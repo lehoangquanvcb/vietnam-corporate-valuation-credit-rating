@@ -168,3 +168,11 @@ Các BAT cũ không bị xóa mà chuyển vào `tools/legacy_operations/` để
 Hai nhiệm vụ cốt lõi vẫn giữ nguyên:
 1. Phân tích giá cổ phiếu / định giá / M&A.
 2. Xếp hạng tín nhiệm theo 3 methodology độc lập.
+
+
+## V8.10.1 - STREAMLIT RUNTIME FIX
+- Xóa import legacy `securities_rating`, `corporate_rating`, `DESC6`, `DESC4` từ `multisector_rating`.
+- Xóa duplicate legacy rating UI còn sót sau Clean Architecture.
+- XHTN trong dashboard và report cùng dùng duy nhất `three_methodology_rating.rate_company`.
+- Giữ nguyên 3 methodology: Ngân hàng / CTCK / Doanh nghiệp phi tài chính.
+- Không thay đổi Data Layer, Industry Benchmark, Valuation, Decision Intelligence hay Professional Report Engine.

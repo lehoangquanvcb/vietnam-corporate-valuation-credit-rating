@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 import streamlit as st
 from scripts.universal_data import universe,get_company,get_snapshot,entity_history,peer_snapshot,peer_metric_history,industry_snapshot,industry_metric_history,industry_label,period_date,num,coverage
 from scripts.multisector_valuation import valuation
-from scripts.multisector_rating import securities_rating,corporate_rating,DESC6,DESC4
 from scripts.multisector_report import generate_docx,generate_pdf
 from scripts.sector_templates import get_template
 from scripts.sector_kpi_engine import sector_kpi_table
@@ -290,19 +289,12 @@ with tabs[10]:
 
 
 
-    rating=None
-    if meta['EntityType']=='BANK':
-        st.caption('Phương pháp Ngân hàng 2026: BICRA/Anchor → notch nội sinh → SACP → hỗ trợ bên ngoài → ICR.')
-        rating=bank_rating_result(selected)
-    elif meta['EntityType']=='SECURITIES':
-        st.caption('Phương pháp CTCK: BICRA tham chiếu → điều chỉnh Anchor ngành CTCK → Hồ sơ kinh doanh → Vốn & Lợi nhuận → Vị thế rủi ro → Nguồn vốn × Thanh khoản → SACP → ICR.')
-        c=st.columns(5); ov={'BusinessProfile':c[0].select_slider('Hồ sơ KD',options=[1,2,3,4,5,6],value=3,format_func=lambda x:DESC6[x]),'CapitalProfitability':c[1].select_slider('Vốn & LN',options=[1,2,3,4,5,6],value=3,format_func=lambda x:DESC6[x]),'RiskPosition':c[2].select_slider('Vị thế RR',options=[1,2,3,4,5,6],value=3,format_func=lambda x:DESC6[x]),'Funding':c[3].select_slider('Nguồn vốn',options=[1,2,3,4],value=2,format_func=lambda x:DESC4[x]),'Liquidity':c[4].select_slider('Thanh khoản',options=[1,2,3,4],value=2,format_func=lambda x:DESC4[x])};rating=securities_rating(selected,s,ov)
-    else:
-        if meta.get('Methodology')=='EXCLUDED_SPECIALIZED':rating={'Eligible':False,'ICR':'N/A','Reason':'Cần methodology chuyên biệt.'};st.warning(rating['Reason'])
-        else:
-            st.caption('Phương pháp doanh nghiệp phi tài chính: 4 nhóm rủi ro có trọng số → Anchor → Modifier → SCA → hỗ trợ → ICR.')
-            c=st.columns(4);ov={'MacroIndustryRisk':c[0].slider('Rủi ro Vĩ mô & Ngành',1,6,3),'BusinessRisk':c[1].slider('Rủi ro Kinh doanh',1,6,3),'FinancialRisk':c[2].slider('Rủi ro Tài chính',1,6,3),'GovernanceRisk':c[3].slider('Rủi ro Quản trị',1,6,3)};rating=corporate_rating(selected,s,ov)
-    if rating:st.session_state['rating_result']=rating; st.json(rating)
+    # Single source of truth for XHTN: the 3-methodology router.
+    # The detailed methodology result shown above is also the object used by reports.
+    rating=rr3
+    st.session_state['rating_result']=rating
+    with st.expander('Chi tiết kết quả máy tính / audit trail'):
+        st.json(rating)
 
 with tabs[11]:
     st.subheader('Kịch bản & Stress')
@@ -311,11 +303,11 @@ with tabs[11]:
 
 with tabs[12]:
     st.subheader('Báo cáo & Quản trị')
-    st.caption('Bộ báo cáo chuẩn V8.1 được thiết kế ở mức khoảng 30 trang A4, tự co giãn theo dữ liệu thực tế.')
+    st.caption('Bộ báo cáo chuẩn V8.10.1 được thiết kế ở mức khoảng 30 trang A4, tự co giãn theo dữ liệu thực tế.')
     report_kind=st.radio('Loại báo cáo',['Phân tích, Định giá & M&A','Báo cáo Xếp hạng tín nhiệm'],horizontal=True)
     rr=st.session_state.get('rating_result')
     if report_kind=='Báo cáo Xếp hạng tín nhiệm' and rr is None:
-        rr=bank_rating_result(selected) if meta['EntityType']=='BANK' else securities_rating(selected,s) if meta['EntityType']=='SECURITIES' else corporate_rating(selected,s)
+        rr=rate_three_methodologies(selected)
     c1,c2=st.columns(2)
     try:
         rt='rating' if report_kind=='Báo cáo Xếp hạng tín nhiệm' else 'analysis'; docx=generate_docx(selected,rt,rr); pdf=generate_pdf(selected,rt,rr)
