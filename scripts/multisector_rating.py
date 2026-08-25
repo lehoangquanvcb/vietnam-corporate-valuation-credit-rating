@@ -1,0 +1,1 @@
+from scripts.three_methodology_rating import rate_company

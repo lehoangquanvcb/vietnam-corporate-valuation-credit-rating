@@ -1,0 +1,5 @@
+Metric,Direction,RegulatoryReference,Threshold,Unit,Notes
+AvailableCapitalRatio,HIGHER,TT91/2020/TT-BTC,1.80,ratio,Tỷ lệ vốn khả dụng tối thiểu 180%
+DebtEquity,LOWER,TT121/2020/TT-BTC,5.40,x,Tổng nợ/VCSH giới hạn theo phạm vi quy định
+CurrentRatio,HIGHER,TT121/2020/TT-BTC,1.00,x,Tài sản ngắn hạn/Nợ ngắn hạn >1
+DebtEBITDA,LOWER,Methodology CTCK,3.00,x,<3 là điểm ban đầu Phù Hợp theo ví dụ methodology

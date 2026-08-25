@@ -1,0 +1,5 @@
+Methodology,EntityType,Applicable,BaseFramework,Notes
+BANK_2026,BANK,1,BICRA Anchor + notch,Sử dụng engine ngân hàng hiện tại; Anchor BICRA và điều chỉnh nội sinh
+SECURITIES_2025,SECURITIES,1,BICRA reference → CTCK Anchor → SACP → ICR,Anchor CTCK thông thường = BICRA ngân hàng -2 notch; analyst judgement required
+CORPORATE_2025,CORPORATE,1,Weighted risk factors → Anchor → Modifiers → SCA → Support → ICR,Áp dụng DN phi tài chính thông thường
+EXCLUDED_SPECIALIZED,CORPORATE,0,Specialized methodology required,Dự án/IHC/Hàng không cần phương pháp chuyên biệt

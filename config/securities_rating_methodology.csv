@@ -1,0 +1,19 @@
+Factor,Score,Descriptor,NotchLow,NotchHigh,Reference
+BusinessProfile,1,Rất Mạnh,2,2,Methodology CTCK
+BusinessProfile,2,Mạnh,1,1,Methodology CTCK
+BusinessProfile,3,Phù Hợp,0,0,Methodology CTCK
+BusinessProfile,4,Trung Bình,-1,-1,Methodology CTCK
+BusinessProfile,5,Yếu,-3,-2,Methodology CTCK
+BusinessProfile,6,Rất Yếu,-5,-4,Methodology CTCK
+CapitalProfitability,1,Rất Mạnh,2,2,Methodology CTCK
+CapitalProfitability,2,Mạnh,1,1,Methodology CTCK
+CapitalProfitability,3,Phù Hợp,0,0,Methodology CTCK
+CapitalProfitability,4,Trung Bình,-1,-1,Methodology CTCK
+CapitalProfitability,5,Yếu,-3,-2,Methodology CTCK
+CapitalProfitability,6,Rất Yếu,-5,-4,Methodology CTCK
+RiskPosition,1,Rất Mạnh,2,2,Methodology CTCK
+RiskPosition,2,Mạnh,1,1,Methodology CTCK
+RiskPosition,3,Phù Hợp,0,0,Methodology CTCK
+RiskPosition,4,Trung Bình,-1,-1,Methodology CTCK
+RiskPosition,5,Yếu,-3,-2,Methodology CTCK
+RiskPosition,6,Rất Yếu,-5,-4,Methodology CTCK

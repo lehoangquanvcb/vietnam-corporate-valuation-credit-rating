@@ -1,0 +1,665 @@
+from pathlib import Path
+from datetime import datetime
+import json, re, sys, time, unicodedata, argparse, os
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import numpy as np
+import pandas as pd
+
+# -----------------------------------------------------------------------------
+# Vnstock/Pandas compatibility guard
+# Some vnstock_data builds call isna()/notna() on a pandas MultiIndex. Recent
+# pandas versions intentionally raise ``NotImplementedError: isna is not defined
+# for MultiIndex``.  Patch the method only inside this local refresh process so
+# the Bronze API can continue returning fundamentals without changing app data.
+# -----------------------------------------------------------------------------
+def _multiindex_isna_compat(self):
+    out=[]
+    for item in self.tolist():
+        vals=item if isinstance(item, tuple) else (item,)
+        flag=False
+        for v in vals:
+            try:
+                flag = flag or bool(pd.isna(v))
+            except Exception:
+                flag = flag or (v is None)
+        out.append(flag)
+    return np.asarray(out, dtype=bool)
+
+def _multiindex_notna_compat(self):
+    return ~_multiindex_isna_compat(self)
+
+# pandas.isna(MultiIndex) raises before MultiIndex.isna() is reached on some
+# pandas/vnstock_data combinations. Guard BOTH the method and top-level
+# pandas functions. vnstock_data is imported only after this block, so modules
+# doing `from pandas import isna` also receive the compatible wrapper.
+_pd_isna_native = pd.isna
+_pd_notna_native = pd.notna
+
+def _pd_isna_compat(obj):
+    if isinstance(obj, pd.MultiIndex):
+        return _multiindex_isna_compat(obj)
+    return _pd_isna_native(obj)
+
+def _pd_notna_compat(obj):
+    if isinstance(obj, pd.MultiIndex):
+        return _multiindex_notna_compat(obj)
+    return _pd_notna_native(obj)
+
+pd.isna = _pd_isna_compat
+pd.isnull = _pd_isna_compat
+pd.notna = _pd_notna_compat
+pd.notnull = _pd_notna_compat
+
+try:
+    # Validate the native behavior first; patch only when pandas raises.
+    _probe=pd.MultiIndex.from_tuples([("A",1),(None,2)])
+    try:
+        _probe.isna()
+    except NotImplementedError:
+        pd.MultiIndex.isna=_multiindex_isna_compat
+        pd.MultiIndex.notna=_multiindex_notna_compat
+except Exception:
+    pass
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+RAW = DATA / "raw"
+DATA.mkdir(exist_ok=True); RAW.mkdir(exist_ok=True)
+BANKS = json.loads((ROOT / "config" / "banks.json").read_text(encoding="utf-8"))
+
+VNSTOCK_IMPORT_ERROR=None
+try:
+    from vnstock_data import Fundamental, Market
+except Exception as exc:
+    Fundamental=Market=None
+    VNSTOCK_IMPORT_ERROR=exc
+
+
+def now():
+    return datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def norm(v):
+    s = str(v if v is not None else "").replace("đ", "d").replace("Đ", "D")
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    return re.sub(r"[^A-Za-z0-9]+", " ", s).lower().strip()
+
+
+def flatten(df):
+    if df is None:
+        return pd.DataFrame()
+    x = df.copy()
+    try:
+        if isinstance(x.index, pd.MultiIndex) or x.index.name is not None:
+            x = x.reset_index()
+    except Exception:
+        x.index = pd.RangeIndex(len(x))
+    if isinstance(x.columns, pd.MultiIndex):
+        out=[]; seen={}
+        for c in x.columns:
+            parts=[str(z).strip() for z in c if str(z).strip() not in {"", "None", "nan"}]
+            name=" | ".join(parts) if parts else "column"
+            k=seen.get(name,0); seen[name]=k+1
+            out.append(name if k==0 else f"{name}__{k}")
+        x.columns=out
+    else:
+        x.columns=[str(c) for c in x.columns]
+    return x
+
+
+def find_col(df, aliases):
+    wanted=[norm(a) for a in aliases]
+    for c in df.columns:
+        nc=norm(c)
+        if any(nc==w or nc.endswith(" "+w) for w in wanted):
+            return c
+    for c in df.columns:
+        nc=norm(c)
+        if any(w and w in nc for w in wanted):
+            return c
+    return None
+
+
+def call_safe(label, funcs):
+    errs=[]
+    for fn in funcs:
+        try:
+            df=fn()
+            if df is not None and len(df):
+                return df, f"{label}:OK"
+            errs.append("EMPTY")
+        except Exception as exc:
+            errs.append(str(exc)[:160])
+    return pd.DataFrame(), f"{label}:ERROR:" + " | ".join(errs)
+
+
+def period_key(v):
+    s=str(v).upper()
+    y=re.search(r"(20\d{2})",s)
+    q=re.search(r"Q([1-4])",s)
+    return (int(y.group(1)) if y else 0, int(q.group(1)) if q else 0)
+
+
+RATIO_METRICS={"ROE","ROA","NIM","NPL","CAR","CIR","LDR","CASA"}
+
+
+def clean_ratio_value(metric, value):
+    """Convert ratio units and reject source placeholders / impossible values.
+
+    Key policy: missing is NaN, never zero.  Some Vnstock bank ratios use 0 as a
+    placeholder when a disclosure is unavailable (notably CAR), while CIR is
+    commonly negative because operating expenses carry a negative accounting sign.
+    """
+    v=pd.to_numeric(pd.Series([value]),errors="coerce").iloc[0]
+    if pd.isna(v): return np.nan
+    v=float(v)
+    if abs(v)>1.5 and abs(v)<=100:
+        v=v/100.0
+    if metric=="CIR":
+        v=abs(v)
+        return v if 0.01 <= v <= 2.0 else np.nan
+    if metric=="CAR":
+        # Zero / near-zero is a Vnstock missing-data placeholder, not an economic CAR.
+        return v if 0.02 <= v <= 0.50 else np.nan
+    if metric=="NPL":
+        return v if 0.0 <= v <= 0.50 else np.nan
+    if metric=="CASA":
+        return v if 0.0 <= v <= 1.0 else np.nan
+    if metric=="LDR":
+        return v if 0.05 <= v <= 2.50 else np.nan
+    if metric=="NIM":
+        return v if -0.10 <= v <= 0.30 else np.nan
+    if metric=="ROA":
+        return v if -0.20 <= v <= 0.20 else np.nan
+    if metric=="ROE":
+        return v if -2.0 <= v <= 2.0 else np.nan
+    return v
+
+
+def metric_mask(x, ids=(), names=()):
+    """Prefer exact metric IDs; only fall back to names/contains if exact IDs absent.
+
+    This prevents RT_BANK_NPL from also matching RT_BANK_NPL_COVERAGE.
+    """
+    idc=find_col(x,["id","code","metric_id"])
+    nc=find_col(x,["name","metric","indicator","item","label"])
+    if idc and ids:
+        s=x[idc].astype(str).str.upper().str.strip()
+        exact=pd.Series(False,index=x.index)
+        for a in ids:
+            exact |= s.eq(str(a).upper().strip())
+        if bool(exact.any()):
+            return exact,idc,nc
+    if nc and names:
+        s=x[nc].astype(str).map(norm)
+        # Prefer exact normalized names first.
+        exact=pd.Series(False,index=x.index)
+        for a in names:
+            exact |= s.eq(norm(a))
+        if bool(exact.any()):
+            return exact,idc,nc
+    mask=pd.Series(False,index=x.index)
+    if idc and ids:
+        s=x[idc].astype(str).str.upper()
+        for a in ids:
+            aa=str(a).upper(); mask |= s.str.contains(aa,regex=False,na=False)
+    if nc and names:
+        s=x[nc].astype(str).map(norm)
+        for a in names:
+            aa=norm(a); mask |= s.str.contains(aa,regex=False,na=False)
+    return mask,idc,nc
+
+
+def latest_valid_from_history(hist, metric):
+    rows=[r for r in hist if r.get("Metric")==metric and pd.notna(r.get("Value"))]
+    if not rows:return np.nan,None
+    rows=sorted(rows,key=lambda r:period_key(r.get("Period")))
+    r=rows[-1]
+    return float(r["Value"]),str(r["Period"])
+
+
+def latest_metric(df, ids=(), names=()):
+    x=flatten(df)
+    if x.empty: return np.nan
+    mask,idc,nc=metric_mask(x,ids,names)
+    vc=find_col(x,["value","metric_value","ratio_value"])
+    pc=find_col(x,["period","report_period","quarter","year"])
+    if not bool(mask.any()): return np.nan
+    z=x.loc[mask].copy()
+    if pc:
+        z["_pk"]=z[pc].map(period_key); z=z.sort_values("_pk")
+    if vc:
+        vals=pd.to_numeric(z[vc],errors="coerce").dropna()
+        if len(vals): return float(vals.iloc[-1])
+        return np.nan
+    for _,r in z.iterrows():
+        vals=[]
+        for c in z.columns:
+            if c in {idc,nc,pc,"_pk"}: continue
+            v=pd.to_numeric(pd.Series([r[c]]),errors="coerce").dropna()
+            if len(v): vals.append((period_key(c),float(v.iloc[0])))
+        if vals:
+            vals.sort(key=lambda q:q[0]); return vals[-1][1]
+    return np.nan
+
+
+def history_metric(df, ticker, metric_name, ids=(), names=()):
+    x=flatten(df)
+    if x.empty: return []
+    mask,idc,nc=metric_mask(x,ids,names)
+    vc=find_col(x,["value","metric_value","ratio_value"])
+    pc=find_col(x,["period","report_period","quarter","year"])
+    z=x.loc[mask].copy()
+    rows=[]
+    if z.empty: return rows
+    if pc and vc:
+        for _,r in z.iterrows():
+            v=pd.to_numeric(pd.Series([r[vc]]),errors="coerce").iloc[0]
+            if metric_name in RATIO_METRICS:
+                v=clean_ratio_value(metric_name,v)
+            if pd.notna(v): rows.append({"Ticker":ticker,"Period":str(r[pc]),"Metric":metric_name,"Value":float(v)})
+    else:
+        for _,r in z.iterrows():
+            for c in z.columns:
+                if period_key(c)[0] > 0:
+                    v=pd.to_numeric(pd.Series([r[c]]),errors="coerce").iloc[0]
+                    if metric_name in RATIO_METRICS:
+                        v=clean_ratio_value(metric_name,v)
+                    if pd.notna(v): rows.append({"Ticker":ticker,"Period":str(c),"Metric":metric_name,"Value":float(v)})
+    # One observation per ticker / period / metric.
+    best={}
+    for r in rows: best[(r["Ticker"],r["Period"],r["Metric"])]=r
+    return list(best.values())
+
+
+METRICS = {
+    "ROE": (["RT_ROE","RT_BANK_ROE"],["return on equity","roe"]),
+    "ROA": (["RT_ROA","RT_BANK_ROA"],["return on assets","roa"]),
+    "NIM": (["RT_BANK_NIM"],["net interest margin","nim"]),
+    "NPL": (["RT_BANK_NPL"],["non performing loan","npl ratio","bad debt ratio"]),
+    "CAR": (["RT_BANK_CAR"],["capital adequacy ratio","car"]),
+    "CIR": (["RT_BANK_CIR"],["cost income ratio","cir"]),
+    "LDR": (["RT_BANK_LDR"],["loan to deposit ratio","ldr"]),
+    "CASA": (["RT_BANK_CASA"],["casa","current account savings","current account saving"]),
+    "EPS": (["RT_EPS"],["earnings per share","eps"]),
+    "BVPS": (["RT_BVPS"],["book value per share","bvps"]),
+    "PB": (["RT_PB","RT_P_B"],["price to book","p b"]),
+    "PE": (["RT_PE","RT_P_E"],["price earnings","p e"]),
+}
+BS_METRICS = {
+    "TotalAssets": (["BS_TOTAL_ASSETS"],["total assets"]),
+    "GrossLoans": (["BS_LOANS_TO_CUSTOMERS_GROSS","BS_CUSTOMER_LOANS","BS_LOANS_TO_CUSTOMERS","BS_LOANS_AND_ADVANCES_TO_CUSTOMERS"],["loans to customers gross","loans to customers","customer loans","loans and advances to customers"]),
+    "CustomerDeposits": (["BS_CUSTOMER_DEPOSITS"],["customer deposits","deposits from customers"]),
+    "Equity": (["BS_EQUITY","BS_TOTAL_EQUITY","BS_OWNERS_EQUITY"],["equity","total equity","owners equity","shareholders equity"]),
+    "IntangibleAssets": (["BS_INTANGIBLE_ASSETS"],["intangible assets"]),
+}
+IS_METRICS = {
+    "NPAT": (["IS_NET_PROFIT_AFTER_TAX","IS_NET_PROFIT"],["net profit after tax","profit after tax","net income"]),
+    "NetInterestIncome": (["IS_NET_INTEREST_INCOME"],["net interest income"]),
+    "OperatingIncome": (["IS_TOTAL_OPERATING_INCOME","IS_OPERATING_INCOME"],["total operating income","operating income"]),
+    "ProvisionExpense": (["IS_PROVISION_EXPENSE"],["provision expense","credit loss expense"]),
+}
+
+
+SNAPSHOT_BASE_COLUMNS = [
+    "Ticker","RetrievedAt","DataType","SourceMode","ParserLog",
+    "ROE","ROA","NIM","NPL","CAR","CIR","LDR","CASA","EPS","BVPS","PB","PE",
+    "TotalAssets","GrossLoans","CustomerDeposits","Equity","IntangibleAssets","TangibleEquity",
+    "NPAT","NetInterestIncome","OperatingIncome","ProvisionExpense"
+]
+
+
+def error_snapshot(ticker, message):
+    """Return a schema-stable bank row when one bank's fundamental fetch fails."""
+    row={c:np.nan for c in SNAPSHOT_BASE_COLUMNS}
+    row.update({
+        "Ticker":str(ticker).upper().strip(),
+        "RetrievedAt":now(),
+        "DataType":"ACTUAL_PARTIAL",
+        "SourceMode":"VNSTOCK_BRONZE",
+        "ParserLog":"FUNDAMENTAL_ERROR:"+str(message)[:450],
+    })
+    return row
+
+
+def ensure_ticker_column(df, default_tickers=None):
+    """Normalize ticker/symbol columns or index into canonical `Ticker` without raising."""
+    if df is None:
+        return pd.DataFrame(columns=["Ticker"])
+    x=df.copy()
+    if isinstance(x.index,pd.MultiIndex) or x.index.name is not None:
+        try:x=x.reset_index()
+        except Exception:pass
+    if "Ticker" not in x.columns:
+        alias=find_col(x,["ticker","symbol","code","stock_code","stock symbol"])
+        if alias is not None:
+            x=x.rename(columns={alias:"Ticker"})
+    if "Ticker" not in x.columns:
+        if default_tickers is not None and len(x)==len(default_tickers):
+            x["Ticker"]=[str(v).upper().strip() for v in default_tickers]
+        else:
+            x["Ticker"]=pd.Series(dtype="object") if len(x)==0 else np.nan
+    x["Ticker"]=x["Ticker"].astype(str).str.upper().str.strip()
+    x.loc[x["Ticker"].isin(["NAN","NONE","<NA>",""]),"Ticker"]=np.nan
+    return x
+
+
+def fetch_one(ticker):
+    eq=Fundamental().equity(ticker)
+    health,s1=call_safe("health",[
+        lambda:eq.financial_health(scorecard="banking",lang="en",limit=20),
+        lambda:eq.financial_health(scorecard="bank",lang="en",limit=20),
+    ])
+    ratio_q,s2=call_safe("ratio_q",[
+        lambda:eq.ratio(period="quarter",lang="en",scorecard="banking"),
+        lambda:eq.ratio(period="quarter",lang="en"),
+        lambda:eq.ratio(period="quarter"),
+    ])
+    bs_q,s3=call_safe("bs_q",[
+        lambda:eq.balance_sheet(period="quarter",lang="en",scorecard="banking"),
+        lambda:eq.balance_sheet(period="quarter",lang="en"),
+        lambda:eq.balance_sheet(period="quarter"),
+    ])
+    is_q,s4=call_safe("is_q",[
+        lambda:eq.income_statement(period="quarter",lang="en",scorecard="banking"),
+        lambda:eq.income_statement(period="quarter",lang="en"),
+        lambda:eq.income_statement(period="quarter"),
+    ])
+    ratio_y,s5=call_safe("ratio_y",[
+        lambda:eq.ratio(period="year",lang="en",scorecard="banking"),
+        lambda:eq.ratio(period="year",lang="en"),
+        lambda:eq.ratio(period="year"),
+    ])
+    for name,df in [("health",health),("ratio_q",ratio_q),("balance_q",bs_q),("income_q",is_q),("ratio_y",ratio_y)]:
+        if len(df):
+            try: flatten(df).to_csv(RAW/f"{ticker}_{name}.csv",index=False,encoding="utf-8-sig")
+            except Exception: pass
+
+    snap={"Ticker":ticker,"RetrievedAt":now(),"DataType":"ACTUAL","SourceMode":"VNSTOCK_BRONZE",
+          "ParserLog":" || ".join([s1,s2,s3,s4,s5])}
+    for m,(ids,names) in METRICS.items():
+        v=latest_metric(health,ids,names)
+        if pd.isna(v): v=latest_metric(ratio_q,ids,names)
+        snap[m]=v
+    for m,(ids,names) in BS_METRICS.items(): snap[m]=latest_metric(bs_q,ids,names)
+    for m,(ids,names) in IS_METRICS.items(): snap[m]=latest_metric(is_q,ids,names)
+
+    # Ratio guardrails. Missing source values remain NaN; never fabricate zero.
+    for m in ["ROE","ROA","NIM","NPL","CAR","CIR","LDR","CASA"]:
+        snap[m]=clean_ratio_value(m,snap.get(m))
+
+    # Derive BVPS/EPS only when direct ratios are absent and units appear coherent.
+    if pd.isna(snap.get("BVPS")) and pd.notna(snap.get("Equity")) and pd.notna(snap.get("NPAT")) and pd.notna(snap.get("EPS")) and snap["EPS"]!=0:
+        shares=snap["NPAT"]/snap["EPS"]
+        if shares>0: snap["BVPS"]=snap["Equity"]/shares
+    snap["TangibleEquity"] = snap.get("Equity") - snap.get("IntangibleAssets") if pd.notna(snap.get("Equity")) and pd.notna(snap.get("IntangibleAssets")) else snap.get("Equity")
+
+    hist=[]
+    for m,(ids,names) in METRICS.items(): hist += history_metric(ratio_q,ticker,m,ids,names)
+    for m,(ids,names) in BS_METRICS.items(): hist += history_metric(bs_q,ticker,m,ids,names)
+    for m,(ids,names) in IS_METRICS.items(): hist += history_metric(is_q,ticker,m,ids,names)
+    for m in RATIO_METRICS:
+        v,per=latest_valid_from_history(hist,m)
+        if pd.notna(v):
+            snap[m]=v; snap[f"{m}_AsOf"]=per
+        else:
+            snap[m]=np.nan; snap[f"{m}_AsOf"]=None
+    return snap,hist
+
+
+
+def load_raw_bank(ticker):
+    """Rebuild one bank snapshot from the latest successfully saved Vnstock raw CSVs.
+
+    This is a resilience path only: it preserves the last real Vnstock fundamentals when
+    a later API call fails (for example a vnstock/pandas MultiIndex compatibility error).
+    It never manufactures accounting values.
+    """
+    def raw(name):
+        path=RAW/f"{ticker}_{name}.csv"
+        try:
+            return pd.read_csv(path) if path.exists() else pd.DataFrame()
+        except Exception:
+            return pd.DataFrame()
+    health=raw("health"); ratio_q=raw("ratio_q"); bs_q=raw("balance_q"); is_q=raw("income_q"); ratio_y=raw("ratio_y")
+    if all(x.empty for x in (health,ratio_q,bs_q,is_q,ratio_y)):
+        return None, []
+    snap={"Ticker":ticker,"RetrievedAt":now(),"DataType":"ACTUAL_CACHED","SourceMode":"VNSTOCK_BRONZE_RAW_CACHE",
+          "ParserLog":"API_ERROR -> rebuilt from last successful Vnstock raw CSV"}
+    for m,(ids,names) in METRICS.items():
+        v=latest_metric(health,ids,names)
+        if pd.isna(v): v=latest_metric(ratio_q,ids,names)
+        if pd.isna(v): v=latest_metric(ratio_y,ids,names)
+        snap[m]=v
+    for m,(ids,names) in BS_METRICS.items(): snap[m]=latest_metric(bs_q,ids,names)
+    for m,(ids,names) in IS_METRICS.items(): snap[m]=latest_metric(is_q,ids,names)
+# Ratio guardrails. Missing source values remain NaN; never fabricate zero.
+    for m in ["ROE","ROA","NIM","NPL","CAR","CIR","LDR","CASA"]:
+        snap[m]=clean_ratio_value(m,snap.get(m))
+    snap["TangibleEquity"] = snap.get("Equity") - snap.get("IntangibleAssets") if pd.notna(snap.get("Equity")) and pd.notna(snap.get("IntangibleAssets")) else snap.get("Equity")
+    hist=[]
+    for m,(ids,names) in METRICS.items(): hist += history_metric(ratio_q,ticker,m,ids,names)
+    for m,(ids,names) in BS_METRICS.items(): hist += history_metric(bs_q,ticker,m,ids,names)
+    for m,(ids,names) in IS_METRICS.items(): hist += history_metric(is_q,ticker,m,ids,names)
+    for m in RATIO_METRICS:
+        v,per=latest_valid_from_history(hist,m)
+        if pd.notna(v):
+            snap[m]=v; snap[f"{m}_AsOf"]=per
+        else:
+            snap[m]=np.nan; snap[f"{m}_AsOf"]=None
+    return snap,hist
+
+def derive_per_share_from_market_multiples(df):
+    """Fill EPS/BVPS only as CALCULATED values from Price/PE/PB when direct Vnstock values are blank.
+
+    Vnstock market prices in this pipeline are in thousand VND/share, so derived EPS/BVPS
+    remain in the same thousand-VND/share unit used by the valuation engine.
+    """
+    x=df.copy()
+    for c in ["Price","PB","PE","BVPS","EPS"]:
+        if c not in x.columns:x[c]=np.nan
+        x[c]=pd.to_numeric(x[c],errors="coerce")
+    m=x["BVPS"].isna() & x["Price"].notna() & x["PB"].gt(0)
+    x.loc[m,"BVPS"]=x.loc[m,"Price"]/x.loc[m,"PB"]
+    m=x["EPS"].isna() & x["Price"].notna() & x["PE"].replace(0,np.nan).notna()
+    x.loc[m,"EPS"]=x.loc[m,"Price"]/x.loc[m,"PE"]
+    return x
+
+
+def fetch_price(ticker, start_date="2021-01-01"):
+    try:
+        m=Market().equity(ticker)
+        df=m.ohlcv(start=start_date,end=datetime.now().strftime("%Y-%m-%d"),interval="1D")
+        x=flatten(df)
+        if len(x): x.to_csv(RAW/f"{ticker}_ohlcv.csv",index=False,encoding="utf-8-sig")
+        dc=find_col(x,["time","date","datetime"]); cc=find_col(x,["close","close_price","price"])
+        if dc is None or cc is None: return pd.DataFrame(),np.nan,"SCHEMA_NOT_FOUND"
+        y=pd.DataFrame({"Ticker":ticker,"Date":pd.to_datetime(x[dc],errors="coerce"),"Close":pd.to_numeric(x[cc],errors="coerce")}).dropna()
+        y=y.sort_values("Date").drop_duplicates("Date",keep="last")
+        return y,float(y.Close.iloc[-1]) if len(y) else np.nan,"OK"
+    except Exception as exc:
+        return pd.DataFrame(),np.nan,str(exc)[:180]
+
+
+def read_existing_csv(path, columns=None):
+    try:
+        x=pd.read_csv(path)
+    except Exception:
+        x=pd.DataFrame(columns=columns or [])
+    if columns:
+        for c in columns:
+            if c not in x.columns:x[c]=np.nan
+    return x
+
+
+def merge_history(old,new):
+    cols=["Ticker","Period","Metric","Value"]
+    old=old.copy() if old is not None else pd.DataFrame(columns=cols)
+    new=new.copy() if new is not None else pd.DataFrame(columns=cols)
+    for x in (old,new):
+        for c in cols:
+            if c not in x.columns:x[c]=np.nan
+    z=pd.concat([old[cols],new[cols]],ignore_index=True)
+    z["Ticker"]=z["Ticker"].astype(str).str.upper().str.strip()
+    z=z.dropna(subset=["Ticker","Period","Metric"])
+    return z.drop_duplicates(["Ticker","Period","Metric"],keep="last")
+
+
+def merge_snapshot(old,new, target_tickers=None):
+    old=ensure_ticker_column(old)
+    new=ensure_ticker_column(new)
+    if target_tickers:
+        target={str(t).upper().strip() for t in target_tickers}
+        old=old[~old["Ticker"].isin(target)]
+    z=pd.concat([old,new],ignore_index=True,sort=False)
+    z=ensure_ticker_column(z)
+    return z.dropna(subset=["Ticker"]).drop_duplicates("Ticker",keep="last")
+
+
+def market_incremental_start(existing_price,ticker,full_history=False):
+    if full_history or existing_price is None or existing_price.empty:
+        return "2021-01-01"
+    q=existing_price[existing_price["Ticker"].astype(str).str.upper().eq(str(ticker).upper())].copy()
+    if q.empty:return "2021-01-01"
+    d=pd.to_datetime(q.get("Date"),errors="coerce").max()
+    if pd.isna(d):return "2021-01-01"
+    # overlap a few calendar days so corporate-action/source corrections can replace recent observations.
+    return (d-pd.Timedelta(days=7)).strftime("%Y-%m-%d")
+
+
+def parse_args():
+    ap=argparse.ArgumentParser(description="Vnstock Bronze incremental refresh")
+    ap.add_argument("--mode",choices=["full","fundamentals","prices"],default="full")
+    ap.add_argument("--tickers",default="",help="Comma-separated tickers; blank = full bank universe")
+    ap.add_argument("--workers",type=int,default=int(os.getenv("VNSTOCK_WORKERS","4")))
+    ap.add_argument("--full-price-history",action="store_true",help="Reload market history from 2021 instead of incremental append")
+    return ap.parse_args()
+
+
+def main():
+    args=parse_args()
+    if VNSTOCK_IMPORT_ERROR is not None:
+        print(f"ERROR: vnstock_data unavailable: {VNSTOCK_IMPORT_ERROR!r}")
+        print("Hay chay BAT refresh trong Bronze venv; RUN_FAST.bat khong can vnstock_data.")
+        raise SystemExit(2)
+    selected=[x.strip().upper() for x in args.tickers.split(",") if x.strip()] or [str(x).upper().strip() for x in BANKS]
+    unknown=[x for x in selected if x not in {str(b).upper().strip() for b in BANKS}]
+    if unknown:
+        print("WARNING: ticker outside configured universe:",", ".join(unknown))
+    workers=max(1,min(int(args.workers),6))
+    print(f"REFRESH MODE: {args.mode} | BANKS: {len(selected)} | WORKERS: {workers}")
+
+    old_snap=read_existing_csv(DATA/"bank_snapshot.csv",SNAPSHOT_BASE_COLUMNS+["Price"])
+    old_hist=read_existing_csv(DATA/"bank_history_long.csv",["Ticker","Period","Metric","Value"])
+    old_price=read_existing_csv(DATA/"price_history.csv",["Ticker","Date","Close"])
+    old_log=read_existing_csv(DATA/"refresh_log.csv",["Dataset","Status","Message","RetrievedAt"])
+    old_price=ensure_ticker_column(old_price)
+    if "Date" in old_price: old_price["Date"]=pd.to_datetime(old_price["Date"],errors="coerce")
+    if "Close" in old_price: old_price["Close"]=pd.to_numeric(old_price["Close"],errors="coerce")
+
+    snapshots=[]; histories=[]; new_prices=[]; log=[]
+
+    if args.mode in ("full","fundamentals"):
+        def fund_job(t):
+            try:
+                snap,hist=fetch_one(t); snap["Ticker"]=t
+                return t,snap,hist,"OK",str(snap.get("ParserLog",""))[:500]
+            except Exception as exc:
+                msg=f"{type(exc).__name__}: {exc}"
+                # A second attempt is useful for older vnstock_data builds that lazily
+                # create a MultiIndex only on the first call. The compatibility patch
+                # above remains process-local and does not mutate stored data.
+                if "isna is not defined for MultiIndex" in msg:
+                    try:
+                        pd.MultiIndex.isna=_multiindex_isna_compat
+                        pd.MultiIndex.notna=_multiindex_notna_compat
+                        snap,hist=fetch_one(t); snap["Ticker"]=t
+                        snap["ParserLog"]="MULTIINDEX_COMPAT_RETRY:OK || "+str(snap.get("ParserLog",""))
+                        return t,snap,hist,"OK_RETRY","MultiIndex compatibility retry succeeded"
+                    except Exception as retry_exc:
+                        msg=f"{msg} || RETRY:{type(retry_exc).__name__}: {retry_exc}"
+                cached,cached_hist=load_raw_bank(t)
+                if cached is not None:
+                    cached["ParserLog"]=f"API_ERROR:{msg[:220]} || RAW_CACHE:OK"
+                    return t,cached,cached_hist,"CACHED",msg[:500]
+                return t,error_snapshot(t,msg),[],"ERROR",msg[:500]
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            futures={ex.submit(fund_job,t):t for t in selected}
+            done=0
+            for fut in as_completed(futures):
+                done+=1; t,snap,hist,status,msg=fut.result()
+                print(f"[FUND {done}/{len(selected)}] {t}: {status}")
+                snapshots.append(snap); histories.extend(hist or [])
+                log.append([f"fundamental:{t}",status,msg,now()])
+        new_snap=pd.DataFrame(snapshots)
+        for c in SNAPSHOT_BASE_COLUMNS:
+            if c not in new_snap.columns:new_snap[c]=np.nan
+        new_snap=ensure_ticker_column(new_snap,selected)
+        snap=merge_snapshot(old_snap,new_snap,selected)
+        new_hist=pd.DataFrame(histories)
+        hist_df=merge_history(old_hist,new_hist)
+    else:
+        snap=old_snap.copy(); hist_df=old_hist.copy()
+
+    if args.mode in ("full","prices"):
+        def price_job(t):
+            start=market_incremental_start(old_price,t,args.full_price_history)
+            ph,px,status=fetch_price(t,start)
+            return t,ph,px,status,start
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            futures={ex.submit(price_job,t):t for t in selected}
+            done=0
+            for fut in as_completed(futures):
+                done+=1; t,ph,px,status,start=fut.result()
+                ok="OK" if len(ph) else "ERROR"
+                print(f"[PRICE {done}/{len(selected)}] {t}: {ok} | from {start}")
+                if len(ph):
+                    ph=ensure_ticker_column(ph); ph["Ticker"]=t; new_prices.append(ph[["Ticker","Date","Close"]])
+                log.append([f"price:{t}",ok,f"{status} | start={start}"[:500],now()])
+        price_parts=[old_price[["Ticker","Date","Close"]]] if len(old_price) else []
+        price_parts += new_prices
+        if price_parts:
+            price_hist=pd.concat(price_parts,ignore_index=True,sort=False)
+            price_hist=ensure_ticker_column(price_hist)
+            price_hist["Date"]=pd.to_datetime(price_hist["Date"],errors="coerce")
+            price_hist["Close"]=pd.to_numeric(price_hist["Close"],errors="coerce")
+            price_hist=price_hist.dropna(subset=["Ticker","Date","Close"]).sort_values(["Ticker","Date"]).drop_duplicates(["Ticker","Date"],keep="last")
+        else:
+            price_hist=pd.DataFrame(columns=["Ticker","Date","Close"])
+    else:
+        price_hist=old_price.copy()
+
+    # Market price in snapshot always comes from accumulated price history.
+    snap=ensure_ticker_column(snap)
+    if "Price" in snap.columns:snap=snap.drop(columns=["Price"])
+    if len(price_hist):
+        latest=price_hist.sort_values(["Ticker","Date"]).groupby("Ticker",as_index=False).tail(1)[["Ticker","Close"]].rename(columns={"Close":"Price"})
+        latest=ensure_ticker_column(latest).drop_duplicates("Ticker",keep="last")
+        snap=snap.merge(latest,on="Ticker",how="left")
+    else:
+        snap["Price"]=np.nan
+
+    snap=derive_per_share_from_market_multiples(snap)
+
+    # Stable output schemas and accumulated log.
+    snap=snap.sort_values("Ticker").drop_duplicates("Ticker",keep="last")
+    snap.to_csv(DATA/"bank_snapshot.csv",index=False,encoding="utf-8-sig")
+    hist_df[["Ticker","Period","Metric","Value"]].to_csv(DATA/"bank_history_long.csv",index=False,encoding="utf-8-sig")
+    price_hist[["Ticker","Date","Close"]].to_csv(DATA/"price_history.csv",index=False,encoding="utf-8-sig")
+    new_log=pd.DataFrame(log,columns=["Dataset","Status","Message","RetrievedAt"])
+    log_df=pd.concat([old_log,new_log],ignore_index=True,sort=False).tail(1500)
+    log_df.to_csv(DATA/"refresh_log.csv",index=False,encoding="utf-8-sig")
+
+    fund_rows=new_log[new_log.Dataset.astype(str).str.startswith("fundamental:")] if len(new_log) else pd.DataFrame()
+    price_rows=new_log[new_log.Dataset.astype(str).str.startswith("price:")] if len(new_log) else pd.DataFrame()
+    ok_fund=int(fund_rows.Status.isin(["OK","OK_RETRY","CACHED"]).sum()) if len(fund_rows) else 0
+    ok_price=int((price_rows.Status=="OK").sum()) if len(price_rows) else 0
+    print("\nREFRESH SUMMARY")
+    if args.mode in ("full","fundamentals"):print(f"Fundamental OK: {ok_fund}/{len(selected)}")
+    if args.mode in ("full","prices"):print(f"Price OK: {ok_price}/{len(selected)} (incremental)")
+    print(f"Snapshot rows: {len(snap)} | History rows: {len(hist_df)} | Price rows: {len(price_hist)}")
+    print("DONE")
+
+if __name__=="__main__":
+    main()

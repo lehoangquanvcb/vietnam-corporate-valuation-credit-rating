@@ -1,0 +1,6 @@
+Repository: <your-github-user>/Vietnam_Corporate_Valuation_MA_Credit_Rating_Intelligence
+Branch: main
+Main file path: app.py
+Python: 3.12
+Suggested App URL: vietnam-corporate-valuation-ma-credit-rating
+Important: Vnstock Bronze runs LOCAL only. Streamlit Cloud reads CSV from GitHub.
