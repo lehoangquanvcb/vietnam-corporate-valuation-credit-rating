@@ -183,3 +183,15 @@ Hai nhiệm vụ cốt lõi vẫn giữ nguyên:
 - Khởi tạo `sector_template_key, sector_template = get_template(EntityType, Sector)` ngay sau khi chọn doanh nghiệp.
 - Giữ nguyên V8.10.1 fix: một XHTN router duy nhất cho 3 methodology.
 - Không thay đổi valuation, peer benchmark, data layer hay report engine.
+
+
+## V8.11 - DEEP ANALYSIS & PEER CHARTS
+Mỗi chương report có thêm phân tích định lượng so với trung bình/trung vị ngành, peer bar charts theo từng KPI, ROE-P/B scatter và phụ lục peer chuyên sâu. Kế thừa toàn bộ V8.10.2.
+
+
+## V8.12 - ANALYST NARRATIVE
+- Kế thừa toàn bộ V8.11.
+- Mỗi chương trọng yếu bổ sung lớp phân tích 4 câu hỏi: Số liệu nói gì? Tại sao đáng chú ý? So với peer thế nào? Tác động tới định giá/XHTN ra sao?
+- Tách logic implication giữa báo cáo phân tích cổ phiếu và báo cáo XHTN.
+- Không tự bịa nguyên nhân: nếu dữ liệu chưa đủ, report chuyển thành driver cần kiểm chứng.
+- Giữ peer charts, individual-peer bars, ROE-P/B scatter, trung bình/trung vị ngành.

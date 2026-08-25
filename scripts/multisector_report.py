@@ -444,6 +444,157 @@ def _add_triangulation_table(doc,ticker):
             for pp in cell.paragraphs:
                 for run in pp.runs:run.font.name='Lato';run.font.size=Pt(10)
 
+
+def peer_bar_chart(ticker,metric,title=None,top_n=12):
+    from scripts.universal_data import industry_snapshot
+    peers=industry_snapshot(ticker)
+    if peers is None or not len(peers) or metric not in peers.columns:return None
+    z=peers[['Ticker',metric]].copy()
+    z[metric]=pd.to_numeric(z[metric],errors='coerce')
+    z=z.dropna(subset=[metric]).drop_duplicates('Ticker')
+    if not len(z):return None
+    selected=str(ticker).upper()
+    company=z[z.Ticker.astype(str).str.upper().eq(selected)]
+    if len(company):
+        cv=float(company.iloc[-1][metric]); z['dist']=(z[metric]-cv).abs()
+        chosen=pd.concat([company,z[~z.Ticker.astype(str).str.upper().eq(selected)].sort_values('dist').head(max(0,top_n-1))])
+    else:
+        chosen=z.sort_values(metric).tail(top_n)
+    chosen=chosen.drop_duplicates('Ticker').sort_values(metric)
+    mean=float(z[metric].mean())
+    fig,ax=plt.subplots(figsize=(8.4,4.2));plt.rcParams.update({'font.family':'Lato','font.size':10})
+    ax.barh(chosen.Ticker.astype(str),chosen[metric]);ax.axvline(mean,linestyle='--',linewidth=1.5,label='Trung bình ngành')
+    ax.set_title(title or f"{VI_METRIC.get(metric,metric)} - so sánh peer",fontsize=11);ax.grid(axis='x',alpha=.2);ax.legend(fontsize=8)
+    if metric in PCT:ax.xaxis.set_major_formatter(lambda v,pos:(f'{v*100:.1f}%').replace('.',','))
+    fig.tight_layout();bio=BytesIO();fig.savefig(bio,dpi=180,bbox_inches='tight');plt.close(fig);bio.seek(0);return bio
+
+def peer_scatter_chart(ticker,xmetric,ymetric,title=None):
+    from scripts.universal_data import industry_snapshot
+    peers=industry_snapshot(ticker)
+    if peers is None or not len(peers) or xmetric not in peers.columns or ymetric not in peers.columns:return None
+    z=peers[['Ticker',xmetric,ymetric]].copy()
+    z[xmetric]=pd.to_numeric(z[xmetric],errors='coerce');z[ymetric]=pd.to_numeric(z[ymetric],errors='coerce')
+    z=z.dropna(subset=[xmetric,ymetric]).drop_duplicates('Ticker')
+    if len(z)<2:return None
+    fig,ax=plt.subplots(figsize=(8.4,4.4));plt.rcParams.update({'font.family':'Lato','font.size':10})
+    ax.scatter(z[xmetric],z[ymetric],alpha=.7)
+    for _,r in z.iterrows():
+        if str(r.Ticker).upper()==str(ticker).upper():
+            ax.annotate(str(r.Ticker),(r[xmetric],r[ymetric]),xytext=(5,5),textcoords='offset points',fontweight='bold')
+    ax.axvline(z[xmetric].mean(),linestyle='--',linewidth=1);ax.axhline(z[ymetric].mean(),linestyle='--',linewidth=1)
+    ax.set_xlabel(VI_METRIC.get(xmetric,xmetric));ax.set_ylabel(VI_METRIC.get(ymetric,ymetric))
+    ax.set_title(title or f"{VI_METRIC.get(ymetric,ymetric)} và {VI_METRIC.get(xmetric,xmetric)} - vị trí tương đối",fontsize=11)
+    if xmetric in PCT:ax.xaxis.set_major_formatter(lambda v,pos:(f'{v*100:.1f}%').replace('.',','))
+    if ymetric in PCT:ax.yaxis.set_major_formatter(lambda v,pos:(f'{v*100:.1f}%').replace('.',','))
+    ax.grid(alpha=.2);fig.tight_layout();bio=BytesIO();fig.savefig(bio,dpi=180,bbox_inches='tight');plt.close(fig);bio.seek(0);return bio
+
+def _relative_analysis(ticker,metric):
+    k,_,_=sector_kpi_table(ticker)
+    if not len(k):return None
+    r=k[k.Metric.astype(str).eq(str(metric))]
+    if not len(r):return None
+    r=r.iloc[-1]
+    c=num(r['Doanh nghiệp']);m=num(r['Trung bình ngành']);med=num(r['Trung vị ngành']);n=int(r['Số DN có dữ liệu'])
+    if c is None:return None
+    label=r['Chỉ tiêu']
+    if m in (None,0):return f"{label} của doanh nghiệp là {metric_fmt(metric,c)}; chưa đủ dữ liệu ngành để kết luận tương đối."
+    gap=c/m-1;direction='cao hơn' if gap>0 else 'thấp hơn';mag=abs(gap);g=(f"{mag*100:.1f}").replace('.',',')
+    txt=f"{label} đạt {metric_fmt(metric,c)}, {direction} trung bình ngành {metric_fmt(metric,m)} khoảng {g}% (mẫu {n} doanh nghiệp có dữ liệu)."
+    if med is not None:txt+=f" Trung vị ngành là {metric_fmt(metric,med)}, dùng để kiểm tra ảnh hưởng của outlier."
+    if metric=='ROE':txt+=" ROE cần đọc cùng đòn bẩy, chất lượng lợi nhuận và mức định giá P/B/P/E."
+    elif metric=='NPL':txt+=" Chênh lệch NPL cần đọc cùng mức bao phủ dự phòng, tài sản bảo đảm và bộ đệm vốn."
+    elif metric=='CAR':txt+=" CAR cần đọc cùng tăng trưởng tài sản có rủi ro, kế hoạch vốn và chất lượng tài sản."
+    elif metric=='CASA':txt+=" CASA cao hơn peer có thể hỗ trợ chi phí vốn/NIM nhưng cần kiểm tra độ ổn định tiền gửi."
+    elif metric=='DebtEquity':txt+=" Đòn bẩy cao hơn peer làm tăng độ nhạy lợi nhuận và khả năng trả nợ."
+    return txt
+
+def _page_peer_metrics(head,entity_type):
+    if head in ('ROE & HIỆU QUẢ VỐN','KHẢ NĂNG SINH LỢI'):return ['ROE']
+    if head=='ROA & HIỆU QUẢ TÀI SẢN':return ['ROA']
+    if head in ('CHẤT LƯỢNG TÀI SẢN','CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN') and entity_type=='BANK':return ['NPL']
+    if head=='VỐN & ĐÒN BẨY':return ['CAR'] if entity_type=='BANK' else ['DebtEquity']
+    if head in ('NGUỒN VỐN & THANH KHOẢN','THANH KHOẢN'):return ['CASA'] if entity_type=='BANK' else ['CurrentRatio']
+    if head in ('SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG'):
+        return ['ROE','PB','NPL','CAR'] if entity_type=='BANK' else ['ROE','PB','PE','DebtEquity']
+    if head in ('ĐỊNH GIÁ TƯƠNG ĐỐI','ĐỊNH GIÁ CƠ SỞ & CHẾ ĐỘ ĐỊNH GIÁ'):return ['PB','PE']
+    return []
+
+def _add_peer_section(doc,ticker,head,meta):
+    metrics=_page_peer_metrics(head,meta.get('EntityType'))
+    for mm in metrics:
+        try:
+            nar=_relative_analysis(ticker,mm)
+            if nar:_add_pars(doc,[nar])
+            bio=peer_bar_chart(ticker,mm)
+            if bio:doc.add_picture(bio,width=Mm(176))
+        except Exception:pass
+    if head in ('ROE & HIỆU QUẢ VỐN','KHẢ NĂNG SINH LỢI','SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG'):
+        try:
+            bio=peer_scatter_chart(ticker,'ROE','PB')
+            if bio:doc.add_picture(bio,width=Mm(176))
+        except Exception:pass
+
+
+def _decision_narrative(ticker,head,meta,snapshot,val,report_type):
+    """Four-question analyst narrative: What? Why? Peer? So what?
+    Uses only model/public-data fields already available; avoids inventing causes.
+    """
+    et=meta.get('EntityType')
+    lines=[]
+    metrics=_page_peer_metrics(head,et)
+    # 1) What do the numbers say + peer comparison
+    if metrics:
+        facts=[]
+        for m in metrics[:3]:
+            try:
+                x=_relative_analysis(ticker,m)
+                if x:facts.append(x)
+            except Exception:pass
+        if facts:
+            lines.append("Số liệu nói gì? "+" ".join(facts))
+    # 2) Why: disciplined driver framing, not unsupported causal claims
+    driver_map={
+      'ROE & HIỆU QUẢ VỐN':"Động lực cần kiểm chứng gồm biên lợi nhuận, hiệu suất sử dụng tài sản và đòn bẩy. Báo cáo không quy kết nguyên nhân khi dữ liệu nguồn chưa đủ bằng chứng.",
+      'ROA & HIỆU QUẢ TÀI SẢN':"ROA phản ánh khả năng chuyển quy mô tài sản thành lợi nhuận; cần đối chiếu tăng trưởng tài sản, biên lợi nhuận và các khoản thu nhập bất thường.",
+      'KHẢ NĂNG SINH LỢI':"Khả năng sinh lợi bền vững cần được kiểm tra qua biên lợi nhuận, cơ cấu thu nhập, chi phí hoạt động và mức sử dụng đòn bẩy.",
+      'CHẤT LƯỢNG TÀI SẢN':"Chất lượng tài sản cần được kiểm tra đồng thời qua nợ xấu, dự phòng, tăng trưởng tín dụng/tài sản và mức tập trung rủi ro.",
+      'CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN':"Chất lượng tài sản cần được kiểm tra đồng thời qua nợ xấu, dự phòng, tăng trưởng tín dụng/tài sản và mức tập trung rủi ro.",
+      'VỐN & ĐÒN BẨY':"Bộ đệm vốn phải được đặt cạnh tốc độ tăng trưởng, chất lượng tài sản và khả năng tạo vốn nội bộ; một tỷ lệ vốn cao không tự động đồng nghĩa rủi ro thấp.",
+      'NGUỒN VỐN & THANH KHOẢN':"Chất lượng nguồn vốn phụ thuộc chi phí, độ ổn định, mức tập trung và khả năng chuyển đổi tài sản thành thanh khoản trong điều kiện căng thẳng.",
+      'THANH KHOẢN':"Thanh khoản cần được đọc theo cả trạng thái hiện tại và sức chịu đựng khi dòng tiền bất lợi; tỷ lệ kế toán đơn lẻ không đủ để kết luận.",
+      'ĐỊNH GIÁ TƯƠNG ĐỐI':"Premium/discount định giá chỉ hợp lý khi tương xứng với ROE, tăng trưởng, rủi ro và chất lượng lợi nhuận so với peer.",
+      'ĐỊNH GIÁ CƠ SỞ & CHẾ ĐỘ ĐỊNH GIÁ':"Giá trị hợp lý được xem như một vùng thay vì một điểm duy nhất; độ nhạy với ROE, COE, tăng trưởng và multiple giúp lượng hóa rủi ro sai số.",
+      'SO SÁNH PEER':"So sánh peer ưu tiên cả trung bình và trung vị để giảm ảnh hưởng của outlier; vị trí tương đối quan trọng hơn một ngưỡng tuyệt đối.",
+      'SO SÁNH NHÓM TƯƠNG ĐỒNG':"So sánh peer ưu tiên cả trung bình và trung vị để giảm ảnh hưởng của outlier; vị trí tương đối quan trọng hơn một ngưỡng tuyệt đối."
+    }
+    if head in driver_map:lines.append("Tại sao cần chú ý? "+driver_map[head])
+
+    # 3/4) Explicit implication for valuation vs credit rating
+    if report_type=='analysis':
+        implication={
+          'ROE & HIỆU QUẢ VỐN':"Tác động đến giá cổ phiếu: ROE cao và bền vững hơn peer có thể biện minh cho P/B premium; ngược lại, ROE thấp nhưng P/B cao làm tăng rủi ro định giá.",
+          'ROA & HIỆU QUẢ TÀI SẢN':"Tác động đến giá cổ phiếu: ROA tốt hơn peer hỗ trợ chất lượng lợi nhuận và khả năng duy trì ROE mà không cần tăng mạnh đòn bẩy.",
+          'KHẢ NĂNG SINH LỢI':"Tác động đến giá cổ phiếu: chất lượng và độ bền của lợi nhuận quyết định mức multiple có thể duy trì, không chỉ tốc độ tăng EPS ngắn hạn.",
+          'CHẤT LƯỢNG TÀI SẢN':"Tác động đến giá cổ phiếu: suy giảm chất lượng tài sản có thể làm tăng chi phí tín dụng, giảm ROE kỳ vọng và kéo giảm multiple hợp lý.",
+          'VỐN & ĐÒN BẨY':"Tác động đến giá cổ phiếu: bộ đệm vốn tốt tạo dư địa tăng trưởng/phân phối vốn; thiếu vốn có thể dẫn đến pha loãng hoặc hạn chế tăng trưởng.",
+          'NGUỒN VỐN & THANH KHOẢN':"Tác động đến giá cổ phiếu: nguồn vốn ổn định và chi phí thấp hỗ trợ biên lợi nhuận, đồng thời giảm tail risk thanh khoản.",
+          'ĐỊNH GIÁ TƯƠNG ĐỐI':"Kết luận định giá phải trả lời premium/discount so với peer có được giải thích bởi ROE, tăng trưởng và rủi ro hay không.",
+          'SO SÁNH PEER':"Kết luận đầu tư: ưu tiên doanh nghiệp có tổ hợp ROE/tăng trưởng/chất lượng tài sản tốt hơn peer nhưng valuation chưa phản ánh đầy đủ lợi thế đó.",
+          'SO SÁNH NHÓM TƯƠNG ĐỒNG':"Kết luận đầu tư: ưu tiên doanh nghiệp có tổ hợp ROE/tăng trưởng/chất lượng tài sản tốt hơn peer nhưng valuation chưa phản ánh đầy đủ lợi thế đó."
+        }
+    else:
+        implication={
+          'ROE & HIỆU QUẢ VỐN':"Tác động đến XHTN: khả năng sinh lợi tốt tạo vốn nội bộ và hấp thụ tổn thất; nhưng lợi nhuận dựa nhiều vào đòn bẩy hoặc thu nhập bất thường có chất lượng thấp hơn.",
+          'ROA & HIỆU QUẢ TÀI SẢN':"Tác động đến XHTN: hiệu quả tài sản tốt hỗ trợ khả năng tạo bộ đệm vốn, song phải được kiểm tra tính bền vững.",
+          'KHẢ NĂNG SINH LỢI':"Tác động đến XHTN: lợi nhuận bền vững củng cố năng lực hấp thụ tổn thất và trả nợ; biến động lợi nhuận làm giảm độ chắc chắn của hồ sơ tài chính.",
+          'CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN':"Tác động đến XHTN: chất lượng tài sản suy yếu có thể truyền dẫn sang dự phòng, lợi nhuận, vốn và thanh khoản, do đó là biến số trọng yếu của notch.",
+          'VỐN & ĐÒN BẨY':"Tác động đến XHTN: bộ đệm vốn/đòn bẩy quyết định khả năng hấp thụ tổn thất ngoài dự kiến và là đầu vào quan trọng cho đánh giá hồ sơ tài chính.",
+          'THANH KHOẢN':"Tác động đến XHTN: thanh khoản yếu có thể tạo áp lực trả nợ ngay cả khi doanh nghiệp còn khả năng sinh lợi; cần xem xét cùng cấu trúc đáo hạn và nguồn dự phòng.",
+          'SO SÁNH NHÓM TƯƠNG ĐỒNG':"Tác động đến XHTN: peer comparison là phép kiểm tra tính hợp lý của đánh giá định tính và notch, không thay thế methodology."
+        }
+    if head in implication:lines.append(implication[head])
+    return lines
+
 def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     ticker=str(ticker).upper();meta=get_company(ticker);s=get_snapshot(ticker);val=valuation(ticker,s)
     rr=rating_result or (rate_company(ticker) if report_type=='rating' else {})
@@ -460,16 +611,25 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
         'NGUỒN VỐN & THANH KHOẢN':'CASA' if meta.get('EntityType')=='BANK' else 'CurrentRatio',
         'THANH KHOẢN':'CASA' if meta.get('EntityType')=='BANK' else 'CurrentRatio'
     }
-    # 28 logical analytical pages + cover + contents ~= 30 pages.
-    # Each page is intentionally populated with narrative + evidence/chart/table to avoid empty filler pages.
+
     for i,(head,desc) in enumerate(plan,1):
-        if i>1: doc.add_page_break()
+        if i>1:doc.add_page_break()
         doc.add_heading(f'{i}. {head}',1)
-        _add_pars(doc,_page_narrative(ticker,head,desc,meta,s,val,rr,report_type))
+        pars=_page_narrative(ticker,head,desc,meta,s,val,rr,report_type)
+        # Analyst layer: What? Why? Peer? So what?
+        pars.extend(_decision_narrative(ticker,head,meta,s,val,report_type))
+        # Add explicit evidence-led relative-analysis paragraphs.
+        for mm in _page_peer_metrics(head,meta.get('EntityType')):
+            try:
+                x=_relative_analysis(ticker,mm)
+                if x:pars.append(x)
+            except Exception:pass
+        _add_pars(doc,pars)
+
         if head in chart_for:
-            try: doc.add_picture(chart_metric(ticker,chart_for[head]),width=Mm(176))
-            except Exception: pass
-        elif report_type=='analysis' and head=='BEAR - BASE - BULL':
+            try:doc.add_picture(chart_metric(ticker,chart_for[head]),width=Mm(176))
+            except Exception:pass
+        if report_type=='analysis' and head=='BEAR - BASE - BULL':
             _add_fv_table(doc,ticker)
         elif report_type=='analysis' and head=='ĐỊNH GIÁ NỘI TẠI / CƠ SỞ':
             _add_triangulation_table(doc,ticker)
@@ -480,13 +640,30 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
         else:
             _evidence_table(doc,ticker,head,report_type)
 
+        _add_peer_section(doc,ticker,head,meta)
+
+    # Dedicated peer appendix
+    doc.add_page_break();doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
+    peer_metrics=['ROE','ROA','PB','PE']
+    if meta.get('EntityType')=='BANK':peer_metrics += ['NPL','CAR','CASA','NIM','LDR']
+    elif meta.get('EntityType')=='SECURITIES':peer_metrics += ['AvailableCapitalRatio','DebtEquity','CurrentRatio']
+    else:peer_metrics += ['DebtEquity','CurrentRatio']
+    for mm in peer_metrics:
+        try:
+            doc.add_heading(VI_METRIC.get(mm,mm),2)
+            nar=_relative_analysis(ticker,mm)
+            if nar:_add_pars(doc,[nar])
+            bio=peer_bar_chart(ticker,mm)
+            if bio:doc.add_picture(bio,width=Mm(176))
+        except Exception:pass
+
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
                 for pp in cell.paragraphs:
                     for run in pp.runs:
                         run.font.name='Lato'
-                        if run.font.size is None: run.font.size=Pt(10)
+                        if run.font.size is None:run.font.size=Pt(10)
     bio=BytesIO();doc.save(bio);return bio.getvalue()
 
 def generate_pdf(ticker,report_type='analysis',rating_result=None,mna=None):
@@ -513,7 +690,8 @@ def generate_pdf(ticker,report_type='analysis',rating_result=None,mna=None):
            Paragraph(f"{ticker} - {meta.get('CompanyName')} | {meta.get('Sector')}",body),PageBreak()]
     for i,(head,pars) in enumerate(sections,1):
         story.append(Paragraph(f'{i}. {head}',h))
-        for x in pars:story.append(Paragraph(str(x),body))
+        enriched=list(pars)+_decision_narrative(ticker,head,meta,s,val,report_type)
+        for x in enriched:story.append(Paragraph(str(x),body))
         if head in ['SO SÁNH NHÓM TƯƠNG ĐỒNG','PHỤ LỤC KPI & PEER']:
             k,_,_=sector_kpi_table(ticker);data=[['Chỉ tiêu','DN','TB ngành','Trung vị','N']]
             for _,r in k.head(10).iterrows():
