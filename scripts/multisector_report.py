@@ -97,12 +97,12 @@ def _style_doc(doc):
         st=doc.styles[name]; st.font.name='Lato'
         st._element.rPr.rFonts.set(qn('w:ascii'),'Lato'); st._element.rPr.rFonts.set(qn('w:hAnsi'),'Lato'); st._element.rPr.rFonts.set(qn('w:eastAsia'),'Lato')
     n=doc.styles['Normal']; n.font.size=Pt(11); n.paragraph_format.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    n.paragraph_format.line_spacing=1.15; n.paragraph_format.space_after=Pt(4)
+    n.paragraph_format.line_spacing=1.08; n.paragraph_format.space_after=Pt(2)
     doc.styles['Title'].font.size=Pt(20); doc.styles['Title'].font.bold=True
     doc.styles['Heading 1'].font.size=Pt(14); doc.styles['Heading 1'].font.bold=True
-    doc.styles['Heading 1'].paragraph_format.space_before=Pt(8); doc.styles['Heading 1'].paragraph_format.space_after=Pt(5)
+    doc.styles['Heading 1'].paragraph_format.space_before=Pt(7); doc.styles['Heading 1'].paragraph_format.space_after=Pt(3); doc.styles['Heading 1'].paragraph_format.keep_with_next=True
     doc.styles['Heading 2'].font.size=Pt(12); doc.styles['Heading 2'].font.bold=True
-    doc.styles['Heading 2'].paragraph_format.space_before=Pt(6); doc.styles['Heading 2'].paragraph_format.space_after=Pt(4)
+    doc.styles['Heading 2'].paragraph_format.space_before=Pt(5); doc.styles['Heading 2'].paragraph_format.space_after=Pt(2); doc.styles['Heading 2'].paragraph_format.keep_with_next=True
     # header/footer
     header=sec.header.paragraphs[0]; header.text='VIETNAM CORPORATE VALUATION & CREDIT RATING INTELLIGENCE'
     header.alignment=WD_ALIGN_PARAGRAPH.RIGHT
@@ -401,8 +401,10 @@ def _page_narrative(ticker,head,desc,meta,s,val,rr,report_type):
 def _evidence_table(doc,ticker,head,report_type):
     k,_,_=sector_kpi_table(ticker)
     if not len(k):return
-    # Pick up to 5 KPIs so each analytical page carries evidence without overcrowding.
-    kk=k.head(5)
+    metrics=_page_peer_metrics(head,get_company(ticker).get('EntityType'))
+    if not metrics:return
+    kk=k[k['Metric'].astype(str).isin(metrics)].drop_duplicates('Metric').head(6)
+    if not len(kk):return
     t=doc.add_table(rows=1,cols=5);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
     hdr=['Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị','Số DN']
     for j,x in enumerate(hdr):t.cell(0,j).text=x;_set_cell_shading(t.cell(0,j),'E8EEF7')
@@ -415,8 +417,8 @@ def _evidence_table(doc,ticker,head,report_type):
         for cell in row.cells:
             _set_cell_margins(cell)
             for pp in cell.paragraphs:
+                pp.paragraph_format.space_after=Pt(0)
                 for run in pp.runs:run.font.name='Lato';run.font.size=Pt(9)
-
 
 def _add_evidence_ledger(doc,ticker):
     ev=rating_evidence(ticker); rows=ev.get('EvidenceLedger',[])
@@ -673,7 +675,10 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
         'THANH KHOẢN':'CASA' if meta.get('EntityType')=='BANK' else 'CurrentRatio'
     }
 
+    major_breaks={'TÓM TẮT XẾP HẠNG','HỒ SƠ KINH DOANH','ANCHOR','KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN',
+                  'TÓM TẮT ĐIỀU HÀNH','HỒ SƠ DOANH NGHIỆP','SO SÁNH PEER','ĐỊNH GIÁ TƯƠNG ĐỐI','M&A - GIÁ TRỊ ĐỘC LẬP','KẾT LUẬN PHÂN TÍCH'}
     for i,(head,desc) in enumerate(plan,1):
+        if i>1 and head in major_breaks:doc.add_page_break()
         doc.add_heading(f'{i}. {head}',1)
         pars=_page_narrative(ticker,head,desc,meta,s,val,rr,report_type)
         # Analyst layer: What? Why? Peer? So what?
@@ -698,18 +703,15 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
         elif report_type=='rating' and head=='KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN':
             _add_evidence_ledger(doc,ticker)
         else:
-            # Avoid repeating the same methodology/peer KPI table on consecutive pages.
-            # Detailed KPI matrix is presented once in the methodology appendix.
-            if head in ('SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG','ĐỊNH GIÁ TƯƠNG ĐỐI'):
-                _evidence_table(doc,ticker,head,report_type)
+            _evidence_table(doc,ticker,head,report_type)
 
         _add_peer_section(doc,ticker,head,meta)
 
-    # Comprehensive methodology KPI appendix
+    # Comprehensive methodology KPI appendix – continue naturally to save paper.
     _add_methodology_kpi_matrix(doc,ticker)
 
     # Dedicated peer appendix
-    doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
+    doc.add_page_break();doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
     peer_metrics=metric_list(ticker,available_only=True)
     # Keep charts focused on comparable ratios/scale metrics; N/A metrics remain visible in methodology matrix.
     chartable={'TotalAssets','GrossLoans','CustomerDeposits','Equity','Revenue','ROE','ROA','NIM','NPL','CAR','CIR','LDR','CASA',
@@ -731,23 +733,6 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
                     for run in pp.runs:
                         run.font.name='Lato'
                         if run.font.size is None:run.font.size=Pt(10)
-    # Compact pagination: allow body paragraphs/tables to flow; keep headings with following content.
-    for pp in doc.paragraphs:
-        pf=pp.paragraph_format
-        if pp.style and str(pp.style.name).startswith('Heading'):
-            pf.keep_with_next=True
-        else:
-            pf.keep_with_next=False
-            pf.keep_together=False
-            pf.widow_control=True
-    for table in doc.tables:
-        for row in table.rows:
-            trPr=row._tr.get_or_add_trPr()
-            # permit row split where Word needs it to avoid large blank areas
-            for el in list(trPr):
-                if el.tag.endswith('cantSplit'):
-                    trPr.remove(el)
-
     bio=BytesIO();doc.save(bio);return bio.getvalue()
 
 def generate_pdf(ticker,report_type='analysis',rating_result=None,mna=None):

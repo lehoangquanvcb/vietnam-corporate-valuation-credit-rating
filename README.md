@@ -207,10 +207,12 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - Peer appendix lấy danh sách KPI theo methodology thay vì danh sách cố định ngắn.
 
 
-## V8.14 - CONSOLIDATED UI + COMPACT REPORT
-- Kế thừa V8.13 và các fix trước, trừ các điểm xung đột với giao diện mới.
-- Sửa KeyError cột KPI sau khi mở rộng methodology.
-- Gộp Định giá + M&A/Quyền kiểm soát + Tái cấu trúc + Kịch bản & Stress vào tab `PHÂN TÍCH – ĐỊNH GIÁ – M&A`.
-- Giảm navigation từ 13 xuống 9 tab; giữ Báo cáo Xếp hạng tín nhiệm là một tab riêng.
-- Xóa lặp bảng KPI/peer ở nhiều chương; ma trận methodology đầy đủ chỉ trình bày tập trung một lần.
-- Bỏ page-break cưỡng bức giữa mọi chương; Word tự dồn trang, cho phép body/table flow để giảm khoảng trắng và tốn giấy.
+## V8.14
+- Giao diện rút từ 13 tab xuống 3 workspace: Hồ sơ doanh nghiệp; Phân tích, Định giá & M&A; Báo cáo XHTN.
+- Gộp Trung tâm phân tích, Phủ dữ liệu, Tổng quan, Hồ sơ doanh nghiệp, Phân tích tài chính và So sánh tương quan vào Hồ sơ doanh nghiệp.
+- Gộp Phân tích giá cổ phiếu, Định giá, M&A/Quyền kiểm soát, Tái cấu trúc, Kịch bản & Stress vào Phân tích, Định giá & M&A.
+- Chuyển nút xuất báo cáo xuống cuối đúng workspace Phân tích và XHTN; bỏ tab Báo cáo & Quản trị riêng.
+- Sửa KeyError do tên cột KPI thay đổi: app chỉ chọn các cột thực sự tồn tại.
+- Báo cáo không lặp bảng 5 KPI ở nhiều trang; mỗi chương chỉ có bảng KPI đúng chủ đề.
+- Dồn trang: bỏ page break bắt buộc cho mọi chương, giảm spacing, chỉ ngắt trang ở các khối lớn/phụ lục.
+- Kế thừa V8.13 methodology KPI expansion, V8.12 analyst narrative, V8.11 peer charts và toàn bộ sửa lỗi trước đó.
