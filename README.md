@@ -207,12 +207,14 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - Peer appendix lấy danh sách KPI theo methodology thay vì danh sách cố định ngắn.
 
 
-## V8.14
-- Giao diện rút từ 13 tab xuống 3 workspace: Hồ sơ doanh nghiệp; Phân tích, Định giá & M&A; Báo cáo XHTN.
-- Gộp Trung tâm phân tích, Phủ dữ liệu, Tổng quan, Hồ sơ doanh nghiệp, Phân tích tài chính và So sánh tương quan vào Hồ sơ doanh nghiệp.
-- Gộp Phân tích giá cổ phiếu, Định giá, M&A/Quyền kiểm soát, Tái cấu trúc, Kịch bản & Stress vào Phân tích, Định giá & M&A.
-- Chuyển nút xuất báo cáo xuống cuối đúng workspace Phân tích và XHTN; bỏ tab Báo cáo & Quản trị riêng.
-- Sửa KeyError do tên cột KPI thay đổi: app chỉ chọn các cột thực sự tồn tại.
-- Báo cáo không lặp bảng 5 KPI ở nhiều trang; mỗi chương chỉ có bảng KPI đúng chủ đề.
-- Dồn trang: bỏ page break bắt buộc cho mọi chương, giảm spacing, chỉ ngắt trang ở các khối lớn/phụ lục.
-- Kế thừa V8.13 methodology KPI expansion, V8.12 analyst narrative, V8.11 peer charts và toàn bộ sửa lỗi trước đó.
+## V8.14 - UI & REPORT CLEANUP
+- Gộp 6 tab phân tích nền tảng thành 1 tab `Hồ sơ doanh nghiệp`.
+- Gộp Định giá + M&A/Quyền kiểm soát + Tái cấu trúc + Kịch bản/Stress + Intelligent Analyst thành 1 tab `Phân tích, định giá & M&A`.
+- Giữ 1 tab riêng `Báo cáo Xếp hạng tín nhiệm`.
+- Chuyển nút xuất report xuống cuối đúng 2 tab nghiệp vụ chính; bỏ tab Báo cáo & Quản trị riêng.
+- `Dữ liệu & Quản trị` chỉ giữ coverage/universe/governance.
+- Fix KeyError do khác tên cột KPI giữa V8.12/V8.13 bằng normalize columns trước khi hiển thị.
+- Không còn show JSON/code raw trong tab XHTN.
+- Report: bảng KPI chỉ xuất ở các chương cần thiết; loại bỏ việc lặp bảng nhiều trang liên tiếp.
+- Report: bỏ page-break cưỡng bức ở mọi mục; chỉ ngắt tại chương lớn để dồn trang và giảm khoảng trắng.
+- Matrix methodology có guard để chỉ xuất một lần.

@@ -97,12 +97,12 @@ def _style_doc(doc):
         st=doc.styles[name]; st.font.name='Lato'
         st._element.rPr.rFonts.set(qn('w:ascii'),'Lato'); st._element.rPr.rFonts.set(qn('w:hAnsi'),'Lato'); st._element.rPr.rFonts.set(qn('w:eastAsia'),'Lato')
     n=doc.styles['Normal']; n.font.size=Pt(11); n.paragraph_format.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    n.paragraph_format.line_spacing=1.08; n.paragraph_format.space_after=Pt(2)
+    n.paragraph_format.line_spacing=1.15; n.paragraph_format.space_after=Pt(2)
     doc.styles['Title'].font.size=Pt(20); doc.styles['Title'].font.bold=True
     doc.styles['Heading 1'].font.size=Pt(14); doc.styles['Heading 1'].font.bold=True
-    doc.styles['Heading 1'].paragraph_format.space_before=Pt(7); doc.styles['Heading 1'].paragraph_format.space_after=Pt(3); doc.styles['Heading 1'].paragraph_format.keep_with_next=True
+    doc.styles['Heading 1'].paragraph_format.space_before=Pt(5); doc.styles['Heading 1'].paragraph_format.space_after=Pt(3)
     doc.styles['Heading 2'].font.size=Pt(12); doc.styles['Heading 2'].font.bold=True
-    doc.styles['Heading 2'].paragraph_format.space_before=Pt(5); doc.styles['Heading 2'].paragraph_format.space_after=Pt(2); doc.styles['Heading 2'].paragraph_format.keep_with_next=True
+    doc.styles['Heading 2'].paragraph_format.space_before=Pt(4); doc.styles['Heading 2'].paragraph_format.space_after=Pt(2)
     # header/footer
     header=sec.header.paragraphs[0]; header.text='VIETNAM CORPORATE VALUATION & CREDIT RATING INTELLIGENCE'
     header.alignment=WD_ALIGN_PARAGRAPH.RIGHT
@@ -137,6 +137,7 @@ def _add_toc(doc,sections):
 def _add_kpi_table(doc,ticker,limit=10):
     k,_,_=sector_kpi_table(ticker)
     if not len(k):return
+    doc.add_heading('Bảng chỉ tiêu tổng hợp và so sánh ngành',2)
     t=doc.add_table(rows=1,cols=5);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
     hdr=['Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị ngành','Số DN']
     for j,x in enumerate(hdr):
@@ -399,26 +400,9 @@ def _page_narrative(ticker,head,desc,meta,s,val,rr,report_type):
     return base
 
 def _evidence_table(doc,ticker,head,report_type):
-    k,_,_=sector_kpi_table(ticker)
-    if not len(k):return
-    metrics=_page_peer_metrics(head,get_company(ticker).get('EntityType'))
-    if not metrics:return
-    kk=k[k['Metric'].astype(str).isin(metrics)].drop_duplicates('Metric').head(6)
-    if not len(kk):return
-    t=doc.add_table(rows=1,cols=5);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
-    hdr=['Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị','Số DN']
-    for j,x in enumerate(hdr):t.cell(0,j).text=x;_set_cell_shading(t.cell(0,j),'E8EEF7')
-    _set_repeat_table_header(t.rows[0])
-    for _,r in kk.iterrows():
-        c=t.add_row().cells;m=r['Metric']
-        vals=[r['Chỉ tiêu'],metric_fmt(m,r['Doanh nghiệp']),metric_fmt(m,r['Trung bình ngành']),metric_fmt(m,r['Trung vị ngành']),str(int(r['Số DN có dữ liệu']))]
-        for j,x in enumerate(vals):c[j].text=str(x)
-    for row in t.rows:
-        for cell in row.cells:
-            _set_cell_margins(cell)
-            for pp in cell.paragraphs:
-                pp.paragraph_format.space_after=Pt(0)
-                for run in pp.runs:run.font.name='Lato';run.font.size=Pt(9)
+    # Disabled in V8.14: the consolidated methodology KPI matrix provides
+    # the single source of tabular KPI evidence; chapters use narrative + peer charts.
+    return
 
 def _add_evidence_ledger(doc,ticker):
     ev=rating_evidence(ticker); rows=ev.get('EvidenceLedger',[])
@@ -643,20 +627,34 @@ def _fmt_method_value(metric,v):
     return (f"{v:,.2f}").replace(',','X').replace('.',',').replace('X','.')
 
 def _add_methodology_kpi_matrix(doc,ticker):
+    if getattr(doc,'_methodology_matrix_added',False):
+        return
+    doc._methodology_matrix_added=True
     z=methodology_kpi_table(ticker,include_missing=True)
     if z.empty:return
     doc.add_heading('MA TRẬN CHỈ TIÊU THEO PHƯƠNG PHÁP XHTN',1)
-    _add_pars(doc,["Ma trận dưới đây mở rộng phạm vi phân tích theo đúng loại hình doanh nghiệp. Chỉ tiêu chưa có dữ liệu được giữ N/A để chỉ rõ data gap, không tự giả định số liệu."])
-    for grp,g in z.groupby('Nhóm phân tích',sort=False):
-        doc.add_heading(str(grp),2)
-        tb=doc.add_table(rows=1,cols=6);tb.style='Table Grid'
-        hdr=['Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị','Số DN','Dữ liệu']
-        for j,x in enumerate(hdr):tb.rows[0].cells[j].text=x
-        for _,r in g.iterrows():
-            c=tb.add_row().cells;m=r['Metric']
-            vals=[r['Chỉ tiêu'],_fmt_method_value(m,r['Doanh nghiệp']),_fmt_method_value(m,r['TB ngành']),
-                  _fmt_method_value(m,r['Trung vị']),str(int(r['Số DN'])),r['Trạng thái dữ liệu']]
-            for j,x in enumerate(vals):c[j].text=str(x)
+    _add_pars(doc,[
+        "Ma trận dưới đây tổng hợp một lần toàn bộ chỉ tiêu theo đúng loại hình doanh nghiệp. "
+        "Chỉ tiêu chưa có dữ liệu giữ trạng thái N/A – cần bổ sung nguồn; không tự giả định."
+    ])
+    tb=doc.add_table(rows=1,cols=7);tb.style='Table Grid';tb.alignment=WD_TABLE_ALIGNMENT.CENTER
+    hdr=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị','Số DN','Dữ liệu']
+    for j,x in enumerate(hdr):
+        tb.rows[0].cells[j].text=x
+        _set_cell_shading(tb.rows[0].cells[j],'E8EEF7')
+    _set_repeat_table_header(tb.rows[0])
+    for _,r in z.iterrows():
+        c=tb.add_row().cells;m=r['Metric']
+        vals=[r['Nhóm phân tích'],r['Chỉ tiêu'],_fmt_method_value(m,r['Doanh nghiệp']),
+              _fmt_method_value(m,r['TB ngành']),_fmt_method_value(m,r['Trung vị']),
+              str(int(r['Số DN'])),r['Trạng thái dữ liệu']]
+        for j,x in enumerate(vals):c[j].text=str(x)
+    for row in tb.rows:
+        for cell in row.cells:
+            _set_cell_margins(cell,top=35,bottom=35,start=45,end=45)
+            for pp in cell.paragraphs:
+                for run in pp.runs:
+                    run.font.name='Lato';run.font.size=Pt(9)
 
 def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     ticker=str(ticker).upper();meta=get_company(ticker);s=get_snapshot(ticker);val=valuation(ticker,s)
@@ -675,10 +673,17 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
         'THANH KHOẢN':'CASA' if meta.get('EntityType')=='BANK' else 'CurrentRatio'
     }
 
-    major_breaks={'TÓM TẮT XẾP HẠNG','HỒ SƠ KINH DOANH','ANCHOR','KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN',
-                  'TÓM TẮT ĐIỀU HÀNH','HỒ SƠ DOANH NGHIỆP','SO SÁNH PEER','ĐỊNH GIÁ TƯƠNG ĐỐI','M&A - GIÁ TRỊ ĐỘC LẬP','KẾT LUẬN PHÂN TÍCH'}
+    major_breaks={
+        'SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG',
+        'ĐỊNH GIÁ TƯƠNG ĐỐI','ANCHOR',
+        'STRESS TEST','KẾT LUẬN PHÂN TÍCH',
+        'KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN',
+        'PHỤ LỤC KPI','PHỤ LỤC KPI, PEER & BIỂU ĐỒ'
+    }
     for i,(head,desc) in enumerate(plan,1):
-        if i>1 and head in major_breaks:doc.add_page_break()
+        # Chỉ ngắt trang tại chương lớn; các mục ngắn tự dồn lên phần trống của trang trước.
+        if i>1 and head in major_breaks:
+            doc.add_page_break()
         doc.add_heading(f'{i}. {head}',1)
         pars=_page_narrative(ticker,head,desc,meta,s,val,rr,report_type)
         # Analyst layer: What? Why? Peer? So what?
@@ -703,28 +708,23 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
         elif report_type=='rating' and head=='KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN':
             _add_evidence_ledger(doc,ticker)
         else:
-            _evidence_table(doc,ticker,head,report_type)
+            # Chỉ chèn bảng KPI ở các chương thật sự cần.
+            # Tránh lặp lại cùng một bảng nhiều trang liên tiếp.
+            evidence_pages={
+                'SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG',
+                'PHỤ LỤC KPI','PHỤ LỤC KPI & PEER',
+                'PHỤ LỤC KPI, PEER & BIỂU ĐỒ',
+                'HỒ SƠ TÀI CHÍNH'
+            }
+            if head in evidence_pages:
+                _evidence_table(doc,ticker,head,report_type)
 
         _add_peer_section(doc,ticker,head,meta)
 
-    # Comprehensive methodology KPI appendix – continue naturally to save paper.
+    # Comprehensive methodology KPI appendix: flow into available page space.
     _add_methodology_kpi_matrix(doc,ticker)
 
-    # Dedicated peer appendix
-    doc.add_page_break();doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
-    peer_metrics=metric_list(ticker,available_only=True)
-    # Keep charts focused on comparable ratios/scale metrics; N/A metrics remain visible in methodology matrix.
-    chartable={'TotalAssets','GrossLoans','CustomerDeposits','Equity','Revenue','ROE','ROA','NIM','NPL','CAR','CIR','LDR','CASA',
-               'PB','PE','DebtEquity','CurrentRatio','AvailableCapitalRatio','GrossMargin','NetMargin','DebtEBITDA','CFO_Debt'}
-    peer_metrics=[m for m in peer_metrics if m in chartable]
-    for mm in peer_metrics:
-        try:
-            doc.add_heading(VI_METRIC.get(mm,mm),2)
-            nar=_relative_analysis(ticker,mm)
-            if nar:_add_pars(doc,[nar])
-            bio=peer_bar_chart(ticker,mm)
-            if bio:doc.add_picture(bio,width=Mm(176))
-        except Exception:pass
+    # Peer charts are already embedded in relevant chapters; no duplicate appendix.
 
     for table in doc.tables:
         for row in table.rows:
