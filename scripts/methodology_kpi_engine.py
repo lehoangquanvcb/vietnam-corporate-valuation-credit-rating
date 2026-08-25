@@ -18,35 +18,32 @@ LABELS={
 'AvailableCapitalRatio':'Tỷ lệ an toàn vốn khả dụng','MarketShareBrokerage':'Thị phần môi giới',
 'ClientAssets':'Tài sản/tiền gửi của khách hàng','MarginLoans':'Dư nợ cho vay ký quỹ',
 'MarginLoansEquity':'Cho vay ký quỹ/VCSH','ICGR':'Tỷ lệ tạo vốn nội bộ (ICGR)',
-'OperatingProfitMargin':'Biên lợi nhuận hoạt động','EV_EBITDA':'EV/EBITDA','FFO':'FFO','FOCF':'FOCF','DCF':'DCF',
-'FFO_Debt':'FFO/Nợ vay','DCF_Debt':'DCF/Nợ vay','InterestCoverage':'EBITDA/Lãi vay',
-'BrokerageRevenue':'Doanh thu môi giới','TradingRevenue':'Doanh thu tự doanh',
-'MarginInterestRevenue':'Doanh thu cho vay ký quỹ','LLR':'Tỷ lệ bao phủ nợ xấu'
+'OperatingProfitMargin':'Biên lợi nhuận hoạt động','EV_EBITDA':'EV/EBITDA'
 }
 PCT=set(['ROE','ROA','NIM','NPL','CAR','CIR','CASA','LoanAssets','DepositAssets','EquityAssets',
 'TangibleEquityAssets','NII_OperatingIncome','ProvisionOperatingIncome','GrossMargin','NetMargin',
 'EBITDAMargin','DebtAssets','CFO_Debt','FOCF_Debt','CFO_Margin','CapexRevenue','AvailableCapitalRatio',
-'MarketShareBrokerage','MarginLoansEquity','ICGR','OperatingProfitMargin','FFO_Debt','DCF_Debt','LLR'])
-MULT=set(['LDR','PB','PE','DebtEquity','DebtEBITDA','CurrentRatio','EV_EBITDA','InterestCoverage'])
+'MarketShareBrokerage','MarginLoansEquity','ICGR','OperatingProfitMargin'])
+MULT=set(['LDR','PB','PE','DebtEquity','DebtEBITDA','CurrentRatio','EV_EBITDA'])
 
 BANK_GROUPS={
 'Hồ sơ kinh doanh':['TotalAssets','GrossLoans','CustomerDeposits','LoanAssets','DepositAssets'],
 'Vốn, đòn bẩy & lợi nhuận':['CAR','EquityAssets','TangibleEquityAssets','ROE','ROA','NIM','CIR','NII_OperatingIncome'],
-'Vị thế rủi ro':['NPL','LLR','ProvisionOperatingIncome','LoanAssets'],
+'Vị thế rủi ro':['NPL','ProvisionOperatingIncome','LoanAssets'],
 'Nguồn vốn & thanh khoản':['CASA','LDR','DepositAssets'],
 'Định giá':['PB','PE']
 }
 SEC_GROUPS={
 'Hồ sơ kinh doanh':['Revenue','TotalAssets','Equity','MarketShareBrokerage','ClientAssets','MarginLoans'],
 'Vốn, đòn bẩy & lợi nhuận':['AvailableCapitalRatio','DebtEquity','DebtEBITDA','ROE','ROA','NetMargin','OperatingProfitMargin','ICGR'],
-'Vị thế rủi ro':['MarginLoansEquity','MarketShareBrokerage','BrokerageRevenue','TradingRevenue','MarginInterestRevenue','DebtEquity'],
+'Vị thế rủi ro':['MarginLoansEquity','MarketShareBrokerage','DebtEquity'],
 'Nguồn vốn & thanh khoản':['CurrentRatio','DebtEquity','CFO_Debt'],
 'Định giá':['PB','PE','EV_EBITDA']
 }
 CORP_GROUPS={
 'Quy mô & hồ sơ kinh doanh':['Revenue','TotalAssets','GrossMargin','OperatingProfitMargin','EBITDAMargin'],
 'Khả năng sinh lợi':['ROE','ROA','NetMargin','EBITDAMargin'],
-'Dòng tiền & đòn bẩy':['DebtEquity','DebtAssets','DebtEBITDA','FFO_Debt','CFO_Debt','FOCF_Debt','DCF_Debt','InterestCoverage','CFO_Margin','CapexRevenue'],
+'Dòng tiền & đòn bẩy':['DebtEquity','DebtAssets','DebtEBITDA','CFO_Debt','FOCF_Debt','CFO_Margin','CapexRevenue'],
 'Thanh khoản':['CurrentRatio','CFO_Debt','FOCF_Debt'],
 'Định giá':['PB','PE','EV_EBITDA']
 }
@@ -73,16 +70,7 @@ def enrich_row(r):
     d['CFO_Margin']=_div(d.get('CFO'),d.get('Revenue'))
     d['CapexRevenue']=_div(abs(_n(d.get('Capex'))),d.get('Revenue'))
     focf=_n(d.get('CFO'))-abs(_n(d.get('Capex'))) if np.isfinite(_n(d.get('CFO'))) and np.isfinite(_n(d.get('Capex'))) else np.nan
-    d['FOCF']=focf
     d['FOCF_Debt']=_div(focf,d.get('TotalDebt'))
-    ffo=_n(d.get('FFO'))
-    if not np.isfinite(ffo) and np.isfinite(_n(d.get('EBITDA'))) and np.isfinite(_n(d.get('InterestExpense'))) and np.isfinite(_n(d.get('TaxExpense'))):
-        ffo=_n(d.get('EBITDA'))-abs(_n(d.get('InterestExpense')))-abs(_n(d.get('TaxExpense')))
-    d['FFO']=ffo; d['FFO_Debt']=_div(ffo,d.get('TotalDebt'))
-    dcf=_n(d.get('DCF'))
-    if not np.isfinite(dcf) and np.isfinite(focf) and np.isfinite(_n(d.get('DividendsPaid'))): dcf=focf-abs(_n(d.get('DividendsPaid')))
-    d['DCF']=dcf; d['DCF_Debt']=_div(dcf,d.get('TotalDebt'))
-    d['InterestCoverage']=_div(d.get('EBITDA'),abs(_n(d.get('InterestExpense'))) if np.isfinite(_n(d.get('InterestExpense'))) else np.nan)
     d['MarginLoansEquity']=_div(d.get('MarginLoans'),d.get('Equity'))
     return d
 

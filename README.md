@@ -207,12 +207,10 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - Peer appendix lấy danh sách KPI theo methodology thay vì danh sách cố định ngắn.
 
 
-## V8.14 - DATA LAYER COVERAGE
-Kế thừa toàn bộ V8.13 và các sửa lỗi trước đó. Nâng cấp tập trung vào việc giảm N/A một cách có kiểm soát:
-- Mở rộng alias/parser Vnstock cho CTCK và doanh nghiệp phi tài chính.
-- Bổ sung InterestExpense, TaxExpense, Depreciation, DividendsPaid, RetainedEarnings, CharterCapital, MarginLoans và các cấu phần doanh thu CTCK.
-- Tự tính FFO, FOCF, DCF, FFO/Debt, FOCF/Debt, DCF/Debt, Debt/EBITDA, EBITDA/Interest, MarginLoans/Equity và ICGR khi đủ dữ liệu nguồn.
-- Manual input trở thành fallback có kiểm soát cho toàn bộ KPI methodology, không ghi đè dữ liệu Vnstock đang có.
-- Thêm methodology_data_dictionary.csv và methodology_coverage.csv.
-- App hiển thị độ phủ KPI trọng yếu và danh sách data gap thay vì che giấu bằng giả định.
-- Giữ nguyên kiến trúc Vnstock Bronze: refresh LOCAL -> CSV -> GitHub -> Streamlit chỉ đọc dữ liệu.
+## V8.14 - DATA LAYER & KPI SCHEMA ROBUSTNESS
+- Kế thừa toàn bộ V8.13 và các fix/nâng cấp trước đó.
+- Sửa KeyError tại bảng KPI trên Streamlit do lệch schema giữa TB ngành/Trung bình ngành, Trung vị/Trung vị ngành, Số DN/Số DN có dữ liệu.
+- Thêm canonical KPI schema + safe column selection: thiếu cột không còn làm app crash.
+- Trang Tổng quan dùng trực tiếp ma trận KPI theo methodology thay vì bảng 4–5 KPI cố định.
+- Mở rộng chart tài chính theo BANK / SECURITIES / CORPORATE.
+- Giữ 2 nhiệm vụ cốt lõi: Phân tích giá cổ phiếu và XHTN; giữ 3 methodology, peer engine, report engine, Lato/A4 và Vnstock Bronze architecture.

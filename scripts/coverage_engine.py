@@ -46,17 +46,3 @@ def build_coverage_matrix():
 
 if __name__=='__main__':
     z=build_coverage_matrix(); print(f'OK - coverage matrix: {len(z)} companies'); print(z.Readiness.value_counts(dropna=False).to_string())
-
-
-def build_methodology_coverage():
-    from scripts.universal_data import universe
-    from scripts.methodology_data_quality import methodology_readiness
-    rows=[]
-    for t in universe().Ticker.astype(str):
-        q=methodology_readiness(t)
-        rows.append({'Ticker':t,'EntityType':q['EntityType'],'MethodologyCoveragePct':q['Coverage'],
-                     'MethodologyHave':q['Have'],'MethodologyRequired':q['Required'],
-                     'MissingCriticalMetrics':'|'.join(q['Missing']),'MethodologyReadiness':q['Status']})
-    z=pd.DataFrame(rows)
-    z.to_csv(DATA/'methodology_coverage.csv',index=False,encoding='utf-8-sig')
-    return z
