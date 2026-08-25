@@ -206,15 +206,17 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - Chỉ tiêu thiếu dữ liệu hiển thị N/A – cần bổ sung nguồn; tuyệt đối không tự bịa.
 - Peer appendix lấy danh sách KPI theo methodology thay vì danh sách cố định ngắn.
 
-
-## V8.14 - UI & REPORT CLEANUP
-- Gộp 6 tab phân tích nền tảng thành 1 tab `Hồ sơ doanh nghiệp`.
-- Gộp Định giá + M&A/Quyền kiểm soát + Tái cấu trúc + Kịch bản/Stress + Intelligent Analyst thành 1 tab `Phân tích, định giá & M&A`.
-- Giữ 1 tab riêng `Báo cáo Xếp hạng tín nhiệm`.
-- Chuyển nút xuất report xuống cuối đúng 2 tab nghiệp vụ chính; bỏ tab Báo cáo & Quản trị riêng.
-- `Dữ liệu & Quản trị` chỉ giữ coverage/universe/governance.
-- Fix KeyError do khác tên cột KPI giữa V8.12/V8.13 bằng normalize columns trước khi hiển thị.
-- Không còn show JSON/code raw trong tab XHTN.
-- Report: bảng KPI chỉ xuất ở các chương cần thiết; loại bỏ việc lặp bảng nhiều trang liên tiếp.
-- Report: bỏ page-break cưỡng bức ở mọi mục; chỉ ngắt tại chương lớn để dồn trang và giảm khoảng trắng.
-- Matrix methodology có guard để chỉ xuất một lần.
+## V8.14 FULL CONSOLIDATED
+- Full package kế thừa V8.13 và toàn bộ data/config/scripts/reports/master workbook.
+- UI rút từ 13 tab xuống 4 tab:
+  1. Hồ sơ doanh nghiệp
+  2. Phân tích, Định giá & M&A
+  3. Báo cáo Xếp hạng tín nhiệm
+  4. Dữ liệu & Quản trị
+- Gộp Định giá + M&A/Quyền kiểm soát + Tái cấu trúc + Kịch bản & Stress vào tab Phân tích, Định giá & M&A.
+- Gộp Trung tâm phân tích + Tổng quan + Hồ sơ DN + Phân tích tài chính + So sánh tương quan vào Hồ sơ doanh nghiệp.
+- Module xuất report được chuyển xuống cuối đúng tab Phân tích/Định giá/M&A và XHTN.
+- Fix KeyError do tên cột KPI thay đổi bằng safe-column rendering.
+- Report không còn lặp cùng bảng 5 KPI qua nhiều trang: evidence table chọn KPI theo đúng chủ đề chương.
+- Bỏ ép page break cho từng chương; Word tự dồn trang, giảm khoảng trắng và tốn giấy.
+- Giữ nguyên methodology KPI expansion, peer charts, analyst narrative, 3 methodology XHTN, Vnstock Bronze architecture.

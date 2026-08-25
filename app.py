@@ -106,219 +106,154 @@ for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
 if meta.get('Methodology')=='EXCLUDED_SPECIALIZED': st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
 if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['TotalAssets','Revenue','ROE','Price']): st.info(f'Chưa có BCTC Vnstock LOCAL cho {selected}. Chạy RUN_REFRESH_ONE_COMPANY.bat và nhập {selected}; Streamlit Cloud sẽ đọc CSV sau khi push GitHub.')
 
+tabs=st.tabs(['HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','BÁO CÁO XẾP HẠNG TÍN NHIỆM','DỮ LIỆU & QUẢN TRỊ'])
 
-def fmt_price(x):
+def _safe_show(df, wanted, n=None):
+    if df is None or not len(df): return pd.DataFrame()
+    cols=[c for c in wanted if c in df.columns]
+    q=df[cols].copy() if cols else df.copy()
+    return q.head(n) if n else q
+
+def _download_report_block(report_type, rating_result=None):
+    title='Báo cáo Phân tích – Định giá – M&A' if report_type=='analysis' else 'Báo cáo Xếp hạng tín nhiệm'
+    st.markdown('---')
+    st.subheader('Xuất '+title)
+    st.caption('Báo cáo A4 tự dồn trang theo nội dung thực tế; không ép mỗi chương sang một trang mới.')
+    c1,c2=st.columns(2)
     try:
-        if x is None or pd.isna(x): return 'N/A'
-        return f'{float(x)*1000:,.0f} đồng/cp'.replace(',', '.')
-    except: return 'N/A'
-
-def fmt_mult(x):
-    try:
-        if x is None or pd.isna(x): return 'N/A'
-        return f'{float(x):.2f}x'.replace('.', ',')
-    except: return 'N/A'
-
-def fmt_pct(x):
-    try:
-        if x is None or pd.isna(x): return 'N/A'
-        return f'{float(x)*100:.1f}%'.replace('.', ',')
-    except: return 'N/A'
-
-tabs=st.tabs([
-    'Hồ sơ doanh nghiệp',
-    'Phân tích, định giá & M&A',
-    'Báo cáo Xếp hạng tín nhiệm',
-    'Dữ liệu & Quản trị'
-])
-
-
-
-# =========================================================
-# TAB 1 — HỒ SƠ DOANH NGHIỆP
-# Gộp: Trung tâm phân tích + Phủ dữ liệu + Tổng quan + Hồ sơ DN
-#      + Phân tích tài chính + So sánh tương quan
-# =========================================================
-with tabs[0]:
-    st.subheader(f'Hồ sơ doanh nghiệp - {selected}')
-
-    c1,c2,c3,c4,c5,c6=st.columns(6)
-    c1.metric('Giá thị trường', fmt_price(s.get('Price') or s.get('Close')))
-    c2.metric('P/B', fmt_mult(s.get('PB')))
-    c3.metric('ROE', fmt_pct(s.get('ROE')))
-    c4.metric('NPL', fmt_pct(s.get('NPL')) if meta.get('EntityType')=='BANK' else 'N/A')
-    c5.metric('CAR', fmt_pct(s.get('CAR')) if meta.get('EntityType')=='BANK' else 'N/A')
-    c6.metric('CASA', fmt_pct(s.get('CASA')) if meta.get('EntityType')=='BANK' else 'N/A')
-
-    st.markdown('### Nhận diện & phạm vi phân tích')
-    st.write(f"**{meta.get('CompanyName')}** · Loại hình: **{meta.get('EntityType')}** · Ngành: **{meta.get('Sector')}** · Sàn: **{meta.get('Exchange')}**")
-    st.write(f"**Nhóm so sánh:** {industry_name}")
-    st.write(f"**Phương pháp XHTN:** {meta.get('Methodology')}")
-    st.caption(f"Nguồn phân ngành: {meta.get('IndustrySource','Master/Legacy')} · Cấp ICB: {meta.get('IndustryLevelUsed','N/A')} · Mẫu phân tích chuyên ngành: {sector_template.get('label','N/A')}")
-
-    st.markdown('### Phủ dữ liệu')
-    try:
-        cov=pd.read_csv(DATA/'coverage_matrix.csv')
-        rr=cov[cov.Ticker.astype(str).str.upper().eq(selected)]
-        if len(rr):
-            st.dataframe(rr,hide_index=True,use_container_width=True)
-        else:
-            st.info('Chưa có dòng coverage cho doanh nghiệp này.')
-    except Exception:
-        st.info('Chưa có coverage_matrix.csv. Có thể tạo lại bằng RUN_FULL_REFRESH.bat.')
-
-    st.markdown('### Chỉ tiêu tài chính theo methodology')
-    try:
-        ov2,_,_=sector_kpi_table(selected)
-        # Normalize column names across V8.12/V8.13 to avoid KeyError.
-        rename_map={
-            'Nhóm phân tích':'Nhóm phân tích',
-            'Nhóm phân tích ':'Nhóm phân tích',
-            'TB ngành':'Trung bình ngành',
-            'Trung vị':'Trung vị ngành',
-            'Số DN':'Số DN có dữ liệu'
-        }
-        ov2=ov2.rename(columns=rename_map)
-        wanted=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành','Số DN có dữ liệu','Trạng thái dữ liệu']
-        shown=[c for c in wanted if c in ov2.columns]
-        st.dataframe(ov2[shown],hide_index=True,use_container_width=True)
+        docx=generate_docx(selected,report_type,rating_result)
+        pdf=generate_pdf(selected,report_type,rating_result)
+        suffix='Phan_tich_Dinh_gia_MA' if report_type=='analysis' else 'XHTN'
+        c1.download_button('Tải báo cáo Word',docx,file_name=f'{selected}_{suffix}.docx',
+            mime='application/vnd.openxmlformats-officedocument.wordprocessingml.document',use_container_width=True,
+            key=f'docx_{report_type}')
+        c2.download_button('Tải báo cáo PDF',pdf,file_name=f'{selected}_{suffix}.pdf',
+            mime='application/pdf',use_container_width=True,key=f'pdf_{report_type}')
     except Exception as e:
-        st.warning(f'Chưa hiển thị được ma trận chỉ tiêu: {e}')
+        st.warning(f'Chưa tạo được báo cáo: {e}')
 
-    st.markdown('### So sánh ngành & xu hướng')
-    # Keep charts focused; one KPI per chart.
-    metrics=['ROE','ROA']
-    if meta.get('EntityType')=='BANK':
-        metrics += ['NIM','NPL','CAR','CASA','LDR']
-    elif meta.get('EntityType')=='SECURITIES':
-        metrics += ['AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE']
+with tabs[0]:
+    st.subheader('Hồ sơ doanh nghiệp')
+    a,b,c,d=st.columns(4)
+    a.metric('Loại hình',meta.get('EntityType','N/A')); b.metric('Ngành',meta.get('Sector','N/A'))
+    c.metric('Sàn',meta.get('Exchange','N/A')); d.metric('Nhóm so sánh',industry_name)
+    st.write(f"**{meta.get('CompanyName')}** được hệ thống tự phân loại vào **{meta.get('Sector')}**. "
+             f"Methodology XHTN: **{meta.get('Methodology')}**.")
+    st.caption(f"Nguồn phân ngành: {meta.get('IndustrySource','Master/Legacy')} · Cấp ICB: {meta.get('IndustryLevelUsed','N/A')}")
+    st.markdown('### Hồ sơ tài chính & xu hướng')
+    if meta['EntityType']=='BANK':
+        ml=[('TotalAssets','Tổng tài sản',False),('GrossLoans','Cho vay khách hàng',False),
+            ('CustomerDeposits','Tiền gửi khách hàng',False),('ROE','ROE',True),('ROA','ROA',True),
+            ('NIM','NIM',True),('NPL','Nợ xấu',True),('CAR','CAR',True),('CASA','CASA',True),('LDR','LDR',True)]
     else:
-        metrics += ['DebtEquity','CurrentRatio','PB','PE']
-    for mm in metrics:
-        try:
-            fig=metric_chart(selected,mm)
-            if fig is not None:
-                st.plotly_chart(fig,use_container_width=True)
-        except Exception:
-            pass
+        ml=[('Revenue','Doanh thu',False),('NPAT','Lợi nhuận sau thuế',False),('ROE','ROE',True),
+            ('ROA','ROA',True),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Thanh toán hiện hành',False)]
+    for i in range(0,len(ml),2):
+        cc=st.columns(2)
+        for j,(m,t,pf) in enumerate(ml[i:i+2]):
+            with cc[j]: st.plotly_chart(metric_chart(selected,m,f'{t} · so với trung bình ngành',pf),use_container_width=True)
+    st.markdown('### Bộ chỉ tiêu theo methodology & so sánh ngành')
+    skpi,_,_=sector_kpi_table(selected)
+    if len(skpi):
+        wanted=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành',
+                'Số DN có dữ liệu','Chênh lệch với TB ngành','Trạng thái dữ liệu']
+        st.dataframe(_safe_show(skpi,wanted),hide_index=True,use_container_width=True)
+    else: st.info('Chưa có dữ liệu methodology KPI.')
+    if len(peer):
+        st.markdown('### Vị trí tương đối trong peer group')
+        q=peer.copy(); q['Doanh nghiệp']=q.Ticker.astype(str)
+        cols_show=['Doanh nghiệp','ROE','ROA','PB','PE','DebtEquity','CurrentRatio','NPL','CAR','CASA','NIM','CIR','LDR']
+        st.dataframe(_safe_show(q,cols_show),hide_index=True,use_container_width=True)
 
-# =========================================================
-# TAB 2 — PHÂN TÍCH, ĐỊNH GIÁ & M&A
-# Gộp: Phân tích chuyên viên + Định giá + M&A/Quyền kiểm soát
-#      + Tái cấu trúc + Kịch bản & Stress + xuất report phân tích
-# =========================================================
 with tabs[1]:
-    st.subheader('Phân tích, định giá & M&A')
-
+    st.subheader('Phân tích, Định giá & M&A')
     aa=intelligent_analyze(selected)
-    vt=triangulate(selected)
-    fv=fair_value_range(selected)
-
-    st.markdown('### Luận điểm phân tích')
-    a1,a2,a3=st.columns(3)
-    a1.metric('Quan điểm định lượng',aa.get('View','N/A'))
-    a2.metric('Độ tin cậy phân tích',vt.get('AnalyticalConfidence','N/A'))
-    a3.metric('Độ đầy đủ dữ liệu',f"{vt.get('DataQuality',{}).get('Coverage',0)*100:.0f}%")
+    c1,c2,c3=st.columns(3)
+    c1.metric('Quan điểm định lượng',aa.get('View','N/A')); c2.metric('Điểm tín hiệu',aa.get('Score','N/A')); c3.metric('Mẫu chuyên ngành',aa.get('Template','N/A'))
     st.write(aa.get('Conclusion',''))
-    for x in aa.get('Interpretations',[]): st.write('• '+x)
+    l,r=st.columns(2)
+    with l:
+        st.markdown('#### Điểm mạnh tương đối')
+        for x in aa.get('Strengths',[]): st.write('• '+x)
+    with r:
+        st.markdown('#### Rủi ro / điểm yếu tương đối')
+        for x in aa.get('Risks',[]): st.write('• '+x)
 
     st.markdown('### Định giá')
-    b1,b2,b3,b4=st.columns(4)
-    b1.metric('Bear',fmt_price(fv.get('Bear')))
-    b2.metric('Base',fmt_price(fv.get('Base')))
-    b3.metric('Bull',fmt_price(fv.get('Bull')))
-    b4.metric('Chiến lược/M&A',fmt_price(fv.get('StrategicMA')))
-    st.dataframe(pd.DataFrame(vt.get('Lenses',[])),hide_index=True,use_container_width=True)
+    vr=valuation_regime(selected); fv=fair_value_range(selected); vt=triangulate(selected)
+    a,b,c,d=st.columns(4)
+    a.metric('Giá thị trường',money(val.get('Price'))); b.metric('Giá trị tham chiếu',money(val.get('FairValue')))
+    c.metric('Tiềm năng',pct(val.get('Upside'))); d.metric('Chế độ định giá',vr.get('Regime','N/A'))
+    q1,q2,q3,q4=st.columns(4); fmt=lambda x:'N/A' if x is None else f"{x:,.0f}".replace(',','.')
+    q1.metric('Bear',fmt(fv.get('Bear')));q2.metric('Base',fmt(fv.get('Base')));q3.metric('Bull',fmt(fv.get('Bull')));q4.metric('Chiến lược/M&A',fmt(fv.get('StrategicMA')))
+    lenses=pd.DataFrame(vt.get('Lenses',[]))
+    if len(lenses): st.dataframe(lenses,hide_index=True,use_container_width=True)
 
-    st.markdown('### M&A / Quyền kiểm soát / Tái cấu trúc')
-    m1,m2,m3=st.columns(3)
-    control=m1.slider('Thặng dư quyền kiểm soát',0.0,0.80,float(fv.get('ControlPremium',0.25)),0.05)
-    synergy=m2.slider('Hệ số cộng hưởng chiến lược',0.0,0.80,float(fv.get('StrategicSynergy',0.10)),0.05)
-    capital=m3.number_input('Vốn bổ sung giả định (tỷ đồng)',min_value=0.0,value=0.0,step=100.0)
-    st.caption('Các giả định M&A là theo từng thương vụ; không áp dụng giả định riêng của STB cho doanh nghiệp khác.')
+    st.markdown('### M&A, quyền kiểm soát, tái cấu trúc & kịch bản stress')
+    base=num(val.get('FairValue')) or num(s.get('Price'))
+    c1,c2,c3=st.columns(3)
+    premium=c1.slider('Thặng dư quyền kiểm soát',0.0,0.60,0.15,0.01)
+    synergy=c2.slider('Giá trị cộng hưởng',0.0,0.50,0.08,0.01)
+    stake=c3.slider('Tỷ lệ mua',0.01,1.0,0.51,0.01)
+    strategic=base*(1+premium+synergy) if base else None
+    st.metric('Giá trị chiến lược tham chiếu/cp',money(strategic))
+    st.caption('Control premium, synergy và tỷ lệ mua là biến kịch bản theo từng thương vụ; không hard-code giả định của STB cho doanh nghiệp khác.')
+    x1,x2=st.columns(2)
+    with x1:
+        debt_cut=st.slider('Giảm nợ giả định',0,50,10,5)
+        equity_raise=st.slider('Tăng vốn giả định',0,50,10,5)
+        st.write(f'Kịch bản tái cấu trúc: giảm nợ {debt_cut}% · tăng vốn {equity_raise}%.')
+    with x2:
+        if meta['EntityType']=='BANK':
+            shock=st.slider('Shock NPL (điểm %)',0.0,5.0,1.0,.25)
+            st.write(f'NPL hiện tại {pct(s.get("NPL"))}; stress cộng thêm {vi(shock,2)} điểm %.')
+        else:
+            rev=st.slider('Shock doanh thu',-50,20,-10,5); margin=st.slider('Shock biên lợi nhuận',-10,10,-2,1)
+            st.write(f'Doanh thu {rev:+d}% · biên lợi nhuận {margin:+d} điểm %.')
+    _download_report_block('analysis')
 
-    st.markdown('### Kịch bản & Stress')
-    st.write('Bear/Base/Bull được sử dụng như khung độ nhạy. Stress cần hiệu chỉnh theo ngành, chất lượng tài sản, đòn bẩy, thanh khoản và khả năng sinh lợi.')
-
-    st.divider()
-    st.markdown('### Xuất báo cáo Phân tích giá cổ phiếu – Định giá – M&A')
-    try:
-        docx_bytes=generate_docx(selected,'analysis')
-        st.download_button('Tải báo cáo Word',docx_bytes,file_name=f'{selected}_Phan_tich_Dinh_gia_MA.docx',
-                           mime='application/vnd.openxmlformats-officedocument.wordprocessingml.document',use_container_width=True)
-        pdf_bytes=generate_pdf(selected,'analysis')
-        st.download_button('Tải báo cáo PDF',pdf_bytes,file_name=f'{selected}_Phan_tich_Dinh_gia_MA.pdf',
-                           mime='application/pdf',use_container_width=True)
-    except Exception as e:
-        st.warning(f'Chưa tạo được báo cáo phân tích: {e}')
-
-# =========================================================
-# TAB 3 — BÁO CÁO XẾP HẠNG TÍN NHIỆM
-# Một tab riêng, không show JSON/code.
-# =========================================================
 with tabs[2]:
     st.subheader('Báo cáo Xếp hạng tín nhiệm')
-
     rr3=rate_three_methodologies(selected)
-    rc=committee_pack(selected)
-    ev=rating_evidence(selected)
-
-    st.markdown(f"**Phương pháp áp dụng:** {rr3.get('MethodologyName','N/A')}")
+    st.markdown(f"**Phương pháp tự động lựa chọn:** {rr3.get('MethodologyName','N/A')}")
     st.caption(rr3.get('Audit',''))
-
-    r1,r2,r3,r4=st.columns(4)
-    r1.metric('Anchor',rr3.get('Anchor','N/A'))
-    r2.metric('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A')))
-    r3.metric('ICR mô phỏng',rr3.get('ICR','N/A'))
-    r4.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'))
-
-    st.markdown('### Cấu phần đánh giá')
-    if rr3.get('Methodology') in ('BANK','SECURITIES'):
-        st.dataframe(pd.DataFrame([{'Cấu phần':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),
-                     hide_index=True,use_container_width=True)
+    r1,r2,r3=st.columns(3)
+    r1.metric('Anchor',rr3.get('Anchor','N/A'));r2.metric('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A')));r3.metric('ICR',rr3.get('ICR','N/A'))
+    if rr3.get('Methodology')=='BANK':
+        st.write('**BICRA:**',rr3.get('BICRA'),' · **Điều chỉnh nội sinh:**',rr3.get('InternalNotches'),'bậc')
+        st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
+    elif rr3.get('Methodology')=='SECURITIES':
+        st.write('**BICRA tham chiếu:**',rr3.get('BICRAReference'),' → **điều chỉnh Anchor CTCK:** -2 bậc')
+        st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
     elif rr3.get('Methodology')=='CORPORATE':
-        st.dataframe(pd.DataFrame([{'Nhóm rủi ro':k,'Điểm 1–6':v} for k,v in rr3.get('RiskScores',{}).items()]),
-                     hide_index=True,use_container_width=True)
-        st.warning('Điểm tự động của doanh nghiệp phi tài chính là sơ bộ khi chưa có đủ KCF/trọng số ngành chính thức.')
-
+        st.dataframe(pd.DataFrame([{'Nhóm rủi ro':k,'Điểm 1–6':v} for k,v in rr3.get('RiskScores',{}).items()]),hide_index=True,use_container_width=True)
+        st.warning('Điểm tự động là sơ bộ khi dữ liệu định tính/KCF chưa đầy đủ; app không dùng methodology ngân hàng thay thế methodology doanh nghiệp.')
+    rc=committee_pack(selected)
     st.markdown('### Waterfall trình Hội đồng XHTN')
     st.dataframe(pd.DataFrame(rc.get('Waterfall',[])),hide_index=True,use_container_width=True)
+    ev=rating_evidence(selected)
+    st.markdown('### Sổ bằng chứng & mức độ tin cậy')
+    e1,e2,e3=st.columns(3)
+    e1.metric('ICR mô phỏng',ev.get('ICR','N/A'));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',f"{ev.get('DataQuality',{}).get('Coverage',0)*100:.0f}%")
+    ledger=pd.DataFrame(ev.get('EvidenceLedger',[]))
+    if len(ledger): st.dataframe(ledger,hide_index=True,use_container_width=True)
+    st.session_state['rating_result']=rr3
+    with st.expander('Chi tiết kết quả máy tính / audit trail'): st.json(rr3)
+    _download_report_block('rating',rr3)
 
-    st.markdown('### Sổ bằng chứng XHTN')
-    st.dataframe(pd.DataFrame(ev.get('EvidenceLedger',[])),hide_index=True,use_container_width=True)
-    st.caption(ev.get('GovernanceRule',''))
-
-    st.divider()
-    st.markdown('### Xuất báo cáo Xếp hạng tín nhiệm')
-    try:
-        rating_docx=generate_docx(selected,'rating',rating_result=rr3)
-        st.download_button('Tải báo cáo XHTN Word',rating_docx,file_name=f'{selected}_XHTN.docx',
-                           mime='application/vnd.openxmlformats-officedocument.wordprocessingml.document',use_container_width=True)
-        rating_pdf=generate_pdf(selected,'rating',rating_result=rr3)
-        st.download_button('Tải báo cáo XHTN PDF',rating_pdf,file_name=f'{selected}_XHTN.pdf',
-                           mime='application/pdf',use_container_width=True)
-    except Exception as e:
-        st.warning(f'Chưa tạo được báo cáo XHTN: {e}')
-
-# =========================================================
-# TAB 4 — DỮ LIỆU & QUẢN TRỊ
-# Chỉ giữ các phần quản trị thực sự cần.
-# =========================================================
 with tabs[3]:
     st.subheader('Dữ liệu & Quản trị')
-
-    st.markdown('### Trạng thái dữ liệu')
-    try:
-        cov=pd.read_csv(DATA/'coverage_matrix.csv')
+    st.caption('Vnstock Bronze chạy LOCAL → ghi CSV/model outputs → push GitHub → Streamlit Cloud chỉ đọc dữ liệu repository.')
+    try: cov=pd.read_csv(DATA/'coverage_matrix.csv')
+    except Exception: cov=build_coverage_matrix() if build_coverage_matrix else pd.DataFrame()
+    if len(cov):
+        a,b,c,d=st.columns(4)
+        a.metric('Universe trong Master',f'{len(cov):,}'.replace(',', '.'))
+        a1=int((cov.Readiness=='PRODUCTION_READY').sum()) if 'Readiness' in cov else 0
+        a2=int((cov.Readiness=='PARTIAL').sum()) if 'Readiness' in cov else 0
+        a3=int((cov.Readiness=='INSUFFICIENT_DATA').sum()) if 'Readiness' in cov else 0
+        b.metric('Sẵn sàng phân tích',f'{a1:,}'.replace(',', '.'));c.metric('Phủ một phần',f'{a2:,}'.replace(',', '.'));d.metric('Thiếu dữ liệu',f'{a3:,}'.replace(',', '.'))
         st.dataframe(cov,hide_index=True,use_container_width=True)
-    except Exception:
-        st.info('Chưa có coverage_matrix.csv.')
-
-    st.markdown('### Universe & phân ngành')
-    try:
-        st.dataframe(U,hide_index=True,use_container_width=True)
-    except Exception:
-        pass
-
-    st.markdown('### Ghi chú vận hành')
-    st.caption('Vnstock chạy LOCAL → CSV/model outputs → GitHub → Streamlit Cloud chỉ đọc dữ liệu. Không chạy Vnstock Sponsor tại runtime trên Cloud.')
+    st.markdown('### Universe & methodology router')
+    cols=[c for c in ['Ticker','CompanyName','EntityType','Sector','Exchange','PeerGroup','Methodology'] if c in u.columns]
+    st.dataframe(u[cols],hide_index=True,use_container_width=True)
