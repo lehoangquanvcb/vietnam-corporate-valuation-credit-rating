@@ -7,7 +7,7 @@ from scripts.universal_data import universe,get_company,get_snapshot,entity_hist
 from scripts.multisector_valuation import valuation
 from scripts.multisector_report import generate_docx,generate_pdf
 from scripts.sector_templates import get_template
-from scripts.sector_kpi_engine import sector_kpi_table,canonical_kpi_view,safe_kpi_columns
+from scripts.sector_kpi_engine import sector_kpi_table
 from scripts.intelligent_analyst import analyze as intelligent_analyze
 from scripts.valuation_regime import assess as valuation_regime
 from scripts.three_methodology_rating import rate_company as rate_three_methodologies
@@ -106,7 +106,7 @@ for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
 if meta.get('Methodology')=='EXCLUDED_SPECIALIZED': st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
 if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['TotalAssets','Revenue','ROE','Price']): st.info(f'Chưa có BCTC Vnstock LOCAL cho {selected}. Chạy RUN_REFRESH_ONE_COMPANY.bat và nhập {selected}; Streamlit Cloud sẽ đọc CSV sau khi push GitHub.')
 
-tabs=st.tabs(['TRUNG TÂM PHÂN TÍCH','PHÂN TÍCH GIÁ CỔ PHIẾU','Phủ dữ liệu toàn thị trường','Tổng quan','Hồ sơ doanh nghiệp','Phân tích tài chính','So sánh tương quan','Định giá','M&A / Quyền kiểm soát','Tái cấu trúc','Báo cáo Xếp hạng tín nhiệm','Kịch bản & Stress','Báo cáo & Quản trị'])
+tabs=st.tabs(['TRUNG TÂM PHÂN TÍCH','PHÂN TÍCH – ĐỊNH GIÁ – M&A','Phủ dữ liệu toàn thị trường','Tổng quan','Hồ sơ doanh nghiệp','Phân tích tài chính','So sánh tương quan','Báo cáo Xếp hạng tín nhiệm','Báo cáo & Quản trị'])
 
 
 with tabs[0]:
@@ -126,6 +126,7 @@ with tabs[0]:
     st.caption('Hai nhiệm vụ dùng chung một Data Layer và Industry Benchmark, nhưng giữ riêng phương pháp luận, kết luận và báo cáo đầu ra.')
 
 with tabs[1]:
+
     vr=valuation_regime(selected)
     st.markdown('#### Chế độ định giá tương đối')
     x1,x2,x3=st.columns(3)
@@ -177,6 +178,31 @@ with tabs[1]:
             st.dataframe(rr,hide_index=True,use_container_width=True)
     except Exception:pass
 
+    st.markdown('---')
+    st.markdown('### Phân tích chiến lược, định giá & giao dịch')
+    with st.expander('Định giá doanh nghiệp', expanded=True):
+        st.subheader('Định giá')
+        a,b,c,d=st.columns(4); a.metric('Giá thị trường',money(val.get('Price')));b.metric('Giá trị tham chiếu',money(val.get('FairValue')));c.metric('Tiềm năng',pct(val.get('Upside')));d.metric('Phương pháp',val.get('PrimaryMethod','N/A'))
+        st.caption('V8.0 Foundation chỉ xuất giá trị khi dữ liệu nền đủ điều kiện. Không dùng giả định hard-code để tạo giá trị khi thiếu BCTC/market multiples.')
+
+    with st.expander('M&A, quyền kiểm soát & giá trị chiến lược'):
+        st.subheader('M&A / Quyền kiểm soát')
+        base=num(val.get('FairValue')) or num(s.get('Price'))
+        c1,c2,c3=st.columns(3); premium=c1.slider('Thặng dư quyền kiểm soát',0.0,0.60,0.15,0.01); synergy=c2.slider('Giá trị cộng hưởng (% giá trị độc lập)',0.0,0.50,0.08,0.01); stake=c3.slider('Tỷ lệ mua',0.01,1.0,0.51,0.01)
+        strategic=base*(1+premium+synergy) if base else None
+        st.metric('Giá trị chiến lược tham chiếu/cp',money(strategic));st.caption('Control premium và synergy là biến kịch bản. Không mặc định đây là giá giao dịch thực tế.')
+
+    with st.expander('Tái cấu trúc & các đòn bẩy tạo giá trị'):
+        st.subheader('Tái cấu trúc')
+        if meta['EntityType']=='BANK': st.write('Theo dõi tác động xử lý tài sản, bổ sung vốn, NPL, CAR và BVPS sau tái cấu trúc. Các biến đặc thù chỉ được nhập khi có dữ liệu của chính ngân hàng.')
+        else: st.write('Mô phỏng giảm nợ, tăng vốn, bán tài sản, tái cơ cấu danh mục và tác động lên đòn bẩy, thanh khoản và giá trị vốn chủ sở hữu.')
+        debt_cut=st.slider('Giảm nợ giả định',0,50,10,5); equity_raise=st.slider('Tăng vốn giả định',0,50,10,5); st.caption(f'Kịch bản: giảm nợ {debt_cut}% và tăng vốn {equity_raise}%.')
+
+    with st.expander('Kịch bản & Stress'):
+        st.subheader('Kịch bản & Stress')
+        if meta['EntityType']=='BANK': shock=st.slider('Shock NPL (điểm %)',0.0,5.0,1.0,.25);st.write(f'NPL hiện tại {pct(s.get("NPL"))}; stress cộng thêm {vi(shock,2)} điểm %.')
+        else: rev=st.slider('Shock doanh thu',-50,20,-10,5); margin=st.slider('Shock biên lợi nhuận',-10,10,-2,1);st.write(f'Kịch bản doanh thu {rev:+d}% và biên lợi nhuận {margin:+d} điểm %.')
+
 with tabs[2]:
     st.subheader('Phủ dữ liệu toàn thị trường')
     try:
@@ -199,12 +225,13 @@ with tabs[2]:
 with tabs[3]:
     st.subheader('Tổng quan')
     c1,c2,c3,c4=st.columns(4); c1.metric('Loại hình',meta.get('EntityType'));c2.metric('Ngành',meta.get('Sector'));c3.metric('Sàn',meta.get('Exchange'));c4.metric('Ngành so sánh',industry_name)
-    st.markdown('### So sánh với trung bình ngành theo methodology')
-    ov2,_,_=sector_kpi_table(selected)
-    ov2=canonical_kpi_view(ov2)
-    overview_cols=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành','Số DN có dữ liệu']
-    st.dataframe(safe_kpi_columns(ov2,overview_cols).head(24),hide_index=True,use_container_width=True)
-    st.caption('Bảng được tạo theo methodology tương ứng với loại hình doanh nghiệp; schema được chuẩn hóa để tương thích dữ liệu cũ/mới.')
+    if len(peer):
+        st.markdown('### So sánh với trung bình ngành')
+        metrics=['ROE','ROA'] + (['NPL','CAR'] if meta['EntityType']=='BANK' else ['DebtEquity','CurrentRatio'])
+        rows=[]
+        for m in metrics:
+            vals=pd.to_numeric(peer.get(m,pd.Series(dtype=float)),errors='coerce').dropna(); rows.append({'Chỉ tiêu':m,selected:s.get(m),'Trung bình ngành':vals.mean() if len(vals) else np.nan,'Số doanh nghiệp trong mẫu ngành có dữ liệu':len(vals)})
+        st.dataframe(pd.DataFrame(rows),hide_index=True,use_container_width=True)
 
 with tabs[4]:
     st.subheader('Hồ sơ doanh nghiệp')
@@ -215,12 +242,8 @@ with tabs[4]:
 
 with tabs[5]:
     st.subheader('Phân tích tài chính')
-    if meta['EntityType']=='BANK':
-        metric_list=[('ROE','ROE',True),('ROA','ROA',True),('NIM','NIM',True),('CIR','CIR',True),('NPL','Nợ xấu',True),('CAR','CAR',True),('CASA','CASA',True),('LDR','LDR',True),('GrossLoans','Cho vay khách hàng',False),('CustomerDeposits','Tiền gửi khách hàng',False)]
-    elif meta['EntityType']=='SECURITIES':
-        metric_list=[('ROE','ROE',True),('ROA','ROA',True),('AvailableCapitalRatio','Tỷ lệ vốn khả dụng',True),('Revenue','Doanh thu',False),('NPAT','LNST',False),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Thanh toán hiện hành',False),('PB','P/B',False),('PE','P/E',False)]
-    else:
-        metric_list=[('ROE','ROE',True),('ROA','ROA',True),('Revenue','Doanh thu',False),('NPAT','LNST',False),('DebtEquity','Nợ/VCSH',False),('DebtEBITDA','Nợ vay/EBITDA',False),('CurrentRatio','Thanh toán hiện hành',False),('PB','P/B',False),('PE','P/E',False)]
+    if meta['EntityType']=='BANK': metric_list=[('ROE','ROE',True),('ROA','ROA',True),('NIM','NIM',True),('NPL','NPL',True),('CAR','CAR',True),('CASA','CASA',True),('LDR','LDR',True)]
+    else: metric_list=[('ROE','ROE',True),('ROA','ROA',True),('Revenue','Doanh thu',False),('NPAT','Lợi nhuận sau thuế',False),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Hệ số thanh toán hiện hành',False)]
     for i in range(0,len(metric_list),2):
         cc=st.columns(2)
         for j,item in enumerate(metric_list[i:i+2]):
@@ -231,7 +254,10 @@ with tabs[6]:
     st.subheader('Bộ chỉ tiêu chuyên ngành và trung bình ngành')
     skpi,_,_=sector_kpi_table(selected)
     if len(skpi):
-        show=canonical_kpi_view(skpi)
+        show=skpi.copy()
+        # Backward/forward compatible column aliases after methodology expansion.
+        alias_cols={'TB ngành':'Trung bình ngành','Trung vị':'Trung vị ngành','Số DN':'Số DN có dữ liệu'}
+        show=show.rename(columns={k:v for k,v in alias_cols.items() if k in show.columns and v not in show.columns})
         for c in ['Doanh nghiệp','Trung bình ngành','Trung vị ngành','Chênh lệch với TB ngành']:
             if c in show: show[c]=pd.to_numeric(show[c],errors='coerce')
         st.dataframe(show,hide_index=True,use_container_width=True)
@@ -244,24 +270,6 @@ with tabs[6]:
     else:st.info('Chưa có dữ liệu ngành để so sánh.')
 
 with tabs[7]:
-    st.subheader('Định giá')
-    a,b,c,d=st.columns(4); a.metric('Giá thị trường',money(val.get('Price')));b.metric('Giá trị tham chiếu',money(val.get('FairValue')));c.metric('Tiềm năng',pct(val.get('Upside')));d.metric('Phương pháp',val.get('PrimaryMethod','N/A'))
-    st.caption('V8.0 Foundation chỉ xuất giá trị khi dữ liệu nền đủ điều kiện. Không dùng giả định hard-code để tạo giá trị khi thiếu BCTC/market multiples.')
-
-with tabs[8]:
-    st.subheader('M&A / Quyền kiểm soát')
-    base=num(val.get('FairValue')) or num(s.get('Price'))
-    c1,c2,c3=st.columns(3); premium=c1.slider('Thặng dư quyền kiểm soát',0.0,0.60,0.15,0.01); synergy=c2.slider('Giá trị cộng hưởng (% giá trị độc lập)',0.0,0.50,0.08,0.01); stake=c3.slider('Tỷ lệ mua',0.01,1.0,0.51,0.01)
-    strategic=base*(1+premium+synergy) if base else None
-    st.metric('Giá trị chiến lược tham chiếu/cp',money(strategic));st.caption('Control premium và synergy là biến kịch bản. Không mặc định đây là giá giao dịch thực tế.')
-
-with tabs[9]:
-    st.subheader('Tái cấu trúc')
-    if meta['EntityType']=='BANK': st.write('Theo dõi tác động xử lý tài sản, bổ sung vốn, NPL, CAR và BVPS sau tái cấu trúc. Các biến đặc thù chỉ được nhập khi có dữ liệu của chính ngân hàng.')
-    else: st.write('Mô phỏng giảm nợ, tăng vốn, bán tài sản, tái cơ cấu danh mục và tác động lên đòn bẩy, thanh khoản và giá trị vốn chủ sở hữu.')
-    debt_cut=st.slider('Giảm nợ giả định',0,50,10,5); equity_raise=st.slider('Tăng vốn giả định',0,50,10,5); st.caption(f'Kịch bản: giảm nợ {debt_cut}% và tăng vốn {equity_raise}%.')
-
-with tabs[10]:
     st.subheader('NHIỆM VỤ 2 – XẾP HẠNG TÍN NHIỆM')
     rr3=rate_three_methodologies(selected)
     st.markdown(f"**Phương pháp được tự động lựa chọn:** {rr3.get('MethodologyName','N/A')}")
@@ -302,12 +310,8 @@ with tabs[10]:
     with st.expander('Chi tiết kết quả máy tính / audit trail'):
         st.json(rating)
 
-with tabs[11]:
-    st.subheader('Kịch bản & Stress')
-    if meta['EntityType']=='BANK': shock=st.slider('Shock NPL (điểm %)',0.0,5.0,1.0,.25);st.write(f'NPL hiện tại {pct(s.get("NPL"))}; stress cộng thêm {vi(shock,2)} điểm %.')
-    else: rev=st.slider('Shock doanh thu',-50,20,-10,5); margin=st.slider('Shock biên lợi nhuận',-10,10,-2,1);st.write(f'Kịch bản doanh thu {rev:+d}% và biên lợi nhuận {margin:+d} điểm %.')
 
-with tabs[12]:
+with tabs[8]:
     st.subheader('Báo cáo & Quản trị')
     st.caption('Bộ báo cáo chuẩn V8.10.1 được thiết kế ở mức khoảng 30 trang A4, tự co giãn theo dữ liệu thực tế.')
     report_kind=st.radio('Loại báo cáo',['Phân tích, Định giá & M&A','Báo cáo Xếp hạng tín nhiệm'],horizontal=True)

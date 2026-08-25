@@ -207,10 +207,10 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - Peer appendix lấy danh sách KPI theo methodology thay vì danh sách cố định ngắn.
 
 
-## V8.14 - DATA LAYER & KPI SCHEMA ROBUSTNESS
-- Kế thừa toàn bộ V8.13 và các fix/nâng cấp trước đó.
-- Sửa KeyError tại bảng KPI trên Streamlit do lệch schema giữa TB ngành/Trung bình ngành, Trung vị/Trung vị ngành, Số DN/Số DN có dữ liệu.
-- Thêm canonical KPI schema + safe column selection: thiếu cột không còn làm app crash.
-- Trang Tổng quan dùng trực tiếp ma trận KPI theo methodology thay vì bảng 4–5 KPI cố định.
-- Mở rộng chart tài chính theo BANK / SECURITIES / CORPORATE.
-- Giữ 2 nhiệm vụ cốt lõi: Phân tích giá cổ phiếu và XHTN; giữ 3 methodology, peer engine, report engine, Lato/A4 và Vnstock Bronze architecture.
+## V8.14 - CONSOLIDATED UI + COMPACT REPORT
+- Kế thừa V8.13 và các fix trước, trừ các điểm xung đột với giao diện mới.
+- Sửa KeyError cột KPI sau khi mở rộng methodology.
+- Gộp Định giá + M&A/Quyền kiểm soát + Tái cấu trúc + Kịch bản & Stress vào tab `PHÂN TÍCH – ĐỊNH GIÁ – M&A`.
+- Giảm navigation từ 13 xuống 9 tab; giữ Báo cáo Xếp hạng tín nhiệm là một tab riêng.
+- Xóa lặp bảng KPI/peer ở nhiều chương; ma trận methodology đầy đủ chỉ trình bày tập trung một lần.
+- Bỏ page-break cưỡng bức giữa mọi chương; Word tự dồn trang, cho phép body/table flow để giảm khoảng trắng và tốn giấy.

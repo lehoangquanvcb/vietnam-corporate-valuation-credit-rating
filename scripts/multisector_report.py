@@ -674,7 +674,6 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     }
 
     for i,(head,desc) in enumerate(plan,1):
-        if i>1:doc.add_page_break()
         doc.add_heading(f'{i}. {head}',1)
         pars=_page_narrative(ticker,head,desc,meta,s,val,rr,report_type)
         # Analyst layer: What? Why? Peer? So what?
@@ -699,16 +698,18 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
         elif report_type=='rating' and head=='KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN':
             _add_evidence_ledger(doc,ticker)
         else:
-            _evidence_table(doc,ticker,head,report_type)
+            # Avoid repeating the same methodology/peer KPI table on consecutive pages.
+            # Detailed KPI matrix is presented once in the methodology appendix.
+            if head in ('SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG','ĐỊNH GIÁ TƯƠNG ĐỐI'):
+                _evidence_table(doc,ticker,head,report_type)
 
         _add_peer_section(doc,ticker,head,meta)
 
     # Comprehensive methodology KPI appendix
-    doc.add_page_break()
     _add_methodology_kpi_matrix(doc,ticker)
 
     # Dedicated peer appendix
-    doc.add_page_break();doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
+    doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
     peer_metrics=metric_list(ticker,available_only=True)
     # Keep charts focused on comparable ratios/scale metrics; N/A metrics remain visible in methodology matrix.
     chartable={'TotalAssets','GrossLoans','CustomerDeposits','Equity','Revenue','ROE','ROA','NIM','NPL','CAR','CIR','LDR','CASA',
@@ -730,6 +731,23 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
                     for run in pp.runs:
                         run.font.name='Lato'
                         if run.font.size is None:run.font.size=Pt(10)
+    # Compact pagination: allow body paragraphs/tables to flow; keep headings with following content.
+    for pp in doc.paragraphs:
+        pf=pp.paragraph_format
+        if pp.style and str(pp.style.name).startswith('Heading'):
+            pf.keep_with_next=True
+        else:
+            pf.keep_with_next=False
+            pf.keep_together=False
+            pf.widow_control=True
+    for table in doc.tables:
+        for row in table.rows:
+            trPr=row._tr.get_or_add_trPr()
+            # permit row split where Word needs it to avoid large blank areas
+            for el in list(trPr):
+                if el.tag.endswith('cantSplit'):
+                    trPr.remove(el)
+
     bio=BytesIO();doc.save(bio);return bio.getvalue()
 
 def generate_pdf(ticker,report_type='analysis',rating_result=None,mna=None):
