@@ -195,3 +195,24 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - Tách logic implication giữa báo cáo phân tích cổ phiếu và báo cáo XHTN.
 - Không tự bịa nguyên nhân: nếu dữ liệu chưa đủ, report chuyển thành driver cần kiểm chứng.
 - Giữ peer charts, individual-peer bars, ROE-P/B scatter, trung bình/trung vị ngành.
+
+
+## V8.13 - METHODOLOGY KPI EXPANSION
+- Mở rộng ma trận chỉ tiêu theo 3 methodology: Ngân hàng, Công ty chứng khoán, Doanh nghiệp phi tài chính.
+- Báo cáo không còn chỉ 5 KPI; thêm nhóm quy mô, hiệu quả, vốn/đòn bẩy, vị thế rủi ro, nguồn vốn/thanh khoản và định giá.
+- Tự tính các tỷ lệ có thể suy ra từ BCTC: Cho vay/TTS, Tiền gửi/TTS, VCSH/TTS, NII/Operating income, EBITDA margin, Debt/Assets, CFO/Debt, FOCF/Debt, CAPEX/Revenue...
+- CTCK hỗ trợ thêm vốn khả dụng, thị phần môi giới, tài sản khách hàng, dư nợ margin, margin/VCSH, ICGR khi nguồn/manual input có dữ liệu.
+- Doanh nghiệp phi tài chính bám methodology dòng tiền/đòn bẩy: Debt/EBITDA, CFO/Debt, FOCF/Debt, EBITDA margin, current ratio...
+- Chỉ tiêu thiếu dữ liệu hiển thị N/A – cần bổ sung nguồn; tuyệt đối không tự bịa.
+- Peer appendix lấy danh sách KPI theo methodology thay vì danh sách cố định ngắn.
+
+
+## V8.14 - DATA LAYER COVERAGE
+Kế thừa toàn bộ V8.13 và các sửa lỗi trước đó. Nâng cấp tập trung vào việc giảm N/A một cách có kiểm soát:
+- Mở rộng alias/parser Vnstock cho CTCK và doanh nghiệp phi tài chính.
+- Bổ sung InterestExpense, TaxExpense, Depreciation, DividendsPaid, RetainedEarnings, CharterCapital, MarginLoans và các cấu phần doanh thu CTCK.
+- Tự tính FFO, FOCF, DCF, FFO/Debt, FOCF/Debt, DCF/Debt, Debt/EBITDA, EBITDA/Interest, MarginLoans/Equity và ICGR khi đủ dữ liệu nguồn.
+- Manual input trở thành fallback có kiểm soát cho toàn bộ KPI methodology, không ghi đè dữ liệu Vnstock đang có.
+- Thêm methodology_data_dictionary.csv và methodology_coverage.csv.
+- App hiển thị độ phủ KPI trọng yếu và danh sách data gap thay vì che giấu bằng giả định.
+- Giữ nguyên kiến trúc Vnstock Bronze: refresh LOCAL -> CSV -> GitHub -> Streamlit chỉ đọc dữ liệu.

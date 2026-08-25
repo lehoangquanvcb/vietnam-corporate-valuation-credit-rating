@@ -22,16 +22,22 @@ def generic_snapshot():
     x=read_csv(DATA/'company_snapshot.csv')
     m=read_csv(CFG/'manual_financial_inputs.csv')
     if len(x) and len(m) and 'Ticker' in x and 'Ticker' in m:
+        x=x.copy(); m=m.copy()
         x['Ticker']=x['Ticker'].astype(str).str.upper(); m['Ticker']=m['Ticker'].astype(str).str.upper()
         m=m.drop_duplicates('Ticker',keep='last')
+        meta_cols={'Ticker','AsOfDate','Source','DataType','Note'}
+        value_cols=[c for c in m.columns if c not in meta_cols]
         x=x.merge(m,on='Ticker',how='left',suffixes=('','_Manual'))
-        for c in ['AvailableCapitalRatio','MarketShareBrokerage','ClientAssets','MarginLoans','ICGR']:
+        for c in value_cols:
             cm=c+'_Manual'
             if cm in x.columns:
                 if c not in x.columns:x[c]=np.nan
-                x[c]=pd.to_numeric(x[c],errors='coerce').where(pd.to_numeric(x[c],errors='coerce').notna(),pd.to_numeric(x[cm],errors='coerce'))
+                live=pd.to_numeric(x[c],errors='coerce')
+                manual=pd.to_numeric(x[cm],errors='coerce')
+                x[c]=live.where(live.notna(),manual)
         return x
     return x
+
 def price_history(): return read_csv(DATA/'price_history.csv')
 def generic_history(): return read_csv(DATA/'company_history_long.csv')
 

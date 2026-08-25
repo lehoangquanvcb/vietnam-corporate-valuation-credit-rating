@@ -1,3 +1,4 @@
+import numpy as np
 from pathlib import Path
 from io import BytesIO
 import math, pandas as pd, matplotlib.pyplot as plt
@@ -20,6 +21,7 @@ from scripts.rating_evidence_engine import rating_evidence
 from scripts.intelligent_analyst import analyze as intelligent_analyze
 from scripts.sector_kpi_engine import sector_kpi_table
 from scripts.sector_templates import get_template
+from scripts.methodology_kpi_engine import methodology_kpi_table, metric_list, LABELS as METH_LABELS, PCT as METH_PCT, MULT as METH_MULT
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -509,15 +511,47 @@ def _relative_analysis(ticker,metric):
     return txt
 
 def _page_peer_metrics(head,entity_type):
-    if head in ('ROE & HIỆU QUẢ VỐN','KHẢ NĂNG SINH LỢI'):return ['ROE']
-    if head=='ROA & HIỆU QUẢ TÀI SẢN':return ['ROA']
-    if head in ('CHẤT LƯỢNG TÀI SẢN','CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN') and entity_type=='BANK':return ['NPL']
-    if head=='VỐN & ĐÒN BẨY':return ['CAR'] if entity_type=='BANK' else ['DebtEquity']
-    if head in ('NGUỒN VỐN & THANH KHOẢN','THANH KHOẢN'):return ['CASA'] if entity_type=='BANK' else ['CurrentRatio']
-    if head in ('SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG'):
-        return ['ROE','PB','NPL','CAR'] if entity_type=='BANK' else ['ROE','PB','PE','DebtEquity']
-    if head in ('ĐỊNH GIÁ TƯƠNG ĐỐI','ĐỊNH GIÁ CƠ SỞ & CHẾ ĐỘ ĐỊNH GIÁ'):return ['PB','PE']
-    return []
+    if entity_type=='BANK':
+        mp={
+        'QUY MÔ & TĂNG TRƯỞNG':['TotalAssets','GrossLoans','CustomerDeposits'],
+        'ROE & HIỆU QUẢ VỐN':['ROE','NIM','CIR'],
+        'ROA & HIỆU QUẢ TÀI SẢN':['ROA','LoanAssets','EquityAssets'],
+        'KHẢ NĂNG SINH LỢI':['ROE','ROA','NIM','CIR'],
+        'CHẤT LƯỢNG TÀI SẢN':['NPL','ProvisionOperatingIncome','LoanAssets'],
+        'CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN':['NPL','ProvisionOperatingIncome','LoanAssets'],
+        'VỐN & ĐÒN BẨY':['CAR','EquityAssets','ROE'],
+        'NGUỒN VỐN & THANH KHOẢN':['CASA','LDR','DepositAssets'],
+        'THANH KHOẢN':['LDR','CASA','DepositAssets'],
+        'SO SÁNH PEER':['ROE','ROA','NIM','CIR','NPL','CAR','CASA','LDR','PB'],
+        'SO SÁNH NHÓM TƯƠNG ĐỒNG':['ROE','ROA','NIM','CIR','NPL','CAR','CASA','LDR','PB']}
+    elif entity_type=='SECURITIES':
+        mp={
+        'QUY MÔ & TĂNG TRƯỞNG':['Revenue','TotalAssets','Equity'],
+        'ROE & HIỆU QUẢ VỐN':['ROE','AvailableCapitalRatio','DebtEquity'],
+        'ROA & HIỆU QUẢ TÀI SẢN':['ROA','NetMargin'],
+        'KHẢ NĂNG SINH LỢI':['ROE','ROA','NetMargin','ICGR'],
+        'CHẤT LƯỢNG TÀI SẢN':['MarginLoansEquity','DebtEquity'],
+        'CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN':['MarginLoansEquity','DebtEquity'],
+        'VỐN & ĐÒN BẨY':['AvailableCapitalRatio','DebtEquity','DebtEBITDA'],
+        'NGUỒN VỐN & THANH KHOẢN':['CurrentRatio','DebtEquity','CFO_Debt'],
+        'THANH KHOẢN':['CurrentRatio','CFO_Debt'],
+        'SO SÁNH PEER':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],
+        'SO SÁNH NHÓM TƯƠNG ĐỒNG':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE']}
+    else:
+        mp={
+        'QUY MÔ & TĂNG TRƯỞNG':['Revenue','TotalAssets','GrossMargin'],
+        'ROE & HIỆU QUẢ VỐN':['ROE','DebtEquity','NetMargin'],
+        'ROA & HIỆU QUẢ TÀI SẢN':['ROA','EBITDAMargin'],
+        'KHẢ NĂNG SINH LỢI':['ROE','ROA','GrossMargin','NetMargin','EBITDAMargin'],
+        'CHẤT LƯỢNG TÀI SẢN':['CFO_Debt','FOCF_Debt','DebtEBITDA'],
+        'CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN':['CFO_Debt','FOCF_Debt','DebtEBITDA'],
+        'VỐN & ĐÒN BẨY':['DebtEquity','DebtEBITDA','CFO_Debt','FOCF_Debt'],
+        'NGUỒN VỐN & THANH KHOẢN':['CurrentRatio','CFO_Debt','FOCF_Debt'],
+        'THANH KHOẢN':['CurrentRatio','CFO_Debt','FOCF_Debt'],
+        'SO SÁNH PEER':['ROE','ROA','GrossMargin','NetMargin','DebtEquity','DebtEBITDA','CurrentRatio','PB','PE'],
+        'SO SÁNH NHÓM TƯƠNG ĐỒNG':['ROE','ROA','GrossMargin','NetMargin','DebtEquity','DebtEBITDA','CurrentRatio','PB','PE']}
+    if head in ('ĐỊNH GIÁ TƯƠNG ĐỐI','ĐỊNH GIÁ CƠ SỞ & CHẾ ĐỘ ĐỊNH GIÁ'):return ['PB','PE','EV_EBITDA']
+    return mp.get(head,[])
 
 def _add_peer_section(doc,ticker,head,meta):
     metrics=_page_peer_metrics(head,meta.get('EntityType'))
@@ -595,6 +629,33 @@ def _decision_narrative(ticker,head,meta,snapshot,val,report_type):
     if head in implication:lines.append(implication[head])
     return lines
 
+
+def _fmt_method_value(metric,v):
+    try:v=float(v)
+    except:return 'N/A'
+    if not np.isfinite(v):return 'N/A'
+    if metric in METH_PCT:return f"{v*100:.1f}%".replace('.',',')
+    if metric in METH_MULT:return f"{v:.2f}x".replace('.',',')
+    if abs(v)>=1e12:return (f"{v/1e12:,.1f} nghìn tỷ").replace(',','X').replace('.',',').replace('X','.')
+    if abs(v)>=1e9:return (f"{v/1e9:,.1f} tỷ").replace(',','X').replace('.',',').replace('X','.')
+    return (f"{v:,.2f}").replace(',','X').replace('.',',').replace('X','.')
+
+def _add_methodology_kpi_matrix(doc,ticker):
+    z=methodology_kpi_table(ticker,include_missing=True)
+    if z.empty:return
+    doc.add_heading('MA TRẬN CHỈ TIÊU THEO PHƯƠNG PHÁP XHTN',1)
+    _add_pars(doc,["Ma trận dưới đây mở rộng phạm vi phân tích theo đúng loại hình doanh nghiệp. Chỉ tiêu chưa có dữ liệu được giữ N/A để chỉ rõ data gap, không tự giả định số liệu."])
+    for grp,g in z.groupby('Nhóm phân tích',sort=False):
+        doc.add_heading(str(grp),2)
+        tb=doc.add_table(rows=1,cols=6);tb.style='Table Grid'
+        hdr=['Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị','Số DN','Dữ liệu']
+        for j,x in enumerate(hdr):tb.rows[0].cells[j].text=x
+        for _,r in g.iterrows():
+            c=tb.add_row().cells;m=r['Metric']
+            vals=[r['Chỉ tiêu'],_fmt_method_value(m,r['Doanh nghiệp']),_fmt_method_value(m,r['TB ngành']),
+                  _fmt_method_value(m,r['Trung vị']),str(int(r['Số DN'])),r['Trạng thái dữ liệu']]
+            for j,x in enumerate(vals):c[j].text=str(x)
+
 def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     ticker=str(ticker).upper();meta=get_company(ticker);s=get_snapshot(ticker);val=valuation(ticker,s)
     rr=rating_result or (rate_company(ticker) if report_type=='rating' else {})
@@ -642,12 +703,17 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
 
         _add_peer_section(doc,ticker,head,meta)
 
+    # Comprehensive methodology KPI appendix
+    doc.add_page_break()
+    _add_methodology_kpi_matrix(doc,ticker)
+
     # Dedicated peer appendix
     doc.add_page_break();doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
-    peer_metrics=['ROE','ROA','PB','PE']
-    if meta.get('EntityType')=='BANK':peer_metrics += ['NPL','CAR','CASA','NIM','LDR']
-    elif meta.get('EntityType')=='SECURITIES':peer_metrics += ['AvailableCapitalRatio','DebtEquity','CurrentRatio']
-    else:peer_metrics += ['DebtEquity','CurrentRatio']
+    peer_metrics=metric_list(ticker,available_only=True)
+    # Keep charts focused on comparable ratios/scale metrics; N/A metrics remain visible in methodology matrix.
+    chartable={'TotalAssets','GrossLoans','CustomerDeposits','Equity','Revenue','ROE','ROA','NIM','NPL','CAR','CIR','LDR','CASA',
+               'PB','PE','DebtEquity','CurrentRatio','AvailableCapitalRatio','GrossMargin','NetMargin','DebtEBITDA','CFO_Debt'}
+    peer_metrics=[m for m in peer_metrics if m in chartable]
     for mm in peer_metrics:
         try:
             doc.add_heading(VI_METRIC.get(mm,mm),2)

@@ -65,15 +65,42 @@ def hist_rows(df,ticker,metric,names):
     return out
 
 MAP={
-'TotalAssets':['total assets','bs total assets'], 'Equity':['owners equity','total equity','equity'],
-'Cash':['cash and cash equivalents','cash'], 'CurrentAssets':['current assets'], 'CurrentLiabilities':['current liabilities'],
-'TotalDebt':['total debt','borrowings','debt'], 'Revenue':['revenue','net revenue','sales'], 'GrossProfit':['gross profit'],
-'OperatingProfit':['operating profit','ebit'], 'NPAT':['net profit after tax','profit after tax','net income'],
-'EBITDA':['ebitda'], 'CFO':['cash flow from operating activities','net cash flow from operating activities'],
-'Capex':['purchase of fixed assets','capital expenditure'], 'ROE':['roe','return on equity'], 'ROA':['roa','return on assets'],
-'PB':['price to book','p b','pb'], 'PE':['price to earning','p e','pe'], 'EPS':['eps','earning per share'], 'BVPS':['book value per share','bvps'],
-'DebtEquity':['debt to equity','debt equity'], 'CurrentRatio':['current ratio'], 'NetMargin':['net profit margin','net margin'],
-'GrossMargin':['gross margin'], 'EV_EBITDA':['ev ebitda','enterprise value ebitda'],
+'TotalAssets':['total assets','bs total assets','assets'],
+'Equity':['owners equity','total equity','equity attributable to owners','shareholders equity'],
+'TangibleEquity':['tangible equity','net tangible assets'],
+'Cash':['cash and cash equivalents','cash'],
+'CurrentAssets':['current assets'],
+'CurrentLiabilities':['current liabilities'],
+'TotalDebt':['total debt','borrowings','interest bearing debt','loans and borrowings','short term borrowings','long term borrowings'],
+'Revenue':['revenue','net revenue','sales','operating revenue'],
+'GrossProfit':['gross profit'],
+'OperatingProfit':['operating profit','ebit','profit from operating activities'],
+'NPAT':['net profit after tax','profit after tax','net income','profit attributable to owners'],
+'EBITDA':['ebitda'],
+'InterestExpense':['interest expense','finance interest expense','borrowing interest expense','interest and similar expense'],
+'TaxExpense':['income tax expense','corporate income tax expense'],
+'Depreciation':['depreciation and amortisation','depreciation and amortization','depreciation expense'],
+'DividendsPaid':['dividends paid','dividend paid'],
+'CFO':['cash flow from operating activities','net cash flow from operating activities','net cash generated from operating activities'],
+'Capex':['purchase of fixed assets','purchase of property plant equipment','capital expenditure','purchase construction of fixed assets'],
+'ROE':['roe','return on equity'],
+'ROA':['roa','return on assets'],
+'PB':['price to book','p b','pb'],
+'PE':['price to earning','p e','pe'],
+'EPS':['eps','earning per share'],
+'BVPS':['book value per share','bvps'],
+'DebtEquity':['debt to equity','debt equity'],
+'CurrentRatio':['current ratio'],
+'NetMargin':['net profit margin','net margin'],
+'GrossMargin':['gross margin'],
+'EV_EBITDA':['ev ebitda','enterprise value ebitda'],
+'AvailableCapitalRatio':['available capital ratio','capital adequacy ratio'],
+'MarginLoans':['margin loans','receivables from margin activities','margin lending'],
+'BrokerageRevenue':['brokerage revenue','revenue from brokerage'],
+'TradingRevenue':['trading income','gain from financial assets at fvtpl','fvtpl gain'],
+'MarginInterestRevenue':['margin lending interest','interest from margin loans','margin interest income'],
+'RetainedEarnings':['retained earnings','undistributed profit after tax'],
+'CharterCapital':['charter capital','contributed charter capital']
 }
 
 def call(opts):
@@ -97,16 +124,48 @@ def fetch(ticker,etype):
     row={'Ticker':ticker,'RetrievedAt':now(),'DataType':'ACTUAL','SourceMode':'VNSTOCK_BRONZE','ParserLog':' | '.join([rs,bs_s,is_s,cf_s])}
     hist=[]
     for m,names in MAP.items():
-        source=ratio if m in ['ROE','ROA','PB','PE','EPS','BVPS','DebtEquity','CurrentRatio','NetMargin','GrossMargin','EV_EBITDA'] else bs if m in ['TotalAssets','Equity','Cash','CurrentAssets','CurrentLiabilities','TotalDebt'] else cf if m in ['CFO','Capex'] else inc
+        ratio_metrics={'ROE','ROA','PB','PE','EPS','BVPS','DebtEquity','CurrentRatio','NetMargin','GrossMargin','EV_EBITDA','AvailableCapitalRatio'}
+        bs_metrics={'TotalAssets','Equity','TangibleEquity','Cash','CurrentAssets','CurrentLiabilities','TotalDebt','MarginLoans','RetainedEarnings','CharterCapital'}
+        cf_metrics={'CFO','Capex','DividendsPaid','Depreciation'}
+        source=ratio if m in ratio_metrics else bs if m in bs_metrics else cf if m in cf_metrics else inc
         row[m]=last_numeric(source,names); hist+=hist_rows(source,ticker,m,names)
     # derived metrics only when source data exists
     if pd.isna(row.get('DebtEquity')) and pd.notna(row.get('TotalDebt')) and pd.notna(row.get('Equity')) and row['Equity']!=0: row['DebtEquity']=row['TotalDebt']/row['Equity']
     if pd.isna(row.get('CurrentRatio')) and pd.notna(row.get('CurrentAssets')) and pd.notna(row.get('CurrentLiabilities')) and row['CurrentLiabilities']!=0: row['CurrentRatio']=row['CurrentAssets']/row['CurrentLiabilities']
     if pd.isna(row.get('ROE')) and pd.notna(row.get('NPAT')) and pd.notna(row.get('Equity')) and row['Equity']!=0: row['ROE']=row['NPAT']/row['Equity']
     if pd.isna(row.get('ROA')) and pd.notna(row.get('NPAT')) and pd.notna(row.get('TotalAssets')) and row['TotalAssets']!=0: row['ROA']=row['NPAT']/row['TotalAssets']
-    if pd.notna(row.get('TotalDebt')) and pd.notna(row.get('EBITDA')) and row['EBITDA']!=0: row['DebtEBITDA']=row['TotalDebt']/row['EBITDA']
-    if pd.notna(row.get('CFO')) and pd.notna(row.get('TotalDebt')) and row['TotalDebt']!=0: row['CFO_Debt']=row['CFO']/row['TotalDebt']
-    return row,hist
+    # Derived methodology metrics: calculate only from observed inputs.
+    def div(a,b):
+        try:
+            a=float(a); b=float(b)
+            return a/b if np.isfinite(a) and np.isfinite(b) and b!=0 else np.nan
+        except:return np.nan
+    if pd.isna(row.get('EBITDA')) and pd.notna(row.get('OperatingProfit')) and pd.notna(row.get('Depreciation')):
+        row['EBITDA']=row['OperatingProfit']+row['Depreciation']
+    row['DebtEBITDA']=div(row.get('TotalDebt'),row.get('EBITDA'))
+    row['CFO_Debt']=div(row.get('CFO'),row.get('TotalDebt'))
+    if pd.notna(row.get('CFO')) and pd.notna(row.get('Capex')):
+        row['FOCF']=row['CFO']-abs(row['Capex'])
+        row['FOCF_Debt']=div(row['FOCF'],row.get('TotalDebt'))
+    if pd.notna(row.get('FOCF')) and pd.notna(row.get('DividendsPaid')):
+        row['DCF']=row['FOCF']-abs(row['DividendsPaid'])
+        row['DCF_Debt']=div(row['DCF'],row.get('TotalDebt'))
+    if pd.notna(row.get('EBITDA')) and pd.notna(row.get('InterestExpense')):
+        row['InterestCoverage']=div(row['EBITDA'],abs(row['InterestExpense']))
+    if pd.notna(row.get('EBITDA')) and pd.notna(row.get('InterestExpense')) and pd.notna(row.get('TaxExpense')):
+        row['FFO']=row['EBITDA']-abs(row['InterestExpense'])-abs(row['TaxExpense'])
+        row['FFO_Debt']=div(row['FFO'],row.get('TotalDebt'))
+    row['MarginLoansEquity']=div(row.get('MarginLoans'),row.get('Equity'))
+    if pd.isna(row.get('ICGR')):
+        row['ICGR']=div(row.get('RetainedEarnings'),row.get('CharterCapital'))
+    # Per-metric provenance audit trail
+    prov=[]
+    for k,v in row.items():
+        if k in ('Ticker','RetrievedAt','DataType','SourceMode','ParserLog'):continue
+        try: ok=pd.notna(v) and np.isfinite(float(v))
+        except: ok=False
+        if ok: prov.append({'Ticker':ticker,'Metric':k,'Source':'VNSTOCK_BRONZE_OR_DERIVED','RetrievedAt':row['RetrievedAt']})
+    return row,hist,prov
 
 def price(ticker):
     try:
@@ -129,14 +188,14 @@ def main():
         if key=='BANKS':u=u[u.EntityType.eq('BANK')]
         elif key=='SECURITIES':u=u[u.EntityType.eq('SECURITIES')]
         elif key=='CORPORATES':u=u[u.EntityType.eq('CORPORATE')]
-    snaps=[]; history=[]; logs=[]
+    snaps=[]; history=[]; logs=[]; provenance=[]
     for i,r in u.reset_index(drop=True).iterrows():
         t=r.Ticker; typ=r.EntityType; print(f'[{i+1}/{len(u)}] {t} {typ}')
         if typ=='BANK':
             # Bank data remains maintained by the existing dedicated bank refresh pipeline.
             logs.append({'Dataset':f'company:{t}','Status':'SKIP_BANK_DEDICATED','Message':'Use bank refresh engine','RetrievedAt':now()}); continue
         try:
-            s,h=fetch(t,typ); s['Price']=price(t); snaps.append(s); history+=h
+            s,h,pr=fetch(t,typ); s['Price']=price(t); snaps.append(s); history+=h; provenance+=pr
             logs.append({'Dataset':f'company:{t}','Status':'OK','Message':s.get('ParserLog','OK'),'RetrievedAt':now()})
         except Exception as e:
             logs.append({'Dataset':f'company:{t}','Status':'ERROR','Message':f'{type(e).__name__}: {e}','RetrievedAt':now()})
@@ -152,6 +211,12 @@ def main():
         allh=pd.concat([oldh,nh],ignore_index=True) if len(oldh) else nh
         allh=allh.drop_duplicates(['Ticker','Period','Metric'],keep='last')
         allh.to_csv(DATA/'company_history_long.csv',index=False,encoding='utf-8-sig')
+    if provenance:
+        pp=DATA/'metric_provenance.csv'
+        oldp=pd.read_csv(pp) if pp.exists() else pd.DataFrame()
+        zp=pd.concat([oldp,pd.DataFrame(provenance)],ignore_index=True) if len(oldp) else pd.DataFrame(provenance)
+        zp=zp.drop_duplicates(['Ticker','Metric'],keep='last')
+        zp.to_csv(pp,index=False,encoding='utf-8-sig')
     logp=DATA/'refresh_log_multisector.csv'; oldl=pd.read_csv(logp) if logp.exists() else pd.DataFrame(); pd.concat([oldl,pd.DataFrame(logs)],ignore_index=True).to_csv(logp,index=False,encoding='utf-8-sig')
     print('DONE')
 if __name__=='__main__':main()

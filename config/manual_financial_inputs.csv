@@ -1,1 +1,1 @@
-Ticker,AsOfDate,AvailableCapitalRatio,MarketShareBrokerage,ClientAssets,MarginLoans,ICGR,Source,DataType,Note
+﻿Ticker,AsOfDate,AvailableCapitalRatio,MarketShareBrokerage,ClientAssets,MarginLoans,ICGR,BrokerageRevenue,TradingRevenue,MarginInterestRevenue,CharterCapital,RetainedEarnings,DividendsPaid,InterestExpense,TaxExpense,Depreciation,TangibleEquity,LLR,Source,DataType,Note

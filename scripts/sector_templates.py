@@ -3,8 +3,8 @@ import re, unicodedata, pandas as pd
 ROOT=Path(__file__).resolve().parents[1]; CFG=ROOT/'config'
 
 TEMPLATES={
-'BANK': {'label':'Ngân hàng','metrics':['TotalAssets','ROE','ROA','NIM','NPL','CAR','CASA','LDR','PB'],'valuation':['P/B','Residual Income'],'focus':['Chất lượng tài sản','Vốn','Nguồn vốn & thanh khoản','Khả năng sinh lợi']},
-'SECURITIES': {'label':'Công ty chứng khoán','metrics':['Revenue','NPAT','ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],'valuation':['P/B','P/E'],'focus':['Thị phần & franchise','Vốn khả dụng','Đòn bẩy','Thanh khoản','Cơ cấu doanh thu']},
+'BANK': {'label':'Ngân hàng','metrics':['TotalAssets','GrossLoans','CustomerDeposits','ROE','ROA','NIM','CIR','NPL','CAR','CASA','LDR','PB','PE'],'valuation':['P/B','Residual Income'],'focus':['Chất lượng tài sản','Vốn','Nguồn vốn & thanh khoản','Khả năng sinh lợi']},
+'SECURITIES': {'label':'Công ty chứng khoán','metrics':['Revenue','TotalAssets','Equity','NPAT','ROE','ROA','AvailableCapitalRatio','DebtEquity','DebtEBITDA','CurrentRatio','PB','PE'],'valuation':['P/B','P/E'],'focus':['Thị phần & franchise','Vốn khả dụng','Đòn bẩy','Thanh khoản','Cơ cấu doanh thu']},
 'REAL_ESTATE': {'label':'Bất động sản','metrics':['Revenue','NPAT','ROE','ROA','DebtEquity','CurrentRatio','PB','PE'],'valuation':['P/B','P/E','RNAV (khi có dữ liệu dự án)'],'focus':['Quỹ đất & pháp lý','Presales/người mua trả tiền trước','Tồn kho','Nợ ròng/VCSH','Dòng tiền dự án']},
 'STEEL_MATERIALS': {'label':'Thép & vật liệu','metrics':['Revenue','NPAT','ROE','ROA','DebtEquity','CurrentRatio','PE','PB'],'valuation':['P/E','EV/EBITDA'],'focus':['Sản lượng','Biên lợi nhuận','Giá nguyên liệu','Vòng quay tồn kho','Chu kỳ ngành']},
 'POWER_UTILITIES': {'label':'Điện & tiện ích','metrics':['Revenue','NPAT','ROE','ROA','DebtEquity','CurrentRatio','PE','PB'],'valuation':['EV/EBITDA','P/E','DCF'],'focus':['Công suất','Sản lượng','Giá bán điện','EBITDA margin','Nợ dự án']},

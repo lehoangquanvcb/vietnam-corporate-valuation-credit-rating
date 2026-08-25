@@ -1,0 +1,74 @@
+﻿Ticker,EntityType,MethodologyCoveragePct,MethodologyHave,MethodologyRequired,MissingCriticalMetrics,MethodologyReadiness
+VCB,BANK,0.8888888888888888,8,9,LLR,TỐT
+BID,BANK,0.8888888888888888,8,9,LLR,TỐT
+CTG,BANK,0.8888888888888888,8,9,LLR,TỐT
+TCB,BANK,0.8888888888888888,8,9,LLR,TỐT
+MBB,BANK,0.8888888888888888,8,9,LLR,TỐT
+ACB,BANK,0.8888888888888888,8,9,LLR,TỐT
+HDB,BANK,0.8888888888888888,8,9,LLR,TỐT
+VPB,BANK,0.8888888888888888,8,9,LLR,TỐT
+STB,BANK,0.8888888888888888,8,9,LLR,TỐT
+VIB,BANK,0.8888888888888888,8,9,LLR,TỐT
+SHB,BANK,0.8888888888888888,8,9,LLR,TỐT
+TPB,BANK,0.8888888888888888,8,9,LLR,TỐT
+LPB,BANK,0.8888888888888888,8,9,LLR,TỐT
+OCB,BANK,0.8888888888888888,8,9,LLR,TỐT
+MSB,BANK,0.8888888888888888,8,9,LLR,TỐT
+SSB,BANK,0.8888888888888888,8,9,LLR,TỐT
+EIB,BANK,0.8888888888888888,8,9,LLR,TỐT
+NAB,BANK,0.8888888888888888,8,9,LLR,TỐT
+KLB,BANK,0.8888888888888888,8,9,LLR,TỐT
+BAB,BANK,0.8888888888888888,8,9,LLR,TỐT
+SSI,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+HCM,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+VCI,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+VND,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+MBS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+SHS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+VIX,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+FTS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+BSI,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+CTS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+ORS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+AGR,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+VDS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+TVS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+BVS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+APG,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+EVS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+AAS,SECURITIES,0.0,0,9,AvailableCapitalRatio|DebtEquity|DebtEBITDA|ROE|ROA|CurrentRatio|MarginLoansEquity|MarketShareBrokerage|ICGR,THIẾU DỮ LIỆU
+HPG,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+HSG,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+NKG,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+VHM,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+NLG,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+KDH,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+DXG,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+NVL,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+VIC,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+GAS,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+PVS,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+PVD,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+POW,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+REE,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+PC1,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+NT2,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+MWG,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+FRT,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+PNJ,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+FPT,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+CMG,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+GMD,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+HAH,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+VSC,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+VNM,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+MSN,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+SAB,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+DGC,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+DPM,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+DCM,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+CTD,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+HHV,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+C4G,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+VJC,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU
+HVN,CORPORATE,0.0,0,9,DebtEBITDA|FFO_Debt|CFO_Debt|FOCF_Debt|InterestCoverage|ROE|ROA|CurrentRatio|NetMargin,THIẾU DỮ LIỆU

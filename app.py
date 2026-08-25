@@ -8,6 +8,7 @@ from scripts.multisector_valuation import valuation
 from scripts.multisector_report import generate_docx,generate_pdf
 from scripts.sector_templates import get_template
 from scripts.sector_kpi_engine import sector_kpi_table
+from scripts.methodology_data_quality import methodology_readiness
 from scripts.intelligent_analyst import analyze as intelligent_analyze
 from scripts.valuation_regime import assess as valuation_regime
 from scripts.three_methodology_rating import rate_company as rate_three_methodologies
@@ -201,11 +202,11 @@ with tabs[3]:
     c1,c2,c3,c4=st.columns(4); c1.metric('Loại hình',meta.get('EntityType'));c2.metric('Ngành',meta.get('Sector'));c3.metric('Sàn',meta.get('Exchange'));c4.metric('Ngành so sánh',industry_name)
     if len(peer):
         st.markdown('### So sánh với trung bình ngành')
-        metrics=['ROE','ROA'] + (['NPL','CAR'] if meta['EntityType']=='BANK' else ['DebtEquity','CurrentRatio'])
-        rows=[]
-        for m in metrics:
-            vals=pd.to_numeric(peer.get(m,pd.Series(dtype=float)),errors='coerce').dropna(); rows.append({'Chỉ tiêu':m,selected:s.get(m),'Trung bình ngành':vals.mean() if len(vals) else np.nan,'Số doanh nghiệp trong mẫu ngành có dữ liệu':len(vals)})
-        st.dataframe(pd.DataFrame(rows),hide_index=True,use_container_width=True)
+        ov,_,_=sector_kpi_table(selected)
+        if len(ov):
+            ov2=ov[ov['Doanh nghiệp'].notna() | ov['Trung bình ngành'].notna()].copy()
+            st.dataframe(ov2[['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành','Số DN có dữ liệu']].head(18),
+                         hide_index=True,use_container_width=True)
 
 with tabs[4]:
     st.subheader('Hồ sơ doanh nghiệp')
@@ -216,8 +217,12 @@ with tabs[4]:
 
 with tabs[5]:
     st.subheader('Phân tích tài chính')
-    if meta['EntityType']=='BANK': metric_list=[('ROE','ROE',True),('ROA','ROA',True),('NIM','NIM',True),('NPL','NPL',True),('CAR','CAR',True),('CASA','CASA',True),('LDR','LDR',True)]
-    else: metric_list=[('ROE','ROE',True),('ROA','ROA',True),('Revenue','Doanh thu',False),('NPAT','Lợi nhuận sau thuế',False),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Hệ số thanh toán hiện hành',False)]
+    if meta['EntityType']=='BANK':
+        metric_list=[('ROE','ROE',True),('ROA','ROA',True),('NIM','NIM',True),('CIR','CIR',True),('NPL','NPL',True),('CAR','CAR',True),('CASA','CASA',True),('LDR','LDR',True)]
+    elif meta['EntityType']=='SECURITIES':
+        metric_list=[('ROE','ROE',True),('ROA','ROA',True),('Revenue','Doanh thu',False),('AvailableCapitalRatio','Vốn khả dụng',True),('DebtEquity','Nợ/VCSH',False),('DebtEBITDA','Nợ/EBITDA',False),('CurrentRatio','Thanh khoản hiện hành',False),('MarginLoansEquity','Margin/VCSH',True)]
+    else:
+        metric_list=[('ROE','ROE',True),('ROA','ROA',True),('Revenue','Doanh thu',False),('NetMargin','Biên LN ròng',True),('DebtEquity','Nợ/VCSH',False),('DebtEBITDA','Nợ/EBITDA',False),('CFO_Debt','CFO/Nợ',True),('FOCF_Debt','FOCF/Nợ',True),('InterestCoverage','EBITDA/Lãi vay',False),('CurrentRatio','Thanh khoản hiện hành',False)]
     for i in range(0,len(metric_list),2):
         cc=st.columns(2)
         for j,item in enumerate(metric_list[i:i+2]):
@@ -233,6 +238,14 @@ with tabs[6]:
             if c in show: show[c]=pd.to_numeric(show[c],errors='coerce')
         st.dataframe(show,hide_index=True,use_container_width=True)
     st.caption('Trung bình ngành được tính động từ các doanh nghiệp cùng ngành có dữ liệu; số lượng mẫu được hiển thị riêng cho từng chỉ tiêu.')
+    dq=methodology_readiness(selected)
+    q1,q2,q3=st.columns(3)
+    q1.metric('Độ phủ KPI trọng yếu',f"{dq['Coverage']*100:.0f}%")
+    q2.metric('KPI có dữ liệu',f"{dq['Have']}/{dq['Required']}")
+    q3.metric('Sẵn sàng methodology',dq['Status'])
+    if dq['Missing']:
+        st.info('KPI trọng yếu còn thiếu: '+', '.join(dq['Missing'])+'. Hệ thống giữ N/A và ưu tiên bổ sung từ Vnstock/BCTC/manual input có nguồn.')
+
     st.subheader('So sánh doanh nghiệp với ngành')
     if len(peer):
         q=peer.copy(); q['Doanh nghiệp']=q.Ticker.astype(str)
@@ -306,7 +319,7 @@ with tabs[11]:
 
 with tabs[12]:
     st.subheader('Báo cáo & Quản trị')
-    st.caption('Bộ báo cáo chuẩn V8.10.1 được thiết kế ở mức khoảng 30 trang A4, tự co giãn theo dữ liệu thực tế.')
+    st.caption('Bộ báo cáo kế thừa chuẩn trước và mở rộng Data Layer V8.14 được thiết kế ở mức khoảng 30 trang A4, tự co giãn theo dữ liệu thực tế.')
     report_kind=st.radio('Loại báo cáo',['Phân tích, Định giá & M&A','Báo cáo Xếp hạng tín nhiệm'],horizontal=True)
     rr=st.session_state.get('rating_result')
     if report_kind=='Báo cáo Xếp hạng tín nhiệm' and rr is None:
