@@ -85,12 +85,15 @@ presentation=st.sidebar.toggle('Chế độ trình bày',value=False)
 if not selected: st.error('Không có doanh nghiệp trong bộ lọc.'); st.stop()
 meta=get_company(selected); s=get_snapshot(selected); val=valuation(selected,s); peer=industry_snapshot(selected)
 industry_name=industry_label(selected)
+# Resolve the sector template once for the selected company.
+# get_template() returns (template_key, template_dict).
+sector_template_key, sector_template = get_template(meta.get('EntityType'), meta.get('Sector'))
 st.sidebar.markdown('---'); st.sidebar.markdown('## TRẠNG THÁI')
 st.sidebar.success(f"{meta.get('EntityType')} · {meta.get('Exchange')}")
 st.sidebar.caption(f"Ngành: {meta.get('Sector')}\n\nNhóm so sánh: {meta.get('PeerGroup')}\n\nPhương pháp: {meta.get('Methodology')}")
 
 st.title('NỀN TẢNG PHÂN TÍCH, ĐỊNH GIÁ, M&A & XẾP HẠNG TÍN NHIỆM DOANH NGHIỆP VIỆT NAM')
-st.caption('ENGINE V8.1 FULL MARKET · Ngân hàng + Công ty chứng khoán + Doanh nghiệp phi tài chính · Vnstock Bronze LOCAL → CSV → GitHub → Streamlit')
+st.caption('FULL MARKET DECISION INTELLIGENCE · Ngân hàng + Công ty chứng khoán + Doanh nghiệp phi tài chính · Vnstock Bronze LOCAL → CSV → GitHub → Streamlit')
 st.subheader(f"{selected} — {meta.get('CompanyName')}")
 
 # Header KPIs adapt by entity.

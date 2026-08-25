@@ -176,3 +176,10 @@ Hai nhiệm vụ cốt lõi vẫn giữ nguyên:
 - XHTN trong dashboard và report cùng dùng duy nhất `three_methodology_rating.rate_company`.
 - Giữ nguyên 3 methodology: Ngân hàng / CTCK / Doanh nghiệp phi tài chính.
 - Không thay đổi Data Layer, Industry Benchmark, Valuation, Decision Intelligence hay Professional Report Engine.
+
+
+## V8.10.2 - STREAMLIT SECTOR TEMPLATE FIX
+- Fix `NameError: sector_template is not defined` tại tab Hồ sơ doanh nghiệp.
+- Khởi tạo `sector_template_key, sector_template = get_template(EntityType, Sector)` ngay sau khi chọn doanh nghiệp.
+- Giữ nguyên V8.10.1 fix: một XHTN router duy nhất cho 3 methodology.
+- Không thay đổi valuation, peer benchmark, data layer hay report engine.
