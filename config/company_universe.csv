@@ -1,74 +1,74 @@
-﻿Ticker,CompanyName,EntityType,Sector,Exchange,PeerGroup,Methodology,Active,SectorTemplate,SectorTemplateLabel
-VCB,Vietcombank,BANK,Ngân hàng,HOSE,Ngân hàng niêm yết lớn,BANK_2026,1,BANK,Ngân hàng
-BID,BIDV,BANK,Ngân hàng,HOSE,Ngân hàng niêm yết lớn,BANK_2026,1,BANK,Ngân hàng
-CTG,VietinBank,BANK,Ngân hàng,HOSE,Ngân hàng niêm yết lớn,BANK_2026,1,BANK,Ngân hàng
-TCB,Techcombank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
-MBB,MB Bank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
-ACB,ACB,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
-HDB,HDBank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
-VPB,VPBank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
-STB,Sacombank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
-VIB,VIB,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-SHB,SHB,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-TPB,TPBank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-LPB,LPBank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-OCB,OCB,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-MSB,MSB,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-SSB,SeABank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-EIB,Eximbank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-NAB,Nam A Bank,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
-KLB,KienlongBank,BANK,Ngân hàng,UPCOM,Ngân hàng tư nhân nhỏ,BANK_2026,1,BANK,Ngân hàng
-BAB,Bac A Bank,BANK,Ngân hàng,HNX,Ngân hàng tư nhân nhỏ,BANK_2026,1,BANK,Ngân hàng
-SSI,SSI Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-HCM,HSC,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-VCI,Vietcap Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-VND,VNDIRECT,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-MBS,MB Securities,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-SHS,Saigon Hanoi Securities,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-VIX,VIX Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-FTS,FPT Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-BSI,BIDV Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-CTS,VietinBank Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-ORS,Tiên Phong Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-AGR,Agriseco,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-VDS,Rong Viet Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-TVS,Thien Viet Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-BVS,Bao Viet Securities,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-APG,APG Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô nhỏ,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-EVS,Everest Securities,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô nhỏ,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-AAS,SmartInvest Securities,SECURITIES,Công ty chứng khoán,UPCOM,CTCK quy mô nhỏ,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
-HPG,Hoa Phat Group,CORPORATE,Thép,HOSE,Thép,CORPORATE_2025,1,STEEL_MATERIALS,Thép & vật liệu
-HSG,Hoa Sen Group,CORPORATE,Thép,HOSE,Thép,CORPORATE_2025,1,STEEL_MATERIALS,Thép & vật liệu
-NKG,Nam Kim Steel,CORPORATE,Thép,HOSE,Thép,CORPORATE_2025,1,STEEL_MATERIALS,Thép & vật liệu
-VHM,Vinhomes,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-NLG,Nam Long,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-KDH,Khang Dien House,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-DXG,Dat Xanh Group,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-NVL,Novaland,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-VIC,Vingroup,CORPORATE,Tập đoàn đầu tư,HOSE,IHC,EXCLUDED_SPECIALIZED,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-GAS,PV GAS,CORPORATE,Dầu khí,HOSE,Dầu khí,CORPORATE_2025,1,OIL_GAS,Dầu khí
-PVS,PTSC,CORPORATE,Dầu khí,HNX,Dầu khí,CORPORATE_2025,1,OIL_GAS,Dầu khí
-PVD,PV Drilling,CORPORATE,Dầu khí,HOSE,Dầu khí,CORPORATE_2025,1,OIL_GAS,Dầu khí
-POW,PV Power,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-REE,REE Corporation,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-PC1,PC1 Group,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-NT2,PV Power Nhon Trach 2,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-MWG,Mobile World,CORPORATE,Bán lẻ,HOSE,Bán lẻ,CORPORATE_2025,1,RETAIL,Bán lẻ
-FRT,FPT Retail,CORPORATE,Bán lẻ,HOSE,Bán lẻ,CORPORATE_2025,1,RETAIL,Bán lẻ
-PNJ,Phu Nhuan Jewelry,CORPORATE,Bán lẻ,HOSE,Bán lẻ,CORPORATE_2025,1,RETAIL,Bán lẻ
-FPT,FPT Corporation,CORPORATE,Công nghệ,HOSE,Công nghệ,CORPORATE_2025,1,TECH,Công nghệ
-CMG,CMC Corporation,CORPORATE,Công nghệ,HOSE,Công nghệ,CORPORATE_2025,1,TECH,Công nghệ
-GMD,Gemadept,CORPORATE,Logistics,HOSE,Logistics,CORPORATE_2025,1,LOGISTICS,Logistics & cảng
-HAH,Hai An Transport,CORPORATE,Logistics,HOSE,Logistics,CORPORATE_2025,1,LOGISTICS,Logistics & cảng
-VSC,Viconship,CORPORATE,Logistics,HOSE,Logistics,CORPORATE_2025,1,LOGISTICS,Logistics & cảng
-VNM,Vinamilk,CORPORATE,Thực phẩm,HOSE,Thực phẩm,CORPORATE_2025,1,CONSUMER,Tiêu dùng & thực phẩm
-MSN,Masan Group,CORPORATE,Hàng tiêu dùng,HOSE,Hàng tiêu dùng,CORPORATE_2025,1,CONSUMER,Tiêu dùng & thực phẩm
-SAB,Sabeco,CORPORATE,Đồ uống,HOSE,Đồ uống,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-DGC,Duc Giang Chemicals,CORPORATE,Hóa chất,HOSE,Hóa chất,CORPORATE_2025,1,CHEMICALS,Hóa chất
-DPM,PVFCCo,CORPORATE,Hóa chất,HOSE,Hóa chất,CORPORATE_2025,1,CHEMICALS,Hóa chất
-DCM,Ca Mau Fertilizer,CORPORATE,Hóa chất,HOSE,Hóa chất,CORPORATE_2025,1,CHEMICALS,Hóa chất
-CTD,Coteccons,CORPORATE,Xây dựng,HOSE,Xây dựng,CORPORATE_2025,1,CONSTRUCTION_INFRA,Xây dựng & hạ tầng
-HHV,Deo Ca Traffic Infrastructure,CORPORATE,Hạ tầng,HOSE,Hạ tầng,CORPORATE_2025,1,CONSTRUCTION_INFRA,Xây dựng & hạ tầng
-C4G,CIENCO4,CORPORATE,Hạ tầng,UPCOM,Hạ tầng,CORPORATE_2025,1,CONSTRUCTION_INFRA,Xây dựng & hạ tầng
-VJC,Vietjet Air,CORPORATE,Hàng không,HOSE,Hàng không,EXCLUDED_SPECIALIZED,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
-HVN,Vietnam Airlines,CORPORATE,Hàng không,HOSE,Hàng không,EXCLUDED_SPECIALIZED,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+﻿Ticker,CompanyName,LegalName,EntityType,Sector,Exchange,PeerGroup,Methodology,Active,SectorTemplate,SectorTemplateLabel
+VCB,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng niêm yết lớn,BANK_2026,1,BANK,Ngân hàng
+BID,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng niêm yết lớn,BANK_2026,1,BANK,Ngân hàng
+CTG,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng niêm yết lớn,BANK_2026,1,BANK,Ngân hàng
+TCB,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
+MBB,MB Bank,Ngân hàng TMCP Quân đội,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
+ACB,ACB,Ngân hàng TMCP Á Châu,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
+HDB,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
+VPB,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
+STB,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân lớn,BANK_2026,1,BANK,Ngân hàng
+VIB,VIB,Ngân hàng TMCP Quốc tế Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+SHB,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+TPB,TPBank,Ngân hàng TMCP Tiên Phong,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+LPB,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+OCB,OCB,Ngân hàng TMCP Phương Đông,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+MSB,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+SSB,SeABank,Ngân hàng TMCP Đông Nam Á,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+EIB,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+NAB,Nam A Bank,Ngân hàng TMCP Nam Á,BANK,Ngân hàng,HOSE,Ngân hàng tư nhân trung bình,BANK_2026,1,BANK,Ngân hàng
+KLB,KienlongBank,Ngân hàng TMCP Kiên Long,BANK,Ngân hàng,UPCOM,Ngân hàng tư nhân nhỏ,BANK_2026,1,BANK,Ngân hàng
+BAB,Bac A Bank,Ngân hàng TMCP Bắc Á,BANK,Ngân hàng,HNX,Ngân hàng tư nhân nhỏ,BANK_2026,1,BANK,Ngân hàng
+SSI,SSI Securities,Công ty Cổ phần Chứng khoán SSI,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+HCM,HSC,Công ty Cổ phần Chứng khoán Thành phố Hồ Chí Minh,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+VCI,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+VND,VNDIRECT,Công ty Cổ phần Chứng khoán VNDIRECT,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+MBS,MB Securities,Công ty Cổ phần Chứng khoán MB,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+SHS,Saigon Hanoi Securities,Saigon Hanoi Securities,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+VIX,VIX Securities,VIX Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô lớn,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+FTS,FPT Securities,FPT Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+BSI,BIDV Securities,BIDV Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+CTS,VietinBank Securities,VietinBank Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+ORS,Tiên Phong Securities,Tiên Phong Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+AGR,Agriseco,Agriseco,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+VDS,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+TVS,Thien Viet Securities,Thien Viet Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+BVS,Bao Viet Securities,Bao Viet Securities,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô trung bình,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+APG,APG Securities,APG Securities,SECURITIES,Công ty chứng khoán,HOSE,CTCK quy mô nhỏ,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+EVS,Everest Securities,Everest Securities,SECURITIES,Công ty chứng khoán,HNX,CTCK quy mô nhỏ,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+AAS,SmartInvest Securities,SmartInvest Securities,SECURITIES,Công ty chứng khoán,UPCOM,CTCK quy mô nhỏ,SECURITIES_2025,1,SECURITIES,Công ty chứng khoán
+HPG,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,CORPORATE,Thép,HOSE,Thép,CORPORATE_2025,1,STEEL_MATERIALS,Thép & vật liệu
+HSG,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,CORPORATE,Thép,HOSE,Thép,CORPORATE_2025,1,STEEL_MATERIALS,Thép & vật liệu
+NKG,Nam Kim Steel,Nam Kim Steel,CORPORATE,Thép,HOSE,Thép,CORPORATE_2025,1,STEEL_MATERIALS,Thép & vật liệu
+VHM,Vinhomes,Công ty Cổ phần Vinhomes,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+NLG,Nam Long,Nam Long,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+KDH,Khang Dien House,Khang Dien House,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+DXG,Dat Xanh Group,Dat Xanh Group,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+NVL,Novaland,Novaland,CORPORATE,Bất động sản,HOSE,Bất động sản nhà ở,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+VIC,Vingroup,Vingroup,CORPORATE,Tập đoàn đầu tư,HOSE,IHC,EXCLUDED_SPECIALIZED,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+GAS,PV GAS,PV GAS,CORPORATE,Dầu khí,HOSE,Dầu khí,CORPORATE_2025,1,OIL_GAS,Dầu khí
+PVS,PTSC,PTSC,CORPORATE,Dầu khí,HNX,Dầu khí,CORPORATE_2025,1,OIL_GAS,Dầu khí
+PVD,PV Drilling,PV Drilling,CORPORATE,Dầu khí,HOSE,Dầu khí,CORPORATE_2025,1,OIL_GAS,Dầu khí
+POW,PV Power,PV Power,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+REE,REE Corporation,REE Corporation,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+PC1,PC1 Group,PC1 Group,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+NT2,PV Power Nhon Trach 2,PV Power Nhon Trach 2,CORPORATE,Điện,HOSE,Điện,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+MWG,Mobile World,Công ty Cổ phần Đầu tư Thế Giới Di Động,CORPORATE,Bán lẻ,HOSE,Bán lẻ,CORPORATE_2025,1,RETAIL,Bán lẻ
+FRT,FPT Retail,FPT Retail,CORPORATE,Bán lẻ,HOSE,Bán lẻ,CORPORATE_2025,1,RETAIL,Bán lẻ
+PNJ,Phu Nhuan Jewelry,Phu Nhuan Jewelry,CORPORATE,Bán lẻ,HOSE,Bán lẻ,CORPORATE_2025,1,RETAIL,Bán lẻ
+FPT,FPT Corporation,FPT Corporation,CORPORATE,Công nghệ,HOSE,Công nghệ,CORPORATE_2025,1,TECH,Công nghệ
+CMG,CMC Corporation,CMC Corporation,CORPORATE,Công nghệ,HOSE,Công nghệ,CORPORATE_2025,1,TECH,Công nghệ
+GMD,Gemadept,Gemadept,CORPORATE,Logistics,HOSE,Logistics,CORPORATE_2025,1,LOGISTICS,Logistics & cảng
+HAH,Hai An Transport,Hai An Transport,CORPORATE,Logistics,HOSE,Logistics,CORPORATE_2025,1,LOGISTICS,Logistics & cảng
+VSC,Viconship,Viconship,CORPORATE,Logistics,HOSE,Logistics,CORPORATE_2025,1,LOGISTICS,Logistics & cảng
+VNM,Vinamilk,Vinamilk,CORPORATE,Thực phẩm,HOSE,Thực phẩm,CORPORATE_2025,1,CONSUMER,Tiêu dùng & thực phẩm
+MSN,Masan Group,Masan Group,CORPORATE,Hàng tiêu dùng,HOSE,Hàng tiêu dùng,CORPORATE_2025,1,CONSUMER,Tiêu dùng & thực phẩm
+SAB,Sabeco,Sabeco,CORPORATE,Đồ uống,HOSE,Đồ uống,CORPORATE_2025,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+DGC,Duc Giang Chemicals,Duc Giang Chemicals,CORPORATE,Hóa chất,HOSE,Hóa chất,CORPORATE_2025,1,CHEMICALS,Hóa chất
+DPM,PVFCCo,PVFCCo,CORPORATE,Hóa chất,HOSE,Hóa chất,CORPORATE_2025,1,CHEMICALS,Hóa chất
+DCM,Ca Mau Fertilizer,Ca Mau Fertilizer,CORPORATE,Hóa chất,HOSE,Hóa chất,CORPORATE_2025,1,CHEMICALS,Hóa chất
+CTD,Coteccons,Coteccons,CORPORATE,Xây dựng,HOSE,Xây dựng,CORPORATE_2025,1,CONSTRUCTION_INFRA,Xây dựng & hạ tầng
+HHV,Deo Ca Traffic Infrastructure,Deo Ca Traffic Infrastructure,CORPORATE,Hạ tầng,HOSE,Hạ tầng,CORPORATE_2025,1,CONSTRUCTION_INFRA,Xây dựng & hạ tầng
+C4G,CIENCO4,CIENCO4,CORPORATE,Hạ tầng,UPCOM,Hạ tầng,CORPORATE_2025,1,CONSTRUCTION_INFRA,Xây dựng & hạ tầng
+VJC,Vietjet Air,Vietjet Air,CORPORATE,Hàng không,HOSE,Hàng không,EXCLUDED_SPECIALIZED,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính
+HVN,Vietnam Airlines,Vietnam Airlines,CORPORATE,Hàng không,HOSE,Hàng không,EXCLUDED_SPECIALIZED,1,GENERIC_CORPORATE,Doanh nghiệp phi tài chính

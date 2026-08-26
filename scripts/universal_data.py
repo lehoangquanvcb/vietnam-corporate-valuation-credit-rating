@@ -39,8 +39,11 @@ def get_company(ticker):
     u=universe(); t=str(ticker).upper().strip()
     z=u[u.Ticker.eq(t)]
     if z.empty:
-        return {'Ticker':t,'CompanyName':t,'EntityType':'CORPORATE','Sector':'Chưa phân loại','Exchange':'N/A','PeerGroup':'Chưa phân loại','Methodology':'CORPORATE_2025','Active':1}
-    return z.iloc[0].to_dict()
+        return {'Ticker':t,'CompanyName':t,'LegalName':t,'DisplayName':t,'EntityType':'CORPORATE','Sector':'Chưa phân loại','Exchange':'N/A','PeerGroup':'Chưa phân loại','Methodology':'CORPORATE_2025','Active':1}
+    d=z.iloc[0].to_dict()
+    legal=str(d.get('LegalName') or '').strip()
+    d['DisplayName']=legal if legal and legal.lower()!='nan' else d.get('CompanyName',t)
+    return d
 
 def get_snapshot(ticker):
     meta=get_company(ticker); t=meta['Ticker']

@@ -220,3 +220,51 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - Report không còn lặp cùng bảng 5 KPI qua nhiều trang: evidence table chọn KPI theo đúng chủ đề chương.
 - Bỏ ép page break cho từng chương; Word tự dồn trang, giảm khoảng trắng và tốn giấy.
 - Giữ nguyên methodology KPI expansion, peer charts, analyst narrative, 3 methodology XHTN, Vnstock Bronze architecture.
+
+### 8.15 - Report Flow / Compact Pagination
+- Loại bỏ lặp narrative so sánh peer trong cùng một mục.
+- Mỗi bảng KPI thân báo cáo chỉ chứa chỉ tiêu phù hợp với mục phân tích; không lặp bảng benchmark ở mục peer/phụ lục.
+- Waterfall thân báo cáo chỉ hiển thị cấu phần liên quan; waterfall đầy đủ chỉ xuất hiện ở phụ lục.
+- Bỏ page break cưỡng bức trước các phụ lục để tận dụng phần trống còn lại của trang.
+- Bảng được ưu tiên trước biểu đồ lớn; font/margin bảng thân báo cáo được nén để hạn chế orphan header/row.
+- Body chỉ giữ tối đa một biểu đồ peer đại diện mỗi mục; đồ thị peer chuyên sâu vẫn nằm tại phụ lục.
+
+## Nâng cấp 8.20 - Deep Analytics & Compact Peer Atlas
+- Phụ lục peer chuyển sang bố cục 2x2, tối đa 4 biểu đồ/trang để giảm khoảng trắng.
+- Mở rộng KPI ngân hàng: Asset/Equity, Credit Cost proxy, Funding Gap/TTS, Profit/TTS bên cạnh CAR, NPL, NIM, CIR, CASA, LDR.
+- Mở rộng KPI CTCK: Net Debt/Equity, Net Debt/EBITDA, Cash/TTS, Working Capital/TTS, CFO/FOCF coverage và vòng quay tài sản.
+- Mở rộng KPI doanh nghiệp phi tài chính: Net Debt, CFO/FOCF, CAPEX intensity, liquidity buffer, capital structure và asset turnover.
+- KPI chưa có dữ liệu nguồn được giữ trạng thái N/A - cần bổ sung nguồn, không tự giả định số liệu.
+
+
+## Report Layout 8.31
+- Báo cáo XHTN: format theo cấu trúc báo cáo mẫu Saigon Ratings: trang tóm tắt 2 cột (Kết quả XHTN / Luận điểm XHTN), các khối nội dung lớn có thanh tiêu đề xanh, Hồ sơ Kinh doanh, Hồ sơ Tài chính, Quản trị, Khung xếp hạng và Phụ lục.
+- Báo cáo phân tích cổ phiếu: format theo cấu trúc báo cáo research mẫu: Tóm tắt, Tổng quan, Hoạt động kinh doanh, Tình hình tài chính, Luận điểm đầu tư, Rủi ro, Dự phóng & Định giá, Triển vọng ngành và Phụ lục.
+- Biểu đồ lịch sử và peer được ghép 2 cột để tận dụng chiều ngang A4. Phụ lục biểu đồ chảy tự nhiên theo từng cặp, không ép page break.
+- Không tạo một trang riêng cho từng KPI; KPI liên quan được gom theo nhóm phân tích.
+- Loại bỏ TOC rời đối với báo cáo XHTN; TOC của báo cáo cổ phiếu được đặt ngay sau phần Tóm tắt để tận dụng phần còn trống.
+
+## 8.40 - Sample-native report format
+- Thân báo cáo ưu tiên phân tích số liệu doanh nghiệp, xu hướng và peer; phương pháp luận chuyển xuống phụ lục.
+- Bảng/đồ thị được lồng trực tiếp trong cùng block với đoạn phân tích thay vì tách riêng.
+- Thứ tự mục lớn bám báo cáo mẫu: XHTN theo KLB/VDS/Bà Nà; phân tích cổ phiếu theo STB.
+- Giảm phụ lục đồ thị dài; bảng KPI chi tiết và audit trail chỉ nằm ở cuối báo cáo.
+
+
+### Cập nhật 8.41 – chuẩn hóa thông tin đầu báo cáo và đơn vị số liệu
+- Trang bìa chỉ giữ Ngành và Quốc gia, căn trái; bỏ thông tin Sàn giao dịch.
+- Loại hình doanh nghiệp hiển thị tiếng Việt: Ngân hàng / Công ty Chứng khoán / Doanh nghiệp Phi tài chính.
+- Các giá trị tuyệt đối lớn tự động rút gọn sang nghìn tỷ, tỷ hoặc triệu trong phần chữ và bảng để tiết kiệm không gian.
+
+
+## 8.42 – Full legal name + public macro/sector intelligence + deeper KPI analysis
+- Report header uses `LegalName (Ticker)`; current universe includes legal names for major banks/securities/corporates and discovery writes `organ_name` into `LegalName`.
+- Added `config/public_intelligence.csv` with dated public macro/banking/securities intelligence and source URLs. Runtime remains repository-data-only; no web call is required on Streamlit Cloud.
+- Macro/industry sections now contain current public facts plus an explicit transmission channel to the company.
+- Analytical blocks use up to 6 KPIs and add cross-metric interpretations (ROA × leverage → ROE; NIM–CASA–LDR; NPL–CAR; leverage–liquidity).
+- Bank sections expanded to asset mix, funding mix, equity/assets, profit/assets, NII/operating income, provision/operating income and credit-cost proxy where data are available.
+
+## 8.47 – Macro/Industry de-duplication
+- RỦI RO VĨ MÔ and RỦI RO NGÀNH contain only external-environment analysis and public-source evidence.
+- The issuer-specific KPI transmission block (NIM/CASA/LDR/CAR/NPL for banks) is rendered once only under HỒ SƠ KINH DOANH as “Liên hệ với hồ sơ doanh nghiệp”.
+- Removed stale Python bytecode caches from the distribution to prevent an older report layout from being executed.

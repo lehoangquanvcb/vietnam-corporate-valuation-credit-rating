@@ -47,7 +47,7 @@ def main():
         if not t or t in ('NAN','NONE'):continue
         name=str(r.get(nc,t)) if nc else t; ind=str(r.get(ic,'Chưa phân loại')) if ic else 'Chưa phân loại'; exch=str(r.get(ec,'N/A')) if ec else 'N/A'
         et,sector,method=classify(ind,name)
-        rows.append({'Ticker':t,'CompanyName':name,'EntityType':et,'Sector':sector,'Exchange':exch,'PeerGroup':sector,'Methodology':method,'Active':1})
+        rows.append({'Ticker':t,'CompanyName':name,'LegalName':name,'EntityType':et,'Sector':sector,'Exchange':exch,'PeerGroup':sector,'Methodology':method,'Active':1})
     new=pd.DataFrame(rows).drop_duplicates('Ticker')
     seed=pd.read_csv(CFG/'company_universe.csv'); seed['Ticker']=seed.Ticker.astype(str).str.upper()
     # Seed/master overrides discovery for classifications already curated.

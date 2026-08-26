@@ -1,7 +1,7 @@
 import numpy as np
 from pathlib import Path
 from io import BytesIO
-import math, pandas as pd, matplotlib.pyplot as plt
+import math, re, pandas as pd, matplotlib.pyplot as plt
 from matplotlib import font_manager
 from docx import Document
 from docx.shared import Pt, Mm, Inches
@@ -22,16 +22,53 @@ from scripts.intelligent_analyst import analyze as intelligent_analyze
 from scripts.sector_kpi_engine import sector_kpi_table
 from scripts.sector_templates import get_template
 from scripts.methodology_kpi_engine import methodology_kpi_table, metric_list, LABELS as METH_LABELS, PCT as METH_PCT, MULT as METH_MULT
+from scripts.public_intelligence import load_public_intelligence, scope_for_entity
 
 ROOT=Path(__file__).resolve().parents[1]
 
 VI_METRIC={
 'TotalAssets':'Tổng tài sản','Revenue':'Doanh thu','NPAT':'Lợi nhuận sau thuế','ROE':'ROE','ROA':'ROA',
 'NPL':'Tỷ lệ nợ xấu','CAR':'CAR','CASA':'CASA','LDR':'LDR','NIM':'NIM','PB':'P/B','PE':'P/E',
-'DebtEquity':'Nợ/VCSH','CurrentRatio':'Hệ số thanh toán hiện hành','AvailableCapitalRatio':'Tỷ lệ vốn khả dụng'
+'DebtEquity':'Nợ/VCSH','CurrentRatio':'Hệ số thanh toán hiện hành','AvailableCapitalRatio':'Tỷ lệ vốn khả dụng',
+'AssetEquity':'Tổng tài sản/VCSH','CreditCostProxy':'Chi phí dự phòng/Dư nợ','FundingGapAssets':'Funding gap/TTS',
+'CashAssets':'Tiền/TTS','WorkingCapitalAssets':'VLĐ ròng/TTS','NetDebtEquity':'Nợ ròng/VCSH','NetDebtEBITDA':'Nợ ròng/EBITDA',
+'EquityAssetsCorp':'VCSH/TTS','AssetTurnover':'Vòng quay tài sản','FOCFMargin':'FOCF/Doanh thu','CashDebt':'Tiền/Nợ vay'
 }
-PCT={'ROE','ROA','NPL','CAR','CASA','LDR','NIM','AvailableCapitalRatio'}
-MULT={'PB','PE','DebtEquity','CurrentRatio'}
+PCT={'ROE','ROA','NPL','CAR','CASA','NIM','AvailableCapitalRatio','CreditCostProxy','FundingGapAssets','CashAssets','WorkingCapitalAssets','EquityAssetsCorp','FOCFMargin','CashDebt'}
+MULT={'PB','PE','DebtEquity','CurrentRatio','LDR','AssetEquity','NetDebtEquity','NetDebtEBITDA','AssetTurnover'}
+
+ENTITY_TYPE_VI={'BANK':'Ngân hàng','SECURITIES':'Công ty Chứng khoán','CORPORATE':'Doanh nghiệp Phi tài chính'}
+
+def entity_type_vi(v):
+    key=str(v or '').strip().upper()
+    return ENTITY_TYPE_VI.get(key, str(v or 'N/A'))
+
+def company_display_name(meta,ticker):
+    name=str(meta.get('DisplayName') or meta.get('LegalName') or meta.get('CompanyName') or ticker).strip()
+    # Always show the ticker in parentheses exactly once.
+    if re.search(r'\('+re.escape(str(ticker))+r'\)\s*$',name,re.I):
+        return name
+    return f"{name} ({str(ticker).upper()})"
+
+def _public_intel_paragraphs(entity_type, only=None):
+    scope=scope_for_entity(entity_type)
+    items=load_public_intelligence(scope)
+    out=[]
+    for x in items:
+        if only=='macro' and str(x.get('Scope')).upper()!='MACRO': continue
+        if only=='industry' and str(x.get('Scope')).upper()=='MACRO': continue
+        title=str(x.get('Title') or '').strip(); nar=str(x.get('Narrative') or '').strip()
+        if nar: out.append((title,nar,str(x.get('Source') or ''),str(x.get('URL') or ''),str(x.get('AsOf') or '')))
+    return out
+
+def compact_abs(v):
+    x=num(v)
+    if x is None:return 'N/A'
+    ax=abs(x)
+    if ax>=1e12:return (f"{x/1e12:,.1f} nghìn tỷ").replace(',','X').replace('.',',').replace('X','.')
+    if ax>=1e9:return (f"{x/1e9:,.1f} tỷ").replace(',','X').replace('.',',').replace('X','.')
+    if ax>=1e6:return (f"{x/1e6:,.1f} triệu").replace(',','X').replace('.',',').replace('X','.')
+    return vi(x,1)
 
 def vi(x,d=1):
     v=num(x)
@@ -43,7 +80,7 @@ def price(x): return 'N/A' if num(x) is None else vi(num(x)*1000,0)+' đồng/cp
 def metric_fmt(metric,x):
     if metric in PCT:return pct(x)
     if metric in MULT:return mult(x)
-    return vi(x,1)
+    return compact_abs(x)
 
 def _font():
     try:return font_manager.findfont('Lato',fallback_to_default=False)
@@ -90,7 +127,7 @@ def _set_cell_margins(cell,top=60,start=70,bottom=60,end=70):
         if node is None: node=OxmlElement('w:'+m); tcMar.append(node)
         node.set(qn('w:w'),str(v)); node.set(qn('w:type'),'dxa')
 
-def _style_doc(doc):
+def _style_doc(doc, report_type=None):
     sec=doc.sections[0]; sec.page_height=Mm(297); sec.page_width=Mm(210)
     sec.top_margin=Mm(16); sec.bottom_margin=Mm(15); sec.left_margin=Mm(18); sec.right_margin=Mm(16)
     for name in ['Normal','Title','Subtitle','Heading 1','Heading 2','Heading 3']:
@@ -103,25 +140,33 @@ def _style_doc(doc):
     doc.styles['Heading 1'].paragraph_format.space_before=Pt(8); doc.styles['Heading 1'].paragraph_format.space_after=Pt(5)
     doc.styles['Heading 2'].font.size=Pt(12); doc.styles['Heading 2'].font.bold=True
     doc.styles['Heading 2'].paragraph_format.space_before=Pt(6); doc.styles['Heading 2'].paragraph_format.space_after=Pt(4)
-    # header/footer
-    header=sec.header.paragraphs[0]; header.text='VIETNAM CORPORATE VALUATION & CREDIT RATING INTELLIGENCE'
-    header.alignment=WD_ALIGN_PARAGRAPH.RIGHT
-    for r in header.runs:r.font.name='Lato';r.font.size=Pt(8)
+    # Header is report-specific and functions as a clear simulation/disclaimer notice.
+    header=sec.header.paragraphs[0]
+    if report_type == 'rating':
+        header.text='Báo cáo mô phỏng quá trình Xếp hạng tín nhiệm (tài liệu này không thể thay thế Báo cáo Xếp hạng tín nhiệm)'
+    elif report_type == 'analysis':
+        header.text='Báo cáo mô phỏng quá trình Phân tích, định giá cổ phiếu (tài liệu này không nhằm mục đích khuyến nghị đầu tư cổ phiếu)'
+    else:
+        header.text=''
+    header.alignment=WD_ALIGN_PARAGRAPH.LEFT
+    header.paragraph_format.space_before=Pt(0); header.paragraph_format.space_after=Pt(0)
+    for r in header.runs:
+        r.font.name='Lato'; r.font.size=Pt(8); r.bold=False
     footer=sec.footer.paragraphs[0]; footer.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    r=footer.add_run('Tài liệu phân tích - sử dụng dữ liệu và giả định tại thời điểm lập báo cáo')
-    r.font.name='Lato';r.font.size=Pt(8)
+    r=footer.add_run('Tài liệu này chỉ có tính chất tham khảo, chúng tôi không chịu trách nhiệm về độ chính xác của dữ liệu đầu vào cũng như kết quả đầu ra')
+    r.font.name='Lato'; r.font.size=Pt(8)
 
 def _add_title(doc,ticker,meta,report_type):
     p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     r=p.add_run('BÁO CÁO XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH GIÁ CỔ PHIẾU, ĐỊNH GIÁ & M&A')
     r.bold=True;r.font.name='Lato';r.font.size=Pt(20)
     p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    r=p.add_run(f"{ticker} - {meta.get('CompanyName')}");r.bold=True;r.font.name='Lato';r.font.size=Pt(16)
+    r=p.add_run(company_display_name(meta,ticker));r.bold=True;r.font.name='Lato';r.font.size=Pt(16)
     p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run(f"Ngành: {meta.get('Sector')} | Sàn: {meta.get('Exchange')} | Nhóm so sánh: {meta.get('PeerGroup')}").font.size=Pt(10)
+    p.add_run(f"Ngành: {meta.get('Sector')} | Nhóm so sánh: {meta.get('PeerGroup')}").font.size=Pt(10)
     doc.add_paragraph()
     box=doc.add_table(rows=3,cols=2);box.alignment=WD_TABLE_ALIGNMENT.CENTER;box.style='Table Grid'
-    vals=[('Loại hình',meta.get('EntityType')),('Phương pháp',meta.get('Methodology')),('Nguồn benchmark',industry_label(ticker))]
+    vals=[('Loại hình',entity_type_vi(meta.get('EntityType'))),('Phương pháp',meta.get('Methodology')),('Nguồn benchmark',industry_label(ticker))]
     for i,(a,b) in enumerate(vals):
         box.cell(i,0).text=str(a);box.cell(i,1).text=str(b)
         _set_cell_shading(box.cell(i,0),'E8EEF7')
@@ -266,20 +311,31 @@ def _add_pars(doc,pars):
         if not txt:continue
         p=doc.add_paragraph(str(txt));p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
 
-def _add_waterfall(doc,ticker):
+def _add_waterfall(doc,ticker,components=None,compact=False):
     rc=committee_pack(ticker);rows=rc.get('Waterfall',[])
-    t=doc.add_table(rows=1,cols=5);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
-    hdr=['Bước','Cấu phần','Kết quả','Điều chỉnh','Luận cứ']
+    if components:
+        wanted={str(x).strip().lower() for x in components}
+        rows=[r for r in rows if str(r.get('Cấu phần','')).strip().lower() in wanted]
+    if not rows:return
+    cols=4 if compact else 5
+    t=doc.add_table(rows=1,cols=cols);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
+    hdr=(['Cấu phần','Kết quả','Điều chỉnh','Luận cứ chính'] if compact else ['Bước','Cấu phần','Kết quả','Điều chỉnh','Luận cứ'])
     for j,x in enumerate(hdr):t.cell(0,j).text=x;_set_cell_shading(t.cell(0,j),'E8EEF7')
-    _set_repeat_table_header(t.rows[0])
+    if not compact:_set_repeat_table_header(t.rows[0])
     for r in rows:
         c=t.add_row().cells
-        for j,k in enumerate(['Bước','Cấu phần','Kết quả','Điều chỉnh','Luận cứ']):c[j].text=str(r.get(k,''))
+        if compact:
+            vals=[r.get('Cấu phần',''),r.get('Kết quả',''),r.get('Điều chỉnh',''),str(r.get('Luận cứ','')).split(';')[0][:90]]
+        else:
+            vals=[r.get(k,'') for k in ['Bước','Cấu phần','Kết quả','Điều chỉnh','Luận cứ']]
+        for j,x in enumerate(vals):c[j].text=str(x)
     for row in t.rows:
+        trPr=row._tr.get_or_add_trPr();cant=OxmlElement('w:cantSplit');trPr.append(cant)
         for cell in row.cells:
-            _set_cell_margins(cell)
-            for p in cell.paragraphs:
-                for run in p.runs:run.font.name='Lato';run.font.size=Pt(9)
+            _set_cell_margins(cell,top=30,start=45,bottom=30,end=45)
+            for pp in cell.paragraphs:
+                pp.paragraph_format.space_after=Pt(0);pp.paragraph_format.line_spacing=1.0
+                for run in pp.runs:run.font.name='Lato';run.font.size=Pt(8 if compact else 8.5)
 
 def _add_fv_table(doc,ticker):
     f=fair_value_range(ticker)
@@ -380,25 +436,30 @@ def _page_narrative(ticker,head,desc,meta,s,val,rr,report_type):
     if head in ('TÓM TẮT ĐIỀU HÀNH','KẾT LUẬN PHÂN TÍCH','CATALYST & RỦI RO ĐẦU TƯ','TÓM TẮT XẾP HẠNG'):
         base.extend([x for x in [a.get('Conclusion')] if x])
         base.extend(a.get('Interpretations',[])[:2])
-    # Add structured analytical depth so each A4 page is useful, not a filler page.
-    if report_type=='rating':
-        base.append("Đánh giá tương đối phải chỉ ra doanh nghiệp đang tốt hơn, tương đương hay yếu hơn peer ở những chỉ tiêu nào; đồng thời giải thích liệu chênh lệch đó có đủ bền vững để tác động đến notch/modifier hay không.")
-        base.append("Khi dữ liệu định lượng và nhận định định tính mâu thuẫn, báo cáo giữ cả hai lớp thông tin và yêu cầu chuyên viên giải thích nguyên nhân thay vì để engine tự động ưu tiên một phía.")
-        base.append("Điểm cần xác minh trước Hội đồng gồm: tính đầy đủ của dữ liệu, các sự kiện sau ngày BCTC, giao dịch với bên liên quan, nghĩa vụ tiềm ẩn, kế hoạch vốn/nguồn vốn và khả năng thay đổi hỗ trợ bên ngoài.")
-    else:
-        base.append("Phân tích không chỉ so sánh mức hiện tại mà còn xem xu hướng nhiều kỳ, độ lệch so với peer và khả năng mean-reversion. Một mức multiple thấp chỉ được coi là hấp dẫn nếu không phản ánh suy giảm chất lượng tài sản, lợi nhuận hoặc rủi ro cấu trúc.")
-        base.append("Giá trị hợp lý được đọc như một vùng thay vì một điểm duy nhất. Khoảng Bear-Base-Bull giúp thể hiện bất định của giả định; Strategic/M&A Value là lớp giá trị riêng khi có quyền kiểm soát, scarcity hoặc synergy có thể chứng minh.")
-        base.append("Điểm cần xác minh trước khi sử dụng kết luận gồm: chất lượng BCTC, thay đổi cấu trúc vốn, kế hoạch phát hành, giao dịch cổ đông lớn, sự kiện pháp lý, triển vọng ngành và các thông tin có thể làm thay đổi ROE/COE hoặc multiple mục tiêu.")
-    if report_type=='rating':
+    # Chỉ đưa boilerplate kiểm soát vào các phần thật sự cần thiết.
+    # Tránh lặp cùng một đoạn trên hàng chục trang của báo cáo.
+    governance_heads={'TÓM TẮT XẾP HẠNG','PHẠM VI XẾP HẠNG & DỮ LIỆU','PHƯƠNG PHÁP LUẬN ÁP DỤNG',
+                      'KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN','GIẢ ĐỊNH, HẠN CHẾ & TUYÊN BỐ SỬ DỤNG'}
+    if report_type=='rating' and head in governance_heads:
+        base.append("Đánh giá tương đối phải chỉ ra doanh nghiệp tốt hơn, tương đương hay yếu hơn peer ở chỉ tiêu trọng yếu nào; mọi notch/modifier cần có bằng chứng và audit trail.")
+        base.append("Khi dữ liệu định lượng và nhận định định tính mâu thuẫn, chuyên viên phải giải thích nguyên nhân thay vì để engine tự động ưu tiên một phía.")
+    elif report_type!='rating' and head in {'TÓM TẮT ĐIỀU HÀNH','KẾT LUẬN PHÂN TÍCH','GIẢ ĐỊNH, DỮ LIỆU & TUYÊN BỐ SỬ DỤNG'}:
+        base.append("Giá trị hợp lý được đọc như một vùng; Bear-Base-Bull thể hiện bất định của giả định, còn Strategic/M&A chỉ được ghi nhận khi quyền kiểm soát, scarcity hoặc synergy có thể chứng minh.")
+
+    if head in {'TÓM TẮT XẾP HẠNG','PHẠM VI XẾP HẠNG & DỮ LIỆU','KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN'} and report_type=='rating':
         ev=rating_evidence(ticker)
         base.append(f"Độ tin cậy XHTN tự động: {ev.get('RatingConfidence')}; độ đầy đủ dữ liệu cốt lõi {ev.get('DataQuality',{}).get('Coverage',0)*100:.0f}%.")
-    else:
+    elif head in {'TÓM TẮT ĐIỀU HÀNH','KẾT LUẬN PHÂN TÍCH'} and report_type!='rating':
         vt=triangulate(ticker)
         base.append(f"Độ tin cậy phân tích: {vt.get('AnalyticalConfidence')}; độ đầy đủ dữ liệu cốt lõi {vt.get('DataQuality',{}).get('Coverage',0)*100:.0f}%.")
-    base.append("Nhận định cuối cùng phải được đối chiếu với BCTC hợp nhất, thuyết minh, công bố thông tin và các dữ liệu định tính trước khi phát hành chính thức.")
+
+    if head in governance_heads or head in {'TÓM TẮT ĐIỀU HÀNH','KẾT LUẬN PHÂN TÍCH'}:
+        base.append("Nhận định cuối cùng phải được đối chiếu với BCTC hợp nhất, thuyết minh, công bố thông tin và dữ liệu định tính trước khi phát hành chính thức.")
     return base
 
 def _evidence_table(doc,ticker,head,report_type):
+    if head in ('SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG','PHỤ LỤC PEER & COVERAGE'):
+        return
     k,_,_=sector_kpi_table(ticker)
     if not len(k):return
     meta=get_company(ticker)
@@ -410,7 +471,6 @@ def _evidence_table(doc,ticker,head,report_type):
     t=doc.add_table(rows=1,cols=5);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
     hdr=['Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị','Số DN']
     for j,x in enumerate(hdr):t.cell(0,j).text=x;_set_cell_shading(t.cell(0,j),'E8EEF7')
-    _set_repeat_table_header(t.rows[0])
     for _,r in kk.iterrows():
         c=t.add_row().cells;m=r['Metric']
         vals=[r['Chỉ tiêu'],metric_fmt(m,r['Doanh nghiệp']),metric_fmt(m,r['Trung bình ngành']),
@@ -418,9 +478,10 @@ def _evidence_table(doc,ticker,head,report_type):
         for j,x in enumerate(vals):c[j].text=str(x)
     for row in t.rows:
         for cell in row.cells:
-            _set_cell_margins(cell)
+            _set_cell_margins(cell,top=35,start=55,bottom=35,end=55)
             for pp in cell.paragraphs:
-                for run in pp.runs:run.font.name='Lato';run.font.size=Pt(9)
+                pp.paragraph_format.space_after=Pt(0);pp.paragraph_format.line_spacing=1.0
+                for run in pp.runs:run.font.name='Lato';run.font.size=Pt(8.5)
 
 def _add_evidence_ledger(doc,ticker):
     ev=rating_evidence(ticker); rows=ev.get('EvidenceLedger',[])
@@ -558,18 +619,21 @@ def _page_peer_metrics(head,entity_type):
     return mp.get(head,[])
 
 def _add_peer_section(doc,ticker,head,meta):
+    """Body report: chỉ giữ tối đa 1 đồ thị peer đại diện cho mỗi phần.
+    Phần phụ lục vẫn chứa bộ đồ thị peer đầy đủ. Cách này tránh lặp narrative/biểu đồ
+    và giúp Word dồn nội dung liên tục thay vì để khoảng trắng lớn quanh các ảnh cao.
+    """
     metrics=_page_peer_metrics(head,meta.get('EntityType'))
-    for mm in metrics:
-        try:
-            nar=_relative_analysis(ticker,mm)
-            if nar:_add_pars(doc,[nar])
-            bio=peer_bar_chart(ticker,mm)
-            if bio:doc.add_picture(bio,width=Mm(176))
-        except Exception:pass
-    if head in ('ROE & HIỆU QUẢ VỐN','KHẢ NĂNG SINH LỢI','SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG'):
+    if not metrics:return
+    mm=metrics[0]
+    try:
+        bio=peer_bar_chart(ticker,mm)
+        if bio:doc.add_picture(bio,width=Mm(160))
+    except Exception:pass
+    if head in ('SO SÁNH PEER','SO SÁNH NHÓM TƯƠNG ĐỒNG'):
         try:
             bio=peer_scatter_chart(ticker,'ROE','PB')
-            if bio:doc.add_picture(bio,width=Mm(176))
+            if bio:doc.add_picture(bio,width=Mm(160))
         except Exception:pass
 
 
@@ -660,122 +724,680 @@ def _add_methodology_kpi_matrix(doc,ticker):
                   _fmt_method_value(m,r['Trung vị']),str(int(r['Số DN'])),r['Trạng thái dữ liệu']]
             for j,x in enumerate(vals):c[j].text=str(x)
 
+
+GREEN='4F9E1E'
+LIGHT_GREEN='E6F3D8'
+DARK_GREEN='2F6F12'
+GREY='F2F2F2'
+
+
+def _set_cell_border(cell, **edges):
+    tcPr=cell._tc.get_or_add_tcPr(); borders=tcPr.first_child_found_in('w:tcBorders')
+    if borders is None:
+        borders=OxmlElement('w:tcBorders'); tcPr.append(borders)
+    for edge in ('top','left','bottom','right','insideH','insideV'):
+        if edge not in edges: continue
+        tag='w:'+edge; el=borders.find(qn(tag))
+        if el is None: el=OxmlElement(tag); borders.append(el)
+        for k,v in edges[edge].items(): el.set(qn('w:'+k),str(v))
+
+
+def _section_band(doc,text):
+    t=doc.add_table(rows=1,cols=1); t.alignment=WD_TABLE_ALIGNMENT.CENTER
+    c=t.cell(0,0); _set_cell_shading(c,GREEN); _set_cell_margins(c,top=60,start=90,bottom=60,end=90)
+    p=c.paragraphs[0]; p.paragraph_format.space_after=Pt(0); p.paragraph_format.keep_with_next=True
+    r=p.add_run(str(text).upper()); r.bold=True; r.font.name='Lato'; r.font.size=Pt(12); r.font.color.rgb=None
+    # white text through OOXML for robust LO rendering
+    color=OxmlElement('w:color'); color.set(qn('w:val'),'FFFFFF'); r._r.get_or_add_rPr().append(color)
+    doc.add_paragraph().paragraph_format.space_after=Pt(0)
+
+
+def _subhead(doc,text):
+    p=doc.add_paragraph(); p.paragraph_format.space_before=Pt(5); p.paragraph_format.space_after=Pt(2); p.paragraph_format.keep_with_next=True
+    r=p.add_run(text); r.bold=True; r.font.name='Lato'; r.font.size=Pt(11); color=OxmlElement('w:color'); color.set(qn('w:val'),DARK_GREEN); r._r.get_or_add_rPr().append(color)
+    return p
+
+
+
+def _intel_body(doc, text):
+    """Consistent public-intelligence body style: same Lato face/size/spacing as analytical narrative."""
+    p=doc.add_paragraph()
+    p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.line_spacing=1.05
+    p.paragraph_format.space_after=Pt(3)
+    r=p.add_run(str(text))
+    r.font.name='Lato'; r.font.size=Pt(9.2)
+    return p
+
+def _intel_source(doc, source, asof, url=None):
+    """Compact source note; keep URL in data/audit trail instead of printing a long raw URL in the report."""
+    p=doc.add_paragraph()
+    p.paragraph_format.space_before=Pt(0)
+    p.paragraph_format.space_after=Pt(4)
+    r=p.add_run(f"Nguồn: {source}; cập nhật {asof}.")
+    r.font.name='Lato'; r.font.size=Pt(7.4); r.font.italic=True
+    return p
+
+def _compact_pars(doc,pars,max_pars=4):
+    seen=set(); n=0
+    for txt in pars:
+        key=' '.join(str(txt).split()).strip()
+        if not key or key.lower() in seen: continue
+        seen.add(key.lower()); n+=1
+        if n>max_pars: break
+        p=doc.add_paragraph(key); p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.paragraph_format.line_spacing=1.08; p.paragraph_format.space_after=Pt(3); p.paragraph_format.widow_control=True
+
+
+def _add_two_charts(doc,items,width_mm=76):
+    valid=[]
+    for label,bio in items:
+        if bio: valid.append((label,bio))
+    if not valid:return
+    tbl=doc.add_table(rows=1,cols=min(2,len(valid)));tbl.alignment=WD_TABLE_ALIGNMENT.CENTER
+    for j,(label,bio) in enumerate(valid[:2]):
+        c=tbl.cell(0,j); _set_cell_margins(c,top=25,start=25,bottom=25,end=25)
+        p=c.paragraphs[0];p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_after=Pt(1)
+        r=p.add_run(label);r.bold=True;r.font.name='Lato';r.font.size=Pt(8.5)
+        q=c.add_paragraph();q.alignment=WD_ALIGN_PARAGRAPH.CENTER;q.paragraph_format.space_after=Pt(0)
+        q.add_run().add_picture(bio,width=Mm(width_mm))
+        _set_cell_border(c,bottom={'val':'single','sz':'4','color':'D9D9D9'})
+
+
+def _cover_sample(doc,ticker,meta,report_type):
+    # Dense, simple cover inspired by supplied reports: no metadata table that consumes space.
+    for _ in range(3): doc.add_paragraph()
+    t=doc.add_table(rows=1,cols=1);c=t.cell(0,0);_set_cell_shading(c,GREEN);_set_cell_margins(c,top=520,start=220,bottom=520,end=220)
+    p=c.paragraphs[0];p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+    title='BÁO CÁO XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH CỔ PHIẾU'
+    r=p.add_run(title+'\n');r.bold=True;r.font.name='Lato';r.font.size=Pt(23)
+    col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');r._r.get_or_add_rPr().append(col)
+    r=p.add_run(company_display_name(meta,ticker));r.bold=True;r.font.name='Lato';r.font.size=Pt(18)
+    col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');r._r.get_or_add_rPr().append(col)
+    p=doc.add_paragraph();p.paragraph_format.space_before=Pt(16);p.alignment=WD_ALIGN_PARAGRAPH.LEFT
+    p.paragraph_format.left_indent=Mm(0);p.paragraph_format.right_indent=Mm(0)
+    for i,(label,value) in enumerate([('NGÀNH',meta.get('Sector')),('QUỐC GIA','VIỆT NAM')]):
+        if i: p.add_run('\n')
+        r=p.add_run(f"{label}: ");r.font.name='Lato';r.font.size=Pt(11);r.bold=True
+        r=p.add_run(str(value));r.font.name='Lato';r.font.size=Pt(11);r.bold=True
+    doc.add_page_break()
+
+
+def _rating_summary_page(doc,ticker,meta,rr):
+    # Header band + two-column rating card / thesis, matching structure of KLB/VDS samples.
+    t=doc.add_table(rows=1,cols=1);c=t.cell(0,0);_set_cell_shading(c,GREEN);_set_cell_margins(c,top=100,start=110,bottom=100,end=110)
+    p=c.paragraphs[0];r=p.add_run(company_display_name(meta,ticker).upper());r.bold=True;r.font.name='Lato';r.font.size=Pt(16)
+    col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');r._r.get_or_add_rPr().append(col)
+    p=c.add_paragraph(f"NGÀNH: {meta.get('Sector')}    |    PHƯƠNG PHÁP: {rr.get('MethodologyName',meta.get('Methodology','N/A'))}");p.paragraph_format.space_after=Pt(0)
+    for run in p.runs:
+        run.font.name='Lato';run.font.size=Pt(9);col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');run._r.get_or_add_rPr().append(col)
+    doc.add_paragraph().paragraph_format.space_after=Pt(0)
+    tbl=doc.add_table(rows=1,cols=2);tbl.autofit=False;tbl.alignment=WD_TABLE_ALIGNMENT.CENTER
+    left,right=tbl.cell(0,0),tbl.cell(0,1);left.width=Mm(57);right.width=Mm(112)
+    _set_cell_shading(left,LIGHT_GREEN);_set_cell_margins(left,top=80,start=80,bottom=80,end=80);_set_cell_margins(right,top=30,start=100,bottom=30,end=70)
+    p=left.paragraphs[0];p.alignment=WD_ALIGN_PARAGRAPH.CENTER;r=p.add_run('KẾT QUẢ XẾP HẠNG');r.bold=True;r.font.size=Pt(10);r.font.name='Lato'
+    rows=[('Bậc xếp hạng',rr.get('ICR','N/A')),('Triển vọng',rr.get('Outlook','Ổn định')),('Anchor',rr.get('Anchor','N/A')),('SACP / SCA',rr.get('SACP',rr.get('SCA','N/A'))),('Hỗ trợ bên ngoài',rr.get('ExternalSupport','Trung lập')),('Loại hình',entity_type_vi(meta.get('EntityType'))),('Benchmark',industry_label(ticker))]
+    for a,b in rows:
+        p=left.add_paragraph();p.paragraph_format.space_after=Pt(1);p.paragraph_format.line_spacing=1.0
+        r=p.add_run(a+': ');r.bold=True;r.font.name='Lato';r.font.size=Pt(8.5)
+        r=p.add_run(str(b));r.font.name='Lato';r.font.size=Pt(8.5)
+    p=right.paragraphs[0];r=p.add_run('LUẬN ĐIỂM XẾP HẠNG');r.bold=True;r.font.name='Lato';r.font.size=Pt(11)
+    a=intelligent_analyze(ticker)
+    thesis=[a.get('Conclusion','')]
+    if a.get('Strengths'): thesis.append('Điểm mạnh: '+' '.join(a['Strengths'][:2]))
+    if a.get('Risks'): thesis.append('Điểm cần theo dõi: '+' '.join(a['Risks'][:2]))
+    thesis.append(f"Kết quả mô hình hiện tại là {rr.get('ICR','N/A')}; đánh giá cuối cùng cần đối chiếu dữ liệu nguồn, peer và các yếu tố định tính trọng yếu.")
+    for txt in thesis:
+        if txt:
+            p=right.add_paragraph(str(txt));p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.line_spacing=1.05;p.paragraph_format.space_after=Pt(4)
+            for run in p.runs:run.font.name='Lato';run.font.size=Pt(9.5)
+    _set_cell_border(left,right={'val':'single','sz':'6','color':'FFFFFF'})
+
+
+def _analysis_summary_page(doc,ticker,meta,s,val):
+    _section_band(doc,'TÓM TẮT')
+    tbl=doc.add_table(rows=1,cols=2);tbl.autofit=False;tbl.alignment=WD_TABLE_ALIGNMENT.CENTER
+    left,right=tbl.cell(0,0),tbl.cell(0,1);left.width=Mm(58);right.width=Mm(112)
+    _set_cell_shading(left,GREY);_set_cell_margins(left,top=60,start=70,bottom=60,end=70);_set_cell_margins(right,top=20,start=100,bottom=20,end=50)
+    basics=[('Mã',ticker),('P/B',mult(s.get('PB'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA'))),('Giá cơ sở',price(val.get('FairValue',val.get('BaseValue'))))]
+    p=left.paragraphs[0];r=p.add_run('THÔNG TIN CƠ BẢN');r.bold=True;r.font.name='Lato';r.font.size=Pt(10)
+    for a,b in basics:
+        p=left.add_paragraph();p.paragraph_format.space_after=Pt(1);r=p.add_run(a+': ');r.bold=True;r.font.size=Pt(8.5);r.font.name='Lato';r=p.add_run(str(b));r.font.size=Pt(8.5);r.font.name='Lato'
+    p=right.paragraphs[0];r=p.add_run('LUẬN ĐIỂM ĐẦU TƯ');r.bold=True;r.font.name='Lato';r.font.size=Pt(11)
+    _compact_pars_cell=right
+    a=intelligent_analyze(ticker)
+    texts=[a.get('Conclusion','')]
+    if a.get('Strengths'):texts.append('Luận điểm tích cực: '+' '.join(a['Strengths'][:3]))
+    if a.get('Risks'):texts.append('Rủi ro chính: '+' '.join(a['Risks'][:3]))
+    fv=fair_value_range(ticker);texts.append(f"Vùng giá: Bear {price(fv.get('Bear'))}; Base {price(fv.get('Base'))}; Bull {price(fv.get('Bull'))}.")
+    for txt in texts:
+        if txt:
+            p=right.add_paragraph(str(txt));p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.line_spacing=1.05;p.paragraph_format.space_after=Pt(4)
+            for run in p.runs:run.font.name='Lato';run.font.size=Pt(9.5)
+
+
+def _rating_groups(entity_type):
+    return [
+      ('NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG',['HỒ SƠ KINH DOANH','KHẢ NĂNG SINH LỢI','CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN','VỐN & ĐÒN BẨY','THANH KHOẢN']),
+      ('THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH',['PHẠM VI XẾP HẠNG & DỮ LIỆU','QUY MÔ & TĂNG TRƯỞNG']),
+      ('RỦI RO VĨ MÔ VÀ NGÀNH',['RỦI RO VĨ MÔ','RỦI RO NGÀNH']),
+      ('HỒ SƠ KINH DOANH',['HỒ SƠ KINH DOANH','QUY MÔ & TĂNG TRƯỞNG','SO SÁNH NHÓM TƯƠNG ĐỒNG']),
+      ('HỒ SƠ TÀI CHÍNH',['KHẢ NĂNG SINH LỢI','CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN','VỐN & ĐÒN BẨY','NGUỒN VỐN','THANH KHOẢN','DÒNG TIỀN & KHẢ NĂNG TRẢ NỢ']),
+      ('QUẢN TRỊ VÀ QUẢN LÝ',['QUẢN TRỊ & QUẢN LÝ']),
+      ('KHUNG XẾP HẠNG VÀ KẾT QUẢ',['PHƯƠNG PHÁP LUẬN ÁP DỤNG','ANCHOR','ĐIỀU CHỈNH NỘI SINH / MODIFIERS','SACP / SCA','HỖ TRỢ BÊN NGOÀI','ICR','ĐỘ NHẠY XẾP HẠNG','STRESS TEST','EARLY WARNING','KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN']),
+    ]
+
+
+def _analysis_groups(entity_type):
+    return [
+      ('I. TỔNG QUAN',['HỒ SƠ DOANH NGHIỆP','VỊ THẾ CẠNH TRANH','MÔ HÌNH KINH DOANH']),
+      ('II. HOẠT ĐỘNG KINH DOANH',['QUY MÔ & TĂNG TRƯỞNG','ROE & HIỆU QUẢ VỐN','ROA & HIỆU QUẢ TÀI SẢN','CHẤT LƯỢNG LỢI NHUẬN']),
+      ('III. TÌNH HÌNH TÀI CHÍNH',['CHẤT LƯỢNG TÀI SẢN','VỐN & ĐÒN BẨY','NGUỒN VỐN & THANH KHOẢN','DÒNG TIỀN','SO SÁNH PEER']),
+      ('IV. LUẬN ĐIỂM ĐẦU TƯ',['CATALYST & RỦI RO ĐẦU TƯ','M&A - GIÁ TRỊ ĐỘC LẬP','M&A - QUYỀN KIỂM SOÁT & SCARCITY','M&A - CỘNG HƯỞNG']),
+      ('V. RỦI RO',['STRESS TEST','ĐỘ NHẠY ĐỊNH GIÁ']),
+      ('VI. DỰ PHÓNG KẾT QUẢ KINH DOANH, ĐỊNH GIÁ & KHUYẾN NGHỊ',['ĐỊNH GIÁ TƯƠNG ĐỐI','ĐỊNH GIÁ NỘI TẠI / CƠ SỞ','BEAR - BASE - BULL','KẾT LUẬN PHÂN TÍCH']),
+      ('VII. TRIỂN VỌNG NGÀNH',['BỐI CẢNH VĨ MÔ','TRIỂN VỌNG NGÀNH']),
+    ]
+
+
+def _subsection_content(doc,ticker,sub,meta,s,val,rr,report_type):
+    desc=dict(professional_page_plan(report_type)).get(sub,'')
+    pars=_page_narrative(ticker,sub,desc,meta,s,val,rr,report_type)
+    pars.extend(_decision_narrative(ticker,sub,meta,s,val,report_type))
+    _compact_pars(doc,pars,max_pars=4 if sub not in ('RỦI RO VĨ MÔ','RỦI RO NGÀNH') else 3)
+    if report_type=='analysis' and sub=='BEAR - BASE - BULL': _add_fv_table(doc,ticker)
+    elif report_type=='analysis' and sub=='ĐỊNH GIÁ NỘI TẠI / CƠ SỞ': _add_triangulation_table(doc,ticker)
+    elif report_type=='rating' and sub in ('ANCHOR','ĐIỀU CHỈNH NỘI SINH / MODIFIERS','SACP / SCA','ICR'):
+        filters={'ANCHOR':['BICRA / Anchor'],'ĐIỀU CHỈNH NỘI SINH / MODIFIERS':['Hồ sơ Kinh doanh','Vốn và Lợi nhuận','Vị thế Rủi ro','Huy động vốn và Thanh khoản'],'SACP / SCA':['SACP','SCA'],'ICR':['Hỗ trợ bên ngoài','ICR']}
+        _add_waterfall(doc,ticker,filters.get(sub),compact=True)
+    else: _evidence_table(doc,ticker,sub,report_type)
+
+    metrics=_page_peer_metrics(sub,meta.get('EntityType'))
+    imgs=[]
+    # historical + peer are paired horizontally; this is the main whitespace fix.
+    if metrics:
+        m=metrics[0]
+        try: imgs.append((f"Xu hướng {VI_METRIC.get(m,METH_LABELS.get(m,m))}",chart_metric(ticker,m)))
+        except: pass
+        try: imgs.append((f"So sánh peer - {VI_METRIC.get(m,METH_LABELS.get(m,m))}",peer_bar_chart(ticker,m,top_n=10)))
+        except: pass
+    _add_two_charts(doc,imgs,width_mm=76)
+
+
+def _compact_appendix(doc,ticker,report_type):
+    _section_band(doc,'PHỤ LỤC')
+    _subhead(doc,'Ma trận chỉ tiêu theo phương pháp')
+    z=methodology_kpi_table(ticker,include_missing=False)
+    if not z.empty:
+        # one compact table rather than many separate tables/section headings
+        tb=doc.add_table(rows=1,cols=5);tb.style='Table Grid';tb.alignment=WD_TABLE_ALIGNMENT.CENTER
+        hdr=['Nhóm','Chỉ tiêu','Doanh nghiệp','TB ngành','Trung vị']
+        for j,x in enumerate(hdr):tb.rows[0].cells[j].text=x;_set_cell_shading(tb.rows[0].cells[j],LIGHT_GREEN)
+        _set_repeat_table_header(tb.rows[0])
+        for _,r in z.iterrows():
+            c=tb.add_row().cells;m=r['Metric'];vals=[r['Nhóm phân tích'],r['Chỉ tiêu'],_fmt_method_value(m,r['Doanh nghiệp']),_fmt_method_value(m,r['TB ngành']),_fmt_method_value(m,r['Trung vị'])]
+            for j,x in enumerate(vals):c[j].text=str(x)
+        for row in tb.rows:
+            trPr=row._tr.get_or_add_trPr();cant=OxmlElement('w:cantSplit');trPr.append(cant)
+            for c in row.cells:
+                _set_cell_margins(c,top=22,start=35,bottom=22,end=35)
+                for p in c.paragraphs:
+                    p.paragraph_format.space_after=Pt(0);p.paragraph_format.line_spacing=1.0
+                    for r in p.runs:r.font.name='Lato';r.font.size=Pt(7.5)
+    if report_type=='rating':
+        _subhead(doc,'Waterfall và audit trail')
+        _add_waterfall(doc,ticker,None,compact=False)
+    _subhead(doc,'Đồ thị so sánh peer chuyên sâu')
+    peer_metrics=metric_list(ticker,available_only=True)
+    chartable={'TotalAssets','GrossLoans','CustomerDeposits','Equity','Revenue','ROE','ROA','NIM','NPL','CAR','CIR','LDR','CASA','PB','PE','DebtEquity','CurrentRatio','AvailableCapitalRatio','GrossMargin','NetMargin','DebtEBITDA','CFO_Debt','AssetEquity','CreditCostProxy','FundingGapAssets','CashAssets','WorkingCapitalAssets','NetDebtEquity','NetDebtEBITDA','EquityAssetsCorp','AssetTurnover','FOCFMargin','CashDebt','DebtAssets','FOCF_Debt','CFO_Margin','CapexRevenue'}
+    charts=[]
+    for mm in [m for m in peer_metrics if m in chartable][:12]:
+        try:
+            b=peer_bar_chart(ticker,mm,VI_METRIC.get(mm,METH_LABELS.get(mm,mm)),top_n=8)
+            if b:charts.append((VI_METRIC.get(mm,METH_LABELS.get(mm,mm)),b))
+        except:pass
+    # Flow chart pairs naturally. Do not impose atlas page breaks: Word uses every remaining vertical space.
+    for k in range(0,len(charts),2):
+        batch=charts[k:k+2];tbl=doc.add_table(rows=1,cols=2);tbl.alignment=WD_TABLE_ALIGNMENT.CENTER
+        for j,(label,bio) in enumerate(batch):
+            c=tbl.cell(0,j);_set_cell_margins(c,top=15,start=20,bottom=15,end=20)
+            p=c.paragraphs[0];p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_after=Pt(0)
+            r=p.add_run(label);r.bold=True;r.font.size=Pt(7.5);r.font.name='Lato'
+            q=c.add_paragraph();q.alignment=WD_ALIGN_PARAGRAPH.CENTER;q.paragraph_format.space_after=Pt(0);q.add_run().add_picture(bio,width=Mm(76))
+        if len(batch)==1:
+            tbl.cell(0,1).text=''
+
+
 def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     ticker=str(ticker).upper();meta=get_company(ticker);s=get_snapshot(ticker);val=valuation(ticker,s)
     rr=rating_result or (rate_company(ticker) if report_type=='rating' else {})
-    plan=professional_page_plan(report_type)
-    doc=Document();_style_doc(doc);_add_title(doc,ticker,meta,report_type);_add_toc(doc,plan)
+    doc=Document();_style_doc(doc, report_type)
+    # Match supplied report density: 10.5pt body, wider text area, green section bands.
+    sec=doc.sections[0];sec.top_margin=Mm(13);sec.bottom_margin=Mm(13);sec.left_margin=Mm(14);sec.right_margin=Mm(14)
+    n=doc.styles['Normal'];n.font.size=Pt(10.2);n.paragraph_format.line_spacing=1.06;n.paragraph_format.space_after=Pt(3)
+    _cover_sample(doc,ticker,meta,report_type)
+    if report_type=='rating':
+        _rating_summary_page(doc,ticker,meta,rr)
+        # KLB/VDS samples flow directly from the rating summary into rating drivers; no sparse TOC page.
+        groups=_rating_groups(meta.get('EntityType'))
+    else:
+        _analysis_summary_page(doc,ticker,meta,s,val)
+        groups=_analysis_groups(meta.get('EntityType'))
+        # ASEANSC-style compact TOC placed in the remaining space of the summary page when possible.
+        _section_band(doc,'MỤC LỤC')
+        for i,(group,_) in enumerate(groups,1):
+            p=doc.add_paragraph();p.paragraph_format.space_after=Pt(1);r=p.add_run(group);r.bold=True;r.font.name='Lato';r.font.size=Pt(9.5)
 
-    chart_for={
-        'QUY MÔ & TĂNG TRƯỞNG':'TotalAssets' if meta.get('EntityType')=='BANK' else 'Revenue',
-        'ROE & HIỆU QUẢ VỐN':'ROE','ROA & HIỆU QUẢ TÀI SẢN':'ROA',
-        'KHẢ NĂNG SINH LỢI':'ROE',
-        'CHẤT LƯỢNG TÀI SẢN':'NPL' if meta.get('EntityType')=='BANK' else 'ROA',
-        'CHẤT LƯỢNG TÀI SẢN / RỦI RO TÀI SẢN':'NPL' if meta.get('EntityType')=='BANK' else 'ROA',
-        'VỐN & ĐÒN BẨY':'CAR' if meta.get('EntityType')=='BANK' else 'DebtEquity',
-        'NGUỒN VỐN & THANH KHOẢN':'CASA' if meta.get('EntityType')=='BANK' else 'CurrentRatio',
-        'THANH KHOẢN':'CASA' if meta.get('EntityType')=='BANK' else 'CurrentRatio'
-    }
+    for group,subs in groups:
+        _section_band(doc,group)
+        for sub in subs:
+            _subhead(doc,sub)
+            _subsection_content(doc,ticker,sub,meta,s,val,rr,report_type)
 
-    for i,(head,desc) in enumerate(plan,1):
-        doc.add_heading(f'{i}. {head}',1)
-        pars=_page_narrative(ticker,head,desc,meta,s,val,rr,report_type)
-        # Analyst layer: What? Why? Peer? So what?
-        pars.extend(_decision_narrative(ticker,head,meta,s,val,report_type))
-        # Add explicit evidence-led relative-analysis paragraphs.
-        for mm in _page_peer_metrics(head,meta.get('EntityType')):
-            try:
-                x=_relative_analysis(ticker,mm)
-                if x:pars.append(x)
-            except Exception:pass
-        _add_pars(doc,pars)
+    _compact_appendix(doc,ticker,report_type)
 
-        if head in chart_for:
-            try:doc.add_picture(chart_metric(ticker,chart_for[head]),width=Mm(176))
-            except Exception:pass
-        if report_type=='analysis' and head=='BEAR - BASE - BULL':
-            _add_fv_table(doc,ticker)
-        elif report_type=='analysis' and head=='ĐỊNH GIÁ NỘI TẠI / CƠ SỞ':
-            _add_triangulation_table(doc,ticker)
-        elif report_type=='rating' and head in ('ANCHOR','ĐIỀU CHỈNH NỘI SINH / MODIFIERS','SACP / SCA','ICR','PHỤ LỤC WATERFALL'):
-            _add_waterfall(doc,ticker)
-        elif report_type=='rating' and head=='KẾT LUẬN TRÌNH HỘI ĐỒNG XHTN':
-            _add_evidence_ledger(doc,ticker)
-        else:
-            _evidence_table(doc,ticker,head,report_type)
-
-        _add_peer_section(doc,ticker,head,meta)
-
-    # Comprehensive methodology KPI appendix
-    doc.add_page_break()
-    _add_methodology_kpi_matrix(doc,ticker)
-
-    # Dedicated peer appendix
-    doc.add_page_break();doc.add_heading('PHỤ LỤC ĐỒ THỊ SO SÁNH PEER CHUYÊN SÂU',1)
-    peer_metrics=metric_list(ticker,available_only=True)
-    # Keep charts focused on comparable ratios/scale metrics; N/A metrics remain visible in methodology matrix.
-    chartable={'TotalAssets','GrossLoans','CustomerDeposits','Equity','Revenue','ROE','ROA','NIM','NPL','CAR','CIR','LDR','CASA',
-               'PB','PE','DebtEquity','CurrentRatio','AvailableCapitalRatio','GrossMargin','NetMargin','DebtEBITDA','CFO_Debt'}
-    peer_metrics=[m for m in peer_metrics if m in chartable]
-    for mm in peer_metrics:
-        try:
-            doc.add_heading(VI_METRIC.get(mm,mm),2)
-            nar=_relative_analysis(ticker,mm)
-            if nar:_add_pars(doc,[nar])
-            bio=peer_bar_chart(ticker,mm)
-            if bio:doc.add_picture(bio,width=Mm(176))
-        except Exception:pass
-
-    # Compact A4 pagination: flow sections continuously and prevent orphan headings.
-    for pp in doc.paragraphs:
-        pf=pp.paragraph_format
-        if pp.style and str(pp.style.name).startswith('Heading'):
-            pf.keep_with_next=True
-            pf.space_before=Pt(6)
-            pf.space_after=Pt(3)
-        else:
-            pf.widow_control=True
-            if pf.space_after is None or pf.space_after.pt>4: pf.space_after=Pt(2)
-
+    # Final pagination discipline: no forced page breaks between normal sections; prevent orphan headings/table rows.
+    for p in doc.paragraphs:
+        if p.style and str(p.style.name).startswith('Heading'): p.paragraph_format.keep_with_next=True
+        p.paragraph_format.widow_control=True
     for table in doc.tables:
         for row in table.rows:
+            trPr=row._tr.get_or_add_trPr()
+            if trPr.find(qn('w:cantSplit')) is None: trPr.append(OxmlElement('w:cantSplit'))
             for cell in row.cells:
-                for pp in cell.paragraphs:
-                    for run in pp.runs:
+                for p in cell.paragraphs:
+                    p.paragraph_format.widow_control=True
+                    for run in p.runs:
                         run.font.name='Lato'
-                        if run.font.size is None:run.font.size=Pt(10)
+                        if run.font.size is None:run.font.size=Pt(9)
     bio=BytesIO();doc.save(bio);return bio.getvalue()
 
 def generate_pdf(ticker,report_type='analysis',rating_result=None,mna=None):
-    # Single-source-of-truth: build the DOCX first. Local/app callers may convert with LibreOffice.
-    # Kept for backward compatibility; uses reportlab fallback only if conversion is unavailable.
+    """PDF is converted from the same DOCX source so DOCX/PDF layout stays identical.
+    Falls back to a minimal ReportLab PDF only when LibreOffice is unavailable.
+    """
+    import tempfile, subprocess, shutil, os
+    docx_bytes=generate_docx(ticker,report_type,rating_result,mna)
+    soffice=shutil.which('libreoffice') or shutil.which('soffice')
+    if soffice:
+        with tempfile.TemporaryDirectory() as td:
+            inp=Path(td)/'report.docx'; inp.write_bytes(docx_bytes)
+            env=os.environ.copy(); env['HOME']=td
+            cmd=[soffice,'--headless','--convert-to','pdf','--outdir',td,str(inp)]
+            try:
+                subprocess.run(cmd,check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=90,env=env)
+                pdf=Path(td)/'report.pdf'
+                if pdf.exists(): return pdf.read_bytes()
+            except Exception: pass
+    # Minimal fallback only; normal local/cloud deployment should install LibreOffice via packages.txt.
     from reportlab.lib.pagesizes import A4
-    from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Table,TableStyle,PageBreak
-    from reportlab.lib.styles import ParagraphStyle
-    from reportlab.lib import colors
-    from reportlab.pdfbase import pdfmetrics
-    from reportlab.pdfbase.ttfonts import TTFont
+    from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer
+    from reportlab.lib.styles import getSampleStyleSheet
+    bio=BytesIO();pdf=SimpleDocTemplate(bio,pagesize=A4);styles=getSampleStyleSheet()
+    meta=get_company(str(ticker).upper())
+    story=[Paragraph('BÁO CÁO XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH CỔ PHIẾU',styles['Title']),Spacer(1,12),Paragraph(f"{str(ticker).upper()} - {meta.get('CompanyName')}",styles['Heading1']),Paragraph('PDF fallback: vui lòng cài LibreOffice để PDF giữ nguyên format DOCX.',styles['BodyText'])]
+    pdf.build(story);return bio.getvalue()
+
+
+# ===== V8.40 SAMPLE-NATIVE REPORT ENGINE =====
+# Goal: mirror the supplied analyst/rating reports: evidence first, narrative + chart/table integrated,
+# methodology moved to the back, and major-section order follows the reference reports.
+
+def _v840_value(metric, v):
+    x=num(v)
+    if x is None:return 'N/A'
+    if metric in PCT or metric in METH_PCT:return pct(x)
+    if metric in MULT or metric in METH_MULT:return mult(x)
+    if abs(x)>=1e12:return (f"{x/1e12:,.1f} nghìn tỷ").replace(',','X').replace('.',',').replace('X','.')
+    if abs(x)>=1e9:return (f"{x/1e9:,.0f} tỷ").replace(',','X').replace('.',',').replace('X','.')
+    if abs(x)>=1e6:return (f"{x/1e6:,.1f} triệu").replace(',','X').replace('.',',').replace('X','.')
+    return vi(x,2)
+
+def _v840_metric_row(ticker,metric):
+    k,_,_=sector_kpi_table(ticker)
+    if k is None or not len(k): return None
+    r=k[k.Metric.astype(str).eq(metric)]
+    if not len(r):return None
+    return r.iloc[-1]
+
+def _v840_fact(ticker,metric):
+    r=_v840_metric_row(ticker,metric)
+    if r is None:return ''
+    c=num(r.get('Doanh nghiệp')); m=num(r.get('Trung bình ngành')); med=num(r.get('Trung vị ngành')); n=int(r.get('Số DN có dữ liệu',0) or 0)
+    if c is None:return ''
+    label=str(r.get('Chỉ tiêu') or VI_METRIC.get(metric,METH_LABELS.get(metric,metric)))
+    txt=f"{label} đạt {_v840_value(metric,c)}"
+    if m is not None:
+        if metric in {'NPL','CIR','DebtEquity','DebtEBITDA','NetDebtEBITDA','CreditCostProxy'}:
+            better='thấp hơn' if c<m else 'cao hơn'
+        else: better='cao hơn' if c>m else 'thấp hơn'
+        txt+=f", {better} mức bình quân peer {_v840_value(metric,m)}"
+    if med is not None and m is not None and abs(m-med)/(abs(m)+1e-9)>0.08:
+        txt+=f" (trung vị {_v840_value(metric,med)})"
+    if n:txt+=f"; mẫu so sánh {n} doanh nghiệp"
+    return txt+'.'
+
+def _v840_trend_fact(ticker,metric):
+    h=entity_history(ticker)
+    if h is None or not len(h):return ''
+    z=h[h.Metric.astype(str).eq(metric)].copy()
+    if not len(z):return ''
+    z['Date']=z.Period.map(_period_date);z['Value']=pd.to_numeric(z.Value,errors='coerce')
+    z=z.dropna(subset=['Date','Value']).sort_values('Date').drop_duplicates('Date',keep='last')
+    if len(z)<2:return ''
+    a=float(z.iloc[-1].Value);b=float(z.iloc[-2].Value)
+    label=VI_METRIC.get(metric,METH_LABELS.get(metric,metric));period=str(z.iloc[-1].Period)
+    if b==0:return ''
+    if metric in PCT or metric in METH_PCT:
+        ch=(a-b)*100; direction='tăng' if ch>0 else 'giảm'
+        return f"So với kỳ liền trước, {label} {direction} {abs(ch):.1f} điểm % lên {_v840_value(metric,a)} tại {period}.".replace('.',',',1) if False else f"So với kỳ liền trước, {label} {direction} {str(round(abs(ch),1)).replace('.',',')} điểm % lên {_v840_value(metric,a)} tại {period}."
+    ch=a/b-1;direction='tăng' if ch>0 else 'giảm'
+    return f"So với kỳ liền trước, {label} {direction} {str(round(abs(ch)*100,1)).replace('.',',')}% lên {_v840_value(metric,a)} tại {period}."
+
+def _v840_cross_insights(ticker,metrics):
+    vals={}
+    for m in metrics:
+        r=_v840_metric_row(ticker,m)
+        if r is not None: vals[m]=num(r.get('Doanh nghiệp'))
+    out=[]
+    if all(vals.get(k) is not None for k in ['ROA','AssetEquity','ROE']):
+        implied=vals['ROA']*vals['AssetEquity']
+        out.append(f"ROE có thể được đọc cùng ROA và đòn bẩy tài sản: ROA {_v840_value('ROA',vals['ROA'])} × Tổng tài sản/VCSH {_v840_value('AssetEquity',vals['AssetEquity'])} hàm ý ROE xấp xỉ {_v840_value('ROE',implied)}, so với ROE ghi nhận {_v840_value('ROE',vals['ROE'])}.")
+    if all(vals.get(k) is not None for k in ['NIM','CASA','LDR']):
+        out.append(f"NIM {_v840_value('NIM',vals['NIM'])} cần được đọc cùng CASA {_v840_value('CASA',vals['CASA'])} và LDR {_v840_value('LDR',vals['LDR'])}; CASA cao hỗ trợ chi phí vốn, trong khi LDR cao làm giảm dư địa thanh khoản và có thể gây áp lực huy động.")
+    if all(vals.get(k) is not None for k in ['NPL','CAR']):
+        out.append(f"NPL {_v840_value('NPL',vals['NPL'])} và CAR {_v840_value('CAR',vals['CAR'])} phản ánh đồng thời rủi ro tổn thất kỳ vọng và năng lực hấp thụ lỗ; kết hợp hai chỉ tiêu này đáng tin cậy hơn việc đánh giá riêng từng tỷ lệ.")
+    if all(vals.get(k) is not None for k in ['DebtEquity','CurrentRatio']):
+        out.append(f"Đòn bẩy {_v840_value('DebtEquity',vals['DebtEquity'])} đi cùng hệ số thanh toán hiện hành {_v840_value('CurrentRatio',vals['CurrentRatio'])}; mức đòn bẩy chỉ bền vững khi thanh khoản và dòng tiền đủ để đáp ứng nghĩa vụ ngắn hạn.")
+    return out
+
+def _v840_analysis_text(ticker,metrics,context=''):
+    facts=[]
+    for m in metrics:
+        f=_v840_fact(ticker,m)
+        if f:facts.append(f)
+    trends=[]
+    for m in metrics[:2]:
+        f=_v840_trend_fact(ticker,m)
+        if f:trends.append(f)
+    out=[]
+    if facts: out.append(' '.join(facts[:5]))
+    if trends: out.append(' '.join(trends[:3]))
+    out.extend(_v840_cross_insights(ticker,metrics)[:2])
+    if context: out.append(context)
+    return out
+
+def _v840_mini_table(cell,ticker,metrics):
+    rows=[]
+    for m in metrics:
+        r=_v840_metric_row(ticker,m)
+        if r is not None:rows.append((m,r))
+    if not rows:return
+    t=cell.add_table(rows=1,cols=4);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
+    for j,x in enumerate(['Chỉ tiêu','DN','TB peer','Trung vị']):
+        t.cell(0,j).text=x;_set_cell_shading(t.cell(0,j),LIGHT_GREEN)
+    for m,r in rows:
+        c=t.add_row().cells
+        vals=[str(r.get('Chỉ tiêu')), _v840_value(m,r.get('Doanh nghiệp')),_v840_value(m,r.get('Trung bình ngành')),_v840_value(m,r.get('Trung vị ngành'))]
+        for j,x in enumerate(vals):c[j].text=str(x)
+    for row in t.rows:
+        for c in row.cells:
+            _set_cell_margins(c,top=20,start=30,bottom=20,end=30)
+            for p in c.paragraphs:
+                p.paragraph_format.space_after=Pt(0);p.paragraph_format.line_spacing=1.0
+                for r in p.runs:r.font.name='Lato';r.font.size=Pt(7.4)
+
+def _v840_integrated_block(doc,ticker,title,metrics,paras=None,chart=None,reverse=False):
+    """Narrative + evidence on the same visual block, as in the user's sample reports."""
+    _subhead(doc,title)
+    tbl=doc.add_table(rows=1,cols=2);tbl.autofit=False;tbl.alignment=WD_TABLE_ALIGNMENT.CENTER
+    left,right=tbl.cell(0,0),tbl.cell(0,1)
+    left.width=Mm(98);right.width=Mm(72)
+    _set_cell_margins(left,top=25,start=20,bottom=20,end=55);_set_cell_margins(right,top=25,start=55,bottom=20,end=20)
+    textcell,viscell=(right,left) if reverse else (left,right)
+    if paras is None:paras=_v840_analysis_text(ticker,metrics)
+    # overwrite default empty para first
+    p=textcell.paragraphs[0];p.clear()
+    for i,txt in enumerate([x for x in paras if x]):
+        p=textcell.paragraphs[0] if i==0 else textcell.add_paragraph()
+        p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.line_spacing=1.05;p.paragraph_format.space_after=Pt(4)
+        r=p.add_run(str(txt));r.font.name='Lato';r.font.size=Pt(9.2)
+    # chart first, then compact table immediately below it
+    cm=chart or (metrics[0] if metrics else None)
+    if cm:
+        try:
+            bio=chart_metric(ticker,cm,percent=cm in PCT or cm in METH_PCT)
+            q=viscell.paragraphs[0];q.alignment=WD_ALIGN_PARAGRAPH.CENTER;q.paragraph_format.space_after=Pt(1)
+            q.add_run().add_picture(bio,width=Mm(69))
+        except Exception:pass
+    _v840_mini_table(viscell,ticker,metrics[:8])
+    _set_cell_border(left,bottom={'val':'single','sz':'4','color':'D9D9D9'});_set_cell_border(right,bottom={'val':'single','sz':'4','color':'D9D9D9'})
+
+def _v840_rating_groups(entity_type):
+    if entity_type=='BANK':
+        return [
+          ('NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG','drivers'),
+          ('THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH','overview'),
+          ('RỦI RO VĨ MÔ','macro'),('RỦI RO NGÀNH','industry'),('HỒ SƠ KINH DOANH','business'),
+          ('VỐN VÀ LỢI NHUẬN','capital_profit'),('VỊ THẾ RỦI RO','risk_position'),
+          ('HUY ĐỘNG VỐN VÀ THANH KHOẢN','funding_liquidity'),('YẾU TỐ BÊN NGOÀI','support'),
+          ('ĐỘ NHẠY XẾP HẠNG','sensitivity')]
+    if entity_type=='SECURITIES':
+        return [
+          ('NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG','drivers'),('THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH','overview'),
+          ('RỦI RO VĨ MÔ','macro'),('RỦI RO NGÀNH','industry'),('HỒ SƠ KINH DOANH','business'),
+          ('VỐN, ĐÒN BẨY VÀ LỢI NHUẬN','capital_profit'),('VỊ THẾ RỦI RO','risk_position'),
+          ('NGUỒN VỐN VÀ THANH KHOẢN','funding_liquidity'),('YẾU TỐ BÊN NGOÀI','support'),('ĐỘ NHẠY XẾP HẠNG','sensitivity')]
+    return [
+      ('NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG','drivers'),('THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH','overview'),
+      ('RỦI RO VĨ MÔ VÀ NGÀNH','macro_industry'),('HỒ SƠ KINH DOANH','business'),('RỦI RO TÀI CHÍNH','financial_risk'),
+      ('QUẢN TRỊ VÀ QUẢN LÝ','governance'),('THANH KHOẢN','funding_liquidity'),('YẾU TỐ BÊN NGOÀI','support'),('ĐỘ NHẠY XẾP HẠNG','sensitivity')]
+
+def _v840_driver_page(doc,ticker,meta,rr):
+    a=intelligent_analyze(ticker)
+    _section_band(doc,'NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG')
+    # Use actual strengths/risks from the engine plus live KPI evidence; no methodology exposition.
+    t=doc.add_table(rows=1,cols=2);t.autofit=False
+    for idx,(head,items) in enumerate([('ĐIỂM MẠNH',a.get('Strengths',[])[:4]),('ĐIỂM HẠN CHẾ / RỦI RO',a.get('Risks',[])[:4])]):
+        c=t.cell(0,idx);_set_cell_margins(c,top=60,start=70,bottom=60,end=70);_set_cell_shading(c,'F5FAF0' if idx==0 else 'FAF7F2')
+        p=c.paragraphs[0];r=p.add_run(head);r.bold=True;r.font.name='Lato';r.font.size=Pt(10);r.font.color.rgb=None
+        for x in items:
+            p=c.add_paragraph(style=None);p.paragraph_format.space_after=Pt(3);p.paragraph_format.left_indent=Mm(2)
+            r=p.add_run('• '+str(x));r.font.name='Lato';r.font.size=Pt(9)
+    et=meta.get('EntityType')
+    metrics={'BANK':['ROE','NPL','CAR','CASA'],'SECURITIES':['ROE','AvailableCapitalRatio','DebtEquity','CurrentRatio']}.get(et,['ROE','DebtEquity','CurrentRatio','CFO_Debt'])
+    facts=_v840_analysis_text(ticker,metrics)
+    for ptxt in facts:
+        p=doc.add_paragraph(ptxt);p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.space_after=Pt(3)
+    _v840_mini_table(doc.add_table(rows=1,cols=1).cell(0,0),ticker,metrics)
+
+def _v840_rating_body(doc,ticker,meta,s,rr):
+    et=meta.get('EntityType')
+    for heading,key in _v840_rating_groups(et):
+        if key=='drivers':
+            _v840_driver_page(doc,ticker,meta,rr);continue
+        _section_band(doc,heading)
+        if key=='overview':
+            pars=[f"{company_display_name(meta,ticker)} hoạt động trong ngành {meta.get('Sector')}. Quy mô và vị trí tương đối được đánh giá trực tiếp qua tổng tài sản/doanh thu, vốn chủ sở hữu và các chỉ tiêu hoạt động chính so với peer."]
+            ms=['TotalAssets','GrossLoans','CustomerDeposits','LoanAssets','DepositAssets','AssetEquity'] if et=='BANK' else (['TotalAssets','Revenue','Equity'] if et=='SECURITIES' else ['Revenue','TotalAssets','Equity'])
+            _v840_integrated_block(doc,ticker,'Quy mô hoạt động và vị trí tương đối',ms,pars+_v840_analysis_text(ticker,ms),reverse=False);continue
+        if key in ('macro','industry','macro_industry'):
+            only='macro' if key=='macro' else 'industry' if key=='industry' else None
+            intel=_public_intel_paragraphs(et,only=only)
+            for title,nar,source,url,asof in intel[:4]:
+                if title:_subhead(doc,title)
+                _intel_body(doc,nar)
+                _intel_source(doc,source,asof,url)
+            # Keep macro/industry sections focused on the external environment.
+            # Entity-specific transmission analysis belongs in HỒ SƠ KINH DOANH,
+            # where it can be read together with the company's actual KPIs.
+            continue
+        if key=='business':
+            ms=['TotalAssets','GrossLoans','CustomerDeposits','LoanAssets','DepositAssets','AssetEquity'] if et=='BANK' else (['Revenue','TotalAssets','ROE'] if et=='SECURITIES' else ['Revenue','GrossMargin','AssetTurnover'])
+            ctx="Quy mô chỉ tạo lợi thế khi đi cùng tăng trưởng có chất lượng và khả năng duy trì thị phần. Vì vậy, đánh giá Hồ sơ Kinh doanh ưu tiên khoảng cách với peer và xu hướng nhiều kỳ thay vì chỉ nhìn quy mô tuyệt đối."
+            _v840_integrated_block(doc,ticker,'Quy mô, tăng trưởng và vị thế cạnh tranh',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0])
+
+            # Move the former 'Liên hệ với hồ sơ doanh nghiệp' block here.
+            # This avoids interrupting RỦI RO VĨ MÔ / RỦI RO NGÀNH with issuer-specific KPIs.
+            if et=='BANK':
+                link_ms=['NIM','CASA','LDR','CAR','NPL']
+                link_ctx='Trong Hồ sơ Kinh doanh, tác động của môi trường ngành được đối chiếu trực tiếp với khả năng tạo biên lãi, chất lượng nguồn vốn, mức sử dụng vốn, bộ đệm vốn và chất lượng tài sản của ngân hàng. NIM, CASA, LDR, CAR và NPL được đọc đồng thời với peer để đánh giá mức độ chuyển hóa vị thế kinh doanh thành hiệu quả và sức chống chịu.'
+            elif et=='SECURITIES':
+                link_ms=['AvailableCapitalRatio','DebtEquity','CurrentRatio','ROE','MarketShareBrokerage']
+                link_ctx='Trong Hồ sơ Kinh doanh, tác động của thị trường được đối chiếu với thị phần môi giới, năng lực vốn, đòn bẩy, thanh khoản và khả năng sinh lời để đánh giá khả năng chuyển hóa cơ hội thị trường thành tăng trưởng bền vững.'
+            else:
+                link_ms=['Revenue','GrossMargin','DebtEquity','CurrentRatio','CFO_Debt']
+                link_ctx='Trong Hồ sơ Kinh doanh, tác động của môi trường ngành được đối chiếu với tăng trưởng doanh thu, biên lợi nhuận, cơ cấu vốn, thanh khoản và khả năng tạo dòng tiền để đánh giá sức cạnh tranh và khả năng thích ứng của doanh nghiệp.'
+            # Issuer-specific KPI transmission block belongs ONLY in HỒ SƠ KINH DOANH.
+            # Do not render this block in RỦI RO VĨ MÔ / RỦI RO NGÀNH to avoid duplicated analysis.
+            _v840_integrated_block(doc,ticker,'Liên hệ với hồ sơ doanh nghiệp',link_ms,_v840_analysis_text(ticker,link_ms,link_ctx),chart=link_ms[0])
+            continue
+        if key=='capital_profit':
+            ms=['CAR','EquityAssets','TangibleEquityAssets','AssetEquity','ROE','ROA','ProfitAssets','NIM'] if et=='BANK' else (['ROE','ROA','AvailableCapitalRatio','DebtEquity'] if et=='SECURITIES' else ['ROE','DebtEquity','DebtEBITDA','CFO_Debt'])
+            ctx="Khả năng tạo lợi nhuận và bộ đệm vốn được đọc đồng thời: lợi nhuận cao hỗ trợ tích lũy vốn, nhưng tốc độ tăng tài sản/nợ nhanh có thể làm suy giảm vùng đệm nếu vốn nội sinh không theo kịp."
+            _v840_integrated_block(doc,ticker,'Khả năng sinh lời và bộ đệm vốn',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0]);continue
+        if key=='risk_position':
+            ms=['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets','CAR','EquityAssets'] if et=='BANK' else (['MarginLoansEquity','DebtEquity','ROA','CurrentRatio'] if et=='SECURITIES' else ['DebtEBITDA','NetDebtEBITDA','CFO_Debt','FOCF_Debt'])
+            ctx="Đây là nhóm chỉ tiêu có khả năng truyền dẫn trực tiếp sang lợi nhuận, vốn và khả năng thực hiện nghĩa vụ nợ; chênh lệch bất lợi so với peer được coi là tín hiệu cần giám sát chặt hơn."
+            _v840_integrated_block(doc,ticker,'Chất lượng tài sản / khẩu vị rủi ro',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0]);continue
+        if key in ('funding_liquidity','financial_risk'):
+            ms=['CASA','LDR','CustomerDeposits','DepositAssets','FundingGapAssets','CAR'] if et=='BANK' else (['CurrentRatio','DebtEquity','CFO_Debt','CashAssets'] if et=='SECURITIES' else ['CurrentRatio','CFO_Debt','FOCF_Debt','CashDebt'])
+            ctx="Thanh khoản được đánh giá trên cả cấu trúc nguồn vốn và khả năng tạo tiền. Một tỷ lệ thanh khoản tốt tại một thời điểm không đủ bù cho cấu trúc đáo hạn tập trung hoặc dòng tiền hoạt động yếu."
+            _v840_integrated_block(doc,ticker,'Nguồn vốn, thanh khoản và khả năng trả nợ',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0]);continue
+        if key=='governance':
+            p=doc.add_paragraph("Phần quản trị chỉ trình bày các phát hiện định tính có bằng chứng trong hồ sơ doanh nghiệp: cấu trúc quản trị, chính sách tài chính, quản trị rủi ro, giao dịch bên liên quan và mức độ phụ thuộc hệ sinh thái. Các nội dung chưa có dữ liệu cấu trúc được giữ là điểm cần chuyên viên cập nhật, không tự suy diễn.");p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;continue
+        if key=='support':
+            p=doc.add_paragraph(f"Kết quả mô hình ghi nhận mức hỗ trợ bên ngoài {rr.get('ExternalSupportNotches',0)} bậc. Tác động hỗ trợ chỉ được đưa vào xếp hạng cuối cùng khi có bằng chứng về năng lực và động cơ hỗ trợ; chi tiết tính toán được đưa xuống phụ lục.");p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;continue
+        if key=='sensitivity':
+            a=intelligent_analyze(ticker);risks=a.get('Risks',[])[:3]
+            p=doc.add_paragraph(f"Bậc xếp hạng hiện tại theo mô hình là {rr.get('ICR','N/A')}. Các yếu tố có thể tạo áp lực hạ bậc gồm: "+('; '.join(risks) if risks else 'suy giảm đáng kể về vốn, chất lượng tài sản, thanh khoản hoặc khả năng sinh lời so với peer.'))
+            p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+
+
+def _v840_analysis_body(doc,ticker,meta,s,val):
+    et=meta.get('EntityType')
+    groups=[
+      ('I. TỔNG QUAN','overview'),('II. HOẠT ĐỘNG KINH DOANH','operations'),('III. TÌNH HÌNH TÀI CHÍNH','financials'),
+      ('IV. LUẬN ĐIỂM ĐẦU TƯ','thesis'),('V. RỦI RO','risks'),('VI. DỰ PHÓNG KẾT QUẢ KINH DOANH, ĐỊNH GIÁ & KHUYẾN NGHỊ','valuation'),
+      ('VII. TRIỂN VỌNG NGÀNH','industry')]
+    a=intelligent_analyze(ticker)
+    for heading,key in groups:
+        _section_band(doc,heading)
+        if key=='overview':
+            ms=['TotalAssets','GrossLoans','CustomerDeposits'] if et=='BANK' else ['Revenue','TotalAssets','Equity']
+            _v840_integrated_block(doc,ticker,'Quy mô và vị thế doanh nghiệp',ms,_v840_analysis_text(ticker,ms,"Quy mô được đặt cạnh tăng trưởng và vị trí peer để xác định lợi thế franchise có thực sự chuyển hóa thành hiệu quả kinh doanh hay không."),chart=ms[0]);continue
+        if key=='operations':
+            if et=='BANK':
+                blocks=[('Thu nhập và khả năng sinh lời',['ROE','ROA','NIM','CIR','NII_OperatingIncome','ProfitAssets'],'ROE'),('Tăng trưởng tín dụng và nguồn vốn',['GrossLoans','CustomerDeposits','LDR','CASA','LoanAssets','DepositAssets'],'GrossLoans')]
+            elif et=='SECURITIES':blocks=[('Tăng trưởng và hiệu quả hoạt động',['Revenue','ROE','ROA','NetMargin'],'Revenue'),('Cơ cấu vốn phục vụ kinh doanh',['AvailableCapitalRatio','DebtEquity','CurrentRatio'],'AvailableCapitalRatio')]
+            else:blocks=[('Tăng trưởng và biên lợi nhuận',['Revenue','GrossMargin','NetMargin','AssetTurnover'],'Revenue'),('Hiệu quả vốn',['ROE','ROA','DebtEquity'],'ROE')]
+            for i,(t,ms,ch) in enumerate(blocks):_v840_integrated_block(doc,ticker,t,ms,_v840_analysis_text(ticker,ms),chart=ch,reverse=bool(i%2));continue
+        if key=='financials':
+            if et=='BANK':blocks=[('Chất lượng tài sản và chi phí rủi ro',['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],'NPL'),('An toàn vốn và cấu trúc bảng cân đối',['CAR','EquityAssets','TangibleEquityAssets','AssetEquity','ProfitAssets'],'CAR'),('Nguồn vốn và thanh khoản',['CASA','LDR','DepositAssets','FundingGapAssets','CustomerDeposits'],'CASA')]
+            elif et=='SECURITIES':blocks=[('Đòn bẩy và thanh khoản',['DebtEquity','CurrentRatio','CFO_Debt','CashAssets'],'DebtEquity'),('Rủi ro bảng cân đối',['MarginLoansEquity','AvailableCapitalRatio','ROA'],'MarginLoansEquity')]
+            else:blocks=[('Đòn bẩy và khả năng trả nợ',['DebtEquity','DebtEBITDA','CFO_Debt','FOCF_Debt'],'DebtEquity'),('Thanh khoản và dòng tiền',['CurrentRatio','CashDebt','FOCFMargin'],'CurrentRatio')]
+            for i,(t,ms,ch) in enumerate(blocks):_v840_integrated_block(doc,ticker,t,ms,_v840_analysis_text(ticker,ms),chart=ch,reverse=bool(i%2));continue
+        if key=='thesis':
+            texts=[]
+            if a.get('Strengths'):texts += ['• '+x for x in a['Strengths'][:4]]
+            if a.get('Conclusion'):texts.insert(0,a['Conclusion'])
+            for x in texts:
+                p=doc.add_paragraph(x);p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.space_after=Pt(3)
+            try:
+                sc=peer_scatter_chart(ticker,'ROE','PB')
+                if sc:doc.add_picture(sc,width=Mm(112))
+            except:pass
+            continue
+        if key=='risks':
+            risks=a.get('Risks',[])[:5]
+            for x in risks:
+                p=doc.add_paragraph('• '+str(x));p.paragraph_format.space_after=Pt(3)
+            if et=='BANK':_v840_integrated_block(doc,ticker,'Áp lực NIM, chất lượng tài sản và thanh khoản',['NIM','NPL','LDR','CAR'],_v840_analysis_text(ticker,['NIM','NPL','LDR','CAR']),chart='NIM')
+            continue
+        if key=='valuation':
+            _v840_integrated_block(doc,ticker,'So sánh định giá với peer',['PB','PE','ROE','ROA'],_v840_analysis_text(ticker,['PB','PE','ROE','ROA'],"Premium/discount định giá chỉ có ý nghĩa khi được đặt cạnh ROE, tăng trưởng và rủi ro tương đối."),chart='PB')
+            _subhead(doc,'Dự phóng và vùng giá')
+            _add_fv_table(doc,ticker)
+            vt=triangulate(ticker);p=doc.add_paragraph(f"Độ tin cậy phân tích hiện tại: {vt.get('AnalyticalConfidence','N/A')}. Vùng giá Bear-Base-Bull phản ánh độ nhạy của giả định, còn giá trị Strategic/M&A được trình bày riêng để tránh cộng premium hai lần.");p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+            continue
+        if key=='industry':
+            intel=_public_intel_paragraphs(et,only='industry') + _public_intel_paragraphs(et,only='macro')
+            for title,nar,source,url,asof in intel[:4]:
+                if title:_subhead(doc,title)
+                _intel_body(doc,nar)
+                _intel_source(doc,source,asof,url)
+            if et=='BANK':
+                _v840_integrated_block(doc,ticker,'Vị thế của doanh nghiệp trong bối cảnh ngành',['NIM','CASA','LDR','NPL','CAR','ROE'],_v840_analysis_text(ticker,['NIM','CASA','LDR','NPL','CAR','ROE'],'Các chỉ tiêu trên cho thấy mức độ doanh nghiệp có thể hưởng lợi từ tăng trưởng tín dụng mà không đánh đổi quá mức NIM, chất lượng tài sản hoặc thanh khoản.'),chart='NIM')
+
+def _v840_appendix(doc,ticker,report_type):
+    """No repeated KPI appendix in the client-facing report.
+
+    KPI/peer evidence is embedded in the relevant analytical sections. Detailed
+    scorecards, waterfall and audit trail remain available in platform data rather
+    than consuming report pages or repeating evidence out of context.
+    """
+    return
+
+
+def _normalize_report_typography(doc):
+    """User typography standard: Lato 11pt body; 6pt before/0pt after; tables/charts 10pt."""
+    # Normal/body style. Keep designed cover/section headings larger, but all ordinary text is 11pt.
+    normal = doc.styles['Normal']
+    normal.font.name = 'Lato'
+    normal.font.size = Pt(11)
+    normal.paragraph_format.space_before = Pt(6)
+    normal.paragraph_format.space_after = Pt(0)
+    normal.paragraph_format.line_spacing = 1.0
+
+    # Body paragraphs outside tables. Preserve intentionally larger title/heading typography.
+    table_paragraph_ids = {id(pp) for tb in doc.tables for row in tb.rows for cell in row.cells for pp in cell.paragraphs}
+    for p in doc.paragraphs:
+        p.paragraph_format.space_before = Pt(6)
+        p.paragraph_format.space_after = Pt(0)
+        p.paragraph_format.line_spacing = 1.0
+        style_name = (p.style.name if p.style else '') or ''
+        preserve_large = style_name in ('Title', 'Subtitle') or style_name.startswith('Heading')
+        for r in p.runs:
+            r.font.name = 'Lato'
+            if not preserve_large:
+                r.font.size = Pt(11)
+
+    # Every table, including summary/KPI/appendix tables: Lato 10pt. Compact cell spacing.
+    for tb in doc.tables:
+        for row in tb.rows:
+            for cell in row.cells:
+                for p in cell.paragraphs:
+                    p.paragraph_format.space_before = Pt(0)
+                    p.paragraph_format.space_after = Pt(0)
+                    p.paragraph_format.line_spacing = 1.0
+                    for r in p.runs:
+                        r.font.name = 'Lato'
+                        r.font.size = Pt(10)
+
+    # Matplotlib charts are generated at 10pt globally; reinforce here for subsequent charts.
+    plt.rcParams.update({'font.family': 'Lato', 'font.size': 10})
+
+def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     ticker=str(ticker).upper();meta=get_company(ticker);s=get_snapshot(ticker);val=valuation(ticker,s)
     rr=rating_result or (rate_company(ticker) if report_type=='rating' else {})
-    sections=_rating_sections(ticker,meta,s,rr) if report_type=='rating' else _stock_sections(ticker,meta,s,val)
-    reg=_font();font='Helvetica';bold='Helvetica-Bold'
-    try:
-        b=font_manager.findfont(font_manager.FontProperties(family='Lato',weight='bold'),fallback_to_default=False)
-        pdfmetrics.registerFont(TTFont('LatoReport',reg));pdfmetrics.registerFont(TTFont('LatoReportB',b));font='LatoReport';bold='LatoReportB'
-    except:pass
-    bio=BytesIO();pdf=SimpleDocTemplate(bio,pagesize=A4,leftMargin=50,rightMargin=45,topMargin=45,bottomMargin=42)
-    body=ParagraphStyle('b',fontName=font,fontSize=11,leading=14,alignment=4,spaceAfter=7)
-    h=ParagraphStyle('h',fontName=bold,fontSize=14,leading=17,spaceBefore=8,spaceAfter=6)
-    story=[Paragraph('BÁO CÁO XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH GIÁ CỔ PHIẾU, ĐỊNH GIÁ & M&A',h),
-           Paragraph(f"{ticker} - {meta.get('CompanyName')} | {meta.get('Sector')}",body),PageBreak()]
-    for i,(head,pars) in enumerate(sections,1):
-        story.append(Paragraph(f'{i}. {head}',h))
-        enriched=list(pars)+_decision_narrative(ticker,head,meta,s,val,report_type)
-        for x in enriched:story.append(Paragraph(str(x),body))
-        if head in ['SO SÁNH NHÓM TƯƠNG ĐỒNG','PHỤ LỤC KPI & PEER']:
-            k,_,_=sector_kpi_table(ticker);data=[['Chỉ tiêu','DN','TB ngành','Trung vị','N']]
-            for _,r in k.head(10).iterrows():
-                m=r['Metric'];data.append([r['Chỉ tiêu'],metric_fmt(m,r['Doanh nghiệp']),metric_fmt(m,r['Trung bình ngành']),metric_fmt(m,r['Trung vị ngành']),str(int(r['Số DN có dữ liệu']))])
-            t=Table(data,colWidths=[130,80,90,90,40]);t.setStyle(TableStyle([('FONT',(0,0),(-1,-1),font,9),('FONT',(0,0),(-1,0),bold,9),('BACKGROUND',(0,0),(-1,0),colors.HexColor('#E8EEF7')),('GRID',(0,0),(-1,-1),.3,colors.grey),('VALIGN',(0,0),(-1,-1),'TOP')]))
-            story.append(t);story.append(Spacer(1,8))
-    pdf.build(story);return bio.getvalue()
+    doc=Document();_style_doc(doc, report_type)
+    sec=doc.sections[0];sec.top_margin=Mm(12);sec.bottom_margin=Mm(12);sec.left_margin=Mm(13);sec.right_margin=Mm(13)
+    n=doc.styles['Normal'];n.font.size=Pt(9.6);n.paragraph_format.line_spacing=1.04;n.paragraph_format.space_after=Pt(2.5)
+    _cover_sample(doc,ticker,meta,report_type)
+    if report_type=='rating':
+        _rating_summary_page(doc,ticker,meta,rr)
+        _v840_rating_body(doc,ticker,meta,s,rr)
+    else:
+        _analysis_summary_page(doc,ticker,meta,s,val)
+        _section_band(doc,'MỤC LỤC')
+        for h in ['I. TỔNG QUAN','II. HOẠT ĐỘNG KINH DOANH','III. TÌNH HÌNH TÀI CHÍNH','IV. LUẬN ĐIỂM ĐẦU TƯ','V. RỦI RO','VI. DỰ PHÓNG KẾT QUẢ KINH DOANH, ĐỊNH GIÁ & KHUYẾN NGHỊ','VII. TRIỂN VỌNG NGÀNH']:
+            p=doc.add_paragraph(h);p.paragraph_format.space_after=Pt(1);p.runs[0].font.size=Pt(9);p.runs[0].bold=True
+        _v840_analysis_body(doc,ticker,meta,s,val)
+    _v840_appendix(doc,ticker,report_type)
+    for p in doc.paragraphs:p.paragraph_format.widow_control=True
+    for table in doc.tables:
+        for row in table.rows:
+            trPr=row._tr.get_or_add_trPr()
+            if trPr.find(qn('w:cantSplit')) is None:trPr.append(OxmlElement('w:cantSplit'))
+    _normalize_report_typography(doc)
+    bio=BytesIO();doc.save(bio);return bio.getvalue()

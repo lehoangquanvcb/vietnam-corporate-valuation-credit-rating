@@ -18,33 +18,42 @@ LABELS={
 'AvailableCapitalRatio':'Tỷ lệ an toàn vốn khả dụng','MarketShareBrokerage':'Thị phần môi giới',
 'ClientAssets':'Tài sản/tiền gửi của khách hàng','MarginLoans':'Dư nợ cho vay ký quỹ',
 'MarginLoansEquity':'Cho vay ký quỹ/VCSH','ICGR':'Tỷ lệ tạo vốn nội bộ (ICGR)',
-'OperatingProfitMargin':'Biên lợi nhuận hoạt động','EV_EBITDA':'EV/EBITDA'
+'OperatingProfitMargin':'Biên lợi nhuận hoạt động','EV_EBITDA':'EV/EBITDA',
+'AssetEquity':'Tổng tài sản/VCSH','CreditCostProxy':'Chi phí dự phòng/Dư nợ','FundingGapAssets':'Chênh lệch cho vay-tiền gửi/TTS',
+'ProfitAssets':'LNST/Tổng tài sản','CashAssets':'Tiền/Tổng tài sản','WorkingCapitalAssets':'Vốn lưu động ròng/Tổng tài sản',
+'NetDebtEquity':'Nợ ròng/VCSH','NetDebtEBITDA':'Nợ ròng/EBITDA','EquityAssetsCorp':'VCSH/Tổng tài sản','AssetTurnover':'Doanh thu/Tổng tài sản',
+'FOCFMargin':'FOCF/Doanh thu','CashDebt':'Tiền/Nợ vay'
 }
 PCT=set(['ROE','ROA','NIM','NPL','CAR','CIR','CASA','LoanAssets','DepositAssets','EquityAssets',
 'TangibleEquityAssets','NII_OperatingIncome','ProvisionOperatingIncome','GrossMargin','NetMargin',
 'EBITDAMargin','DebtAssets','CFO_Debt','FOCF_Debt','CFO_Margin','CapexRevenue','AvailableCapitalRatio',
-'MarketShareBrokerage','MarginLoansEquity','ICGR','OperatingProfitMargin'])
-MULT=set(['LDR','PB','PE','DebtEquity','DebtEBITDA','CurrentRatio','EV_EBITDA'])
+'MarketShareBrokerage','MarginLoansEquity','ICGR','OperatingProfitMargin','CreditCostProxy','FundingGapAssets','ProfitAssets','CashAssets','WorkingCapitalAssets','EquityAssetsCorp','FOCFMargin','CashDebt'])
+MULT=set(['LDR','PB','PE','DebtEquity','DebtEBITDA','CurrentRatio','EV_EBITDA','AssetEquity','NetDebtEquity','NetDebtEBITDA','AssetTurnover'])
 
 BANK_GROUPS={
-'Hồ sơ kinh doanh':['TotalAssets','GrossLoans','CustomerDeposits','LoanAssets','DepositAssets'],
-'Vốn, đòn bẩy & lợi nhuận':['CAR','EquityAssets','TangibleEquityAssets','ROE','ROA','NIM','CIR','NII_OperatingIncome'],
-'Vị thế rủi ro':['NPL','ProvisionOperatingIncome','LoanAssets'],
-'Nguồn vốn & thanh khoản':['CASA','LDR','DepositAssets'],
-'Định giá':['PB','PE']
+'Hồ sơ kinh doanh & quy mô':['TotalAssets','GrossLoans','CustomerDeposits','LoanAssets','DepositAssets','AssetEquity'],
+'Vốn & khả năng hấp thụ lỗ':['CAR','EquityAssets','TangibleEquityAssets','AssetEquity','ROE','ProfitAssets'],
+'Khả năng sinh lợi & hiệu quả':['ROE','ROA','NIM','CIR','NII_OperatingIncome','ProfitAssets'],
+'Chất lượng tài sản & chi phí rủi ro':['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],
+'Nguồn vốn & thanh khoản':['CASA','LDR','DepositAssets','FundingGapAssets'],
+'Định giá cổ phiếu':['PB','PE']
 }
 SEC_GROUPS={
-'Hồ sơ kinh doanh':['Revenue','TotalAssets','Equity','MarketShareBrokerage','ClientAssets','MarginLoans'],
-'Vốn, đòn bẩy & lợi nhuận':['AvailableCapitalRatio','DebtEquity','DebtEBITDA','ROE','ROA','NetMargin','OperatingProfitMargin','ICGR'],
-'Vị thế rủi ro':['MarginLoansEquity','MarketShareBrokerage','DebtEquity'],
-'Nguồn vốn & thanh khoản':['CurrentRatio','DebtEquity','CFO_Debt'],
+'Hồ sơ kinh doanh & franchise':['Revenue','TotalAssets','Equity','MarketShareBrokerage','ClientAssets','MarginLoans','AssetTurnover'],
+'Vốn & đòn bẩy':['AvailableCapitalRatio','DebtEquity','DebtAssets','EquityAssetsCorp','AssetEquity','NetDebtEquity'],
+'Khả năng sinh lợi & hiệu quả':['ROE','ROA','NetMargin','OperatingProfitMargin','ICGR','AssetTurnover'],
+'Vị thế rủi ro':['MarginLoansEquity','MarketShareBrokerage','DebtEquity','NetDebtEBITDA'],
+'Nguồn vốn & thanh khoản':['CurrentRatio','WorkingCapitalAssets','CashAssets','CashDebt','CFO_Debt'],
+'Dòng tiền':['CFO_Margin','FOCFMargin','CFO_Debt','FOCF_Debt'],
 'Định giá':['PB','PE','EV_EBITDA']
 }
 CORP_GROUPS={
-'Quy mô & hồ sơ kinh doanh':['Revenue','TotalAssets','GrossMargin','OperatingProfitMargin','EBITDAMargin'],
-'Khả năng sinh lợi':['ROE','ROA','NetMargin','EBITDAMargin'],
-'Dòng tiền & đòn bẩy':['DebtEquity','DebtAssets','DebtEBITDA','CFO_Debt','FOCF_Debt','CFO_Margin','CapexRevenue'],
-'Thanh khoản':['CurrentRatio','CFO_Debt','FOCF_Debt'],
+'Quy mô & hồ sơ kinh doanh':['Revenue','TotalAssets','AssetTurnover','GrossMargin','OperatingProfitMargin','EBITDAMargin'],
+'Khả năng sinh lợi':['ROE','ROA','NetMargin','EBITDAMargin','AssetTurnover'],
+'Đòn bẩy & khả năng trả nợ':['DebtEquity','DebtAssets','NetDebtEquity','DebtEBITDA','NetDebtEBITDA','CFO_Debt','FOCF_Debt'],
+'Dòng tiền & đầu tư':['CFO_Margin','FOCFMargin','CapexRevenue','CFO_Debt','FOCF_Debt'],
+'Thanh khoản':['CurrentRatio','WorkingCapitalAssets','CashAssets','CashDebt'],
+'Cấu trúc vốn':['EquityAssetsCorp','AssetEquity','NetDebtEquity'],
 'Định giá':['PB','PE','EV_EBITDA']
 }
 
@@ -72,6 +81,23 @@ def enrich_row(r):
     focf=_n(d.get('CFO'))-abs(_n(d.get('Capex'))) if np.isfinite(_n(d.get('CFO'))) and np.isfinite(_n(d.get('Capex'))) else np.nan
     d['FOCF_Debt']=_div(focf,d.get('TotalDebt'))
     d['MarginLoansEquity']=_div(d.get('MarginLoans'),d.get('Equity'))
+    d['AssetEquity']=_div(d.get('TotalAssets'),d.get('Equity'))
+    d['CreditCostProxy']=_div(abs(_n(d.get('ProvisionExpense'))),d.get('GrossLoans'))
+    if np.isfinite(_n(d.get('GrossLoans'))) and np.isfinite(_n(d.get('CustomerDeposits'))) and np.isfinite(_n(d.get('TotalAssets'))) and _n(d.get('TotalAssets'))!=0:
+        d['FundingGapAssets']=(_n(d.get('GrossLoans'))-_n(d.get('CustomerDeposits')))/_n(d.get('TotalAssets'))
+    else:d['FundingGapAssets']=np.nan
+    d['ProfitAssets']=_div(d.get('NPAT'),d.get('TotalAssets'))
+    d['CashAssets']=_div(d.get('Cash'),d.get('TotalAssets'))
+    if np.isfinite(_n(d.get('CurrentAssets'))) and np.isfinite(_n(d.get('CurrentLiabilities'))) and np.isfinite(_n(d.get('TotalAssets'))) and _n(d.get('TotalAssets'))!=0:
+        d['WorkingCapitalAssets']=(_n(d.get('CurrentAssets'))-_n(d.get('CurrentLiabilities')))/_n(d.get('TotalAssets'))
+    else:d['WorkingCapitalAssets']=np.nan
+    netdebt=_n(d.get('TotalDebt'))-_n(d.get('Cash')) if np.isfinite(_n(d.get('TotalDebt'))) and np.isfinite(_n(d.get('Cash'))) else np.nan
+    d['NetDebtEquity']=_div(netdebt,d.get('Equity'))
+    d['NetDebtEBITDA']=_div(netdebt,d.get('EBITDA'))
+    d['EquityAssetsCorp']=_div(d.get('Equity'),d.get('TotalAssets'))
+    d['AssetTurnover']=_div(d.get('Revenue'),d.get('TotalAssets'))
+    d['FOCFMargin']=_div(focf,d.get('Revenue'))
+    d['CashDebt']=_div(d.get('Cash'),d.get('TotalDebt'))
     return d
 
 def enriched_industry(ticker):

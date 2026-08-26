@@ -11,6 +11,9 @@ def fmt(v,m):
     if v is None:return 'N/A'
     if m in PCT:return (f'{v*100:.1f}%').replace('.',',')
     if m in VAL:return (f'{v:.2f}x').replace('.',',')
+    if abs(v)>=1e12:return (f'{v/1e12:,.1f} nghìn tỷ').replace(',','X').replace('.',',').replace('X','.')
+    if abs(v)>=1e9:return (f'{v/1e9:,.1f} tỷ').replace(',','X').replace('.',',').replace('X','.')
+    if abs(v)>=1e6:return (f'{v/1e6:,.1f} triệu').replace(',','X').replace('.',',').replace('X','.')
     return f'{v:,.2f}'.replace(',','X').replace('.',',').replace('X','.')
 def analyze(ticker):
     meta=get_company(ticker); snap=get_snapshot(ticker); k,key,tmpl=sector_kpi_table(ticker); val=valuation(ticker,snap)
@@ -24,8 +27,8 @@ def analyze(ticker):
             good=(gap<0) if r.Metric in LOWER|VAL else (gap>0)
             pts=(2 if abs(gap)>=.25 else 1)*(1 if good else -1)
         score+=pts;fs.append({'Metric':r.Metric,'Label':r['Chỉ tiêu'],'Gap':gap,'Score':pts,'Company':c,'Mean':m,'N':int(r['Số DN có dữ liệu'])})
-    pos=sorted([x for x in fs if x['Score']>0],key=lambda x:abs(x['Gap']),reverse=True)[:4]
-    neg=sorted([x for x in fs if x['Score']<0],key=lambda x:abs(x['Gap']),reverse=True)[:4]
+    pos=sorted([x for x in fs if x['Score']>0],key=lambda x:abs(x['Gap']),reverse=True)[:6]
+    neg=sorted([x for x in fs if x['Score']<0],key=lambda x:abs(x['Gap']),reverse=True)[:6]
     def sent(x):
         d='cao hơn' if x['Gap']>0 else 'thấp hơn';g=(f"{abs(x['Gap'])*100:.1f}").replace('.',',')
         return f"{x['Label']} {fmt(x['Company'],x['Metric'])}, {d} trung bình ngành {fmt(x['Mean'],x['Metric'])} khoảng {g}% (mẫu {x['N']} DN)."
@@ -40,7 +43,7 @@ def analyze(ticker):
     fair=num(val.get('FairValue'));price=num(val.get('Price'));up=(fair/price-1) if fair and price else None
     conc=f'Quan điểm định lượng tổng hợp: {view}. '
     conc+=('Chưa đủ dữ liệu để lượng hóa upside/downside.' if up is None else f"Giá trị tham chiếu của engine chênh khoảng {(f'{up*100:.1f}').replace('.',',')}% so với thị giá; đây là kết quả mô hình, không phải khuyến nghị mua/bán.")
-    return {'Ticker':ticker,'CompanyName':meta.get('CompanyName'),'Sector':meta.get('Sector'),'Template':tmpl['label'],'Focus':tmpl['focus'],'Score':score,'View':view,'Strengths':[sent(x) for x in pos],'Risks':[sent(x) for x in neg],'Interpretations':inter,'Conclusion':conc}
+    return {'Ticker':ticker,'CompanyName':meta.get('DisplayName',meta.get('CompanyName')),'Sector':meta.get('Sector'),'Template':tmpl['label'],'Focus':tmpl['focus'],'Score':score,'View':view,'Strengths':[sent(x) for x in pos],'Risks':[sent(x) for x in neg],'Interpretations':inter,'Conclusion':conc}
 def export_all():
     rows=[]
     for t in universe().Ticker:
