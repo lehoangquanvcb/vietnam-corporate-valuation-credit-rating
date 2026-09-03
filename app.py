@@ -98,8 +98,30 @@ industry_name=industry_label(selected)
 # get_template() returns (template_key, template_dict).
 sector_template_key, sector_template = get_template(meta.get('EntityType'), meta.get('Sector'))
 st.sidebar.markdown('---'); st.sidebar.markdown('## TRẠNG THÁI')
-st.sidebar.success(f"{meta.get('EntityType')} · {meta.get('Exchange')}")
-st.sidebar.caption(f"Ngành: {meta.get('Sector')}\n\nNhóm so sánh: {_dynamic_peer_label_ui(ticker, meta.get('PeerGroup'))}\n\nPhương pháp: {meta.get('Methodology')}")
+
+def _clean_text(x, fallback='N/A'):
+    if x is None:
+        return fallback
+    try:
+        if pd.isna(x):
+            return fallback
+    except Exception:
+        pass
+    t=str(x).strip()
+    return fallback if t in ('', 'nan', 'None', '<NA>') else t
+
+_entity_type=_clean_text(meta.get('EntityType'))
+_sector=_clean_text(meta.get('Sector'))
+_peer_fallback=_clean_text(meta.get('PeerGroup'))
+_methodology=_clean_text(meta.get('Methodology'))
+
+# Exchange/stock exchange is intentionally omitted from the UI.
+st.sidebar.success(_entity_type)
+st.sidebar.caption(
+    f"Ngành: {_sector}\n\n"
+    f"Nhóm so sánh: {_dynamic_peer_label_ui(selected, _peer_fallback)}\n\n"
+    f"Phương pháp: {_methodology}"
+)
 
 st.title('NỀN TẢNG PHÂN TÍCH, ĐỊNH GIÁ, M&A & XẾP HẠNG TÍN NHIỆM DOANH NGHIỆP VIỆT NAM')
 st.caption('FULL MARKET DECISION INTELLIGENCE · Ngân hàng + Công ty chứng khoán + Doanh nghiệp phi tài chính · Vnstock Bronze LOCAL → CSV → GitHub → Streamlit')
