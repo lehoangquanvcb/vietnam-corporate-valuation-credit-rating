@@ -1,3 +1,9 @@
+import sys as _sys
+from pathlib import Path as _Path
+_PROJECT_ROOT = _Path(__file__).resolve().parents[1]
+if str(_PROJECT_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_PROJECT_ROOT))
+
 from pathlib import Path
 import json, re
 import numpy as np
@@ -79,8 +85,15 @@ def industry_label(ticker):
     return _il(ticker)
 
 def peer_tickers(ticker):
+    try:
+        from scripts.dynamic_peer_engine import dynamic_peer_tickers
+        p=dynamic_peer_tickers(ticker,include_target=True)
+        if len(p)>1:return p
+    except Exception:
+        pass
+    # fallback to legacy PeerGroup only when dynamic selection cannot be built
     m=get_company(ticker); u=universe()
-    p=u[u.PeerGroup.astype(str).eq(str(m.get('PeerGroup')))].Ticker.astype(str).tolist()
+    p=u[u.PeerGroup.astype(str).eq(str(m.get('PeerGroup')))].Ticker.astype(str).tolist() if 'PeerGroup' in u.columns else []
     return p or [ticker]
 
 def peer_snapshot(ticker):

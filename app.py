@@ -23,6 +23,15 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
+
+def _dynamic_peer_label_ui(ticker, fallback):
+    try:
+        from scripts.dynamic_peer_engine import dynamic_peer_label
+        x=dynamic_peer_label(ticker)
+        return x if x else fallback
+    except Exception:
+        return fallback
+
 st.set_page_config(page_title='Nền tảng Phân tích, Định giá, M&A & XHTN Doanh nghiệp Việt Nam',page_icon='🏢',layout='wide')
 st.markdown('''<style>
 .block-container{padding-top:1rem;max-width:1550px}.muted{color:#9CA3AF;font-size:.86rem}
@@ -90,7 +99,7 @@ industry_name=industry_label(selected)
 sector_template_key, sector_template = get_template(meta.get('EntityType'), meta.get('Sector'))
 st.sidebar.markdown('---'); st.sidebar.markdown('## TRẠNG THÁI')
 st.sidebar.success(f"{meta.get('EntityType')} · {meta.get('Exchange')}")
-st.sidebar.caption(f"Ngành: {meta.get('Sector')}\n\nNhóm so sánh: {meta.get('PeerGroup')}\n\nPhương pháp: {meta.get('Methodology')}")
+st.sidebar.caption(f"Ngành: {meta.get('Sector')}\n\nNhóm so sánh: {_dynamic_peer_label_ui(ticker, meta.get('PeerGroup'))}\n\nPhương pháp: {meta.get('Methodology')}")
 
 st.title('NỀN TẢNG PHÂN TÍCH, ĐỊNH GIÁ, M&A & XẾP HẠNG TÍN NHIỆM DOANH NGHIỆP VIỆT NAM')
 st.caption('FULL MARKET DECISION INTELLIGENCE · Ngân hàng + Công ty chứng khoán + Doanh nghiệp phi tài chính · Vnstock Bronze LOCAL → CSV → GitHub → Streamlit')
@@ -134,12 +143,25 @@ def _download_report_block(report_type, rating_result=None):
 
 with tabs[0]:
     st.subheader('Hồ sơ doanh nghiệp')
-    a,b,c,d=st.columns(4)
-    a.metric('Loại hình',meta.get('EntityType','N/A')); b.metric('Ngành',meta.get('Sector','N/A'))
-    c.metric('Sàn',meta.get('Exchange','N/A')); d.metric('Nhóm so sánh',industry_name)
+    a,b,c=st.columns(3)
+    a.metric('Ngành',meta.get('Sector','N/A'))
+    b.metric('Nhóm so sánh',industry_name)
+    c.metric('Phương pháp',meta.get('Methodology','N/A'))
     st.write(f"**{meta.get('CompanyName')}** được hệ thống tự phân loại vào **{meta.get('Sector')}**. "
              f"Methodology XHTN: **{meta.get('Methodology')}**.")
     st.caption(f"Nguồn phân ngành: {meta.get('IndustrySource','Master/Legacy')} · Cấp ICB: {meta.get('IndustryLevelUsed','N/A')}")
+    try:
+        from scripts.dynamic_peer_engine import select_dynamic_peers
+        _dp=select_dynamic_peers(selected)
+        if len(_dp):
+            with st.expander('Nhóm doanh nghiệp tương đồng được hệ thống tự chọn'):
+                _show=[c for c in ['PeerRank','Ticker','CompanyName','Sector','SimilarityScore','SimilarityBasis','PeerPool'] if c in _dp.columns]
+                _v=_dp[_show].copy()
+                if 'SimilarityScore' in _v.columns:_v['SimilarityScore']=(_v['SimilarityScore']*100).round(1).astype(str)+'%'
+                st.dataframe(_v,hide_index=True,use_container_width=True)
+                st.caption('Peer được tái tính sau mỗi Full Refresh từ toàn bộ universe Vnstock; Master chỉ còn là metadata/fallback.')
+    except Exception:
+        pass
     st.markdown('### Hồ sơ tài chính & xu hướng')
     if meta['EntityType']=='BANK':
         ml=[('TotalAssets','Tổng tài sản',False),('GrossLoans','Cho vay khách hàng',False),
@@ -151,8 +173,8 @@ with tabs[0]:
     for i in range(0,len(ml),2):
         cc=st.columns(2)
         for j,(m,t,pf) in enumerate(ml[i:i+2]):
-            with cc[j]: st.plotly_chart(metric_chart(selected,m,f'{t} · so với trung bình ngành',pf),use_container_width=True)
-    st.markdown('### Bộ chỉ tiêu theo methodology & so sánh ngành')
+            with cc[j]: st.plotly_chart(metric_chart(selected,m,f'{t} · so với nhóm tương đồng',pf),use_container_width=True)
+    st.markdown('### Bộ chỉ tiêu theo methodology & nhóm tương đồng động')
     skpi,_,_=sector_kpi_table(selected)
     if len(skpi):
         wanted=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành',
@@ -254,6 +276,14 @@ with tabs[3]:
         a3=int((cov.Readiness=='INSUFFICIENT_DATA').sum()) if 'Readiness' in cov else 0
         b.metric('Sẵn sàng phân tích',f'{a1:,}'.replace(',', '.'));c.metric('Phủ một phần',f'{a2:,}'.replace(',', '.'));d.metric('Thiếu dữ liệu',f'{a3:,}'.replace(',', '.'))
         st.dataframe(cov,hide_index=True,use_container_width=True)
+    st.markdown('### Dynamic peer engine')
+    try:
+        dps=pd.read_csv(DATA/'dynamic_peer_summary.csv')
+        if len(dps):
+            st.dataframe(dps,hide_index=True,use_container_width=True)
+        else: st.info('Dynamic peer map sẽ được tạo sau RUN_FULL_REFRESH.bat.')
+    except Exception:
+        st.info('Dynamic peer map sẽ được tạo sau RUN_FULL_REFRESH.bat.')
     st.markdown('### Universe & methodology router')
     cols=[c for c in ['Ticker','CompanyName','EntityType','Sector','Exchange','PeerGroup','Methodology'] if c in u.columns]
     st.dataframe(u[cols],hide_index=True,use_container_width=True)

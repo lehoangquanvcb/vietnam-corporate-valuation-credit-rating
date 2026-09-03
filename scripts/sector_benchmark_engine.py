@@ -1,23 +1,47 @@
+import sys as _sys
+from pathlib import Path as _Path
+_PROJECT_ROOT = _Path(__file__).resolve().parents[1]
+if str(_PROJECT_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_PROJECT_ROOT))
+
 from pathlib import Path
 import pandas as pd, numpy as np
 from scripts.universal_data import universe,bank_snapshot,generic_snapshot,read_csv,period_date
 ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data'
 
-def industry_tickers(ticker):
+def sector_universe_tickers(ticker):
+    """Broad industry universe (not the dynamic peer subset)."""
     u=universe();t=str(ticker).upper();z=u[u.Ticker.eq(t)]
     if z.empty:return [t]
     r=z.iloc[0];typ=r.EntityType
     if typ=='BANK':return u[u.EntityType.eq('BANK')].Ticker.tolist()
     if typ=='SECURITIES':return u[u.EntityType.eq('SECURITIES')].Ticker.tolist()
+    if 'ICBCode2' in u.columns and pd.notna(r.get('ICBCode2')):
+        p=u[(u.EntityType.eq('CORPORATE')) & (u.ICBCode2.astype(str).eq(str(r.get('ICBCode2'))))]
+        if len(p)>=6:return p.Ticker.tolist()
     sec=str(r.Sector);return u[(u.EntityType.eq('CORPORATE')) & (u.Sector.astype(str).eq(sec))].Ticker.tolist()
 
+def industry_tickers(ticker):
+    """Compatibility name: benchmarks now use a dynamic similarity peer group."""
+    try:
+        from scripts.dynamic_peer_engine import dynamic_peer_tickers
+        p=dynamic_peer_tickers(ticker,include_target=True)
+        if len(p)>1:return p
+    except Exception:
+        pass
+    return sector_universe_tickers(ticker)
+
 def industry_label(ticker):
-    u=universe();z=u[u.Ticker.eq(str(ticker).upper())]
-    if z.empty:return 'Ngành'
-    r=z.iloc[0]
-    if r.EntityType=='BANK':return 'Trung bình các ngân hàng niêm yết/ĐKGD'
-    if r.EntityType=='SECURITIES':return 'Trung bình ngành công ty chứng khoán niêm yết/ĐKGD'
-    return f"Trung bình ngành {r.Sector}"
+    try:
+        from scripts.dynamic_peer_engine import dynamic_peer_label
+        return dynamic_peer_label(ticker)
+    except Exception:
+        u=universe();z=u[u.Ticker.eq(str(ticker).upper())]
+        if z.empty:return 'Ngành'
+        r=z.iloc[0]
+        if r.EntityType=='BANK':return 'Trung bình các ngân hàng niêm yết/ĐKGD'
+        if r.EntityType=='SECURITIES':return 'Trung bình ngành công ty chứng khoán niêm yết/ĐKGD'
+        return f"Trung bình ngành {r.Sector}"
 
 def industry_snapshot(ticker):
     u=universe();z=u[u.Ticker.eq(str(ticker).upper())]
@@ -45,7 +69,7 @@ def build_sector_benchmarks():
         for m in metrics:
             if m not in s.columns:continue
             v=pd.to_numeric(s[m],errors='coerce').dropna()
-            if len(v):rows.append({'Ticker':t,'Sector':u.loc[u.Ticker.eq(t),'Sector'].iloc[0],'Metric':m,'IndustryMean':v.mean(),'IndustryMedian':v.median(),'IndustryCount':len(v)})
+            if len(v):rows.append({'Ticker':t,'Sector':u.loc[u.Ticker.eq(t),'Sector'].iloc[0],'Metric':m,'IndustryMean':v.mean(),'IndustryMedian':v.median(),'IndustryCount':len(v),'BenchmarkType':'DYNAMIC_PEER'})
     z=pd.DataFrame(rows);z.to_csv(DATA/'industry_benchmarks.csv',index=False,encoding='utf-8-sig');return z
 if __name__=='__main__':
-    z=build_sector_benchmarks();print(f'OK - {len(z)} industry benchmark rows')
+    z=build_sector_benchmarks();print(f'OK - {len(z)} dynamic-peer benchmark rows')

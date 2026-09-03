@@ -4,5 +4,5 @@ numpy>=1.26,<3
 matplotlib>=3.8,<4
 reportlab>=4.0,<5
 python-docx>=1.1,<2
-vnstock_data
 openpyxl>=3.1
+# vnstock_data: install separately with the official Vnstock Sponsor installer (not public PyPI).

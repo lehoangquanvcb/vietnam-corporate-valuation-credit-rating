@@ -48,3 +48,10 @@ Không sử dụng repo/app ngân hàng V7.x cũ. Đây là project riêng.
 ## D. Kiến trúc Bronze
 
 Vnstock chỉ chạy ở PC/local environment. Không cài và không gọi vnstock_data trên Streamlit Cloud. Cloud chỉ đọc CSV đã được commit lên GitHub.
+
+## Vnstock Sponsor Bronze credential
+
+- Chạy `SETUP_VNSTOCK_BRONZE.bat` trên máy local để tạo `.env` và thiết lập `VNSTOCK_API_KEY`.
+- Không commit `.env` hoặc API Key lên GitHub.
+- Streamlit Cloud chỉ đọc CSV đã push; không cần Sponsor credential.
+- Kiểm tra trước bằng `RUN_DIAGNOSE_VNSTOCK.bat`.

@@ -1,0 +1,8 @@
+﻿Ticker,Period,Dataset,Field,Value,DataType,SourceMode
+V68,LATEST,balance_sheet,order,118.0,ACTUAL,VNSTOCK_BRONZE
+V68,LATEST,balance_sheet,level,1.0,ACTUAL,VNSTOCK_BRONZE
+V68,LATEST,balance_sheet,off_balance,0.0,ACTUAL,VNSTOCK_BRONZE
+V68,LATEST,balance_sheet,value,839087433555.0,ACTUAL,VNSTOCK_BRONZE
+V68,LATEST,income_statement,order,25.0,ACTUAL,VNSTOCK_BRONZE
+V68,LATEST,income_statement,level,1.0,ACTUAL,VNSTOCK_BRONZE
+V68,LATEST,income_statement,value,106.0,ACTUAL,VNSTOCK_BRONZE

@@ -1,3 +1,7 @@
+
+from vnstock_env import load_vnstock_env
+load_vnstock_env()
+
 from pathlib import Path
 from datetime import datetime
 import json, re, sys, time, unicodedata, argparse, os
@@ -65,7 +69,24 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 RAW = DATA / "raw"
 DATA.mkdir(exist_ok=True); RAW.mkdir(exist_ok=True)
-BANKS = json.loads((ROOT / "config" / "banks.json").read_text(encoding="utf-8"))
+def _bank_universe():
+    p=ROOT/'config'/'company_universe.csv'
+    if p.exists():
+        try:
+            u=pd.read_csv(p)
+            u['Ticker']=u['Ticker'].astype(str).str.upper().str.strip()
+            q=u[u['EntityType'].astype(str).str.upper().eq('BANK')]
+            if 'Active' in q.columns:
+                q=q[pd.to_numeric(q['Active'],errors='coerce').fillna(1).eq(1)]
+            vals=sorted(q['Ticker'].dropna().unique().tolist())
+            if vals:return vals
+        except Exception as exc:
+            print('WARNING - cannot read dynamic bank universe:',exc)
+    # Backward-compatible fallback only when discovery/master is unavailable.
+    q=ROOT/'config'/'banks.json'
+    return json.loads(q.read_text(encoding='utf-8')) if q.exists() else []
+
+BANKS = _bank_universe()
 
 VNSTOCK_IMPORT_ERROR=None
 try:

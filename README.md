@@ -268,3 +268,96 @@ Mỗi chương report có thêm phân tích định lượng so với trung bìn
 - RỦI RO VĨ MÔ and RỦI RO NGÀNH contain only external-environment analysis and public-source evidence.
 - The issuer-specific KPI transmission block (NIM/CASA/LDR/CAR/NPL for banks) is rendered once only under HỒ SƠ KINH DOANH as “Liên hệ với hồ sơ doanh nghiệp”.
 - Removed stale Python bytecode caches from the distribution to prevent an older report layout from being executed.
+
+
+### 8.52 report placement fix
+- In equity analysis reports, issuer-specific bank KPIs (NIM/CASA/LDR/NPL/CAR/ROE) are no longer rendered under `VII. TRIỂN VỌNG NGÀNH`.
+- The block is rendered once under `II. HOẠT ĐỘNG KINH DOANH` as `Hiệu quả kinh doanh và sức chống chịu`.
+- `VII. TRIỂN VỌNG NGÀNH` contains public macro/industry intelligence only.
+
+## V8.54 - FIX REFRESH ONE COMPANY ROUTING
+- Sửa `RUN_REFRESH_ONE_COMPANY.bat`: trước đây fallback gọi sai tham số `--ticker`, trong khi `refresh_vnstock.py` chỉ nhận `--tickers`.
+- Bổ sung `scripts/refresh_one_company.py` để route đúng theo `EntityType`:
+  - BANK -> `refresh_vnstock.py --tickers <ticker>`
+  - SECURITIES/CORPORATE -> `refresh_vnstock_multisector.py <ticker>`
+- Nhờ đó VDS và các công ty chứng khoán không còn bị đưa nhầm vào bank refresh pipeline.
+
+
+## 8.55 — Full-market Vnstock Bronze refresh
+
+Package không còn dùng danh sách 73 mã như một whitelist. `RUN_FULL_REFRESH.bat` / `RUN_REFRESH_ALL_VNSTOCK.bat` sẽ:
+
+1. gọi Vnstock Listing để phát hiện **toàn bộ mã cổ phiếu hiện có trong nguồn Listing**;
+2. lưu payload Listing đầy đủ tại `config/vnstock_listing_full.csv`;
+3. tự phân loại BANK / SECURITIES / CORPORATE;
+4. refresh toàn bộ ngân hàng bằng bank parser chuyên biệt;
+5. refresh toàn bộ CTCK và doanh nghiệp phi tài chính bằng multisector parser;
+6. lưu nguyên bảng ratio / balance sheet / income statement / cash flow theo từng ticker trong `data/raw/`;
+7. lưu **mọi trường số** Vnstock trả về theo từng mã tại `data/fundamentals_long/<TICKER>.csv`, có chỉ mục `data/vnstock_company_fundamentals_manifest.csv`; cách partition này tránh lỗi RAM khi chạy toàn thị trường;
+8. cập nhật benchmark, coverage, intelligent analyst và validation sau khi Bronze hoàn tất.
+
+### Chạy local
+
+```bat
+RUN_FULL_REFRESH.bat
+```
+
+hoặc:
+
+```bat
+RUN_REFRESH_ALL_VNSTOCK.bat
+```
+
+Sau khi hoàn tất, kiểm tra `git status`, rồi `git add .`, `git commit` và `git push`. Streamlit Cloud chỉ đọc CSV trong GitHub, không gọi Vnstock lúc runtime.
+
+**Lưu ý dung lượng:** full-market refresh tạo nhiều file raw. Nếu GitHub repo tăng quá nhanh, có thể chỉ commit các file Bronze tổng hợp (`company_snapshot.csv`, `company_history_long.csv`, `bank_snapshot.csv`, `bank_history_long.csv`, `vnstock_company_fundamentals_manifest.csv`, universe và benchmark; thư mục `data/fundamentals_long/` có thể giữ local nếu repo quá lớn) và giữ `data/raw/` local.
+
+## 8.56 - Dynamic Peer Engine trên toàn thị trường
+
+- Peer group không còn là nhóm tĩnh theo Master. Sau Full Refresh, hệ thống tự chọn tối đa 10 doanh nghiệp tương đồng từ toàn bộ universe Vnstock.
+- Ngân hàng: ưu tiên tương đồng về quy mô tài sản, ROE, NIM, NPL, CAR, CASA, LDR và cơ cấu tài sản/vốn.
+- Công ty chứng khoán: ưu tiên quy mô tài sản/vốn/doanh thu, ROE, đòn bẩy, thanh khoản, margin/vốn chủ và hiệu suất tài sản.
+- Doanh nghiệp phi tài chính: trước hết khóa theo ICB cấp 2/ngành; sau đó xếp hạng tương đồng theo quy mô, doanh thu, vốn, ROE/ROA, đòn bẩy, thanh khoản và hiệu suất tài sản. Nếu ngành có quá ít doanh nghiệp, engine tự mở rộng pool theo ICB cấp 1.
+- Mỗi lần `RUN_FULL_REFRESH.bat` sẽ tạo `data/dynamic_peer_map.csv` và `data/dynamic_peer_summary.csv`, rồi benchmark/valuation/report sử dụng nhóm peer động này.
+- `PeerGroup` trong Master vẫn được giữ làm metadata/fallback; không còn quyết định benchmark chính.
+
+## 8.57 - Fix vnstock_data v3 Listing discovery
+`discover_listed_universe.py` now uses `from vnstock_data import Reference; Reference().equity.list()` as the primary full-market universe API. The separate legacy `vnstock` package is no longer required for discovery. `RUN_DIAGNOSE_VNSTOCK.bat` prints the exact Python interpreter and available vnstock_data classes.
+
+---
+
+## V8.59 — Tích hợp Vnstock Sponsor Bronze an toàn (LOCAL credential)
+
+Từ V8.59, pipeline local có thể nạp trực tiếp **Vnstock Sponsor API Key** từ biến môi trường `VNSTOCK_API_KEY` trước khi import `vnstock_data`. Cơ chế này bám theo hướng dẫn chính thức của Vnstock Sponsor: thư viện `vnstock_data` tự nhận diện API Key trong môi trường và áp dụng quyền/hạn mức của gói tài trợ.
+
+### Thiết lập một lần trên Windows
+
+1. Đảm bảo `vnstock_data` đã được cài bằng **Vnstock Sponsor installer** vào môi trường Python/venv của bạn. Không cài `vnstock_data` bằng pip công khai.
+2. Chạy `SETUP_VNSTOCK_BRONZE.bat`.
+3. Dán API Key khi PowerShell yêu cầu. Key được nhập ở chế độ ẩn.
+4. Nếu Sponsor installer nằm trong một venv riêng, nhập đường dẫn venv (ví dụ `C:\Users\HP\.venv`).
+5. Chạy `RUN_DIAGNOSE_VNSTOCK.bat`. Khi `Reference().equity.list()` trả về `OK`, chạy `RUN_FULL_REFRESH.bat`.
+
+Package tạo file `.env` chỉ trên máy local, dạng:
+
+```text
+VNSTOCK_API_KEY=<YOUR_KEY>
+VNSTOCK_INTERACTIVE=0
+VNSTOCK_LANGUAGE=2
+VNSTOCK_VENV_PATH=C:\...\.venv
+```
+
+**Không đưa `.env` lên GitHub.** `.gitignore` đã chặn `.env`, `.env.*`, `*.key`, `*.secret`; chỉ `.env.example` được phép commit. Các script chỉ hiển thị key ở dạng che (`abcd...wxyz`) khi chẩn đoán, không ghi key vào CSV, report hay log.
+
+### Kiến trúc sau nâng cấp
+
+`VNSTOCK Sponsor Bronze API key (LOCAL)` → `vnstock_data` → `Reference/Market/Fundamental/Insights` → `raw + Bronze CSV` → `dynamic peer/benchmark/analyst` → `GitHub` → `Streamlit Cloud đọc CSV`.
+
+Streamlit Cloud **không cần và không nên chứa API Key**. Toàn bộ truy cập Sponsor vẫn chạy ở máy local/self-hosted runner.
+
+
+## 8.60 - Memory-safe full-market Bronze
+- Không gom hàng chục triệu dòng fundamentals vào một `list`/`DataFrame` trong RAM.
+- Mỗi mã được ghi ngay vào `data/fundamentals_long/<TICKER>.csv`.
+- Có checkpoint mỗi 50 mã.
+- Nếu lần 8.59 đã tải xong raw nhưng lỗi `ArrayMemoryError` ở cuối, chạy `RUN_RECOVER_MULTISECTOR_FROM_RAW.bat` để tái dựng Bronze từ raw hiện có mà không tải lại 1.723 mã.

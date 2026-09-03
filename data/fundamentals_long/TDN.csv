@@ -1,0 +1,4 @@
+﻿Ticker,Period,Dataset,Field,Value,DataType,SourceMode
+TDN,LATEST,cash_flow,order,51.0,ACTUAL,VNSTOCK_BRONZE
+TDN,LATEST,cash_flow,level,1.0,ACTUAL,VNSTOCK_BRONZE
+TDN,LATEST,cash_flow,value,2289103761.0,ACTUAL,VNSTOCK_BRONZE

@@ -1,3 +1,9 @@
+import sys as _sys
+from pathlib import Path as _Path
+_PROJECT_ROOT = _Path(__file__).resolve().parents[1]
+if str(_PROJECT_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_PROJECT_ROOT))
+
 import numpy as np
 from pathlib import Path
 from io import BytesIO
@@ -151,10 +157,10 @@ def _style_doc(doc, report_type=None):
     header.alignment=WD_ALIGN_PARAGRAPH.LEFT
     header.paragraph_format.space_before=Pt(0); header.paragraph_format.space_after=Pt(0)
     for r in header.runs:
-        r.font.name='Lato'; r.font.size=Pt(8); r.bold=False
+        r.font.name='Lato'; r.font.size=Pt(9); r.bold=False
     footer=sec.footer.paragraphs[0]; footer.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    r=footer.add_run('Tài liệu này chỉ có tính chất tham khảo, chúng tôi không chịu trách nhiệm về độ chính xác của dữ liệu đầu vào cũng như kết quả đầu ra')
-    r.font.name='Lato'; r.font.size=Pt(8)
+    r=footer.add_run('Tài liệu chỉ có tính chất tham khảo, tác giả không chịu trách nhiệm về độ chính xác của dữ liệu đầu vào cũng như kết quả đầu ra')
+    r.font.name='Lato'; r.font.size=Pt(9)
 
 def _add_title(doc,ticker,meta,report_type):
     p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER
@@ -807,16 +813,16 @@ def _add_two_charts(doc,items,width_mm=76):
 def _cover_sample(doc,ticker,meta,report_type):
     # Dense, simple cover inspired by supplied reports: no metadata table that consumes space.
     for _ in range(3): doc.add_paragraph()
-    t=doc.add_table(rows=1,cols=1);c=t.cell(0,0);_set_cell_shading(c,GREEN);_set_cell_margins(c,top=520,start=220,bottom=520,end=220)
+    t=doc.add_table(rows=1,cols=1);c=t.cell(0,0);_set_cell_shading(c,GREEN);_set_cell_margins(c,top=850,start=320,bottom=850,end=320)
     p=c.paragraphs[0];p.alignment=WD_ALIGN_PARAGRAPH.LEFT
     title='BÁO CÁO XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH CỔ PHIẾU'
-    r=p.add_run(title+'\n');r.bold=True;r.font.name='Lato';r.font.size=Pt(23)
+    r=p.add_run(title+'\n');r.bold=True;r.font.name='Lato';r.font.size=Pt(30)
     col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');r._r.get_or_add_rPr().append(col)
-    r=p.add_run(company_display_name(meta,ticker));r.bold=True;r.font.name='Lato';r.font.size=Pt(18)
+    r=p.add_run(company_display_name(meta,ticker));r.bold=True;r.font.name='Lato';r.font.size=Pt(22)
     col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');r._r.get_or_add_rPr().append(col)
     p=doc.add_paragraph();p.paragraph_format.space_before=Pt(16);p.alignment=WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.left_indent=Mm(0);p.paragraph_format.right_indent=Mm(0)
-    for i,(label,value) in enumerate([('NGÀNH',meta.get('Sector')),('QUỐC GIA','VIỆT NAM')]):
+    for i,(label,value) in enumerate([('NGÀNH',str(meta.get('Sector','')).upper()),('QUỐC GIA','VIỆT NAM')]):
         if i: p.add_run('\n')
         r=p.add_run(f"{label}: ");r.font.name='Lato';r.font.size=Pt(11);r.bold=True
         r=p.add_run(str(value));r.font.name='Lato';r.font.size=Pt(11);r.bold=True
@@ -1291,7 +1297,21 @@ def _v840_analysis_body(doc,ticker,meta,s,val):
                 blocks=[('Thu nhập và khả năng sinh lời',['ROE','ROA','NIM','CIR','NII_OperatingIncome','ProfitAssets'],'ROE'),('Tăng trưởng tín dụng và nguồn vốn',['GrossLoans','CustomerDeposits','LDR','CASA','LoanAssets','DepositAssets'],'GrossLoans')]
             elif et=='SECURITIES':blocks=[('Tăng trưởng và hiệu quả hoạt động',['Revenue','ROE','ROA','NetMargin'],'Revenue'),('Cơ cấu vốn phục vụ kinh doanh',['AvailableCapitalRatio','DebtEquity','CurrentRatio'],'AvailableCapitalRatio')]
             else:blocks=[('Tăng trưởng và biên lợi nhuận',['Revenue','GrossMargin','NetMargin','AssetTurnover'],'Revenue'),('Hiệu quả vốn',['ROE','ROA','DebtEquity'],'ROE')]
-            for i,(t,ms,ch) in enumerate(blocks):_v840_integrated_block(doc,ticker,t,ms,_v840_analysis_text(ticker,ms),chart=ch,reverse=bool(i%2));continue
+            for i,(t,ms,ch) in enumerate(blocks):
+                _v840_integrated_block(doc,ticker,t,ms,_v840_analysis_text(ticker,ms),chart=ch,reverse=bool(i%2))
+            # Issuer-specific KPI transmission belongs in the business/operations section,
+            # not in the industry outlook. Render it once here only.
+            if et=='BANK':
+                _v840_integrated_block(
+                    doc,ticker,'Hiệu quả kinh doanh và sức chống chịu',
+                    ['NIM','CASA','LDR','NPL','CAR','ROE'],
+                    _v840_analysis_text(
+                        ticker,['NIM','CASA','LDR','NPL','CAR','ROE'],
+                        'Các chỉ tiêu trên cho thấy mức độ doanh nghiệp có thể hưởng lợi từ tăng trưởng tín dụng mà không đánh đổi quá mức NIM, chất lượng tài sản hoặc thanh khoản.'
+                    ),
+                    chart='NIM'
+                )
+            continue
         if key=='financials':
             if et=='BANK':blocks=[('Chất lượng tài sản và chi phí rủi ro',['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],'NPL'),('An toàn vốn và cấu trúc bảng cân đối',['CAR','EquityAssets','TangibleEquityAssets','AssetEquity','ProfitAssets'],'CAR'),('Nguồn vốn và thanh khoản',['CASA','LDR','DepositAssets','FundingGapAssets','CustomerDeposits'],'CASA')]
             elif et=='SECURITIES':blocks=[('Đòn bẩy và thanh khoản',['DebtEquity','CurrentRatio','CFO_Debt','CashAssets'],'DebtEquity'),('Rủi ro bảng cân đối',['MarginLoansEquity','AvailableCapitalRatio','ROA'],'MarginLoansEquity')]
@@ -1326,8 +1346,6 @@ def _v840_analysis_body(doc,ticker,meta,s,val):
                 if title:_subhead(doc,title)
                 _intel_body(doc,nar)
                 _intel_source(doc,source,asof,url)
-            if et=='BANK':
-                _v840_integrated_block(doc,ticker,'Vị thế của doanh nghiệp trong bối cảnh ngành',['NIM','CASA','LDR','NPL','CAR','ROE'],_v840_analysis_text(ticker,['NIM','CASA','LDR','NPL','CAR','ROE'],'Các chỉ tiêu trên cho thấy mức độ doanh nghiệp có thể hưởng lợi từ tăng trưởng tín dụng mà không đánh đổi quá mức NIM, chất lượng tài sản hoặc thanh khoản.'),chart='NIM')
 
 def _v840_appendix(doc,ticker,report_type):
     """No repeated KPI appendix in the client-facing report.
@@ -1363,7 +1381,7 @@ def _normalize_report_typography(doc):
                 r.font.size = Pt(11)
 
     # Every table, including summary/KPI/appendix tables: Lato 10pt. Compact cell spacing.
-    for tb in doc.tables:
+    for tb_idx, tb in enumerate(doc.tables):
         for row in tb.rows:
             for cell in row.cells:
                 for p in cell.paragraphs:
@@ -1372,7 +1390,10 @@ def _normalize_report_typography(doc):
                     p.paragraph_format.line_spacing = 1.0
                     for r in p.runs:
                         r.font.name = 'Lato'
-                        r.font.size = Pt(10)
+                        # The first table is the cover's green title band. Preserve its
+                        # deliberately larger 30pt/22pt hierarchy; analytical tables remain 10pt.
+                        if tb_idx != 0:
+                            r.font.size = Pt(10)
 
     # Matplotlib charts are generated at 10pt globally; reinforce here for subsequent charts.
     plt.rcParams.update({'font.family': 'Lato', 'font.size': 10})

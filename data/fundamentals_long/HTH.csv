@@ -1,0 +1,4 @@
+﻿Ticker,Period,Dataset,Field,Value,DataType,SourceMode
+HTH,LATEST,ratio,order,60.0,ACTUAL,VNSTOCK_BRONZE
+HTH,LATEST,ratio,level,2.0,ACTUAL,VNSTOCK_BRONZE
+HTH,LATEST,ratio,value,0.0,ACTUAL,VNSTOCK_BRONZE

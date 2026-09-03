@@ -1,3 +1,7 @@
+
+from vnstock_env import load_vnstock_env
+load_vnstock_env()
+
 from pathlib import Path
 import re, unicodedata
 import pandas as pd
@@ -24,21 +28,28 @@ def _reference():
         return None
 
 def _listing():
+    # Legacy compatibility only. Current vnstock_data v3 uses Reference.
     try:
         from vnstock_data import Listing
+        for make in [lambda:Listing(source='VCI'),lambda:Listing(),lambda:Listing(source='KBS')]:
+            try:return make()
+            except Exception:pass
     except Exception:
-        try: from vnstock import Listing
-        except Exception:return None
-    for make in [lambda:Listing(source='VCI'),lambda:Listing(),lambda:Listing(source='KBS')]:
-        try:return make()
-        except Exception:pass
+        pass
+    try:
+        from vnstock import Listing
+        for make in [lambda:Listing(source='VCI'),lambda:Listing(),lambda:Listing(source='KBS')]:
+            try:return make()
+            except Exception:pass
+    except Exception:
+        pass
     return None
 
 def fetch_industry_map():
     frames=[]
     ref=_reference()
     if ref is not None:
-        for call in [lambda:ref.industry.sectors(lang='vi'),lambda:ref.industry.sectors(),lambda:ref.equity.list_by_industry(lang='vi'),lambda:ref.equity.list_by_industry()]:
+        for call in [lambda:ref.equity.list(),lambda:ref.industry.sectors(lang='vi'),lambda:ref.industry.sectors()]:
             try:
                 z=pd.DataFrame(call())
                 if len(z):frames.append(z)
