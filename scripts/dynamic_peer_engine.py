@@ -208,6 +208,11 @@ def dynamic_peer_tickers(ticker: str, include_target=True, max_peers: int=MAX_PE
 
 
 def dynamic_peer_label(ticker: str):
+    # Analyst override is authoritative for the label as well as selection.
+    u=universe(); ov,olabel=_override_pool(_norm_ticker(ticker),u)
+    if olabel and len(ov)>=2:
+        n=max(0,len(ov)-1)
+        return f'Nhóm tương đồng động: {n} DN từ {olabel}'
     p = select_dynamic_peers(ticker)
     if p.empty:
         return 'Nhóm tương đồng động (chưa đủ dữ liệu)'

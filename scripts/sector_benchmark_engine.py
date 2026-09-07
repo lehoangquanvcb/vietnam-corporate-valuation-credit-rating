@@ -7,7 +7,7 @@ if str(_PROJECT_ROOT) not in _sys.path:
 from pathlib import Path
 import pandas as pd, numpy as np
 from scripts.universal_data import universe,bank_snapshot,generic_snapshot,read_csv,period_date
-ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data'
+ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data';CFG=ROOT/'config'
 
 MIN_BENCHMARK_PEERS=5
 
@@ -42,8 +42,25 @@ def sector_universe_tickers(ticker):
     sec=str(r.Sector);return u[(u.EntityType.eq('CORPORATE')) & (u.Sector.astype(str).eq(sec))].Ticker.tolist()
 
 
+def _analyst_override_tickers(ticker):
+    t=str(ticker).upper().strip(); path=CFG/'dynamic_peer_overrides.csv'
+    try:
+        o=pd.read_csv(path)
+        if o.empty or not {'TargetTicker','PeerTicker'}.issubset(o.columns): return []
+        o=o.copy();o['TargetTicker']=o['TargetTicker'].astype(str).str.upper().str.strip();o['PeerTicker']=o['PeerTicker'].astype(str).str.upper().str.strip()
+        if 'Active' in o.columns:o=o[pd.to_numeric(o['Active'],errors='coerce').fillna(1).eq(1)]
+        z=o[o.TargetTicker.eq(t)].copy()
+        if z.empty:return []
+        if 'Priority' in z.columns:
+            z['_p']=pd.to_numeric(z['Priority'],errors='coerce').fillna(9999);z=z.sort_values(['_p','PeerTicker'])
+        return [x for x in z.PeerTicker.astype(str).tolist() if x and x!=t]
+    except Exception:return []
+
 def industry_tickers(ticker):
-    """Target + its selected dynamic peers, retained for UI peer-position tables."""
+    """Target + peers. Analyst override is authoritative when present."""
+    t=str(ticker).upper().strip(); ov=_analyst_override_tickers(t)
+    if ov:
+        return [t]+ov
     try:
         from scripts.dynamic_peer_engine import dynamic_peer_tickers
         p=dynamic_peer_tickers(ticker,include_target=True)
@@ -60,6 +77,8 @@ def benchmark_peer_tickers(ticker):
 
 
 def industry_label(ticker):
+    ov=_analyst_override_tickers(ticker)
+    if ov:return f'Nhóm tương đồng động: {len(ov)} DN từ Nhóm peer chuyên ngành (analyst override)'
     try:
         from scripts.dynamic_peer_engine import dynamic_peer_label
         return dynamic_peer_label(ticker)

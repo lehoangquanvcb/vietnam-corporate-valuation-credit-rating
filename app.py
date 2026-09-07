@@ -23,8 +23,46 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
+BUILD_TAG='V8.73.1-CLOUD-RUNTIME-GUARD'
+
+def _override_peer_info(ticker):
+    """Read analyst peer override directly at UI boundary so Cloud/local resolve identically."""
+    path=ROOT/'config'/'dynamic_peer_overrides.csv'
+    try:
+        o=pd.read_csv(path)
+        if o.empty or not {'TargetTicker','PeerTicker'}.issubset(o.columns): return None, []
+        o=o.copy(); o['TargetTicker']=o['TargetTicker'].astype(str).str.upper().str.strip(); o['PeerTicker']=o['PeerTicker'].astype(str).str.upper().str.strip()
+        if 'Active' in o.columns: o=o[pd.to_numeric(o['Active'],errors='coerce').fillna(1).eq(1)]
+        z=o[o['TargetTicker'].eq(str(ticker).upper().strip())].copy()
+        if z.empty:return None, []
+        if 'Priority' in z.columns:
+            z['_p']=pd.to_numeric(z['Priority'],errors='coerce').fillna(9999); z=z.sort_values(['_p','PeerTicker'])
+        peers=[x for x in z.PeerTicker.astype(str).tolist() if x and x!=str(ticker).upper().strip()]
+        return 'Nhóm peer chuyên ngành (analyst override)', peers
+    except Exception:
+        return None, []
+
+def _final_chart_guard(metric, df):
+    """Last-mile validity guard: malformed upstream values must never reach Plotly."""
+    if df is None or not len(df): return df
+    q=df.copy(); m=str(metric)
+    for c in ['IndustryMean','IndustryMedian']:
+        if c not in q.columns: continue
+        v=pd.to_numeric(q[c],errors='coerce')
+        if m=='DebtEquity': v=v.where((v>=0)&(v<=10))
+        elif m=='CurrentRatio': v=v.where((v>0)&(v<=20))
+        elif m=='PE': v=v.where((v>0)&(v<=200))
+        elif m=='PB': v=v.where((v>0)&(v<=20))
+        elif m in {'ROE','ROA'}: v=v.where((v>=-2)&(v<=2))
+        q[c]=v
+    keep=[c for c in ['IndustryMean','IndustryMedian'] if c in q.columns]
+    return q.dropna(subset=keep,how='all') if keep else q
 
 def _dynamic_peer_label_ui(ticker, fallback):
+    # V8.73.1: analyst override wins at the UI boundary, independent of imported-module cache.
+    src, peers=_override_peer_info(ticker)
+    if src and peers:
+        return f'Nhóm tương đồng động: {len(peers)} DN từ {src}'
     try:
         from scripts.dynamic_peer_engine import dynamic_peer_label
         x=dynamic_peer_label(ticker)
@@ -49,7 +87,7 @@ def money(x):return 'N/A' if num(x) is None else vi(num(x)*1000,0)+' đồng/cp'
 def bn(x):return 'N/A' if num(x) is None else vi(num(x)/1e9,0)+' tỷ đồng'
 
 def metric_chart(ticker,metric,title,percent=False):
-    h=entity_history(ticker); p=industry_metric_history(ticker,metric); fig=go.Figure()
+    h=entity_history(ticker); p=_final_chart_guard(metric,industry_metric_history(ticker,metric)); fig=go.Figure()
     if len(h):
         z=h[h.Metric.astype(str).eq(metric)].copy(); z['Date']=z.Period.map(period_date); z['Value']=pd.to_numeric(z.Value,errors='coerce'); z=z.dropna(subset=['Date','Value']).sort_values('Date')
         if len(z):fig.add_trace(go.Scatter(x=z.Date,y=z.Value,mode='markers' if len(z)<3 else 'lines+markers',name=ticker))
@@ -125,6 +163,16 @@ st.sidebar.caption(
     f"Nhóm so sánh: {_dynamic_peer_label_ui(selected, _peer_fallback)}\n\n"
     f"Phương pháp: {_methodology}"
 )
+
+# Runtime fingerprint: makes Cloud/local source and peer resolution observable.
+_diag_source,_diag_peers=_override_peer_info(selected)
+with st.sidebar.expander('Runtime / dữ liệu', expanded=False):
+    st.caption(f'Build: {BUILD_TAG}')
+    st.caption(f'Peer source: {_diag_source or "DYNAMIC/FALLBACK"}')
+    st.caption(f'Peer count: {len(_diag_peers) if _diag_peers else "dynamic"}')
+    if _diag_peers: st.caption('Peer tickers: '+', '.join(_diag_peers))
+    st.caption('History: data/company_history_long.csv')
+    st.caption('DebtEquity chart guard: 0–10x')
 
 st.title('NỀN TẢNG PHÂN TÍCH, ĐỊNH GIÁ, M&A & XẾP HẠNG TÍN NHIỆM DOANH NGHIỆP VIỆT NAM')
 st.caption('FULL MARKET DECISION INTELLIGENCE · Ngân hàng + Công ty chứng khoán + Doanh nghiệp phi tài chính · Vnstock Bronze LOCAL → CSV → GitHub → Streamlit')
