@@ -518,27 +518,52 @@ def _add_triangulation_table(doc,ticker):
                 for run in pp.runs:run.font.name='Lato';run.font.size=Pt(10)
 
 
-def peer_bar_chart(ticker,metric,title=None,top_n=12):
+def _latest_metric_period_report(ticker,metric):
+    try:
+        h=entity_history(ticker)
+        z=h[h.Metric.astype(str).eq(metric)].copy()
+        z['Date']=z.Period.map(period_date); z=z.dropna(subset=['Date']).sort_values('Date')
+        return str(z.iloc[-1].Period) if len(z) else 'kỳ gần nhất'
+    except Exception:
+        return 'kỳ gần nhất'
+
+def peer_bar_chart(ticker,metric,title=None,top_n=11):
+    """Vertical latest-period comparison: company + up to 10 peers."""
     from scripts.universal_data import industry_snapshot
     peers=industry_snapshot(ticker)
     if peers is None or not len(peers) or metric not in peers.columns:return None
-    z=peers[['Ticker',metric]].copy()
-    z[metric]=pd.to_numeric(z[metric],errors='coerce')
-    z=z.dropna(subset=[metric]).drop_duplicates('Ticker')
+    z=peers[['Ticker',metric]].copy(); z['Ticker']=z.Ticker.astype(str).str.upper().str.strip(); z[metric]=pd.to_numeric(z[metric],errors='coerce')
+    v=z[metric]
+    if metric=='DebtEquity': v=v.where((v>=0)&(v<=10))
+    elif metric=='CurrentRatio': v=v.where((v>0)&(v<=20))
+    elif metric=='PE': v=v.where((v>0)&(v<=200))
+    elif metric=='PB': v=v.where((v>0)&(v<=20))
+    elif metric in {'ROE','ROA'}: v=v.where((v>=-2)&(v<=2))
+    z[metric]=v; z=z.dropna(subset=[metric]).drop_duplicates('Ticker',keep='last')
     if not len(z):return None
-    selected=str(ticker).upper()
-    company=z[z.Ticker.astype(str).str.upper().eq(selected)]
-    if len(company):
-        cv=float(company.iloc[-1][metric]); z['dist']=(z[metric]-cv).abs()
-        chosen=pd.concat([company,z[~z.Ticker.astype(str).str.upper().eq(selected)].sort_values('dist').head(max(0,top_n-1))])
-    else:
-        chosen=z.sort_values(metric).tail(top_n)
-    chosen=chosen.drop_duplicates('Ticker').sort_values(metric)
-    mean=float(z[metric].mean())
-    fig,ax=plt.subplots(figsize=(8.4,4.2));plt.rcParams.update({'font.family':'Lato','font.size':10})
-    ax.barh(chosen.Ticker.astype(str),chosen[metric]);ax.axvline(mean,linestyle='--',linewidth=1.5,label='Trung bình ngành')
-    ax.set_title(title or f"{VI_METRIC.get(metric,metric)} - so sánh peer",fontsize=11);ax.grid(axis='x',alpha=.2);ax.legend(fontsize=8)
-    if metric in PCT:ax.xaxis.set_major_formatter(lambda v,pos:(f'{v*100:.1f}%').replace('.',','))
+    selected=str(ticker).upper().strip()
+    # Preserve analyst/dynamic peer order when available; target is always the first column.
+    order=[selected]
+    try:
+        from scripts.dynamic_peer_engine import select_dynamic_peers
+        d=select_dynamic_peers(selected)
+        if d is not None and len(d) and 'Ticker' in d.columns:
+            order += [str(x).upper().strip() for x in d.Ticker.tolist() if str(x).upper().strip()!=selected][:10]
+    except Exception: pass
+    if len(order)==1:
+        order += [x for x in z.Ticker.tolist() if x!=selected][:10]
+    chosen=z.set_index('Ticker').reindex(order[:11]).dropna(subset=[metric]).reset_index()
+    if not len(chosen):return None
+    period=_latest_metric_period_report(selected,metric)
+    fig,ax=plt.subplots(figsize=(8.4,3.9));plt.rcParams.update({'font.family':'Lato','font.size':10})
+    bars=ax.bar(chosen.Ticker.astype(str),chosen[metric])
+    ax.set_title(title or f"{VI_METRIC.get(metric,metric)} - DN và 10 peer tại {period}",fontsize=11)
+    ax.grid(axis='y',alpha=.2); ax.tick_params(axis='x',labelrotation=0)
+    if metric in PCT:ax.yaxis.set_major_formatter(lambda v,pos:(f'{v*100:.1f}%').replace('.',','))
+    # Compact data labels; useful when inserted into A4 reports.
+    for b,val in zip(bars,chosen[metric].tolist()):
+        lab=(f'{val*100:.1f}%' if metric in PCT else f'{val:.2f}').replace('.',',')
+        ax.text(b.get_x()+b.get_width()/2,b.get_height(),lab,ha='center',va='bottom' if val>=0 else 'top',fontsize=7,rotation=90)
     fig.tight_layout();bio=BytesIO();fig.savefig(bio,dpi=180,bbox_inches='tight');plt.close(fig);bio.seek(0);return bio
 
 def peer_scatter_chart(ticker,xmetric,ymetric,title=None):
@@ -834,7 +859,7 @@ def _rating_summary_page(doc,ticker,meta,rr):
     t=doc.add_table(rows=1,cols=1);c=t.cell(0,0);_set_cell_shading(c,GREEN);_set_cell_margins(c,top=100,start=110,bottom=100,end=110)
     p=c.paragraphs[0];r=p.add_run(company_display_name(meta,ticker).upper());r.bold=True;r.font.name='Lato';r.font.size=Pt(16)
     col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');r._r.get_or_add_rPr().append(col)
-    p=c.add_paragraph(f"NGÀNH: {meta.get('Sector')}    |    PHƯƠNG PHÁP: {rr.get('MethodologyName',meta.get('Methodology','N/A'))}");p.paragraph_format.space_after=Pt(0)
+    p=c.add_paragraph(f"NGÀNH: {meta.get('Sector')}    |    NHÓM SO SÁNH: {industry_label(ticker)}");p.paragraph_format.space_after=Pt(0)
     for run in p.runs:
         run.font.name='Lato';run.font.size=Pt(9);col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');run._r.get_or_add_rPr().append(col)
     doc.add_paragraph().paragraph_format.space_after=Pt(0)
@@ -854,19 +879,28 @@ def _rating_summary_page(doc,ticker,meta,rr):
         if not rr.get('DataSufficientForAutoRating',True):
             thesis.append(f"Chưa phát hành bậc xếp hạng mô phỏng do dữ liệu doanh nghiệp/peer chưa đủ. Hiện có {rr.get('PeerCount',0)} peer và các chỉ tiêu bằng chứng: {', '.join(rr.get('EvidenceMetrics',[])[:8]) or 'chưa đủ'}.")
         else:
-            thesis.append(f"Kết quả mô phỏng {rr.get('ICR','N/A')} được hình thành từ Rủi ro Vĩ mô & Ngành, Rủi ro Kinh doanh, Rủi ro Tài chính và Rủi ro Quản trị & Quản lý; thanh khoản được xem là yếu tố điều chỉnh riêng.")
-        parts=[]
-        for k,v in rs.items():
-            try: parts.append(f"{k}: {float(v):.1f}/6 ({rl.get(k,'')})")
-            except: pass
-        if parts: thesis.append('Hồ sơ rủi ro: '+'; '.join(parts)+'.')
-        thesis.append(f"Benchmark sử dụng {rr.get('PeerCount',0)} doanh nghiệp tương đồng động; kết quả cuối cùng vẫn cần analyst validation đối với ngành, quản trị, support và các sự kiện trọng yếu.")
+            thesis.append(f"Kết quả mô phỏng hiện tại là {rr.get('ICR','N/A')}. Luận điểm xếp hạng ưu tiên bằng chứng định lượng về quy mô, khả năng sinh lợi, đòn bẩy, dòng tiền và thanh khoản so với nhóm tương đồng.")
+        # Put real company/peer metrics on the first page instead of methodology exposition.
+        keym=['Revenue','GrossMargin','EBITDAMargin','ROE','ROA','DebtEquity','DebtEBITDA','CFO_Debt','FOCF_Debt','CurrentRatio']
+        facts=[_v840_fact(ticker,m) for m in keym]
+        facts=[x for x in facts if x]
+        if facts: thesis.append(' '.join(facts[:4]))
+        cross=_v840_cross_insights(ticker,keym)
+        if cross: thesis.append(cross[0])
+        thesis.append(f"Benchmark hiện có {rr.get('PeerCount',0)} doanh nghiệp tương đồng; các chỉ tiêu được đọc đồng thời theo xu hướng nhiều kỳ và vị trí tại kỳ gần nhất.")
     else:
         a=intelligent_analyze(ticker)
-        thesis=[a.get('Conclusion','')]
-        if a.get('Strengths'): thesis.append('Điểm mạnh: '+' '.join(a['Strengths'][:2]))
+        if meta.get('EntityType')=='BANK':
+            keym=['TotalAssets','GrossLoans','CustomerDeposits','ROE','ROA','NIM','CIR','NPL','CAR','CASA','LDR']
+        else:
+            keym=['TotalAssets','Revenue','Equity','ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','MarketShareBrokerage','MarginLoansEquity']
+        facts=[_v840_fact(ticker,m) for m in keym];facts=[x for x in facts if x]
+        thesis=[f"Kết quả mô phỏng hiện tại là {rr.get('ICR','N/A')}. Báo cáo ưu tiên phân tích số liệu thực tế, xu hướng và vị trí so với peer; phương pháp chi tiết được thu gọn ở audit trail."]
+        if facts: thesis.append(' '.join(facts[:5]))
+        cross=_v840_cross_insights(ticker,keym)
+        if cross: thesis.append(cross[0])
+        if a.get('Strengths'): thesis.append('Điểm mạnh định lượng/định tính: '+' '.join(a['Strengths'][:2]))
         if a.get('Risks'): thesis.append('Điểm cần theo dõi: '+' '.join(a['Risks'][:2]))
-        thesis.append(f"Kết quả mô hình hiện tại là {rr.get('ICR','N/A')}; đánh giá cuối cùng cần đối chiếu dữ liệu nguồn, peer và các yếu tố định tính trọng yếu.")
     for txt in thesis:
         if txt:
             p=right.add_paragraph(str(txt));p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.line_spacing=1.05;p.paragraph_format.space_after=Pt(4)
@@ -1182,13 +1216,20 @@ def _v840_integrated_block(doc,ticker,title,metrics,paras=None,chart=None,revers
         p=textcell.paragraphs[0] if i==0 else textcell.add_paragraph()
         p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.line_spacing=1.05;p.paragraph_format.space_after=Pt(4)
         r=p.add_run(str(txt));r.font.name='Lato';r.font.size=Pt(9.2)
-    # chart first, then compact table immediately below it
+    # Two complementary views in the same analytical block:
+    # (1) multi-period company vs peer mean, and (2) latest-period company vs 10 peers.
     cm=chart or (metrics[0] if metrics else None)
     if cm:
         try:
             bio=chart_metric(ticker,cm,percent=cm in PCT or cm in METH_PCT)
             q=viscell.paragraphs[0];q.alignment=WD_ALIGN_PARAGRAPH.CENTER;q.paragraph_format.space_after=Pt(1)
-            q.add_run().add_picture(bio,width=Mm(69))
+            q.add_run().add_picture(bio,width=Mm(67))
+        except Exception:pass
+        try:
+            bio2=peer_bar_chart(ticker,cm,title=f"{VI_METRIC.get(cm,METH_LABELS.get(cm,cm))} - DN và 10 peer tại kỳ gần nhất",top_n=11)
+            if bio2:
+                q2=viscell.add_paragraph();q2.alignment=WD_ALIGN_PARAGRAPH.CENTER;q2.paragraph_format.space_after=Pt(1)
+                q2.add_run().add_picture(bio2,width=Mm(67))
         except Exception:pass
     _v840_mini_table(viscell,ticker,metrics[:8])
     _set_cell_border(left,bottom={'val':'single','sz':'4','color':'D9D9D9'});_set_cell_border(right,bottom={'val':'single','sz':'4','color':'D9D9D9'})
@@ -1308,29 +1349,179 @@ def _v840_rating_body(doc,ticker,meta,s,rr):
             _v840_integrated_block(doc,ticker,'Liên hệ với hồ sơ doanh nghiệp',link_ms,_v840_analysis_text(ticker,link_ms,link_ctx),chart=link_ms[0])
             continue
         if key=='capital_profit':
-            ms=['CAR','EquityAssets','TangibleEquityAssets','AssetEquity','ROE','ROA','ProfitAssets','NIM'] if et=='BANK' else (['ROE','ROA','AvailableCapitalRatio','DebtEquity'] if et=='SECURITIES' else ['ROE','DebtEquity','DebtEBITDA','CFO_Debt'])
-            ctx="Khả năng tạo lợi nhuận và bộ đệm vốn được đọc đồng thời: lợi nhuận cao hỗ trợ tích lũy vốn, nhưng tốc độ tăng tài sản/nợ nhanh có thể làm suy giảm vùng đệm nếu vốn nội sinh không theo kịp."
-            _v840_integrated_block(doc,ticker,'Khả năng sinh lời và bộ đệm vốn',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0]);continue
+            if et=='BANK':
+                _v840_integrated_block(doc,ticker,'An toàn vốn và sức hấp thụ tổn thất',
+                    ['CAR','EquityAssets','TangibleEquityAssets','AssetEquity'],
+                    _v840_analysis_text(ticker,['CAR','EquityAssets','TangibleEquityAssets','AssetEquity'],
+                    'CAR và tỷ trọng vốn chủ sở hữu được đặt cạnh peer để đánh giá khả năng hấp thụ tổn thất và dư địa tăng tài sản có rủi ro. Mức vốn chỉ được coi là tích cực khi duy trì bền vững cùng tốc độ tăng tín dụng.'),
+                    chart='CAR')
+                _v840_integrated_block(doc,ticker,'Khả năng sinh lời và tích lũy vốn nội sinh',
+                    ['ROE','ROA','NIM','CIR','ProfitAssets'],
+                    _v840_analysis_text(ticker,['ROE','ROA','NIM','CIR','ProfitAssets'],
+                    'ROE, ROA, NIM và CIR được phân tích đồng thời để đánh giá chất lượng lợi nhuận, hiệu quả vận hành và khả năng bổ sung vốn từ lợi nhuận giữ lại.'),
+                    chart='ROE',reverse=True)
+            elif et=='SECURITIES':
+                _v840_integrated_block(doc,ticker,'Vốn khả dụng và đòn bẩy tài chính',
+                    ['AvailableCapitalRatio','DebtEquity','EquityAssetsCorp','AssetEquity'],
+                    _v840_analysis_text(ticker,['AvailableCapitalRatio','DebtEquity','EquityAssetsCorp','AssetEquity'],
+                    'Tỷ lệ vốn khả dụng và đòn bẩy là hai biến trọng yếu đối với sức chịu đựng của công ty chứng khoán, đặc biệt trong giai đoạn thanh khoản thị trường suy yếu hoặc tài sản tài chính biến động mạnh.'),
+                    chart='AvailableCapitalRatio')
+                _v840_integrated_block(doc,ticker,'Thu nhập, khả năng sinh lời và độ ổn định',
+                    ['Revenue','ROE','ROA','NetMargin'],
+                    _v840_analysis_text(ticker,['Revenue','ROE','ROA','NetMargin'],
+                    'Khả năng sinh lời được đánh giá cả về mức tuyệt đối, xu hướng và khoảng cách với peer; lợi nhuận biến động mạnh hơn peer là tín hiệu cần theo dõi khi doanh thu phụ thuộc đáng kể vào tự doanh.'),
+                    chart='ROE',reverse=True)
+            else:
+                ms=['ROE','DebtEquity','DebtEBITDA','CFO_Debt']
+                ctx="Khả năng tạo lợi nhuận và bộ đệm vốn được đọc đồng thời: lợi nhuận cao hỗ trợ tích lũy vốn, nhưng tốc độ tăng tài sản/nợ nhanh có thể làm suy giảm vùng đệm nếu vốn nội sinh không theo kịp."
+                _v840_integrated_block(doc,ticker,'Khả năng sinh lời và bộ đệm vốn',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0])
+            continue
         if key=='risk_position':
-            ms=['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets','CAR','EquityAssets'] if et=='BANK' else (['MarginLoansEquity','DebtEquity','ROA','CurrentRatio'] if et=='SECURITIES' else ['DebtEBITDA','NetDebtEBITDA','CFO_Debt','FOCF_Debt'])
-            ctx="Đây là nhóm chỉ tiêu có khả năng truyền dẫn trực tiếp sang lợi nhuận, vốn và khả năng thực hiện nghĩa vụ nợ; chênh lệch bất lợi so với peer được coi là tín hiệu cần giám sát chặt hơn."
-            _v840_integrated_block(doc,ticker,'Chất lượng tài sản / khẩu vị rủi ro',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0]);continue
+            if et=='BANK':
+                _v840_integrated_block(doc,ticker,'Chất lượng tài sản và chi phí tín dụng',
+                    ['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],
+                    _v840_analysis_text(ticker,['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],
+                    'NPL được đọc cùng chi phí tín dụng và mức độ tập trung tài sản vào cho vay để đánh giá khả năng tổn thất tín dụng truyền dẫn sang lợi nhuận và vốn.'),
+                    chart='NPL')
+                _v840_integrated_block(doc,ticker,'Tăng trưởng tín dụng và bộ đệm rủi ro',
+                    ['GrossLoans','LoanAssets','CAR','EquityAssets'],
+                    _v840_analysis_text(ticker,['GrossLoans','LoanAssets','CAR','EquityAssets'],
+                    'Tăng trưởng tín dụng cao hơn peer chỉ tích cực khi không đi cùng suy giảm CAR hoặc gia tăng NPL; báo cáo ưu tiên mối quan hệ giữa tăng trưởng, bộ đệm vốn và chất lượng tài sản.'),
+                    chart='GrossLoans',reverse=True)
+            elif et=='SECURITIES':
+                _v840_integrated_block(doc,ticker,'Rủi ro bảng cân đối và cho vay ký quỹ',
+                    ['MarginLoansEquity','DebtEquity','AvailableCapitalRatio','CurrentRatio'],
+                    _v840_analysis_text(ticker,['MarginLoansEquity','DebtEquity','AvailableCapitalRatio','CurrentRatio'],
+                    'Cho vay ký quỹ/VCSH, đòn bẩy và vốn khả dụng được đọc đồng thời để đánh giá mức độ nhạy cảm trước biến động giá tài sản, margin call và nhu cầu bổ sung thanh khoản.'),
+                    chart='MarginLoansEquity')
+                _v840_integrated_block(doc,ticker,'Biến động lợi nhuận và khẩu vị rủi ro thị trường',
+                    ['ROE','ROA','NetMargin','Revenue'],
+                    _v840_analysis_text(ticker,['ROE','ROA','NetMargin','Revenue'],
+                    'Biến động ROE/ROA và biên lợi nhuận so với peer được dùng như tín hiệu định lượng về mức độ ổn định của mô hình thu nhập; các khoản tự doanh cần được phân tích sâu hơn khi dữ liệu chi tiết có sẵn.'),
+                    chart='ROA',reverse=True)
+            else:
+                ms=['DebtEBITDA','NetDebtEBITDA','CFO_Debt','FOCF_Debt']
+                ctx="Đây là nhóm chỉ tiêu có khả năng truyền dẫn trực tiếp sang lợi nhuận, vốn và khả năng thực hiện nghĩa vụ nợ; chênh lệch bất lợi so với peer được coi là tín hiệu cần giám sát chặt hơn."
+                _v840_integrated_block(doc,ticker,'Chất lượng tài sản / khẩu vị rủi ro',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0])
+            continue
         if key=='financial_risk':
-            ms=['DebtEquity','DebtAssets','NetDebtEquity','DebtEBITDA','NetDebtEBITDA','InterestCoverage','CFO_Debt','FOCF_Debt']
-            ctx='Hồ sơ Tài chính tập trung vào đòn bẩy, khả năng tạo dòng tiền và năng lực trả nợ. Nợ/EBITDA và Nợ ròng/EBITDA được đọc cùng CFO/Nợ, FOCF/Nợ và khả năng trả lãi; một tỷ lệ đòn bẩy đơn lẻ không đủ để kết luận nếu dòng tiền biến động mạnh.'
-            _v840_integrated_block(doc,ticker,'Đòn bẩy, dòng tiền và khả năng trả nợ',ms,_v840_analysis_text(ticker,ms,ctx),chart='DebtEquity');continue
+            ms1=['DebtEquity','DebtAssets','NetDebtEquity','DebtEBITDA','NetDebtEBITDA','InterestCoverage']
+            ctx1='Đòn bẩy được đánh giá theo cả cấu trúc vốn và khả năng tạo EBITDA. Nợ/VCSH, Nợ/EBITDA và Nợ ròng/EBITDA cần được đọc cùng xu hướng nhiều kỳ và phân bố peer để xác định doanh nghiệp đang ở vùng bảo thủ, trung tính hay căng thẳng.'
+            _v840_integrated_block(doc,ticker,'Đòn bẩy và sức chịu đựng bảng cân đối',ms1,_v840_analysis_text(ticker,ms1,ctx1),chart='DebtEquity')
+            ms2=['CFO_Debt','FOCF_Debt','CFO_Margin','FOCFMargin','CashDebt','CurrentRatio']
+            ctx2='Khả năng trả nợ phụ thuộc chất lượng chuyển đổi lợi nhuận thành tiền. CFO/Nợ và FOCF/Nợ được ưu tiên để kiểm tra sức trả nợ thực tế, trong khi tiền/Nợ và hệ số thanh toán hiện hành phản ánh bộ đệm thanh khoản tại thời điểm đánh giá.'
+            _v840_integrated_block(doc,ticker,'Dòng tiền, khả năng trả nợ và bộ đệm thanh khoản',ms2,_v840_analysis_text(ticker,ms2,ctx2),chart='CFO_Debt');continue
         if key=='funding_liquidity':
-            ms=['CurrentRatio','WorkingCapitalAssets','CashAssets','CashDebt','CFO_Debt','FOCF_Debt'] if et=='CORPORATE' else (['CASA','LDR','CustomerDeposits','DepositAssets','FundingGapAssets','CAR'] if et=='BANK' else ['CurrentRatio','DebtEquity','CFO_Debt','CashAssets'])
-            ctx="Thanh khoản được đánh giá tách biệt khỏi rủi ro tài chính: khả năng đáp ứng nghĩa vụ ngắn hạn, bộ đệm tiền và khả năng tạo tiền cần được đọc cùng cấu trúc đáo hạn/tái cấp vốn."
-            _v840_integrated_block(doc,ticker,'Nguồn vốn, thanh khoản và khả năng trả nợ',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0]);continue
+            if et=='BANK':
+                _v840_integrated_block(doc,ticker,'Chất lượng và tính ổn định của nguồn vốn',
+                    ['CASA','CustomerDeposits','DepositAssets','FundingGapAssets'],
+                    _v840_analysis_text(ticker,['CASA','CustomerDeposits','DepositAssets','FundingGapAssets'],
+                    'CASA thấp hơn peer làm tăng chi phí vốn và giảm khả năng bảo vệ NIM; chênh lệch cho vay - tiền gửi và tỷ trọng tiền gửi khách hàng cho thấy mức độ phụ thuộc vào nguồn vốn thị trường.'),
+                    chart='CASA')
+                _v840_integrated_block(doc,ticker,'Thanh khoản và cân đối tăng trưởng',
+                    ['LDR','CAR','CustomerDeposits','GrossLoans'],
+                    _v840_analysis_text(ticker,['LDR','CAR','CustomerDeposits','GrossLoans'],
+                    'LDR được đọc cùng tốc độ tăng tiền gửi và tín dụng để đánh giá mức độ căng thẳng thanh khoản. CAR đóng vai trò bộ đệm bổ sung khi bảng cân đối mở rộng nhanh.'),
+                    chart='LDR',reverse=True)
+            elif et=='SECURITIES':
+                _v840_integrated_block(doc,ticker,'Cơ cấu nguồn vốn và khả năng tái cấp vốn',
+                    ['DebtEquity','CashAssets','CFO_Debt','Equity'],
+                    _v840_analysis_text(ticker,['DebtEquity','CashAssets','CFO_Debt','Equity'],
+                    'Cơ cấu nguồn vốn được đánh giá qua đòn bẩy, quy mô vốn chủ, bộ đệm tiền và khả năng tạo dòng tiền; phụ thuộc quá mức vào nợ ngắn hạn có thể làm tăng rủi ro tái cấp vốn khi thị trường vốn biến động.'),
+                    chart='DebtEquity')
+                _v840_integrated_block(doc,ticker,'Thanh khoản và mức thặng dư vốn khả dụng',
+                    ['CurrentRatio','AvailableCapitalRatio','WorkingCapitalAssets','CashAssets'],
+                    _v840_analysis_text(ticker,['CurrentRatio','AvailableCapitalRatio','WorkingCapitalAssets','CashAssets'],
+                    'Thanh khoản và vốn khả dụng phải duy trì vùng đệm đủ lớn để hấp thụ biến động tài sản tài chính và đáp ứng nghĩa vụ ngắn hạn ngay cả khi khả năng huy động mới suy giảm.'),
+                    chart='CurrentRatio',reverse=True)
+            else:
+                ms=['CurrentRatio','WorkingCapitalAssets','CashAssets','CashDebt','CFO_Debt','FOCF_Debt']
+                ctx="Thanh khoản được đánh giá tách biệt khỏi rủi ro tài chính: khả năng đáp ứng nghĩa vụ ngắn hạn, bộ đệm tiền và khả năng tạo tiền cần được đọc cùng cấu trúc đáo hạn/tái cấp vốn."
+                _v840_integrated_block(doc,ticker,'Nguồn vốn, thanh khoản và khả năng trả nợ',ms,_v840_analysis_text(ticker,ms,ctx),chart=ms[0])
+            continue
         if key=='governance':
-            p=doc.add_paragraph("Rủi ro Quản trị và Quản lý được xem xét riêng đối với cơ cấu quản trị, năng lực Ban lãnh đạo, chiến lược, chính sách tài chính, quản trị rủi ro, giao dịch bên liên quan và mức độ phụ thuộc hệ sinh thái. Chỉ các nhận định có bằng chứng mới được đưa vào điều chỉnh; khi dữ liệu định tính chưa đủ, mô hình giữ trạng thái trung lập và yêu cầu chuyên viên xác nhận thay vì tự suy diễn.");p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;continue
+            p=doc.add_paragraph("Phần này tập trung vào các vấn đề có thể thay đổi hồ sơ tín dụng: chiến lược tăng trưởng, khẩu vị đòn bẩy, giao dịch bên liên quan, kỷ luật tài chính, năng lực quản trị rủi ro và mức độ phụ thuộc vào cổ đông/hệ sinh thái. Các yếu tố chưa có bằng chứng được ghi nhận là khoảng trống thông tin, không tự suy diễn.");p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;continue
         if key=='support':
-            p=doc.add_paragraph(f"Kết quả mô hình ghi nhận mức hỗ trợ bên ngoài {rr.get('ExternalSupportNotches',0)} bậc. Tác động hỗ trợ chỉ được đưa vào xếp hạng cuối cùng khi có bằng chứng về năng lực và động cơ hỗ trợ; chi tiết tính toán được đưa xuống phụ lục.");p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;continue
+            p=doc.add_paragraph(f"Hỗ trợ bên ngoài hiện được mô hình ghi nhận {rr.get('ExternalSupportNotches',0)} bậc. Báo cáo chỉ điều chỉnh khi có bằng chứng cụ thể về năng lực và động cơ hỗ trợ.");p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;continue
         if key=='sensitivity':
             a=intelligent_analyze(ticker);risks=a.get('Risks',[])[:3]
             p=doc.add_paragraph(f"Bậc xếp hạng hiện tại theo mô hình là {rr.get('ICR','N/A')}. Các yếu tố có thể tạo áp lực hạ bậc gồm: "+('; '.join(risks) if risks else 'suy giảm đáng kể về vốn, chất lượng tài sản, thanh khoản hoặc khả năng sinh lời so với peer.'))
             p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+
+
+
+def _v875_final_rating_scorecard(doc,ticker,meta,rr):
+    """Final compact score/notch table.
+
+    BANK/SECURITIES: emphasize starting point + internal notch bridge + support.
+    CORPORATE: emphasize component scores (1-6), modifiers and support.
+    This is intentionally the LAST analytical section of the rating report.
+    """
+    _section_band(doc,'TỔNG KẾT CẤU PHẦN XẾP HẠNG')
+    et=meta.get('EntityType')
+    if et in ('BANK','SECURITIES'):
+        desc_score={'Rất Mạnh':'1/6','Mạnh':'2/6','Phù Hợp':'3/6','Trung Bình':'4/6','Yếu':'5/6','Rất Yếu':'6/6'}
+        desc_notch={'Rất Mạnh':2,'Mạnh':1,'Phù Hợp':0,'Trung Bình':-1,'Yếu':-2,'Rất Yếu':-4}
+        rows=[]
+        if et=='BANK':
+            rows.append(('Điểm ban đầu ngành / BICRA',str(rr.get('BICRA',rr.get('Anchor','N/A'))),'—','Điểm khởi đầu'))
+        else:
+            rows.append(('BICRA tham chiếu',str(rr.get('BICRAReference','N/A')),'—','Tham chiếu ngành ngân hàng'))
+            rows.append(('Điều chỉnh Anchor Công ty Chứng khoán','Đặc thù ngành CTCK',f"{int(rr.get('SectorAnchorAdjustment',-2)):+d}",str(rr.get('Anchor','N/A'))))
+        for k,v in rr.get('Factors',{}).items():
+            rows.append((str(k),f"{v} ({desc_score.get(v,'N/A')})",f"{desc_notch.get(v,0):+d}",'Điều chỉnh nội sinh'))
+        rows.append(('Tổng điều chỉnh nội sinh','—',f"{int(rr.get('InternalNotches',0)):+d}",str(rr.get('SACP','N/A'))))
+        rows.append(('Hỗ trợ bên ngoài','Trung lập' if int(rr.get('ExternalSupportNotches',0))==0 else 'Có điều chỉnh',f"{int(rr.get('ExternalSupportNotches',0)):+d}",str(rr.get('ICR','N/A'))))
+        rows.append(('Kết quả Xếp hạng',str(rr.get('Outlook','Ổn định')),'—',str(rr.get('ICR','N/A'))))
+        tb=doc.add_table(rows=1,cols=4);tb.style='Table Grid';tb.alignment=WD_TABLE_ALIGNMENT.CENTER
+        hdr=['Cấu phần','Đánh giá / Điểm','Nâng/Hạ notch','Kết quả']
+        for j,x in enumerate(hdr):
+            tb.cell(0,j).text=x;_set_cell_shading(tb.cell(0,j),LIGHT_GREEN)
+        _set_repeat_table_header(tb.rows[0])
+        for row in rows:
+            c=tb.add_row().cells
+            for j,x in enumerate(row):c[j].text=str(x)
+        for row in tb.rows:
+            trPr=row._tr.get_or_add_trPr()
+            if trPr.find(qn('w:cantSplit')) is None:trPr.append(OxmlElement('w:cantSplit'))
+            for c in row.cells:
+                _set_cell_margins(c,top=35,start=45,bottom=35,end=45)
+                for p in c.paragraphs:
+                    p.paragraph_format.space_after=Pt(0);p.paragraph_format.line_spacing=1.0
+                    for r in p.runs:r.font.name='Lato';r.font.size=Pt(9)
+        p=doc.add_paragraph('Bảng tổng kết tập trung vào kết quả của từng cấu phần và tác động notch; phần giải thích phương pháp chi tiết được giữ ở audit trail của nền tảng, không lặp lại trong báo cáo.')
+        p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.space_after=Pt(0)
+    else:
+        rs=rr.get('RiskScores',{});rl=rr.get('RiskLabels',{})
+        tb=doc.add_table(rows=1,cols=4);tb.style='Table Grid';tb.alignment=WD_TABLE_ALIGNMENT.CENTER
+        hdr=['Cấu phần','Điểm','Mức rủi ro / Đánh giá','Tác động']
+        for j,x in enumerate(hdr):
+            tb.cell(0,j).text=x;_set_cell_shading(tb.cell(0,j),LIGHT_GREEN)
+        _set_repeat_table_header(tb.rows[0])
+        rows=[]
+        for k,v in rs.items():
+            try:score=f"{float(v):.1f}/6"
+            except Exception:score='N/A'
+            rows.append((k,score,rl.get(k,'N/A'),'Điểm cấu phần'))
+        rows += [
+            ('Thanh khoản',str(rr.get('LiquidityScore','N/A')),rr.get('Liquidity','N/A'),'Modifier/cap nếu trọng yếu'),
+            ('Modifier','—','—',f"{int(rr.get('ModifierNotches',0)):+d} notch"),
+            ('SCA',rr.get('SCA','N/A'),'—','Sau modifier/cap'),
+            ('Hỗ trợ bên ngoài','—','—',f"{int(rr.get('ExternalSupportNotches',0)):+d} notch"),
+            ('Kết quả Xếp hạng','—',rr.get('Outlook','N/A'),rr.get('ICR','N/A')),
+        ]
+        for row in rows:
+            c=tb.add_row().cells
+            for j,x in enumerate(row):c[j].text=str(x)
+        for row in tb.rows:
+            for c in row.cells:
+                _set_cell_margins(c,top=35,start=45,bottom=35,end=45)
+                for p in c.paragraphs:
+                    p.paragraph_format.space_after=Pt(0);p.paragraph_format.line_spacing=1.0
+                    for r in p.runs:r.font.name='Lato';r.font.size=Pt(9)
+
+    # Final report section requested by the user: score/notch bridge after all analytical sections.
+    _v875_final_rating_scorecard(doc,ticker,meta,rr)
 
 
 def _v840_analysis_body(doc,ticker,meta,s,val):

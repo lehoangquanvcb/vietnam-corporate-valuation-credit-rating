@@ -23,7 +23,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.73.1-CLOUD-RUNTIME-GUARD'
+BUILD_TAG='V8.74-ANALYTICAL-RATING-PEER-BARS'
 
 def _override_peer_info(ticker):
     """Read analyst peer override directly at UI boundary so Cloud/local resolve identically."""
@@ -87,16 +87,52 @@ def money(x):return 'N/A' if num(x) is None else vi(num(x)*1000,0)+' đồng/cp'
 def bn(x):return 'N/A' if num(x) is None else vi(num(x)/1e9,0)+' tỷ đồng'
 
 def metric_chart(ticker,metric,title,percent=False):
+    """Trend chart: exactly two lines, company vs peer mean."""
     h=entity_history(ticker); p=_final_chart_guard(metric,industry_metric_history(ticker,metric)); fig=go.Figure()
     if len(h):
         z=h[h.Metric.astype(str).eq(metric)].copy(); z['Date']=z.Period.map(period_date); z['Value']=pd.to_numeric(z.Value,errors='coerce'); z=z.dropna(subset=['Date','Value']).sort_values('Date')
         if len(z):fig.add_trace(go.Scatter(x=z.Date,y=z.Value,mode='markers' if len(z)<3 else 'lines+markers',name=ticker))
     if len(p):
         fig.add_trace(go.Scatter(x=p.PeriodDate,y=p.IndustryMean,mode='markers' if len(p)<3 else 'lines',line=dict(dash='dash'),name='Trung bình peer'))
-        if 'IndustryMedian' in p.columns:
-            fig.add_trace(go.Scatter(x=p.PeriodDate,y=p.IndustryMedian,mode='markers' if len(p)<3 else 'lines',line=dict(dash='dot'),name='Trung vị peer'))
-    fig.update_layout(title=title,height=370,legend=dict(orientation='h',y=-.2),margin=dict(t=45,b=70),xaxis_title='')
+    fig.update_layout(title=title,height=330,legend=dict(orientation='h',y=-.2),margin=dict(t=45,b=60),xaxis_title='')
     if percent:fig.update_yaxes(tickformat='.1%')
+    return fig
+
+def _latest_metric_period(ticker,metric):
+    try:
+        h=entity_history(ticker)
+        z=h[h.Metric.astype(str).eq(metric)].copy()
+        z['Date']=z.Period.map(period_date); z=z.dropna(subset=['Date']).sort_values('Date')
+        return str(z.iloc[-1].Period) if len(z) else 'kỳ gần nhất'
+    except Exception:
+        return 'kỳ gần nhất'
+
+def latest_peer_bar_chart(ticker,metric,title,percent=False,max_peers=10):
+    """Latest-period cross section: target + up to 10 analyst/dynamic peers."""
+    q=industry_snapshot(ticker)
+    fig=go.Figure()
+    if q is None or not len(q) or metric not in q.columns:
+        fig.update_layout(title=title,height=330); return fig
+    z=q[['Ticker',metric]].copy(); z['Ticker']=z.Ticker.astype(str).str.upper().str.strip(); z[metric]=pd.to_numeric(z[metric],errors='coerce')
+    # Last-mile validity guards mirror the time-series benchmark guard.
+    v=z[metric]
+    if metric=='DebtEquity': v=v.where((v>=0)&(v<=10))
+    elif metric=='CurrentRatio': v=v.where((v>0)&(v<=20))
+    elif metric=='PE': v=v.where((v>0)&(v<=200))
+    elif metric=='PB': v=v.where((v>0)&(v<=20))
+    elif metric in {'ROE','ROA'}: v=v.where((v>=-2)&(v<=2))
+    z[metric]=v; z=z.dropna(subset=[metric]).drop_duplicates('Ticker',keep='last')
+    target=str(ticker).upper().strip(); src, override_peers=_override_peer_info(target)
+    order=[target]+override_peers[:max_peers] if override_peers else [target]+[x for x in z.Ticker.tolist() if x!=target][:max_peers]
+    z=z.set_index('Ticker').reindex(order).dropna(subset=[metric]).reset_index()
+    if not len(z): fig.update_layout(title=title,height=330); return fig
+    period=_latest_metric_period(target,metric)
+    fig.add_trace(go.Bar(x=z.Ticker,y=z[metric],name=f'{target} + peer',text=z[metric],textposition='auto'))
+    fig.update_layout(title=f'{title} · {period}',height=330,showlegend=False,margin=dict(t=45,b=50),xaxis_title='')
+    if percent:
+        fig.update_yaxes(tickformat='.1%'); fig.update_traces(texttemplate='%{y:.1%}')
+    else:
+        fig.update_traces(texttemplate='%{y:.2f}')
     return fig
 
 def _growth_from_hist(metric):
@@ -246,7 +282,9 @@ with tabs[0]:
     for i in range(0,len(ml),2):
         cc=st.columns(2)
         for j,(m,t,pf) in enumerate(ml[i:i+2]):
-            with cc[j]: st.plotly_chart(metric_chart(selected,m,f'{t} · so với nhóm tương đồng',pf),use_container_width=True)
+            with cc[j]:
+                st.plotly_chart(metric_chart(selected,m,f'{t} · xu hướng DN và trung bình peer',pf),use_container_width=True)
+                st.plotly_chart(latest_peer_bar_chart(selected,m,f'{t} · DN và 10 peer tại kỳ gần nhất',pf),use_container_width=True)
     st.markdown('### Bộ chỉ tiêu theo methodology & nhóm tương đồng động')
     st.caption('Benchmark loại chính doanh nghiệp đang phân tích; chỉ hiển thị trung bình/trung vị khi có tối thiểu 5 peer có dữ liệu cho chỉ tiêu đó.')
     skpi,_,_=sector_kpi_table(selected)
@@ -311,45 +349,94 @@ with tabs[1]:
 with tabs[2]:
     st.subheader('Báo cáo Xếp hạng tín nhiệm')
     rr3=rate_three_methodologies(selected)
-    st.markdown(f"**Phương pháp tự động lựa chọn:** {rr3.get('MethodologyName','N/A')}")
-    st.caption(rr3.get('Audit',''))
     r1,r2,r3=st.columns(3)
     r1.metric('Anchor',rr3.get('Anchor','N/A'));r2.metric('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A')));r3.metric('ICR',rr3.get('ICR','N/A'))
-    if rr3.get('Methodology')=='BANK':
-        st.write('**BICRA:**',rr3.get('BICRA'),' · **Điều chỉnh nội sinh:**',rr3.get('InternalNotches'),'bậc')
-        st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
-    elif rr3.get('Methodology')=='SECURITIES':
-        st.write('**BICRA tham chiếu:**',rr3.get('BICRAReference'),' → **điều chỉnh Anchor CTCK:** -2 bậc')
-        st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
-    elif rr3.get('Methodology')=='CORPORATE':
-        labels=rr3.get('RiskLabels',{})
-        _rows=[]
+
+    st.markdown('### Phân tích các chỉ số tín dụng trọng yếu')
+    _rating_metric_map={
+        'BANK':['ROE','ROA','NIM','NPL','CAR','CASA','LDR','CIR'],
+        'SECURITIES':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],
+        'CORPORATE':['Revenue','GrossMargin','EBITDAMargin','ROE','ROA','DebtEquity','DebtEBITDA','CFO_Debt','FOCF_Debt','CurrentRatio','CashDebt']
+    }
+    _rkpi,_,_=sector_kpi_table(selected)
+    if len(_rkpi):
+        _want=set(_rating_metric_map.get(meta.get('EntityType'),[]))
+        _show=_rkpi[_rkpi.Metric.astype(str).isin(_want)].copy() if 'Metric' in _rkpi.columns else _rkpi.copy()
+        _cols=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành','Số DN có dữ liệu','Chênh lệch với TB ngành','Trạng thái dữ liệu']
+        st.dataframe(_safe_show(_show,_cols),hide_index=True,use_container_width=True)
+        # Current-period cross-sectional charts for the most decision-relevant metrics.
+        if meta.get('EntityType')=='BANK': _bar_metrics=[('ROE','ROE',True),('NPL','Nợ xấu',True),('CAR','CAR',True),('CASA','CASA',True)]
+        elif meta.get('EntityType')=='SECURITIES': _bar_metrics=[('ROE','ROE',True),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Thanh toán hiện hành',False),('AvailableCapitalRatio','Vốn khả dụng',True)]
+        else: _bar_metrics=[('ROE','ROE',True),('DebtEquity','Nợ/VCSH',False),('DebtEBITDA','Nợ/EBITDA',False),('CurrentRatio','Thanh toán hiện hành',False)]
+        for _i in range(0,len(_bar_metrics),2):
+            _cc=st.columns(2)
+            for _j,(_m,_t,_pf) in enumerate(_bar_metrics[_i:_i+2]):
+                with _cc[_j]: st.plotly_chart(latest_peer_bar_chart(selected,_m,f'{_t} · DN và 10 peer',_pf),use_container_width=True)
+    else:
+        st.info('Chưa có đủ chỉ tiêu định lượng để phân tích XHTN.')
+
+    if rr3.get('Methodology')=='CORPORATE':
+        labels=rr3.get('RiskLabels',{}); _rows=[]
         for k,v in rr3.get('RiskScores',{}).items():
             try: _score=f'{float(v):.1f}/6' if pd.notna(v) else 'N/A'
             except Exception: _score='N/A'
             _rows.append({'Nhóm rủi ro':k,'Điểm':_score,'Mức rủi ro':labels.get(k,'N/A')})
+        st.markdown('### Tổng hợp hồ sơ rủi ro')
         st.dataframe(pd.DataFrame(_rows),hide_index=True,use_container_width=True)
-        p1,p2,p3=st.columns(3)
-        p1.metric('Peer có dữ liệu',rr3.get('PeerCount',0))
-        p2.metric('Thanh khoản',rr3.get('Liquidity','N/A'))
-        p3.metric('Đủ dữ liệu để tự động XHTN','CÓ' if rr3.get('DataSufficientForAutoRating') else 'CHƯA')
-        if rr3.get('EvidenceMetrics'):
-            st.caption('Chỉ tiêu định lượng sử dụng: '+', '.join(rr3.get('EvidenceMetrics',[])))
+        p1,p2,p3=st.columns(3); p1.metric('Peer có dữ liệu',rr3.get('PeerCount',0)); p2.metric('Thanh khoản',rr3.get('Liquidity','N/A')); p3.metric('Đủ dữ liệu để tự động XHTN','CÓ' if rr3.get('DataSufficientForAutoRating') else 'CHƯA')
         if not rr3.get('DataSufficientForAutoRating'):
-            st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng. Hệ thống không còn mặc định 3/6 cho bốn nhóm rủi ro và không tự gán vnBBB-.')
+            st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng.')
+    elif rr3.get('Methodology') in ('BANK','SECURITIES'):
+        st.markdown('### Tổng hợp hồ sơ rủi ro')
+        st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
+
+    # V8.75: final component/notch summary, mirroring the user's BANK/SECURITIES sample reports.
+    st.markdown('### Tổng kết cấu phần xếp hạng')
+    if rr3.get('Methodology') in ('BANK','SECURITIES'):
+        _desc_score={'Rất Mạnh':'1/6','Mạnh':'2/6','Phù Hợp':'3/6','Trung Bình':'4/6','Yếu':'5/6','Rất Yếu':'6/6'}
+        _desc_notch={'Rất Mạnh':2,'Mạnh':1,'Phù Hợp':0,'Trung Bình':-1,'Yếu':-2,'Rất Yếu':-4}
+        _sumrows=[]
+        if rr3.get('Methodology')=='SECURITIES':
+            _sumrows.append({'Cấu phần':'BICRA tham chiếu','Đánh giá / Điểm':rr3.get('BICRAReference','N/A'),'Nâng/Hạ notch':'—','Kết quả':'Tham chiếu ngành ngân hàng'})
+            _sumrows.append({'Cấu phần':'Điều chỉnh Anchor CTCK','Đánh giá / Điểm':'Đặc thù ngành CTCK','Nâng/Hạ notch':f"{int(rr3.get('SectorAnchorAdjustment',-2)):+d}",'Kết quả':rr3.get('Anchor','N/A')})
         else:
-            st.info('XHTN doanh nghiệp sử dụng riêng khung: Rủi ro vĩ mô & ngành → Rủi ro kinh doanh → Rủi ro tài chính → Quản trị & quản lý → Thanh khoản/modifiers → hỗ trợ. Các yếu tố định tính vẫn cần chuyên viên xác nhận.')
+            _sumrows.append({'Cấu phần':'Điểm ban đầu ngành / BICRA','Đánh giá / Điểm':rr3.get('BICRA',rr3.get('Anchor','N/A')),'Nâng/Hạ notch':'—','Kết quả':rr3.get('Anchor','N/A')})
+        for _k,_v in rr3.get('Factors',{}).items():
+            _sumrows.append({'Cấu phần':_k,'Đánh giá / Điểm':f"{_v} ({_desc_score.get(_v,'N/A')})",'Nâng/Hạ notch':f"{_desc_notch.get(_v,0):+d}",'Kết quả':'Điều chỉnh nội sinh'})
+        _sumrows.append({'Cấu phần':'Tổng điều chỉnh nội sinh','Đánh giá / Điểm':'—','Nâng/Hạ notch':f"{int(rr3.get('InternalNotches',0)):+d}",'Kết quả':rr3.get('SACP','N/A')})
+        _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Trung lập' if int(rr3.get('ExternalSupportNotches',0))==0 else 'Có điều chỉnh','Nâng/Hạ notch':f"{int(rr3.get('ExternalSupportNotches',0)):+d}",'Kết quả':rr3.get('ICR','N/A')})
+        _sumrows.append({'Cấu phần':'Kết quả XHTN','Đánh giá / Điểm':rr3.get('Outlook','Ổn định'),'Nâng/Hạ notch':'—','Kết quả':rr3.get('ICR','N/A')})
+        st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
+    elif rr3.get('Methodology')=='CORPORATE':
+        _rs=rr3.get('RiskScores',{}); _rl=rr3.get('RiskLabels',{})
+        _sumrows=[]
+        for _k,_v in _rs.items():
+            try:_pt=f"{float(_v):.1f}/6"
+            except Exception:_pt='N/A'
+            _sumrows.append({'Cấu phần':_k,'Điểm':_pt,'Mức rủi ro':_rl.get(_k,'N/A'),'Tác động':'Điểm cấu phần'})
+        _sumrows += [
+            {'Cấu phần':'Thanh khoản','Điểm':str(rr3.get('LiquidityScore','N/A')),'Mức rủi ro':rr3.get('Liquidity','N/A'),'Tác động':'Modifier/cap nếu trọng yếu'},
+            {'Cấu phần':'Modifier','Điểm':'—','Mức rủi ro':'—','Tác động':f"{int(rr3.get('ModifierNotches',0)):+d} notch"},
+            {'Cấu phần':'Hỗ trợ bên ngoài','Điểm':'—','Mức rủi ro':'—','Tác động':f"{int(rr3.get('ExternalSupportNotches',0)):+d} notch"},
+            {'Cấu phần':'Kết quả XHTN','Điểm':'—','Mức rủi ro':rr3.get('Outlook','N/A'),'Tác động':rr3.get('ICR','N/A')},
+        ]
+        st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
+
     rc=committee_pack(selected)
     st.markdown('### Waterfall trình Hội đồng XHTN')
     st.dataframe(pd.DataFrame(rc.get('Waterfall',[])),hide_index=True,use_container_width=True)
     ev=rating_evidence(selected)
-    st.markdown('### Sổ bằng chứng & mức độ tin cậy')
-    e1,e2,e3=st.columns(3)
-    e1.metric('ICR mô phỏng',ev.get('ICR','N/A'));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',f"{ev.get('DataQuality',{}).get('Coverage',0)*100:.0f}%")
-    ledger=pd.DataFrame(ev.get('EvidenceLedger',[]))
-    if len(ledger): st.dataframe(ledger,hide_index=True,use_container_width=True)
+    st.markdown('### Mức độ tin cậy của kết quả')
+    e1,e2,e3=st.columns(3); e1.metric('ICR mô phỏng',ev.get('ICR','N/A'));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',f"{ev.get('DataQuality',{}).get('Coverage',0)*100:.0f}%")
+
+    with st.expander('Phương pháp, audit trail & chi tiết máy tính',expanded=False):
+        st.write(f"**Phương pháp tự động lựa chọn:** {rr3.get('MethodologyName','N/A')}")
+        if rr3.get('Audit'): st.caption(rr3.get('Audit',''))
+        if rr3.get('EvidenceMetrics'): st.caption('Chỉ tiêu định lượng sử dụng: '+', '.join(rr3.get('EvidenceMetrics',[])))
+        ledger=pd.DataFrame(ev.get('EvidenceLedger',[]))
+        if len(ledger): st.dataframe(ledger,hide_index=True,use_container_width=True)
+        st.json(rr3)
     st.session_state['rating_result']=rr3
-    with st.expander('Chi tiết kết quả máy tính / audit trail'): st.json(rr3)
     _download_report_block('rating',rr3)
 
 with tabs[3]:
