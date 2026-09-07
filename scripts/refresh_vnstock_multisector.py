@@ -3,12 +3,12 @@ from vnstock_env import load_vnstock_env
 load_vnstock_env()
 
 from pathlib import Path
-import sys, re, json, traceback, os, argparse
+import sys, re, json, traceback, os, argparse, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 import numpy as np, pandas as pd
 
-PLATFORM_REFRESH_VERSION='8.72'
+PLATFORM_REFRESH_VERSION='8.72.1'
 
 def _version_tuple(v):
     try: return tuple(int(x) for x in re.findall(r'\d+', str(v))[:3])

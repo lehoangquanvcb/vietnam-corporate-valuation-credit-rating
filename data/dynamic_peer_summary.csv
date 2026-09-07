@@ -1749,4 +1749,4 @@ TVS,Nhóm tương đồng động: 10 DN từ Công ty chứng khoán niêm yế
 VCI,Nhóm tương đồng động: 10 DN từ Công ty chứng khoán niêm yết/ĐKGD,10,"AAS,APG,BSI,BVS,CTS,EVS,FTS,MBS,ORS,SHS"
 VDS,Nhóm tương đồng động: 10 DN từ Công ty chứng khoán niêm yết/ĐKGD,10,"AAS,APG,BSI,BVS,CTS,EVS,FTS,MBS,ORS,SHS"
 VIX,Nhóm tương đồng động: 10 DN từ Công ty chứng khoán niêm yết/ĐKGD,10,"AAS,APG,BSI,BVS,CTS,EVS,FTS,MBS,ORS,SHS"
-HPG,Nhóm tương đồng động: 10 DN từ ICB cấp 2: Nguyên vật liệu,10,"AAA,AAH,ABS,ACG,ACM,AMC,APP,ATG,AVG,BCA"
+HPG,Nhóm tương đồng động: 10 DN từ Nhóm peer chuyên ngành (analyst override),10,"TVN,HSG,NKG,VGS,SMC,TIS,TLH,HMC,POM,DTL"

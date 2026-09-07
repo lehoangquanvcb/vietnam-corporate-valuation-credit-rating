@@ -420,7 +420,7 @@ DTG,11532,data/fundamentals_long/DTG.csv,2026-08-28T11:29:41+07:00
 DTH,5826,data/fundamentals_long/DTH.csv,2026-08-28T11:29:47+07:00
 DTI,19275,data/fundamentals_long/DTI.csv,2026-08-28T11:46:06+07:00
 DTK,28701,data/fundamentals_long/DTK.csv,2026-08-28T16:06:16+07:00
-DTL,28563,data/fundamentals_long/DTL.csv,2026-08-28T15:26:51+07:00
+DTL,28563,data/fundamentals_long/DTL.csv,2026-09-07T09:34:30+07:00
 DTP,27078,data/fundamentals_long/DTP.csv,2026-08-28T11:30:21+07:00
 DTT,28701,data/fundamentals_long/DTT.csv,2026-08-28T15:26:52+07:00
 DTV,5259,data/fundamentals_long/DTV.csv,2026-08-28T16:06:14+07:00
@@ -616,7 +616,7 @@ HLR,5259,data/fundamentals_long/HLR.csv,2026-08-28T09:48:29+07:00
 HLS,6957,data/fundamentals_long/HLS.csv,2026-08-28T09:48:39+07:00
 HLT,2625,data/fundamentals_long/HLT.csv,2026-08-28T14:41:52+07:00
 HLY,12498,data/fundamentals_long/HLY.csv,2026-08-28T09:48:50+07:00
-HMC,28563,data/fundamentals_long/HMC.csv,2026-08-28T15:30:37+07:00
+HMC,28563,data/fundamentals_long/HMC.csv,2026-09-07T09:32:59+07:00
 HMD,2547,data/fundamentals_long/HMD.csv,2026-08-28T15:30:06+07:00
 HMG,6486,data/fundamentals_long/HMG.csv,2026-08-28T15:30:19+07:00
 HMH,28866,data/fundamentals_long/HMH.csv,2026-08-28T09:49:16+07:00
@@ -652,7 +652,7 @@ HRB,6957,data/fundamentals_long/HRB.csv,2026-08-28T16:55:37+07:00
 HRC,28536,data/fundamentals_long/HRC.csv,2026-08-28T15:31:41+07:00
 HRT,22758,data/fundamentals_long/HRT.csv,2026-08-28T09:10:10+07:00
 HSA,1509,data/fundamentals_long/HSA.csv,2026-08-28T09:49:45+07:00
-HSG,28866,data/fundamentals_long/HSG.csv,2026-08-28T15:31:50+07:00
+HSG,28866,data/fundamentals_long/HSG.csv,2026-09-07T09:27:07+07:00
 HSI,4410,data/fundamentals_long/HSI.csv,2026-08-28T15:31:41+07:00
 HSL,28452,data/fundamentals_long/HSL.csv,2026-08-28T14:44:02+07:00
 HSM,28536,data/fundamentals_long/HSM.csv,2026-08-28T14:44:26+07:00
@@ -935,7 +935,7 @@ NHP,6462,data/fundamentals_long/NHP.csv,2026-08-28T10:20:00+07:00
 NHT,23304,data/fundamentals_long/NHT.csv,2026-08-28T14:55:55+07:00
 NHV,6297,data/fundamentals_long/NHV.csv,2026-08-28T15:38:09+07:00
 NJC,5778,data/fundamentals_long/NJC.csv,2026-08-28T14:55:51+07:00
-NKG,28701,data/fundamentals_long/NKG.csv,2026-08-28T15:39:05+07:00
+NKG,28701,data/fundamentals_long/NKG.csv,2026-09-07T09:27:53+07:00
 NLG,28701,data/fundamentals_long/NLG.csv,2026-08-28T17:06:07+07:00
 NLS,7122,data/fundamentals_long/NLS.csv,2026-08-28T16:15:08+07:00
 NNC,28701,data/fundamentals_long/NNC.csv,2026-08-28T10:20:39+07:00
@@ -1052,7 +1052,7 @@ PNJ,28866,data/fundamentals_long/PNJ.csv,2026-08-28T14:58:31+07:00
 PNP,26991,data/fundamentals_long/PNP.csv,2026-08-28T10:27:35+07:00
 PNT,6957,data/fundamentals_long/PNT.csv,2026-08-28T10:26:45+07:00
 POB,3660,data/fundamentals_long/POB.csv,2026-08-28T16:20:43+07:00
-POM,28866,data/fundamentals_long/POM.csv,2026-08-28T15:42:07+07:00
+POM,28866,data/fundamentals_long/POM.csv,2026-09-07T09:32:13+07:00
 POS,28686,data/fundamentals_long/POS.csv,2026-08-28T11:38:03+07:00
 POT,28866,data/fundamentals_long/POT.csv,2026-08-28T11:21:49+07:00
 POV,28563,data/fundamentals_long/POV.csv,2026-08-28T16:22:01+07:00
@@ -1272,7 +1272,7 @@ SLD,15444,data/fundamentals_long/SLD.csv,2026-08-28T17:16:58+07:00
 SLS,28701,data/fundamentals_long/SLS.csv,2026-08-28T15:05:00+07:00
 SMA,28866,data/fundamentals_long/SMA.csv,2026-08-28T16:27:32+07:00
 SMB,28866,data/fundamentals_long/SMB.csv,2026-08-28T15:04:58+07:00
-SMC,28536,data/fundamentals_long/SMC.csv,2026-08-28T15:46:07+07:00
+SMC,28536,data/fundamentals_long/SMC.csv,2026-09-07T09:30:14+07:00
 SMN,28701,data/fundamentals_long/SMN.csv,2026-08-28T14:15:39+07:00
 SMT,28287,data/fundamentals_long/SMT.csv,2026-08-28T11:22:36+07:00
 SNC,6957,data/fundamentals_long/SNC.csv,2026-08-28T15:04:51+07:00
@@ -1397,7 +1397,7 @@ TIE,6276,data/fundamentals_long/TIE.csv,2026-08-28T10:52:52+07:00
 TIG,28149,data/fundamentals_long/TIG.csv,2026-08-28T17:22:32+07:00
 TIN,14662,data/fundamentals_long/TIN.csv,2026-08-28T17:22:32+07:00
 TIP,28866,data/fundamentals_long/TIP.csv,2026-08-28T17:23:02+07:00
-TIS,28701,data/fundamentals_long/TIS.csv,2026-08-28T15:47:51+07:00
+TIS,28701,data/fundamentals_long/TIS.csv,2026-09-07T09:33:44+07:00
 TIX,28536,data/fundamentals_long/TIX.csv,2026-08-28T17:23:14+07:00
 TJC,28536,data/fundamentals_long/TJC.csv,2026-08-28T10:53:26+07:00
 TKA,2805,data/fundamentals_long/TKA.csv,2026-08-28T10:52:55+07:00
@@ -1407,7 +1407,7 @@ TKU,28728,data/fundamentals_long/TKU.csv,2026-08-28T15:48:16+07:00
 TL4,28728,data/fundamentals_long/TL4.csv,2026-08-28T10:53:54+07:00
 TLD,28659,data/fundamentals_long/TLD.csv,2026-08-28T10:53:56+07:00
 TLG,28701,data/fundamentals_long/TLG.csv,2026-08-28T15:11:03+07:00
-TLH,28701,data/fundamentals_long/TLH.csv,2026-08-28T15:48:26+07:00
+TLH,28701,data/fundamentals_long/TLH.csv,2026-09-07T09:31:12+07:00
 TLI,5943,data/fundamentals_long/TLI.csv,2026-08-28T15:10:31+07:00
 TLP,25446,data/fundamentals_long/TLP.csv,2026-08-28T16:30:56+07:00
 TLT,3495,data/fundamentals_long/TLT.csv,2026-08-28T10:53:47+07:00
@@ -1485,7 +1485,7 @@ TVD,28701,data/fundamentals_long/TVD.csv,2026-08-28T15:53:47+07:00
 TVG,6957,data/fundamentals_long/TVG.csv,2026-08-28T10:58:44+07:00
 TVH,3495,data/fundamentals_long/TVH.csv,2026-08-28T10:58:49+07:00
 TVM,6957,data/fundamentals_long/TVM.csv,2026-08-28T10:58:59+07:00
-TVN,28563,data/fundamentals_long/TVN.csv,2026-08-28T15:53:47+07:00
+TVN,28563,data/fundamentals_long/TVN.csv,2026-09-07T09:29:27+07:00
 TVP,2433,data/fundamentals_long/TVP.csv,2026-08-28T11:35:14+07:00
 TVS,51274,data/fundamentals_long/TVS.csv,2026-08-29T03:42:29+07:00
 TVT,28728,data/fundamentals_long/TVT.csv,2026-08-28T15:12:21+07:00
@@ -1571,7 +1571,7 @@ VGI,28371,data/fundamentals_long/VGI.csv,2026-08-28T17:33:53+07:00
 VGL,6957,data/fundamentals_long/VGL.csv,2026-08-28T15:55:01+07:00
 VGP,28701,data/fundamentals_long/VGP.csv,2026-08-28T11:07:08+07:00
 VGR,28260,data/fundamentals_long/VGR.csv,2026-08-28T11:07:39+07:00
-VGS,28701,data/fundamentals_long/VGS.csv,2026-08-28T15:55:47+07:00
+VGS,28701,data/fundamentals_long/VGS.csv,2026-09-07T09:28:40+07:00
 VGT,28701,data/fundamentals_long/VGT.csv,2026-08-28T15:13:58+07:00
 VGV,28701,data/fundamentals_long/VGV.csv,2026-08-28T17:27:00+07:00
 VHC,28701,data/fundamentals_long/VHC.csv,2026-08-28T15:14:04+07:00

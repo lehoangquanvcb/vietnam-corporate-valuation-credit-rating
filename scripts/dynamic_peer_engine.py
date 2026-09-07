@@ -12,6 +12,7 @@ CFG = ROOT / 'config'
 
 MAX_PEERS = 10
 MIN_PEERS = 5
+OVERRIDE_FILE = CFG / 'dynamic_peer_overrides.csv'
 
 SIZE_METRICS = {'TotalAssets','Revenue','Equity','Loans','Deposits','MarketCap','ClientAssets','MarginLoans'}
 
@@ -45,6 +46,39 @@ def _snapshot_for_type(entity_type: str) -> pd.DataFrame:
     return s.drop_duplicates('Ticker', keep='last')
 
 
+
+def _override_pool(ticker: str, u: pd.DataFrame):
+    """Optional analyst-maintained peer set.
+
+    Overrides are used before broad ICB/sector matching. They solve cases where the
+    provider's ICB hierarchy is too coarse (e.g. HPG classified only as Materials).
+    The target itself is appended so similarity can be calculated once peer data exist.
+    """
+    t=_norm_ticker(ticker)
+    try:
+        o=pd.read_csv(OVERRIDE_FILE)
+    except Exception:
+        return pd.DataFrame(), None
+    if o.empty or 'TargetTicker' not in o.columns or 'PeerTicker' not in o.columns:
+        return pd.DataFrame(), None
+    o=o.copy()
+    o['TargetTicker']=o['TargetTicker'].map(_norm_ticker)
+    o['PeerTicker']=o['PeerTicker'].map(_norm_ticker)
+    if 'Active' in o.columns:
+        o=o[pd.to_numeric(o['Active'],errors='coerce').fillna(1).eq(1)]
+    z=o[o['TargetTicker'].eq(t)].copy()
+    if z.empty:return pd.DataFrame(), None
+    if 'Priority' in z.columns:
+        z['_p']=pd.to_numeric(z['Priority'],errors='coerce').fillna(9999)
+        z=z.sort_values(['_p','PeerTicker'])
+    wanted=[t]+[x for x in z['PeerTicker'].tolist() if x!=t]
+    pool=u[u['Ticker'].isin(wanted)].copy()
+    # preserve analyst order instead of alphabetical/provider order
+    order={x:i for i,x in enumerate(wanted)}
+    pool['_override_order']=pool['Ticker'].map(order).fillna(9999)
+    pool=pool.sort_values('_override_order').drop(columns=['_override_order'])
+    return pool, 'Nhóm peer chuyên ngành (analyst override)'
+
 def _candidate_pool(ticker: str, u: pd.DataFrame) -> tuple[pd.DataFrame, str]:
     t = _norm_ticker(ticker)
     z = u[u.Ticker.eq(t)]
@@ -53,6 +87,10 @@ def _candidate_pool(ticker: str, u: pd.DataFrame) -> tuple[pd.DataFrame, str]:
     r = z.iloc[0]
     et = str(r.get('EntityType','CORPORATE')).upper()
     same_type = u[u.EntityType.astype(str).str.upper().eq(et)].copy()
+    if et == 'CORPORATE':
+        opool, olabel = _override_pool(t, same_type)
+        if len(opool) >= 2:
+            return opool, olabel
     if et == 'BANK':
         return same_type, 'Ngân hàng niêm yết/ĐKGD'
     if et == 'SECURITIES':

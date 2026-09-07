@@ -53,7 +53,7 @@ def metric_chart(ticker,metric,title,percent=False):
     if len(h):
         z=h[h.Metric.astype(str).eq(metric)].copy(); z['Date']=z.Period.map(period_date); z['Value']=pd.to_numeric(z.Value,errors='coerce'); z=z.dropna(subset=['Date','Value']).sort_values('Date')
         if len(z):fig.add_trace(go.Scatter(x=z.Date,y=z.Value,mode='markers' if len(z)<3 else 'lines+markers',name=ticker))
-    if len(p):fig.add_trace(go.Scatter(x=p.PeriodDate,y=p.IndustryMean,mode='markers' if len(p)<3 else 'lines',line=dict(dash='dash'),name='Trung bình ngành'))
+    if len(p):fig.add_trace(go.Scatter(x=p.PeriodDate,y=p.IndustryMean,mode='markers' if len(p)<3 else 'lines',line=dict(dash='dash'),name='Trung bình peer'))
     fig.update_layout(title=title,height=370,legend=dict(orientation='h',y=-.2),margin=dict(t=45,b=70),xaxis_title='')
     if percent:fig.update_yaxes(tickformat='.1%')
     return fig
@@ -197,6 +197,7 @@ with tabs[0]:
         for j,(m,t,pf) in enumerate(ml[i:i+2]):
             with cc[j]: st.plotly_chart(metric_chart(selected,m,f'{t} · so với nhóm tương đồng',pf),use_container_width=True)
     st.markdown('### Bộ chỉ tiêu theo methodology & nhóm tương đồng động')
+    st.caption('Benchmark loại chính doanh nghiệp đang phân tích; chỉ hiển thị trung bình/trung vị khi có tối thiểu 5 peer có dữ liệu cho chỉ tiêu đó.')
     skpi,_,_=sector_kpi_table(selected)
     if len(skpi):
         wanted=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành',

@@ -6,7 +6,7 @@ if str(_PROJECT_ROOT) not in _sys.path:
 
 import numpy as np, pandas as pd
 from scripts.universal_data import get_company,get_snapshot
-from scripts.sector_benchmark_engine import industry_snapshot
+from scripts.sector_benchmark_engine import industry_snapshot, MIN_BENCHMARK_PEERS
 
 LABELS={
 'Price':'Giá thị trường','TotalAssets':'Tổng tài sản','GrossLoans':'Cho vay khách hàng',
@@ -109,6 +109,12 @@ def enrich_row(r):
 def enriched_industry(ticker):
     x=industry_snapshot(ticker)
     if x.empty:return x
+    # Benchmark peers must exclude the target itself. The UI may still display the
+    # target in the peer-position table, but it must never influence its own benchmark.
+    t=str(ticker).upper().strip()
+    if 'Ticker' in x.columns:
+        x=x[x['Ticker'].astype(str).str.upper().str.strip().ne(t)].copy()
+    if x.empty:return x
     return pd.DataFrame([enrich_row(r) for r in x.to_dict('records')])
 
 def groups_for(ticker):
@@ -123,9 +129,18 @@ def methodology_kpi_table(ticker, include_missing=True):
             vals=pd.to_numeric(peers[m],errors='coerce').dropna() if len(peers) and m in peers else pd.Series(dtype=float)
             mean=float(vals.mean()) if len(vals) else np.nan; med=float(vals.median()) if len(vals) else np.nan
             if not include_missing and not np.isfinite(c) and not len(vals):continue
+            n=int(len(vals))
+            if n < MIN_BENCHMARK_PEERS:
+                mean=np.nan; med=np.nan
+            if not np.isfinite(c):
+                status='N/A – cần bổ sung nguồn doanh nghiệp'
+            elif n < MIN_BENCHMARK_PEERS:
+                status=f'Có dữ liệu DN; peer chưa đủ (n={n}/{MIN_BENCHMARK_PEERS})'
+            else:
+                status=f'Có dữ liệu; benchmark peer n={n}'
             rows.append({'Nhóm phân tích':group,'Metric':m,'Chỉ tiêu':LABELS.get(m,m),
-                         'Doanh nghiệp':c,'TB ngành':mean,'Trung vị':med,'Số DN':int(len(vals)),
-                         'Trạng thái dữ liệu':'Có dữ liệu' if np.isfinite(c) else 'N/A – cần bổ sung nguồn'})
+                         'Doanh nghiệp':c,'TB ngành':mean,'Trung vị':med,'Số DN':n,
+                         'Trạng thái dữ liệu':status})
     return pd.DataFrame(rows)
 
 def metric_list(ticker, available_only=True):
