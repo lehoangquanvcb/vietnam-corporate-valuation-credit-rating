@@ -60,16 +60,28 @@ def industry_metric_history(ticker,metric):
     if x.empty:return x
     return x.groupby('PeriodDate',as_index=False).agg(IndustryMean=('Value','mean'),IndustryMedian=('Value','median'),IndustryCount=('Ticker','nunique'))
 
-def build_sector_benchmarks():
-    u=universe();rows=[]
+def build_sector_benchmarks(target_ticker=None):
+    u=universe(); rows=[]
     metrics=['ROE','ROA','PB','PE','DebtEquity','CurrentRatio','NPL','CAR','CASA','NIM','LDR','Revenue','NPAT','TotalAssets']
-    for t in u.Ticker:
+    targets=u.Ticker.tolist()
+    if target_ticker:
+        tt=str(target_ticker).upper().strip(); targets=[tt] if tt in set(u.Ticker.astype(str).str.upper()) else []
+    for t in targets:
         s=industry_snapshot(t)
         if s.empty:continue
         for m in metrics:
             if m not in s.columns:continue
-            v=pd.to_numeric(s[m],errors='coerce').dropna()
+            v=pd.to_numeric(s[m],errors='coerce').replace([float('inf'),float('-inf')],pd.NA).dropna()
             if len(v):rows.append({'Ticker':t,'Sector':u.loc[u.Ticker.eq(t),'Sector'].iloc[0],'Metric':m,'IndustryMean':v.mean(),'IndustryMedian':v.median(),'IndustryCount':len(v),'BenchmarkType':'DYNAMIC_PEER'})
-    z=pd.DataFrame(rows);z.to_csv(DATA/'industry_benchmarks.csv',index=False,encoding='utf-8-sig');return z
+    z=pd.DataFrame(rows); path=DATA/'industry_benchmarks.csv'
+    if target_ticker:
+        tt=str(target_ticker).upper().strip()
+        try: old=pd.read_csv(path); old=old[old.Ticker.astype(str).str.upper().ne(tt)] if 'Ticker' in old.columns else pd.DataFrame()
+        except Exception: old=pd.DataFrame()
+        z=pd.concat([old,z],ignore_index=True,sort=False)
+    z.to_csv(path,index=False,encoding='utf-8-sig');return z
+
 if __name__=='__main__':
-    z=build_sector_benchmarks();print(f'OK - {len(z)} dynamic-peer benchmark rows')
+    import sys
+    target=sys.argv[1] if len(sys.argv)>1 and str(sys.argv[1]).upper() not in {'ALL','--ALL'} else None
+    z=build_sector_benchmarks(target);print(f'OK - benchmark updated for {target or "ALL"}')

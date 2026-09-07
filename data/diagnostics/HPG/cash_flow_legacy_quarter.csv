@@ -1,0 +1,1735 @@
+﻿period,id,name,order,level,unit,value
+2026-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,5253680177765.0
+2026-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,7184684207426.0
+2026-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,2851263156834.0
+2026-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,29729264501.0
+2026-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,36508026287.0
+2026-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2026-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-312411561122.0
+2026-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,1519613868123.0
+2026-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2026-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2026-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2026-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2026-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,11309386962049.0
+2026-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2026-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2026-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2026-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2026-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2026-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2026-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2026-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2026-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2026-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2026-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-2192449788291.0
+2026-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-12416888818121.0
+2026-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,10937459023519.0
+2026-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-458042256988.0
+2026-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-1463319682421.0
+2026-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2026-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2026-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-245192384986.0
+2026-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-10946013242594.0
+2026-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-6703186347074.0
+2026-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,4953208163.0
+2026-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-19094908027888.0
+2026-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,15873130453662.0
+2026-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,-1660000000000.0
+2026-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,46272643836.0
+2026-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,587724826707.0
+2026-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2026-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,20080000000.0
+2026-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-20000000.0
+2026-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,33108134858225.0
+2026-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-25174836242420.0
+2026-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2026-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-3933630537385.0
+2026-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,13801785439329.0
+2026-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2026-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2026-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2026-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,9782057360909.0
+2026-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,6816755450021.0
+2026-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,10762183839545.0
+2026-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,2854213903270.0
+2026-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-394463126.0
+2026-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-93187660506.0
+2026-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2026-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-5113315374186.0
+2026-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,1333414699291.0
+2026-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2026-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2026-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2026-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2026-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,9742914944288.0
+2026-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2026-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2026-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2026-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2026-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2026-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2026-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2026-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2026-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2026-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2026-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-3247077198393.0
+2026-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,6689926170566.0
+2026-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-2632265270173.0
+2026-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,101663240118.0
+2026-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-1339109587744.0
+2026-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2026-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2026-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-289234924371.0
+2026-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-2921294017214.0
+2026-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-5489839982929.0
+2026-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,5137451465.0
+2026-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-15410488328272.0
+2026-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,9808255809184.0
+2026-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,-1860000000000.0
+2026-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,9754502725420.0
+2026-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,271138307918.0
+2026-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2026-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,906464079800.0
+2026-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-133022500000.0
+2026-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,37972026707821.0
+2026-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-39509669716860.0
+2026-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2026-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-3593041781.0
+2026-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,10687436567485.0
+2026-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2026-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2026-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2026-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,11455231038505.0
+2025-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,8564297977440.0
+2025-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,4600129962763.0
+2025-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,2882676563353.0
+2025-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-12074483403.0
+2025-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-36094914050.0
+2025-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2025-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-293829106766.0
+2025-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,1236524775157.0
+2025-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2025-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2025-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2025-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2025-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,8377332797054.0
+2025-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2025-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2025-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2025-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2025-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2025-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2025-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2025-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2025-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2025-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2025-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-2605118841180.0
+2025-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-7580580412836.0
+2025-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,12796369447003.0
+2025-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-1247137898314.0
+2025-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-1142569855154.0
+2025-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2025-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,439016917840.0
+2025-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-190617586065.0
+2025-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-3607680554438.0
+2025-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-1885559821997.0
+2025-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,29666213081.0
+2025-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-9695300000000.0
+2025-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,6932197909676.0
+2025-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,-373200000000.0
+2025-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,1155000000000.0
+2025-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,229515144802.0
+2025-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2025-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,-1098200000000.0
+2025-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,40272000000.0
+2025-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,32818989148452.0
+2025-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-37483382298841.0
+2025-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2025-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-25294401728.0
+2025-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,2553274752088.0
+2025-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2025-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2025-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2025-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,8300890304205.0
+2025-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,8294398995676.0
+2025-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,4628313172434.0
+2025-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,2169156032825.0
+2025-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,10882237428.0
+2025-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-56814712069.0
+2025-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2025-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-454485515064.0
+2025-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,812194101705.0
+2025-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2025-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2025-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2025-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2025-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,7109245317259.0
+2025-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2025-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2025-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2025-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2025-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2025-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2025-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2025-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2025-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2025-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2025-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-167609437136.0
+2025-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,3191714046698.0
+2025-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-812631275870.0
+2025-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-253644124207.0
+2025-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-667863337041.0
+2025-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2025-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2025-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-68517258315.0
+2025-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-13938241340574.0
+2025-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-13174576334243.0
+2025-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,3219518312.0
+2025-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-5995439000000.0
+2025-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,4707217381781.0
+2025-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,-70900000000.0
+2025-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,209046191384.0
+2025-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,383190902192.0
+2025-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2025-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,1260500000000.0
+2025-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-40275000000.0
+2025-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,37526149069159.0
+2025-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-34691683779555.0
+2025-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2025-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-7647585893.0
+2025-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,13139605443126.0
+2025-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2025-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2025-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2025-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,9092562739415.0
+2025-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,3285102529955.0
+2025-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,4972383493663.0
+2025-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1617247528510.0
+2025-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-59927342891.0
+2025-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,309920317236.0
+2025-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2025-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-305813548010.0
+2025-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,439112631420.0
+2025-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2025-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2025-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2025-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2025-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,6972923079928.0
+2025-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2025-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2025-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2025-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2025-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2025-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2025-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2025-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2025-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2025-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2025-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-1835418390802.0
+2025-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-2468299455608.0
+2025-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,1394149750385.0
+2025-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-230901936807.0
+2025-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-473975259473.0
+2025-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2025-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2025-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-67494643569.0
+2025-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-5539961327915.0
+2025-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-4519331143893.0
+2025-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,27600517030.0
+2025-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-9102740296773.0
+2025-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,7723722972602.0
+2025-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2025-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,15000000000.0
+2025-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,315786623119.0
+2025-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2025-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,525100000000.0
+2025-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-52020000.0
+2025-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,37133314442108.0
+2025-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-32170574605521.0
+2025-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2025-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-3574672793.0
+2025-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,16172237421052.0
+2025-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2025-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2025-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2025-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,10688024277258.0
+2025-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,-2777940446480.0
+2025-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,3839765349020.0
+2025-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1801603135468.0
+2025-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,11289113084.0
+2025-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,132616469869.0
+2025-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2025-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-244726801802.0
+2025-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,627024360692.0
+2025-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2025-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2025-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2025-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2025-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,6167571626331.0
+2025-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2025-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2025-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2025-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2025-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2025-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2025-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2025-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2025-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2025-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2025-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-4134982417163.0
+2025-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-384608710947.0
+2025-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-1984736525485.0
+2025-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,48974724977.0
+2025-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-599757525250.0
+2025-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2025-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2025-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-220131091954.0
+2025-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-2728509645771.0
+2025-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-6168853176586.0
+2025-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,8330267880.0
+2025-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-5526332899179.0
+2025-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,8422939517832.0
+2025-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2025-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,226687184000.0
+2025-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,308719460282.0
+2025-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2025-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,100000000.0
+2025-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2025-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,42070537735752.0
+2025-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-35992323059515.0
+2025-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2025-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-22127134.0
+2025-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,13537328367232.0
+2025-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2025-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2025-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2025-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,7459035818129.0
+2024-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,3095079901212.0
+2024-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,3286676100696.0
+2024-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1693028331093.0
+2024-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-61035121811.0
+2024-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,227751228845.0
+2024-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2024-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-765370789609.0
+2024-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,562492663846.0
+2024-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2024-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,12295891969.0
+2024-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2024-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2024-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,4955838305029.0
+2024-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2024-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2024-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2024-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2024-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2024-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2024-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2024-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2024-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2024-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2024-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,971968926351.0
+2024-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-6209983876378.0
+2024-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,4023222874211.0
+2024-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,129299221688.0
+2024-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-529644932828.0
+2024-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2024-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,447272727.0
+2024-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-194420019511.0
+2024-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-9083163490691.0
+2024-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-7257089099480.0
+2024-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,443699573180.0
+2024-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-6360476824332.0
+2024-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,3871936250811.0
+2024-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2024-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,31246619001.0
+2024-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,187519990129.0
+2024-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2024-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,103000000000.0
+2024-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-17140000.0
+2024-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,42414841815225.0
+2024-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-38146312226161.0
+2024-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2024-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-2343960741.0
+2024-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,11256814628175.0
+2024-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2024-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2024-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2024-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,6887646139852.0
+2024-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,264607405102.0
+2024-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,3412385133844.0
+2024-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1771185761423.0
+2024-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-3156807492.0
+2024-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-206784225956.0
+2024-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2024-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,103011663888.0
+2024-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,525114798901.0
+2024-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2024-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,-6049970652.0
+2024-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2024-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2024-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,5595706353956.0
+2024-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2024-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2024-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2024-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2024-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2024-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2024-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2024-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2024-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2024-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2024-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,377494427161.0
+2024-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-3510769453171.0
+2024-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-1584866701776.0
+2024-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,46606159449.0
+2024-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-567728987154.0
+2024-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2024-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2024-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-79428476117.0
+2024-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-10586771366756.0
+2024-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-9401555834547.0
+2024-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,-332578559029.0
+2024-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-6770711616439.0
+2024-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,5612320000000.0
+2024-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2024-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2024-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,305754643259.0
+2024-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2024-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,90136000000.0
+2024-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2024-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,45987162684520.0
+2024-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-40276725834290.0
+2024-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2024-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-1606676054.0
+2024-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,14299964253456.0
+2024-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2024-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2024-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2024-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,8500998079280.0
+2024-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,2500002958156.0
+2024-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,3733225669765.0
+2024-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1729640974153.0
+2024-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,162022519725.0
+2024-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-30290605919.0
+2024-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2024-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,406339912654.0
+2024-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,564134360513.0
+2024-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2024-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,6049970652.0
+2024-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2024-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2024-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,6571122801543.0
+2024-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2024-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2024-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2024-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2024-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2024-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2024-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2024-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2024-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2024-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2024-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-618194847084.0
+2024-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,811031696508.0
+2024-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-3565852264665.0
+2024-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,46814900835.0
+2024-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-613526452453.0
+2024-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2024-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2024-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-107787269936.0
+2024-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,2505750845717.0
+2024-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-4038554034033.0
+2024-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,2758324845.0
+2024-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-6908419972602.0
+2024-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,13728665397260.0
+2024-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2024-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2024-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,-278698869753.0
+2024-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2024-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2024-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-2420000.0
+2024-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,41954146315610.0
+2024-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-46356254460746.0
+2024-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2024-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-1658737650.0
+2024-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,8628268550497.0
+2024-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2024-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2024-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2024-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,13032037853283.0
+2024-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,748630390745.0
+2024-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,3261215356873.0
+2024-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1721816264528.0
+2024-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,10669816792.0
+2024-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,182794183008.0
+2024-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2024-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-1462291190778.0
+2024-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,635618987620.0
+2024-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2024-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2024-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2024-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2024-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,4349823418043.0
+2024-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2024-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2024-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2024-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2024-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2024-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2024-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2024-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2024-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2024-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2024-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-2549940352860.0
+2024-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-1850079271655.0
+2024-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,3121851473748.0
+2024-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-450426491575.0
+2024-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-621521923912.0
+2024-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2024-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2024-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-401971341603.0
+2024-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-12623954240718.0
+2024-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-14797827829267.0
+2024-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,1139714227578.0
+2024-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-8465849467273.0
+2024-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,8374734396151.0
+2024-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2024-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2024-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,1125274432093.0
+2024-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2024-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,40000000000.0
+2024-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-100000000.0
+2024-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,44109437021720.0
+2024-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-32099643158043.0
+2024-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2024-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,638363554.0
+2024-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,24479220263468.0
+2024-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2024-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2024-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2024-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,12428888036237.0
+2023-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,5410273426874.0
+2023-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,3384568877748.0
+2023-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1741097551767.0
+2023-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-149104888269.0
+2023-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-150012871876.0
+2023-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2023-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,33606206324.0
+2023-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,710943681004.0
+2023-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2023-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2023-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2023-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2023-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,5571098556698.0
+2023-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2023-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2023-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2023-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2023-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2023-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2023-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2023-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2023-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2023-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2023-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-2360010541026.0
+2023-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-897339146679.0
+2023-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,4060504082997.0
+2023-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-14640876626.0
+2023-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-734328822276.0
+2023-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2023-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2023-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-98926312478.0
+2023-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-10373912914493.0
+2023-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-7374116374071.0
+2023-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,151206936404.0
+2023-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-12287268028348.0
+2023-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,9589411407600.0
+2023-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2023-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,-526054585230.0
+2023-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,72907729152.0
+2023-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2023-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,200000000.0
+2023-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-70560000.0
+2023-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,37040198581692.0
+2023-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-29499317057488.0
+2023-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2023-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-7623503418.0
+2023-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,19800788621670.0
+2023-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2023-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2023-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2023-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,12267401160884.0
+2023-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,633011285055.0
+2023-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2174230121892.0
+2023-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1721774737926.0
+2023-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,15972161435.0
+2023-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,327203956815.0
+2023-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2023-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,700000000.0
+2023-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,855978191830.0
+2023-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2023-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,-6049970652.0
+2023-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2023-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2023-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,5089809199246.0
+2023-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2023-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2023-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2023-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2023-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2023-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2023-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2023-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2023-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2023-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2023-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,1302169808975.0
+2023-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-1539457455806.0
+2023-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-3179803871108.0
+2023-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,2482635158.0
+2023-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-894619601392.0
+2023-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2023-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2023-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-120152763848.0
+2023-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-1277285294183.0
+2023-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-4360794062575.0
+2023-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,43509632440.0
+2023-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-7534337000000.0
+2023-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,10386022792583.0
+2023-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2023-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2023-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,188313343369.0
+2023-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2023-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2023-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-523080000.0
+2023-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,30104574327511.0
+2023-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-33016730316247.0
+2023-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2023-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-13172335.0
+2023-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,6783977182805.0
+2023-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2023-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2023-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2023-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,9696669423876.0
+2023-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,4531338045226.0
+2023-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,1701886953766.0
+2023-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1662354940325.0
+2023-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-19798182146.0
+2023-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,186695827590.0
+2023-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2023-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,807566211073.0
+2023-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,1028566971432.0
+2023-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2023-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,6049970652.0
+2023-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2023-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2023-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,5373322692692.0
+2023-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2023-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2023-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2023-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2023-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2023-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2023-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2023-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2023-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2023-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2023-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-732945984778.0
+2023-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,2333570335010.0
+2023-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-1147183496853.0
+2023-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-180499266765.0
+2023-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-1022641263764.0
+2023-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2023-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2023-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-82665294478.0
+2023-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,1022434224490.0
+2023-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-2799215791708.0
+2023-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,-72804191977.0
+2023-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-8820154397260.0
+2023-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,13396144607939.0
+2023-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2023-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2023-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,-681536002504.0
+2023-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2023-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2023-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,-1750000000.0
+2023-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,30250075237636.0
+2023-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-30416146549804.0
+2023-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2023-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-309845372.0
+2023-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,13084723928699.0
+2023-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2023-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2023-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2023-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,13252855086239.0
+2023-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,-1102980128050.0
+2023-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,532042789767.0
+2023-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1648185800262.0
+2023-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-941109168744.0
+2023-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-70212986899.0
+2023-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2023-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-1917697628031.0
+2023-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,989588839615.0
+2023-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2023-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2023-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2023-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2023-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,240797645970.0
+2023-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2023-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2023-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2023-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2023-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2023-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2023-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2023-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2023-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2023-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2023-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-3812875642667.0
+2023-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,1129379609411.0
+2023-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,2852581088093.0
+2023-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,118008526448.0
+2023-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-1008860534438.0
+2023-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2023-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2023-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-215138161878.0
+2023-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-2172518070703.0
+2023-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-2818742500442.0
+2023-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,85782979543.0
+2023-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-11146363396151.0
+2023-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,9915617722611.0
+2023-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2023-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2023-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,1791187123736.0
+2023-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2023-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,500000000.0
+2023-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2023-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,29747246722377.0
+2023-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-26927061343325.0
+2023-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2023-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-67273509.0
+2023-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,10689069671869.0
+2023-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2023-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2023-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2023-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,7868451566326.0
+2022-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,5439594182682.0
+2022-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,-2078547921756.0
+2022-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1722687479263.0
+2022-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,341386215259.0
+2022-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-1153484051152.0
+2022-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2022-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-433785906879.0
+2022-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,932651987764.0
+2022-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2022-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2022-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2022-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2022-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,-669092197501.0
+2022-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2022-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2022-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2022-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2022-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2022-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2022-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2022-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2022-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2022-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2022-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,2263542077184.0
+2022-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,9068509515894.0
+2022-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-3825851459148.0
+2022-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-57006802391.0
+2022-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-932734695711.0
+2022-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2022-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2022-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-19904558293.0
+2022-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-2356726048320.0
+2022-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-3787933631685.0
+2022-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,2310679826.0
+2022-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-7221150335894.0
+2022-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,8592702929212.0
+2022-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,-371644175956.0
+2022-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2022-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,428988486177.0
+2022-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2022-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,2250000000.0
+2022-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2022-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,20090198575763.0
+2022-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-26729017842245.0
+2022-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2022-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,6867415088.0
+2022-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,1694887068833.0
+2022-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2022-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2022-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2022-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,8324588920227.0
+2022-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,4457600150505.0
+2022-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,-1299955296196.0
+2022-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1736975580676.0
+2022-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,137493426199.0
+2022-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,546820352732.0
+2022-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2022-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-483634913465.0
+2022-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,836700531276.0
+2022-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2022-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,-2994000000.0
+2022-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2022-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2022-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,1471405681222.0
+2022-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2022-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2022-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2022-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2022-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2022-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2022-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2022-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2022-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2022-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2022-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,3761408428487.0
+2022-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,14893476334949.0
+2022-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-15025441161545.0
+2022-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,259795335259.0
+2022-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-797610374903.0
+2022-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2022-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2022-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-105134288761.0
+2022-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-5599345832027.0
+2022-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-4411237849191.0
+2022-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,693243676.0
+2022-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-18170530825728.0
+2022-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,16474113153471.0
+2022-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2022-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2022-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,507616445745.0
+2022-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2022-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2022-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2022-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,30844142246599.0
+2022-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-35929148438674.0
+2022-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2022-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-2241486887074.0
+2022-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,4554915267516.0
+2022-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2022-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2022-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2022-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,11881408346665.0
+2022-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,-6092405256675.0
+2022-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,4379340489328.0
+2022-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1677130524495.0
+2022-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,593032893735.0
+2022-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,643248114558.0
+2022-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2022-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,47163693950.0
+2022-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,717352725484.0
+2022-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2022-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,2994000000.0
+2022-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2022-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2022-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,8060262441550.0
+2022-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2022-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2022-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2022-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2022-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2022-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2022-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2022-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2022-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2022-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2022-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-1966756554929.0
+2022-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-18097014411925.0
+2022-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,7164279474800.0
+2022-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-126209000614.0
+2022-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-713566675256.0
+2022-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2022-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2022-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-138671731563.0
+2022-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-2064041028932.0
+2022-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-3740134869390.0
+2022-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,6530260130.0
+2022-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-10795594944261.0
+2022-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,12607471335560.0
+2022-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2022-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2022-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,-142312810971.0
+2022-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2022-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,1300000000.0
+2022-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2022-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,49521669195301.0
+2022-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-40072417413636.0
+2022-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2022-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-3265243694.0
+2022-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,29772484560083.0
+2022-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2022-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2022-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2022-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,20325198022112.0
+2022-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,8387007986583.0
+2022-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,8922103855907.0
+2022-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1677611364569.0
+2022-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-59950204308.0
+2022-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,150783920541.0
+2022-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2022-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-951283456248.0
+2022-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,596932887294.0
+2022-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2022-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2022-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2022-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2022-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,10336198367755.0
+2022-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2022-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2022-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2022-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2022-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2022-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2022-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2022-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2022-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2022-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2022-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,665168430681.0
+2022-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,2157183286223.0
+2022-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-2993606607312.0
+2022-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-95129210608.0
+2022-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-590981613068.0
+2022-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2022-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2022-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-513100948690.0
+2022-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-14691659942124.0
+2022-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-6026975731178.0
+2022-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,4117528200.0
+2022-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-19318517776498.0
+2022-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,9738241951928.0
+2022-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2022-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2022-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,911474085424.0
+2022-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2022-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,525000000.0
+2022-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2022-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,34800675129353.0
+2022-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-31899973544079.0
+2022-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2022-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-9489245406.0
+2022-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,21951751930169.0
+2022-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2022-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2022-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2022-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,19060014590301.0
+2021-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,14171404896797.0
+2021-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,8038356261876.0
+2021-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1566782572400.0
+2021-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,187032358552.0
+2021-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,258423817835.0
+2021-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2021-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-5441110827.0
+2021-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,629506996556.0
+2021-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2021-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2021-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2021-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2021-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,10674660896392.0
+2021-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2021-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2021-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2021-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2021-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2021-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2021-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2021-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2021-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2021-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2021-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,3442217701358.0
+2021-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,3613321745493.0
+2021-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-386836884300.0
+2021-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-355772858060.0
+2021-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-643452188645.0
+2021-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2021-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2021-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-208158469367.0
+2021-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-1041002713649.0
+2021-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-4326244042568.0
+2021-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,33337740164.0
+2021-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-9540866742500.0
+2021-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,12763595869520.0
+2021-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2021-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2021-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,29174461735.0
+2021-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2021-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,1300000000.0
+2021-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2021-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,32283420282683.0
+2021-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-36295469189503.0
+2021-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2021-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-24515647431.0
+2021-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,18436111007879.0
+2021-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2021-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2021-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2021-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,22471375562130.0
+2021-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,-162134811093.0
+2021-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,10978756069697.0
+2021-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1557450246725.0
+2021-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,1233182111.0
+2021-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-209979223465.0
+2021-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2021-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-310183817801.0
+2021-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,675107905208.0
+2021-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2021-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,-2994000000.0
+2021-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2021-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2021-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,12689390362475.0
+2021-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2021-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2021-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2021-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2021-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2021-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2021-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2021-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2021-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2021-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2021-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-4673747018000.0
+2021-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-6269003879894.0
+2021-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-959546992745.0
+2021-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-88497371785.0
+2021-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-676491835696.0
+2021-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2021-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2021-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-47611113527.0
+2021-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-6299130298855.0
+2021-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-2394064632437.0
+2021-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,22467916217.0
+2021-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-12798301968208.0
+2021-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,8560809135918.0
+2021-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2021-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2021-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,309959249655.0
+2021-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2021-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,6200000000.0
+2021-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2021-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,33643984837211.0
+2021-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-28439823546968.0
+2021-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2021-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-1550442909.0
+2021-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,18585296946689.0
+2021-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2021-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2021-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2021-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,13376486099355.0
+2021-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,11863537045264.0
+2021-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,10349452188126.0
+2021-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1507505865787.0
+2021-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-33730842823.0
+2021-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-4008223308.0
+2021-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2021-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-312132259952.0
+2021-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,599661392906.0
+2021-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2021-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,2994000000.0
+2021-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2021-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2021-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,12109742120736.0
+2021-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2021-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2021-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2021-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2021-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2021-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2021-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2021-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2021-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2021-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2021-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,1556222812501.0
+2021-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-12331373344340.0
+2021-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,11316582903533.0
+2021-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,16860686697.0
+2021-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-625991809706.0
+2021-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2021-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2021-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-40495890692.0
+2021-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-10021743517372.0
+2021-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-3996355629739.0
+2021-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,7970290465.0
+2021-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-10950565099870.0
+2021-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,4718629665828.0
+2021-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2021-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2021-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,198577255944.0
+2021-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2021-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2021-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2021-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,28538845159800.0
+2021-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-28079986938828.0
+2021-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2021-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-1670953710220.0
+2021-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,13432088242409.0
+2021-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2021-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2021-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2021-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,14644183731657.0
+2021-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,1593350131465.0
+2021-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,7690213194491.0
+2021-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1454908359540.0
+2021-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,28321364644.0
+2021-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-2552250936.0
+2021-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2021-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-722585925436.0
+2021-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,621546963567.0
+2021-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2021-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2021-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2021-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2021-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,9069851705870.0
+2021-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2021-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2021-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2021-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2021-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2021-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2021-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2021-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2021-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2021-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2021-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-3364015325784.0
+2021-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-1849087719759.0
+2021-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-758802388718.0
+2021-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-52531887685.0
+2021-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-638893494939.0
+2021-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2021-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2021-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-318492238077.0
+2021-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-3042160779980.0
+2021-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-1399236188679.0
+2021-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,1780127545.0
+2021-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-7952254523391.0
+2021-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,5213877851025.0
+2021-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2021-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,827030264967.0
+2021-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,266641688553.0
+2021-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2021-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,3130000000.0
+2021-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2021-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,30267142223530.0
+2021-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-28495551029999.0
+2021-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2021-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-6724946432.0
+2021-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,15786625440813.0
+2021-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2021-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2021-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2021-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,14018629193714.0
+2020-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,51456869771.0
+2020-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,5330249297734.0
+2020-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1386472041189.0
+2020-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-9703574796.0
+2020-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-9996456364.0
+2020-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2020-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-202814191600.0
+2020-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,662031175138.0
+2020-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2020-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2020-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2020-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2020-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,7156238291301.0
+2020-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2020-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2020-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2020-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2020-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2020-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2020-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2020-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2020-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2020-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2020-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-635727619676.0
+2020-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-5473842806342.0
+2020-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,771033329096.0
+2020-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-138333751178.0
+2020-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-633221134958.0
+2020-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2020-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2020-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-21735058073.0
+2020-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-1578923538534.0
+2020-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-1546069161409.0
+2020-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,8456445735.0
+2020-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-2910381996977.0
+2020-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,2710758549569.0
+2020-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2020-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2020-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,158312624548.0
+2020-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2020-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,300000000.0
+2020-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2020-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,24246371804094.0
+2020-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-15335976761188.0
+2020-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2020-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-13435338013.0
+2020-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,21898261477419.0
+2020-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2020-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2020-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2020-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,13001001772526.0
+2020-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,2975694138839.0
+2020-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,4271871636028.0
+2020-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1181347918547.0
+2020-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,4036719741.0
+2020-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,42845968449.0
+2020-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2020-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-141011034467.0
+2020-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,540809441828.0
+2020-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2020-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2020-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2020-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2020-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,5899900650126.0
+2020-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2020-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2020-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2020-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2020-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2020-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2020-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2020-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2020-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2020-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2020-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-1913396601976.0
+2020-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,131486017669.0
+2020-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-374458836488.0
+2020-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,43273301700.0
+2020-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-519408535848.0
+2020-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2020-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2020-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-24046981942.0
+2020-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-6028706081766.0
+2020-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-1898885081877.0
+2020-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,1163951886.0
+2020-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-5112617752800.0
+2020-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,906347252521.0
+2020-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2020-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2020-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,75285548504.0
+2020-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2020-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,2400000000.0
+2020-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2020-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,22818192138710.0
+2020-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-20236380816626.0
+2020-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2020-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-1393099337621.0
+2020-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,6819660651478.0
+2020-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2020-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2020-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2020-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,5628548667015.0
+2020-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,5262251018628.0
+2020-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,3095721382125.0
+2020-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1138885194120.0
+2020-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,11589787924.0
+2020-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-261050273579.0
+2020-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2020-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-122088274050.0
+2020-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,523373576010.0
+2020-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2020-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2020-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2020-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2020-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,4386431392550.0
+2020-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2020-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2020-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2020-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2020-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2020-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2020-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2020-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2020-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2020-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2020-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,628008567582.0
+2020-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-1771718379224.0
+2020-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,2552135727517.0
+2020-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,42648469309.0
+2020-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-503553127663.0
+2020-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2020-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2020-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-30378102797.0
+2020-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-5400615752340.0
+2020-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-2477672697519.0
+2020-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,10231022111.0
+2020-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-3591249113354.0
+2020-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,568606107101.0
+2020-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2020-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2020-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,89468929321.0
+2020-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2020-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2020-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2020-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,17636534390058.0
+2020-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-16160430801645.0
+2020-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2020-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-7966027040.0
+2020-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,8957727187782.0
+2020-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2020-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2020-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2020-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,7489589626409.0
+2020-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,714368443643.0
+2020-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2657091220016.0
+2020-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,1091959044244.0
+2020-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,22391252573.0
+2020-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,281070672466.0
+2020-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2020-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-61696545888.0
+2020-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,481082874292.0
+2020-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2020-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2020-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2020-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2020-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,4471898517703.0
+2020-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2020-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2020-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2020-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2020-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2020-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2020-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2020-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2020-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2020-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2020-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-1577050200596.0
+2020-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,53050182496.0
+2020-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-1211555601127.0
+2020-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,37163563730.0
+2020-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-374789631415.0
+2020-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2020-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2020-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-252203233893.0
+2020-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-3596501027783.0
+2020-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-3447607366037.0
+2020-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,15967887769.0
+2020-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-1034707105440.0
+2020-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,800412234367.0
+2020-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2020-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2020-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,69433321558.0
+2020-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2020-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2020-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2020-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,16924270152854.0
+2020-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-12424802707315.0
+2020-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2020-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-4973046084.0
+2020-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,10652321588871.0
+2020-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2020-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2020-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2020-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,6157827189416.0
+2019-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,6771574919276.0
+2019-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2284996658014.0
+2019-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,803343483855.0
+2019-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,15279555359.0
+2019-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-6186878093.0
+2019-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2019-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-123838477791.0
+2019-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,270226645026.0
+2019-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2019-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2019-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2019-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2019-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,3243820986370.0
+2019-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2019-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2019-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2019-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2019-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2019-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2019-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2019-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2019-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2019-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2019-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,621007249018.0
+2019-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-220137009622.0
+2019-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,4152758736704.0
+2019-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-130439228509.0
+2019-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-261917773785.0
+2019-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2019-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2019-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-37393880602.0
+2019-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-4731202728287.0
+2019-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-5325523796833.0
+2019-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,10683051824.0
+2019-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-618298027730.0
+2019-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,1078468665087.0
+2019-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2019-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2019-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,123467379365.0
+2019-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2019-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,85000000.0
+2019-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2019-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,18859904271596.0
+2019-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-20308458019905.0
+2019-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2019-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-246706983.0
+2019-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,3116186857567.0
+2019-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2019-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2019-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2019-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,4564902312859.0
+2019-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,-2995757054845.0
+2019-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2160914730482.0
+2019-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,651891904577.0
+2019-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,2445513914.0
+2019-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-18928373518.0
+2019-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2019-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-161697586815.0
+2019-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,265895204863.0
+2019-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2019-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,-13524576360.0
+2019-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2019-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2019-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,2886996817143.0
+2019-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2019-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2019-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2019-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2019-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2019-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2019-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2019-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2019-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2019-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2019-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-384010257320.0
+2019-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-3602598105490.0
+2019-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-1279510864698.0
+2019-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,43941232508.0
+2019-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-274014274502.0
+2019-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2019-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2019-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-54478176261.0
+2019-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-2833603630639.0
+2019-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-3759383204475.0
+2019-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,-11480931285.0
+2019-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,215263176450.0
+2019-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,529241329543.0
+2019-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2019-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2019-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,192755999128.0
+2019-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2019-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2019-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2019-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,17893141507485.0
+2019-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-13985922428353.0
+2019-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2019-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-5335419426.0
+2019-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,7874827311916.0
+2019-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2019-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2019-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2019-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,3972943652210.0
+2019-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,2444315976349.0
+2019-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2479812592590.0
+2019-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,599784384579.0
+2019-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,2877014108.0
+2019-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,48465776731.0
+2019-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2019-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-101892899907.0
+2019-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,215389146860.0
+2019-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2019-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,13524576360.0
+2019-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2019-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2019-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,3257960591321.0
+2019-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2019-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2019-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2019-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2019-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2019-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2019-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2019-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2019-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2019-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2019-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,777004519794.0
+2019-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-3506410691355.0
+2019-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,2417455437347.0
+2019-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,10345284222.0
+2019-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-188205446868.0
+2019-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2019-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2019-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-76124456748.0
+2019-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-6418061138664.0
+2019-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-7200900927887.0
+2019-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,20810046202.0
+2019-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-1234317332787.0
+2019-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,1902221835548.0
+2019-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2019-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2019-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,94125240260.0
+2019-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2019-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2019-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2019-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,12947565846637.0
+2019-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-9177531346113.0
+2019-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2019-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-6818491460.0
+2019-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,9663292080634.0
+2019-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2019-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2019-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2019-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,5900076071570.0
+2019-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,2133897345378.0
+2019-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2170940228673.0
+2019-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,583138700857.0
+2019-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-26374697757.0
+2019-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-14499415586.0
+2019-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2019-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-33470504380.0
+2019-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,185199221610.0
+2019-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2019-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2019-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2019-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2019-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,2864933533417.0
+2019-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2019-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2019-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2019-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2019-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2019-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2019-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2019-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2019-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2019-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2019-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-1145022952518.0
+2019-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,2196908631444.0
+2019-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-1160255462159.0
+2019-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,66109848557.0
+2019-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-143138746017.0
+2019-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2019-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2019-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-171033086219.0
+2019-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-4715345584076.0
+2019-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-5336201548793.0
+2019-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,2364808068.0
+2019-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-2810200888442.0
+2019-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,3322292650156.0
+2019-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2019-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2019-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,106399394935.0
+2019-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2019-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2019-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2019-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,19848673018339.0
+2019-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-13671770034245.0
+2019-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2019-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-217727679.0
+2019-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,12287564467367.0
+2019-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2019-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2019-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2019-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,6110879210952.0
+2018-Q4,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,1728078424799.0
+2018-Q4,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2037329601363.0
+2018-Q4,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,577870811942.0
+2018-Q4,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-18173662868.0
+2018-Q4,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,4104939588.0
+2018-Q4,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2018-Q4,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-66937818732.0
+2018-Q4,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,144936133893.0
+2018-Q4,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2018-Q4,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2018-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2018-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2018-Q4,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,2679130005186.0
+2018-Q4,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2018-Q4,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2018-Q4,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2018-Q4,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2018-Q4,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2018-Q4,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2018-Q4,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2018-Q4,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2018-Q4,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2018-Q4,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2018-Q4,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-1712374696823.0
+2018-Q4,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,891988751549.0
+2018-Q4,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,734863589308.0
+2018-Q4,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,1283788372.0
+2018-Q4,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-229376309960.0
+2018-Q4,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2018-Q4,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2018-Q4,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-67856393468.0
+2018-Q4,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-5451638161615.0
+2018-Q4,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-7753757887855.0
+2018-Q4,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,44519888341.0
+2018-Q4,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-1461540758141.0
+2018-Q4,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,3593320000000.0
+2018-Q4,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,-138933689.0
+2018-Q4,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,2599680288.0
+2018-Q4,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,123359849441.0
+2018-Q4,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2018-Q4,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2018-Q4,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2018-Q4,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,15795734202913.0
+2018-Q4,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-13529615414961.0
+2018-Q4,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2018-Q4,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-1565389423.0
+2018-Q4,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,4780170533986.0
+2018-Q4,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2018-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2018-Q4,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2018-Q4,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,2515617135457.0
+2018-Q3,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,1658166580948.0
+2018-Q3,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2848086063843.0
+2018-Q3,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,597087360757.0
+2018-Q3,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-47094368475.0
+2018-Q3,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,21416556849.0
+2018-Q3,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2018-Q3,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,2051444778.0
+2018-Q3,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,141685345016.0
+2018-Q3,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2018-Q3,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,-12308219836.0
+2018-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2018-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2018-Q3,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,3550924182932.0
+2018-Q3,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2018-Q3,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2018-Q3,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2018-Q3,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2018-Q3,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2018-Q3,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2018-Q3,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2018-Q3,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2018-Q3,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2018-Q3,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2018-Q3,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,119547210473.0
+2018-Q3,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-1501522889313.0
+2018-Q3,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,44260251184.0
+2018-Q3,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,16736976398.0
+2018-Q3,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-131341967884.0
+2018-Q3,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2018-Q3,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2018-Q3,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-28524384634.0
+2018-Q3,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-8532007613879.0
+2018-Q3,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-10643470479000.0
+2018-Q3,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,908642864.0
+2018-Q3,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-3302730556489.0
+2018-Q3,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,5155733037056.0
+2018-Q3,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2018-Q3,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2018-Q3,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,257551741690.0
+2018-Q3,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2018-Q3,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2018-Q3,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2018-Q3,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,15179506401865.0
+2018-Q3,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-9647874632159.0
+2018-Q3,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2018-Q3,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-1236393107.0
+2018-Q3,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,9506547044861.0
+2018-Q3,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2018-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2018-Q3,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2018-Q3,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,3976151668262.0
+2018-Q2,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,1459330087913.0
+2018-Q2,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2577218001099.0
+2018-Q2,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,553037107154.0
+2018-Q2,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-426147437.0
+2018-Q2,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,-33113633439.0
+2018-Q2,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2018-Q2,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-41534210367.0
+2018-Q2,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,135220094841.0
+2018-Q2,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2018-Q2,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,12308219836.0
+2018-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2018-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2018-Q2,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,3202709431687.0
+2018-Q2,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2018-Q2,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2018-Q2,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2018-Q2,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2018-Q2,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2018-Q2,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2018-Q2,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2018-Q2,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2018-Q2,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2018-Q2,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2018-Q2,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,-618456931257.0
+2018-Q2,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,-1531001715888.0
+2018-Q2,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,924608516139.0
+2018-Q2,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-250081285218.0
+2018-Q2,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-139451648027.0
+2018-Q2,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2018-Q2,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2018-Q2,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-26000040655.0
+2018-Q2,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,-6957260395393.0
+2018-Q2,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-6535623048148.0
+2018-Q2,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,5500137417.0
+2018-Q2,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-3916356966921.0
+2018-Q2,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,3253622924069.0
+2018-Q2,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,0.0
+2018-Q2,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,15000000000.0
+2018-Q2,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,220596558190.0
+2018-Q2,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2018-Q2,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,11424719202.0
+2018-Q2,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2018-Q2,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,14031707569867.0
+2018-Q2,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-9886721261520.0
+2018-Q2,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2018-Q2,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-2474192297.0
+2018-Q2,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,9472975060406.0
+2018-Q2,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2018-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2018-Q2,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2018-Q2,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,5319038225154.0
+2018-Q1,CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH,1,1,VNĐ,2754870075796.0
+2018-Q1,CF_PROFIT_BEFORE_TAX,  ‣ Lợi nhuận trước thuế,2,2,VNĐ,2608439205997.0
+2018-Q1,CF_DEPRECIATION_AND_AMORTISATION,  ‣ Khấu hao TSCĐ và BĐSĐT,3,2,VNĐ,556108322687.0
+2018-Q1,CF_PROVISIONS,  ‣ Các khoản dự phòng,4,2,VNĐ,-7296315043.0
+2018-Q1,CF_FOREIGN_EXCHANGE_LOSS_GAIN,"  ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ",5,2,VNĐ,38197623898.0
+2018-Q1,CF_LOSS_GAIN_FROM_DISPOSAL_OF_FIXED_ASSETS,  ‣ Lãi/(lỗ) từ thanh lý tài sản cố định,6,2,VNĐ,0.0
+2018-Q1,CF_LOSS_GAIN_FROM_INVESTMENT,"  ‣ Lãi, lỗ từ hoạt động đầu tư",7,2,VNĐ,-46934532354.0
+2018-Q1,CF_INTEREST_EXPENSE,  ‣ Chi phí lãi vay,8,2,VNĐ,118019669890.0
+2018-Q1,CF_INTEREST_AND_DIVIDENDS_RECEIVED,  ‣ Thu lãi và cổ tức,9,2,VNĐ,0.0
+2018-Q1,CF_DEPRECIATION_AMORTIZATION,  ‣ Phân bổ lợi thế thương mại,10,2,VNĐ,0.0
+2018-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền đầu kỳ (Điều chỉnh lại),11,2,VNĐ,0.0
+2018-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD_RESTATED,  ‣ Tiền và tương đương tiền cuối kỳ (Điều chỉnh lại),12,2,VNĐ,0.0
+2018-Q1,CF_OPERATING_PROFIT_BEFORE_CHANGES_IN_WORKING_CAPITAL,  ‣ Lợi nhuận từ hoạt động kinh doanh trước thay đổi vốn lưu động,13,2,VNĐ,3266533975075.0
+2018-Q1,CF_INSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH gốc,14,2,VNĐ,
+2018-Q1,CF_INWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhận Tái,15,2,VNĐ,
+2018-Q1,CF_OUTWARD_REINSURANCE_RECEIVABLES,  ‣ Phải thu hoạt động BH Nhượng tái,16,2,VNĐ,
+2018-Q1,CF_OTHER_OPERATING_RECEIVABLES,  ‣ Phải thu hoạt động khác,17,2,VNĐ,
+2018-Q1,CF_INTERNAL_RECEIVABLES_PAYABLES,  ‣ Phải thu/trả đơn vị nội bộ,18,2,VNĐ,
+2018-Q1,CF_INSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH gốc,19,2,VNĐ,
+2018-Q1,CF_INWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhận Tái,20,2,VNĐ,
+2018-Q1,CF_OUTWARD_REINSURANCE_PAYABLES,  ‣ Phải trả hoạt động BH Nhượng tái,21,2,VNĐ,
+2018-Q1,CF_OTHER_OPERATING_PAYABLES,  ‣ Phải trả hoạt động khác,22,2,VNĐ,
+2018-Q1,CF_EMPLOYEE_PAYABLES,  ‣ Phải trả CBCNV,23,2,VNĐ,
+2018-Q1,CF_INCREASE_DECREASE_IN_RECEIVABLES,"  ‣ Tăng, giảm các khoản phải thu",24,2,VNĐ,82342161661.0
+2018-Q1,CF_INCREASE_DECREASE_IN_INVENTORY,"  ‣ Tăng, giảm hàng tồn kho",25,2,VNĐ,543802130814.0
+2018-Q1,CF_INCREASE_DECREASE_IN_PAYABLES,"  ‣ Tăng, giảm các khoản phải thu",26,2,VNĐ,-243975167874.0
+2018-Q1,CF_INCREASE_DECREASE_IN_PREPAID_EXPENSES,"  ‣ Tăng, giảm chi phí trả trước",27,2,VNĐ,-268670700316.0
+2018-Q1,CF_INTEREST_PAID,  ‣ Tiền lãi vay đã trả,28,2,VNĐ,-111597863515.0
+2018-Q1,CF_CORPORATE_INCOME_TAX_PAID,  ‣ Tiền thuế thu nhập thực nộp trong kỳ,29,2,VNĐ,
+2018-Q1,CF_OTHER_RECEIPTS_FROM_OPERATING_ACTIVITIES,  ‣ Tiền thu khác từ hoạt động kinh doanh,30,2,VNĐ,0.0
+2018-Q1,CF_OTHER_PAYMENTS_FOR_OPERATING_ACTIVITIES,  ‣ Tiền chi khác cho hoạt động kinh doanh,31,2,VNĐ,-181620568095.0
+2018-Q1,CF_NET_CASH_FLOWS_FROM_INVESTING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG ĐẦU TƯ,32,1,VNĐ,449826431658.0
+2018-Q1,CF_PAYMENTS_FOR_FIXED_ASSETS,"  ‣ Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác",33,2,VNĐ,-2661214218378.0
+2018-Q1,CF_PROCEEDS_FROM_DISPOSAL_OF_FIXED_ASSETS,"  ‣ Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác",34,2,VNĐ,56838470987.0
+2018-Q1,CF_LOANS_TO_OTHER_ENTITIES,"  ‣ Tiền chi cho vay, mua các công cụ nợ của đơn vị khác",35,2,VNĐ,-2614873739992.0
+2018-Q1,CF_COLLECTION_OF_LOANS,"  ‣ Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác",36,2,VNĐ,5440337241859.0
+2018-Q1,CF_PAYMENTS_FOR_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền chi đầu tư góp vốn vào đơn vị khác,37,2,VNĐ,-115947860804.0
+2018-Q1,CF_PROCEEDS_FROM_INVESTMENTS_IN_OTHER_ENTITIES,  ‣ Tiền thu hồi đầu tư góp vốn vào đơn vị khác,38,2,VNĐ,0.0
+2018-Q1,CF_DIVIDENDS_AND_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",39,2,VNĐ,344686537986.0
+2018-Q1,CF_NET_CASH_FLOWS_FROM_FINANCING_ACTIVITIES,LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG TÀI CHÍNH,40,1,VNĐ,
+2018-Q1,CF_PROCEEDS_FROM_ISSUANCE_OF_SHARES,"  ‣ Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu",41,2,VNĐ,0.0
+2018-Q1,CF_PAYMENTS_FOR_SHARE_REPURCHASES,"  ‣ Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu  của doanh nghiệp đã phát hành",42,2,VNĐ,0.0
+2018-Q1,CF_PROCEEDS_FROM_BORROWINGS,  ‣ Tiền thu từ đi vay,43,2,VNĐ,8465066041528.0
+2018-Q1,CF_REPAYMENT_OF_BORROWINGS,  ‣ Tiền trả nợ gốc vay,44,2,VNĐ,-9270797786046.0
+2018-Q1,CF_PAYMENTS_FOR_FINANCE_LEASES,  ‣ Tiền trả nợ gốc thuê tài chính,45,2,VNĐ,0.0
+2018-Q1,CF_DIVIDENDS_PAID,"  ‣ Cổ tức, lợi nhuận đã trả cho chủ sở hữu",46,2,VNĐ,-642223602.0
+2018-Q1,CF_INTEREST_RECEIVED,"  ‣ Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia",47,2,VNĐ,5856594491623.0
+2018-Q1,CF_NET_CASH_FLOWS_DURING_THE_PERIOD,LƯU CHUYỂN TIỀN THUẦN TRONG KỲ,48,1,VNĐ,
+2018-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_BEGINNING_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN ĐẦU KỲ,49,1,VNĐ,
+2018-Q1,CF_EFFECT_OF_FOREIGN_EXCHANGE_DIFFERENCES,Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ,50,1,VNĐ,
+2018-Q1,CF_CASH_AND_CASH_EQUIVALENTS_AT_END_OF_PERIOD,TIỀN VÀ TƯƠNG ĐƯƠNG TIỀN CUỐI KỲ,51,1,VNĐ,6662968459743.0

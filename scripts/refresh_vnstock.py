@@ -553,7 +553,7 @@ def parse_args():
     ap=argparse.ArgumentParser(description="Vnstock Bronze incremental refresh")
     ap.add_argument("--mode",choices=["full","fundamentals","prices"],default="full")
     ap.add_argument("--tickers",default="",help="Comma-separated tickers; blank = full bank universe")
-    ap.add_argument("--workers",type=int,default=int(os.getenv("VNSTOCK_WORKERS","4")))
+    ap.add_argument("--workers",type=int,default=int(os.getenv("VNSTOCK_WORKERS","1")))
     ap.add_argument("--full-price-history",action="store_true",help="Reload market history from 2021 instead of incremental append")
     return ap.parse_args()
 
@@ -568,7 +568,7 @@ def main():
     unknown=[x for x in selected if x not in {str(b).upper().strip() for b in BANKS}]
     if unknown:
         print("WARNING: ticker outside configured universe:",", ".join(unknown))
-    workers=max(1,min(int(args.workers),6))
+    workers=max(1,min(int(args.workers),2))
     print(f"REFRESH MODE: {args.mode} | BANKS: {len(selected)} | WORKERS: {workers}")
 
     old_snap=read_existing_csv(DATA/"bank_snapshot.csv",SNAPSHOT_BASE_COLUMNS+["Price"])
@@ -583,6 +583,7 @@ def main():
 
     if args.mode in ("full","fundamentals"):
         def fund_job(t):
+            time.sleep(float(os.getenv("VNSTOCK_TICKER_DELAY","2.5")))
             try:
                 snap,hist=fetch_one(t); snap["Ticker"]=t
                 return t,snap,hist,"OK",str(snap.get("ParserLog",""))[:500]
@@ -625,6 +626,7 @@ def main():
 
     if args.mode in ("full","prices"):
         def price_job(t):
+            time.sleep(float(os.getenv("VNSTOCK_TICKER_DELAY","2.5")))
             start=market_incremental_start(old_price,t,args.full_price_history)
             ph,px,status=fetch_price(t,start)
             return t,ph,px,status,start

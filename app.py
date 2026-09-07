@@ -270,8 +270,23 @@ with tabs[2]:
         st.write('**BICRA tham chiếu:**',rr3.get('BICRAReference'),' → **điều chỉnh Anchor CTCK:** -2 bậc')
         st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
     elif rr3.get('Methodology')=='CORPORATE':
-        st.dataframe(pd.DataFrame([{'Nhóm rủi ro':k,'Điểm 1–6':v} for k,v in rr3.get('RiskScores',{}).items()]),hide_index=True,use_container_width=True)
-        st.warning('Điểm tự động là sơ bộ khi dữ liệu định tính/KCF chưa đầy đủ; app không dùng methodology ngân hàng thay thế methodology doanh nghiệp.')
+        labels=rr3.get('RiskLabels',{})
+        _rows=[]
+        for k,v in rr3.get('RiskScores',{}).items():
+            try: _score=f'{float(v):.1f}/6' if pd.notna(v) else 'N/A'
+            except Exception: _score='N/A'
+            _rows.append({'Nhóm rủi ro':k,'Điểm':_score,'Mức rủi ro':labels.get(k,'N/A')})
+        st.dataframe(pd.DataFrame(_rows),hide_index=True,use_container_width=True)
+        p1,p2,p3=st.columns(3)
+        p1.metric('Peer có dữ liệu',rr3.get('PeerCount',0))
+        p2.metric('Thanh khoản',rr3.get('Liquidity','N/A'))
+        p3.metric('Đủ dữ liệu để tự động XHTN','CÓ' if rr3.get('DataSufficientForAutoRating') else 'CHƯA')
+        if rr3.get('EvidenceMetrics'):
+            st.caption('Chỉ tiêu định lượng sử dụng: '+', '.join(rr3.get('EvidenceMetrics',[])))
+        if not rr3.get('DataSufficientForAutoRating'):
+            st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng. Hệ thống không còn mặc định 3/6 cho bốn nhóm rủi ro và không tự gán vnBBB-.')
+        else:
+            st.info('XHTN doanh nghiệp sử dụng riêng khung: Rủi ro vĩ mô & ngành → Rủi ro kinh doanh → Rủi ro tài chính → Quản trị & quản lý → Thanh khoản/modifiers → hỗ trợ. Các yếu tố định tính vẫn cần chuyên viên xác nhận.')
     rc=committee_pack(selected)
     st.markdown('### Waterfall trình Hội đồng XHTN')
     st.dataframe(pd.DataFrame(rc.get('Waterfall',[])),hide_index=True,use_container_width=True)

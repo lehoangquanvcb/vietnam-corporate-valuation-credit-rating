@@ -99,8 +99,20 @@ def select_dynamic_peers(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap
     if s.empty:
         return pd.DataFrame()
     pool = pool.merge(s, on='Ticker', how='inner', suffixes=('','_snap'))
-    if pool.empty or t not in set(pool.Ticker):
+    if pool.empty:
         return pd.DataFrame()
+    if t not in set(pool.Ticker):
+        # Metadata-only fallback: still expose economically coherent peers, but do not
+        # pretend a quantitative similarity score exists. This is useful while a
+        # ticker's Bronze snapshot is missing/incomplete.
+        base=_candidate_pool(t,u)[0].copy()
+        base=base[~base.Ticker.eq(t)].head(max_peers).copy()
+        if base.empty:return pd.DataFrame()
+        out=pd.DataFrame({'TargetTicker':t,'Ticker':base.Ticker.astype(str).tolist()})
+        out['PeerRank']=np.arange(1,len(out)+1);out['SimilarityScore']=np.nan;out['DistanceScore']=np.nan;out['MetricsCoverage']=0.0
+        out['PeerPool']=pool_label;out['SimilarityBasis']='Cùng ngành/ICB; chờ dữ liệu tài chính để xếp hạng tương đồng'
+        names=u[['Ticker']+[c for c in ['CompanyName','LegalName','Sector','EntityType'] if c in u.columns]].drop_duplicates('Ticker')
+        return out.merge(names,on='Ticker',how='left')
     target = pool[pool.Ticker.eq(t)].iloc[-1]
     weights = WEIGHTS.get(et, WEIGHTS['CORPORATE'])
     rows=[]
@@ -133,7 +145,14 @@ def select_dynamic_peers(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap
                      'PeerPool':pool_label,'SimilarityBasis':reason})
     out = pd.DataFrame(rows)
     if out.empty:
-        return out
+        base=_candidate_pool(t,u)[0].copy()
+        base=base[~base.Ticker.eq(t)].head(max_peers).copy()
+        if base.empty:return out
+        out=pd.DataFrame({'TargetTicker':t,'Ticker':base.Ticker.astype(str).tolist()})
+        out['PeerRank']=np.arange(1,len(out)+1);out['SimilarityScore']=np.nan;out['DistanceScore']=np.nan;out['MetricsCoverage']=0.0
+        out['PeerPool']=pool_label;out['SimilarityBasis']='Cùng ngành/ICB; chờ đủ KPI để tính similarity'
+        names=u[['Ticker']+[c for c in ['CompanyName','LegalName','Sector','EntityType'] if c in u.columns]].drop_duplicates('Ticker')
+        return out.merge(names,on='Ticker',how='left')
     out = out.sort_values(['DistanceScore','Ticker']).head(max_peers).reset_index(drop=True)
     out.insert(0,'TargetTicker',t)
     out['PeerRank'] = np.arange(1,len(out)+1)
@@ -158,32 +177,43 @@ def dynamic_peer_label(ticker: str):
     return f'Nhóm tương đồng động: {len(p)} DN từ {pool}'
 
 
-def build_dynamic_peer_map():
+def build_dynamic_peer_map(target_ticker=None):
     u = universe(); all_rows=[]; summaries=[]
     if u.empty:
         return pd.DataFrame()
     u=u.copy(); u['Ticker']=u.Ticker.map(_norm_ticker)
-    # Load each Bronze snapshot once. This keeps full-market peer construction fast even for 1,000+ tickers.
+    targets=u.Ticker.astype(str).tolist()
+    if target_ticker:
+        tt=_norm_ticker(target_ticker); targets=[tt] if tt in set(targets) else []
     snap_cache={'BANK':_snapshot_for_type('BANK'),'SECURITIES':_snapshot_for_type('SECURITIES'),'CORPORATE':_snapshot_for_type('CORPORATE')}
-    for i,t in enumerate(u.Ticker.astype(str),1):
+    for i,t in enumerate(targets,1):
         p = select_dynamic_peers(t, _u=u, _snap_cache=snap_cache)
         if len(p):
             all_rows.append(p)
             pool=str(p.iloc[0].get('PeerPool','toàn thị trường'))
             label=f'Nhóm tương đồng động: {len(p)} DN từ {pool}'
-            summaries.append({'Ticker':_norm_ticker(t),'DynamicPeerGroup':label,
-                              'DynamicPeerCount':len(p),'DynamicPeers':','.join(p.Ticker.astype(str))})
+            summaries.append({'Ticker':_norm_ticker(t),'DynamicPeerGroup':label,'DynamicPeerCount':len(p),'DynamicPeers':','.join(p.Ticker.astype(str))})
         else:
-            summaries.append({'Ticker':_norm_ticker(t),'DynamicPeerGroup':'Nhóm tương đồng động (chưa đủ dữ liệu)',
-                              'DynamicPeerCount':0,'DynamicPeers':''})
-        if i % 100 == 0:
-            print(f'Dynamic peer: {i}/{len(u)}')
+            summaries.append({'Ticker':_norm_ticker(t),'DynamicPeerGroup':'Nhóm tương đồng động (chưa đủ dữ liệu)','DynamicPeerCount':0,'DynamicPeers':''})
+        if not target_ticker and i % 100 == 0: print(f'Dynamic peer: {i}/{len(targets)}')
     z = pd.concat(all_rows, ignore_index=True) if all_rows else pd.DataFrame()
-    z.to_csv(DATA/'dynamic_peer_map.csv', index=False, encoding='utf-8-sig')
-    pd.DataFrame(summaries).to_csv(DATA/'dynamic_peer_summary.csv', index=False, encoding='utf-8-sig')
-    print(f'OK - dynamic peer map: {len(z)} relations for {len(u)} companies')
+    map_path=DATA/'dynamic_peer_map.csv'; sum_path=DATA/'dynamic_peer_summary.csv'
+    if target_ticker:
+        tt=_norm_ticker(target_ticker)
+        try: old=pd.read_csv(map_path); old=old[old.TargetTicker.astype(str).str.upper().ne(tt)] if 'TargetTicker' in old.columns else pd.DataFrame()
+        except Exception: old=pd.DataFrame()
+        z=pd.concat([old,z],ignore_index=True,sort=False) if len(old) or len(z) else pd.DataFrame()
+        try: olds=pd.read_csv(sum_path); olds=olds[olds.Ticker.astype(str).str.upper().ne(tt)] if 'Ticker' in olds.columns else pd.DataFrame()
+        except Exception: olds=pd.DataFrame()
+        sums=pd.concat([olds,pd.DataFrame(summaries)],ignore_index=True,sort=False)
+    else:
+        sums=pd.DataFrame(summaries)
+    z.to_csv(map_path,index=False,encoding='utf-8-sig'); sums.to_csv(sum_path,index=False,encoding='utf-8-sig')
+    print(f'OK - dynamic peer update: {len(targets)} target(s)')
     return z
 
 
 if __name__ == '__main__':
-    build_dynamic_peer_map()
+    import sys
+    target=sys.argv[1] if len(sys.argv)>1 and str(sys.argv[1]).upper() not in {'ALL','--ALL'} else None
+    build_dynamic_peer_map(target)

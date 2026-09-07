@@ -7,6 +7,10 @@ if str(_PROJECT_ROOT) not in _sys.path:
 import numpy as np, pandas as pd
 from scripts.universal_data import num, peer_snapshot, get_company
 
+def _safe_median(series):
+    x=pd.to_numeric(series,errors='coerce').replace([np.inf,-np.inf],np.nan).dropna()
+    return float(x.median()) if len(x) else np.nan
+
 def valuation(ticker,s):
     meta=get_company(ticker); typ=meta.get('EntityType'); p=peer_snapshot(ticker)
     price=num(s.get('Price')); eps=num(s.get('EPS')); bvps=num(s.get('BVPS')); roe=num(s.get('ROE'))
@@ -14,13 +18,13 @@ def valuation(ticker,s):
     if typ=='BANK':
         # Bank-specific valuation is maintained by the proven V7 engine; here provide universal cross-check.
         pb=num(s.get('PB')) or (price/bvps if price and bvps else None)
-        peer_pb=pd.to_numeric(p.get('PB',pd.Series(dtype=float)),errors='coerce').median() if len(p) else np.nan
+        peer_pb=_safe_median(p.get('PB',pd.Series(dtype=float))) if len(p) else np.nan
         fair=peer_pb*bvps if bvps and pd.notna(peer_pb) else None
         out.update({'PrimaryMethod':'P/B nhóm so sánh','CurrentMultiple':pb,'PeerMultiple':peer_pb,'FairValue':fair})
     elif typ=='SECURITIES':
         pb=num(s.get('PB')) or (price/bvps if price and bvps else None); pe=num(s.get('PE')) or (price/eps if price and eps else None)
-        peer_pb=pd.to_numeric(p.get('PB',pd.Series(dtype=float)),errors='coerce').median() if len(p) else np.nan
-        peer_pe=pd.to_numeric(p.get('PE',pd.Series(dtype=float)),errors='coerce').median() if len(p) else np.nan
+        peer_pb=_safe_median(p.get('PB',pd.Series(dtype=float))) if len(p) else np.nan
+        peer_pe=_safe_median(p.get('PE',pd.Series(dtype=float))) if len(p) else np.nan
         vals=[]
         if bvps and pd.notna(peer_pb): vals.append(peer_pb*bvps)
         if eps and pd.notna(peer_pe): vals.append(peer_pe*eps)
@@ -28,8 +32,8 @@ def valuation(ticker,s):
         out.update({'PrimaryMethod':'P/B + P/E nhóm CTCK','CurrentMultiple':pb,'PeerMultiple':peer_pb,'FairValue':fair})
     else:
         pe=num(s.get('PE')) or (price/eps if price and eps else None); ev_ebitda=num(s.get('EV_EBITDA'))
-        peer_pe=pd.to_numeric(p.get('PE',pd.Series(dtype=float)),errors='coerce').median() if len(p) else np.nan
-        peer_ev=pd.to_numeric(p.get('EV_EBITDA',pd.Series(dtype=float)),errors='coerce').median() if len(p) else np.nan
+        peer_pe=_safe_median(p.get('PE',pd.Series(dtype=float))) if len(p) else np.nan
+        peer_ev=_safe_median(p.get('EV_EBITDA',pd.Series(dtype=float))) if len(p) else np.nan
         vals=[]
         if eps and pd.notna(peer_pe): vals.append(peer_pe*eps)
         # EV/EBITDA requires enterprise bridge; do not fabricate if shares/net debt unavailable.

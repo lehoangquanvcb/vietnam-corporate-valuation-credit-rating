@@ -1,0 +1,146 @@
+DIAGNOSTIC ENGINE v8.64
+Python: C:\Users\HP\.venv\Scripts\python.exe
+Version: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+.env: NOT FOUND | E:\Valuation_and_Credit_Rating_Intelligence\.env
+VNSTOCK_API_KEY: NOT SET
+VNSTOCK_VENV_PATH: C:\Users\HP\.venv
+VNSTOCK_INTERACTIVE: 0
+vnstock_data: OK | file=C:\Users\HP\.venv\Lib\site-packages\vnstock_data\__init__.py | version=3.2.2
+  Reference: YES
+  Fundamental: YES
+  Market: YES
+  Quote: YES
+  Insights: YES
+  Macro: YES
+
+Sponsor access smoke test:
+Sponsor authentication: OK
+Reference().equity.list(): OK | rows= 1751 | columns= ['symbol', 'org_name']
+
+===== FUNDAMENTAL SCHEMA PROBE: HPG =====
+equity object: EquityFundamental
+
+--- balance_sheet ---
+signature: (com_type=None, **B)
+legacy_quarter_en: OK shape=(4012, 8)
+columns: ['period', 'id', 'name', 'order', 'level', 'off_balance', 'unit', 'value']
+ period                          id                     name  order level off_balance unit        value
+2026-Q2        BS_SHORT_TERM_ASSETS        Short Term Assets      1     1       False  VNĐ 1.199690e+14
+2026-Q2 BS_CASH_AND_PRECIOUS_METALS Cash and Precious Metals      2     1       False  VNĐ 9.782057e+12
+2026-Q2                     BS_CASH                   ‣ Cash      3     2       False  VNĐ 2.221355e+12
+2026-Q2         BS_CASH_EQUIVALENTS       ‣ Cash Equivalents      4     2       False  VNĐ 7.560703e+12
+2026-Q2   BS_SHORT_TERM_INVESTMENTS   Short Term Investments      5     1       False  VNĐ 2.747389e+13
+legacy_quarter: OK shape=(4012, 8)
+columns: ['period', 'id', 'name', 'order', 'level', 'off_balance', 'unit', 'value']
+ period                          id                               name  order level off_balance unit        value
+2026-Q2        BS_SHORT_TERM_ASSETS                   TÀI SẢN NGẮN HẠN      1     1       False  VNĐ 1.199690e+14
+2026-Q2 BS_CASH_AND_PRECIOUS_METALS Tiền và các khoản tương đương tiền      2     1       False  VNĐ 9.782057e+12
+2026-Q2                     BS_CASH                             ‣ Tiền      3     2       False  VNĐ 2.221355e+12
+2026-Q2         BS_CASH_EQUIVALENTS       ‣ Các khoản tương đương tiền      4     2       False  VNĐ 7.560703e+12
+2026-Q2   BS_SHORT_TERM_INVESTMENTS          Đầu tư tài chính ngắn hạn      5     1       False  VNĐ 2.747389e+13
+legacy_default: OK shape=(4956, 8)
+columns: ['period', 'id', 'name', 'order', 'level', 'off_balance', 'unit', 'value']
+ period                          id                               name  order level off_balance unit        value
+2026-Q2        BS_SHORT_TERM_ASSETS                   TÀI SẢN NGẮN HẠN      1     1       False  VNĐ 1.199690e+14
+2026-Q2 BS_CASH_AND_PRECIOUS_METALS Tiền và các khoản tương đương tiền      2     1       False  VNĐ 9.782057e+12
+2026-Q2                     BS_CASH                             ‣ Tiền      3     2       False  VNĐ 2.221355e+12
+2026-Q2         BS_CASH_EQUIVALENTS       ‣ Các khoản tương đương tiền      4     2       False  VNĐ 7.560703e+12
+2026-Q2   BS_SHORT_TERM_INVESTMENTS          Đầu tư tài chính ngắn hạn      5     1       False  VNĐ 2.747389e+13
+
+--- income_statement ---
+signature: (com_type=None, **B)
+legacy_quarter_en: OK shape=(850, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                    id               name  order level unit         value
+2026-Q2            IS_REVENUE            Revenue      1     1  VNĐ  5.555725e+13
+2026-Q2 IS_REVENUE_DEDUCTIONS Revenue Deductions      2     1  VNĐ -3.983439e+11
+2026-Q2        IS_NET_REVENUE        Net Revenue      3     1  VNĐ  5.515890e+13
+2026-Q2 IS_COST_OF_GOODS_SOLD Cost of Goods Sold      4     1  VNĐ -4.467112e+13
+2026-Q2       IS_GROSS_PROFIT       Gross Profit      5     1  VNĐ  1.048779e+13
+legacy_quarter: OK shape=(850, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                    id                                            name  order level unit         value
+2026-Q2            IS_REVENUE          DOANH THU BÁN HÀNG VÀ CUNG CẤP DỊCH VỤ      1     1  VNĐ  5.555725e+13
+2026-Q2 IS_REVENUE_DEDUCTIONS                    Các khoản giảm trừ doanh thu      2     1  VNĐ -3.983439e+11
+2026-Q2        IS_NET_REVENUE Doanh thu thuần về bán hàng và cung cấp dịch vụ      3     1  VNĐ  5.515890e+13
+2026-Q2 IS_COST_OF_GOODS_SOLD                                Giá vốn hàng bán      4     1  VNĐ -4.467112e+13
+2026-Q2       IS_GROSS_PROFIT   LỢI NHUẬN GỘP VỀ BÁN HÀNG VÀ CUNG CẤP DỊCH VỤ      5     1  VNĐ  1.048779e+13
+legacy_default: OK shape=(1050, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                    id                                            name  order level unit         value
+2026-Q2            IS_REVENUE          DOANH THU BÁN HÀNG VÀ CUNG CẤP DỊCH VỤ      1     1  VNĐ  5.555725e+13
+2026-Q2 IS_REVENUE_DEDUCTIONS                    Các khoản giảm trừ doanh thu      2     1  VNĐ -3.983439e+11
+2026-Q2        IS_NET_REVENUE Doanh thu thuần về bán hàng và cung cấp dịch vụ      3     1  VNĐ  5.515890e+13
+2026-Q2 IS_COST_OF_GOODS_SOLD                                Giá vốn hàng bán      4     1  VNĐ -4.467112e+13
+2026-Q2       IS_GROSS_PROFIT   LỢI NHUẬN GỘP VỀ BÁN HÀNG VÀ CUNG CẤP DỊCH VỤ      5     1  VNĐ  1.048779e+13
+
+--- cash_flow ---
+signature: (com_type=None, **B)
+legacy_quarter_en: OK shape=(1734, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                                          id                                     name  order level unit        value
+2026-Q2 CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES Net Cash Flows from Operating Activities      1     1  VNĐ 5.253680e+12
+2026-Q2                        CF_PROFIT_BEFORE_TAX                      ‣ Profit Before Tax      2     2  VNĐ 7.184684e+12
+2026-Q2            CF_DEPRECIATION_AND_AMORTISATION          ‣ Depreciation and Amortisation      3     2  VNĐ 2.851263e+12
+2026-Q2                               CF_PROVISIONS                             ‣ Provisions      4     2  VNĐ 2.972926e+10
+2026-Q2               CF_FOREIGN_EXCHANGE_LOSS_GAIN             ‣ Foreign Exchange Loss Gain      5     2  VNĐ 3.650803e+10
+legacy_quarter: OK shape=(1734, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                                          id                                                                                         name  order level unit        value
+2026-Q2 CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES                                                LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH      1     1  VNĐ 5.253680e+12
+2026-Q2                        CF_PROFIT_BEFORE_TAX                                                                       ‣ Lợi nhuận trước thuế      2     2  VNĐ 7.184684e+12
+2026-Q2            CF_DEPRECIATION_AND_AMORTISATION                                                                     ‣ Khấu hao TSCĐ và BĐSĐT      3     2  VNĐ 2.851263e+12
+2026-Q2                               CF_PROVISIONS                                                                         ‣ Các khoản dự phòng      4     2  VNĐ 2.972926e+10
+2026-Q2               CF_FOREIGN_EXCHANGE_LOSS_GAIN   ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ      5     2  VNĐ 3.650803e+10
+legacy_default: OK shape=(2142, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                                          id                                                                                         name  order level unit        value
+2026-Q2 CF_NET_CASH_FLOWS_FROM_OPERATING_ACTIVITIES                                                LƯU CHUYỂN TIỀN THUẦN TỪ HOẠT ĐỘNG KINH DOANH      1     1  VNĐ 5.253680e+12
+2026-Q2                        CF_PROFIT_BEFORE_TAX                                                                       ‣ Lợi nhuận trước thuế      2     2  VNĐ 7.184684e+12
+2026-Q2            CF_DEPRECIATION_AND_AMORTISATION                                                                     ‣ Khấu hao TSCĐ và BĐSĐT      3     2  VNĐ 2.851263e+12
+2026-Q2                               CF_PROVISIONS                                                                         ‣ Các khoản dự phòng      4     2  VNĐ 2.972926e+10
+2026-Q2               CF_FOREIGN_EXCHANGE_LOSS_GAIN   ‣ Lãi, lỗ chênh lệch tỷ giá hối đoái do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ      5     2  VNĐ 3.650803e+10
+
+--- ratio ---
+signature: (com_type=None, **B)
+legacy_quarter_en: OK shape=(1980, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                    id                            name  order level unit    value
+2026-Q2 RT_CAT_INFO_VALUATION Valuation & Company Information      1     1           NaN
+2026-Q2           RT_VALUE_PE                     ‣ P/E Ratio      2     2  lần 7.854792
+2026-Q2           RT_VALUE_PB                     ‣ P/B Ratio      3     2  lần 1.294696
+2026-Q2           RT_VALUE_PS                     ‣ P/S Ratio      4     2  lần 0.956591
+2026-Q2         RT_VALUE_P_CF                    ‣ P/CF Ratio      5     2  lần 6.303958
+legacy_quarter: OK shape=(1980, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                    id                              name  order level unit    value
+2026-Q2 RT_CAT_INFO_VALUATION ĐỊNH GIÁ & THÔNG TIN DOANH NGHIỆP      1     1           NaN
+2026-Q2           RT_VALUE_PE                      ‣ P/E cơ bản      2     2  lần 7.854792
+2026-Q2           RT_VALUE_PB                             ‣ P/B      3     2  lần 1.294696
+2026-Q2           RT_VALUE_PS                             ‣ P/S      4     2  lần 0.956591
+2026-Q2         RT_VALUE_P_CF                            ‣ P/CF      5     2  lần 6.303958
+legacy_default: OK shape=(2460, 7)
+columns: ['period', 'id', 'name', 'order', 'level', 'unit', 'value']
+ period                    id                              name  order level unit    value
+2026-Q2 RT_CAT_INFO_VALUATION ĐỊNH GIÁ & THÔNG TIN DOANH NGHIỆP      1     1           NaN
+2026-Q2           RT_VALUE_PE                      ‣ P/E cơ bản      2     2  lần 7.854792
+2026-Q2           RT_VALUE_PB                             ‣ P/B      3     2  lần 1.294696
+2026-Q2           RT_VALUE_PS                             ‣ P/S      4     2  lần 0.956591
+2026-Q2         RT_VALUE_P_CF                            ‣ P/CF      5     2  lần 6.303958
+
+--- financial_health ---
+[93m💡 LƯU Ý & MIỄN TRỪ TRÁCH NHIỆM: Dữ liệu tài chính được tổng hợp và chuẩn hóa từ nhiều nguồn công khai. Do sự khác biệt về phương pháp hạch toán giữa các nhà cung cấp, một số chỉ số có thể có chênh lệch so với báo cáo pdf gốc. Dữ liệu này chỉ mang tính chất tham khảo. Dự án miễn trừ mọi trách nhiệm đối với các quyết định đầu tư dựa trên thông tin này.[0m
+regular: OK shape=(36, 17)
+columns: ['id', 'item', 'level', 'order', 'unit', '2024', '2024-Q1', '2024-Q2', '2024-Q3', '2024-Q4', '2025', '2025-Q1', '2025-Q2', '2025-Q3', '2025-Q4', '2026-Q1', '2026-Q2']
+                                    id                                   item  level  order unit          2024       2024-Q1       2024-Q2       2024-Q3       2024-Q4          2025       2025-Q1       2025-Q2       2025-Q3       2025-Q4       2026-Q1       2026-Q2
+                        IS_NET_REVENUE                         IS_NET_REVENUE      1      0  VNĐ  1.388551e+14  3.085236e+13  3.955551e+13  3.395626e+13  3.449098e+13  1.561161e+14  3.762167e+13  3.591052e+13  3.640742e+13  4.617648e+13  5.290085e+13  5.515890e+13
+                 IS_COST_OF_GOODS_SOLD                  IS_COST_OF_GOODS_SOLD      1      1  VNĐ -1.203576e+14 -2.669838e+13 -3.430803e+13 -2.922508e+13 -3.012607e+13 -1.316183e+14 -3.219752e+13 -2.932080e+13 -3.032016e+13 -3.977983e+13 -4.453578e+13 -4.467112e+13
+                       IS_GROSS_PROFIT                        IS_GROSS_PROFIT      1      2  VNĐ  1.849755e+13  4.153983e+12  5.247480e+12  4.731177e+12  4.364909e+12  2.449779e+13  5.424154e+12  6.589722e+12  6.087261e+12  6.396650e+12  8.365069e+12  1.048779e+13
+                   IS_SELLING_EXPENSES                    IS_SELLING_EXPENSES      1      3  VNĐ -2.337309e+12 -6.403788e+11 -7.465096e+11 -7.202082e+11 -2.302121e+11 -2.633631e+12 -7.378157e+11 -8.253719e+11 -7.989660e+11 -2.714771e+11 -1.344969e+12 -1.717603e+12
+IS_GENERAL_AND_ADMINISTRATIVE_EXPENSES IS_GENERAL_AND_ADMINISTRATIVE_EXPENSES      1      4  VNĐ -1.545516e+12 -3.172785e+11 -3.894179e+11 -3.215015e+11 -5.173181e+11 -1.436537e+12 -3.472438e+11 -3.222859e+11 -3.559633e+11 -4.110444e+11 -3.859019e+11 -3.077969e+11
+                   IS_OPERATING_PROFIT                    IS_OPERATING_PROFIT      1      5  VNĐ  1.326701e+13  2.887668e+12  3.691521e+12  3.385018e+12  3.302799e+12  1.790583e+13  3.806582e+12  4.960786e+12  4.571025e+12  4.567441e+12  1.070403e+13  7.155004e+12
+                  IS_INTEREST_EXPENSES                   IS_INTEREST_EXPENSES      1      6  VNĐ -2.287361e+12 -6.356190e+11 -5.641344e+11 -5.251148e+11 -5.624927e+11 -3.114856e+12 -6.270244e+11 -4.391126e+11 -8.121941e+11 -1.236525e+12 -1.333415e+12 -1.519614e+12
+                  IS_PROFIT_BEFORE_TAX                   IS_PROFIT_BEFORE_TAX      1      7  VNĐ  1.369350e+13  3.261215e+12  3.733226e+12  3.412385e+12  3.286676e+12  1.804059e+13  3.839765e+12  4.972383e+12  4.628313e+12  4.600130e+12  1.076218e+13  7.184684e+12
+
+Diagnostic files saved to: E:\Valuation_and_Credit_Rating_Intelligence\data\diagnostics\HPG
+DONE - HPG/schema probe completed.

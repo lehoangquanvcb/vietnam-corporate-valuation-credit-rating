@@ -32,10 +32,18 @@ if not defined VENV_SELECTED if exist ".venv\Scripts\python.exe" set "VENV_SELEC
 
 if defined VENV_SELECTED set "PYTHON=%VENV_SELECTED%\Scripts\python.exe"
 
+set "VNSTOCK_WORKERS=1"
+set "VNSTOCK_TICKER_DELAY=2.5"
+
+set "VNSTOCK_WORKERS=1"
+set "VNSTOCK_TICKER_DELAY=2.5"
+
 echo ===========================================================
 echo  FULL VNSTOCK SPONSOR REFRESH - TOAN BO THI TRUONG
 echo ===========================================================
 echo Python: %PYTHON%
+echo Bronze-safe throttle: 1 worker ^| 2.5 sec ticker delay ^| library retry/wait preserved
+echo Bronze-safe throttle: 1 worker ^| 2.5 sec ticker delay
 echo Sponsor source: vnstock_data ^(local Bronze credential; key never printed^)
 echo Vnstock Reference ^> ALL listed tickers ^> BANK + SECURITIES + CORPORATE
 echo ^> full raw fundamentals ^> normalized Bronze ^> dynamic peer ^> benchmark ^> analyst

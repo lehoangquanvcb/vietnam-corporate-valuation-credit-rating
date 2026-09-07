@@ -50,11 +50,31 @@ def analyze(ticker):
     conc=f'Quan điểm định lượng tổng hợp: {view}. '
     conc+=('Chưa đủ dữ liệu để lượng hóa upside/downside.' if up is None else f"Giá trị tham chiếu của engine chênh khoảng {(f'{up*100:.1f}').replace('.',',')}% so với thị giá; đây là kết quả mô hình, không phải khuyến nghị mua/bán.")
     return {'Ticker':ticker,'CompanyName':meta.get('DisplayName',meta.get('CompanyName')),'Sector':meta.get('Sector'),'Template':tmpl['label'],'Focus':tmpl['focus'],'Score':score,'View':view,'Strengths':[sent(x) for x in pos],'Risks':[sent(x) for x in neg],'Interpretations':inter,'Conclusion':conc}
+def _summary_row(t):
+    try:
+        a=analyze(t); return {k:a[k] for k in ['Ticker','Sector','Template','Score','View','Conclusion']}
+    except Exception as e:
+        return {'Ticker':str(t).upper(),'Error':str(e)}
+
+def export_one(ticker):
+    t=str(ticker).upper().strip(); row=_summary_row(t)
+    path=DATA/'intelligent_analyst_summary.csv'
+    try: old=pd.read_csv(path)
+    except Exception: old=pd.DataFrame()
+    new=pd.DataFrame([row])
+    if len(old) and 'Ticker' in old.columns:
+        old=old[old.Ticker.astype(str).str.upper().ne(t)]
+        new=pd.concat([old,new],ignore_index=True,sort=False)
+    new.to_csv(path,index=False,encoding='utf-8-sig')
+    return pd.DataFrame([row])
+
 def export_all():
-    rows=[]
-    for t in universe().Ticker:
-        try:
-            a=analyze(t);rows.append({k:a[k] for k in ['Ticker','Sector','Template','Score','View','Conclusion']})
-        except Exception as e:rows.append({'Ticker':t,'Error':str(e)})
+    rows=[_summary_row(t) for t in universe().Ticker]
     z=pd.DataFrame(rows);z.to_csv(DATA/'intelligent_analyst_summary.csv',index=False,encoding='utf-8-sig');return z
-if __name__=='__main__':print(export_all().head())
+
+if __name__=='__main__':
+    import sys
+    if len(sys.argv)>1 and str(sys.argv[1]).upper() not in {'ALL','--ALL'}:
+        print(export_one(sys.argv[1]).to_string(index=False))
+    else:
+        print(export_all().head())

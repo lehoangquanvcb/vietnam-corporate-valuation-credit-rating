@@ -28,7 +28,7 @@ LABELS={
 'AssetEquity':'Tổng tài sản/VCSH','CreditCostProxy':'Chi phí dự phòng/Dư nợ','FundingGapAssets':'Chênh lệch cho vay-tiền gửi/TTS',
 'ProfitAssets':'LNST/Tổng tài sản','CashAssets':'Tiền/Tổng tài sản','WorkingCapitalAssets':'Vốn lưu động ròng/Tổng tài sản',
 'NetDebtEquity':'Nợ ròng/VCSH','NetDebtEBITDA':'Nợ ròng/EBITDA','EquityAssetsCorp':'VCSH/Tổng tài sản','AssetTurnover':'Doanh thu/Tổng tài sản',
-'FOCFMargin':'FOCF/Doanh thu','CashDebt':'Tiền/Nợ vay'
+'FOCFMargin':'FOCF/Doanh thu','CashDebt':'Tiền/Nợ vay','InterestCoverage':'EBIT/Chi phí lãi vay'
 }
 PCT=set(['ROE','ROA','NIM','NPL','CAR','CIR','CASA','LoanAssets','DepositAssets','EquityAssets',
 'TangibleEquityAssets','NII_OperatingIncome','ProvisionOperatingIncome','GrossMargin','NetMargin',
@@ -56,7 +56,7 @@ SEC_GROUPS={
 CORP_GROUPS={
 'Quy mô & hồ sơ kinh doanh':['Revenue','TotalAssets','AssetTurnover','GrossMargin','OperatingProfitMargin','EBITDAMargin'],
 'Khả năng sinh lợi':['ROE','ROA','NetMargin','EBITDAMargin','AssetTurnover'],
-'Đòn bẩy & khả năng trả nợ':['DebtEquity','DebtAssets','NetDebtEquity','DebtEBITDA','NetDebtEBITDA','CFO_Debt','FOCF_Debt'],
+'Đòn bẩy & khả năng trả nợ':['DebtEquity','DebtAssets','NetDebtEquity','DebtEBITDA','NetDebtEBITDA','InterestCoverage','CFO_Debt','FOCF_Debt'],
 'Dòng tiền & đầu tư':['CFO_Margin','FOCFMargin','CapexRevenue','CFO_Debt','FOCF_Debt'],
 'Thanh khoản':['CurrentRatio','WorkingCapitalAssets','CashAssets','CashDebt'],
 'Cấu trúc vốn':['EquityAssetsCorp','AssetEquity','NetDebtEquity'],
