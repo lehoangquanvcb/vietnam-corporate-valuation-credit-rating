@@ -53,7 +53,10 @@ def metric_chart(ticker,metric,title,percent=False):
     if len(h):
         z=h[h.Metric.astype(str).eq(metric)].copy(); z['Date']=z.Period.map(period_date); z['Value']=pd.to_numeric(z.Value,errors='coerce'); z=z.dropna(subset=['Date','Value']).sort_values('Date')
         if len(z):fig.add_trace(go.Scatter(x=z.Date,y=z.Value,mode='markers' if len(z)<3 else 'lines+markers',name=ticker))
-    if len(p):fig.add_trace(go.Scatter(x=p.PeriodDate,y=p.IndustryMean,mode='markers' if len(p)<3 else 'lines',line=dict(dash='dash'),name='Trung bình peer'))
+    if len(p):
+        fig.add_trace(go.Scatter(x=p.PeriodDate,y=p.IndustryMean,mode='markers' if len(p)<3 else 'lines',line=dict(dash='dash'),name='Trung bình peer'))
+        if 'IndustryMedian' in p.columns:
+            fig.add_trace(go.Scatter(x=p.PeriodDate,y=p.IndustryMedian,mode='markers' if len(p)<3 else 'lines',line=dict(dash='dot'),name='Trung vị peer'))
     fig.update_layout(title=title,height=370,legend=dict(orientation='h',y=-.2),margin=dict(t=45,b=70),xaxis_title='')
     if percent:fig.update_yaxes(tickformat='.1%')
     return fig

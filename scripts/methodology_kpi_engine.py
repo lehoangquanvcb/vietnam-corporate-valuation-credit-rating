@@ -6,7 +6,7 @@ if str(_PROJECT_ROOT) not in _sys.path:
 
 import numpy as np, pandas as pd
 from scripts.universal_data import get_company,get_snapshot
-from scripts.sector_benchmark_engine import industry_snapshot, MIN_BENCHMARK_PEERS
+from scripts.sector_benchmark_engine import industry_snapshot, MIN_BENCHMARK_PEERS, _clean_benchmark_values
 
 LABELS={
 'Price':'Giá thị trường','TotalAssets':'Tổng tài sản','GrossLoans':'Cho vay khách hàng',
@@ -126,7 +126,7 @@ def methodology_kpi_table(ticker, include_missing=True):
     for group,metrics in groups_for(ticker).items():
         for m in metrics:
             c=_n(s.get(m))
-            vals=pd.to_numeric(peers[m],errors='coerce').dropna() if len(peers) and m in peers else pd.Series(dtype=float)
+            vals=_clean_benchmark_values(m,peers[m]) if len(peers) and m in peers else pd.Series(dtype=float)
             mean=float(vals.mean()) if len(vals) else np.nan; med=float(vals.median()) if len(vals) else np.nan
             if not include_missing and not np.isfinite(c) and not len(vals):continue
             n=int(len(vals))

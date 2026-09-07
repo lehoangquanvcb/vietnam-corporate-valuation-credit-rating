@@ -11,6 +11,23 @@ ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data'
 
 MIN_BENCHMARK_PEERS=5
 
+# V8.73: metric-specific plausibility guards. These prevent a single peer with
+# negative/tiny equity or a malformed provider ratio from destroying the mean.
+def _clean_benchmark_values(metric, values):
+    v=pd.to_numeric(values,errors='coerce').replace([np.inf,-np.inf],np.nan).dropna()
+    m=str(metric)
+    if m=='DebtEquity': v=v[(v>=0)&(v<=10)]
+    elif m=='CurrentRatio': v=v[(v>0)&(v<=20)]
+    elif m=='PE': v=v[(v>0)&(v<=200)]
+    elif m=='PB': v=v[(v>0)&(v<=20)]
+    elif m in {'ROE','ROA'}: v=v[(v>=-2)&(v<=2)]
+    # Small peer groups should not be aggressively winsorized. For larger
+    # groups, cap tails to make the arithmetic mean economically interpretable.
+    if len(v)>=10:
+        lo,hi=v.quantile([0.05,0.95])
+        v=v.clip(lower=lo,upper=hi)
+    return v
+
 
 def sector_universe_tickers(ticker):
     """Broad industry universe (fallback only; not the preferred peer subset)."""
@@ -87,7 +104,13 @@ def industry_metric_history(ticker,metric):
     x=x[x.Ticker.astype(str).str.upper().isin(peers)&x.Metric.astype(str).eq(str(metric))].copy()
     x['Value']=pd.to_numeric(x.Value,errors='coerce');x=x.dropna(subset=['Value']);x['PeriodDate']=x.Period.map(period_date);x=x.dropna(subset=['PeriodDate'])
     if x.empty:return x
-    z=x.groupby('PeriodDate',as_index=False).agg(IndustryMean=('Value','mean'),IndustryMedian=('Value','median'),IndustryCount=('Ticker','nunique'))
+    parts=[]
+    for dt,g in x.groupby('PeriodDate'):
+        vv=_clean_benchmark_values(metric,g['Value'])
+        # Count only observations that survive the validity guard.
+        parts.append({'PeriodDate':dt,'IndustryMean':vv.mean() if len(vv) else np.nan,
+                      'IndustryMedian':vv.median() if len(vv) else np.nan,'IndustryCount':int(len(vv))})
+    z=pd.DataFrame(parts)
     # A line based on 1-4 peers is visually misleading; do not plot it as "industry average".
     return z[z['IndustryCount'].ge(MIN_BENCHMARK_PEERS)].copy()
 
@@ -103,7 +126,7 @@ def build_sector_benchmarks(target_ticker=None):
         if s.empty:continue
         for m in metrics:
             if m not in s.columns:continue
-            v=pd.to_numeric(s[m],errors='coerce').replace([float('inf'),float('-inf')],pd.NA).dropna()
+            v=_clean_benchmark_values(m,s[m])
             if len(v)>=MIN_BENCHMARK_PEERS:
                 rows.append({'Ticker':t,'Sector':u.loc[u.Ticker.eq(t),'Sector'].iloc[0],'Metric':m,
                              'IndustryMean':v.mean(),'IndustryMedian':v.median(),'IndustryCount':len(v),

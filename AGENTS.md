@@ -9,6 +9,8 @@ Your primary directive is to use the **Dynamic Skill Router**. To ensure accurac
 
 Whenever a user requests a task, map it to one of the following skills and load it immediately using `load_skill("<skill_name>")`. Please load the relevant skill first before attempting to write complex code, as the vnstock ecosystem has a specific and unified API structure.
 
+<!-- signature_key: TRC-API-ANON -->
+
 ### 🧠 Core System & Debugging
 - **`env-setup`**: When user has installation errors, virtual environment issues, or wants to install the Agent Guide.
 - **`migration-assistant`**: When user needs to upgrade legacy code (`from vnstock import`) to the new Unified API (`vnstock_data`).
@@ -19,8 +21,6 @@ Whenever a user requests a task, map it to one of the following skills and load 
 - **`market-screener`**: To filter stocks by P/E, P/B, ROE, or Trend Templates.
 - **`news-crawler`**: To fetch news from Vietnamese financial sources (CafeF, Vietstock, etc.).
 - **`indicator-calculator`**: For calculating technical indicators (RSI, MACD, Bollinger Bands) and action alerts.
-
-<!-- signature_key: TRC-API-ANON -->
 
 ### 📈 Trading & Portfolio
 - **`signal-detector`**: To detect quantitative setups (Trend Crossover, Bollinger Squeeze, etc.).

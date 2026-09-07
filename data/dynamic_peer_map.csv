@@ -17475,13 +17475,13 @@ VIX,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ 
 VIX,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
 VIX,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
 VIX,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-HPG,TVN,0.7975538461538462,0.20244615384615386,0.65,Nhóm peer chuyên ngành (analyst override),"TotalAssets, DebtEquity, ROE",1,TVN,TVN,Nguyên vật liệu,CORPORATE
-HPG,HSG,0.7206307692307692,0.2793692307692308,0.65,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Equity, DebtEquity",2,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
-HPG,NKG,0.6660853146853147,0.33391468531468527,0.65,Nhóm peer chuyên ngành (analyst override),"TotalAssets, DebtEquity, Equity",3,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
-HPG,VGS,0.6255258741258741,0.3744741258741259,0.65,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, ROE",4,VGS,VGS,Nguyên vật liệu,CORPORATE
-HPG,SMC,0.5388125874125874,0.4611874125874126,0.65,Nhóm peer chuyên ngành (analyst override),"DebtEquity, ROE, TotalAssets",5,SMC,SMC,Nguyên vật liệu,CORPORATE
-HPG,TIS,0.509441958041958,0.490558041958042,0.65,Nhóm peer chuyên ngành (analyst override),"TotalAssets, DebtEquity, Equity",6,TIS,TIS,Nguyên vật liệu,CORPORATE
-HPG,TLH,0.38496643356643356,0.6150335664335664,0.65,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, ROE",7,TLH,TLH,Nguyên vật liệu,CORPORATE
-HPG,HMC,0.3597916083916084,0.6402083916083916,0.65,Nhóm peer chuyên ngành (analyst override),"ROE, DebtEquity, ROA",8,HMC,HMC,Nguyên vật liệu,CORPORATE
-HPG,POM,0.35140000000000005,0.6486,0.65,Nhóm peer chuyên ngành (analyst override),"TotalAssets, DebtEquity, ROE",9,POM,POM,Nguyên vật liệu,CORPORATE
-HPG,DTL,0.260490909090909,0.739509090909091,0.65,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, ROE",10,DTL,DTL,Nguyên vật liệu,CORPORATE
+HPG,TVN,0.8517786561264822,0.1482213438735178,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",1,TVN,TVN,Nguyên vật liệu,CORPORATE
+HPG,HSG,0.8162055335968379,0.18379446640316208,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",2,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+HPG,NKG,0.692687747035573,0.30731225296442694,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",3,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+HPG,VGS,0.6363636363636362,0.3636363636363637,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, ROE",4,VGS,VGS,Nguyên vật liệu,CORPORATE
+HPG,TIS,0.5553359683794465,0.4446640316205534,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, Equity",5,TIS,TIS,Nguyên vật liệu,CORPORATE
+HPG,SMC,0.5237154150197627,0.4762845849802373,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"ROE, TotalAssets, DebtEquity",6,SMC,SMC,Nguyên vật liệu,CORPORATE
+HPG,HMC,0.4436758893280631,0.5563241106719369,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"Revenue, ROE, DebtEquity",7,HMC,HMC,Nguyên vật liệu,CORPORATE
+HPG,TLH,0.4328063241106719,0.5671936758893281,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, Revenue",8,TLH,TLH,Nguyên vật liệu,CORPORATE
+HPG,POM,0.3893280632411066,0.6106719367588934,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, DebtEquity, ROE",9,POM,POM,Nguyên vật liệu,CORPORATE
+HPG,DTL,0.27470355731225293,0.7252964426877471,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, CurrentRatio, TotalAssets",10,DTL,DTL,Nguyên vật liệu,CORPORATE

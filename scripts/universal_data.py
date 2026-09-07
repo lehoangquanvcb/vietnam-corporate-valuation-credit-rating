@@ -26,6 +26,30 @@ def universe():
 def bank_snapshot(): return read_csv(DATA/'bank_snapshot.csv')
 def generic_snapshot():
     x=read_csv(DATA/'company_snapshot.csv')
+    # V8.73 integrity repair: ratio KPIs can be present in company_history_long.csv
+    # even when an older company_snapshot row has a blank value. Hydrate only
+    # point-in-time ratio fields from the latest available history observation.
+    if len(x) and 'Ticker' in x.columns:
+        h=read_csv(DATA/'company_history_long.csv')
+        ratio_fill=['PE','PB','CurrentRatio','DebtEquity','ROE','ROA']
+        if len(h) and {'Ticker','Metric','Value','Period'}.issubset(h.columns):
+            hh=h[h['Metric'].astype(str).isin(ratio_fill)].copy()
+            hh['Ticker']=hh['Ticker'].astype(str).str.upper().str.strip()
+            hh['Value']=pd.to_numeric(hh['Value'],errors='coerce')
+            hh['_Date']=hh['Period'].map(period_date)
+            hh=hh.dropna(subset=['Value','_Date']).sort_values(['Ticker','Metric','_Date'])
+            if len(hh):
+                latest=hh.groupby(['Ticker','Metric'],as_index=False).tail(1).pivot(index='Ticker',columns='Metric',values='Value').reset_index()
+                x=x.copy(); x['Ticker']=x['Ticker'].astype(str).str.upper().str.strip()
+                x=x.merge(latest,on='Ticker',how='left',suffixes=('','_HistLatest'))
+                for c in ratio_fill:
+                    hc=c+'_HistLatest'
+                    if hc in x.columns:
+                        if c not in x.columns:x[c]=np.nan
+                        cur=pd.to_numeric(x[c],errors='coerce')
+                        hist=pd.to_numeric(x[hc],errors='coerce')
+                        x[c]=cur.where(cur.notna(),hist)
+                        x=x.drop(columns=[hc])
     m=read_csv(CFG/'manual_financial_inputs.csv')
     if len(x) and len(m) and 'Ticker' in x and 'Ticker' in m:
         x['Ticker']=x['Ticker'].astype(str).str.upper(); m['Ticker']=m['Ticker'].astype(str).str.upper()

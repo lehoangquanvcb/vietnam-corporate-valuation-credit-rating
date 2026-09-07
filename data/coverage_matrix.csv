@@ -1229,7 +1229,7 @@ DPR,DPR,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 DPS,DPS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,0,0,0,0,1,1,0.25,INSUFFICIENT_DATA
 DRG,DRG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 DRI,DRI,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-DTL,DTL,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+DTL,DTL,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 DTT,DTT,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 ECO,ECO,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 FRC,FRC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
@@ -1248,7 +1248,7 @@ HHP,HHP,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 HII,HII,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 HLA,HLA,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,0,0,0,0,1,1,0.25,INSUFFICIENT_DATA
 HLC,HLC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-HMC,HMC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+HMC,HMC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 HMD,HMD,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 HMG,HMG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 HNP,HNP,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
@@ -1256,7 +1256,7 @@ HPG,Hoa Phat Group,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORAT
 HPH,HPH,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 HPM,HPM,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 HRC,HRC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-HSG,Hoa Sen Group,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+HSG,Hoa Sen Group,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 HSI,HSI,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 HSV,HSV,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 HUX,HUX,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,0,0,0,0,1,1,0.25,INSUFFICIENT_DATA
@@ -1293,7 +1293,7 @@ NBC,NBC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 NFC,NFC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 NHH,NHH,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 NHV,NHV,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-NKG,Nam Kim Steel,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+NKG,Nam Kim Steel,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 NNG,NNG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,0,0,0,0,1,1,0.25,INSUFFICIENT_DATA
 NSG,NSG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 NSH,NSH,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
@@ -1308,7 +1308,7 @@ PIS,PIS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 PLC,PLC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 PLP,PLP,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 PMB,PMB,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-POM,POM,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+POM,POM,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 PSE,PSE,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 PSW,PSW,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 PTB,PTB,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
@@ -1326,7 +1326,7 @@ SHA,SHA,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 SHI,SHI,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 SHN,SHN,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 SJF,SJF,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,0,0,0,0,1,1,0.25,INSUFFICIENT_DATA
-SMC,SMC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+SMC,SMC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 SPC,SPC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 SPI,SPI,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 SQC,SQC,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
@@ -1335,10 +1335,10 @@ TAH,TAH,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 TD6,TD6,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 TDS,TDS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 THT,THT,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-TIS,TIS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+TIS,TIS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 TKG,TKG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,0,0,0,0,1,1,0.25,INSUFFICIENT_DATA
 TKU,TKU,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-TLH,TLH,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+TLH,TLH,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 TMB,TMB,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 TMG,TMG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 TMW,TMW,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
@@ -1355,7 +1355,7 @@ TTF,TTF,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 TTH,TTH,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 TTS,TTS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 TVD,TVD,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-TVN,TVN,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+TVN,TVN,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 V68,V68,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 VAF,VAF,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 VBG,VBG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
@@ -1365,7 +1365,7 @@ VDT,VDT,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,
 VET,VET,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 VFG,VFG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 VGL,VGL,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
-VGS,VGS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
+VGS,VGS,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,1,1,2,1,1,1.0,PRODUCTION_READY
 VID,VID,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 VIF,VIF,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL
 VIM,VIM,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,0,0,0,1,1,0.5,PARTIAL

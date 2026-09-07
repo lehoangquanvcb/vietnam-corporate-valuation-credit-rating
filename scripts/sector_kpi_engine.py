@@ -18,10 +18,15 @@ def sector_kpi_table(ticker):
     key,t=get_template(m.get('EntityType'),m.get('Sector'))
     z=methodology_kpi_table(ticker,include_missing=True).copy()
     z=z.rename(columns={'TB ngành':'Trung bình ngành','Trung vị':'Trung vị ngành','Số DN':'Số DN có dữ liệu'})
-    z['Chênh lệch với TB ngành']=np.where(
-        pd.to_numeric(z['Doanh nghiệp'],errors='coerce').notna() &
-        pd.to_numeric(z['Trung bình ngành'],errors='coerce').notna() &
-        pd.to_numeric(z['Trung bình ngành'],errors='coerce').ne(0),
-        pd.to_numeric(z['Doanh nghiệp'],errors='coerce')/pd.to_numeric(z['Trung bình ngành'],errors='coerce')-1,
-        np.nan)
+    # V8.73: express the gap in the metric's natural economic unit instead of
+    # company/peer-1, which becomes nonsensical when the peer mean is negative.
+    from scripts.methodology_kpi_engine import PCT, MULT
+    def _gap(r):
+        c=num(r.get('Doanh nghiệp')); b=num(r.get('Trung bình ngành')); m=str(r.get('Metric',''))
+        if c is None or b is None:return 'N/A'
+        if m in PCT:return f'{(c-b)*100:+.2f} điểm %'
+        if m in MULT:return f'{c-b:+.2f}x'
+        if b!=0:return f'{(c/b-1)*100:+.1f}%'
+        return 'N/A'
+    z['Chênh lệch với TB ngành']=z.apply(_gap,axis=1)
     return z,key,t
