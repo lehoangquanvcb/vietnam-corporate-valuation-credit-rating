@@ -528,42 +528,76 @@ def _latest_metric_period_report(ticker,metric):
         return 'kỳ gần nhất'
 
 def peer_bar_chart(ticker,metric,title=None,top_n=11):
-    """Vertical latest-period comparison: company + up to 10 peers."""
-    from scripts.universal_data import industry_snapshot
-    peers=industry_snapshot(ticker)
-    if peers is None or not len(peers) or metric not in peers.columns:return None
-    z=peers[['Ticker',metric]].copy(); z['Ticker']=z.Ticker.astype(str).str.upper().str.strip(); z[metric]=pd.to_numeric(z[metric],errors='coerce')
-    v=z[metric]
-    if metric=='DebtEquity': v=v.where((v>=0)&(v<=10))
-    elif metric=='CurrentRatio': v=v.where((v>0)&(v<=20))
-    elif metric=='PE': v=v.where((v>0)&(v<=200))
-    elif metric=='PB': v=v.where((v>0)&(v<=20))
-    elif metric in {'ROE','ROA'}: v=v.where((v>=-2)&(v<=2))
-    z[metric]=v; z=z.dropna(subset=[metric]).drop_duplicates('Ticker',keep='last')
-    if not len(z):return None
+    """Latest-period cross-section: target + up to 10 analyst/dynamic peers.
+
+    V8.76 strict rule:
+    - determine the target's latest available period for the metric;
+    - use the SAME period for every peer;
+    - target is always the first column;
+    - no silent mixing of different reporting periods.
+    """
     selected=str(ticker).upper().strip()
-    # Preserve analyst/dynamic peer order when available; target is always the first column.
+    period=_latest_metric_period_report(selected,metric)
+    if period in (None,'kỳ gần nhất'):
+        return None
+
     order=[selected]
     try:
         from scripts.dynamic_peer_engine import select_dynamic_peers
         d=select_dynamic_peers(selected)
         if d is not None and len(d) and 'Ticker' in d.columns:
-            order += [str(x).upper().strip() for x in d.Ticker.tolist() if str(x).upper().strip()!=selected][:10]
-    except Exception: pass
+            order += [str(x).upper().strip() for x in d.Ticker.tolist()
+                      if str(x).upper().strip()!=selected][:10]
+    except Exception:
+        pass
+
+    # fallback to the current peer snapshot only to discover peer tickers, not values
     if len(order)==1:
-        order += [x for x in z.Ticker.tolist() if x!=selected][:10]
-    chosen=z.set_index('Ticker').reindex(order[:11]).dropna(subset=[metric]).reset_index()
-    if not len(chosen):return None
-    period=_latest_metric_period_report(selected,metric)
-    fig,ax=plt.subplots(figsize=(8.4,3.9));plt.rcParams.update({'font.family':'Lato','font.size':10})
+        try:
+            from scripts.universal_data import industry_snapshot
+            ps=industry_snapshot(selected)
+            if ps is not None and len(ps) and 'Ticker' in ps.columns:
+                order += [str(x).upper().strip() for x in ps.Ticker.tolist()
+                          if str(x).upper().strip()!=selected][:10]
+        except Exception:
+            pass
+
+    rows=[]
+    for t in order[:11]:
+        try:
+            h=entity_history(t)
+            if h is None or not len(h): continue
+            z=h[(h.Metric.astype(str).eq(metric)) & (h.Period.astype(str).eq(str(period)))].copy()
+            if not len(z): continue
+            val=pd.to_numeric(z.iloc[-1].get('Value'),errors='coerce')
+            if pd.isna(val): continue
+            val=float(val)
+            if metric=='DebtEquity' and not (0<=val<=10): continue
+            if metric=='CurrentRatio' and not (0<val<=20): continue
+            if metric=='PE' and not (0<val<=200): continue
+            if metric=='PB' and not (0<val<=20): continue
+            if metric in {'ROE','ROA'} and not (-2<=val<=2): continue
+            rows.append({'Ticker':t,metric:val})
+        except Exception:
+            continue
+    if not rows:return None
+    chosen=pd.DataFrame(rows).drop_duplicates('Ticker',keep='last')
+
+    # Require the target value, otherwise the comparison is not meaningful.
+    if selected not in set(chosen.Ticker.astype(str)):
+        return None
+
+    fig,ax=plt.subplots(figsize=(8.6,3.9));plt.rcParams.update({'font.family':'Lato','font.size':10})
     bars=ax.bar(chosen.Ticker.astype(str),chosen[metric])
-    ax.set_title(title or f"{VI_METRIC.get(metric,metric)} - DN và 10 peer tại {period}",fontsize=11)
-    ax.grid(axis='y',alpha=.2); ax.tick_params(axis='x',labelrotation=0)
-    if metric in PCT:ax.yaxis.set_major_formatter(lambda v,pos:(f'{v*100:.1f}%').replace('.',','))
-    # Compact data labels; useful when inserted into A4 reports.
+    human_period=str(period).replace('2026-Q2','Quý II/2026').replace('2026-Q1','Quý I/2026').replace('2026-Q3','Quý III/2026').replace('2026-Q4','Quý IV/2026')
+    ax.set_title(title or f"{VI_METRIC.get(metric,METH_LABELS.get(metric,metric))} - Công ty và peer tại {human_period}",fontsize=11)
+    ax.grid(axis='y',alpha=.2);ax.tick_params(axis='x',labelrotation=0)
+    if metric in PCT or metric in METH_PCT:
+        ax.yaxis.set_major_formatter(lambda v,pos:(f'{v*100:.1f}%').replace('.',','))
     for b,val in zip(bars,chosen[metric].tolist()):
-        lab=(f'{val*100:.1f}%' if metric in PCT else f'{val:.2f}').replace('.',',')
-        ax.text(b.get_x()+b.get_width()/2,b.get_height(),lab,ha='center',va='bottom' if val>=0 else 'top',fontsize=7,rotation=90)
+        lab=(f'{val*100:.1f}%' if metric in PCT or metric in METH_PCT else f'{val:.2f}').replace('.',',')
+        ax.text(b.get_x()+b.get_width()/2,b.get_height(),lab,ha='center',
+                va='bottom' if val>=0 else 'top',fontsize=7,rotation=90)
     fig.tight_layout();bio=BytesIO();fig.savefig(bio,dpi=180,bbox_inches='tight');plt.close(fig);bio.seek(0);return bio
 
 def peer_scatter_chart(ticker,xmetric,ymetric,title=None):
@@ -895,7 +929,7 @@ def _rating_summary_page(doc,ticker,meta,rr):
         else:
             keym=['TotalAssets','Revenue','Equity','ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','MarketShareBrokerage','MarginLoansEquity']
         facts=[_v840_fact(ticker,m) for m in keym];facts=[x for x in facts if x]
-        thesis=[f"Kết quả mô phỏng hiện tại là {rr.get('ICR','N/A')}. Báo cáo ưu tiên phân tích số liệu thực tế, xu hướng và vị trí so với peer; phương pháp chi tiết được thu gọn ở audit trail."]
+        thesis=[f"Kết quả mô phỏng hiện tại là {rr.get('ICR','N/A')}. Luận điểm xếp hạng được dẫn dắt bởi các chỉ số thực tế, xu hướng nhiều kỳ và vị trí của doanh nghiệp so với 10 peer tại kỳ gần nhất."]
         if facts: thesis.append(' '.join(facts[:5]))
         cross=_v840_cross_insights(ticker,keym)
         if cross: thesis.append(cross[0])
@@ -1188,7 +1222,7 @@ def _v840_mini_table(cell,ticker,metrics):
         if r is not None:rows.append((m,r))
     if not rows:return
     t=cell.add_table(rows=1,cols=4);t.style='Table Grid';t.alignment=WD_TABLE_ALIGNMENT.CENTER
-    for j,x in enumerate(['Chỉ tiêu','DN','TB peer','Trung vị']):
+    for j,x in enumerate(['Chỉ tiêu','Công ty','TB peer','Trung vị peer']):
         t.cell(0,j).text=x;_set_cell_shading(t.cell(0,j),LIGHT_GREEN)
     for m,r in rows:
         c=t.add_row().cells
@@ -1202,37 +1236,74 @@ def _v840_mini_table(cell,ticker,metrics):
                 for r in p.runs:r.font.name='Lato';r.font.size=Pt(7.4)
 
 def _v840_integrated_block(doc,ticker,title,metrics,paras=None,chart=None,reverse=False):
-    """Narrative + evidence on the same visual block, as in the user's sample reports."""
+    """Analysis-first block.
+
+    V8.76:
+    - narrative and KPI table first;
+    - then explicit chart pairs for key indicators:
+      LEFT = company vs peer mean through time (2 lines);
+      RIGHT = company + up to 10 peers at the target's latest period (bars).
+    """
     _subhead(doc,title)
+
+    # Analysis text + compact evidence table.
     tbl=doc.add_table(rows=1,cols=2);tbl.autofit=False;tbl.alignment=WD_TABLE_ALIGNMENT.CENTER
     left,right=tbl.cell(0,0),tbl.cell(0,1)
-    left.width=Mm(98);right.width=Mm(72)
-    _set_cell_margins(left,top=25,start=20,bottom=20,end=55);_set_cell_margins(right,top=25,start=55,bottom=20,end=20)
-    textcell,viscell=(right,left) if reverse else (left,right)
+    left.width=Mm(105);right.width=Mm(65)
+    _set_cell_margins(left,top=25,start=20,bottom=20,end=55)
+    _set_cell_margins(right,top=25,start=55,bottom=20,end=20)
+    textcell,tablecell=(right,left) if reverse else (left,right)
     if paras is None:paras=_v840_analysis_text(ticker,metrics)
-    # overwrite default empty para first
     p=textcell.paragraphs[0];p.clear()
     for i,txt in enumerate([x for x in paras if x]):
         p=textcell.paragraphs[0] if i==0 else textcell.add_paragraph()
-        p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.line_spacing=1.05;p.paragraph_format.space_after=Pt(4)
-        r=p.add_run(str(txt));r.font.name='Lato';r.font.size=Pt(9.2)
-    # Two complementary views in the same analytical block:
-    # (1) multi-period company vs peer mean, and (2) latest-period company vs 10 peers.
-    cm=chart or (metrics[0] if metrics else None)
-    if cm:
+        p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.paragraph_format.line_spacing=1.05;p.paragraph_format.space_after=Pt(4)
+        r=p.add_run(str(txt));r.font.name='Lato';r.font.size=Pt(10.2)
+    _v840_mini_table(tablecell,ticker,metrics[:8])
+    _set_cell_border(left,bottom={'val':'single','sz':'4','color':'D9D9D9'})
+    _set_cell_border(right,bottom={'val':'single','sz':'4','color':'D9D9D9'})
+
+    # Select up to two key metrics that actually have target data.
+    candidates=[]
+    if chart: candidates.append(chart)
+    for m in metrics:
+        if m not in candidates:candidates.append(m)
+    valid=[]
+    for m in candidates:
         try:
-            bio=chart_metric(ticker,cm,percent=cm in PCT or cm in METH_PCT)
-            q=viscell.paragraphs[0];q.alignment=WD_ALIGN_PARAGRAPH.CENTER;q.paragraph_format.space_after=Pt(1)
-            q.add_run().add_picture(bio,width=Mm(67))
-        except Exception:pass
+            h=entity_history(ticker)
+            z=h[h.Metric.astype(str).eq(m)] if h is not None and len(h) else pd.DataFrame()
+            if len(z): valid.append(m)
+        except Exception: pass
+        if len(valid)>=2: break
+
+    for m in valid:
+        pair=doc.add_table(rows=1,cols=2);pair.autofit=False;pair.alignment=WD_TABLE_ALIGNMENT.CENTER
+        lc,rc=pair.cell(0,0),pair.cell(0,1)
+        lc.width=Mm(84);rc.width=Mm(84)
+        _set_cell_margins(lc,top=15,start=10,bottom=20,end=20)
+        _set_cell_margins(rc,top=15,start=20,bottom=20,end=10)
+
+        # 2-line history: company + mean peer only.
         try:
-            bio2=peer_bar_chart(ticker,cm,title=f"{VI_METRIC.get(cm,METH_LABELS.get(cm,cm))} - DN và 10 peer tại kỳ gần nhất",top_n=11)
+            bio=chart_metric(ticker,m,title=f"{VI_METRIC.get(m,METH_LABELS.get(m,m))} - xu hướng so với TB peer",
+                             percent=m in PCT or m in METH_PCT)
+            q=lc.paragraphs[0];q.alignment=WD_ALIGN_PARAGRAPH.CENTER;q.paragraph_format.space_after=Pt(0)
+            q.add_run().add_picture(bio,width=Mm(80))
+        except Exception:
+            lc.paragraphs[0].add_run('Chưa đủ dữ liệu lịch sử.')
+
+        # Bar cross-section at exactly the same latest period.
+        try:
+            bio2=peer_bar_chart(ticker,m,top_n=11)
             if bio2:
-                q2=viscell.add_paragraph();q2.alignment=WD_ALIGN_PARAGRAPH.CENTER;q2.paragraph_format.space_after=Pt(1)
-                q2.add_run().add_picture(bio2,width=Mm(67))
-        except Exception:pass
-    _v840_mini_table(viscell,ticker,metrics[:8])
-    _set_cell_border(left,bottom={'val':'single','sz':'4','color':'D9D9D9'});_set_cell_border(right,bottom={'val':'single','sz':'4','color':'D9D9D9'})
+                q2=rc.paragraphs[0];q2.alignment=WD_ALIGN_PARAGRAPH.CENTER;q2.paragraph_format.space_after=Pt(0)
+                q2.add_run().add_picture(bio2,width=Mm(80))
+            else:
+                rc.paragraphs[0].add_run('Chưa đủ  dữ liệu cùng kỳ của peer.')
+        except Exception:
+            rc.paragraphs[0].add_run('Chưa đủ dữ liệu peer.')
 
 def _v840_rating_groups(entity_type):
     if entity_type=='BANK':
@@ -1489,7 +1560,7 @@ def _v875_final_rating_scorecard(doc,ticker,meta,rr):
                 for p in c.paragraphs:
                     p.paragraph_format.space_after=Pt(0);p.paragraph_format.line_spacing=1.0
                     for r in p.runs:r.font.name='Lato';r.font.size=Pt(9)
-        p=doc.add_paragraph('Bảng tổng kết tập trung vào kết quả của từng cấu phần và tác động notch; phần giải thích phương pháp chi tiết được giữ ở audit trail của nền tảng, không lặp lại trong báo cáo.')
+        p=doc.add_paragraph('Bảng tổng kết cho thấy trực tiếp điểm khởi đầu, đánh giá từng cấu phần, mức nâng/hạ notch, hỗ trợ bên ngoài và bậc xếp hạng cuối cùng.')
         p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY;p.paragraph_format.space_after=Pt(0)
     else:
         rs=rr.get('RiskScores',{});rl=rr.get('RiskLabels',{})
@@ -1519,10 +1590,6 @@ def _v875_final_rating_scorecard(doc,ticker,meta,rr):
                 for p in c.paragraphs:
                     p.paragraph_format.space_after=Pt(0);p.paragraph_format.line_spacing=1.0
                     for r in p.runs:r.font.name='Lato';r.font.size=Pt(9)
-
-    # Final report section requested by the user: score/notch bridge after all analytical sections.
-    _v875_final_rating_scorecard(doc,ticker,meta,rr)
-
 
 def _v840_analysis_body(doc,ticker,meta,s,val):
     et=meta.get('EntityType')
@@ -1659,6 +1726,9 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
             p=doc.add_paragraph(h);p.paragraph_format.space_after=Pt(1);p.runs[0].font.size=Pt(9);p.runs[0].bold=True
         _v840_analysis_body(doc,ticker,meta,s,val)
     _v840_appendix(doc,ticker,report_type)
+    # V8.76: the score/notch bridge is literally the final section of every rating report.
+    if report_type=='rating':
+        _v875_final_rating_scorecard(doc,ticker,meta,rr)
     for p in doc.paragraphs:p.paragraph_format.widow_control=True
     for table in doc.tables:
         for row in table.rows:
