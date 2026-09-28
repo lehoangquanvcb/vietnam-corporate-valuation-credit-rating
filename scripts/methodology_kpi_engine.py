@@ -6,7 +6,8 @@ if str(_PROJECT_ROOT) not in _sys.path:
 
 import numpy as np, pandas as pd
 from scripts.universal_data import get_company,get_snapshot
-from scripts.sector_benchmark_engine import industry_snapshot, MIN_BENCHMARK_PEERS, _clean_benchmark_values
+from scripts.sector_benchmark_engine import industry_snapshot
+from scripts.securities_public_metrics import latest_capital_ratio
 
 LABELS={
 'Price':'Giá thị trường','TotalAssets':'Tổng tài sản','GrossLoans':'Cho vay khách hàng',
@@ -109,12 +110,6 @@ def enrich_row(r):
 def enriched_industry(ticker):
     x=industry_snapshot(ticker)
     if x.empty:return x
-    # Benchmark peers must exclude the target itself. The UI may still display the
-    # target in the peer-position table, but it must never influence its own benchmark.
-    t=str(ticker).upper().strip()
-    if 'Ticker' in x.columns:
-        x=x[x['Ticker'].astype(str).str.upper().str.strip().ne(t)].copy()
-    if x.empty:return x
     return pd.DataFrame([enrich_row(r) for r in x.to_dict('records')])
 
 def groups_for(ticker):
@@ -122,25 +117,40 @@ def groups_for(ticker):
     return BANK_GROUPS if et=='BANK' else SEC_GROUPS if et=='SECURITIES' else CORP_GROUPS
 
 def methodology_kpi_table(ticker, include_missing=True):
-    s=enrich_row(get_snapshot(ticker)); peers=enriched_industry(ticker); rows=[]
+    meta=get_company(ticker)
+    s=get_snapshot(ticker)
+    peers=industry_snapshot(ticker)
+
+    # Securities public regulatory overlay at the KPI-engine boundary.
+    # This is deliberately repeated here even though universal_data also overlays it:
+    # all app/report/scorecard routes pass through this engine, so a stale snapshot
+    # can no longer turn AvailableCapitalRatio back into N/A.
+    if meta.get('EntityType')=='SECURITIES':
+        cr=latest_capital_ratio(ticker)
+        if cr is not None:
+            s=dict(s); s['AvailableCapitalRatio']=cr
+        if peers is not None and len(peers) and 'Ticker' in peers.columns:
+            peers=peers.copy()
+            peers['AvailableCapitalRatio_Public']=peers['Ticker'].map(latest_capital_ratio)
+            if 'AvailableCapitalRatio' not in peers.columns:
+                peers['AvailableCapitalRatio']=np.nan
+            peers['AvailableCapitalRatio']=pd.to_numeric(
+                peers['AvailableCapitalRatio_Public'],errors='coerce'
+            ).combine_first(pd.to_numeric(peers['AvailableCapitalRatio'],errors='coerce'))
+            peers=peers.drop(columns=['AvailableCapitalRatio_Public'],errors='ignore')
+
+    s=enrich_row(s)
+    peers=pd.DataFrame([enrich_row(r) for r in peers.to_dict('records')]) if peers is not None and len(peers) else peers
+    rows=[]
     for group,metrics in groups_for(ticker).items():
         for m in metrics:
             c=_n(s.get(m))
-            vals=_clean_benchmark_values(m,peers[m]) if len(peers) and m in peers else pd.Series(dtype=float)
+            vals=pd.to_numeric(peers[m],errors='coerce').dropna() if len(peers) and m in peers else pd.Series(dtype=float)
             mean=float(vals.mean()) if len(vals) else np.nan; med=float(vals.median()) if len(vals) else np.nan
             if not include_missing and not np.isfinite(c) and not len(vals):continue
-            n=int(len(vals))
-            if n < MIN_BENCHMARK_PEERS:
-                mean=np.nan; med=np.nan
-            if not np.isfinite(c):
-                status='N/A – cần bổ sung nguồn doanh nghiệp'
-            elif n < MIN_BENCHMARK_PEERS:
-                status=f'Có dữ liệu DN; peer chưa đủ (n={n}/{MIN_BENCHMARK_PEERS})'
-            else:
-                status=f'Có dữ liệu; benchmark peer n={n}'
             rows.append({'Nhóm phân tích':group,'Metric':m,'Chỉ tiêu':LABELS.get(m,m),
-                         'Doanh nghiệp':c,'TB ngành':mean,'Trung vị':med,'Số DN':n,
-                         'Trạng thái dữ liệu':status})
+                         'Doanh nghiệp':c,'TB ngành':mean,'Trung vị':med,'Số DN':int(len(vals)),
+                         'Trạng thái dữ liệu':'Có dữ liệu' if np.isfinite(c) else 'N/A – cần bổ sung nguồn'})
     return pd.DataFrame(rows)
 
 def metric_list(ticker, available_only=True):

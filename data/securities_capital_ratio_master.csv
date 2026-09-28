@@ -1,0 +1,10 @@
+﻿Ticker,ReportDate,AvailableCapitalRatio,SourceURL,SourceDomain,SourceType,AuditStatus,CollectedDate
+VDS,2022-12-31,4.3359,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=2,vdsc.com.vn,OFFICIAL_CTCK_FINANCIAL_TABLE,SOURCE_DISCLOSURE,2026-09-28
+VDS,2023-12-31,4.3029,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=2,vdsc.com.vn,OFFICIAL_CTCK_FINANCIAL_TABLE,SOURCE_DISCLOSURE,2026-09-28
+VDS,2024-12-31,5.1674,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=2,vdsc.com.vn,OFFICIAL_CTCK_FINANCIAL_TABLE,SOURCE_DISCLOSURE,2026-09-28
+VDS,2025-09-30,3.9825999999999997,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=1,vdsc.com.vn,OFFICIAL_CTCK_FINANCIAL_TABLE,SOURCE_DISCLOSURE,2026-09-28
+VDS,2025-12-31,4.3968,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=2,vdsc.com.vn,OFFICIAL_CTCK_FINANCIAL_TABLE,SOURCE_DISCLOSURE,2026-09-28
+VDS,2026-03-31,3.508,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=1,vdsc.com.vn,OFFICIAL_CTCK_FINANCIAL_TABLE,SOURCE_DISCLOSURE,2026-09-28
+VDS,2026-06-30,6.9008,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=1,vdsc.com.vn,OFFICIAL_CTCK_FINANCIAL_TABLE,SOURCE_DISCLOSURE,2026-09-28
+VDS,2026-09-23,6.9008,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=1,www.vdsc.com.vn,OFFICIAL_CTCK_DISCLOSURE,SOURCE_DISCLOSURE,2026-09-24
+VDS,2026-09-28,6.9008,https://www.vdsc.com.vn/quan-he-co-dong/thong-tin-tai-chinh?groupId=1,www.vdsc.com.vn,OFFICIAL_CTCK_DISCLOSURE,SOURCE_DISCLOSURE,2026-09-28

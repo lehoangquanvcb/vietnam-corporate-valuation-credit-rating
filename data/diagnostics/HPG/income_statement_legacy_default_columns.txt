@@ -1,7 +1,0 @@
-period
-id
-name
-order
-level
-unit
-value

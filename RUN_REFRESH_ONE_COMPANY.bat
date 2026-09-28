@@ -47,7 +47,7 @@ echo Cap nhat dynamic peer + benchmark + analyst...
 if errorlevel 1 goto :err
 "%PYTHON%" scripts\sector_benchmark_engine.py
 if errorlevel 1 goto :err
-"%PYTHON%" scripts\intelligent_analyst.py
+REM V8.114: skip all-universe intelligent analyst after one-company refresh
 if errorlevel 1 goto :err
 
 echo.

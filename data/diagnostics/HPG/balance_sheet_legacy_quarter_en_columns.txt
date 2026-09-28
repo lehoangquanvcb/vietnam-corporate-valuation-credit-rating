@@ -1,8 +1,0 @@
-period
-id
-name
-order
-level
-off_balance
-unit
-value

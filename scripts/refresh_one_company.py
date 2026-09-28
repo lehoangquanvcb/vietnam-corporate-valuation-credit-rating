@@ -103,6 +103,22 @@ def main():
             else: print('WARNING - Debt/EBITDA unavailable after strict derivation.')
             if pd.notna(cfd): print('CASH-FLOW CHECK: CFO/Debt =', float(cfd),'| basis=',r.get('CFO_Debt_Basis',''))
             else: print('WARNING - CFO/Debt unavailable after strict derivation.')
+    # Always refresh the newest DAILY market close after a successful one-company refresh.
+    # This fixes stale valuation/report prices without spending calls on the full universe.
+    try:
+        from refresh_latest_market_price import refresh_latest_market_price, refresh_market_history
+        refresh_latest_market_price(ticker)
+        # V8.118: price-relative analysis needs histories for the selected peer set too.
+        try:
+            from dynamic_peer_engine import dynamic_peer_tickers
+            _pp=dynamic_peer_tickers(ticker,include_target=False)[:10]
+            for _pt in _pp:
+                try: refresh_market_history(_pt,3)
+                except Exception as _e: print(f'WARNING - peer price history {_pt}: {_e}')
+        except Exception as _e:
+            print('WARNING - peer market-history bundle skipped:',_e)
+    except Exception as e:
+        print('WARNING - fundamentals updated but latest market price refresh failed:', e)
     raise SystemExit(0)
 
 if __name__ == '__main__':

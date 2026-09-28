@@ -1,284 +1,284 @@
 ﻿TargetTicker,Ticker,SimilarityScore,DistanceScore,MetricsCoverage,PeerPool,SimilarityBasis,PeerRank,CompanyName,LegalName,Sector,EntityType
 ABB,PCB,0.8223714285714285,0.1776285714285714,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,1,PCB,PCB,Ngân hàng,BANK
-ABB,VAB,0.8194429908715622,0.1805570091284377,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",2,VAB,VAB,Ngân hàng,BANK
-ABB,NAB,0.8020582592011164,0.1979417407988836,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-ABB,BAB,0.7921623350194779,0.2078376649805221,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",4,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-ABB,KLB,0.7633118204546776,0.2366881795453223,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
-ABB,LPB,0.7414268271411129,0.2585731728588872,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+ABB,VAB,0.8194429908715622,0.18055700912843775,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",2,VAB,VAB,Ngân hàng,BANK
+ABB,NAB,0.8020582592011164,0.19794174079888363,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+ABB,BAB,0.7921623350194779,0.20783766498052217,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",4,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+ABB,KLB,0.7633118204546776,0.23668817954532237,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
+ABB,LPB,0.7414268271411129,0.2585731728588872,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
 ABB,VBB,0.7242431249591743,0.2757568750408257,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",7,VBB,VBB,Ngân hàng,BANK
-ABB,EIB,0.6887842316413744,0.3112157683586256,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CASA",8,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-ABB,PGB,0.6827838827838828,0.3172161172161172,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NIM",9,PGB,PGB,Ngân hàng,BANK
-ABB,HDB,0.6791673934531077,0.3208326065468922,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",10,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-ACB,TCB,0.8530495959067388,0.1469504040932612,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
-ACB,MBB,0.8325716611430897,0.1674283388569103,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-ACB,VCB,0.8275829990115704,0.1724170009884295,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
-ACB,CTG,0.803546717832432,0.1964532821675679,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
-ACB,VIB,0.80143031571603,0.19856968428397,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",5,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-ACB,TPB,0.7948950520379092,0.2051049479620908,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-ACB,VPB,0.7577068434211292,0.2422931565788708,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",7,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-ACB,SHB,0.7492412349555206,0.2507587650444793,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-ACB,BID,0.7466248037676608,0.2533751962323391,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",9,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
-ACB,LPB,0.7419501133786848,0.2580498866213151,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",10,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-BAB,VBB,0.848549088771311,0.1514509112286889,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,VBB,VBB,Ngân hàng,BANK
-BAB,VAB,0.8402232687946973,0.1597767312053026,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,VAB,VAB,Ngân hàng,BANK
-BAB,ABB,0.7921623350194779,0.2078376649805221,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",3,ABB,ABB,Ngân hàng,BANK
-BAB,PCB,0.7866571428571428,0.2133428571428571,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,4,PCB,PCB,Ngân hàng,BANK
-BAB,EIB,0.7673120530263388,0.2326879469736612,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-BAB,NAB,0.7641839641839642,0.2358160358160358,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",6,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-BAB,SSB,0.7542996685853829,0.2457003314146171,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-BAB,PGB,0.7375893947322518,0.2624106052677482,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,PGB,PGB,Ngân hàng,BANK
-BAB,BVB,0.7350311064596778,0.2649688935403221,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,BVB,BVB,Ngân hàng,BANK
+ABB,EIB,0.6887842316413744,0.3112157683586256,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CASA",8,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+ABB,PGB,0.6827838827838828,0.31721611721611725,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NIM",9,PGB,PGB,Ngân hàng,BANK
+ABB,HDB,0.6791673934531077,0.3208326065468922,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",10,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+ACB,TCB,0.8530495959067388,0.14695040409326124,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
+ACB,MBB,0.8325716611430897,0.1674283388569103,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+ACB,VCB,0.8275829990115704,0.17241700098842958,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+ACB,CTG,0.803546717832432,0.19645328216756794,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
+ACB,VIB,0.80143031571603,0.19856968428397004,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",5,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+ACB,TPB,0.7948950520379092,0.20510494796209083,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+ACB,VPB,0.7577068434211292,0.24229315657887088,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",7,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+ACB,SHB,0.7492412349555206,0.25075876504447936,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+ACB,BID,0.7466248037676608,0.2533751962323391,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",9,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
+ACB,LPB,0.7419501133786848,0.25804988662131517,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",10,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+BAB,VBB,0.848549088771311,0.15145091122868898,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,VBB,VBB,Ngân hàng,BANK
+BAB,VAB,0.8402232687946973,0.15977673120530267,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,VAB,VAB,Ngân hàng,BANK
+BAB,ABB,0.7921623350194779,0.20783766498052217,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",3,ABB,ABB,Ngân hàng,BANK
+BAB,PCB,0.7866571428571428,0.21334285714285717,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,4,PCB,PCB,Ngân hàng,BANK
+BAB,EIB,0.7673120530263388,0.23268794697366127,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+BAB,NAB,0.7641839641839642,0.23581603581603586,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",6,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+BAB,SSB,0.7542996685853829,0.24570033141461717,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+BAB,PGB,0.7375893947322518,0.2624106052677482,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,PGB,PGB,Ngân hàng,BANK
+BAB,BVB,0.7350311064596778,0.26496889354032216,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,BVB,BVB,Ngân hàng,BANK
 BAB,NVB,0.7210423933633809,0.278957606636619,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,NVB,NVB,Ngân hàng,BANK
-BID,CTG,0.8600500029071458,0.1399499970928542,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
-BID,VCB,0.797592883307169,0.2024071166928309,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",2,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
-BID,MBB,0.766881795453224,0.2331182045467759,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-BID,SHB,0.7555322983894412,0.2444677016105587,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-BID,ACB,0.7466248037676608,0.2533751962323391,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",5,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-BID,NAB,0.7172393743822315,0.2827606256177685,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-BID,LPB,0.6974475260189545,0.3025524739810454,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-BID,TPB,0.6668759811616953,0.3331240188383046,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-BID,HDB,0.6538868538868539,0.3461131461131462,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-BID,VPB,0.6506192220477934,0.3493807779522065,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",10,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-BVB,SGB,0.8281760567474853,0.1718239432525147,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",1,SGB,SGB,Ngân hàng,BANK
-BVB,NVB,0.8252947939120778,0.1747052060879221,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,NVB,NVB,Ngân hàng,BANK
-BVB,PGB,0.81859410430839,0.18140589569161,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,PGB,PGB,Ngân hàng,BANK
-BVB,VBB,0.8166724149193285,0.1833275850806714,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",4,VBB,VBB,Ngân hàng,BANK
-BVB,EIB,0.8002674574103146,0.1997325425896854,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-BVB,VAB,0.77433571719286,0.22566428280714,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,VAB,VAB,Ngân hàng,BANK
-BVB,OCB,0.7690447119018546,0.2309552880981453,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-BVB,SSB,0.7501366358509215,0.2498633641490784,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-BVB,BAB,0.7350311064596778,0.2649688935403221,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-BVB,KLB,0.7216698645270073,0.2783301354729927,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CASA, LDR",10,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
-CTG,VCB,0.8862608291179719,0.113739170882028,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
-CTG,MBB,0.8677597534740392,0.1322402465259608,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-CTG,BID,0.8600500029071458,0.1399499970928542,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
-CTG,ACB,0.803546717832432,0.1964532821675679,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-CTG,LPB,0.7354846211989069,0.2645153788010931,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-CTG,TCB,0.728112099540671,0.271887900459329,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, ROE",6,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
-CTG,HDB,0.7213907785336356,0.2786092214663643,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-CTG,NAB,0.7017152160009303,0.2982847839990697,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-CTG,TPB,0.6961218675504389,0.3038781324495611,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-CTG,SHB,0.6927960927960928,0.3072039072039072,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-EIB,SSB,0.8746555032269318,0.1253444967730682,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-EIB,PCB,0.8580857142857143,0.1419142857142857,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,2,PCB,PCB,Ngân hàng,BANK
-EIB,OCB,0.8059770916913773,0.1940229083086226,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+BID,CTG,0.8600500029071458,0.13994999709285422,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
+BID,VCB,0.797592883307169,0.20240711669283096,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",2,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+BID,MBB,0.766881795453224,0.23311820454677598,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+BID,SHB,0.7555322983894412,0.24446770161055878,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+BID,ACB,0.7466248037676608,0.2533751962323391,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",5,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+BID,NAB,0.7172393743822315,0.2827606256177685,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+BID,LPB,0.6974475260189545,0.3025524739810454,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+BID,TPB,0.6668759811616953,0.33312401883830467,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+BID,HDB,0.6538868538868539,0.3461131461131462,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+BID,VPB,0.6506192220477934,0.34938077795220657,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",10,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+BVB,SGB,0.8281760567474853,0.1718239432525147,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",1,SGB,SGB,Ngân hàng,BANK
+BVB,NVB,0.8252947939120778,0.17470520608792212,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,NVB,NVB,Ngân hàng,BANK
+BVB,PGB,0.81859410430839,0.18140589569161,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,PGB,PGB,Ngân hàng,BANK
+BVB,VBB,0.8166724149193285,0.18332758508067148,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",4,VBB,VBB,Ngân hàng,BANK
+BVB,EIB,0.8002674574103146,0.19973254258968545,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+BVB,VAB,0.77433571719286,0.22566428280714,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,VAB,VAB,Ngân hàng,BANK
+BVB,OCB,0.7690447119018546,0.2309552880981453,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+BVB,SSB,0.7501366358509215,0.24986336414907848,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+BVB,BAB,0.7350311064596778,0.26496889354032216,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+BVB,KLB,0.7216698645270073,0.2783301354729927,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CASA, LDR",10,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
+CTG,VCB,0.8862608291179719,0.11373917088202806,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+CTG,MBB,0.8677597534740392,0.1322402465259608,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+CTG,BID,0.8600500029071458,0.13994999709285422,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
+CTG,ACB,0.803546717832432,0.19645328216756794,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+CTG,LPB,0.7354846211989069,0.2645153788010931,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+CTG,TCB,0.728112099540671,0.271887900459329,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, ROE",6,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
+CTG,HDB,0.7213907785336356,0.27860922146636435,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+CTG,NAB,0.7017152160009303,0.2982847839990697,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+CTG,TPB,0.6961218675504389,0.3038781324495611,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+CTG,SHB,0.6927960927960928,0.3072039072039072,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+EIB,SSB,0.8746555032269318,0.12534449677306822,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+EIB,PCB,0.8580857142857143,0.14191428571428572,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,2,PCB,PCB,Ngân hàng,BANK
+EIB,OCB,0.8059770916913773,0.19402290830862265,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
 EIB,NVB,0.803477562218303,0.196522437781697,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,NVB,NVB,Ngân hàng,BANK
-EIB,BVB,0.8002674574103146,0.1997325425896854,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,BVB,BVB,Ngân hàng,BANK
-EIB,PGB,0.7878481307052736,0.2121518692947264,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",6,PGB,PGB,Ngân hàng,BANK
-EIB,MSB,0.7870457584743299,0.2129542415256701,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, ROE",7,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-EIB,VBB,0.771862172578222,0.228137827421778,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,VBB,VBB,Ngân hàng,BANK
-EIB,BAB,0.7673120530263388,0.2326879469736612,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-EIB,STB,0.7414268271411129,0.2585731728588871,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
-HDB,SHB,0.8094191522762951,0.1905808477237049,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-HDB,VIB,0.796162567591139,0.203837432408861,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-HDB,VPB,0.787883016454445,0.212116983545555,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-HDB,LPB,0.7785220070934357,0.2214779929065643,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-HDB,MBB,0.7722309436595151,0.2277690563404849,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-HDB,MSB,0.7445665445665446,0.2554334554334554,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",6,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-HDB,VCB,0.7423338566195709,0.2576661433804291,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
-HDB,TPB,0.7329728472585615,0.2670271527414384,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-HDB,ACB,0.7257398685970113,0.2742601314029886,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-HDB,CTG,0.7213907785336356,0.2786092214663643,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
-KLB,ABB,0.7633118204546776,0.2366881795453223,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,ABB,ABB,Ngân hàng,BANK
-KLB,VAB,0.7450898308041165,0.2549101691958835,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CASA",2,VAB,VAB,Ngân hàng,BANK
-KLB,BVB,0.7216698645270073,0.2783301354729927,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CASA, LDR",3,BVB,BVB,Ngân hàng,BANK
-KLB,NAB,0.7128670271527414,0.2871329728472586,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-KLB,LPB,0.6935868364439792,0.3064131635560208,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-KLB,HDB,0.6853770568056281,0.3146229431943718,0.91,Ngân hàng niêm yết/ĐKGD,"ROE, TotalAssets, NIM",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-KLB,PGB,0.6695738124309553,0.3304261875690447,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",7,PGB,PGB,Ngân hàng,BANK
-KLB,BAB,0.6691551834408977,0.3308448165591023,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",8,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+EIB,BVB,0.8002674574103146,0.19973254258968545,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,BVB,BVB,Ngân hàng,BANK
+EIB,PGB,0.7878481307052736,0.21215186929472643,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",6,PGB,PGB,Ngân hàng,BANK
+EIB,MSB,0.7870457584743299,0.21295424152567013,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, ROE",7,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+EIB,VBB,0.771862172578222,0.22813782742177804,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,VBB,VBB,Ngân hàng,BANK
+EIB,BAB,0.7673120530263388,0.23268794697366127,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+EIB,STB,0.7414268271411129,0.25857317285888715,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
+HDB,SHB,0.8094191522762951,0.1905808477237049,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+HDB,VIB,0.796162567591139,0.203837432408861,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+HDB,VPB,0.787883016454445,0.21211698354555503,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+HDB,LPB,0.7785220070934357,0.22147799290656436,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+HDB,MBB,0.7722309436595151,0.22776905634048497,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+HDB,MSB,0.7445665445665446,0.25543345543345547,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",6,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+HDB,VCB,0.7423338566195709,0.25766614338042915,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+HDB,TPB,0.7329728472585615,0.26702715274143846,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+HDB,ACB,0.7257398685970113,0.2742601314029886,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+HDB,CTG,0.7213907785336356,0.27860922146636435,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
+KLB,ABB,0.7633118204546776,0.23668817954532237,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,ABB,ABB,Ngân hàng,BANK
+KLB,VAB,0.7450898308041165,0.25491016919588355,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CASA",2,VAB,VAB,Ngân hàng,BANK
+KLB,BVB,0.7216698645270073,0.2783301354729927,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CASA, LDR",3,BVB,BVB,Ngân hàng,BANK
+KLB,NAB,0.7128670271527414,0.2871329728472586,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+KLB,LPB,0.6935868364439792,0.3064131635560208,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+KLB,HDB,0.6853770568056281,0.31462294319437184,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"ROE, TotalAssets, NIM",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+KLB,PGB,0.6695738124309553,0.33042618756904474,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",7,PGB,PGB,Ngân hàng,BANK
+KLB,BAB,0.6691551834408977,0.3308448165591023,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",8,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
 KLB,VBB,0.6676750930825005,0.3323249069174995,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CASA",9,VBB,VBB,Ngân hàng,BANK
-KLB,MSB,0.6448398162683877,0.3551601837316123,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",10,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-LPB,NAB,0.8114076399790685,0.1885923600209315,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-LPB,VIB,0.7968835397406825,0.2031164602593174,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-LPB,HDB,0.7785220070934357,0.2214779929065643,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-LPB,TPB,0.7667422524565382,0.2332577475434618,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",4,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-LPB,SHB,0.7571370428513285,0.2428629571486714,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-LPB,ACB,0.7419501133786848,0.2580498866213151,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",6,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-LPB,ABB,0.7414268271411129,0.2585731728588872,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,ABB,ABB,Ngân hàng,BANK
-LPB,CTG,0.7354846211989069,0.2645153788010931,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
-LPB,MBB,0.7308099308099308,0.2691900691900691,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-LPB,STB,0.7075062503633932,0.2924937496366068,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
-MBB,CTG,0.8677597534740392,0.1322402465259608,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
-MBB,VCB,0.8517471946043375,0.1482528053956625,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
-MBB,TCB,0.8359323216466074,0.1640676783533926,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",3,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
-MBB,ACB,0.8325716611430897,0.1674283388569103,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",4,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-MBB,VPB,0.7860573289144717,0.2139426710855282,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-MBB,HDB,0.7722309436595151,0.2277690563404849,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-MBB,BID,0.766881795453224,0.2331182045467759,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
-MBB,VIB,0.7437292865864293,0.2562707134135706,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-MBB,TPB,0.7355660212803069,0.2644339787196931,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-MBB,LPB,0.7308099308099308,0.2691900691900691,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-MSB,TPB,0.8860747717890575,0.1139252282109425,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-MSB,VIB,0.8691202976917263,0.1308797023082737,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-MSB,SSB,0.8459677888249317,0.1540322111750683,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-MSB,OCB,0.8384557241700099,0.1615442758299901,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-MSB,EIB,0.7870457584743299,0.2129542415256701,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, ROE",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-MSB,PCB,0.7866571428571428,0.2133428571428571,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,6,PCB,PCB,Ngân hàng,BANK
-MSB,TCB,0.753636839351125,0.2463631606488749,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
-MSB,SHB,0.7456480027908599,0.2543519972091401,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-MSB,HDB,0.7445665445665446,0.2554334554334554,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",9,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-MSB,STB,0.7396476539333682,0.2603523460666318,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
-NAB,SHB,0.8329321472178615,0.1670678527821385,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-NAB,LPB,0.8114076399790685,0.1885923600209315,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-NAB,ABB,0.8020582592011164,0.1979417407988836,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,ABB,ABB,Ngân hàng,BANK
-NAB,BAB,0.7641839641839642,0.2358160358160358,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",4,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-NAB,TPB,0.763346706203849,0.236653293796151,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-NAB,VIB,0.754532240246526,0.245467759753474,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-NAB,PCB,0.7509428571428571,0.2490571428571428,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,7,PCB,PCB,Ngân hàng,BANK
-NAB,VBB,0.7282930302436476,0.2717069697563524,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,VBB,VBB,Ngân hàng,BANK
-NAB,MSB,0.7267980696552125,0.2732019303447875,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-NAB,SSB,0.7241700098842956,0.2758299901157044,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",10,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-NVB,SGB,0.8552118361747991,0.1447881638252008,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,SGB,SGB,Ngân hàng,BANK
-NVB,BVB,0.8252947939120778,0.1747052060879221,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,BVB,BVB,Ngân hàng,BANK
+KLB,MSB,0.6448398162683877,0.35516018373161234,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",10,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+LPB,NAB,0.8114076399790685,0.18859236002093152,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+LPB,VIB,0.7968835397406825,0.20311646025931748,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+LPB,HDB,0.7785220070934357,0.22147799290656436,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+LPB,TPB,0.7667422524565382,0.23325774754346187,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",4,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+LPB,SHB,0.7571370428513285,0.24286295714867145,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+LPB,ACB,0.7419501133786848,0.25804988662131517,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",6,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+LPB,ABB,0.7414268271411129,0.2585731728588872,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,ABB,ABB,Ngân hàng,BANK
+LPB,CTG,0.7354846211989069,0.2645153788010931,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
+LPB,MBB,0.7308099308099308,0.26919006919006916,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+LPB,STB,0.7075062503633932,0.2924937496366068,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
+MBB,CTG,0.8677597534740392,0.1322402465259608,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
+MBB,VCB,0.8517471946043375,0.14825280539566255,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+MBB,TCB,0.8359323216466074,0.16406767835339267,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",3,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
+MBB,ACB,0.8325716611430897,0.1674283388569103,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",4,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+MBB,VPB,0.7860573289144717,0.21394267108552828,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+MBB,HDB,0.7722309436595151,0.22776905634048497,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+MBB,BID,0.766881795453224,0.23311820454677598,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
+MBB,VIB,0.7437292865864293,0.2562707134135706,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+MBB,TPB,0.7355660212803069,0.2644339787196931,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+MBB,LPB,0.7308099308099308,0.26919006919006916,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+MSB,TPB,0.8860747717890575,0.11392522821094252,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+MSB,VIB,0.8691202976917263,0.13087970230827375,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+MSB,SSB,0.8459677888249317,0.15403221117506832,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+MSB,OCB,0.8384557241700099,0.16154427582999012,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+MSB,EIB,0.7870457584743299,0.21295424152567013,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, ROE",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+MSB,PCB,0.7866571428571428,0.21334285714285717,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,6,PCB,PCB,Ngân hàng,BANK
+MSB,TCB,0.753636839351125,0.24636316064887498,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
+MSB,SHB,0.7456480027908599,0.2543519972091401,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+MSB,HDB,0.7445665445665446,0.25543345543345547,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",9,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+MSB,STB,0.7396476539333682,0.2603523460666318,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
+NAB,SHB,0.8329321472178615,0.16706785278213854,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+NAB,LPB,0.8114076399790685,0.18859236002093152,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+NAB,ABB,0.8020582592011164,0.19794174079888363,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,ABB,ABB,Ngân hàng,BANK
+NAB,BAB,0.7641839641839642,0.23581603581603586,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",4,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+NAB,TPB,0.763346706203849,0.236653293796151,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+NAB,VIB,0.754532240246526,0.24546775975347407,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+NAB,PCB,0.7509428571428571,0.24905714285714287,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,7,PCB,PCB,Ngân hàng,BANK
+NAB,VBB,0.7282930302436476,0.27170696975635245,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,VBB,VBB,Ngân hàng,BANK
+NAB,MSB,0.7267980696552125,0.2732019303447875,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+NAB,SSB,0.7241700098842956,0.2758299901157044,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",10,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+NVB,SGB,0.8552118361747991,0.14478816382520082,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,SGB,SGB,Ngân hàng,BANK
+NVB,BVB,0.8252947939120778,0.17470520608792212,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,BVB,BVB,Ngân hàng,BANK
 NVB,EIB,0.803477562218303,0.196522437781697,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-NVB,PGB,0.799819583251682,0.2001804167483179,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,PGB,PGB,Ngân hàng,BANK
+NVB,PGB,0.799819583251682,0.20018041674831796,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,PGB,PGB,Ngân hàng,BANK
 NVB,VBB,0.7968801358677902,0.2031198641322098,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,VBB,VBB,Ngân hàng,BANK
-NVB,VAB,0.7470401724475799,0.2529598275524201,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",6,VAB,VAB,Ngân hàng,BANK
+NVB,VAB,0.7470401724475799,0.25295982755242014,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",6,VAB,VAB,Ngân hàng,BANK
 NVB,BAB,0.7210423933633809,0.278957606636619,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-NVB,PCB,0.7152285714285714,0.2847714285714285,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,8,PCB,PCB,Ngân hàng,BANK
-NVB,SSB,0.6975921353452217,0.3024078646547782,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-NVB,OCB,0.6796941668299692,0.3203058331700307,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-OCB,PCB,0.8580857142857143,0.1419142857142857,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,1,PCB,PCB,Ngân hàng,BANK
-OCB,SSB,0.857363800220943,0.1426361997790569,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-OCB,MSB,0.8384557241700099,0.1615442758299901,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-OCB,VIB,0.8272341415198557,0.1727658584801442,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-OCB,EIB,0.8059770916913773,0.1940229083086226,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-OCB,TPB,0.7995813710099424,0.2004186289900575,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-OCB,BVB,0.7690447119018546,0.2309552880981453,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,BVB,BVB,Ngân hàng,BANK
-OCB,VPB,0.7573928716785859,0.242607128321414,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",8,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-OCB,VBB,0.7294688091972042,0.2705311908027957,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",9,VBB,VBB,Ngân hàng,BANK
-OCB,STB,0.7262515262515262,0.2737484737484738,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
-PCB,EIB,0.8580857142857143,0.1419142857142857,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,1,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-PCB,OCB,0.8580857142857143,0.1419142857142857,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,2,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+NVB,PCB,0.7152285714285714,0.28477142857142856,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,8,PCB,PCB,Ngân hàng,BANK
+NVB,SSB,0.6975921353452217,0.30240786465477826,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+NVB,OCB,0.6796941668299692,0.32030583317003075,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+OCB,PCB,0.8580857142857143,0.14191428571428572,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,1,PCB,PCB,Ngân hàng,BANK
+OCB,SSB,0.857363800220943,0.14263619977905695,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+OCB,MSB,0.8384557241700099,0.16154427582999012,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+OCB,VIB,0.8272341415198557,0.17276585848014422,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+OCB,EIB,0.8059770916913773,0.19402290830862265,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+OCB,TPB,0.7995813710099424,0.20041862899005755,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+OCB,BVB,0.7690447119018546,0.2309552880981453,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,BVB,BVB,Ngân hàng,BANK
+OCB,VPB,0.7573928716785859,0.24260712832141407,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",8,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+OCB,VBB,0.7294688091972042,0.27053119080279575,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",9,VBB,VBB,Ngân hàng,BANK
+OCB,STB,0.7262515262515262,0.2737484737484738,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
+PCB,EIB,0.8580857142857143,0.14191428571428572,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,1,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+PCB,OCB,0.8580857142857143,0.14191428571428572,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,2,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
 PCB,ABB,0.8223714285714285,0.1776285714285714,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,3,ABB,ABB,Ngân hàng,BANK
-PCB,SSB,0.8223714285714285,0.1776285714285714,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,4,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-PCB,BAB,0.7866571428571428,0.2133428571428571,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,5,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-PCB,MSB,0.7866571428571428,0.2133428571428571,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,6,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-PCB,NAB,0.7509428571428571,0.2490571428571428,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,7,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-PCB,VBB,0.7509428571428571,0.2490571428571428,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,8,VBB,VBB,Ngân hàng,BANK
-PCB,NVB,0.7152285714285714,0.2847714285714285,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,9,NVB,NVB,Ngân hàng,BANK
-PCB,TPB,0.7152285714285714,0.2847714285714285,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,10,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-PGB,BVB,0.81859410430839,0.18140589569161,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,BVB,BVB,Ngân hàng,BANK
-PGB,NVB,0.799819583251682,0.2001804167483179,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,NVB,NVB,Ngân hàng,BANK
-PGB,SGB,0.7995697424268853,0.2004302575731147,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,SGB,SGB,Ngân hàng,BANK
-PGB,EIB,0.7878481307052736,0.2121518692947264,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-PGB,VAB,0.763869992441421,0.236130007558579,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,VAB,VAB,Ngân hàng,BANK
-PGB,VBB,0.7491304461427919,0.2508695538572081,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,VBB,VBB,Ngân hàng,BANK
-PGB,BAB,0.7375893947322518,0.2624106052677482,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-PGB,SSB,0.7048316762602476,0.2951683237397524,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-PGB,ABB,0.6827838827838828,0.3172161172161172,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NIM",9,ABB,ABB,Ngân hàng,BANK
-PGB,KLB,0.6695738124309553,0.3304261875690447,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",10,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
-SGB,NVB,0.8552118361747991,0.1447881638252008,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,NVB,NVB,Ngân hàng,BANK
-SGB,BVB,0.8281760567474853,0.1718239432525147,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,BVB,BVB,Ngân hàng,BANK
-SGB,PGB,0.7995697424268853,0.2004302575731147,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,PGB,PGB,Ngân hàng,BANK
-SGB,VBB,0.75056750930825,0.2494324906917499,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",4,VBB,VBB,Ngân hàng,BANK
-SGB,EIB,0.7407756264899121,0.2592243735100878,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-SGB,SSB,0.6727367870225012,0.3272632129774988,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",6,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-SGB,VAB,0.669259840688412,0.3307401593115879,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",7,VAB,VAB,Ngân hàng,BANK
-SGB,BAB,0.6429792429792429,0.3570207570207571,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-SGB,OCB,0.6167567881853595,0.3832432118146404,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-SGB,KLB,0.6075236932379788,0.3924763067620211,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CASA",10,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
-SHB,NAB,0.8329321472178615,0.1670678527821385,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-SHB,HDB,0.8094191522762951,0.1905808477237049,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-SHB,TPB,0.7998255712541427,0.2001744287458574,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-SHB,VIB,0.7796616082330368,0.2203383917669632,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-SHB,LPB,0.7571370428513285,0.2428629571486714,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-SHB,BID,0.7555322983894412,0.2444677016105587,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
-SHB,SSB,0.7518111518111518,0.2481888481888482,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",7,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-SHB,ACB,0.7492412349555206,0.2507587650444793,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-SHB,MSB,0.7456480027908599,0.2543519972091401,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-SHB,VCB,0.7340891912320484,0.2659108087679516,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
-SSB,EIB,0.8746555032269318,0.1253444967730682,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-SSB,OCB,0.857363800220943,0.1426361997790569,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-SSB,MSB,0.8459677888249317,0.1540322111750683,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-SSB,PCB,0.8223714285714285,0.1776285714285714,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,4,PCB,PCB,Ngân hàng,BANK
-SSB,TPB,0.8220710506424792,0.1779289493575208,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",5,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-SSB,VIB,0.7973021687307402,0.2026978312692598,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",6,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-SSB,VBB,0.7784595989287347,0.2215404010712652,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,VBB,VBB,Ngân hàng,BANK
-SSB,BAB,0.7542996685853829,0.2457003314146171,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-SSB,SHB,0.7518111518111518,0.2481888481888482,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",9,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-SSB,BVB,0.7501366358509215,0.2498633641490784,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,BVB,BVB,Ngân hàng,BANK
-STB,VIB,0.7931972789115646,0.2068027210884354,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",1,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-STB,EIB,0.7414268271411129,0.2585731728588871,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-STB,MSB,0.7396476539333682,0.2603523460666318,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-STB,OCB,0.7262515262515262,0.2737484737484738,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-STB,SSB,0.7223675795104366,0.2776324204895634,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",5,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-STB,HDB,0.7193674050816907,0.2806325949183092,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, LDR",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-STB,LPB,0.7075062503633932,0.2924937496366068,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",7,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-STB,TPB,0.706889935461364,0.293110064538636,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-STB,ACB,0.7047735333449618,0.2952264666550381,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",9,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-STB,SHB,0.696354439211582,0.303645560788418,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-TCB,ACB,0.8530495959067388,0.1469504040932612,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-TCB,MBB,0.8359323216466074,0.1640676783533926,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-TCB,VPB,0.8064887493458922,0.1935112506541078,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",3,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-TCB,TPB,0.7861619861619862,0.2138380138380138,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",4,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-TCB,VCB,0.7856852142566428,0.2143147857433572,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
-TCB,MSB,0.753636839351125,0.2463631606488749,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-TCB,VIB,0.7379963951392523,0.2620036048607477,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-TCB,CTG,0.728112099540671,0.271887900459329,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, ROE",8,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
-TCB,HDB,0.6935635792778649,0.306436420722135,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",9,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-TCB,SHB,0.6864585150299436,0.3135414849700564,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-TPB,MSB,0.8860747717890575,0.1139252282109425,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-TPB,VIB,0.8599686028257457,0.1400313971742543,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-TPB,SSB,0.8220710506424792,0.1779289493575208,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",3,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-TPB,SHB,0.7998255712541427,0.2001744287458574,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-TPB,OCB,0.7995813710099424,0.2004186289900575,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",5,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-TPB,ACB,0.7948950520379092,0.2051049479620908,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-TPB,TCB,0.7861619861619862,0.2138380138380138,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
-TPB,LPB,0.7667422524565382,0.2332577475434618,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",8,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-TPB,NAB,0.763346706203849,0.236653293796151,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-TPB,VPB,0.758381301238444,0.2416186987615559,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-VAB,BAB,0.8402232687946973,0.1597767312053026,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-VAB,ABB,0.8194429908715622,0.1805570091284377,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",2,ABB,ABB,Ngân hàng,BANK
+PCB,SSB,0.8223714285714285,0.17762857142857147,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,4,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+PCB,BAB,0.7866571428571428,0.21334285714285717,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,5,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+PCB,MSB,0.7866571428571428,0.21334285714285717,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,6,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+PCB,NAB,0.7509428571428571,0.24905714285714287,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,7,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+PCB,VBB,0.7509428571428571,0.24905714285714287,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,8,VBB,VBB,Ngân hàng,BANK
+PCB,NVB,0.7152285714285714,0.28477142857142856,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,9,NVB,NVB,Ngân hàng,BANK
+PCB,TPB,0.7152285714285714,0.28477142857142856,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,10,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+PGB,BVB,0.81859410430839,0.18140589569161,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,BVB,BVB,Ngân hàng,BANK
+PGB,NVB,0.799819583251682,0.20018041674831796,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,NVB,NVB,Ngân hàng,BANK
+PGB,SGB,0.7995697424268853,0.20043025757311472,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,SGB,SGB,Ngân hàng,BANK
+PGB,EIB,0.7878481307052736,0.21215186929472643,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+PGB,VAB,0.763869992441421,0.23613000755857902,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,VAB,VAB,Ngân hàng,BANK
+PGB,VBB,0.7491304461427919,0.25086955385720816,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,VBB,VBB,Ngân hàng,BANK
+PGB,BAB,0.7375893947322518,0.2624106052677482,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+PGB,SSB,0.7048316762602476,0.2951683237397524,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+PGB,ABB,0.6827838827838828,0.31721611721611725,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NIM",9,ABB,ABB,Ngân hàng,BANK
+PGB,KLB,0.6695738124309553,0.33042618756904474,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",10,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
+SGB,NVB,0.8552118361747991,0.14478816382520082,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,NVB,NVB,Ngân hàng,BANK
+SGB,BVB,0.8281760567474853,0.1718239432525147,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,BVB,BVB,Ngân hàng,BANK
+SGB,PGB,0.7995697424268853,0.20043025757311472,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,PGB,PGB,Ngân hàng,BANK
+SGB,VBB,0.75056750930825,0.24943249069174994,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",4,VBB,VBB,Ngân hàng,BANK
+SGB,EIB,0.7407756264899121,0.2592243735100878,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+SGB,SSB,0.6727367870225012,0.3272632129774988,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",6,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+SGB,VAB,0.669259840688412,0.33074015931158796,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",7,VAB,VAB,Ngân hàng,BANK
+SGB,BAB,0.6429792429792429,0.3570207570207571,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+SGB,OCB,0.6167567881853595,0.38324321181464044,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+SGB,KLB,0.6075236932379788,0.3924763067620211,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CASA",10,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
+SHB,NAB,0.8329321472178615,0.16706785278213854,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+SHB,HDB,0.8094191522762951,0.1905808477237049,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+SHB,TPB,0.7998255712541427,0.2001744287458574,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+SHB,VIB,0.7796616082330368,0.22033839176696324,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+SHB,LPB,0.7571370428513285,0.24286295714867145,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+SHB,BID,0.7555322983894412,0.24446770161055878,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
+SHB,SSB,0.7518111518111518,0.24818884818884826,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",7,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+SHB,ACB,0.7492412349555206,0.25075876504447936,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+SHB,MSB,0.7456480027908599,0.2543519972091401,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+SHB,VCB,0.7340891912320484,0.26591080876795165,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+SSB,EIB,0.8746555032269318,0.12534449677306822,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+SSB,OCB,0.857363800220943,0.14263619977905695,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+SSB,MSB,0.8459677888249317,0.15403221117506832,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+SSB,PCB,0.8223714285714285,0.17762857142857147,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,4,PCB,PCB,Ngân hàng,BANK
+SSB,TPB,0.8220710506424792,0.1779289493575208,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",5,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+SSB,VIB,0.7973021687307402,0.20269783126925983,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",6,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+SSB,VBB,0.7784595989287347,0.22154040107126524,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,VBB,VBB,Ngân hàng,BANK
+SSB,BAB,0.7542996685853829,0.24570033141461717,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+SSB,SHB,0.7518111518111518,0.24818884818884826,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",9,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+SSB,BVB,0.7501366358509215,0.24986336414907848,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,BVB,BVB,Ngân hàng,BANK
+STB,VIB,0.7931972789115646,0.20680272108843545,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",1,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+STB,EIB,0.7414268271411129,0.25857317285888715,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+STB,MSB,0.7396476539333682,0.2603523460666318,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+STB,OCB,0.7262515262515262,0.2737484737484738,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+STB,SSB,0.7223675795104366,0.2776324204895634,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",5,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+STB,HDB,0.7193674050816907,0.2806325949183092,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, LDR",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+STB,LPB,0.7075062503633932,0.2924937496366068,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, CAR",7,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+STB,TPB,0.706889935461364,0.29311006453863603,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+STB,ACB,0.7047735333449618,0.29522646665503816,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",9,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+STB,SHB,0.696354439211582,0.303645560788418,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+TCB,ACB,0.8530495959067388,0.14695040409326124,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+TCB,MBB,0.8359323216466074,0.16406767835339267,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+TCB,VPB,0.8064887493458922,0.19351125065410782,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",3,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+TCB,TPB,0.7861619861619862,0.21383801383801385,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",4,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+TCB,VCB,0.7856852142566428,0.21431478574335722,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+TCB,MSB,0.753636839351125,0.24636316064887498,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+TCB,VIB,0.7379963951392523,0.2620036048607477,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",7,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+TCB,CTG,0.728112099540671,0.271887900459329,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, ROE",8,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
+TCB,HDB,0.6935635792778649,0.30643642072213506,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",9,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+TCB,SHB,0.6864585150299436,0.3135414849700564,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+TPB,MSB,0.8860747717890575,0.11392522821094252,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+TPB,VIB,0.8599686028257457,0.1400313971742543,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+TPB,SSB,0.8220710506424792,0.1779289493575208,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, CAR, NPL",3,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+TPB,SHB,0.7998255712541427,0.2001744287458574,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",4,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+TPB,OCB,0.7995813710099424,0.20041862899005755,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",5,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+TPB,ACB,0.7948950520379092,0.20510494796209083,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+TPB,TCB,0.7861619861619862,0.21383801383801385,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
+TPB,LPB,0.7667422524565382,0.23325774754346187,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",8,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+TPB,NAB,0.763346706203849,0.236653293796151,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+TPB,VPB,0.758381301238444,0.24161869876155595,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+VAB,BAB,0.8402232687946973,0.15977673120530267,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",1,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+VAB,ABB,0.8194429908715622,0.18055700912843775,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, NPL",2,ABB,ABB,Ngân hàng,BANK
 VAB,VBB,0.8079193938206284,0.1920806061793716,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,VBB,VBB,Ngân hàng,BANK
-VAB,BVB,0.77433571719286,0.22566428280714,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,BVB,BVB,Ngân hàng,BANK
-VAB,PGB,0.763869992441421,0.236130007558579,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,PGB,PGB,Ngân hàng,BANK
-VAB,NVB,0.7470401724475799,0.2529598275524201,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",6,NVB,NVB,Ngân hàng,BANK
-VAB,KLB,0.7450898308041165,0.2549101691958835,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CASA",7,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
-VAB,NAB,0.7208093493807779,0.2791906506192221,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, ROE",8,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+VAB,BVB,0.77433571719286,0.22566428280714,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,BVB,BVB,Ngân hàng,BANK
+VAB,PGB,0.763869992441421,0.23613000755857902,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",5,PGB,PGB,Ngân hàng,BANK
+VAB,NVB,0.7470401724475799,0.25295982755242014,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, LDR",6,NVB,NVB,Ngân hàng,BANK
+VAB,KLB,0.7450898308041165,0.25491016919588355,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CASA",7,KienlongBank,Ngân hàng TMCP Kiên Long,Ngân hàng,BANK
+VAB,NAB,0.7208093493807779,0.2791906506192221,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, ROE",8,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
 VAB,PCB,0.6795142857142857,0.3204857142857143,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,9,PCB,PCB,Ngân hàng,BANK
-VAB,EIB,0.669399383685098,0.330600616314902,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-VBB,BAB,0.848549088771311,0.1514509112286889,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
-VBB,BVB,0.8166724149193285,0.1833275850806714,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",2,BVB,BVB,Ngân hàng,BANK
+VAB,EIB,0.669399383685098,0.33060061631490206,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",10,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+VBB,BAB,0.848549088771311,0.15145091122868898,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,Bac A Bank,Ngân hàng TMCP Bắc Á,Ngân hàng,BANK
+VBB,BVB,0.8166724149193285,0.18332758508067148,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",2,BVB,BVB,Ngân hàng,BANK
 VBB,VAB,0.8079193938206284,0.1920806061793716,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",3,VAB,VAB,Ngân hàng,BANK
 VBB,NVB,0.7968801358677902,0.2031198641322098,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,NVB,NVB,Ngân hàng,BANK
-VBB,SSB,0.7784595989287347,0.2215404010712652,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-VBB,EIB,0.771862172578222,0.228137827421778,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
-VBB,PCB,0.7509428571428571,0.2490571428571428,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,7,PCB,PCB,Ngân hàng,BANK
-VBB,SGB,0.75056750930825,0.2494324906917499,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,SGB,SGB,Ngân hàng,BANK
-VBB,PGB,0.7491304461427919,0.2508695538572081,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,PGB,PGB,Ngân hàng,BANK
-VBB,OCB,0.7294688091972042,0.2705311908027957,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",10,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-VCB,CTG,0.8862608291179719,0.113739170882028,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
-VCB,MBB,0.8517471946043375,0.1482528053956625,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-VCB,ACB,0.8275829990115704,0.1724170009884295,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-VCB,BID,0.797592883307169,0.2024071166928309,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",4,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
-VCB,TCB,0.7856852142566428,0.2143147857433572,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
-VCB,HDB,0.7423338566195709,0.2576661433804291,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-VCB,SHB,0.7340891912320484,0.2659108087679516,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-VCB,TPB,0.7227629513343798,0.2772370486656201,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-VCB,VPB,0.6934821791964648,0.3065178208035352,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-VCB,NAB,0.6819582533868248,0.3180417466131752,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
-VIB,MSB,0.8691202976917263,0.1308797023082737,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-VIB,TPB,0.8599686028257457,0.1400313971742543,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",2,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-VIB,OCB,0.8272341415198557,0.1727658584801442,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-VIB,ACB,0.80143031571603,0.19856968428397,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",4,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-VIB,SSB,0.7973021687307402,0.2026978312692598,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
-VIB,LPB,0.7968835397406825,0.2031164602593174,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",6,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
-VIB,HDB,0.796162567591139,0.203837432408861,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",7,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-VIB,STB,0.7931972789115646,0.2068027210884354,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
-VIB,VPB,0.78998778998779,0.21001221001221,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
-VIB,SHB,0.7796616082330368,0.2203383917669632,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-VPB,TCB,0.8064887493458922,0.1935112506541078,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",1,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
-VPB,VIB,0.78998778998779,0.21001221001221,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
-VPB,HDB,0.787883016454445,0.212116983545555,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
-VPB,MBB,0.7860573289144717,0.2139426710855282,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
-VPB,TPB,0.758381301238444,0.2416186987615559,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",5,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
-VPB,ACB,0.7577068434211292,0.2422931565788708,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",6,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
-VPB,OCB,0.7573928716785859,0.242607128321414,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
-VPB,SHB,0.7319379033664748,0.2680620966335252,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
-VPB,MSB,0.717716146287575,0.2822838537124251,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
-VPB,VCB,0.6934821791964648,0.3065178208035352,0.91,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
+VBB,SSB,0.7784595989287347,0.22154040107126524,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+VBB,EIB,0.771862172578222,0.22813782742177804,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",6,Eximbank,Ngân hàng TMCP Xuất Nhập khẩu Việt Nam,Ngân hàng,BANK
+VBB,PCB,0.7509428571428571,0.24905714285714287,0.32,Ngân hàng niêm yết/ĐKGD,TotalAssets,7,PCB,PCB,Ngân hàng,BANK
+VBB,SGB,0.75056750930825,0.24943249069174994,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,SGB,SGB,Ngân hàng,BANK
+VBB,PGB,0.7491304461427919,0.25086955385720816,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,PGB,PGB,Ngân hàng,BANK
+VBB,OCB,0.7294688091972042,0.27053119080279575,0.81,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",10,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+VCB,CTG,0.8862608291179719,0.11373917088202806,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,VietinBank,Ngân hàng TMCP Công Thương Việt Nam,Ngân hàng,BANK
+VCB,MBB,0.8517471946043375,0.14825280539566255,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",2,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+VCB,ACB,0.8275829990115704,0.17241700098842958,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+VCB,BID,0.797592883307169,0.20240711669283096,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",4,BIDV,Ngân hàng TMCP Đầu tư và Phát triển Việt Nam,Ngân hàng,BANK
+VCB,TCB,0.7856852142566428,0.21431478574335722,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
+VCB,HDB,0.7423338566195709,0.25766614338042915,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",6,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+VCB,SHB,0.7340891912320484,0.26591080876795165,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",7,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+VCB,TPB,0.7227629513343798,0.27723704866562016,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",8,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+VCB,VPB,0.6934821791964648,0.3065178208035352,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",9,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+VCB,NAB,0.6819582533868248,0.3180417466131752,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,Nam A Bank,Ngân hàng TMCP Nam Á,Ngân hàng,BANK
+VIB,MSB,0.8691202976917263,0.13087970230827375,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",1,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+VIB,TPB,0.8599686028257457,0.1400313971742543,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",2,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+VIB,OCB,0.8272341415198557,0.17276585848014422,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+VIB,ACB,0.80143031571603,0.19856968428397004,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",4,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+VIB,SSB,0.7973021687307402,0.20269783126925983,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",5,SeABank,Ngân hàng TMCP Đông Nam Á,Ngân hàng,BANK
+VIB,LPB,0.7968835397406825,0.20311646025931748,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",6,LPBank,Ngân hàng TMCP Lộc Phát Việt Nam,Ngân hàng,BANK
+VIB,HDB,0.796162567591139,0.203837432408861,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NPL, CAR",7,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+VIB,STB,0.7931972789115646,0.20680272108843545,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, NIM, ROE",8,Sacombank,Ngân hàng TMCP Sài Gòn Thương Tín,Ngân hàng,BANK
+VIB,VPB,0.78998778998779,0.21001221001221004,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",9,VPBank,Ngân hàng TMCP Việt Nam Thịnh Vượng,Ngân hàng,BANK
+VIB,SHB,0.7796616082330368,0.22033839176696324,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",10,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+VPB,TCB,0.8064887493458922,0.19351125065410782,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",1,Techcombank,Ngân hàng TMCP Kỹ Thương Việt Nam,Ngân hàng,BANK
+VPB,VIB,0.78998778998779,0.21001221001221004,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",2,VIB,Ngân hàng TMCP Quốc tế Việt Nam,Ngân hàng,BANK
+VPB,HDB,0.787883016454445,0.21211698354555503,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",3,HDBank,Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh,Ngân hàng,BANK
+VPB,MBB,0.7860573289144717,0.21394267108552828,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",4,MB Bank,Ngân hàng TMCP Quân đội,Ngân hàng,BANK
+VPB,TPB,0.758381301238444,0.24161869876155595,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",5,TPBank,Ngân hàng TMCP Tiên Phong,Ngân hàng,BANK
+VPB,ACB,0.7577068434211292,0.24229315657887088,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CASA",6,ACB,Ngân hàng TMCP Á Châu,Ngân hàng,BANK
+VPB,OCB,0.7573928716785859,0.24260712832141407,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NPL",7,OCB,Ngân hàng TMCP Phương Đông,Ngân hàng,BANK
+VPB,SHB,0.7319379033664748,0.2680620966335252,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",8,SHB,Ngân hàng TMCP Sài Gòn - Hà Nội,Ngân hàng,BANK
+VPB,MSB,0.717716146287575,0.2822838537124251,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, NIM",9,MSB,Ngân hàng TMCP Hàng Hải Việt Nam,Ngân hàng,BANK
+VPB,VCB,0.6934821791964648,0.3065178208035352,0.9099999999999999,Ngân hàng niêm yết/ĐKGD,"TotalAssets, ROE, CAR",10,Vietcombank,Ngân hàng TMCP Ngoại thương Việt Nam,Ngân hàng,BANK
 BPW,CT5,,,0.0,ngành: Chưa phân loại,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,CT5,CT5,Chưa phân loại,CORPORATE
 BPW,DKH,,,0.0,ngành: Chưa phân loại,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,DKH,DKH,Chưa phân loại,CORPORATE
 BPW,DPD,,,0.0,ngành: Chưa phân loại,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,DPD,DPD,Chưa phân loại,CORPORATE
@@ -12299,16 +12299,16 @@ DRI,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 DRI,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 DRI,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 DRI,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-DTL,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-DTL,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-DTL,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-DTL,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-DTL,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-DTL,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-DTL,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-DTL,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-DTL,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-DTL,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+DTL,TLH,0.7470355731225296,0.2529644268774704,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",1,TLH,TLH,Nguyên vật liệu,CORPORATE
+DTL,POM,0.7272727272727273,0.27272727272727276,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, ROE",2,POM,POM,Nguyên vật liệu,CORPORATE
+DTL,HMC,0.7124505928853755,0.28754940711462457,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",3,HMC,HMC,Nguyên vật liệu,CORPORATE
+DTL,SMC,0.6936758893280632,0.30632411067193677,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",4,SMC,SMC,Nguyên vật liệu,CORPORATE
+DTL,TIS,0.6403162055335968,0.3596837944664032,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",5,TIS,TIS,Nguyên vật liệu,CORPORATE
+DTL,VGS,0.5612648221343872,0.4387351778656127,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",6,VGS,VGS,Nguyên vật liệu,CORPORATE
+DTL,NKG,0.5405138339920948,0.45948616600790515,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",7,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+DTL,TVN,0.42292490118577064,0.5770750988142294,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, CurrentRatio, TotalAssets",8,TVN,TVN,Nguyên vật liệu,CORPORATE
+DTL,HSG,0.39328063241106714,0.6067193675889329,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, ROE, Revenue",9,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+DTL,HPG,0.27470355731225293,0.7252964426877471,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, CurrentRatio, TotalAssets",10,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
 DTT,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 DTT,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 DTT,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -12489,16 +12489,16 @@ HLC,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 HLC,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 HLC,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 HLC,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-HMC,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-HMC,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-HMC,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-HMC,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-HMC,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-HMC,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-HMC,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-HMC,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-HMC,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-HMC,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+HMC,SMC,0.7559288537549407,0.24407114624505932,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",1,SMC,SMC,Nguyên vật liệu,CORPORATE
+HMC,VGS,0.7183794466403162,0.2816205533596838,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, ROE",2,VGS,VGS,Nguyên vật liệu,CORPORATE
+HMC,DTL,0.7124505928853755,0.28754940711462457,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",3,DTL,DTL,Nguyên vật liệu,CORPORATE
+HMC,TLH,0.6847826086956521,0.31521739130434784,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",4,TLH,TLH,Nguyên vật liệu,CORPORATE
+HMC,TIS,0.6729249011857708,0.3270750988142293,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, DebtEquity, TotalAssets",5,TIS,TIS,Nguyên vật liệu,CORPORATE
+HMC,NKG,0.6561264822134387,0.3438735177865613,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, DebtEquity, TotalAssets",6,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+HMC,TVN,0.5563241106719367,0.44367588932806334,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, ROE, DebtEquity",7,TVN,TVN,Nguyên vật liệu,CORPORATE
+HMC,POM,0.5365612648221343,0.46343873517786566,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, Equity",8,POM,POM,Nguyên vật liệu,CORPORATE
+HMC,HSG,0.5326086956521738,0.46739130434782616,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, ROE, ROA",9,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+HMC,HPG,0.4436758893280631,0.5563241106719369,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, ROE, DebtEquity",10,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
 HMD,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 HMD,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 HMD,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -12529,6 +12529,16 @@ HNP,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 HNP,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 HNP,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 HNP,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+HPG,TVN,0.8517786561264822,0.1482213438735178,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",1,TVN,TVN,Nguyên vật liệu,CORPORATE
+HPG,HSG,0.8162055335968379,0.18379446640316208,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",2,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+HPG,NKG,0.692687747035573,0.30731225296442694,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",3,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+HPG,VGS,0.6363636363636362,0.3636363636363637,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, ROE",4,VGS,VGS,Nguyên vật liệu,CORPORATE
+HPG,TIS,0.5553359683794465,0.4446640316205534,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, Equity",5,TIS,TIS,Nguyên vật liệu,CORPORATE
+HPG,SMC,0.5237154150197627,0.4762845849802373,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"ROE, TotalAssets, DebtEquity",6,SMC,SMC,Nguyên vật liệu,CORPORATE
+HPG,HMC,0.4436758893280631,0.5563241106719369,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"Revenue, ROE, DebtEquity",7,HMC,HMC,Nguyên vật liệu,CORPORATE
+HPG,TLH,0.4328063241106719,0.5671936758893281,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, Revenue",8,TLH,TLH,Nguyên vật liệu,CORPORATE
+HPG,POM,0.3893280632411066,0.6106719367588934,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, DebtEquity, ROE",9,POM,POM,Nguyên vật liệu,CORPORATE
+HPG,DTL,0.27470355731225293,0.7252964426877471,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, CurrentRatio, TotalAssets",10,DTL,DTL,Nguyên vật liệu,CORPORATE
 HPH,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 HPH,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 HPH,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -12559,16 +12569,16 @@ HRC,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 HRC,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 HRC,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 HRC,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-HSG,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-HSG,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-HSG,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-HSG,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-HSG,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-HSG,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-HSG,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-HSG,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-HSG,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-HSG,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+HSG,TVN,0.8636363636363636,0.13636363636363635,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",1,TVN,TVN,Nguyên vật liệu,CORPORATE
+HSG,NKG,0.825098814229249,0.174901185770751,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",2,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+HSG,HPG,0.8162055335968379,0.18379446640316208,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",3,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
+HSG,TIS,0.6739130434782609,0.32608695652173914,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",4,TIS,TIS,Nguyên vật liệu,CORPORATE
+HSG,VGS,0.6719367588932805,0.32806324110671947,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",5,VGS,VGS,Nguyên vật liệu,CORPORATE
+HSG,TLH,0.5909090909090908,0.4090909090909092,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",6,TLH,TLH,Nguyên vật liệu,CORPORATE
+HSG,SMC,0.5612648221343872,0.4387351778656127,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROA",7,SMC,SMC,Nguyên vật liệu,CORPORATE
+HSG,POM,0.559288537549407,0.440711462450593,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",8,POM,POM,Nguyên vật liệu,CORPORATE
+HSG,HMC,0.5326086956521738,0.46739130434782616,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, ROE, ROA",9,HMC,HMC,Nguyên vật liệu,CORPORATE
+HSG,DTL,0.39328063241106714,0.6067193675889329,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, ROE, Revenue",10,DTL,DTL,Nguyên vật liệu,CORPORATE
 HSI,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 HSI,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 HSI,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -12929,16 +12939,16 @@ NHV,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 NHV,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 NHV,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 NHV,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-NKG,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-NKG,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-NKG,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-NKG,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-NKG,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-NKG,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-NKG,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-NKG,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-NKG,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-NKG,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+NKG,TVN,0.8270750988142292,0.17292490118577072,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",1,TVN,TVN,Nguyên vật liệu,CORPORATE
+NKG,HSG,0.825098814229249,0.174901185770751,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",2,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+NKG,TIS,0.8211462450592885,0.1788537549407115,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",3,TIS,TIS,Nguyên vật liệu,CORPORATE
+NKG,VGS,0.7262845849802371,0.27371541501976293,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",4,VGS,VGS,Nguyên vật liệu,CORPORATE
+NKG,HPG,0.692687747035573,0.30731225296442694,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",5,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
+NKG,TLH,0.6630434782608694,0.33695652173913054,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",6,TLH,TLH,Nguyên vật liệu,CORPORATE
+NKG,HMC,0.6561264822134387,0.3438735177865613,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, DebtEquity, TotalAssets",7,HMC,HMC,Nguyên vật liệu,CORPORATE
+NKG,SMC,0.6393280632411066,0.3606719367588934,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",8,SMC,SMC,Nguyên vật liệu,CORPORATE
+NKG,POM,0.5780632411067192,0.4219367588932807,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",9,POM,POM,Nguyên vật liệu,CORPORATE
+NKG,DTL,0.5405138339920948,0.45948616600790515,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",10,DTL,DTL,Nguyên vật liệu,CORPORATE
 NNG,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 NNG,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 NNG,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -13079,16 +13089,16 @@ PMB,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 PMB,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 PMB,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 PMB,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-POM,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-POM,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-POM,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-POM,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-POM,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-POM,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-POM,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-POM,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-POM,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-POM,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+POM,TLH,0.75098814229249,0.24901185770750994,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, DebtEquity",1,TLH,TLH,Nguyên vật liệu,CORPORATE
+POM,DTL,0.7272727272727273,0.27272727272727276,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, ROE",2,DTL,DTL,Nguyên vật liệu,CORPORATE
+POM,TIS,0.6541501976284585,0.3458498023715415,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",3,TIS,TIS,Nguyên vật liệu,CORPORATE
+POM,SMC,0.6284584980237153,0.37154150197628466,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",4,SMC,SMC,Nguyên vật liệu,CORPORATE
+POM,VGS,0.6047430830039526,0.3952569169960474,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",5,VGS,VGS,Nguyên vật liệu,CORPORATE
+POM,NKG,0.5780632411067192,0.4219367588932807,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",6,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+POM,HSG,0.559288537549407,0.440711462450593,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",7,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+POM,HMC,0.5365612648221343,0.46343873517786566,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, Equity",8,HMC,HMC,Nguyên vật liệu,CORPORATE
+POM,TVN,0.4861660079051382,0.5138339920948618,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, ROE",9,TVN,TVN,Nguyên vật liệu,CORPORATE
+POM,HPG,0.3893280632411066,0.6106719367588934,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, ROE",10,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
 PSE,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 PSE,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 PSE,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -13259,16 +13269,16 @@ SJF,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 SJF,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 SJF,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 SJF,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-SMC,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-SMC,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-SMC,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-SMC,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-SMC,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-SMC,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-SMC,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-SMC,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-SMC,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-SMC,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+SMC,VGS,0.8320158102766798,0.16798418972332016,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",1,VGS,VGS,Nguyên vật liệu,CORPORATE
+SMC,HMC,0.7559288537549407,0.24407114624505932,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",2,HMC,HMC,Nguyên vật liệu,CORPORATE
+SMC,TLH,0.7015810276679841,0.29841897233201586,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",3,TLH,TLH,Nguyên vật liệu,CORPORATE
+SMC,DTL,0.6936758893280632,0.30632411067193677,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",4,DTL,DTL,Nguyên vật liệu,CORPORATE
+SMC,TIS,0.6739130434782609,0.32608695652173914,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",5,TIS,TIS,Nguyên vật liệu,CORPORATE
+SMC,NKG,0.6393280632411066,0.3606719367588934,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",6,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+SMC,POM,0.6284584980237153,0.37154150197628466,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",7,POM,POM,Nguyên vật liệu,CORPORATE
+SMC,TVN,0.5968379446640315,0.40316205533596844,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",8,TVN,TVN,Nguyên vật liệu,CORPORATE
+SMC,HSG,0.5612648221343872,0.4387351778656127,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROA",9,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+SMC,HPG,0.5237154150197627,0.4762845849802373,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"ROE, TotalAssets, DebtEquity",10,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
 SPC,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 SPC,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 SPC,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -13349,16 +13359,16 @@ THT,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 THT,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 THT,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 THT,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-TIS,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-TIS,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-TIS,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-TIS,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-TIS,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-TIS,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-TIS,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-TIS,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-TIS,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-TIS,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+TIS,NKG,0.8211462450592885,0.1788537549407115,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",1,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+TIS,TVN,0.7035573122529644,0.29644268774703564,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",2,TVN,TVN,Nguyên vật liệu,CORPORATE
+TIS,HSG,0.6739130434782609,0.32608695652173914,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",3,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+TIS,SMC,0.6739130434782609,0.32608695652173914,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",4,SMC,SMC,Nguyên vật liệu,CORPORATE
+TIS,HMC,0.6729249011857708,0.3270750988142293,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, DebtEquity, TotalAssets",5,HMC,HMC,Nguyên vật liệu,CORPORATE
+TIS,POM,0.6541501976284585,0.3458498023715415,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",6,POM,POM,Nguyên vật liệu,CORPORATE
+TIS,VGS,0.6521739130434783,0.3478260869565218,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",7,VGS,VGS,Nguyên vật liệu,CORPORATE
+TIS,DTL,0.6403162055335968,0.3596837944664032,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",8,DTL,DTL,Nguyên vật liệu,CORPORATE
+TIS,TLH,0.6264822134387351,0.37351778656126483,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",9,TLH,TLH,Nguyên vật liệu,CORPORATE
+TIS,HPG,0.5553359683794465,0.4446640316205534,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",10,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
 TKG,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 TKG,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 TKG,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -13379,16 +13389,16 @@ TKU,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 TKU,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 TKU,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 TKU,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-TLH,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-TLH,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-TLH,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-TLH,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-TLH,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-TLH,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-TLH,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-TLH,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-TLH,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-TLH,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+TLH,POM,0.75098814229249,0.24901185770750994,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, DebtEquity",1,POM,POM,Nguyên vật liệu,CORPORATE
+TLH,VGS,0.7490118577075098,0.25098814229249017,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",2,VGS,VGS,Nguyên vật liệu,CORPORATE
+TLH,DTL,0.7470355731225296,0.2529644268774704,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",3,DTL,DTL,Nguyên vật liệu,CORPORATE
+TLH,SMC,0.7015810276679841,0.29841897233201586,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",4,SMC,SMC,Nguyên vật liệu,CORPORATE
+TLH,HMC,0.6847826086956521,0.31521739130434784,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",5,HMC,HMC,Nguyên vật liệu,CORPORATE
+TLH,NKG,0.6630434782608694,0.33695652173913054,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",6,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+TLH,TIS,0.6264822134387351,0.37351778656126483,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",7,TIS,TIS,Nguyên vật liệu,CORPORATE
+TLH,HSG,0.5909090909090908,0.4090909090909092,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",8,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+TLH,TVN,0.5158102766798418,0.4841897233201582,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",9,TVN,TVN,Nguyên vật liệu,CORPORATE
+TLH,HPG,0.4328063241106719,0.5671936758893281,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",10,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
 TMB,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 TMB,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 TMB,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -13549,16 +13559,16 @@ TVD,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 TVD,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 TVD,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 TVD,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-TVN,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-TVN,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-TVN,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-TVN,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-TVN,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-TVN,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-TVN,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-TVN,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-TVN,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-TVN,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+TVN,HSG,0.8636363636363636,0.13636363636363635,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",1,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+TVN,HPG,0.8517786561264822,0.1482213438735178,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",2,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
+TVN,NKG,0.8270750988142292,0.17292490118577072,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",3,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+TVN,TIS,0.7035573122529644,0.29644268774703564,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",4,TIS,TIS,Nguyên vật liệu,CORPORATE
+TVN,VGS,0.6541501976284585,0.3458498023715415,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",5,VGS,VGS,Nguyên vật liệu,CORPORATE
+TVN,SMC,0.5968379446640315,0.40316205533596844,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",6,SMC,SMC,Nguyên vật liệu,CORPORATE
+TVN,HMC,0.5563241106719367,0.44367588932806334,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, ROE, DebtEquity",7,HMC,HMC,Nguyên vật liệu,CORPORATE
+TVN,TLH,0.5158102766798418,0.4841897233201582,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, Revenue",8,TLH,TLH,Nguyên vật liệu,CORPORATE
+TVN,POM,0.4861660079051382,0.5138339920948618,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, ROE",9,POM,POM,Nguyên vật liệu,CORPORATE
+TVN,DTL,0.42292490118577064,0.5770750988142294,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, CurrentRatio, TotalAssets",10,DTL,DTL,Nguyên vật liệu,CORPORATE
 V68,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 V68,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 V68,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -13649,16 +13659,16 @@ VGL,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KP
 VGL,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
 VGL,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
 VGL,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
-VGS,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
-VGS,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
-VGS,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
-VGS,ACG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,ACG,ACG,Nguyên vật liệu,CORPORATE
-VGS,ACM,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,ACM,ACM,Nguyên vật liệu,CORPORATE
-VGS,AMC,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,AMC,AMC,Nguyên vật liệu,CORPORATE
-VGS,APP,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,APP,APP,Nguyên vật liệu,CORPORATE
-VGS,ATG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,ATG,ATG,Nguyên vật liệu,CORPORATE
-VGS,AVG,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,AVG,AVG,Nguyên vật liệu,CORPORATE
-VGS,BCA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,BCA,BCA,Nguyên vật liệu,CORPORATE
+VGS,SMC,0.8320158102766798,0.16798418972332016,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, ROE",1,SMC,SMC,Nguyên vật liệu,CORPORATE
+VGS,TLH,0.7490118577075098,0.25098814229249017,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",2,TLH,TLH,Nguyên vật liệu,CORPORATE
+VGS,NKG,0.7262845849802371,0.27371541501976293,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",3,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
+VGS,HMC,0.7183794466403162,0.2816205533596838,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"Revenue, TotalAssets, ROE",4,HMC,HMC,Nguyên vật liệu,CORPORATE
+VGS,HSG,0.6719367588932805,0.32806324110671947,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",5,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
+VGS,TVN,0.6541501976284585,0.3458498023715415,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, DebtEquity, Revenue",6,TVN,TVN,Nguyên vật liệu,CORPORATE
+VGS,TIS,0.6521739130434783,0.3478260869565218,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, Equity",7,TIS,TIS,Nguyên vật liệu,CORPORATE
+VGS,HPG,0.6363636363636362,0.3636363636363637,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"DebtEquity, TotalAssets, ROE",8,Hoa Phat Group,Công ty Cổ phần Tập đoàn Hòa Phát,Nguyên vật liệu,CORPORATE
+VGS,POM,0.6047430830039526,0.3952569169960474,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",9,POM,POM,Nguyên vật liệu,CORPORATE
+VGS,DTL,0.5612648221343872,0.4387351778656127,0.9199999999999999,ICB cấp 2: Nguyên vật liệu,"TotalAssets, Revenue, DebtEquity",10,DTL,DTL,Nguyên vật liệu,CORPORATE
 VID,AAA,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,AAA,AAA,Nguyên vật liệu,CORPORATE
 VID,AAH,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,AAH,AAH,Nguyên vật liệu,CORPORATE
 VID,ABS,,,0.0,ICB cấp 2: Nguyên vật liệu,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,ABS,ABS,Nguyên vật liệu,CORPORATE
@@ -17325,163 +17335,153 @@ VGI,PAI,,,0.0,ICB cấp 2: Viễn thông,Cùng ngành/ICB; chờ đủ KPI để
 VGI,PIA,,,0.0,ICB cấp 2: Viễn thông,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,PIA,PIA,Viễn thông,CORPORATE
 VGI,PTP,,,0.0,ICB cấp 2: Viễn thông,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,PTP,PTP,Viễn thông,CORPORATE
 VGI,TTN,,,0.0,ICB cấp 2: Viễn thông,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,TTN,TTN,Viễn thông,CORPORATE
-AAS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-AAS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-AAS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-AAS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-AAS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-AAS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-AAS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-AAS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-AAS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-AAS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-APG,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-APG,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-APG,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-APG,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-APG,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-APG,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-APG,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-APG,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-APG,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-APG,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-BSI,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-BSI,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-BSI,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-BSI,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-BSI,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-BSI,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-BSI,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-BSI,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-BSI,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-BSI,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-BVS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-BVS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-BVS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-BVS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-BVS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-BVS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-BVS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-BVS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-BVS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-BVS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-CTS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-CTS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-CTS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-CTS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-CTS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-CTS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-CTS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-CTS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-CTS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-CTS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-EVS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-EVS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-EVS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-EVS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-EVS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-EVS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-EVS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-EVS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-EVS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-EVS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-FTS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-FTS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-FTS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-FTS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-FTS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-FTS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-FTS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-FTS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-FTS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-FTS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-MBS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-MBS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-MBS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-MBS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-MBS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-MBS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-MBS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-MBS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-MBS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-MBS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-ORS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-ORS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-ORS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-ORS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-ORS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-ORS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-ORS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-ORS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-ORS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-ORS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-SHS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-SHS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-SHS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-SHS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-SHS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-SHS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-SHS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-SHS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-SHS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-SHS,SSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
-SSI,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-SSI,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-SSI,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-SSI,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-SSI,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-SSI,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-SSI,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-SSI,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-SSI,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-SSI,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-TVS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-TVS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-TVS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-TVS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-TVS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-TVS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-TVS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-TVS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-TVS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-TVS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-VCI,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-VCI,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-VCI,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-VCI,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-VCI,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-VCI,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-VCI,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-VCI,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-VCI,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-VCI,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-VDS,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-VDS,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-VDS,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-VDS,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-VDS,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-VDS,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-VDS,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-VDS,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-VDS,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-VDS,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-VIX,AAS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
-VIX,APG,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
-VIX,BSI,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,3,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
-VIX,BVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,4,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
-VIX,CTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,5,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
-VIX,EVS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,6,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
-VIX,FTS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
-VIX,MBS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,8,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
-VIX,ORS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,9,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
-VIX,SHS,,,0.0,Công ty chứng khoán niêm yết/ĐKGD,Cùng ngành/ICB; chờ đủ KPI để tính similarity,10,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
-HPG,TVN,0.8517786561264822,0.1482213438735178,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",1,TVN,TVN,Nguyên vật liệu,CORPORATE
-HPG,HSG,0.8162055335968379,0.18379446640316208,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",2,Hoa Sen Group,Công ty Cổ phần Tập đoàn Hoa Sen,Nguyên vật liệu,CORPORATE
-HPG,NKG,0.692687747035573,0.30731225296442694,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, DebtEquity",3,Nam Kim Steel,Nam Kim Steel,Nguyên vật liệu,CORPORATE
-HPG,VGS,0.6363636363636362,0.3636363636363637,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, ROE",4,VGS,VGS,Nguyên vật liệu,CORPORATE
-HPG,TIS,0.5553359683794465,0.4446640316205534,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, Revenue, Equity",5,TIS,TIS,Nguyên vật liệu,CORPORATE
-HPG,SMC,0.5237154150197627,0.4762845849802373,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"ROE, TotalAssets, DebtEquity",6,SMC,SMC,Nguyên vật liệu,CORPORATE
-HPG,HMC,0.4436758893280631,0.5563241106719369,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"Revenue, ROE, DebtEquity",7,HMC,HMC,Nguyên vật liệu,CORPORATE
-HPG,TLH,0.4328063241106719,0.5671936758893281,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, TotalAssets, Revenue",8,TLH,TLH,Nguyên vật liệu,CORPORATE
-HPG,POM,0.3893280632411066,0.6106719367588934,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"TotalAssets, DebtEquity, ROE",9,POM,POM,Nguyên vật liệu,CORPORATE
-HPG,DTL,0.27470355731225293,0.7252964426877471,0.9199999999999999,Nhóm peer chuyên ngành (analyst override),"DebtEquity, CurrentRatio, TotalAssets",10,DTL,DTL,Nguyên vật liệu,CORPORATE
+AAS,EVS,0.8845751937984496,0.11542480620155038,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",1,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
+AAS,APG,0.8667457364341085,0.13325426356589148,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
+AAS,BVS,0.7760480620155039,0.22395193798449609,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",3,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+AAS,TVS,0.7341875968992249,0.26581240310077514,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",4,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+AAS,VDS,0.6993038759689922,0.3006961240310077,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",5,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+AAS,ORS,0.6822496124031008,0.31775038759689916,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",6,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+AAS,SHS,0.5403891472868219,0.4596108527131782,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",7,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+AAS,FTS,0.5396139534883722,0.46038604651162784,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",8,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+AAS,CTS,0.5303116279069768,0.4696883720930232,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",9,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+AAS,BSI,0.46829612403100784,0.5317038759689922,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",10,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+APG,AAS,0.8667457364341085,0.13325426356589148,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
+APG,EVS,0.8295364341085272,0.17046356589147285,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",2,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
+APG,BVS,0.7923271317829458,0.20767286821705422,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",3,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+APG,TVS,0.7504666666666667,0.2495333333333333,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",4,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+APG,VDS,0.6752728682170543,0.32472713178294565,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",5,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+APG,ORS,0.645815503875969,0.35418449612403097,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, ROE",6,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+APG,FTS,0.555893023255814,0.444106976744186,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+APG,CTS,0.5465906976744186,0.4534093023255814,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",8,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+APG,SHS,0.5349627906976746,0.4650372093023254,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, ROE",9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+APG,BSI,0.4845751937984496,0.5154248062015504,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",10,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+BSI,FTS,0.8690713178294573,0.1309286821705426,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",1,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+BSI,CTS,0.8148077519379845,0.18519224806201548,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, ROE",2,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+BSI,MBS,0.8016294573643411,0.19837054263565893,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",3,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+BSI,SHS,0.7845751937984496,0.21542480620155036,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",4,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+BSI,ORS,0.735737984496124,0.264262015503876,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",5,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+BSI,VCI,0.721784496124031,0.278215503875969,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",6,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+BSI,VDS,0.7202341085271318,0.2797658914728682,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",7,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+BSI,TVS,0.7179085271317829,0.28209147286821706,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",8,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+BSI,BVS,0.676048062015504,0.323951937984496,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",9,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+BSI,SSI,0.6551178294573643,0.34488217054263565,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
+BVS,TVS,0.8969782945736434,0.10302170542635658,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",1,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+BVS,APG,0.7923271317829458,0.20767286821705422,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
+BVS,AAS,0.7760480620155039,0.22395193798449609,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",3,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
+BVS,VDS,0.7690713178294574,0.2309286821705426,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",4,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+BVS,FTS,0.7473658914728682,0.25263410852713175,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",5,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+BVS,CTS,0.7380635658914729,0.2619364341085271,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",6,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+BVS,ORS,0.6915519379844961,0.30844806201550384,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Revenue",7,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+BVS,EVS,0.6768232558139535,0.32317674418604647,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",8,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
+BVS,BSI,0.676048062015504,0.323951937984496,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",9,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+BVS,SHS,0.6225596899224807,0.3774403100775193,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",10,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+CTS,FTS,0.8644201550387597,0.1355798449612403,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",1,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+CTS,BSI,0.8148077519379845,0.18519224806201548,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, ROE",2,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+CTS,VDS,0.7682961240310078,0.23170387596899228,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",3,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+CTS,TVS,0.7566682170542636,0.24333178294573646,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",4,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+CTS,BVS,0.7380635658914729,0.2619364341085271,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",5,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+CTS,MBS,0.6977534883720931,0.30224651162790694,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",6,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+CTS,ORS,0.6241100775193799,0.37588992248062014,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Revenue, Equity",7,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+CTS,SHS,0.6155829457364341,0.38441705426356587,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Revenue, ROE",8,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+CTS,VCI,0.5527922480620155,0.44720775193798445,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Revenue",9,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+CTS,SSI,0.5512418604651163,0.44875813953488375,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"ROE, TotalAssets, DebtEquity",10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
+EVS,AAS,0.8845751937984496,0.11542480620155038,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",1,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
+EVS,APG,0.8295364341085272,0.17046356589147285,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",2,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
+EVS,BVS,0.6768232558139535,0.32317674418604647,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",3,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+EVS,TVS,0.6349627906976745,0.3650372093023255,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",4,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+EVS,VDS,0.6000790697674419,0.39992093023255815,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",5,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+EVS,ORS,0.5938775193798449,0.40612248062015505,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"ROE, TotalAssets, DebtEquity",6,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+EVS,SHS,0.44116434108527136,0.5588356589147286,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"ROE, TotalAssets, DebtEquity",7,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+EVS,FTS,0.44038914728682177,0.5596108527131782,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",8,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+EVS,CTS,0.43108682170542634,0.5689131782945737,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",9,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+EVS,BSI,0.36907131782945735,0.6309286821705427,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",10,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+FTS,BSI,0.8690713178294573,0.1309286821705426,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",1,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+FTS,CTS,0.8644201550387597,0.1355798449612403,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",2,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+FTS,VDS,0.8024046511627907,0.19759534883720928,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",3,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+FTS,TVS,0.7892263565891473,0.2107736434108527,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",4,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+FTS,MBS,0.7613193798449612,0.23868062015503874,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",5,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+FTS,BVS,0.7473658914728682,0.25263410852713175,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",6,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+FTS,ORS,0.7264356589147287,0.2735643410852713,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",7,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+FTS,SHS,0.7008542635658914,0.2991457364341085,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",8,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+FTS,VCI,0.6380635658914728,0.36193643410852716,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",9,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+FTS,SSI,0.6148077519379845,0.38519224806201546,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",10,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
+MBS,SSI,0.8047302325581396,0.1952697674418604,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",1,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
+MBS,BSI,0.8016294573643411,0.19837054263565893,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",2,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+MBS,SHS,0.8008542635658915,0.19914573643410854,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",3,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+MBS,VCI,0.7954279069767443,0.2045720930232558,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",4,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+MBS,VIX,0.7675209302325581,0.23247906976744187,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",5,VIX Securities,VIX Securities,Công ty chứng khoán,SECURITIES
+MBS,FTS,0.7613193798449612,0.23868062015503874,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+MBS,CTS,0.6977534883720931,0.30224651162790694,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",7,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+MBS,ORS,0.6713968992248062,0.32860310077519383,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+MBS,TVS,0.6086062015503877,0.39139379844961236,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",9,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+MBS,VDS,0.6000790697674419,0.39992093023255815,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",10,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+ORS,SHS,0.8310868217054264,0.1689131782945736,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",1,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+ORS,BSI,0.735737984496124,0.264262015503876,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",2,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+ORS,VDS,0.7279860465116279,0.27201395348837204,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",3,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+ORS,FTS,0.7264356589147287,0.2735643410852713,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",4,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+ORS,VCI,0.7155829457364341,0.2844170542635659,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",5,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+ORS,TVS,0.7024046511627908,0.29759534883720923,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",6,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+ORS,BVS,0.6915519379844961,0.30844806201550384,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Revenue",7,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+ORS,AAS,0.6822496124031008,0.31775038759689916,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",8,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
+ORS,MBS,0.6713968992248062,0.32860310077519383,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",9,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+ORS,VIX,0.6504666666666667,0.3495333333333333,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",10,VIX Securities,VIX Securities,Công ty chứng khoán,SECURITIES
+SHS,VCI,0.8682961240310078,0.13170387596899227,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",1,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+SHS,ORS,0.8310868217054264,0.1689131782945736,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",2,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+SHS,MBS,0.8008542635658915,0.19914573643410854,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",3,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+SHS,BSI,0.7845751937984496,0.21542480620155036,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",4,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+SHS,VIX,0.7411643410852713,0.2588356589147287,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",5,VIX Securities,VIX Securities,Công ty chứng khoán,SECURITIES
+SHS,SSI,0.7272108527131783,0.2727891472868217,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",6,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
+SHS,FTS,0.7008542635658914,0.2991457364341085,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+SHS,VDS,0.662094573643411,0.33790542635658904,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",8,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+SHS,TVS,0.6551178294573645,0.34488217054263554,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",9,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+SHS,BVS,0.6225596899224807,0.3774403100775193,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",10,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+SSI,VCI,0.8427147286821706,0.1572852713178294,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",1,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+SSI,MBS,0.8047302325581396,0.1952697674418604,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",2,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+SSI,VIX,0.7931023255813954,0.20689767441860463,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",3,VIX Securities,VIX Securities,Công ty chứng khoán,SECURITIES
+SSI,SHS,0.7272108527131783,0.2727891472868217,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",4,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+SSI,BSI,0.6551178294573643,0.34488217054263565,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",5,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+SSI,FTS,0.6148077519379845,0.38519224806201546,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",6,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+SSI,ORS,0.5744976744186046,0.4255023255813954,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",7,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+SSI,CTS,0.5512418604651163,0.44875813953488375,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"ROE, TotalAssets, DebtEquity",8,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+SSI,VDS,0.5140325581395349,0.4859674418604651,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"ROE, TotalAssets, DebtEquity",9,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+SSI,TVS,0.4822496124031008,0.5177503875968992,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"DebtEquity, TotalAssets, ROE",10,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+TVS,BVS,0.8969782945736434,0.10302170542635658,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",1,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+TVS,VDS,0.8078310077519381,0.19216899224806197,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",2,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+TVS,FTS,0.7892263565891473,0.2107736434108527,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",3,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+TVS,CTS,0.7566682170542636,0.24333178294573646,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",4,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+TVS,APG,0.7504666666666667,0.2495333333333333,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",5,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
+TVS,AAS,0.7341875968992249,0.26581240310077514,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",6,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
+TVS,BSI,0.7179085271317829,0.28209147286821706,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",7,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+TVS,ORS,0.7024046511627908,0.29759534883720923,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",8,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+TVS,SHS,0.6551178294573645,0.34488217054263554,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+TVS,EVS,0.6349627906976745,0.3650372093023255,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",10,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
+VCI,SHS,0.8682961240310078,0.13170387596899227,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",1,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+VCI,SSI,0.8427147286821706,0.1572852713178294,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",2,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
+VCI,MBS,0.7954279069767443,0.2045720930232558,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",3,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+VCI,VIX,0.7853503875968992,0.21464961240310076,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",4,VIX Securities,VIX Securities,Công ty chứng khoán,SECURITIES
+VCI,BSI,0.721784496124031,0.278215503875969,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",5,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+VCI,ORS,0.7155829457364341,0.2844170542635659,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",6,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+VCI,FTS,0.6380635658914728,0.36193643410852716,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+VCI,VDS,0.5791488372093023,0.4208511627906977,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"ROE, TotalAssets, DebtEquity",8,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+VCI,TVS,0.5706217054263567,0.42937829457364335,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"ROE, DebtEquity, TotalAssets",9,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+VCI,CTS,0.5527922480620155,0.44720775193798445,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Revenue",10,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+VDS,TVS,0.8078310077519381,0.19216899224806197,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",1,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES
+VDS,FTS,0.8024046511627907,0.19759534883720928,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",2,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+VDS,BVS,0.7690713178294574,0.2309286821705426,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",3,Bao Viet Securities,Bao Viet Securities,Công ty chứng khoán,SECURITIES
+VDS,CTS,0.7682961240310078,0.23170387596899228,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",4,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+VDS,ORS,0.7279860465116279,0.27201395348837204,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",5,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+VDS,BSI,0.7202341085271318,0.2797658914728682,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",6,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+VDS,AAS,0.6993038759689922,0.3006961240310077,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",7,SmartInvest Securities,SmartInvest Securities,Công ty chứng khoán,SECURITIES
+VDS,APG,0.6752728682170543,0.32472713178294565,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",8,APG Securities,APG Securities,Công ty chứng khoán,SECURITIES
+VDS,SHS,0.662094573643411,0.33790542635658904,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, DebtEquity",9,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+VDS,EVS,0.6000790697674419,0.39992093023255815,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, Equity",10,Everest Securities,Everest Securities,Công ty chứng khoán,SECURITIES
+VIX,SSI,0.7931023255813954,0.20689767441860463,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",1,SSI Securities,Công ty Cổ phần Chứng khoán SSI,Công ty chứng khoán,SECURITIES
+VIX,VCI,0.7853503875968992,0.21464961240310076,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",2,Vietcap Securities,Công ty Cổ phần Chứng khoán Vietcap,Công ty chứng khoán,SECURITIES
+VIX,MBS,0.7675209302325581,0.23247906976744187,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",3,MB Securities,Công ty Cổ phần Chứng khoán MB,Công ty chứng khoán,SECURITIES
+VIX,SHS,0.7411643410852713,0.2588356589147287,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, Revenue",4,Saigon Hanoi Securities,Saigon Hanoi Securities,Công ty chứng khoán,SECURITIES
+VIX,ORS,0.6504666666666667,0.3495333333333333,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, DebtEquity",5,Tiên Phong Securities,Tiên Phong Securities,Công ty chứng khoán,SECURITIES
+VIX,BSI,0.5853503875968993,0.4146496124031007,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",6,BIDV Securities,BIDV Securities,Công ty chứng khoán,SECURITIES
+VIX,FTS,0.5450403100775194,0.4549596899224806,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Equity",7,FPT Securities,FPT Securities,Công ty chứng khoán,SECURITIES
+VIX,VDS,0.5450403100775194,0.4549596899224806,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, DebtEquity, ROE",8,Rong Viet Securities,Công ty Cổ phần Chứng khoán Rồng Việt,Công ty chứng khoán,SECURITIES
+VIX,CTS,0.4814744186046511,0.5185255813953489,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, ROE, Revenue",9,VietinBank Securities,VietinBank Securities,Công ty chứng khoán,SECURITIES
+VIX,TVS,0.4124821705426357,0.5875178294573643,0.8600000000000001,Công ty chứng khoán niêm yết/ĐKGD,"TotalAssets, Equity, ROE",10,Thien Viet Securities,Thien Viet Securities,Công ty chứng khoán,SECURITIES

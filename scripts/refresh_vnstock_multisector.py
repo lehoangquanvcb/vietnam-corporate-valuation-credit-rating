@@ -386,7 +386,7 @@ def hist_rows(df,ticker,metric,names):
 
 FLOW_METRICS={'Revenue','GrossProfit','OperatingProfit','InterestExpense','NPAT','EBITDA','Depreciation','CFO','Capex'}
 RATIO_METRICS={'ROE','ROA','PB','PE','EPS','BVPS','DebtEquity','CurrentRatio','NetMargin','GrossMargin','EV_EBITDA','InterestCoverage'}
-STOCK_METRICS={'TotalAssets','Equity','Cash','CurrentAssets','CurrentLiabilities','TotalDebt','TotalLiabilities'}
+STOCK_METRICS={'TotalAssets','Equity','Cash','CurrentAssets','CurrentLiabilities','TotalDebt','TotalLiabilities','MarginLoans'}
 
 def _metric_kind(metric):
     if metric in FLOW_METRICS:return 'flow'
@@ -395,10 +395,11 @@ def _metric_kind(metric):
 
 MAP={
 'TotalAssets':['total assets','bs total assets','assets total'],
-'Equity':['owners equity','owner equity','total equity','equity','bs owners equity','bs total equity'],
+'Equity':['owners equity','owner equity','total equity','equity','bs equity','bs owners equity','bs total equity','BS_EQUITY','BS_OWNERS_EQUITY','BS_TOTAL_EQUITY'],
 'Cash':['cash and cash equivalents','cash','bs cash and precious metals','bs cash and cash equivalents'],
 'CurrentAssets':['current assets','bs current assets'],
 'CurrentLiabilities':['current liabilities','bs current liabilities'],
+'MarginLoans':['margin loans','margin lending','margin receivables','receivables from margin lending','margin trading loans','loans for margin trading','cho vay giao dich ky quy','cho vay ký quỹ','các khoản cho vay giao dịch ký quỹ','cac khoan cho vay giao dich ky quy'],
 'TotalDebt':['total debt','total borrowings','borrowings','interest bearing debt','debt'],
 'TotalLiabilities':['total liabilities','bs total liabilities'],
 'Revenue':['revenue','net revenue','sales','is net revenue','is revenue','IS_NET_REVENUE'],
@@ -423,10 +424,14 @@ MAP={
 # Do not infer core financial metrics from fuzzy labels when a stable semantic ID exists.
 SEMANTIC_IDS={
     'TotalAssets':['BS_TOTAL_ASSETS'],
-    'Equity':['BS_OWNERS_EQUITY'],
+    'Equity':['BS_EQUITY','BS_OWNERS_EQUITY','BS_TOTAL_EQUITY'],
     'Cash':['BS_CASH_AND_PRECIOUS_METALS'],
     'CurrentAssets':['BS_SHORT_TERM_ASSETS'],
     'CurrentLiabilities':['BS_SHORT_TERM_LIABILITIES'],
+    # Securities-company margin lending. vnstock/provider semantic IDs have varied by
+    # statement schema, therefore keep a preference list and use a securities-only
+    # label fallback below when none of these IDs is present.
+    'MarginLoans':['BS_MARGIN_LOANS','BS_MARGIN_LENDING','BS_RECEIVABLES_FROM_MARGIN_LENDING','BS_LOANS_FOR_MARGIN_TRADING','BS_MARGIN_TRADING_LOANS'],
     'TotalLiabilities':['BS_TOTAL_LIABILITIES'],
     'Revenue':['IS_NET_REVENUE'],
     'GrossProfit':['IS_GROSS_PROFIT'],
@@ -654,7 +659,7 @@ def fetch(ticker,etype):
     health_map=_extract_all_mapped(health) if len(health) else {}
     parse_errors=[]
     for m,names in MAP.items():
-        source=ratio if m in ['ROE','ROA','PB','PE','EPS','BVPS','DebtEquity','CurrentRatio','NetMargin','GrossMargin','EV_EBITDA','InterestCoverage'] else bs if m in ['TotalAssets','Equity','Cash','CurrentAssets','CurrentLiabilities','TotalDebt','TotalLiabilities'] else cf if m in ['CFO','Capex','Depreciation'] else inc
+        source=ratio if m in ['ROE','ROA','PB','PE','EPS','BVPS','DebtEquity','CurrentRatio','NetMargin','GrossMargin','EV_EBITDA','InterestCoverage'] else bs if m in ['TotalAssets','Equity','Cash','CurrentAssets','CurrentLiabilities','TotalDebt','TotalLiabilities','MarginLoans'] else cf if m in ['CFO','Capex','Depreciation'] else inc
         try:
             v,selmeta=_metric_exact_then_fallback(source,health,m,names)
         except Exception as e:
@@ -676,6 +681,28 @@ def fetch(ticker,etype):
         else:
             hist+=hist_rows_any(source,ticker,m,names)
             if not any(x.get('Metric')==m for x in hist) and len(health): hist+=hist_rows_any(health,ticker,m,names)
+    # V8.115 — CTCK margin lending fallback from the balance sheet itself.
+    # Exact semantic IDs remain first priority.  If the provider schema does not expose
+    # one of those IDs, search ONLY the securities balance sheet for labels that clearly
+    # identify margin lending.  Never substitute total loans/receivables because they can
+    # include advance-to-sellers and other receivables.
+    if str(etype).upper()=='SECURITIES' and pd.isna(row.get('MarginLoans')):
+        _margin_aliases=[
+            'margin loans','margin lending','margin receivables',
+            'receivables from margin lending','margin trading loans','loans for margin trading',
+            'cho vay giao dich ky quy','cho vay ký quỹ','các khoản cho vay giao dịch ký quỹ',
+            'cac khoan cho vay giao dich ky quy'
+        ]
+        try:
+            _mv,_mm=_metric_exact_then_fallback(bs,pd.DataFrame(),'MarginLoans',_margin_aliases)
+            if pd.notna(_mv):
+                row['MarginLoans']=float(_mv)
+                row['MarginLoans_SourceRow']=_mm.get('row','MARGIN_LABEL_MATCH')
+                row['MarginLoans_Basis']=_mm.get('basis','LATEST_Q')
+                row['MarginLoans_Periods']='|'.join(_mm.get('periods',[]) or [])
+        except Exception as _e:
+            row['ParserLog']=row.get('ParserLog','')+f' | MarginLoans:{type(_e).__name__}:{_e}'
+
     if parse_errors: row['ParserLog']=row.get('ParserLog','')+' | METRIC_ERRORS='+';'.join(parse_errors)
     row['SnapshotPeriod']='LATEST_QUARTER'
     row['FlowBasis']='TTM_LAST_4_CONSECUTIVE_QUARTERS_STRICT'
@@ -751,6 +778,17 @@ def fetch(ticker,etype):
     capex=float(row['Capex']) if pd.notna(row.get('Capex')) else np.nan
     cash=float(row['Cash']) if pd.notna(row.get('Cash')) else np.nan
 
+    # CTCK risk metric required by SECURITIES_2025: margin lending / equity.
+    margin=float(row['MarginLoans']) if pd.notna(row.get('MarginLoans')) else np.nan
+    if str(etype).upper()=='SECURITIES' and pd.notna(margin) and pd.notna(equity) and equity>0:
+        row['MarginLoansEquity']=margin/equity
+        row['MarginLoansEquity_SourceRow']=f"{row.get('MarginLoans_SourceRow','MarginLoans')}/BS_OWNERS_EQUITY"
+        row['MarginLoansEquity_Basis']='LATEST_Q_MARGIN_OVER_LATEST_Q_EQUITY'
+        row['MarginLoansEquity_Periods']=row.get('MarginLoans_Periods','')
+    else:
+        row['MarginLoansEquity']=np.nan
+
+
     # Prefer statement-consistent debt/equity over provider ratio when exact borrowings are available.
     if pd.notna(debt) and pd.notna(equity) and equity!=0:
         row['DebtEquity']=debt/equity
@@ -803,27 +841,35 @@ def fetch(ticker,etype):
             row[_m]=np.nan
     return row,hist,allfields
 
+def price_quote(ticker):
+    """Return (VND/share, trading_date, source) using the newest daily OHLCV."""
+    start=(datetime.now()-pd.Timedelta(days=45)).strftime('%Y-%m-%d')
+    end=datetime.now().strftime('%Y-%m-%d')
+    for source,fn in [
+        ('VNSTOCK_MARKET_OHLCV', lambda: Market().equity(ticker).ohlcv(start=start,end=end) if Market is not None else None),
+        ('VNSTOCK_QUOTE_VCI', lambda: Quote(source='VCI',symbol=ticker).history(start=start,end=end,interval='1D') if Quote is not None else None),
+    ]:
+        try:
+            d=flat(fn())
+            if d is None or d.empty:continue
+            c=find_col(d,['close']); dc=find_col(d,['time','date','trading date','datetime'])
+            if c is None:continue
+            d['_C']=pd.to_numeric(d[c],errors='coerce')
+            d['_D']=pd.to_datetime(d[dc],errors='coerce') if dc is not None else pd.NaT
+            d=d.dropna(subset=['_C'])
+            if d.empty:continue
+            if d['_D'].notna().any():d=d.sort_values('_D')
+            r=d.iloc[-1]; v=float(r['_C'])
+            if 0<v<500:v*=1000.0
+            while v>1_000_000:v/=1000.0
+            dt=(pd.Timestamp(r['_D']).date().isoformat() if pd.notna(r['_D']) else datetime.now().date().isoformat())
+            if 100<=v<=1_000_000:return v,dt,source
+        except Exception:
+            pass
+    return np.nan,'',''
+
 def price(ticker):
-    try:
-        if Market is not None:
-            d=Market().equity(ticker).ohlcv(start='2025-01-01',end=datetime.now().strftime('%Y-%m-%d'))
-            d=flat(d); c=find_col(d,['close']);
-            if c and len(d):
-                v=pd.to_numeric(d[c],errors='coerce').dropna()
-                if len(v): return float(v.iloc[-1])
-    except Exception:
-        pass
-    try:
-        if Quote is not None:
-            q=Quote(source='VCI',symbol=ticker)
-            d=q.history(start='2025-01-01',end=datetime.now().strftime('%Y-%m-%d'),interval='1D')
-            d=flat(d); c=find_col(d,['close'])
-            if c and len(d):
-                v=pd.to_numeric(d[c],errors='coerce').dropna()
-                if len(v): return float(v.iloc[-1])
-    except Exception:
-        pass
-    return np.nan
+    return price_quote(ticker)[0]
 
 def main():
     ap=argparse.ArgumentParser(description='Vnstock Bronze multisector full-market refresh')
@@ -853,7 +899,9 @@ def main():
         t=r.Ticker; typ=r.EntityType
         if ticker_delay: time.sleep(ticker_delay)
         try:
-            s,h,a=fetch(t,typ); s['Price']=price(t)
+            s,h,a=fetch(t,typ)
+            _px,_pdate,_psrc=price_quote(t)
+            s['Price']=_px; s['PriceDate']=_pdate; s['PriceSource']=_psrc
             return t,s,h,a,{'Dataset':f'company:{t}','Status':'OK','Message':s.get('ParserLog','OK'),'RetrievedAt':now()}
         except Exception as e:
             msg=f'{type(e).__name__}: {e}'
@@ -888,6 +936,20 @@ def main():
         if len(old) and 'Ticker' in old.columns: old=old[~old.Ticker.astype(str).isin(new.Ticker.astype(str))]
         new=pd.concat([old,new],ignore_index=True) if len(old) else new
         new.sort_values('Ticker').drop_duplicates('Ticker',keep='last').to_csv(DATA/'company_snapshot.csv',index=False,encoding='utf-8-sig')
+
+        # Keep a dated daily-close history for valuation/report freshness.
+        pxrows=new[['Ticker','PriceDate','Price','PriceSource']].copy() if all(c in new.columns for c in ['Ticker','PriceDate','Price']) else pd.DataFrame()
+        if len(pxrows):
+            pxrows=pxrows.rename(columns={'PriceDate':'Date','Price':'Close','PriceSource':'Source'})
+            pxrows['Close']=pd.to_numeric(pxrows['Close'],errors='coerce')
+            pxrows=pxrows.dropna(subset=['Close'])
+            ph=DATA/'price_history.csv'
+            oldp=pd.read_csv(ph) if ph.exists() else pd.DataFrame()
+            allp=pd.concat([oldp,pxrows],ignore_index=True,sort=False) if len(oldp) else pxrows
+            allp['Ticker']=allp['Ticker'].astype(str).str.upper().str.strip()
+            allp['Date']=pd.to_datetime(allp['Date'],errors='coerce').dt.date.astype(str)
+            allp=allp.drop_duplicates(['Ticker','Date'],keep='last').sort_values(['Ticker','Date'])
+            allp.to_csv(ph,index=False,encoding='utf-8-sig')
 
     oldh=pd.read_csv(DATA/'company_history_long.csv') if (DATA/'company_history_long.csv').exists() else pd.DataFrame()
     nh=pd.DataFrame(history)
