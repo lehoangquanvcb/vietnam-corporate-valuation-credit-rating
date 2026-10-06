@@ -1005,6 +1005,7 @@ KDC,KDC,KDC,CORPORATE,Hàng Tiêu dùng,N/A,Hàng Tiêu dùng,CORPORATE_2025,1
 KCE,KCE,KCE,CORPORATE,Công nghiệp,N/A,Công nghiệp,CORPORATE_2025,1
 KCB,KCB,KCB,CORPORATE,Nguyên vật liệu,N/A,Nguyên vật liệu,CORPORATE_2025,1
 KBC,KBC,KBC,CORPORATE,Tài chính,N/A,Tài chính,CORPORATE_2025,1
+KAI,KAI,KAI,CORPORATE,Chưa phân loại,N/A,Chưa phân loại,CORPORATE_2025,1
 KAC,KAC,KAC,CORPORATE,Tài chính,N/A,Tài chính,CORPORATE_2025,1
 JVC,JVC,JVC,CORPORATE,Dược phẩm và Y tế,N/A,Dược phẩm và Y tế,CORPORATE_2025,1
 JOS,JOS,JOS,CORPORATE,Hàng Tiêu dùng,N/A,Hàng Tiêu dùng,CORPORATE_2025,1
@@ -1205,6 +1206,7 @@ HAB,HAB,HAB,CORPORATE,Dịch vụ Tiêu dùng,N/A,Dịch vụ Tiêu dùng,CORPOR
 H11,H11,H11,CORPORATE,Công nghiệp,N/A,Công nghiệp,CORPORATE_2025,1
 GVT,GVT,GVT,CORPORATE,Nguyên vật liệu,N/A,Nguyên vật liệu,CORPORATE_2025,1
 GVR,GVR,GVR,CORPORATE,Nguyên vật liệu,N/A,Nguyên vật liệu,CORPORATE_2025,1
+GTX,GTX,GTX,CORPORATE,Chưa phân loại,N/A,Chưa phân loại,CORPORATE_2025,1
 GTT,GTT,GTT,CORPORATE,Dịch vụ Tiêu dùng,N/A,Dịch vụ Tiêu dùng,CORPORATE_2025,1
 GTS,GTS,GTS,CORPORATE,Công nghiệp,N/A,Công nghiệp,CORPORATE_2025,1
 GTK,GTK,GTK,CORPORATE,Hàng Tiêu dùng,N/A,Hàng Tiêu dùng,CORPORATE_2025,1
@@ -1317,6 +1319,7 @@ DVC,DVC,DVC,CORPORATE,Tiện ích Cộng đồng,N/A,Tiện ích Cộng đồng,
 DUS,DUS,DUS,CORPORATE,Công nghiệp,N/A,Công nghiệp,CORPORATE_2025,1
 DTV,DTV,DTV,CORPORATE,Tiện ích Cộng đồng,N/A,Tiện ích Cộng đồng,CORPORATE_2025,1
 DTT,DTT,DTT,CORPORATE,Nguyên vật liệu,N/A,Nguyên vật liệu,CORPORATE_2025,1
+DTR,DTR,DTR,CORPORATE,Chưa phân loại,N/A,Chưa phân loại,CORPORATE_2025,1
 DTP,DTP,DTP,CORPORATE,Dược phẩm và Y tế,N/A,Dược phẩm và Y tế,CORPORATE_2025,1
 DTL,DTL,DTL,CORPORATE,Nguyên vật liệu,N/A,Nguyên vật liệu,CORPORATE_2025,1
 DTK,DTK,DTK,CORPORATE,Tiện ích Cộng đồng,N/A,Tiện ích Cộng đồng,CORPORATE_2025,1

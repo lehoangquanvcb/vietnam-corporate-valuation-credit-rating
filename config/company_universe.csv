@@ -31,10 +31,13 @@ BPW,BPW,BPW,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NO
 CT5,CT5,CT5,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
 DKH,DKH,DKH,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
 DPD,DPD,DPD,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
+DTR,DTR,DTR,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
+GTX,GTX,GTX,CORPORATE,Công nghiệp,,Công nghiệp,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
 HGA,HGA,HGA,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
 HGC,HGC,HGC,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
 HRT,HRT,HRT,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
 IPH,IPH,IPH,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
+KAI,KAI,KAI,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 MXC,MXC,MXC,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
 PYU,PYU,PYU,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
 SRT,SRT,SRT,CORPORATE,Chưa phân loại,,Chưa phân loại,CORPORATE_2025,1,NONE,VNSTOCK_ICB_AUTO,,,,,,,,
@@ -1320,7 +1323,7 @@ RTB,RTB,RTB,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,
 SAV,SAV,SAV,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
 SBR,SBR,SBR,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
 SCA,SCA,SCA,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
-SEP,SEP,SEP,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
+SEP,SEP,SEP,CORPORATE,Hàng Tiêu dùng,,Hàng Tiêu dùng,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng
 SFG,SFG,SFG,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
 SHA,SHA,SHA,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
 SHI,SHI,SHI,CORPORATE,Nguyên vật liệu,,Nguyên vật liệu,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
@@ -1601,7 +1604,7 @@ HD2,HD2,HD2,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK
 HD6,HD6,HD6,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 HD8,HD8,HD8,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 HDC,HDC,HDC,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
-HDG,HDG,HDG,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
+HDG,HDG,HDG,CORPORATE,Tiện ích Cộng đồng,,Tiện ích Cộng đồng,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng
 HLD,HLD,HLD,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 HPI,HPI,HPI,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 HPX,HPX,HPX,CORPORATE,Tài chính,,Tài chính,CORPORATE_2025,1,ICBName2,VNSTOCK_ICB_AUTO,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính

@@ -382,6 +382,7 @@ DBW,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện 
 DC1,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
 DC2,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
 DC4,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
+DCBA,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 DCBF,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 DCDE,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 DCDS,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
@@ -703,7 +704,7 @@ HDA,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghi�
 HDB,8301,Ngân hàng,8301,Ngân hàng,8301,Ngân hàng,8301,Ngân hàng
 HDBOND,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 HDC,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
-HDG,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
+HDG,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng
 HDM,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng
 HDO,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
 HDP,4000,Dược phẩm và Y tế,4000,Dược phẩm và Y tế,4000,Dược phẩm và Y tế,4000,Dược phẩm và Y tế
@@ -878,6 +879,7 @@ ITD,9000,Công nghệ Thông tin,9000,Công nghệ Thông tin,9000,Công nghệ 
 ITQ,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
 ITS,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
 IVS,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
+JFVNOPP,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 JOS,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng
 JVC,4000,Dược phẩm và Y tế,4000,Dược phẩm và Y tế,4000,Dược phẩm và Y tế,4000,Dược phẩm và Y tế
 JVCF,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
@@ -1004,6 +1006,7 @@ LUT,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghi�
 LVF,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 LWS,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng
 LYF,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng
+LUMINOUS GROWTH,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 M10,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng
 MA1,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 MAC,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
@@ -1245,6 +1248,7 @@ PHVSF,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 PIA,6000,Viễn thông,6000,Viễn thông,6000,Viễn thông,6000,Viễn thông
 PIC,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng
 PID,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp
+PIF,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
 PIS,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
 PIT,5000,Dịch vụ Tiêu dùng,5000,Dịch vụ Tiêu dùng,5000,Dịch vụ Tiêu dùng,5000,Dịch vụ Tiêu dùng
 PIV,8000,Tài chính,8000,Tài chính,8000,Tài chính,8000,Tài chính
@@ -1467,7 +1471,7 @@ SDY,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghi�
 SEA,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng
 SEB,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng
 SED,5000,Dịch vụ Tiêu dùng,5000,Dịch vụ Tiêu dùng,5000,Dịch vụ Tiêu dùng,5000,Dịch vụ Tiêu dùng
-SEP,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
+SEP,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng,3000,Hàng Tiêu dùng
 SFC,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng,7000,Tiện ích Cộng đồng
 SFG,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu,1000,Nguyên vật liệu
 SFI,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp,2000,Công nghiệp

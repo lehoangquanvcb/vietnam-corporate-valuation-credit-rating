@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 import numpy as np, pandas as pd
 
-PLATFORM_REFRESH_VERSION='8.72.1'
+PLATFORM_REFRESH_VERSION='8.74.1'
 
 def _version_tuple(v):
     try: return tuple(int(x) for x in re.findall(r'\d+', str(v))[:3])
@@ -20,7 +20,7 @@ FUND_PARTS.mkdir(parents=True,exist_ok=True)
 try:
     import vnstock_data
     from vnstock_data import Fundamental
-    VNSTOCK_DATA_VERSION=getattr(vnstock_data,'__version__','0')
+    VNSTOCK_DATA_VERSION=getattr(vnstock_data,'__version__',None) or __import__('importlib.metadata',fromlist=['version']).version('vnstock_data')
     try:
         from vnstock_data import Market
     except Exception:
@@ -312,7 +312,11 @@ def call_financial_health(eq, etype):
             if not isinstance(d,pd.DataFrame): d=pd.DataFrame(d)
             d=flat(d)
             if len(d):return d,f'financial_health:{tag}:OK shape={d.shape}'
-        except Exception as e:last=f'{tag}:{type(e).__name__}:{e}'
+        except Exception as e:
+            last=f'{tag}:{type(e).__name__}:{e}'
+            msg=last.lower()
+            if any(x in msg for x in ('read timed out','readtimeout','connectionerror','max retries exceeded')):
+                return pd.DataFrame(), 'financial_health:NETWORK_TIMEOUT_FAILFAST '+last
     return pd.DataFrame(), 'financial_health:FAILED '+last
 
 def hist_rows_any(df,ticker,metric,names):
@@ -433,7 +437,7 @@ SEMANTIC_IDS={
     # label fallback below when none of these IDs is present.
     'MarginLoans':['BS_MARGIN_LOANS','BS_MARGIN_LENDING','BS_RECEIVABLES_FROM_MARGIN_LENDING','BS_LOANS_FOR_MARGIN_TRADING','BS_MARGIN_TRADING_LOANS'],
     'TotalLiabilities':['BS_TOTAL_LIABILITIES'],
-    'Revenue':['IS_NET_REVENUE'],
+    'Revenue':['IS_NET_REVENUE','IS_TOTAL_NET_REVENUE_FROM_INSURANCE_BUSINESS','IS_TOTAL_OPERATING_INCOME'],
     'GrossProfit':['IS_GROSS_PROFIT'],
     'OperatingProfit':['IS_OPERATING_PROFIT'],
     'InterestExpense':['IS_INTEREST_EXPENSES'],
@@ -584,7 +588,11 @@ def call(opts):
         try:
             z=fn()
             if z is not None and len(z): return flat(z), 'OK'
-        except Exception as e:last=f'{type(e).__name__}: {e}'
+        except Exception as e:
+            last=f'{type(e).__name__}: {e}'
+            msg=last.lower()
+            if any(x in msg for x in ('read timed out','readtimeout','connectionerror','max retries exceeded')):
+                return pd.DataFrame(), 'NETWORK_TIMEOUT_FAILFAST: '+last
     return pd.DataFrame(), last or 'EMPTY'
 
 def _com_type(etype):
@@ -642,13 +650,15 @@ def fetch(ticker,etype):
     eq=Fundamental().equity(ticker)
     health,hs=call_financial_health(eq,etype)
     ratio,rs=call_report(eq,'ratio','quarter',etype)
-    if ratio.empty: ratio,rs=call_report(eq,'ratio','year',etype)
+    if ratio.empty and 'NETWORK_TIMEOUT_FAILFAST' not in rs: ratio,rs=call_report(eq,'ratio','year',etype)
     bs,bs_s=call_report(eq,'balance_sheet','quarter',etype)
-    if bs.empty: bs,bs_s=call_report(eq,'balance_sheet','year',etype)
+    if bs.empty and 'NETWORK_TIMEOUT_FAILFAST' not in bs_s: bs,bs_s=call_report(eq,'balance_sheet','year',etype)
+    if 'NETWORK_TIMEOUT_FAILFAST' in rs and 'NETWORK_TIMEOUT_FAILFAST' in bs_s:
+        raise RuntimeError('UPSTREAM_CIRCUIT_BREAKER: consecutive ratio/balance_sheet network timeouts')
     inc,is_s=call_report(eq,'income_statement','quarter',etype)
-    if inc.empty: inc,is_s=call_report(eq,'income_statement','year',etype)
+    if inc.empty and 'NETWORK_TIMEOUT_FAILFAST' not in is_s: inc,is_s=call_report(eq,'income_statement','year',etype)
     cf,cf_s=call_report(eq,'cash_flow','quarter',etype)
-    if cf.empty: cf,cf_s=call_report(eq,'cash_flow','year',etype)
+    if cf.empty and 'NETWORK_TIMEOUT_FAILFAST' not in cf_s: cf,cf_s=call_report(eq,'cash_flow','year',etype)
     for name,df in [('ratio',ratio),('balance',bs),('income',inc),('cashflow',cf)]:
         if len(df): df.to_csv(RAW/f'{ticker}_{name}.csv',index=False,encoding='utf-8-sig')
     row={'Ticker':ticker,'RetrievedAt':now(),'DataType':'ACTUAL','SourceMode':'VNSTOCK_BRONZE','ParserVersion':PLATFORM_REFRESH_VERSION,'VnstockDataVersion':VNSTOCK_DATA_VERSION,'ParserLog':' | '.join([hs,rs,bs_s,is_s,cf_s])}
@@ -872,10 +882,10 @@ def price(ticker):
     return price_quote(ticker)[0]
 
 def main():
-    ap=argparse.ArgumentParser(description='Vnstock Bronze multisector full-market refresh')
+    ap=argparse.ArgumentParser(description='Vnstock Sponsor multisector refresh')
     ap.add_argument('scope',nargs='*',help='ALL / SECURITIES / CORPORATES / ticker list')
     ap.add_argument('--workers',type=int,default=int(os.getenv('VNSTOCK_WORKERS','1')))
-    ap.add_argument('--ticker-delay',type=float,default=float(os.getenv('VNSTOCK_TICKER_DELAY','2.5')),help='Seconds between ticker API batches; Bronze-safe default 2.5s')
+    ap.add_argument('--ticker-delay',type=float,default=float(os.getenv('VNSTOCK_TICKER_DELAY','2.5')),help='Seconds between ticker API batches; conservative default 2.5s')
     args=ap.parse_args()
     u=pd.read_csv(CFG/'company_universe.csv'); u['Ticker']=u.Ticker.astype(str).str.upper().str.strip()
     if 'Active' in u.columns: u=u[pd.to_numeric(u.Active,errors='coerce').fillna(1).eq(1)]
@@ -895,6 +905,31 @@ def main():
     print(f'MULTISECTOR ACTIVE UNIVERSE: {len(u)} | WORKERS: {workers} | TICKER_DELAY: {ticker_delay:.1f}s')
     snaps=[]; history=[]; logs=[]; manifest=[]
 
+    def snapshot_usable(s):
+        if not isinstance(s,dict): return False
+        rev=pd.to_numeric(s.get('Revenue'),errors='coerce')
+        npat=pd.to_numeric(s.get('NPAT'),errors='coerce')
+        assets=pd.to_numeric(s.get('TotalAssets'),errors='coerce')
+        equity=pd.to_numeric(s.get('Equity'),errors='coerce')
+        if pd.isna(rev) or rev==0 or pd.isna(npat) or pd.isna(assets) or np.sign(assets)!=1 or pd.isna(equity): return False
+        if str(s.get('Revenue_Basis','')).upper()!='TTM4Q': return False
+        if str(s.get('NPAT_Basis','')).upper()!='TTM4Q': return False
+        expected='2025-Q3'+chr(124)+'2025-Q4'+chr(124)+'2026-Q1'+chr(124)+'2026-Q2'
+        if str(s.get('Revenue_Periods',''))!=expected: return False
+        if str(s.get('NPAT_Periods',''))!=expected: return False
+        return True
+
+    def snapshot_status(s):
+        if not isinstance(s,dict): return 'ERROR'
+        if snapshot_usable(s): return 'OK'
+        rev=pd.to_numeric(s.get('Revenue'),errors='coerce'); npat=pd.to_numeric(s.get('NPAT'),errors='coerce')
+        assets=pd.to_numeric(s.get('TotalAssets'),errors='coerce'); equity=pd.to_numeric(s.get('Equity'),errors='coerce')
+        if pd.notna(rev) and rev==0:return 'ZERO_REVENUE'
+        core=pd.notna(rev) and rev!=0 and pd.notna(npat) and pd.notna(assets) and assets>0 and pd.notna(equity)
+        ttm=str(s.get('Revenue_Basis','')).upper()=='TTM4Q' and str(s.get('NPAT_Basis','')).upper()=='TTM4Q'
+        if core and ttm:return 'STALE_VALID'
+        return 'INCOMPLETE'
+
     def job(r):
         t=r.Ticker; typ=r.EntityType
         if ticker_delay: time.sleep(ticker_delay)
@@ -902,7 +937,8 @@ def main():
             s,h,a=fetch(t,typ)
             _px,_pdate,_psrc=price_quote(t)
             s['Price']=_px; s['PriceDate']=_pdate; s['PriceSource']=_psrc
-            return t,s,h,a,{'Dataset':f'company:{t}','Status':'OK','Message':s.get('ParserLog','OK'),'RetrievedAt':now()}
+            status=snapshot_status(s)
+            return t,s,h,a,{'Dataset':f'company:{t}','Status':status,'Message':s.get('ParserLog','OK'),'RetrievedAt':now()}
         except Exception as e:
             msg=f'{type(e).__name__}: {e}'
             print(f'ERROR DETAIL {t}: {msg}')
@@ -914,7 +950,7 @@ def main():
         done=0
         for fut in as_completed(futures):
             done+=1; t,snap,h,a,log=fut.result(); print(f'[{done}/{len(u)}] {t}: {log["Status"]}')
-            if snap is not None:
+            if snap is not None and log["Status"] == "OK":
                 snaps.append(snap); history += h
                 # Memory-safe full-fundamental storage: persist each ticker immediately
                 # instead of retaining tens of millions of Python dicts in RAM.
@@ -977,6 +1013,6 @@ def main():
 
     logp=DATA/'refresh_log_multisector.csv'; oldl=pd.read_csv(logp) if logp.exists() else pd.DataFrame()
     pd.concat([oldl,pd.DataFrame(logs)],ignore_index=True).to_csv(logp,index=False,encoding='utf-8-sig')
-    ok=sum(1 for x in logs if x['Status']=='OK'); err=len(logs)-ok
-    print(f'DONE | OK={ok} | ERROR={err} | total={len(logs)}')
+    ok=sum(1 for x in logs if x['Status']=='OK'); err=sum(1 for x in logs if x['Status']=='ERROR'); other=len(logs)-ok-err
+    print(f'DONE | OK={ok} | NONCURRENT={other} | ERROR={err} | total={len(logs)}')
 if __name__=='__main__':main()

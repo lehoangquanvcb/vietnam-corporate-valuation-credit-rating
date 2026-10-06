@@ -152,3 +152,64 @@ price:VCB,OK,OK | start=2026-08-20,2026-09-07T08:56:26+07:00
 price:VIB,OK,OK | start=2026-08-20,2026-09-07T08:56:29+07:00
 price:VPB,OK,OK | start=2026-08-20,2026-09-07T08:56:32+07:00
 fundamental:PCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-07T08:59:02+07:00
+fundamental:ABB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:36:14+07:00
+fundamental:ACB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:36:51+07:00
+fundamental:BAB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:37:29+07:00
+fundamental:BID,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:38:06+07:00
+fundamental:BVB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:38:42+07:00
+fundamental:CTG,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:40:00+07:00
+fundamental:EIB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:41:10+07:00
+fundamental:HDB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:43:12+07:00
+fundamental:KLB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:45:51+07:00
+fundamental:LPB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:46:58+07:00
+fundamental:MBB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:49:05+07:00
+fundamental:MSB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:53:03+07:00
+fundamental:NAB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:57:08+07:00
+fundamental:NVB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T13:59:51+07:00
+fundamental:OCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:02:05+07:00
+fundamental:PCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:04:44+07:00
+fundamental:PGB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:05:49+07:00
+fundamental:SGB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:10:54+07:00
+fundamental:SHB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:17:03+07:00
+fundamental:SSB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:19:11+07:00
+fundamental:STB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:22:30+07:00
+fundamental:TCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:25:15+07:00
+fundamental:TPB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:29:25+07:00
+fundamental:VAB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:31:38+07:00
+fundamental:VBB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:33:16+07:00
+fundamental:VCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:37:26+07:00
+fundamental:VIB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:40:26+07:00
+fundamental:VPB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T14:41:58+07:00
+price:ABB,OK,OK | start=2026-08-28,2026-09-28T14:42:01+07:00
+price:ACB,OK,OK | start=2026-08-28,2026-09-28T14:42:04+07:00
+price:BAB,OK,OK | start=2026-08-28,2026-09-28T14:42:07+07:00
+price:BID,OK,OK | start=2026-08-28,2026-09-28T14:42:10+07:00
+price:BVB,OK,OK | start=2026-08-28,2026-09-28T14:42:13+07:00
+price:CTG,OK,OK | start=2026-08-28,2026-09-28T14:42:16+07:00
+price:EIB,OK,OK | start=2026-08-28,2026-09-28T14:42:19+07:00
+price:HDB,OK,OK | start=2026-08-28,2026-09-28T14:42:21+07:00
+price:KLB,OK,OK | start=2026-08-28,2026-09-28T14:42:25+07:00
+price:LPB,OK,OK | start=2026-08-28,2026-09-28T14:42:28+07:00
+price:MBB,OK,OK | start=2026-08-28,2026-09-28T14:42:30+07:00
+price:MSB,OK,OK | start=2026-08-28,2026-09-28T14:42:33+07:00
+price:NAB,OK,OK | start=2026-08-28,2026-09-28T14:42:36+07:00
+price:NVB,OK,OK | start=2026-08-28,2026-09-28T14:42:39+07:00
+price:OCB,OK,OK | start=2026-08-28,2026-09-28T14:42:42+07:00
+price:PCB,OK,OK | start=2026-08-28,2026-09-28T14:42:45+07:00
+price:PGB,OK,OK | start=2026-08-28,2026-09-28T14:42:48+07:00
+price:SGB,OK,OK | start=2026-08-28,2026-09-28T14:42:50+07:00
+price:SHB,OK,OK | start=2026-08-28,2026-09-28T14:42:53+07:00
+price:SSB,OK,OK | start=2026-08-28,2026-09-28T14:42:56+07:00
+price:STB,OK,OK | start=2026-08-28,2026-09-28T14:42:59+07:00
+price:TCB,OK,OK | start=2026-08-28,2026-09-28T14:43:02+07:00
+price:TPB,OK,OK | start=2026-08-28,2026-09-28T14:43:05+07:00
+price:VAB,OK,OK | start=2026-08-28,2026-09-28T14:43:08+07:00
+price:VBB,OK,OK | start=2026-08-28,2026-09-28T14:43:11+07:00
+price:VCB,OK,OK | start=2026-08-28,2026-09-28T14:43:14+07:00
+price:VIB,OK,OK | start=2026-08-28,2026-09-28T14:43:17+07:00
+price:VPB,OK,OK | start=2026-08-28,2026-09-28T14:43:20+07:00
+fundamental:PCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-28T15:20:49+07:00
+fundamental:PCB,OK,health:ERROR:Failed to fetch data: 502 - Bad Gateway | Failed to fetch data: 502 - Bad Gateway || ratio_q:ERROR:Failed to fetch data: 502 - Bad Gateway | Failed to fetch data: 502 - Bad Gateway | Failed to fetch data: 502 - Bad Gateway || bs_q:ERROR:Failed to fetch data: 502 - Bad Gateway | Failed to fetch data: 502 - Bad Gateway | Failed to fetch data: 502 - Bad Gateway || is_q:ERROR:Failed to fetch data: 502 - Bad Gateway | Failed to fetch data: 502 - Bad Gateway | Failed to fetch data: 502 - ,2026-09-28T15:45:04+07:00
+fundamental:PCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-29T10:15:19+07:00
+fundamental:PCB,CACHED,NotImplementedError: isna is not defined for MultiIndex || RETRY:NotImplementedError: isna is not defined for MultiIndex,2026-09-30T13:51:37+07:00
+price:PCB,OK,OK | start=2026-09-21,2026-09-30T13:51:40+07:00

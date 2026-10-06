@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 status=load_vnstock_env()
 print('DIAGNOSTIC ENGINE v8.64'); print('Python:',sys.executable); print('Version:',sys.version.replace('\\n',' '))
 print('.env:','FOUND' if status['env_file_exists'] else 'NOT FOUND','|',status['env_file'])
-print('VNSTOCK_API_KEY:',status['api_key_masked']); print('VNSTOCK_VENV_PATH:',status['venv_path'] or os.getenv('VNSTOCK_VENV_PATH') or 'NOT SET')
+print('VNSTOCK_SPONSOR_CREDENTIAL_FILE:', 'FOUND' if status['credential_file_exists'] else 'NOT FOUND'); print('VNSTOCK_VENV_PATH:',status['venv_path'] or os.getenv('VNSTOCK_VENV_PATH') or 'NOT SET')
 print('VNSTOCK_INTERACTIVE:',os.getenv('VNSTOCK_INTERACTIVE',''))
 try:
  import vnstock_data

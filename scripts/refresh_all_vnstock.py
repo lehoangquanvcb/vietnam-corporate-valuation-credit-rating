@@ -16,9 +16,9 @@ def run(cmd, fatal=True):
 
 def main():
     sponsor = load_vnstock_env()
-    print('Vnstock Sponsor credential:', sponsor['api_key_masked'])
-    if not sponsor['api_key_present']:
-        print('WARNING - VNSTOCK_API_KEY not found in .env/process environment. vnstock_data may still use a credential previously stored by the official installer.')
+    print('Vnstock Sponsor credential file:', 'FOUND' if sponsor['credential_file_exists'] else 'NOT FOUND')
+    if not sponsor['credential_file_exists']:
+        print('WARNING - Vnstock Sponsor credential file not found at ~/.vnstock/api_key.json.')
     # 1) Discover the current market directly from Vnstock. This intentionally
     # does NOT use a hard-coded ticker list.
     run(['scripts/discover_listed_universe.py'])
