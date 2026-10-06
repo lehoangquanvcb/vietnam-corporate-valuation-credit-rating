@@ -666,7 +666,8 @@ for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
 if meta.get('Methodology')=='EXCLUDED_SPECIALIZED': st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
 if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['TotalAssets','Revenue','ROE','Price']): st.info(f'Chưa có đủ dữ liệu tài chính cho {selected}.')
 
-tabs=st.tabs(['HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','BÁO CÁO XẾP HẠNG TÍN NHIỆM','DỮ LIỆU & QUẢN TRỊ'])
+_sections=['HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','BÁO CÁO XẾP HẠNG TÍN NHIỆM','DỮ LIỆU & QUẢN TRỊ']
+_active_section=st.radio('Điều hướng',_sections,horizontal=True,label_visibility='collapsed',key='main_section_nav')
 
 def _safe_show(df, wanted, n=None):
     if df is None or not len(df): return pd.DataFrame()
@@ -691,7 +692,7 @@ def _download_report_block(report_type, rating_result=None):
     except Exception as e:
         st.warning(f'Chưa tạo được báo cáo: {e}')
 
-with tabs[0]:
+if _active_section==_sections[0]:
     st.subheader('Thông tin tổng quan')
     _profile=load_company_profile(selected)
     if _profile:
@@ -758,7 +759,7 @@ with tabs[0]:
         cols_show=['Doanh nghiệp','ROE','ROA','PB','PE','DebtEquity','CurrentRatio','NPL','CAR','CASA','NIM','CIR','LDR']
         st.dataframe(_safe_show(q,cols_show),hide_index=True,use_container_width=True)
 
-with tabs[1]:
+if _active_section==_sections[1]:
     st.subheader('Phân tích, Định giá & M&A')
     aa=intelligent_analyze(selected)
     c1,c2,c3=st.columns(3)
@@ -816,7 +817,7 @@ with tabs[1]:
             st.write(f'Doanh thu {rev:+d}% · biên lợi nhuận {margin:+d} điểm %.')
     _download_report_block('analysis')
 
-with tabs[2]:
+if _active_section==_sections[2]:
     st.subheader('Báo cáo Xếp hạng tín nhiệm')
     rr3=rate_three_methodologies(selected)
     r1,r2,r3=st.columns(3)
@@ -946,7 +947,7 @@ with tabs[2]:
     st.session_state['rating_result']=rr3
     _download_report_block('rating',rr3)
 
-with tabs[3]:
+if _active_section==_sections[3]:
     st.subheader('Dữ liệu & Quản trị')
     try: cov=pd.read_csv(DATA/'coverage_matrix.csv')
     except Exception: cov=build_coverage_matrix() if build_coverage_matrix else pd.DataFrame()
