@@ -681,22 +681,52 @@ def _safe_show(df, wanted, n=None):
     q=df[cols].copy() if cols else df.copy()
     return q.head(n) if n else q
 
+def _rating_report_fallback(ticker, rating_result, error):
+    """Minimal transparent DOCX when legacy report generator rejects missing rating values."""
+    from docx import Document
+    from docx.shared import Pt
+    doc=Document()
+    doc.add_heading('BÁO CÁO MÔ PHỎNG XẾP HẠNG TÍN NHIỆM', 0)
+    doc.add_paragraph(f'Doanh nghiệp: {ticker}')
+    doc.add_paragraph('BẢN DỰ THẢO – KHÔNG PHẢI KẾT QUẢ XHTN ĐƯỢC PHÊ DUYỆT')
+    r=rating_result or {}
+    for k in ('MethodologyName','Anchor','SACP','SCA','ICR','Outlook'):
+        v=r.get(k)
+        if v is not None: doc.add_paragraph(f'{k}: {v}')
+    doc.add_heading('Các cấu phần',level=1)
+    for k,v in (r.get('Factors') or {}).items(): doc.add_paragraph(f'{k}: {v}')
+    doc.add_heading('Bằng chứng và dữ liệu cần bổ sung',level=1)
+    for k,v in (r.get('MissingEvidence') or {}).items() if isinstance(r.get('MissingEvidence'),dict) else []:
+        doc.add_paragraph(f'{k}: {v}')
+    doc.add_paragraph('Bộ tạo báo cáo chi tiết chưa xử lý được dữ liệu thiếu; bản này chỉ trình bày kết quả thực tế có sẵn, không suy diễn bậc XHTN.')
+    out=io.BytesIO();doc.save(out);return out.getvalue()
+
+
 def _download_report_block(report_type, rating_result=None):
     title='Báo cáo Phân tích – Định giá – M&A' if report_type=='analysis' else 'Báo cáo mô phỏng quá trình Xếp hạng tín nhiệm'
-    st.markdown('---')
-    st.subheader('Xuất '+title)
+    st.markdown('---');st.subheader('Xuất '+title)
     c1,c2=st.columns(2)
-    try:
-        docx=generate_docx(selected,report_type,rating_result)
-        pdf=generate_pdf(selected,report_type,rating_result)
-        suffix='Phan_tich_Dinh_gia_MA' if report_type=='analysis' else 'XHTN'
-        c1.download_button('Tải báo cáo Word',docx,file_name=f'{selected}_{suffix}.docx',
-            mime='application/vnd.openxmlformats-officedocument.wordprocessingml.document',use_container_width=True,
-            key=f'docx_{report_type}')
-        c2.download_button('Tải báo cáo PDF',pdf,file_name=f'{selected}_{suffix}.pdf',
-            mime='application/pdf',use_container_width=True,key=f'pdf_{report_type}')
-    except Exception as e:
-        st.warning(f'Chưa tạo được báo cáo: {e}')
+    suffix='Phan_tich_Dinh_gia_MA' if report_type=='analysis' else 'XHTN'
+    identity=f'{selected}_{report_type}'
+    for kind, column, title, mime, ext in [
+        ('docx',c1,'Word','application/vnd.openxmlformats-officedocument.wordprocessingml.document','docx'),
+        ('pdf',c2,'PDF','application/pdf','pdf')]:
+        key=f'report_{identity}_{kind}'
+        with column:
+            if st.button('Chuẩn bị báo cáo '+title,key='prepare_'+key,use_container_width=True):
+                try:
+                    data=(generate_docx(selected,report_type,rating_result) if kind=='docx' else generate_pdf(selected,report_type,rating_result))
+                    st.session_state[key]=data.getvalue() if hasattr(data,'getvalue') else data
+                except Exception as exc:
+                    if kind=='docx' and report_type=='rating':
+                        st.session_state[key]=_rating_report_fallback(selected,rating_result,str(exc))
+                        st.warning('Báo cáo chi tiết chưa tạo được; đã chuẩn bị bản Word dự thảo với dữ liệu thực có. Lỗi: '+str(exc))
+                    else:
+                        st.session_state.pop(key,None)
+                        st.error('Không thể tạo báo cáo '+title+': '+str(exc))
+            data=st.session_state.get(key)
+            if isinstance(data,(bytes,bytearray)) and data:
+                st.download_button('Tải báo cáo '+title,data,file_name=f'{selected}_{suffix}.{ext}',mime=mime,key='download_'+key,use_container_width=True)
 
 if _active_section==_sections[0]:
     st.subheader('Thông tin tổng quan')
@@ -910,22 +940,29 @@ if _active_section==_sections[2]:
         st.markdown('### Tổng hợp hồ sơ rủi ro')
         st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
 
-    # V8.75: final component/notch summary, mirroring the user's BANK/SECURITIES sample reports.
+    # Component summary: missing assessments remain unknown, never converted to +0.
     st.markdown('### Tổng kết cấu phần xếp hạng')
     if rr3.get('Methodology') in ('BANK','SECURITIES'):
         _desc_score={'Rất Mạnh':'1/6','Mạnh':'2/6','Phù Hợp':'3/6','Trung Bình':'4/6','Yếu':'5/6','Rất Yếu':'6/6'}
         _desc_notch={'Rất Mạnh':2,'Mạnh':1,'Phù Hợp':0,'Trung Bình':-1,'Yếu':-2,'Rất Yếu':-4}
         _sumrows=[]
         if rr3.get('Methodology')=='SECURITIES':
-            _sumrows.append({'Cấu phần':'BICRA tham chiếu','Đánh giá / Điểm':_rating_no_vn(rr3.get('BICRAReference','N/A')),'Nâng/Hạ notch':'—','Kết quả':'Tham chiếu ngành ngân hàng'})
-            _sumrows.append({'Cấu phần':'Điều chỉnh Anchor CTCK','Đánh giá / Điểm':'Đặc thù ngành CTCK','Nâng/Hạ notch':f"{int(rr3.get('SectorAnchorAdjustment',-2)):+d}",'Kết quả':_rating_no_vn(rr3.get('Anchor','N/A'))})
+            _sumrows.append({'Cấu phần':'BICRA tham chiếu','Đánh giá / Điểm':_rating_no_vn(rr3.get('BICRAReference','N/A')),'Nâng/Hạ notch':'—','Kết quả':'Tham chiếu'})
+            _sumrows.append({'Cấu phần':'Điều chỉnh Anchor CTCK','Đánh giá / Điểm':'Đặc thù ngành CTCK','Nâng/Hạ notch':str(rr3.get('SectorAnchorAdjustment','N/A')),'Kết quả':_rating_no_vn(rr3.get('Anchor','N/A'))})
         else:
             _sumrows.append({'Cấu phần':'Điểm ban đầu ngành / BICRA','Đánh giá / Điểm':_rating_no_vn(rr3.get('BICRA',rr3.get('Anchor','N/A'))),'Nâng/Hạ notch':'—','Kết quả':_rating_no_vn(rr3.get('Anchor','N/A'))})
-        for _k,_v in rr3.get('Factors',{}).items():
-            _sumrows.append({'Cấu phần':_k,'Đánh giá / Điểm':f"{_v} ({_desc_score.get(_v,'N/A')})",'Nâng/Hạ notch':f"{_desc_notch.get(_v,0):+d}",'Kết quả':'Điều chỉnh nội sinh'})
-        _sumrows.append({'Cấu phần':'Tổng điều chỉnh nội sinh','Đánh giá / Điểm':'—','Nâng/Hạ notch':f"{int(rr3.get('InternalNotches') or 0):+d}",'Kết quả':_rating_no_vn(rr3.get('SACP','N/A'))})
-        _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Trung lập' if int(rr3.get('ExternalSupportNotches') or 0)==0 else 'Có điều chỉnh','Nâng/Hạ notch':f"{int(rr3.get('ExternalSupportNotches') or 0):+d}",'Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
-        _sumrows.append({'Cấu phần':'Kết quả XHTN','Đánh giá / Điểm':rr3.get('Outlook','Ổn định'),'Nâng/Hạ notch':'—','Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
+        _factors=rr3.get('Factors') or {}
+        _factor_labels={'Hồ sơ Kinh doanh','Vốn và Lợi nhuận','Vị thế Rủi ro','Huy động vốn và Thanh khoản'} if rr3.get('Methodology')=='BANK' else set(_factors)
+        for _k in _factor_labels:
+            _v=_factors.get(_k)
+            _sumrows.append({'Cấu phần':_k,'Đánh giá / Điểm':f"{_v} ({_desc_score[_v]})" if _v in _desc_score else 'Chưa thẩm định', 'Nâng/Hạ notch':f"{_desc_notch[_v]:+d}" if _v in _desc_notch else 'N/A','Kết quả':'Điều chỉnh nội sinh' if _v in _desc_notch else 'Thiếu đánh giá'})
+        def _fmt_notch(v):
+            try:return f'{int(v):+d}' if v is not None and pd.notna(v) else 'N/A'
+            except (ValueError,TypeError):return 'N/A'
+        _sumrows.append({'Cấu phần':'Tổng điều chỉnh nội sinh','Đánh giá / Điểm':'—','Nâng/Hạ notch':_fmt_notch(rr3.get('InternalNotches')),'Kết quả':_rating_no_vn(rr3.get('SACP','N/A'))})
+        _support=rr3.get('ExternalSupportNotches')
+        _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Chưa thẩm định' if _support is None else ('Trung lập' if _support==0 else 'Có điều chỉnh'),'Nâng/Hạ notch':_fmt_notch(_support),'Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
+        _sumrows.append({'Cấu phần':'Kết quả XHTN','Đánh giá / Điểm':rr3.get('Outlook','Chờ thẩm định'),'Nâng/Hạ notch':'—','Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
     elif rr3.get('Methodology')=='CORPORATE':
         _rs=rr3.get('RiskScores',{}); _rl=rr3.get('RiskLabels',{})
@@ -971,12 +1008,32 @@ if _active_section==_sections[2]:
         ]
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
 
-    rc=committee_pack(selected) if rr3.get('Methodology') not in ('INSURANCE','BANK') else {'Waterfall': []}
+    # Show an auditable factor waterfall even before the final rating is approved.
+    if rr3.get('Methodology')=='BANK':
+        _wf=[{'Bước':'Anchor cố định','Điều chỉnh':'—','Bậc XHTN':_rating_no_vn(rr3.get('Anchor','N/A'))}]
+        for _k,_v in (rr3.get('Factors') or {}).items():
+            _wf.append({'Bước':_k,'Điều chỉnh':f"{_desc_notch[_v]:+d}" if _v in _desc_notch else 'N/A','Bậc XHTN':'Đang tổng hợp'})
+        _wf.extend([{'Bước':'SACP','Điều chỉnh':'—','Bậc XHTN':_rating_no_vn(rr3.get('SACP','N/A'))},
+                    {'Bước':'Hỗ trợ bên ngoài','Điều chỉnh':_fmt_notch(rr3.get('ExternalSupportNotches')),'Bậc XHTN':_rating_no_vn(rr3.get('ICR','N/A'))}])
+        rc={'Waterfall':_wf}
+    else:
+        rc=committee_pack(selected) if rr3.get('Methodology')!='INSURANCE' else {'Waterfall':[]}
     st.markdown('### Waterfall trình Hội đồng XHTN')
-    st.dataframe(pd.DataFrame(rc.get('Waterfall',[])),hide_index=True,use_container_width=True)
-    ev=rating_evidence(selected) if rr3.get('Methodology') not in ('INSURANCE','BANK') else {'ICR':rr3.get('ICR','N/A'),'RatingConfidence':'Chờ thẩm định','DataQuality':{'Coverage':0},'EvidenceLedger':[]}
+    _waterfall=pd.DataFrame(rc.get('Waterfall',[]))
+    if len(_waterfall):st.dataframe(_waterfall,hide_index=True,use_container_width=True)
+    else:st.info('Chưa có waterfall; cần hoàn thành thẩm định cấu phần.')
+    if rr3.get('Methodology')=='BANK':
+        _spec={'CAR','ROA','ROE','NIM','CIR','NPL','LoanLossCoverage','CreditCost','Group2LoansRatio','CASA','LDR','LiquidityCoverageRatio','StableFundingRatio'}
+        _present={m for m in _spec if num(s.get(m)) is not None}
+        _cov=len(_present)/len(_spec)
+        ev={'ICR':rr3.get('ICR','N/A'),'RatingConfidence':'Chờ thẩm định' if rr3.get('ICR') in ('N/A',None) else 'Mô phỏng – cần phê duyệt','DataQuality':{'Coverage':_cov},'EvidenceLedger':[]}
+        st.caption(f'Coverage định lượng: {len(_present)}/{len(_spec)} chỉ tiêu thiết kế; không bao gồm đánh giá định tính và hỗ trợ bên ngoài.')
+    else:
+        ev=rating_evidence(selected) if rr3.get('Methodology')!='INSURANCE' else {'ICR':rr3.get('ICR','N/A'),'RatingConfidence':'Chờ thẩm định','DataQuality':{'Coverage':None},'EvidenceLedger':[]}
     st.markdown('### Mức độ tin cậy của kết quả')
-    e1,e2,e3=st.columns(3); e1.metric('ICR mô phỏng',_rating_no_vn(ev.get('ICR','N/A')));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',f"{ev.get('DataQuality',{}).get('Coverage',0)*100:.0f}%")
+    _coverage=ev.get('DataQuality',{}).get('Coverage')
+    _coverage_label=f'{_coverage*100:.0f}%' if isinstance(_coverage,(int,float)) and np.isfinite(_coverage) else 'N/A'
+    e1,e2,e3=st.columns(3);e1.metric('ICR mô phỏng',_rating_no_vn(ev.get('ICR','N/A')));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',_coverage_label)
 
     with st.expander('Phương pháp, audit trail & chi tiết máy tính',expanded=False):
         st.write(f"**Phương pháp tự động lựa chọn:** {rr3.get('MethodologyName','N/A')}")
