@@ -610,9 +610,15 @@ def bank_rating_result(ticker,overrides=None):
 
 u=universe()
 st.sidebar.markdown('## PHÂN TÍCH DOANH NGHIỆP')
-entity_filter=st.sidebar.selectbox('Nhóm doanh nghiệp',['Tất cả','Ngân hàng','Công ty chứng khoán','Doanh nghiệp phi tài chính'])
-maptype={'Ngân hàng':'BANK','Công ty chứng khoán':'SECURITIES','Doanh nghiệp phi tài chính':'CORPORATE'}
-z=u if entity_filter=='Tất cả' else u[u.EntityType.eq(maptype[entity_filter])]
+entity_filter=st.sidebar.selectbox('Nhóm doanh nghiệp',['Tất cả','Ngân hàng','Công ty chứng khoán','Công ty bảo hiểm','Doanh nghiệp phi tài chính'])
+maptype={'Ngân hàng':'BANK','Công ty chứng khoán':'SECURITIES','Công ty bảo hiểm':'INSURANCE','Doanh nghiệp phi tài chính':'CORPORATE'}
+if entity_filter=='Công ty bảo hiểm':
+    _et=u['EntityType'].fillna('').astype(str).str.upper() if 'EntityType' in u else pd.Series('',index=u.index)
+    _mt=u['Methodology'].fillna('').astype(str).str.upper() if 'Methodology' in u else pd.Series('',index=u.index)
+    _sector=u['Sector'].fillna('').astype(str).str.lower() if 'Sector' in u else pd.Series('',index=u.index)
+    z=u[_et.isin(['INSURANCE','INSURER','INSURANCE_NONLIFE','INSURANCE_LIFE']) | _mt.str.startswith('INSURANCE') | (_sector.str.contains('bảo hiểm|bao hiem|insurance',regex=True) & ~_sector.str.contains('môi giới|moi gioi|broker',regex=True))]
+else:
+    z=u if entity_filter=='Tất cả' else u[u.EntityType.eq(maptype[entity_filter])]
 labels={r.Ticker:f'{r.Ticker} — {r.CompanyName}' for _,r in z.iterrows()}
 selected=st.sidebar.selectbox('Mã doanh nghiệp',z.Ticker.tolist(),format_func=lambda x:labels.get(x,x)) if len(z) else None
 presentation=st.sidebar.toggle('Chế độ trình bày',value=False)
@@ -663,7 +669,7 @@ else:kpis=[('Giá thị trường',money(val.get('Price'))),('P/E',mult(s.get('P
 cols=st.columns(6)
 for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
 
-if meta.get('Methodology')=='EXCLUDED_SPECIALIZED': st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
+if meta.get('Methodology')=='EXCLUDED_SPECIALIZED' and not (str(meta.get('EntityType','')).upper().startswith('INSURANCE') or any(x in str(meta.get('Sector','')).lower() for x in ['bảo hiểm','insurance','bao hiem'])): st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
 if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['TotalAssets','Revenue','ROE','Price']): st.info(f'Chưa có đủ dữ liệu tài chính cho {selected}.')
 
 _sections=['HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','BÁO CÁO XẾP HẠNG TÍN NHIỆM','DỮ LIỆU & QUẢN TRỊ']
@@ -819,7 +825,35 @@ if _active_section==_sections[1]:
 
 if _active_section==_sections[2]:
     st.subheader('Báo cáo Xếp hạng tín nhiệm')
-    rr3=rate_three_methodologies(selected)
+    _rating_overrides={}
+    _entity_method=str(meta.get('EntityType','')).upper()
+    _insurance_selected=(_entity_method.startswith('INSURANCE') or str(meta.get('Methodology','')).upper().startswith('INSURANCE') or any(x in str(meta.get('Sector','')).lower() for x in ['bảo hiểm','insurance','bao hiem']))
+    if _insurance_selected:
+        with st.expander('Đầu vào thẩm định công ty bảo hiểm (bắt buộc để có bậc XHTN)',expanded=True):
+            st.caption('Tham chiếu ma trận Saigon Ratings 2025; nhập điểm sau khi kiểm tra bằng chứng. Không tự suy đoán điểm từ báo cáo tài chính doanh nghiệp thông thường.')
+            _c=st.columns(3)
+            _risk_fields=[('MacroIndustryRisk','Rủi ro vĩ mô và ngành',6),('BusinessRisk','Rủi ro kinh doanh',6),('FinancialRisk','Rủi ro tài chính',10)]
+            for _col,(_key,_lab,_max) in zip(_c,_risk_fields):
+                with _col:
+                    _v=st.selectbox(_lab,['Chưa đánh giá']+list(range(1,_max+1)),key=f'ins_{selected}_{_key}')
+                    if isinstance(_v,int): _rating_overrides[_key]=_v
+            st.caption('Điều chỉnh và hỗ trợ chỉ được nhập khi đã có đánh giá của chuyên viên/Hội đồng XHTN.')
+            _mods=[('GovernanceLiquidityNotches','Quản trị & thanh khoản'),('OtherAdjustmentsNotches','Điều chỉnh khác'),('ComparativeNotches','Điều chỉnh so sánh'),('GroupSupportNotches','Hỗ trợ tập đoàn'),('GovernmentSupportNotches','Hỗ trợ Chính phủ')]
+            for _key,_lab in _mods:
+                _v=st.selectbox(_lab,['Chưa đánh giá']+list(range(0,9) if 'Support' in _key else range(-6,7)),key=f'ins_{selected}_{_key}')
+                if isinstance(_v,int):_rating_overrides[_key]=_v
+            _choice=st.selectbox('Anchor nếu ma trận có nhiều lựa chọn',['Chưa chọn']+['vn'+x.upper() for x in ['aa+','aa','aa-','a+','a','a-','bbb+','bbb','bbb-','bb+','bb','bb-','b+','b','b-']],key=f'ins_{selected}_anchor_choice')
+            if _choice!='Chưa chọn':_rating_overrides['AnchorSelection']=_choice
+    elif _entity_method=='BANK':
+        with st.expander('Thẩm định yếu tố ngân hàng và hỗ trợ bên ngoài',expanded=False):
+            st.caption('Anchor A− cố định. Chưa đủ chỉ tiêu và bằng chứng thì giữ N/A; không mặc định chấm trung tính.')
+            _grades=['Tự tính từ dữ liệu','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu']
+            for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Huy động vốn và thanh khoản')]:
+                _g=st.selectbox(_lab,_grades,key=f'bank_{selected}_{_key}')
+                if _g!='Tự tính từ dữ liệu':_rating_overrides[_key]=_g
+            _confirmed=st.checkbox('Đã đánh giá mức hỗ trợ bên ngoài',key=f'bank_{selected}_support_confirmed')
+            if _confirmed:_rating_overrides['ExternalSupportNotches']=st.number_input('Notch hỗ trợ đã thẩm định',0,8,0,1,key=f'bank_{selected}_support')
+    rr3=rate_three_methodologies(selected,_rating_overrides)
     r1,r2,r3=st.columns(3)
     r1.metric('Anchor',_rating_no_vn(rr3.get('Anchor','N/A')));r2.metric('SACP / SCA',_rating_no_vn(rr3.get('SACP',rr3.get('SCA','N/A'))));r3.metric('ICR',_rating_no_vn(rr3.get('ICR','N/A')))
 
@@ -827,6 +861,7 @@ if _active_section==_sections[2]:
     _rating_metric_map={
         'BANK':['ROE','ROA','NIM','NPL','CAR','CASA','LDR','CIR'],
         'SECURITIES':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],
+        'INSURANCE':['ROE','ROA','CombinedRatio','SolvencyRatio','LossRatio','ExpenseRatio','InsurancePremiumRevenue'],
         'CORPORATE':['Revenue','GrossMargin','EBITDAMargin','ROE','ROA','DebtEquity','DebtEBITDA','CFO_Debt','FOCF_Debt','CurrentRatio','CashDebt']
     }
     _rkpi,_,_=sector_kpi_table(selected)
@@ -865,6 +900,12 @@ if _active_section==_sections[2]:
         p1,p2,p3=st.columns(3); p1.metric('Peer có dữ liệu',rr3.get('PeerCount',0)); p2.metric('Thanh khoản',rr3.get('Liquidity','N/A')); p3.metric('Đủ dữ liệu để tự động XHTN','CÓ' if rr3.get('DataSufficientForAutoRating') else 'CHƯA')
         if not rr3.get('DataSufficientForAutoRating'):
             st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng.')
+    elif rr3.get('Methodology')=='INSURANCE':
+        st.markdown('### Ma trận và các điều chỉnh bảo hiểm')
+        _ins_rows=[{'Cấu phần':k,'Kết quả':str(rr3.get(k,'N/A'))} for k in ['CombinedRiskScore','FinancialRiskScore','AnchorCandidates','Anchor','SCA','ICR']]
+        st.dataframe(pd.DataFrame(_ins_rows),hide_index=True,use_container_width=True)
+        if rr3.get('MissingEvidence'): st.warning('Cần bổ sung/thẩm định: '+', '.join(map(str,rr3['MissingEvidence'])))
+        st.caption(rr3.get('ScopeNote',''))
     elif rr3.get('Methodology') in ('BANK','SECURITIES'):
         st.markdown('### Tổng hợp hồ sơ rủi ro')
         st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
@@ -882,8 +923,8 @@ if _active_section==_sections[2]:
             _sumrows.append({'Cấu phần':'Điểm ban đầu ngành / BICRA','Đánh giá / Điểm':_rating_no_vn(rr3.get('BICRA',rr3.get('Anchor','N/A'))),'Nâng/Hạ notch':'—','Kết quả':_rating_no_vn(rr3.get('Anchor','N/A'))})
         for _k,_v in rr3.get('Factors',{}).items():
             _sumrows.append({'Cấu phần':_k,'Đánh giá / Điểm':f"{_v} ({_desc_score.get(_v,'N/A')})",'Nâng/Hạ notch':f"{_desc_notch.get(_v,0):+d}",'Kết quả':'Điều chỉnh nội sinh'})
-        _sumrows.append({'Cấu phần':'Tổng điều chỉnh nội sinh','Đánh giá / Điểm':'—','Nâng/Hạ notch':f"{int(rr3.get('InternalNotches',0)):+d}",'Kết quả':_rating_no_vn(rr3.get('SACP','N/A'))})
-        _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Trung lập' if int(rr3.get('ExternalSupportNotches',0))==0 else 'Có điều chỉnh','Nâng/Hạ notch':f"{int(rr3.get('ExternalSupportNotches',0)):+d}",'Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
+        _sumrows.append({'Cấu phần':'Tổng điều chỉnh nội sinh','Đánh giá / Điểm':'—','Nâng/Hạ notch':f"{int(rr3.get('InternalNotches') or 0):+d}",'Kết quả':_rating_no_vn(rr3.get('SACP','N/A'))})
+        _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Trung lập' if int(rr3.get('ExternalSupportNotches') or 0)==0 else 'Có điều chỉnh','Nâng/Hạ notch':f"{int(rr3.get('ExternalSupportNotches') or 0):+d}",'Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
         _sumrows.append({'Cấu phần':'Kết quả XHTN','Đánh giá / Điểm':rr3.get('Outlook','Ổn định'),'Nâng/Hạ notch':'—','Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
     elif rr3.get('Methodology')=='CORPORATE':
@@ -925,15 +966,15 @@ if _active_section==_sections[2]:
             {'Cấu phần':'Thanh khoản','Điểm':str(rr3.get('LiquidityScore','N/A')),'Mức rủi ro':rr3.get('Liquidity','N/A'),'Tác động':'Modifier/cap nếu trọng yếu; không cộng trực tiếp vào điểm tổng hợp'},
             {'Cấu phần':'Modifier','Điểm':'—','Mức rủi ro':'—','Tác động':f"{int(rr3.get('ModifierNotches',0)):+d} notch"},
             {'Cấu phần':'SCA','Điểm':_rating_no_vn(rr3.get('SCA','N/A')),'Mức rủi ro':'Sau modifier/cap','Tác động':'Anchor + modifier/cap'},
-            {'Cấu phần':'Hỗ trợ bên ngoài','Điểm':'—','Mức rủi ro':'—','Tác động':f"{int(rr3.get('ExternalSupportNotches',0)):+d} notch"},
+            {'Cấu phần':'Hỗ trợ bên ngoài','Điểm':'—','Mức rủi ro':'—','Tác động':f"{int(rr3.get('ExternalSupportNotches') or 0):+d} notch"},
             {'Cấu phần':'Kết quả XHTN','Điểm':_rating_no_vn(rr3.get('ICR','N/A')),'Mức rủi ro':rr3.get('Outlook','N/A'),'Tác động':'SCA + hỗ trợ bên ngoài'},
         ]
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
 
-    rc=committee_pack(selected)
+    rc=committee_pack(selected) if rr3.get('Methodology') not in ('INSURANCE','BANK') else {'Waterfall': []}
     st.markdown('### Waterfall trình Hội đồng XHTN')
     st.dataframe(pd.DataFrame(rc.get('Waterfall',[])),hide_index=True,use_container_width=True)
-    ev=rating_evidence(selected)
+    ev=rating_evidence(selected) if rr3.get('Methodology') not in ('INSURANCE','BANK') else {'ICR':rr3.get('ICR','N/A'),'RatingConfidence':'Chờ thẩm định','DataQuality':{'Coverage':0},'EvidenceLedger':[]}
     st.markdown('### Mức độ tin cậy của kết quả')
     e1,e2,e3=st.columns(3); e1.metric('ICR mô phỏng',_rating_no_vn(ev.get('ICR','N/A')));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',f"{ev.get('DataQuality',{}).get('Coverage',0)*100:.0f}%")
 
