@@ -21,6 +21,14 @@ def universe():
     if len(x):
         x['Ticker']=x['Ticker'].astype(str).str.upper().str.strip()
         x=x[x.get('Active',1).fillna(1).astype(int).eq(1)]
+        # Explicit insurer registry: survives a universe refresh that collapses
+        # ICB industry into the broad 'Tài chính' bucket.
+        insurer_tickers = {'ABI','AIC','BIC','BLI','BMI','BVH','MIG','PGI','PRE','PTI','PVI','VNR'}
+        mask=x['Ticker'].isin(insurer_tickers)
+        x.loc[mask,'EntityType']='INSURANCE'
+        x.loc[mask,'Methodology']='INSURANCE_2025'
+        x.loc[mask,'Sector']='Bảo hiểm'
+        x.loc[mask,'PeerGroup']='Bảo hiểm'
     return x
 
 def bank_snapshot(): return read_csv(DATA/'bank_snapshot.csv')
