@@ -1,0 +1,1981 @@
+﻿period,id,name,order,level,unit,value
+2026-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2026-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.9761384692
+2026-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.3481449273
+2026-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6773471649
+2026-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,6.5021361904
+2026-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-5.7698447575
+2026-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2026-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2583895346800.0
+2026-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2026-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2026-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2026-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-642595945021.0
+2026-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-621151213971.0
+2026-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2026-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2026-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2026-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1327486556
+2026-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0274670308
+2026-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2109080306
+2026-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1490897358
+2026-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1684513044
+2026-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.084529857
+2026-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0678967285
+2026-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4045412994
+2026-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2026-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,72.2822355615
+2026-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2026-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2026-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2026-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2026-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.0475266158
+2026-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.0470239337
+2026-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6122509906
+2026-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2026-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2026-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2026-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2026-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2026-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,4.3210347647
+2026-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.5896683459
+2026-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2026-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,4.3210347647
+2026-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2026-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2026-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2026-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2026-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2026-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2026-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2026-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2026-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2026-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2026-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2026-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2026-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2026-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2026-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2026-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2026-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2026-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2026-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2026-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,8.006353859
+2026-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,0.9913512854
+2026-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.5380284458
+2026-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,11.9046226993
+2026-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.5141646471
+2026-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2026-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2012776847400.0
+2026-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2026-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2026-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2026-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-668942153033.0
+2026-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-645618731847.0
+2026-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2026-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2026-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2026-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.129683924
+2026-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0278096421
+2026-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2132089162
+2026-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1594579987
+2026-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1788126227
+2026-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0835720546
+2026-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0672001832
+2026-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4138328314
+2026-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2026-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,69.9951604148
+2026-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2026-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2026-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2026-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2026-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.0452095955
+2026-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.0442447285
+2026-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6056473952
+2026-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2026-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2026-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2026-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2026-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2026-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.7762727514
+2026-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.5453083347
+2026-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2026-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.7762727514
+2026-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2026-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2026-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2026-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2026-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2026-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2026-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2026-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2026-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2026-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2026-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2026-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2026-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2026-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2026-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2026-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2026-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2026-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2025-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2025-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,8.8519229552
+2025-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1128271763
+2025-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.5972411891
+2025-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,29.5736893325
+2025-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-3.9773923352
+2025-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2025-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2173577201600.0
+2025-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2025-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2025-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2025-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-669080263415.0
+2025-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-644286760317.0
+2025-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2025-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2025-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2025-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1272080053
+2025-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0278202127
+2025-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2339858297
+2025-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2025-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1838454562
+2025-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0841141877
+2025-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.06747022
+2025-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4123332147
+2025-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2025-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,60.7141308962
+2025-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2025-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2025-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2025-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2025-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.0467413897
+2025-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.045310747
+2025-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.5997382658
+2025-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2025-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2025-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2025-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2025-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2025-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.7244047781
+2025-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.4640008029
+2025-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2025-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.7244047781
+2025-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2025-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2025-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2025-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2025-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2025-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2025-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2025-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2025-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2025-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2025-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2025-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2025-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2025-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2025-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2025-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2025-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2025-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2025-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2025-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.2123326155
+2025-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1326812316
+2025-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6046437872
+2025-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,16.340685856
+2025-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.0392722463
+2025-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2025-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2156942682200.0
+2025-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2025-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2025-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2025-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-680332516487.0
+2025-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-630298367508.0
+2025-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2025-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2025-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2025-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1241153333
+2025-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0274250682
+2025-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2752927067
+2025-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1909894877
+2025-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1907138436
+2025-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0823681636
+2025-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0656341681
+2025-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4178474264
+2025-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2025-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,65.3976418367
+2025-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2025-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2025-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2025-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2025-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.0781901717
+2025-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.0746242789
+2025-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.0377313749
+2025-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2025-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2025-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2025-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2025-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2025-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.5137416823
+2025-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.2977637009
+2025-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2025-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.5137416823
+2025-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2025-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2025-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2025-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2025-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2025-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2025-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2025-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2025-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2025-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2025-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2025-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2025-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2025-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2025-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2025-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2025-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2025-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2025-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2025-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.6336897525
+2025-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.2062144009
+2025-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6516910784
+2025-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,-23.3534569386
+2025-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.2242681276
+2025-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2025-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2251204958800.0
+2025-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2025-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2025-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2025-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-673240105706.0
+2025-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-624840137438.0
+2025-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2025-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2025-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2025-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1244410845
+2025-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0274813851
+2025-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2743559372
+2025-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1647034604
+2025-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1948932143
+2025-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0851264156
+2025-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0676470901
+2025-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.406246374
+2025-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2025-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,62.0217267063
+2025-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2025-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2025-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2025-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2025-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.0703491932
+2025-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.0656251273
+2025-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6137771324
+2025-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2025-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2025-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2025-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2025-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2025-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.6289336762
+2025-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.3148163287
+2025-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2025-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.6289336762
+2025-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2025-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2025-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2025-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2025-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2025-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2025-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2025-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2025-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2025-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2025-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2025-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2025-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2025-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2025-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2025-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2025-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2025-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2025-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2025-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.4757284745
+2025-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1963846386
+2025-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6537990036
+2025-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,20.5294728602
+2025-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.6082665381
+2025-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2025-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2234570439400.0
+2025-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2025-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2025-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2025-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-646953150589.0
+2025-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-600327068200.0
+2025-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2025-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2025-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2025-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1261509254
+2025-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0286348142
+2025-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2552038816
+2025-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1661504479
+2025-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1892879803
+2025-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0867605853
+2025-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0689972286
+2025-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4150139761
+2025-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2025-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,54.8647556284
+2025-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2025-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2025-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2025-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2025-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.0844110148
+2025-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.0782400544
+2025-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6504289476
+2025-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2025-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2025-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2025-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2025-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2025-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.5454533174
+2025-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.3572577661
+2025-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2025-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.5454533174
+2025-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2025-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2025-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2025-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2025-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2025-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2025-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2025-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2025-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2025-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2025-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2025-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2025-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2025-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2025-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2025-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2025-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2025-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2024-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2024-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,12.12871379
+2024-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.4767781021
+2024-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.8240151925
+2024-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,14.2551777905
+2024-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-5.1186555896
+2024-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,3.93700787
+2024-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2816778618400.0
+2024-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2024-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2024-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2024-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-655794195158.0
+2024-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-612547162596.0
+2024-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2024-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2024-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2024-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1231390786
+2024-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0292613543
+2024-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2599823613
+2024-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2024-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1918448175
+2024-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0851845808
+2024-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0679392066
+2024-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.430699088
+2024-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2024-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,56.5007260933
+2024-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2024-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2024-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2024-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2024-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1001161768
+2024-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.097146921
+2024-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6626684671
+2024-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2024-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2024-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2024-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2024-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2024-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.4169519686
+2024-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.3224711686
+2024-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2024-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.4169519686
+2024-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2024-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2024-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2024-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2024-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2024-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2024-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2024-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2024-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2024-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2024-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2024-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2024-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2024-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2024-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2024-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2024-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2024-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2024-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2024-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,10.4125330732
+2024-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.2899315255
+2024-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.7068776886
+2024-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,10.7903803005
+2024-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.1333291156
+2024-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2024-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2412005313000.0
+2024-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2024-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2024-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2024-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-702231985917.0
+2024-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-660640509366.0
+2024-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2024-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2024-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2024-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1254113424
+2024-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0298673468
+2024-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.3010003717
+2024-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.2042462918
+2024-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.2058005927
+2024-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0843344251
+2024-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0678871974
+2024-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.439955513
+2024-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2024-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,50.719322334
+2024-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2024-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2024-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2024-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2024-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1022041377
+2024-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.0960105401
+2024-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6396236475
+2024-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2024-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2024-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2024-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2024-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2024-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.5238843446
+2024-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.2476764335
+2024-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2024-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.5238843446
+2024-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2024-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2024-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2024-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2024-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2024-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2024-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2024-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2024-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2024-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2024-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2024-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2024-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2024-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2024-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2024-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2024-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2024-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2024-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2024-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,10.8416842816
+2024-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.3919704626
+2024-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.745970976
+2024-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,-22.0684995
+2024-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.2835414136
+2024-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2024-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2550626308000.0
+2024-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2024-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2024-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2024-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-668762835366.0
+2024-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-617297261741.0
+2024-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2024-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2024-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2024-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1281004078
+2024-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0317200458
+2024-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.3180478563
+2024-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1710319233
+2024-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1955902609
+2024-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0853267451
+2024-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0688058199
+2024-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4610081803
+2024-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2024-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,47.0985528837
+2024-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2024-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2024-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2024-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2024-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1031586357
+2024-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.0965887166
+2024-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6898631727
+2024-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2024-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2024-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2024-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2024-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2024-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.13015317
+2024-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.1475268143
+2024-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2024-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.13015317
+2024-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2024-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2024-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2024-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2024-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2024-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2024-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2024-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2024-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2024-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2024-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2024-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2024-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2024-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2024-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2024-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2024-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2024-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2024-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2024-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,10.9104940234
+2024-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.4490499779
+2024-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.7987563102
+2024-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,-10.6826644241
+2024-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.853665525
+2024-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2024-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2639343744800.0
+2024-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2024-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2024-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2024-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-622794526434.0
+2024-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-575265957013.0
+2024-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2024-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2024-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2024-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1325460721
+2024-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0332504544
+2024-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2901962044
+2024-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1647082265
+2024-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1884790713
+2024-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0907267942
+2024-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0732099123
+2024-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4541796784
+2024-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2024-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,46.8703957711
+2024-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2024-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2024-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2024-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2024-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1046453031
+2024-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1022176551
+2024-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6858617609
+2024-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2024-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2024-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2024-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2024-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2024-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.1435948011
+2024-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.1782581919
+2024-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2024-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.1435948011
+2024-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2024-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2024-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2024-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2024-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2024-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2024-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2024-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2024-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2024-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2024-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2024-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2024-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2024-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2024-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2024-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2024-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2024-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2023-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2023-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,11.5937792586
+2023-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.4244055702
+2023-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.823263594
+2023-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,28.7834241648
+2023-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-5.2817052439
+2023-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,4.17536534
+2023-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2655978264200.0
+2023-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2023-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2023-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2023-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-566968247980.0
+2023-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-519164483311.0
+2023-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2023-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2023-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2023-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1292412976
+2023-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0322414235
+2023-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.25508932
+2023-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2023-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1757410156
+2023-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0879302337
+2023-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0710090796
+2023-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.454046493
+2023-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2023-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,50.0157088614
+2023-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2023-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2023-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2023-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2023-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1225042361
+2023-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1220274028
+2023-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6849703833
+2023-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2023-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2023-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2023-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2023-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2023-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.9947610576
+2023-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.1919982241
+2023-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2023-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.9947610576
+2023-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2023-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2023-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2023-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2023-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2023-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2023-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2023-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2023-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2023-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2023-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2023-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2023-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2023-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2023-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2023-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2023-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2023-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2023-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2023-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,10.9188432096
+2023-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.3955327041
+2023-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.8010353681
+2023-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,-26.479704483
+2023-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-5.6335470038
+2023-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2023-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2550626308000.0
+2023-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2023-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2023-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2023-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-511950042180.0
+2023-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-468039374825.0
+2023-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2023-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2023-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2023-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1316713376
+2023-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0336803442
+2023-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2433460735
+2023-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1777137956
+2023-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.160780154
+2023-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0912183856
+2023-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0733626587
+2023-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4590938332
+2023-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2023-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,51.7002652337
+2023-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2023-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2023-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2023-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2023-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1429980763
+2023-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.142464095
+2023-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.7012691025
+2023-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2023-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2023-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2023-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2023-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2023-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.8863744162
+2023-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.1510559226
+2023-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2023-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.8863744162
+2023-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2023-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2023-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2023-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2023-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2023-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2023-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2023-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2023-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2023-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2023-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2023-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2023-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2023-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2023-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2023-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2023-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2023-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2023-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2023-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,13.7075379647
+2023-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.6138515257
+2023-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.9355491577
+2023-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,13.1139875528
+2023-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-6.4170875276
+2023-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2023-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2883316696000.0
+2023-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2023-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2023-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2023-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-504609662654.0
+2023-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-466132781282.0
+2023-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2023-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2023-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2023-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1195002878
+2023-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0308227726
+2023-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2507759945
+2023-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1518916141
+2023-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1637305904
+2023-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0848999306
+2023-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.068250707
+2023-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4516110368
+2023-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2023-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,55.3047742539
+2023-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2023-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2023-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2023-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2023-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1187988484
+2023-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1182790665
+2023-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.0325718697
+2023-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2023-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2023-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2023-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2023-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2023-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.9193067875
+2023-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.126265631
+2023-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2023-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.9193067875
+2023-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2023-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2023-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2023-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2023-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2023-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2023-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2023-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2023-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2023-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2023-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2023-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2023-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2023-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2023-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2023-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2023-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2023-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2023-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2023-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,15.1288697435
+2023-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.6391446583
+2023-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.9187126533
+2023-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,9.0986565096
+2023-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-6.1336431219
+2023-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2023-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2844502817400.0
+2023-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2023-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2023-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2023-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-494074226588.0
+2023-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-454630455474.0
+2023-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2023-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2023-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2023-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.107308644
+2023-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0276213301
+2023-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2833651723
+2023-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1520075356
+2023-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1595752484
+2023-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0751448303
+2023-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0607257957
+2023-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4548533248
+2023-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2023-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,60.2920316254
+2023-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2023-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2023-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2023-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2023-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1097502877
+2023-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1092545364
+2023-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.0236189194
+2023-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2023-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2023-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2023-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2023-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2023-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.9620806274
+2023-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0047468258
+2023-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2023-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.9620806274
+2023-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2023-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2023-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2023-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2023-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2023-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2023-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2023-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2023-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2023-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2023-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2023-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2023-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2023-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2023-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2023-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2023-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2023-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2022-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2022-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,14.2617669958
+2022-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.7289728669
+2022-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.9461497755
+2022-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,10.0995739435
+2022-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-6.3093531016
+2022-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,4.5801526699999995
+2022-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2905496055200.0
+2022-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2022-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2022-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2022-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-484437485547.0
+2022-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-445830192745.0
+2022-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2022-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2022-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2022-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1178149832
+2022-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0310357122
+2022-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2882741027
+2022-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2022-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1577528964
+2022-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0822842846
+2022-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0663416936
+2022-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4678160973
+2022-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2022-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,59.7033617611
+2022-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2022-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2022-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2022-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2022-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1066012435
+2022-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1056172125
+2022-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6368177523
+2022-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2022-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2022-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2022-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2022-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2022-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.0238459602
+2022-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2022-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2022-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.0238459602
+2022-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2022-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2022-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2022-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2022-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2022-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2022-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2022-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2022-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2022-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2022-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2022-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2022-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2022-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2022-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2022-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2022-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2022-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2022-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2022-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,11.4464382291
+2022-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.6395547209
+2022-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.9473499453
+2022-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,-86.706395806
+2022-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-6.532768445
+2022-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,4.5801526699999995
+2022-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2905496055200.0
+2022-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2022-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2022-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2022-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-471901262789.0
+2022-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-430583164409.0
+2022-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2022-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2022-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2022-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1419482805
+2022-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0380205173
+2022-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2662911697
+2022-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2022-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1538655111
+2022-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.1027656924
+2022-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0827637319
+2022-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.459386212
+2022-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2022-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,58.4241578371
+2022-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2022-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2022-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2022-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2022-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1308611145
+2022-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1297275846
+2022-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.0310033478
+2022-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2022-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2022-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2022-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2022-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2022-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.7568086799
+2022-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2022-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2022-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.7568086799
+2022-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2022-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2022-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2022-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2022-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2022-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2022-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2022-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2022-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2022-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2022-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2022-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2022-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2022-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2022-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2022-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2022-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2022-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2022-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2022-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.0139356023
+2022-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.7131299485
+2022-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.9808793066
+2022-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,26.611239285
+2022-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-6.9119441566
+2022-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2022-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,3005303171600.0
+2022-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2022-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2022-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2022-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-451505315006.0
+2022-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-419121434514.0
+2022-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2022-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2022-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2022-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1887080305
+2022-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0496726788
+2022-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.257374126
+2022-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2022-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1473635753
+2022-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.13508501
+2022-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.1088180957
+2022-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.456474436
+2022-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2022-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,58.5105036788
+2022-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2022-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2022-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2022-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2022-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1246611969
+2022-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1235721788
+2022-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6065096663
+2022-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2022-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2022-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2022-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2022-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2022-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.9519630242
+2022-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2022-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2022-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.9519630242
+2022-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2022-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2022-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2022-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2022-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2022-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2022-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2022-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2022-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2022-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2022-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2022-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2022-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2022-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2022-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2022-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2022-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2022-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2022-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2022-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,8.2524147526
+2022-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.6317834844
+2022-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.9911646554
+2022-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,30.479200576
+2022-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-6.932683513
+2022-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2022-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,3016392851200.0
+2022-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2022-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2022-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2022-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-436740498410.0
+2022-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-403843501560.0
+2022-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2022-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2022-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2022-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.2161298183
+2022-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0564311349
+2022-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2456448967
+2022-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2022-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1438056413
+2022-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.1438453195
+2022-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.1159158822
+2022-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4868283264
+2022-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2022-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,59.3873693953
+2022-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2022-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2022-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2022-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2022-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1317196972
+2022-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1304631871
+2022-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6343750552
+2022-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2022-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2022-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2022-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2022-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2022-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.580857967
+2022-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2022-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2022-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.580857967
+2022-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2022-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2022-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2022-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2022-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2022-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2022-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2022-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2022-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2022-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2022-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2022-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2022-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2022-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2022-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2022-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2022-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2022-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2021-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2021-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,8.820364712
+2021-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.7464707271
+2021-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,1.0224203566
+2021-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,92.904104756
+2021-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-7.3774949078
+2021-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2021-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,3105110288000.0
+2021-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2021-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2021-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2021-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-428749078982.0
+2021-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-394182903101.0
+2021-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2021-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,110896796.0
+2021-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2021-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1904793427
+2021-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0459246143
+2021-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2542392217
+2021-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2021-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1424122144
+2021-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.123277116
+2021-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0995214765
+2021-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4614543107
+2021-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2021-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,62.0176638278
+2021-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2021-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2021-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2021-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2021-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1169236024
+2021-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1157372015
+2021-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6123444821
+2021-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2021-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2021-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2021-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2021-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2021-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.0327578979
+2021-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2021-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2021-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.0327578979
+2021-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2021-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2021-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2021-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2021-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2021-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2021-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2021-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2021-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2021-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2021-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2021-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2021-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2021-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2021-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2021-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2021-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2021-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2021-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2021-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,8.4980592968
+2021-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.5098433087
+2021-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.8457394082
+2021-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,8.5775774702
+2021-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-6.1404062793
+2021-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2021-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,2546200085100.0
+2021-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2021-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2021-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2021-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-428749078982.0
+2021-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-394182903101.0
+2021-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2021-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2021-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2021-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1904793427
+2021-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0459246143
+2021-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2542392217
+2021-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2021-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1424122144
+2021-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.123277116
+2021-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0995214765
+2021-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4614543107
+2021-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2021-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,62.0176638278
+2021-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2021-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2021-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2021-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2021-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1169236024
+2021-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1157372015
+2021-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6123444821
+2021-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2021-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2021-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2021-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2021-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2021-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.0327578979
+2021-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2021-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2021-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.0327578979
+2021-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2021-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2021-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2021-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2021-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2021-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2021-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2021-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2021-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2021-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2021-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2021-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2021-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2021-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2021-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2021-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2021-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2021-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2021-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2021-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.4045155238
+2021-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1660940658
+2021-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.5901433144
+2021-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,9.8456637568
+2021-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.3264004648
+2021-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2021-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1792099014600.0
+2021-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2021-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2021-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2021-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-437443526656.0
+2021-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-387163357184.0
+2021-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2021-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2021-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2021-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.12603066861629486
+2021-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.03026873618364334
+2021-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2846384644508362
+2021-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2021-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.14405140280723572
+2021-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0774257481098175
+2021-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.06275106221437454
+2021-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.48236215114593506
+2021-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2021-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,68.57623291015625
+2021-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2021-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2021-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2021-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2021-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1145693063735962
+2021-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1133886575698853
+2021-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.5858699083328247
+2021-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2021-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2021-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2021-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2021-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2021-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.339538097381592
+2021-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2021-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2021-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.339538097381592
+2021-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2021-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2021-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2021-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2021-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2021-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2021-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2021-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2021-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2021-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2021-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2021-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2021-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2021-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2021-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2021-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2021-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2021-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2020-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2020-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,10.3653240479
+2020-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.2290886357
+2020-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6226503792
+2020-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,13.3555468
+2020-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.5040754679
+2020-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,4.87804878
+2020-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1818714346500.0
+2020-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2020-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2020-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2020-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-418737983459.0
+2020-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-368737295511.0
+2020-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2020-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2020-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2020-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1162993735
+2020-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0293583964
+2020-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2829834701
+2020-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2020-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1433580621
+2020-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0742762512
+2020-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0600705175
+2020-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4887322042
+2020-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2020-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,66.9986222306
+2020-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2020-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2020-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2020-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2020-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1187554353
+2020-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1175201998
+2020-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6348744172
+2020-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2020-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2020-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2020-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2020-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2020-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.1292957708
+2020-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2020-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2020-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.1292957708
+2020-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2020-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2020-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2020-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2020-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2020-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2020-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2020-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2020-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2020-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2020-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2020-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2020-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2020-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2020-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2020-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2020-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2020-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2020-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2020-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.3694951485
+2020-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1602197979
+2020-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6221584852
+2020-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,11.1831714714
+2020-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.3748895857
+2020-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,5.0
+2020-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1774355460000.0
+2020-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2020-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2020-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2020-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-410977411311.0
+2020-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-369486289579.0
+2020-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2020-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2020-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2020-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.125482452
+2020-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0312753786
+2020-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.268730894
+2020-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2020-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.144104769
+2020-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0817749608
+2020-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0664025623
+2020-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4709965634
+2020-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2020-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,79.5320680911
+2020-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2020-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2020-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2020-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2020-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1173831622
+2020-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1161457339
+2020-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.0497976443
+2020-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2020-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2020-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2020-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2020-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2020-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.0361530546
+2020-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2020-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2020-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.0361530546
+2020-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2020-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2020-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2020-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2020-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2020-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2020-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2020-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2020-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2020-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2020-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2020-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2020-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2020-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2020-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2020-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2020-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2020-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2020-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2020-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,8.580199921
+2020-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1222068631
+2020-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6003705594
+2020-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,11.8476841028
+2020-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.2430868225
+2020-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2020-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1685637687000.0
+2020-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2020-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2020-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2020-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-393413305630.0
+2020-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-356617555473.0
+2020-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2020-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2020-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2020-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.13100568
+2020-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0330493904
+2020-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2619134082
+2020-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2020-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1401213133
+2020-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0853732052
+2020-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0699716283
+2020-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4723255871
+2020-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2020-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,81.7875665405
+2020-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2020-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2020-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2020-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2020-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.140487879
+2020-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1393060795
+2020-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.0528401255
+2020-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2020-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2020-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2020-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2020-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2020-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.1476418988
+2020-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2020-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2020-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.1476418988
+2020-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2020-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2020-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2020-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2020-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2020-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2020-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2020-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2020-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2020-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2020-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2020-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2020-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2020-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2020-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2020-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2020-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2020-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2020-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2020-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.8306708917
+2020-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1511028301
+2020-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.6275367822
+2020-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,10.0915836132
+2020-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.4282310334
+2020-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2020-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1685637687000.0
+2020-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2020-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2020-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2020-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-384742485505.0
+2020-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-351895691399.0
+2020-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2020-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2020-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2020-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1152709221
+2020-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0295721037
+2020-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2627362732
+2020-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2020-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1432336636
+2020-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0777373179
+2020-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0638345835
+2020-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4632614805
+2020-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2020-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,85.093245923
+2020-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2020-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2020-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2020-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2020-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1408848605
+2020-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1397129577
+2020-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.0454208653
+2020-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2020-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2020-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2020-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2020-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2020-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,3.0802109947
+2020-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2020-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2020-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,3.0802109947
+2020-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2020-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2020-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2020-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2020-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2020-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2020-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2020-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2020-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2020-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2020-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2020-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2020-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2020-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2020-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2020-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2020-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2020-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2019-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2019-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,8.5112980613
+2019-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,0.9000534651
+2019-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.5310030383
+2019-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,17.9650309317
+2019-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-3.6864113224
+2019-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,8.33333333
+2019-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1383997258800.0
+2019-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2019-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2019-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2019-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-371177699644.0
+2019-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-346358578788.0
+2019-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2019-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2019-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2019-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1073119521
+2019-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.029013616
+2019-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2413875986
+2019-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2019-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.142411038
+2019-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0769953635
+2019-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0623880205
+2019-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4650510749
+2019-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2019-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,78.0200871553
+2019-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2019-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2019-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2019-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2019-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1713348955
+2019-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1699408074
+2019-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6727218161
+2019-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2019-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2019-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2019-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2019-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2019-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.7997670843
+2019-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2019-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2019-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.7997670843
+2019-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2019-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2019-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2019-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2019-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2019-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2019-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2019-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2019-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2019-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2019-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2019-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2019-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2019-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2019-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2019-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2019-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2019-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2019-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2019-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.9949433327
+2019-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.0174745952
+2019-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.5972946886
+2019-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,24.790426256
+2019-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.3090727691
+2019-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2019-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1517073918300.0
+2019-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2019-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2019-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2019-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-374968896390.0
+2019-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-327192628556.0
+2019-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2019-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2019-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2019-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1036517356
+2019-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0271809161
+2019-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2514849945
+2019-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1861161971
+2019-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.147630862
+2019-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0724471652
+2019-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0597596873
+2019-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4548369864
+2019-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2019-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,84.1533463969
+2019-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2019-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2019-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2019-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2019-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1581355103
+2019-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1568377221
+2019-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6518746074
+2019-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2019-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2019-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2019-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2019-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2019-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.8426827884
+2019-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2019-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2019-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.8426827884
+2019-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2019-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2019-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2019-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2019-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2019-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2019-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2019-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2019-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2019-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2019-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2019-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2019-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2019-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2019-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2019-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2019-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2019-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2019-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2019-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,10.1179089088
+2019-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.0374807334
+2019-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.0
+2019-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,11.5489995999
+2019-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.1522568251
+2019-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2019-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1508202141000.0
+2019-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2019-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2019-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2019-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-379002914286.0
+2019-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-330728381471.0
+2019-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2019-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2019-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2019-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1024396971
+2019-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0271695186
+2019-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.26071321
+2019-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.2353014014
+2019-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,0.0657205742
+2019-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0
+2019-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0773485927
+2019-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.0
+2019-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2019-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,0.0
+2019-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2019-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2019-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2019-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2019-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1575259696
+2019-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.155927276
+2019-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6503774275
+2019-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2019-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2019-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2019-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2019-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2019-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.8837178706
+2019-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2019-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2019-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.8837178706
+2019-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2019-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2019-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2019-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2019-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2019-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2019-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2019-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2019-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2019-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2019-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2019-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2019-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2019-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2019-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2019-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2019-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2019-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2019-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2019-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.8876116627
+2019-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.0162623104
+2019-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.0
+2019-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,45.1617764024
+2019-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.0466832132
+2019-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2019-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1446099699900.0
+2019-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2019-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2019-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2019-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-370017035714.0
+2019-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-322760193638.0
+2019-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2019-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2019-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2019-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.1010522669
+2019-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0271333242
+2019-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2600335009
+2019-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.2536466192
+2019-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,0.0833725599
+2019-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0
+2019-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0773162488
+2019-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.0
+2019-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2019-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,0.0
+2019-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2019-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2019-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2019-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2019-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1477337826
+2019-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1459910177
+2019-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6268771586
+2019-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2019-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2019-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2019-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2019-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2019-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.9360972212
+2019-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2019-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2019-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.9360972212
+2019-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2019-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2019-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2019-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2019-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2019-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2019-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2019-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2019-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2019-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2019-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2019-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2019-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2019-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2019-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2019-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2019-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2019-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2018-Q4,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2018-Q4,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,9.8991967792
+2018-Q4,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,0.9409091826
+2018-Q4,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.0
+2018-Q4,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,8.7917113593
+2018-Q4,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-3.8419704841
+2018-Q4,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,7.59493671
+2018-Q4,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1401740813400.0
+2018-Q4,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2018-Q4,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2018-Q4,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2018-Q4,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-369316700004.0
+2018-Q4,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-319034761824.0
+2018-Q4,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2018-Q4,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2018-Q4,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2018-Q4,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.0957522855
+2018-Q4,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0272832551
+2018-Q4,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2479013745
+2018-Q4,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.2267496454
+2018-Q4,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,0.0539231786
+2018-Q4,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0
+2018-Q4,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0662642164
+2018-Q4,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.0
+2018-Q4,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2018-Q4,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,0.0
+2018-Q4,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2018-Q4,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2018-Q4,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2018-Q4,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2018-Q4,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.182575094
+2018-Q4,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1806970169
+2018-Q4,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.7085425559
+2018-Q4,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2018-Q4,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2018-Q4,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2018-Q4,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2018-Q4,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2018-Q4,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.59828663
+2018-Q4,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2018-Q4,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2018-Q4,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.59828663
+2018-Q4,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2018-Q4,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2018-Q4,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2018-Q4,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2018-Q4,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2018-Q4,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2018-Q4,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2018-Q4,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2018-Q4,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2018-Q4,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2018-Q4,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2018-Q4,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2018-Q4,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2018-Q4,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2018-Q4,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2018-Q4,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2018-Q4,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2018-Q4,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2018-Q3,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2018-Q3,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,10.5508656442
+2018-Q3,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,0.9792753265
+2018-Q3,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.0
+2018-Q3,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,12.131784711
+2018-Q3,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-3.8555216673
+2018-Q3,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2018-Q3,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1423920256650.0
+2018-Q3,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2018-Q3,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2018-Q3,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2018-Q3,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-355098195308.0
+2018-Q3,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-323666079265.0
+2018-Q3,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2018-Q3,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2018-Q3,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2018-Q3,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.0940338656
+2018-Q3,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0261849615
+2018-Q3,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2442123423
+2018-Q3,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.1922446367
+2018-Q3,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,0.0240311465
+2018-Q3,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0
+2018-Q3,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0638871506
+2018-Q3,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.0
+2018-Q3,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2018-Q3,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,0.0
+2018-Q3,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2018-Q3,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2018-Q3,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2018-Q3,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2018-Q3,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1904456347
+2018-Q3,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1886720251
+2018-Q3,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.6988658459
+2018-Q3,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2018-Q3,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2018-Q3,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2018-Q3,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2018-Q3,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2018-Q3,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.6712583858
+2018-Q3,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2018-Q3,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2018-Q3,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.6712583858
+2018-Q3,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2018-Q3,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2018-Q3,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2018-Q3,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2018-Q3,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2018-Q3,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2018-Q3,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2018-Q3,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2018-Q3,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2018-Q3,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2018-Q3,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2018-Q3,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2018-Q3,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2018-Q3,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2018-Q3,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2018-Q3,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2018-Q3,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2018-Q3,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2018-Q2,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2018-Q2,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,12.8323108961
+2018-Q2,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.1164233381
+2018-Q2,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.0
+2018-Q2,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,2.6094923807
+2018-Q2,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.5356343905
+2018-Q2,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2018-Q2,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1588048136700.0
+2018-Q2,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2018-Q2,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2018-Q2,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2018-Q2,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-350214998867.0
+2018-Q2,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-319635043444.0
+2018-Q2,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2018-Q2,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2018-Q2,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2018-Q2,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.0853435748
+2018-Q2,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0243655622
+2018-Q2,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2462067673
+2018-Q2,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.0
+2018-Q2,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,-0.1446661942
+2018-Q2,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0620888842
+2018-Q2,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.0504668301
+2018-Q2,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.4828035005
+2018-Q2,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2018-Q2,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,84.9936465875
+2018-Q2,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2018-Q2,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2018-Q2,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2018-Q2,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2018-Q2,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1864398479
+2018-Q2,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1846627864
+2018-Q2,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.677983837
+2018-Q2,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2018-Q2,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2018-Q2,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2018-Q2,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2018-Q2,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2018-Q2,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.6985685328
+2018-Q2,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2018-Q2,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2018-Q2,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.6985685328
+2018-Q2,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2018-Q2,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2018-Q2,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2018-Q2,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2018-Q2,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2018-Q2,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2018-Q2,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2018-Q2,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2018-Q2,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2018-Q2,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2018-Q2,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2018-Q2,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2018-Q2,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2018-Q2,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2018-Q2,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2018-Q2,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2018-Q2,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2018-Q2,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
+2018-Q1,RT_CAT_INFO_VALUATION,Valuation & Company Information,1,1,,
+2018-Q1,RT_VALUE_PE,  ‣ P/E Ratio,2,2,lần,11.0588580279
+2018-Q1,RT_VALUE_PB,  ‣ P/B Ratio,3,2,lần,1.0991056807
+2018-Q1,RT_VALUE_PS,  ‣ P/S Ratio,4,2,lần,0.0
+2018-Q1,RT_VALUE_P_CF,  ‣ P/CF Ratio,5,2,lần,2.3421853735
+2018-Q1,RT_VALUE_EV_EBITDA,  ‣ EV/EBITDA,6,2,lần,-4.5421065983
+2018-Q1,RT_VALUE_DIVIDEND_YIELD,  ‣ Dividend Yield,7,2,%,0.0
+2018-Q1,RT_VALUE_MARKET_CAP,  ‣ Market Capitalization,8,2,tỷ VNĐ,1534817472900.0
+2018-Q1,RT_VALUE_EPS,  ‣ Basic EPS,9,2,VNĐ,
+2018-Q1,RT_VALUE_BETA,  ‣ Beta,10,2,lần,
+2018-Q1,RT_VALUE_BVPS,  ‣ Book Value Per Share,11,2,VNĐ,
+2018-Q1,RT_VALUE_EBIT,  ‣ EBIT,12,2,tỷ VNĐ,-342107986519.0
+2018-Q1,RT_VALUE_EBITDA,  ‣ EBITDA,13,2,tỷ VNĐ,-310181702519.0
+2018-Q1,RT_VALUE_EQUITY,  ‣ Owner's Equity,14,2,tỷ VNĐ,0.0
+2018-Q1,RT_VALUE_OUTSTANDING_SHARES,  ‣ Outstanding Shares,15,2,cổ phiếu,88717773.0
+2018-Q1,RT_CAT_PROFITABILITY,Profitability & Efficiency,16,1,,
+2018-Q1,RT_PRT_ROE,  ‣ ROE %,17,2,%,0.0999962725
+2018-Q1,RT_PRT_ROA,  ‣ ROA %,18,2,%,0.0272854464
+2018-Q1,RT_PRT_ROIC,  ‣ ROIC %,19,2,%,-0.2449886309
+2018-Q1,RT_PRT_GROSS_MARGIN,  ‣ Gross Profit Margin %,20,2,%,0.2408976953
+2018-Q1,RT_PRT_EBIT_MARGIN,  ‣ EBIT Margin %,21,2,%,0.0638496791
+2018-Q1,RT_PRT_PRE_TAX_MARGIN,  ‣ Pre Tax Profit Margin %,22,2,%,0.0
+2018-Q1,RT_PRT_NET_MARGIN,  ‣ Net Profit Margin %,23,2,%,0.071532714
+2018-Q1,RT_EFF_ATR,  ‣ Asset Turnover,24,2,vòng,0.0
+2018-Q1,RT_EFF_FATR,  ‣ Fixed Asset Turnover,25,2,vòng,0.0
+2018-Q1,RT_EFF_DSO,  ‣ Days Sales Outstanding,26,2,ngày,0.0
+2018-Q1,RT_EFF_DIO,  ‣ Days Inventory Outstanding,27,2,ngày,0.0
+2018-Q1,RT_EFF_DPO,  ‣ Days Payable Outstanding,28,2,ngày,0.0
+2018-Q1,RT_EFF_CASH_CYCLE,  ‣ Cash Conversion Cycle,29,2,ngày,0.0
+2018-Q1,RT_CAT_LIQUIDITY_SAFETY,Liquidity & Financial Safety,30,1,,
+2018-Q1,RT_LQD_CR,  ‣ Current Ratio,31,2,lần,1.1856151287
+2018-Q1,RT_LQD_QR,  ‣ Quick Ratio,32,2,lần,1.1838265992
+2018-Q1,RT_LQD_CASH_RATIO,  ‣ Cash Ratio,33,2,lần,0.7181681495
+2018-Q1,RT_ASSETS_CURRENT_DEPOSITS,  ‣ Current Deposits,34,2,tỷ VNĐ,
+2018-Q1,RT_ASSETS_DEPOSITS_SPECIAL,  ‣ Special Purpose Deposits,35,2,tỷ VNĐ,
+2018-Q1,RT_ASSETS_DEPOSITS_CUSTOMERS,  ‣ Customer Deposits,36,2,tỷ VNĐ,
+2018-Q1,RT_ASSETS_MARGIN_DEPOSITS,  ‣ Margin Deposits,37,2,tỷ VNĐ,
+2018-Q1,RT_CAT_FINANCIAL_LEVERAGE,Financial Leverage,38,1,,
+2018-Q1,RT_LEV_DE,  ‣ Debt to Equity Ratio,39,2,lần,2.5810904799
+2018-Q1,RT_LEV_LOAN_EQUITY,  ‣ Loans to Equity Ratio,40,2,lần,0.0
+2018-Q1,RT_LEV_DA,  ‣ Debt to Assets Ratio,41,2,lần,
+2018-Q1,RT_LEV_FINANCIAL_LEVERAGE,  ‣ Financial Leverage,42,2,lần,2.5810904799
+2018-Q1,RT_LEV_EQUITY_TO_LIABILITIES,  ‣ Equity to Liabilities Ratio,43,2,lần,0.0
+2018-Q1,RT_LEV_EQUITY_TO_ASSETS,  ‣ Equity to Assets Ratio,44,2,lần,0.0
+2018-Q1,RT_CAT_BANKING_SPECIFICS,Banking Specifics,45,1,,
+2018-Q1,RT_BANK_NIM,  ‣ Net Interest Margin (NIM),46,2,%,0.0
+2018-Q1,RT_BANK_YIEA,  ‣ Yield on Earning Assets (YIEA),47,2,%,0.0
+2018-Q1,RT_BANK_COF,  ‣ Cost of Funds (COF),48,2,%,0.0
+2018-Q1,RT_BANK_NOII,  ‣ Non Interest Income,49,2,tỷ VNĐ,0.0
+2018-Q1,RT_BANK_CIR,  ‣ Cost to Income Ratio (CIR),50,2,%,0.0
+2018-Q1,RT_BANK_LOAN_GROWTH,  ‣ Loan Growth,51,2,%,0.0
+2018-Q1,RT_BANK_DEPOSIT_GROWTH,  ‣ Deposit Growth,52,2,%,0.0
+2018-Q1,RT_BANK_LDR,  ‣ Loan to Deposit Ratio (LDR),53,2,%,0.0
+2018-Q1,RT_BANK_NPL,  ‣ Non Performing Loans Ratio (NPL),54,2,%,0.0
+2018-Q1,RT_BANK_NPL_COVERAGE,  ‣ NPL Coverage Ratio,55,2,%,0.0
+2018-Q1,RT_BANK_PROVISION_TO_LOANS,  ‣ Provision to Loans Ratio,56,2,%,0.0
+2018-Q1,RT_BANK_CAR,  ‣ Capital Adequacy Ratio (CAR),57,2,%,
+2018-Q1,RT_BANK_CASA,  ‣ CASA Ratio,58,2,%,
+2018-Q1,RT_BANK_EQUITY_TO_LOANS,  ‣ Equity to Loans Ratio,59,2,%,0.0
+2018-Q1,RT_BANK_LLR_TO_LOANS,  ‣ Loan Loss Reserve to Loans Ratio,60,2,%,0.0
