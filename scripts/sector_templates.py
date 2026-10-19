@@ -3,6 +3,7 @@ import re, unicodedata, pandas as pd
 ROOT=Path(__file__).resolve().parents[1]; CFG=ROOT/'config'
 
 TEMPLATES={
+'INSURANCE': {'label':'Bảo hiểm','metrics':['TotalAssets','Equity','InsuranceReserves','GrossWrittenPremium','NetInsurancePremium','Revenue','NPAT','ROE','ROA','PB','PE'],'valuation':['P/B tham khảo','P/E tham khảo'],'focus':['Mô hình bảo hiểm','Dự phòng nghiệp vụ','Khả năng thanh toán chuyên ngành','Chất lượng đầu tư','Phạm vi phương pháp phi nhân thọ 2025']},
 'BANK': {'label':'Ngân hàng','metrics':['TotalAssets','GrossLoans','CustomerDeposits','ROE','ROA','NIM','CIR','NPL','CAR','CASA','LDR','CreditCostProxy','AssetEquity','FundingGapAssets','PB','PE'],'valuation':['P/B','Residual Income'],'focus':['Chất lượng tài sản','Vốn','Nguồn vốn & thanh khoản','Khả năng sinh lợi']},
 'SECURITIES': {'label':'Công ty chứng khoán','metrics':['Revenue','TotalAssets','Equity','NPAT','ROE','ROA','AvailableCapitalRatio','DebtEquity','NetDebtEquity','DebtEBITDA','NetDebtEBITDA','CurrentRatio','CashAssets','WorkingCapitalAssets','CFO_Debt','FOCF_Debt','PB','PE'],'valuation':['P/B','P/E'],'focus':['Thị phần & franchise','Vốn khả dụng','Đòn bẩy','Thanh khoản','Cơ cấu doanh thu']},
 'REAL_ESTATE': {'label':'Bất động sản','metrics':['Revenue','NPAT','ROE','ROA','DebtEquity','CurrentRatio','PB','PE'],'valuation':['P/B','P/E','RNAV (khi có dữ liệu dự án)'],'focus':['Quỹ đất & pháp lý','Presales/người mua trả tiền trước','Tồn kho','Nợ ròng/VCSH','Dòng tiền dự án']},
@@ -23,6 +24,7 @@ def norm(s):
     return unicodedata.normalize('NFKD',str(s)).encode('ascii','ignore').decode().lower()
 
 def template_key(entity_type,sector):
+    if entity_type=='INSURANCE': return 'INSURANCE'
     if entity_type=='BANK': return 'BANK'
     if entity_type=='SECURITIES': return 'SECURITIES'
     n=norm(sector)

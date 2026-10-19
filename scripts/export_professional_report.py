@@ -17,12 +17,7 @@ def export(ticker,report_type='analysis'):
     docx=OUT/f'{ticker}_{label}.docx'
     docx.write_bytes(generate_docx(ticker,report_type))
     pdf=OUT/f'{ticker}_{label}.pdf'
-    lo=shutil.which('libreoffice') or shutil.which('soffice')
-    if lo:
-        subprocess.run([lo,'--headless','--convert-to','pdf','--outdir',str(OUT),str(docx)],check=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-        generated=OUT/(docx.stem+'.pdf')
-        if generated.exists() and generated!=pdf: generated.replace(pdf)
-    if not pdf.exists(): pdf.write_bytes(generate_pdf(ticker,report_type))
+    pdf.write_bytes(generate_pdf(ticker,report_type))
     print(docx);print(pdf)
     return docx,pdf
 

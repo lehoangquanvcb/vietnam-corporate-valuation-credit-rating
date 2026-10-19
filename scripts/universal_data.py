@@ -13,22 +13,37 @@ ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'data'; CFG=ROOT/'config'
 
 def read_csv(path):
-    try:return pd.read_csv(path)
-    except Exception:return pd.DataFrame()
+    from scripts.financial_evidence import read_csv as evidence_csv
+    return evidence_csv(path)
 
 def universe():
     x=read_csv(CFG/'company_universe.csv')
     if len(x):
         x['Ticker']=x['Ticker'].astype(str).str.upper().str.strip()
-        x=x[x.get('Active',1).fillna(1).astype(int).eq(1)]
+        if 'Active' in x: x=x[pd.to_numeric(x['Active'],errors='coerce').fillna(1).eq(1)]
         # Explicit insurer registry: survives a universe refresh that collapses
         # ICB industry into the broad 'Tài chính' bucket.
         insurer_tickers = {'ABI','AIC','BIC','BLI','BMI','BVH','MIG','PGI','PRE','PTI','PVI','VNR'}
-        mask=x['Ticker'].isin(insurer_tickers)
+        et=x['EntityType'].fillna('').astype(str).str.upper()
+        method=x['Methodology'].fillna('').astype(str).str.upper()
+        sector=x['Sector'].fillna('').astype(str).str.lower()
+        mask=(x['Ticker'].isin(insurer_tickers) |
+              et.isin(['INSURANCE','INSURER','INSURANCE_NONLIFE','INSURANCE_LIFE']) |
+              method.str.startswith('INSURANCE') |
+              (sector.str.contains('bảo hiểm|bao hiem|insurance',regex=True) &
+               ~sector.str.contains('môi giới|moi gioi|broker',regex=True)))
         x.loc[mask,'EntityType']='INSURANCE'
         x.loc[mask,'Methodology']='INSURANCE_2025'
         x.loc[mask,'Sector']='Bảo hiểm'
         x.loc[mask,'PeerGroup']='Bảo hiểm'
+    registry=read_csv(CFG/'insurance_entities.csv')
+    if len(registry) and 'InsuranceSubtype' in registry and 'Ticker' in registry:
+        for row in registry.to_dict('records'):
+            match=x.Ticker.eq(row['Ticker'])
+            if row.get('InsuranceName'):
+                x.loc[match,'CompanyName']=row['InsuranceName']
+            for key in ['InsuranceSubtype','InsuranceScope','InsuranceSource']:
+                if key in row:x.loc[match,key]=row[key]
     return x
 
 def bank_snapshot(): return read_csv(DATA/'bank_snapshot.csv')
@@ -82,7 +97,7 @@ def get_company(ticker):
         return {'Ticker':t,'CompanyName':t,'LegalName':t,'DisplayName':t,'EntityType':'CORPORATE','Sector':'Chưa phân loại','Exchange':'N/A','PeerGroup':'Chưa phân loại','Methodology':'CORPORATE_2025','Active':1}
     d=z.iloc[0].to_dict()
     legal=str(d.get('LegalName') or '').strip()
-    d['DisplayName']=legal if legal and legal.lower()!='nan' else d.get('CompanyName',t)
+    d['DisplayName']=legal if legal and legal.lower()!='nan' and legal!=t else d.get('CompanyName',t)
     return d
 
 def get_snapshot(ticker):
@@ -93,14 +108,16 @@ def get_snapshot(ticker):
         s=generic_snapshot(); z=s[s.get('Ticker',pd.Series(dtype=str)).astype(str).str.upper().eq(t)] if len(s) else pd.DataFrame()
     out=dict(meta)
     if len(z): out.update(z.iloc[-1].to_dict())
+    from scripts.financial_evidence import repair_snapshot
+    out=repair_snapshot(t,meta['EntityType'],out)
+    # Métadonnées của nhóm phải thắng cache cũ sau refresh.
+    out.update({k:meta[k] for k in ['EntityType','Methodology','Sector','PeerGroup','InsuranceSubtype','InsuranceScope','InsuranceSource'] if k in meta})
     return out
 
 def entity_history(ticker):
-    meta=get_company(ticker); t=meta['Ticker']
-    if meta['EntityType']=='BANK': x=read_csv(DATA/'bank_history_long.csv')
-    else: x=generic_history()
-    if x.empty:return x
-    return x[x.Ticker.astype(str).str.upper().eq(t)].copy()
+    from scripts.financial_evidence import history
+    meta=get_company(ticker)
+    return history(meta['Ticker'],meta['EntityType'])
 
 def industry_tickers(ticker):
     from scripts.sector_benchmark_engine import industry_tickers as _it
@@ -131,11 +148,11 @@ def peer_tickers(ticker):
     return p or [ticker]
 
 def peer_snapshot(ticker):
-    meta=get_company(ticker); peers=peer_tickers(ticker)
-    s=bank_snapshot() if meta['EntityType']=='BANK' else generic_snapshot()
-    if s.empty:return s
-    s=s.copy(); s['Ticker']=s['Ticker'].astype(str).str.upper()
-    return s[s.Ticker.isin(peers)].copy()
+    meta=get_company(ticker)
+    peers=[t for t in peer_tickers(ticker) if str(t).upper()!=str(ticker).upper() and get_company(t).get('EntityType')==meta.get('EntityType')]
+    from scripts.financial_evidence import comparable_model
+    target=get_snapshot(ticker)
+    return pd.DataFrame([row for row in (get_snapshot(t) for t in peers) if comparable_model(target,row)])
 
 def peer_metric_history(ticker,metric):
     meta=get_company(ticker); peers=peer_tickers(ticker)
@@ -148,10 +165,8 @@ def peer_metric_history(ticker,metric):
     return x.groupby('PeriodDate',as_index=False).agg(PeerMean=('Value','mean'),PeerMedian=('Value','median'),PeerCount=('Ticker','nunique'))
 
 def period_date(v):
-    s=str(v).upper(); y=re.search(r'(20\d{2})',s); q=re.search(r'Q\s*([1-4])',s)
-    if not y:return pd.NaT
-    yy=int(y.group(1)); mm=(int(q.group(1))-1)*3+1 if q else 1
-    return pd.Timestamp(yy,mm,1)
+    from scripts.financial_evidence import period_date as canonical_date
+    return canonical_date(v)
 
 def num(x):
     try:

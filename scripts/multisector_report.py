@@ -1526,30 +1526,21 @@ def _compact_appendix(doc,ticker,report_type):
 
 
 def generate_pdf(ticker,report_type='analysis',rating_result=None,mna=None):
-    """PDF is converted from the same DOCX source so DOCX/PDF layout stays identical.
-    Falls back to a minimal ReportLab PDF only when LibreOffice is unavailable.
-    """
+    """Chuyển đúng Word sang PDF; không trả bản PDF rỗng khi converter gặp lỗi."""
     import tempfile, subprocess, shutil, os
-    docx_bytes=generate_docx(ticker,report_type,rating_result,mna)
-    soffice=shutil.which('libreoffice') or shutil.which('soffice')
-    if soffice:
-        with tempfile.TemporaryDirectory() as td:
-            inp=Path(td)/'report.docx'; inp.write_bytes(docx_bytes)
-            env=os.environ.copy(); env['HOME']=td
-            cmd=[soffice,'--headless','--convert-to','pdf','--outdir',td,str(inp)]
-            try:
-                subprocess.run(cmd,check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=90,env=env)
-                pdf=Path(td)/'report.pdf'
-                if pdf.exists(): return pdf.read_bytes()
-            except Exception: pass
-    # Minimal fallback only; normal local/cloud deployment should install LibreOffice via packages.txt.
-    from reportlab.lib.pagesizes import A4
-    from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer
-    from reportlab.lib.styles import getSampleStyleSheet
-    bio=BytesIO();pdf=SimpleDocTemplate(bio,pagesize=A4);styles=getSampleStyleSheet()
-    meta=get_company(str(ticker).upper())
-    story=[Paragraph('BÁO CÁO MÔ PHỎNG QUÁ TRÌNH XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH CỔ PHIẾU',styles['Title']),Spacer(1,12),Paragraph(f"{str(ticker).upper()} - {meta.get('CompanyName')}",styles['Heading1']),Paragraph('PDF fallback: vui lòng cài LibreOffice để PDF giữ nguyên format DOCX.',styles['BodyText'])]
-    pdf.build(story);return bio.getvalue()
+    binary=shutil.which('libreoffice') or shutil.which('soffice')
+    if not binary and os.name=='nt':
+        for env_key in ['PROGRAMFILES','PROGRAMFILES(X86)']:
+            candidate=Path(os.environ.get(env_key,''))/'LibreOffice/program/soffice.exe'
+            if candidate.is_file():binary=str(candidate);break
+    if not binary:raise RuntimeError('Chưa tìm thấy LibreOffice để xuất PDF. Có thể xuất Word hoặc cài LibreOffice và thêm soffice vào PATH.')
+    with tempfile.TemporaryDirectory() as td:
+        inp=Path(td)/'report.docx';inp.write_bytes(generate_docx(ticker,report_type,rating_result,mna))
+        profile=(Path(td)/'profile').as_uri()
+        result=subprocess.run([binary,'-env:UserInstallation='+profile,'--headless','--convert-to','pdf','--outdir',td,str(inp)],capture_output=True,text=True,timeout=120)
+        pdf=Path(td)/'report.pdf'
+        if result.returncode!=0 or not pdf.exists():raise RuntimeError('Xuất PDF thất bại: '+(result.stderr or result.stdout))
+        return pdf.read_bytes()
 
 
 # ===== V8.40 SAMPLE-NATIVE REPORT ENGINE =====
@@ -2563,29 +2554,5 @@ def _normalize_report_typography(doc):
     plt.rcParams.update({'font.family': 'Lato', 'font.size': 10})
 
 def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
-    ticker=str(ticker).upper();meta=get_company(ticker);s=get_snapshot(ticker);val=valuation(ticker,s)
-    rr=rating_result or (rate_company(ticker) if report_type=='rating' else {})
-    doc=Document();_style_doc(doc, report_type)
-    sec=doc.sections[0];sec.top_margin=Mm(12);sec.bottom_margin=Mm(12);sec.left_margin=Mm(13);sec.right_margin=Mm(13)
-    n=doc.styles['Normal'];n.font.size=Pt(9.6);n.paragraph_format.line_spacing=1.04;n.paragraph_format.space_after=Pt(2.5)
-    _cover_sample(doc,ticker,meta,report_type)
-    if report_type=='rating':
-        _rating_summary_page(doc,ticker,meta,rr)
-        _v840_rating_body(doc,ticker,meta,s,rr)
-    else:
-        _analysis_summary_page(doc,ticker,meta,s,val)
-        _v840_analysis_body(doc,ticker,meta,s,val)
-    _v840_appendix(doc,ticker,report_type)
-
-    # Charts are embedded once, inside the relevant analytical section.
-    # Do not append a second chart gallery at the end of the report.
-    # The score/notch bridge remains literally the final section of every rating report.
-    if report_type=='rating':
-        _v875_final_rating_scorecard(doc,ticker,meta,rr)
-    for p in doc.paragraphs:p.paragraph_format.widow_control=True
-    for table in doc.tables:
-        for row in table.rows:
-            trPr=row._tr.get_or_add_trPr()
-            if trPr.find(qn('w:cantSplit')) is None:trPr.append(OxmlElement('w:cantSplit'))
-    _normalize_report_typography(doc)
-    bio=BytesIO();doc.save(bio);return bio.getvalue()
+    from scripts.evidence_report import generate_docx as generate_evidence_docx
+    return generate_evidence_docx(ticker,report_type,rating_result,mna)

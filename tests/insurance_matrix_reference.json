@@ -1,0 +1,404 @@
+{
+  "9x12": [
+    [
+      "",
+      "",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính",
+      "Rủi ro tài chính"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "1",
+      "vnAA+",
+      "vnAA",
+      "vnAA-",
+      "vnA+",
+      "vnA",
+      "vnA-",
+      "vnBBB+",
+      "vnBBB-",
+      "N/A",
+      "N/A"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "2",
+      "vnAA",
+      "vnAA-",
+      "vnAA- hoặc vnA+",
+      "vnA+ hoặc vnA",
+      "vnA",
+      "vnA-",
+      "vnBBB",
+      "vnBB+",
+      "vnBB",
+      "N/A"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "3",
+      "vnA+",
+      "vnA+ hoặc A",
+      "vnA hoặc A-",
+      "vnA-",
+      "vnA-",
+      "vnBBB+",
+      "vnBBB",
+      "vnBB+",
+      "vnBB-",
+      "vnB+"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "4",
+      "vnA hoặc vnA-",
+      "vnA-",
+      "vnA-",
+      "vnBBB+",
+      "vnBBB+",
+      "vnBBB",
+      "vnBBB-",
+      "vnBB",
+      "vnBB-",
+      "vnB"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "5",
+      "vnBBB+",
+      "vnBBB+",
+      "vnBBB+ hoặc vnBBB",
+      "vnBBB",
+      "vnBBB",
+      "vnBBB-",
+      "vnBB+",
+      "vnBB",
+      "vnB+",
+      "vnB"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "6",
+      "vnBBB-",
+      "vnBBB-",
+      "vnBBB-",
+      "vnBB+",
+      "vnBB+",
+      "vnBB+",
+      "vnBB",
+      "vnBB-",
+      "vnB",
+      "vnB"
+    ],
+    [
+      "Rủi ro vĩ mô và ngành và rủi ro kinh doanh",
+      "7",
+      "vnBB-",
+      "vnBB-",
+      "vnBB-",
+      "vnBB-",
+      "vnBB-",
+      "vnBB-",
+      "vnB+",
+      "vnB",
+      "vnB",
+      "vnB- hoặc thấp hơn"
+    ]
+  ],
+  "17x7": [
+    [
+      "",
+      "SCA sau khi xem xét rủi ro quản trị và điều hành",
+      "SCA sau khi xem xét rủi ro quản trị và điều hành",
+      "SCA sau khi xem xét rủi ro quản trị và điều hành",
+      "SCA sau khi xem xét rủi ro quản trị và điều hành",
+      "SCA sau khi xem xét rủi ro quản trị và điều hành",
+      "SCA sau khi xem xét rủi ro quản trị và điều hành"
+    ],
+    [
+      "Anchor ",
+      "Rất mạnh",
+      "Mạnh",
+      "Khá mạnh",
+      "Trung bình",
+      "Yếu",
+      "Rất yếu"
+    ],
+    [
+      "vnAA+",
+      "vnAA+",
+      "vnAA+",
+      "vnAA",
+      "vnA+",
+      "vnBBB+",
+      "vnBBB"
+    ],
+    [
+      "vnAA",
+      "vnAA",
+      "vnAA",
+      "vnAA-",
+      "vnA+",
+      "vnBBB+",
+      "vnBBB"
+    ],
+    [
+      "vnAA-",
+      "vnAA-",
+      "vnAA-",
+      "vnA+",
+      "vnA",
+      "vnBBB",
+      "vnBBB"
+    ],
+    [
+      "vnA+",
+      "vnA+",
+      "vnA+",
+      "vnA+",
+      "vnA",
+      "vnBBB",
+      "vnBBB-"
+    ],
+    [
+      "vnA",
+      "vnA+",
+      "vnA",
+      "vnA",
+      "vnA-",
+      "vnBBB-",
+      "vnBBB-"
+    ],
+    [
+      "vnA-",
+      "vnA",
+      "vnA-",
+      "vnA-",
+      "vnBBB+",
+      "vnBBB-",
+      "vnBBB-"
+    ],
+    [
+      "vnBBB+",
+      "vnA-",
+      "vnBBB+",
+      "vnBBB+",
+      "vnBBB",
+      "vnBB+",
+      "vnBB+"
+    ],
+    [
+      "vnBBB",
+      "vnBBB+",
+      "vnBBB",
+      "vnBBB",
+      "vnBBB-",
+      "vnBB+",
+      "vnBB+"
+    ],
+    [
+      "vnBBB-",
+      "vnBBB",
+      "vnBBB-",
+      "vnBBB-",
+      "vnBB+",
+      "vnBB",
+      "vnBB"
+    ],
+    [
+      "vnBB+",
+      "vnBBB-",
+      "vnBB+",
+      "vnBB+",
+      "vnBB",
+      "vnBB",
+      "vnBB-"
+    ],
+    [
+      "vnBB",
+      "vnBB+",
+      "vnBB",
+      "vnBB",
+      "vnBB-",
+      "vnB+",
+      "vnB+"
+    ],
+    [
+      "vnBB-",
+      "vnBB",
+      "vnBB-",
+      "vnBB-",
+      "vnB+",
+      "vnB+",
+      "vnB"
+    ],
+    [
+      "vnB+",
+      "vnBB-",
+      "vnB+",
+      "vnB+",
+      "vnB",
+      "vnB-",
+      "vnB-"
+    ],
+    [
+      "vnB",
+      "vnB+",
+      "vnB",
+      "vnB",
+      "vnB-",
+      "vnB-",
+      "vnB-"
+    ],
+    [
+      "vnB-",
+      "vnB",
+      "vnB-",
+      "vnB-",
+      "vnB-",
+      "vnB-",
+      "vnB-"
+    ]
+  ],
+  "_source_sha256": "5b2f7ad5cd9c9f1e83259ae48ef0a9275078e5fe510f3a0ecdddab6bf63564d9",
+  "matrix1": [
+    [
+      "Rủi ro vĩ mô \nvà ngành",
+      "Rủi ro kinh doanh",
+      "Rủi ro kinh doanh",
+      "Rủi ro kinh doanh",
+      "Rủi ro kinh doanh",
+      "Rủi ro kinh doanh",
+      "Rủi ro kinh doanh"
+    ],
+    [
+      "Rủi ro vĩ mô \nvà ngành",
+      "1 (Cực kỳ  mạnh)",
+      "2 (Rất mạnh)",
+      "3 (Mạnh)",
+      "4 (Trung bình)",
+      "5 (Dưới trung bình)",
+      "6 (Yếu)"
+    ],
+    [
+      "1 (Rất thấp)",
+      "1 (Cực kỳ mạnh)",
+      "2 (Rất mạnh)",
+      "3 (Mạnh)",
+      "4 (Trung bình)",
+      "5 (Dưới trung bình)",
+      "6 (Yếu) hoặc 7 (Rất yếu)"
+    ],
+    [
+      "2 (Thấp)",
+      "1 (Cực kỳ mạnh)",
+      "2 (Rất mạnh)",
+      "3 (Mạnh)",
+      "4 (Trung bình)",
+      "5 (Dưới trung bình)",
+      "6 (Yếu) hoặc 7 (Rất yếu)"
+    ],
+    [
+      "3 (Trung bình)",
+      "2 (Rất mạnh)",
+      "2 (Rất mạnh)",
+      "3 (Mạnh)",
+      "4 (Trung bình)",
+      "5 (Dưới trung bình)",
+      "6 (Yếu) hoặc 7 (Rất yếu)"
+    ],
+    [
+      "4 (Tương đối cao)",
+      "3 (Mạnh)",
+      "3 (Mạnh)",
+      "4 (Trung bình)",
+      "5 (Dưới trung bình)",
+      "6 (Yếu)",
+      "7 (Rất yếu)"
+    ],
+    [
+      "5 (Cao)",
+      "5 (Dưới trung bình)",
+      "5 (Dưới trung bình)",
+      "5 (Dưới trung bình)",
+      "6 (Yếu)",
+      "6 (Yếu)",
+      "7 (Rất yếu)"
+    ],
+    [
+      "6 (Rất cao)",
+      "6 (Yếu)",
+      "7 (Rất yếu)",
+      "7 (Rất yếu)",
+      "7 (Rất yếu)",
+      "7 (Rất yếu)",
+      "7 (Rất yếu)"
+    ]
+  ],
+  "governance16": [
+    [
+      "CHÍNH SÁCH TÀI CHÍNH",
+      "QUẢN TRỊ VÀ QUẢN LÝ",
+      "QUẢN TRỊ VÀ QUẢN LÝ",
+      "QUẢN TRỊ VÀ QUẢN LÝ",
+      "QUẢN TRỊ VÀ QUẢN LÝ"
+    ],
+    [
+      "CHÍNH SÁCH TÀI CHÍNH",
+      "Mạnh/Strong",
+      "Khá/Satisfactory",
+      "Trung bình/Fair",
+      "Yếu/Weak"
+    ],
+    [
+      "Mạnh",
+      "Rất Mạnh",
+      "Mạnh",
+      "Khá",
+      "Yếu"
+    ],
+    [
+      "Khá",
+      "Mạnh",
+      "Khá",
+      "Trung bình",
+      "Yếu"
+    ],
+    [
+      "Trung bình",
+      "Khá",
+      "Trung bình",
+      "Trung bình",
+      "Rất yếu"
+    ],
+    [
+      "Yếu",
+      "Trung bình",
+      "Trung bình",
+      "Yếu",
+      "Rất yếu"
+    ]
+  ]
+}

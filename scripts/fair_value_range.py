@@ -74,6 +74,8 @@ def fair_value_range(ticker, overrides=None):
             'Bull':'BVPS +8%; P/B peer premium 10% khi ROE/chất lượng tài sản cải thiện.'
         }
 
+    elif typ=='INSURANCE':
+        assumptions={'Base':val.get('Reason','Chưa thẩm định nhóm peer bảo hiểm')}
     else:
         eps=_n(val.get('DerivedEPS'), _n(s.get('EPS')))
         peer_pe=_n(val.get('PeerMultiple'))
@@ -85,15 +87,7 @@ def fair_value_range(ticker, overrides=None):
             'Bull':'EPS +20%; P/E peer premium 10%.'
         }
 
-    # Fallback only when a sector scenario cannot be calculated.
-    if base is None:
-        base=price
-    if bear is None and base is not None:
-        bear=base*0.80
-        assumptions['Bear']=assumptions.get('Bear','Fallback: Base -20% do thiếu biến số kịch bản.')
-    if bull is None and base is not None:
-        bull=base*1.20
-        assumptions['Bull']=assumptions.get('Bull','Fallback: Base +20% do thiếu biến số kịch bản.')
+    # Thiếu định giá => giữ thiếu; thị giá không được biến thành fair value.
 
     control_premium=float(o.get('ControlPremium',0.15))
     strategic_synergy=float(o.get('StrategicSynergy',0.08))

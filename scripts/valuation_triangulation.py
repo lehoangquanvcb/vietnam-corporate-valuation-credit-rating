@@ -13,7 +13,7 @@ from scripts.data_quality_engine import assess_data_quality
 def triangulate(ticker,overrides=None):
     o=overrides or {}; meta=get_company(ticker); s=get_snapshot(ticker)
     v=valuation(ticker,s); fv=fair_value_range(ticker,o); rg=regime(ticker); dq=assess_data_quality(ticker)
-    current=num(s.get('Price')) or num(s.get('Close'))
+    current=num(v.get('Price'))
     base=num(fv.get('Base'))
     upside=None if current in (None,0) or base is None else base/current-1
     # Explicit lenses; no fabricated target when inherited engine lacks one.

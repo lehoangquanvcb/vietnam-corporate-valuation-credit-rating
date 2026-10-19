@@ -1,0 +1,24 @@
+﻿Metric,Label,Unit,Basis,Note
+CombinedRatio,Tỷ lệ kết hợp,decimal ratio,QUARTER / YTD / FY / TTM,Tỷ lệ bồi thường + tỷ lệ chi phí theo cùng cơ sở thuần. Dưới 100% biểu thị thặng dư khai thác theo quy ước này. Cần chuyên viên đối chiếu định nghĩa trước khi dùng để chấm điểm.
+DebtDue24M,DebtDue24M,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+DepositsIGUnder6M,DepositsIGUnder6M,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+DepositsOtherUnder6M,DepositsOtherUnder6M,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+ExpenseRatio,Tỷ lệ chi phí khai thác thuần,decimal ratio,QUARTER / YTD / FY / TTM,Quy ước BCTC: chi phí khai thác thuần = tổng chi phí kinh doanh bảo hiểm − chi phí bồi thường + chi phí quản lý bảo hiểm − thu hoa hồng và thu khác. Không dùng tỷ số nhà cung cấp chưa rõ định nghĩa.
+FXMismatchLiabilities,Lệch ngoại tệ chưa phòng vệ/Nợ phải trả,decimal ratio,END_PERIOD,"Rủi ro tỷ giá: lệch ngoại tệ trọng yếu, chưa phòng vệ >10% tổng nợ phải trả là dấu hiệu tiêu cực."
+GovernmentBondsLiquid,GovernmentBondsLiquid,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+InsuranceContractObligations,Tổng nghĩa vụ hợp đồng bảo hiểm,VND,END_PERIOD,"Cần tổng nghĩa vụ hợp đồng bảo hiểm theo hồ sơ thẩm định. Không thay bằng toàn bộ nợ phải trả, phải trả bảo hiểm hay chỉ dự phòng nghiệp vụ."
+InsuranceEBITDA,InsuranceEBITDA,VND,QUARTER / YTD / FY / TTM,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+InsuranceInterestExpense,InsuranceInterestExpense,VND,QUARTER / YTD / FY / TTM,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+InvestmentLeverage,Tài sản đầu tư rủi ro/Tổng tài sản đầu tư,decimal ratio,END_PERIOD,Đòn bẩy đầu tư: tài sản rủi ro cao sau phòng vệ / tổng đầu tư. <20% kéo dài hỗ trợ tích cực; >100% là dấu hiệu tiêu cực theo tài liệu. Cần giữ nhất quán mẫu số.
+LargestProductShare,Tỷ trọng dòng sản phẩm lớn nhất,decimal ratio,END_PERIOD,Mục đa dạng hóa khác: một dòng sản phẩm vượt 80% tổng phí là dấu hiệu tiêu cực.
+LargestSectorShare,Tỷ trọng ngành lớn nhất trong danh mục đầu tư,decimal ratio,END_PERIOD,Danh mục đa dạng: không ngành nào >15% hỗ trợ tích cực; 15–30% thường trung lập. Xem riêng trường hợp nợ Chính phủ khoảng 50%.
+LiquidCash,LiquidCash,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+ListedEquitiesLiquid,ListedEquitiesLiquid,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+LossRatio,Tỷ lệ bồi thường thuần,decimal ratio,QUARTER / YTD / FY / TTM,Tính từ chi phí bồi thường thuần (kể cả biến động dự phòng bồi thường) / phí bảo hiểm thuần được hưởng. Giữ dấu hoàn nhập.
+MarketSharePremium,Thị phần phí bảo hiểm gốc,decimal ratio,END_PERIOD,Mục vị thế thị trường: thị phần bền vững từ 14% là một ví dụ hỗ trợ đánh giá tích cực; cần mẫu số toàn thị trường cùng kỳ.
+MinimumSolvencyMargin,MinimumSolvencyMargin,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+RatedBondsIGLiquid,RatedBondsIGLiquid,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+RatedBondsOtherLiquid,RatedBondsOtherLiquid,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+RequiredCapital,RequiredCapital,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+SolvencyMargin,SolvencyMargin,VND,END_PERIOD,"Dữ liệu thuyết minh; điền đúng kỳ, phạm vi, nguồn và người duyệt"
+SolvencyRatio,Biên thanh toán/Biên thanh toán tối thiểu,decimal ratio,END_PERIOD,"Tỷ số biên khả năng thanh toán thực có/biên tối thiểu, theo công bố đúng kỳ; không đồng nhất vốn thực góp/vốn pháp định."

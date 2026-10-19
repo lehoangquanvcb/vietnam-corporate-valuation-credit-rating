@@ -14,10 +14,13 @@ def _read(name):
     except:return pd.DataFrame()
 def assess(ticker):
     t=str(ticker).upper(); snap=get_snapshot(t); meta=get_company(t)
-    cc=_read('vnstock_peer_crosscheck.csv')
-    r=cc[cc.Ticker.astype(str).str.upper().eq(t)].iloc[-1].to_dict() if len(cc) and 'Ticker' in cc and cc.Ticker.astype(str).str.upper().eq(t).any() else {}
-    pe=num(r.get('PE',snap.get('PE')));pb=num(r.get('PB',snap.get('PB')))
-    ipe=num(r.get('IndustryPE'));ipb=num(r.get('IndustryPB'));mpe=num(r.get('MarketPE'));mpb=num(r.get('MarketPB'))
+    from scripts.methodology_kpi_engine import methodology_kpi_table
+    table=methodology_kpi_table(t)
+    def benchmark(m):
+        z=table[table.Metric.eq(m)]
+        return num(z.iloc[0]['Trung vị']) if len(z) else None
+    pe=num(snap.get('PE'));pb=num(snap.get('PB'))
+    ipe=benchmark('PE');ipb=benchmark('PB');mpe=mpb=None
     scores=[];notes=[]
     for label,x,b in [('P/E',pe,ipe),('P/B',pb,ipb)]:
         if x is not None and b not in (None,0):
@@ -26,5 +29,5 @@ def assess(ticker):
             state='chiết khấu' if gap<-.1 else 'premium' if gap>.1 else 'xấp xỉ'
             notes.append(f'{label} đang {state} so với ngành khoảng {abs(gap)*100:.1f}%.')
     avg=float(np.mean(scores)) if scores else None
-    regime='RẺ TƯƠNG ĐỐI' if avg is not None and avg<-.15 else 'ĐẮT TƯƠNG ĐỐI' if avg is not None and avg>.15 else 'TRUNG TÍNH'
+    regime='CHƯA ĐỦ DỮ LIỆU' if avg is None else 'RẺ TƯƠNG ĐỐI' if avg is not None and avg<-.15 else 'ĐẮT TƯƠNG ĐỐI' if avg is not None and avg>.15 else 'TRUNG TÍNH'
     return {'Ticker':t,'Sector':meta.get('Sector'),'Regime':regime,'PE':pe,'PB':pb,'IndustryPE':ipe,'IndustryPB':ipb,'MarketPE':mpe,'MarketPB':mpb,'Notes':notes,'RelativeGap':avg}

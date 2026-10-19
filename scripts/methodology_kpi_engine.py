@@ -29,30 +29,30 @@ LABELS={
 'AssetEquity':'Tổng tài sản/VCSH','CreditCostProxy':'Chi phí dự phòng/Dư nợ','FundingGapAssets':'Chênh lệch cho vay-tiền gửi/TTS',
 'ProfitAssets':'LNST/Tổng tài sản','CashAssets':'Tiền/Tổng tài sản','WorkingCapitalAssets':'Vốn lưu động ròng/Tổng tài sản',
 'NetDebtEquity':'Nợ ròng/VCSH','NetDebtEBITDA':'Nợ ròng/EBITDA','EquityAssetsCorp':'VCSH/Tổng tài sản','AssetTurnover':'Doanh thu/Tổng tài sản',
-'FOCFMargin':'FOCF/Doanh thu','CashDebt':'Tiền/Nợ vay','InterestCoverage':'EBIT/Chi phí lãi vay'
+'FOCFMargin':'FOCF/Doanh thu','CashDebt':'Tiền/Nợ vay','InterestCoverage':'EBIT/Chi phí lãi vay','LoanLossCoverage':'Bao phủ nợ xấu','InsuranceReserves':'Dự phòng nghiệp vụ bảo hiểm','GrossWrittenPremium':'Phí bảo hiểm gốc','NetInsurancePremium':'Phí bảo hiểm thuần','InvestmentIncome':'Thu nhập tài chính','InsuranceReservesEquity':'Dự phòng nghiệp vụ/VCSH','Loans':'Các khoản cho vay (không đồng nhất dư nợ ký quỹ)','ClientDeposits':'Tiền gửi của khách hàng','NPAT':'Lợi nhuận sau thuế','Equity':'Vốn chủ sở hữu'
 }
-PCT=set(['ROE','ROA','NIM','NPL','CAR','CIR','CASA','LoanAssets','DepositAssets','EquityAssets',
+PCT=set(['LoanLossCoverage','ROE','ROA','NIM','NPL','CAR','CIR','CASA','LoanAssets','DepositAssets','EquityAssets',
 'TangibleEquityAssets','NII_OperatingIncome','ProvisionOperatingIncome','GrossMargin','NetMargin',
 'EBITDAMargin','DebtAssets','CFO_Debt','FOCF_Debt','CFO_Margin','CapexRevenue','AvailableCapitalRatio',
 'MarketShareBrokerage','MarginLoansEquity','ICGR','OperatingProfitMargin','CreditCostProxy','FundingGapAssets','ProfitAssets','CashAssets','WorkingCapitalAssets','EquityAssetsCorp','FOCFMargin','CashDebt'])
-MULT=set(['LDR','PB','PE','DebtEquity','DebtEBITDA','CurrentRatio','EV_EBITDA','AssetEquity','NetDebtEquity','NetDebtEBITDA','AssetTurnover'])
+MULT=set(['LDR','PB','PE','DebtEquity','DebtEBITDA','CurrentRatio','EV_EBITDA','AssetEquity','NetDebtEquity','NetDebtEBITDA','AssetTurnover','InterestCoverage','InsuranceReservesEquity'])
 
 BANK_GROUPS={
 'Hồ sơ kinh doanh & quy mô':['TotalAssets','GrossLoans','CustomerDeposits','LoanAssets','DepositAssets','AssetEquity'],
 'Vốn & khả năng hấp thụ lỗ':['CAR','EquityAssets','TangibleEquityAssets','AssetEquity','ROE','ProfitAssets'],
 'Khả năng sinh lợi & hiệu quả':['ROE','ROA','NIM','CIR','NII_OperatingIncome','ProfitAssets'],
-'Chất lượng tài sản & chi phí rủi ro':['NPL','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],
+'Chất lượng tài sản & chi phí rủi ro':['NPL','LoanLossCoverage','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],
 'Nguồn vốn & thanh khoản':['CASA','LDR','DepositAssets','FundingGapAssets'],
 'Định giá cổ phiếu':['PB','PE']
 }
 SEC_GROUPS={
-'Hồ sơ kinh doanh & franchise':['Revenue','TotalAssets','Equity','MarketShareBrokerage','ClientAssets','MarginLoans','AssetTurnover'],
+'Hồ sơ kinh doanh & franchise':['Revenue','TotalAssets','Equity','MarketShareBrokerage','ClientDeposits','Loans','MarginLoans','AssetTurnover'],
 'Vốn & đòn bẩy':['AvailableCapitalRatio','DebtEquity','DebtAssets','EquityAssetsCorp','AssetEquity','NetDebtEquity'],
 'Khả năng sinh lợi & hiệu quả':['ROE','ROA','NetMargin','OperatingProfitMargin','ICGR','AssetTurnover'],
-'Vị thế rủi ro':['MarginLoansEquity','MarketShareBrokerage','DebtEquity','NetDebtEBITDA'],
+'Vị thế rủi ro':['MarginLoansEquity','MarketShareBrokerage','DebtEquity'],
 'Nguồn vốn & thanh khoản':['CurrentRatio','WorkingCapitalAssets','CashAssets','CashDebt','CFO_Debt'],
 'Dòng tiền':['CFO_Margin','FOCFMargin','CFO_Debt','FOCF_Debt'],
-'Định giá':['PB','PE','EV_EBITDA']
+'Định giá':['PB','PE']
 }
 CORP_GROUPS={
 'Quy mô & hồ sơ kinh doanh':['Revenue','TotalAssets','AssetTurnover','GrossMargin','OperatingProfitMargin','EBITDAMargin'],
@@ -64,6 +64,11 @@ CORP_GROUPS={
 'Định giá':['PB','PE','EV_EBITDA']
 }
 
+from scripts.insurance_catalog import GROUPS as INS_GROUPS, LABELS as INS_LABELS, PCT as INS_PCT, MULT as INS_MULT
+LABELS.update(INS_LABELS)
+PCT.update(INS_PCT)
+MULT.update(INS_MULT)
+
 def _n(x):
     try:
         v=float(x);return v if np.isfinite(v) else np.nan
@@ -74,6 +79,7 @@ def _div(a,b):
 
 def enrich_row(r):
     d=dict(r)
+    if '_MetricEvidence' in d:return d
     d['LoanAssets']=_div(d.get('GrossLoans'),d.get('TotalAssets'))
     d['DepositAssets']=_div(d.get('CustomerDeposits'),d.get('TotalAssets'))
     d['EquityAssets']=_div(d.get('Equity'),d.get('TotalAssets'))
@@ -114,10 +120,13 @@ def enriched_industry(ticker):
 
 def groups_for(ticker):
     et=get_company(ticker).get('EntityType')
-    return BANK_GROUPS if et=='BANK' else SEC_GROUPS if et=='SECURITIES' else CORP_GROUPS
+    return BANK_GROUPS if et=='BANK' else SEC_GROUPS if et=='SECURITIES' else INS_GROUPS if et=='INSURANCE' else CORP_GROUPS
 
 def methodology_kpi_table(ticker, include_missing=True):
     meta=get_company(ticker)
+    if meta.get('EntityType')=='INSURANCE':
+        from scripts.insurance_analysis import quarter_kpi_table
+        return quarter_kpi_table(ticker,include_missing)
     s=get_snapshot(ticker)
     peers=industry_snapshot(ticker)
 
@@ -141,16 +150,31 @@ def methodology_kpi_table(ticker, include_missing=True):
 
     s=enrich_row(s)
     peers=pd.DataFrame([enrich_row(r) for r in peers.to_dict('records')]) if peers is not None and len(peers) else peers
+    from scripts.financial_evidence import metric_evidence, STATUS
     rows=[]
+    seen=set()
     for group,metrics in groups_for(ticker).items():
         for m in metrics:
-            c=_n(s.get(m))
-            vals=pd.to_numeric(peers[m],errors='coerce').dropna() if len(peers) and m in peers else pd.Series(dtype=float)
-            mean=float(vals.mean()) if len(vals) else np.nan; med=float(vals.median()) if len(vals) else np.nan
+            if m in seen:continue
+            seen.add(m)
+            ev=metric_evidence(s,m); c=_n(ev['Value']); compatible=[]
+            for peer in peers.to_dict('records') if peers is not None and len(peers) else []:
+                if str(peer.get('Ticker')).upper()==str(ticker).upper():continue
+                pe=metric_evidence(peer,m)
+                # Đối chiếu cùng kỳ và cùng cơ sở; không trộn CAR cũ với tỷ số kỳ hiện tại.
+                if pe['Status']=='OK' and pe['Period']==ev['Period'] and pe['Basis']==ev['Basis']:
+                    v=_n(pe['Value'])
+                    if np.isfinite(v):compatible.append(v)
+            vals=pd.Series(compatible,dtype=float)
+            mean=float(vals.mean()) if len(vals)>=5 else np.nan
+            med=float(vals.median()) if len(vals)>=5 else np.nan
             if not include_missing and not np.isfinite(c) and not len(vals):continue
             rows.append({'Nhóm phân tích':group,'Metric':m,'Chỉ tiêu':LABELS.get(m,m),
                          'Doanh nghiệp':c,'TB ngành':mean,'Trung vị':med,'Số DN':int(len(vals)),
-                         'Trạng thái dữ liệu':'Có dữ liệu' if np.isfinite(c) else 'N/A – cần bổ sung nguồn'})
+                         'Trạng thái dữ liệu':STATUS[ev['Status']], 'StatusCode':ev['Status'],
+                         'Kỳ dữ liệu':ev['Period'],'Cơ sở':ev['Basis'],'Nguồn / Công thức':ev['Source'],
+                         'Giải thích':ev['Reason'],
+                         'Trạng thái peer':'Đủ >=5 peer cùng kỳ' if len(vals)>=5 else 'Chưa đủ 5 peer cùng kỳ/cơ sở'})
     return pd.DataFrame(rows)
 
 def metric_list(ticker, available_only=True):

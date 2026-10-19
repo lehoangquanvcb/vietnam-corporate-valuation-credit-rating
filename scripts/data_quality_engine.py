@@ -7,6 +7,7 @@ if str(_PROJECT_ROOT) not in _sys.path:
 from scripts.universal_data import get_company,get_snapshot,num
 
 CORE = {
+'INSURANCE':['TotalAssets','Equity','InsuranceReserves','NetInsurancePremium','NPAT','ROE','ROA','SolvencyRatio'],
 'BANK':['TotalAssets','ROE','ROA','NPL','CAR','CASA','NIM','PB','PE'],
 'SECURITIES':['Revenue','ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],
 'CORPORATE':['Revenue','ROE','ROA','DebtEquity','CurrentRatio','PB','PE']

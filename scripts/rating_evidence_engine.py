@@ -18,11 +18,14 @@ def rating_evidence(ticker,overrides=None):
         rows.append({
           'Cấu phần':x.get('Cấu phần'),'Kết quả':result,'Điều chỉnh':x.get('Điều chỉnh'),
           'Loại bằng chứng':'Định lượng + judgment' if judgement else 'Methodology / calculation',
-          'Trạng thái kiểm chứng':'Cần chuyên viên xác nhận' if judgement else 'Có thể truy vết',
+          'Trạng thái kiểm chứng':'Chưa thẩm định' if result in (None,'N/A','Chưa thẩm định') else 'Cần chuyên viên xác nhận' if judgement else 'Có thể truy vết',
           'Luận cứ':x.get('Luận cứ')
         })
     # Rating confidence intentionally cannot be "high" on automated qualitative scoring alone.
-    if dq['Confidence']=='THẤP': conf='THẤP'
+    if rr.get('Methodology')=='INSURANCE':
+        conf='Mô phỏng — chờ phê duyệt' if rr.get('RatingStatus')=='SIMULATED' else 'Ngoài phạm vi hoặc ô ma trận không áp dụng' if rr.get('RatingStatus')=='NOT_APPLICABLE' else 'Chưa thẩm định'
+    elif rr.get('ICR') in (None,'N/A'):conf='Chưa thẩm định'
+    elif dq['Confidence']=='THẤP': conf='THẤP'
     elif any(r['Trạng thái kiểm chứng']=='Cần chuyên viên xác nhận' for r in rows): conf='TRUNG BÌNH'
     else: conf='KHÁ'
     return {'Ticker':str(ticker).upper(),'Methodology':rr.get('MethodologyName'),'ICR':rr.get('ICR'),

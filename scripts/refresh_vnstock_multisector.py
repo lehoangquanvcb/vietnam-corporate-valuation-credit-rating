@@ -15,6 +15,7 @@ def _version_tuple(v):
     except Exception: return (0,0,0)
 
 ROOT=Path(__file__).resolve().parents[1]; DATA=ROOT/'data'; RAW=DATA/'raw'; CFG=ROOT/'config'; FUND_PARTS=DATA/'fundamentals_long'
+if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
 RAW.mkdir(parents=True,exist_ok=True)
 FUND_PARTS.mkdir(parents=True,exist_ok=True)
 try:
@@ -29,8 +30,10 @@ try:
         from vnstock_data import Quote
     except Exception:
         Quote=None
-except Exception as e:
-    print('Không import được vnstock_data:',e); raise SystemExit(2)
+except ImportError:
+    # Rebuild offline không cần cài sponsor package hoặc đọc credential.
+    vnstock_data=Fundamental=Market=Quote=None
+    VNSTOCK_DATA_VERSION='UNAVAILABLE_OFFLINE'
 
 def now(): return datetime.now().astimezone().isoformat(timespec='seconds')
 def flat(df):
@@ -632,21 +635,15 @@ def sum_last(df, groups):
     return sum(vals) if vals else np.nan
 
 def generic_long(df,ticker,dataset):
-    """Export every numeric field returned by Vnstock, not only mapped KPIs."""
-    if df is None or df.empty:return []
-    x=flat(df); y,q=period_cols(x)
-    id_cols={c for c in [y,q,find_col(x,['ticker','symbol','code'])] if c}
-    out=[]
-    for _,r in x.iterrows():
-        per=period_value(r,y,q) or 'LATEST'
-        for c in x.columns:
-            if c in id_cols: continue
-            v=pd.to_numeric(pd.Series([r.get(c)]),errors='coerce').iloc[0]
-            if pd.notna(v):
-                out.append({'Ticker':ticker,'Period':per,'Dataset':dataset,'Field':str(c),'Value':float(v),'DataType':'ACTUAL','SourceMode':'VNSTOCK_BRONZE'})
-    return out
+    from scripts.financial_evidence import normalize_raw
+    z=normalize_raw(df,'refresh:'+dataset)
+    if z.empty:return []
+    z=z[z.Value.notna()].copy();z['Ticker']=ticker;z['Dataset']=dataset
+    z['DataType']='ACTUAL';z['SourceMode']='VNSTOCK_SPONSOR_SEMANTIC'
+    return z[['Ticker','Period','Dataset','Field','Value','DataType','SourceMode']].to_dict('records')
 
 def fetch(ticker,etype):
+    if Fundamental is None:raise RuntimeError('Cần vnstock_data trong môi trường sponsor để refresh trực tuyến')
     eq=Fundamental().equity(ticker)
     health,hs=call_financial_health(eq,etype)
     ratio,rs=call_report(eq,'ratio','quarter',etype)
@@ -849,6 +846,10 @@ def fetch(ticker,etype):
         if pd.notna(row.get(_m)) and abs(float(row[_m]))>10:
             row['ParserLog']=row.get('ParserLog','')+f" | SANITY_FAIL {_m}={row[_m]}"
             row[_m]=np.nan
+    from scripts.financial_evidence import repair_snapshot, history
+    row=repair_snapshot(str(ticker).upper(),etype,row)
+    row={k:v for k,v in row.items() if not k.startswith('_')}
+    hist=history(str(ticker).upper(),etype).to_dict('records')
     return row,hist,allfields
 
 def price_quote(ticker):

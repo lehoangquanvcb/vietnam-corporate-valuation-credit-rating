@@ -26,6 +26,7 @@ WEIGHTS = {
         'DebtEquity': .13, 'CurrentRatio': .07, 'MarginLoansEquity': .09,
         'AssetTurnover': .05,
     },
+    'INSURANCE': {'TotalAssets':.4,'Equity':.3,'ROE':.2,'ROA':.1},
     'CORPORATE': {
         'TotalAssets': .23, 'Revenue': .20, 'Equity': .10, 'ROE': .11, 'ROA': .08,
         'DebtEquity': .13, 'CurrentRatio': .07, 'AssetTurnover': .05, 'CashAssets': .03,
@@ -93,6 +94,11 @@ def _candidate_pool(ticker: str, u: pd.DataFrame) -> tuple[pd.DataFrame, str]:
             return opool, olabel
     if et == 'BANK':
         return same_type, 'Ngân hàng niêm yết/ĐKGD'
+    if et == 'INSURANCE':
+        subtype=str(r.get('InsuranceSubtype',''))
+        if subtype in ['NONLIFE','LIFE','REINSURANCE','GROUP'] and 'InsuranceSubtype' in same_type:
+            return same_type[same_type.InsuranceSubtype.eq(subtype)], 'Bảo hiểm cùng mô hình '+subtype
+        return same_type[same_type.Ticker.eq(t)], 'Chưa xác minh mô hình bảo hiểm'
     if et == 'SECURITIES':
         return same_type, 'Công ty chứng khoán niêm yết/ĐKGD'
 
@@ -122,7 +128,7 @@ def _pct_rank_distance(series: pd.Series, target_value: float, candidate_value: 
     return abs(tr-cr)
 
 
-def select_dynamic_peers(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap_cache=None) -> pd.DataFrame:
+def _select_dynamic_peers_uncached(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap_cache=None) -> pd.DataFrame:
     t = _norm_ticker(ticker)
     u = (_u.copy() if _u is not None else universe().copy())
     if u.empty:
@@ -151,8 +157,16 @@ def select_dynamic_peers(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap
         out['PeerPool']=pool_label;out['SimilarityBasis']='Cùng ngành/ICB; chờ dữ liệu tài chính để xếp hạng tương đồng'
         names=u[['Ticker']+[c for c in ['CompanyName','LegalName','Sector','EntityType'] if c in u.columns]].drop_duplicates('Ticker')
         return out.merge(names,on='Ticker',how='left')
-    target = pool[pool.Ticker.eq(t)].iloc[-1]
+    # Xếp hạng tương đồng cũng dùng dữ liệu đã sửa, tránh nợ vay fuzzy trong snapshot cũ.
+    from scripts.universal_data import get_snapshot
+    from scripts.financial_evidence import metric_evidence
     weights = WEIGHTS.get(et, WEIGHTS['CORPORATE'])
+    repaired={ct:get_snapshot(ct) for ct in pool.Ticker}
+    target_data=repaired[t]
+    for metric in weights:
+        te=metric_evidence(target_data,metric)
+        pool[metric]=pool.Ticker.map(lambda ct: repaired[ct].get(metric) if metric_evidence(repaired[ct],metric)['Period']==te['Period'] and metric_evidence(repaired[ct],metric)['Basis']==te['Basis'] else np.nan)
+    target = pool[pool.Ticker.eq(t)].iloc[-1]
     rows=[]
     for _, r in pool.iterrows():
         ct = _norm_ticker(r.Ticker)
@@ -198,6 +212,24 @@ def select_dynamic_peers(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap
     names = u[['Ticker'] + [c for c in ['CompanyName','LegalName','Sector','EntityType'] if c in u.columns]].drop_duplicates('Ticker')
     out = out.merge(names, on='Ticker', how='left')
     return out
+
+
+from functools import lru_cache
+
+@lru_cache(maxsize=128)
+def _selection_cached(ticker,max_peers,fingerprint):
+    return _select_dynamic_peers_uncached(ticker,max_peers)
+
+def select_dynamic_peers(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap_cache=None):
+    if _u is not None or _snap_cache is not None:
+        return _select_dynamic_peers_uncached(ticker,max_peers,_u,_snap_cache)
+    from scripts.financial_evidence import signature, _paths
+    t=_norm_ticker(ticker);u=universe();pool,_=_candidate_pool(t,u)
+    files=[CFG/'company_universe.csv',CFG/'dynamic_peer_overrides.csv',CFG/'manual_financial_inputs.csv',
+           CFG/'raw_period_basis.csv',CFG/'insurance_entities.csv',CFG/'insurance_metric_inputs.csv',DATA/'company_snapshot.csv',DATA/'bank_snapshot.csv',
+           DATA/'bank_history_long.csv',DATA/'securities_capital_ratio_master.csv']
+    for row in pool.itertuples():files.extend(_paths(row.Ticker,row.EntityType,ROOT))
+    return _selection_cached(t,max_peers,tuple(signature(p) for p in files)).copy()
 
 
 def dynamic_peer_tickers(ticker: str, include_target=True, max_peers: int=MAX_PEERS):

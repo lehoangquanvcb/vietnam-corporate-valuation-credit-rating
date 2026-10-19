@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 
 ROOT=Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
 DATA=ROOT/'data'; RAW=DATA/'raw'; CFG=ROOT/'config'; FUND_PARTS=DATA/'fundamentals_long'
 FUND_PARTS.mkdir(parents=True,exist_ok=True)
 sys.path.insert(0,str(ROOT/'scripts'))
@@ -49,7 +50,7 @@ def snapshot_quality(row):
     rp=str(row.get("Revenue_Periods","") or ""); np_=str(row.get("NPAT_Periods","") or "")
     expected="2025-Q3"+chr(124)+"2025-Q4"+chr(124)+"2026-Q1"+chr(124)+"2026-Q2"
     balance_ok=pd.notna(assets) and assets>0 and pd.notna(equity)
-    flow_meta=(rb=="TTM4Q" and nb=="TTM4Q" and bool(rp) and bool(np_))
+    flow_meta=(rb in ("TTM4Q","TTM") and nb in ("TTM4Q","TTM") and bool(rp) and bool(np_))
     if pd.notna(rev) and rev==0 and pd.notna(npat) and balance_ok and flow_meta:
         return "ZERO_REVENUE"
     core=pd.notna(rev) and rev!=0 and pd.notna(npat) and balance_ok
@@ -61,38 +62,22 @@ def snapshot_usable(row):
     return snapshot_quality(row)=="CURRENT"
 
 def build_ticker(t):
-    ratio=read_raw(t,'ratio'); bs=read_raw(t,'balance'); inc=read_raw(t,'income'); cf=read_raw(t,'cashflow')
-    if all(x.empty for x in [ratio,bs,inc,cf]): return None,[],None,'NO_RAW'
-    row={'Ticker':t,'RetrievedAt':now(),'DataType':'ACTUAL','SourceMode':SOURCE_MODE,
-         'ParserVersion':PARSER_VERSION,'VnstockDataVersion':getattr(parser,'VNSTOCK_DATA_VERSION',''),
-         'ParserLog':'RECOVERED_FROM_RAW_V8741','SnapshotPeriod':'LATEST_QUARTER',
-         'FlowBasis':'TTM_LAST_4_CONSECUTIVE_QUARTERS_STRICT'}
-    hist=[]
-    for m,names in parser.MAP.items():
-        source=ratio if m in parser.RATIO_METRICS else bs if m in parser.STOCK_METRICS else cf if m in ['CFO','Capex','Depreciation'] else inc
-        try:
-            if m in parser.SEMANTIC_IDS:
-                v,meta=semantic_snapshot(source,m)
-            else:
-                v,meta=parser.metric_snapshot(source,names,parser._metric_kind(m),True)
-        except Exception as e:
-            v,meta=np.nan,{'row':'','basis':'PARSER_ERROR','periods':[]}
-            row['ParserLog']+=f' | {m}:{type(e).__name__}:{e}'
-        row[m]=parser.normalize_metric_value(m,v) if pd.notna(v) else np.nan
-        meta=dict(meta or {})
-        row[f'{m}_SourceRow']=meta.get('row','')
-        row[f'{m}_Basis']=meta.get('basis','')
-        row[f'{m}_Periods']='|'.join(meta.get('periods',[]) or [])
-    parts=[]
-    for ds,df in [('ratio',ratio),('balance_sheet',bs),('income_statement',inc),('cash_flow',cf)]:
-        if df is None or df.empty: continue
-        try:
-            z=parser.generic_long(df,t,ds)
-            if isinstance(z,list): z=pd.DataFrame(z)
-            if z is not None and len(z): parts.append(z)
-        except Exception: pass
+    from scripts.financial_evidence import repair_snapshot, history, normalize_raw
+    u=pd.read_csv(CFG/'company_universe.csv');z=u[u.Ticker.astype(str).str.upper().eq(t)]
+    typ=str(z.iloc[0].EntityType) if len(z) else 'CORPORATE'
+    sources={ds:read_raw(t,ds) for ds in ['ratio','balance','income','cashflow']}
+    if all(x.empty for x in sources.values()):return None,[],None,'NO_RAW'
+    row=repair_snapshot(t,typ,{'Ticker':t,'RetrievedAt':now(),'DataType':'ACTUAL',
+        'SourceMode':SOURCE_MODE,'ParserVersion':PARSER_VERSION,'ParserLog':'RECOVERED_FROM_RAW_V8741_EVIDENCE_8118'})
+    h=history(t,typ).to_dict('records');parts=[]
+    for ds,df in sources.items():
+        if df.empty:continue
+        z=normalize_raw(df,f'data/raw/{t}_{ds}.csv');z=z[z.Value.notna()].copy()
+        z['Ticker']=t;z['Dataset']=ds;z['DataType']='ACTUAL';z['SourceMode']=SOURCE_MODE
+        parts.append(z[['Ticker','Period','Dataset','Field','Value','DataType','SourceMode']])
     long_df=pd.concat(parts,ignore_index=True) if parts else pd.DataFrame()
-    return row,hist,long_df,snapshot_quality(row)
+    row={k:v for k,v in row.items() if not k.startswith('_')}
+    return row,h,long_df,snapshot_quality(row)
 
 def main():
     ap=argparse.ArgumentParser(description='V8.74.1 offline multisector rebuild from existing raw files with quality states')
@@ -112,7 +97,7 @@ def main():
         wanted={x.strip().upper() for x in raw_wanted.split(',') if x.strip()}
         u=u[u.Ticker.isin(wanted)]
     tickers=u.Ticker.dropna().unique().tolist()
-    snaps=[]; manifest=[]; compact=[]; bad=[]; counts={}
+    snaps=[]; manifest=[]; compact=[]; bad=[]; counts={}; history_rows=[]
     for i,t in enumerate(tickers,1):
         row,h,long_df,status=build_ticker(t)
         if row is None:
@@ -124,6 +109,7 @@ def main():
         if status=='INCOMPLETE':
             bad.append(t); continue
         snaps.append(row)
+        history_rows.extend(h)
         if not args.dry_run and long_df is not None and len(long_df):
             fp=FUND_PARTS/f'{t}.csv'; long_df.to_csv(fp,index=False,encoding='utf-8-sig')
             manifest.append({'Ticker':t,'Rows':len(long_df),'Path':str(fp.relative_to(ROOT)).replace(chr(92),'/'),'RetrievedAt':now()})
@@ -144,6 +130,13 @@ def main():
         merged=pd.concat([old,new],ignore_index=True)
         merged=merged.sort_values("Ticker").drop_duplicates("Ticker",keep="last")
         merged.to_csv(snap_path,index=False,encoding="utf-8-sig")
+
+    if history_rows:
+        hp=DATA/'company_history_long.csv'
+        old_h=pd.read_csv(hp) if hp.exists() else pd.DataFrame()
+        new_h=pd.DataFrame(history_rows)
+        if len(old_h):old_h=old_h[~old_h.Ticker.astype(str).str.upper().isin(new_h.Ticker.unique())]
+        pd.concat([old_h,new_h],ignore_index=True).to_csv(hp,index=False,encoding='utf-8-sig')
 
     manifest_path=DATA/"vnstock_company_fundamentals_manifest.csv"
     if manifest:

@@ -25,7 +25,7 @@ def label(x):
 
 def _relative(v,bench,lower=False):
     v=num(v);b=num(bench)
-    if v is None or b in (None,0):return 'Phù Hợp'
+    if v is None or b in (None,0):return None
     gap=v/b-1
     if lower:gap=-gap
     if gap>=.30:return 'Rất Mạnh'
@@ -35,14 +35,10 @@ def _relative(v,bench,lower=False):
     return 'Phù Hợp'
 
 def _industry_mean(ticker,metric):
-    try:
-        from scripts.sector_benchmark_engine import industry_snapshot
-        z=industry_snapshot(ticker)
-        if len(z) and metric in z:
-            v=pd.to_numeric(z[metric],errors='coerce').dropna()
-            return float(v.mean()) if len(v) else None
-    except Exception:pass
-    return None
+    from scripts.methodology_kpi_engine import methodology_kpi_table
+    z=methodology_kpi_table(ticker)
+    q=z[z.Metric.eq(metric)]
+    return num(q.iloc[0]['TB ngành']) if len(q) else None
 
 def bank_rating(ticker, overrides=None):
     s=get_snapshot(ticker); o=overrides or {}
@@ -58,19 +54,26 @@ def bank_rating(ticker, overrides=None):
     return {'Methodology':'BANK','MethodologyName':'Phương pháp XHTN Ngân hàng','BICRA':'a-','Anchor':label(anchor),'Factors':factors,'InternalNotches':notches,'SACP':label(sacp),'ExternalSupportNotches':support,'ICR':label(icr),'Audit':'BICRA → Anchor → 4 nhóm yếu tố nội sinh → SACP → hỗ trợ bên ngoài → ICR'}
 
 def securities_rating(ticker,overrides=None):
-    s=get_snapshot(ticker);o=overrides or {}
-    bank_anchor='a-';anchor=move(bank_anchor,-2)
-    bp=o.get('BusinessProfile','Phù Hợp')
-    ce=o.get('CapitalEarnings',_relative(s.get('ROE'),_industry_mean(ticker,'ROE')))
-    rp=o.get('RiskPosition','Phù Hợp')
-    fl=o.get('FundingLiquidity',_relative(s.get('CurrentRatio'),_industry_mean(ticker,'CurrentRatio')))
-    factors={'Hồ sơ Kinh doanh':bp,'Vốn và Lợi nhuận':ce,'Vị thế Rủi ro':rp,'Nguồn vốn và Thanh khoản':fl}
-    notches=sum(NOTCH.get(v,0) for v in factors.values())
-    sacp=move(anchor,notches)
-    if SCALE.index(sacp)>SCALE.index('b-') and not o.get('DefaultScenario',False):sacp='b-'
-    if o.get('DefaultScenario',False):sacp='ccc'
-    support=int(o.get('ExternalSupportNotches',0));icr=move(sacp,support)
-    return {'Methodology':'SECURITIES','MethodologyName':'Phương pháp XHTN Công ty Chứng khoán','BICRAReference':label(bank_anchor),'SectorAnchorAdjustment':-2,'Anchor':label(anchor),'Factors':factors,'InternalNotches':notches,'SACP':label(sacp),'ExternalSupportNotches':support,'ICR':label(icr),'Audit':'BICRA tham chiếu → -2 bậc Anchor CTCK → 4 nhóm yếu tố nội sinh → SACP → hỗ trợ → ICR'}
+    # Các thành phần định tính chưa thẩm định không được mặc định "Phù Hợp".
+    o=dict(overrides or {}); anchor=move('a-',-2)
+    titles={'BusinessProfile':'Hồ sơ Kinh doanh','CapitalEarnings':'Vốn và Lợi nhuận',
+            'RiskPosition':'Vị thế Rủi ro','FundingLiquidity':'Nguồn vốn và Thanh khoản'}
+    factors={title:o[key] for key,title in titles.items() if o.get(key) in NOTCH}
+    missing={key:'Chưa thẩm định' for key in titles if o.get(key) not in NOTCH}
+    support=o.get('ExternalSupportNotches')
+    valid=isinstance(support,int) and not isinstance(support,bool) and 0<=support<=8
+    if not valid:missing['ExternalSupportNotches']='Chưa thẩm định hỗ trợ bên ngoài'
+    complete=len(factors)==4
+    adjustment=sum(NOTCH[v] for v in factors.values()) if complete else None
+    sacp=move(anchor,adjustment) if complete else None
+    return {'Methodology':'SECURITIES','MethodologyName':'Phương pháp XHTN Công ty Chứng khoán',
+            'BICRAReference':label('a-'),'SectorAnchorAdjustment':-2,'Anchor':label(anchor),
+            'Factors':factors,'InternalNotches':adjustment,'SACP':label(sacp) if sacp else 'N/A',
+            'ExternalSupportNotches':support if valid else None,
+            'ICR':label(move(sacp,support)) if complete and valid else 'N/A',
+            'Outlook':o.get('Outlook','Chưa thẩm định'),'MissingEvidence':missing,
+            'DataSufficientForAutoRating':complete and valid,'RatingStatus':'UNREVIEWED' if missing else 'SIMULATION',
+            'Audit':'Anchor CTCK bằng A- giảm 2 bậc; đánh giá thành phần và hỗ trợ phải được xác nhận; không tự đặt sàn B-.'}
 
 # -------- Corporate methodology --------
 # The corporate sample methodology is risk-factor based: macro/industry, business,
@@ -106,7 +109,10 @@ def _dimension_score(s, peers, specs):
     vals=[]; evidence=[]
     for metric,weight,higher_better in specs:
         if metric not in peers.columns: continue
-        r=_risk_from_percentile(s.get(metric),peers[metric],higher_better)
+        from scripts.financial_evidence import metric_evidence
+        target_ev=metric_evidence(s,metric)
+        same=peers.apply(lambda row: metric_evidence(row,metric)['Period']==target_ev['Period'] and metric_evidence(row,metric)['Basis']==target_ev['Basis'],axis=1)
+        r=_risk_from_percentile(s.get(metric),peers.loc[same,metric],higher_better)
         if r is None: continue
         vals.append((r,weight)); evidence.append(metric)
     if not vals:return None,[],0.0
@@ -162,10 +168,10 @@ def corporate_rating(ticker,overrides=None):
     f_auto,f_ev,f_cov=_dimension_score(s,peers,financial_specs)
     l_auto,l_ev,l_cov=_dimension_score(s,peers,liquidity_specs)
 
-    industry=float(o.get('IndustryRisk',3.0))  # analyst/public-intelligence input; neutral if not overridden
+    industry=num(o.get('IndustryRisk'))  # analyst/public-intelligence input; neutral if not overridden
     business=float(o.get('BusinessRisk',b_auto)) if o.get('BusinessRisk',b_auto) is not None else None
     financial=float(o.get('FinancialRisk',f_auto)) if o.get('FinancialRisk',f_auto) is not None else None
-    governance=float(o.get('GovernanceRisk',3.0)) # qualitative; neutral until evidence/analyst override
+    governance=num(o.get('GovernanceRisk')) # qualitative; neutral until evidence/analyst override
     liquidity=float(o.get('LiquidityScore',l_auto)) if o.get('LiquidityScore',l_auto) is not None else None
 
     peer_count=max(0,len(peers)-1 if len(peers) and 'Ticker' in peers and str(ticker).upper() in set(peers.Ticker.astype(str).str.upper()) else len(peers))
@@ -174,30 +180,39 @@ def corporate_rating(ticker,overrides=None):
     quant_coverage=min(1.0,(b_cov+f_cov)/(1.0+1.0)) # specs each sum ~1
     sufficient=(core_available==2 and peer_count>=3 and len(evidence_metrics)>=5)
 
-    risk_scores={'Rủi ro Vĩ mô và Ngành':industry,
+    risk_scores={'Rủi ro Vĩ mô và Ngành':industry if industry is not None else np.nan,
                  'Rủi ro Kinh doanh':business if business is not None else np.nan,
                  'Rủi ro Tài chính':financial if financial is not None else np.nan,
-                 'Rủi ro Quản trị và Quản lý':governance}
+                 'Rủi ro Quản trị và Quản lý':governance if governance is not None else np.nan}
     risk_labels={k:_risk_label(v if np.isfinite(v) else None) for k,v in risk_scores.items()}
 
     # Sample-report-consistent weighting: business and financial profiles carry most of the quantitative signal.
     # This is explicitly a simulation layer and can be overridden by analysts/committee.
     w=o.get('Weights',{'IndustryRisk':.20,'BusinessRisk':.30,'FinancialRisk':.35,'GovernanceRisk':.15})
-    if not sufficient and 'AnchorOverride' not in o:
+    if set(w)!={'IndustryRisk','BusinessRisk','FinancialRisk','GovernanceRisk'} or any(num(v) is None or v<0 for v in w.values()) or abs(sum(w.values())-1)>1e-8:
+        raise ValueError('Trọng số phải không âm và tổng bằng 1')
+    missing={}
+    for key,value in [('IndustryRisk',industry),('BusinessRisk',business),('FinancialRisk',financial),('GovernanceRisk',governance)]:
+        if value is None:missing[key]='Chưa thẩm định' if key in ('IndustryRisk','GovernanceRisk') else 'Thiếu dữ liệu/peer'
+        elif not 1<=value<=6:raise ValueError(key+': điểm phải trong khoảng 1..6')
+    for key,lo,hi in [('ModifierNotches',-6,6),('ExternalSupportNotches',0,8)]:
+        v=o.get(key)
+        if not isinstance(v,int) or isinstance(v,bool) or not lo<=v<=hi:missing[key]='Chưa thẩm định'
+    if not sufficient:missing['QuantitativeEvidence']='Chưa đủ chỉ tiêu và ít nhất 3 peer'
+    if missing:
         return {
             'Methodology':'CORPORATE','MethodologyName':'Phương pháp XHTN Doanh nghiệp phi tài chính',
             'RiskScores':risk_scores,'RiskLabels':risk_labels,'Weights':w,'WeightedScore':None,
-            'Anchor':'N/A','ModifierNotches':0,'SCA':'N/A','Liquidity':_liq_label(liquidity),
-            'LiquidityScore':liquidity,'ExternalSupportNotches':int(o.get('ExternalSupportNotches',0)),
-            'ICR':'N/A','Outlook':'N/A','PeerCount':peer_count,'EvidenceMetrics':evidence_metrics,
+            'Anchor':'N/A','ModifierNotches':o.get('ModifierNotches'),'SCA':'N/A','Liquidity':_liq_label(liquidity),
+            'LiquidityScore':liquidity,'ExternalSupportNotches':o.get('ExternalSupportNotches'),
+            'ICR':'N/A','Outlook':'Chưa thẩm định','PeerCount':peer_count,'EvidenceMetrics':evidence_metrics,
             'QuantCoverage':quant_coverage,'DataSufficientForAutoRating':False,
-            'ProvisionalAutoScoring':True,
-            'Audit':'Chưa phát hành bậc mô phỏng: cần tối thiểu dữ liệu kinh doanh + tài chính và >=3 peer có dữ liệu. Rủi ro ngành/quản trị là judgment cần chuyên viên xác nhận.'}
+            'ProvisionalAutoScoring':True,'MissingEvidence':missing,'RatingStatus':'UNREVIEWED',
+            'Audit':'Điểm kinh doanh/tài chính là tín hiệu định lượng; ngành, quản trị, modifiers và hỗ trợ phải được thẩm định trước khi hình thành bậc mô phỏng.'}
 
     weighted=(industry*w.get('IndustryRisk',0)+business*w.get('BusinessRisk',0)+
               financial*w.get('FinancialRisk',0)+governance*w.get('GovernanceRisk',0))
-    if 'AnchorOverride' in o: anchor=str(o['AnchorOverride']).lower().replace('vn','')
-    else: anchor=_anchor_from_weighted(weighted)
+    anchor=_anchor_from_weighted(weighted)
 
     modifier=int(o.get('ModifierNotches',0)); sca=move(anchor,modifier)
     # Governance/liquidity caps are applied only when supported by an explicit high-risk score.
@@ -255,11 +270,11 @@ def _bank_peer_gap(v, benchmark, higher_better=True):
     if delta <= -.10: return 'Trung Bình'
     return 'Phù Hợp'
 
-def _bank_factor_score(ticker, snapshot, spec, minimum=2):
+def _bank_factor_score(ticker, snapshot, spec, minimum=2, benchmarks=None):
     observations=[]; missing=[]
     for metric, weight, higher_better in spec:
         actual = _bank_numeric(snapshot.get(metric))
-        benchmark = _bank_numeric(_industry_mean(ticker, metric))
+        benchmark = _bank_numeric((benchmarks or {}).get(metric))
         grade = _bank_peer_gap(actual, benchmark, higher_better)
         if grade is None:
             missing.append({'Metric':metric, 'Actual':actual, 'PeerMean':benchmark, 'Reason':'Thiếu dữ liệu hoặc benchmark không hợp lệ'})
@@ -275,6 +290,9 @@ def _bank_factor_score(ticker, snapshot, spec, minimum=2):
 
 def bank_rating_v875(ticker, overrides=None):
     o=overrides or {}; s=get_snapshot(ticker); anchor='a-'
+    from scripts.methodology_kpi_engine import methodology_kpi_table
+    kt=methodology_kpi_table(ticker)
+    benchmarks=dict(zip(kt.Metric,kt['TB ngành']))
     # Business position cannot be assessed using ROE/NPL/CASA; analyst validation required.
     business=o.get('BusinessProfile')
     factors={}; evidence={}; missing={}
@@ -283,7 +301,7 @@ def bank_rating_v875(ticker, overrides=None):
     else:
         missing['BusinessProfile']='Chưa có đánh giá quy mô, thị phần, đa dạng hóa, vai trò hệ thống'
     for key, title in [('CapitalEarnings','Vốn và Lợi nhuận'),('RiskPosition','Vị thế Rủi ro'),('FundingLiquidity','Huy động vốn và Thanh khoản')]:
-        grade, obs, absent=_bank_factor_score(ticker,s,BANK_FACTOR_SPEC[key])
+        grade, obs, absent=_bank_factor_score(ticker,s,BANK_FACTOR_SPEC[key],benchmarks=benchmarks)
         if o.get(key) in NOTCH:
             grade=o[key]
         if grade is not None: factors[title]=grade
@@ -294,6 +312,7 @@ def bank_rating_v875(ticker, overrides=None):
     complete=len(factors)==4
     support=o.get('ExternalSupportNotches')
     support_valid=isinstance(support,int) and not isinstance(support,bool) and 0<=support<=8
+    if not support_valid:missing['ExternalSupportNotches']='Chưa thẩm định hỗ trợ bên ngoài'
     sacp=move(anchor,sum(NOTCH[v] for v in factors.values())) if complete else None
     icr=move(sacp,support) if complete and support_valid else None
     return {'Methodology':'BANK','MethodologyName':'Phương pháp XHTN Ngân hàng – đa chỉ tiêu, thẩm định',
@@ -303,7 +322,7 @@ def bank_rating_v875(ticker, overrides=None):
             'ExternalSupportNotches':support if support_valid else None,
             'ICR':label(icr) if icr else 'N/A',
             'DataSufficientForAutoRating':complete and support_valid,
-            'EvidenceByFactor':evidence,'MissingEvidence':missing,
+            'EvidenceByFactor':evidence,'MissingEvidence':missing,'RatingStatus':'SIMULATION' if complete and support_valid else 'UNREVIEWED','Outlook':o.get('Outlook','Chưa thẩm định'),
             'Audit':'Anchor cố định A-; 4 cấu phần đa chỉ tiêu; hỗ trợ ngoài phải có thẩm định; không tự động gán AAA.'}
 
 
@@ -330,3 +349,6 @@ def rate_company(ticker,overrides=None):
     if method=='EXCLUDED_SPECIALIZED':
         return {'Methodology':'EXCLUDED_SPECIALIZED','MethodologyName':'Chưa có phương pháp phù hợp','ICR':'N/A','Audit':'Không áp dụng phương pháp doanh nghiệp thông thường cho loại hình chuyên biệt.'}
     return corporate_rating(ticker,overrides)
+
+# Compatibility: fixed Anchor A- and evidence gate for every bank caller.
+bank_rating = bank_rating_v875

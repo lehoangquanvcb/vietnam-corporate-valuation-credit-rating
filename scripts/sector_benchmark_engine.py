@@ -16,6 +16,7 @@ def sector_universe_tickers(ticker):
     if z.empty:return [t]
     r=z.iloc[0];typ=r.EntityType
     if typ=='BANK':return u[u.EntityType.eq('BANK')].Ticker.tolist()
+    if typ=='INSURANCE':return u[u.EntityType.eq('INSURANCE')].Ticker.tolist()
     if typ=='SECURITIES':return u[u.EntityType.eq('SECURITIES')].Ticker.tolist()
     if 'ICBCode2' in u.columns and pd.notna(r.get('ICBCode2')):
         p=u[(u.EntityType.eq('CORPORATE')) & (u.ICBCode2.astype(str).eq(str(r.get('ICBCode2'))))]
@@ -45,30 +46,26 @@ def industry_label(ticker):
         return f"Trung bình ngành {r.Sector}"
 
 def industry_snapshot(ticker):
-    u=universe();z=u[u.Ticker.eq(str(ticker).upper())]
-    if z.empty:return pd.DataFrame()
-    typ=z.iloc[0].EntityType;s=bank_snapshot() if typ=='BANK' else generic_snapshot()
-    if s.empty:return s
-    s=s.copy();s['Ticker']=s.Ticker.astype(str).str.upper()
-    out=s[s.Ticker.isin(industry_tickers(ticker))].copy()
-    if typ=='SECURITIES' and len(out):
-        pub=out['Ticker'].map(latest_capital_ratio)
-        if 'AvailableCapitalRatio' not in out.columns:
-            out['AvailableCapitalRatio']=np.nan
-        out['AvailableCapitalRatio']=pd.to_numeric(pub,errors='coerce').combine_first(
-            pd.to_numeric(out['AvailableCapitalRatio'],errors='coerce')
-        )
-    return out
+    from scripts.universal_data import get_snapshot, get_company
+    typ=get_company(ticker).get('EntityType')
+    peers=[t for t in industry_tickers(ticker) if t!=str(ticker).upper() and get_company(t).get('EntityType')==typ]
+    from scripts.financial_evidence import comparable_model
+    target=get_snapshot(ticker)
+    return pd.DataFrame([row for row in (get_snapshot(t) for t in peers) if comparable_model(target,row)])
 
 def industry_metric_history(ticker,metric):
-    u=universe();z=u[u.Ticker.eq(str(ticker).upper())]
-    if z.empty:return pd.DataFrame()
-    typ=z.iloc[0].EntityType;x=read_csv(DATA/'bank_history_long.csv') if typ=='BANK' else read_csv(DATA/'company_history_long.csv')
-    if x.empty:return pd.DataFrame()
-    peers=industry_tickers(ticker);x=x[x.Ticker.astype(str).str.upper().isin(peers)&x.Metric.astype(str).eq(str(metric))].copy()
-    x['Value']=pd.to_numeric(x.Value,errors='coerce');x=x.dropna(subset=['Value']);x['PeriodDate']=x.Period.map(period_date);x=x.dropna(subset=['PeriodDate'])
-    if x.empty:return x
-    return x.groupby('PeriodDate',as_index=False).agg(IndustryMean=('Value','mean'),IndustryMedian=('Value','median'),IndustryCount=('Ticker','nunique'))
+    from scripts.universal_data import entity_history, get_company
+    typ=get_company(ticker).get('EntityType'); frames=[]
+    for t in industry_tickers(ticker):
+        if t==str(ticker).upper() or get_company(t).get('EntityType')!=typ:continue
+        h=entity_history(t)
+        if len(h):frames.append(h[h.Metric.eq(metric)])
+    if not frames:return pd.DataFrame()
+    x=pd.concat(frames,ignore_index=True);x['PeriodDate']=x.Period.map(period_date)
+    x=x.dropna(subset=['Value','PeriodDate']).drop_duplicates(['Ticker','Period','Metric'])
+    out=x.groupby('PeriodDate',as_index=False).agg(IndustryMean=('Value','mean'),IndustryMedian=('Value','median'),IndustryCount=('Ticker','nunique'))
+    out.loc[out.IndustryCount.lt(5),['IndustryMean','IndustryMedian']]=np.nan
+    return out
 
 def build_sector_benchmarks(target_ticker=None):
     u=universe(); rows=[]

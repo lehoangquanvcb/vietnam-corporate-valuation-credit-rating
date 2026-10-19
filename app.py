@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.116-BASELINE-024914-DATA-CHART-REPAIR'
+BUILD_TAG='V8.119.0-INSURANCE-METHOD'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -73,51 +73,7 @@ def _security_raw_latest_value(ticker, metric):
     return None
 
 def _snapshot_row(ticker):
-    """Flatten one snapshot into a peer-table row without inventing data."""
-    try:
-        d=get_snapshot(ticker) or {}
-    except Exception:
-        d={}
-    row={'Ticker':str(ticker).upper().strip()}
-    if isinstance(d,dict):
-        row.update(d)
-    # Derive only transparent ratios when source fields are available.
-    def _n(k):
-        try:
-            v=pd.to_numeric(pd.Series([row.get(k)]),errors='coerce').iloc[0]
-            return None if pd.isna(v) else float(v)
-        except Exception:
-            return None
-    eq=_n('Equity'); assets=_n('TotalAssets'); npat=_n('NPAT')
-    debt=_n('Debt')
-    if row.get('ROE') is None and npat is not None and eq not in (None,0):
-        row['ROE']=npat/eq
-    if row.get('ROA') is None and npat is not None and assets not in (None,0):
-        row['ROA']=npat/assets
-    if row.get('DebtEquity') is None and debt is not None and eq not in (None,0):
-        row['DebtEquity']=debt/eq
-    if row.get('CurrentRatio') is None:
-        ca=_n('CurrentAssets'); cl=_n('CurrentLiabilities')
-        if ca is not None and cl not in (None,0): row['CurrentRatio']=ca/cl
-    # V8.116: enrich sparse Securities snapshots from raw semantic files.
-    # This fixes blank platform charts without touching the working report/valuation pipeline.
-    try:
-        if str(get_company(ticker).get('EntityType','')).upper()=='SECURITIES':
-            for _m in ['Revenue','NPAT','TotalAssets','Equity','ROE','ROA','DebtEquity','CurrentRatio','PB','PE']:
-                if num(row.get(_m)) is None:
-                    _v=_security_raw_latest_value(ticker,_m)
-                    if _v is not None: row[_m]=_v
-            if num(row.get('AvailableCapitalRatio')) is None:
-                try:
-                    _acr=latest_capital_ratio(str(ticker).upper().strip())
-                    if isinstance(_acr,dict):
-                        _acr=_acr.get('AvailableCapitalRatio',_acr.get('Ratio',_acr.get('Value')))
-                    if num(_acr) is not None: row['AvailableCapitalRatio']=float(num(_acr))
-                except Exception:
-                    pass
-    except Exception:
-        pass
-    return row
+    return get_snapshot(ticker)
 
 def _securities_peer_frame(ticker, max_peers=10):
     """Build a dynamic Securities peer set when industry_snapshot is empty.
@@ -247,8 +203,8 @@ def _dynamic_peer_label_ui(ticker, fallback):
 
 def _rating_no_vn(value):
     """Display rating grades without the historical 'vn' prefix."""
-    if value is None:
-        return value
+    if value is None or str(value) in ('N/A','nan','None'):
+        return 'Chưa thẩm định'
     s=str(value).strip()
     if re.match(r'(?i)^vn(?=[A-C])',s):
         s=s[2:]
@@ -308,7 +264,7 @@ def _price_vnd(x):
     return v if 100<=v<=1_000_000 else None
 def money(x):
     v=_price_vnd(x)
-    return 'N/A' if v is None else vi(v,0)+' đồng/cp'
+    return 'Thiếu dữ liệu' if v is None else vi(v,0)+' đồng/cp'
 def bn(x):return 'N/A' if num(x) is None else vi(num(x)/1e9,0)+' tỷ đồng'
 
 
@@ -385,92 +341,14 @@ def _security_peer_raw_mean_history(ticker, metric, max_peers=10):
     return allh.groupby('Period',as_index=False)['Value'].mean().rename(columns={'Value':'IndustryMean'})
 
 def metric_chart(ticker,metric,title,percent=False):
-    """Trend chart with Securities raw-history fallback.
-    For Securities ratios, use full quarterly raw semantic history so ROE/ROA,
-    Debt/Equity and Current Ratio render like Revenue/NPAT trend charts.
-    """
-    try:
-        et=str(get_company(ticker).get('EntityType','')).upper()
-    except Exception:
-        et=''
-
-    def _norm(v):
-        ss=str(v).upper().strip().replace('_','-').replace(' ','')
-        m=re.fullmatch(r'(20\d{2})-?Q([1-4])',ss)
-        return f"{m.group(1)}-Q{m.group(2)}" if m else str(v).strip()
-
-    def _ord(v):
-        m=re.fullmatch(r'(20\d{2})-Q([1-4])',_norm(v))
-        return int(m.group(1))*4+int(m.group(2)) if m else -1
-
-    # Target history: normal history first, raw semantic fallback for Securities.
-    h=entity_history(ticker)
-    z=pd.DataFrame()
-    if h is not None and len(h):
-        z=h[h.Metric.astype(str).eq(metric)].copy()
-        if len(z):
-            z['Value']=pd.to_numeric(z.Value,errors='coerce')
-            z=z.dropna(subset=['Value'])
-            z['Period']=z['Period'].map(_norm)
-            z=z[z['Period'].astype(str).str.len()>0]
-            z['_ord']=z['Period'].map(_ord)
-            z=z.sort_values('_ord').drop_duplicates('Period',keep='last')[['Period','Value','_ord']]
-    if et=='SECURITIES' and (z.empty or z['Period'].nunique()<3):
-        rz=_security_raw_metric_history(ticker,metric)
-        if len(rz):
-            rz=rz.copy(); rz['Period']=rz['Period'].map(_norm); rz['_ord']=rz['Period'].map(_ord)
-            z=rz.sort_values('_ord').drop_duplicates('Period',keep='last')[['Period','Value','_ord']]
-
-    # Peer history: normal engine first, then raw peer fallback when sparse.
-    p=_final_chart_guard(metric,industry_metric_history(ticker,metric))
-    pp=pd.DataFrame()
-    if p is not None and len(p):
-        pp=p.copy()
-        if 'Period' in pp.columns:
-            pp['Period']=pp['Period'].map(_norm)
-        elif 'PeriodDate' in pp.columns:
-            pp['Period']=pd.to_datetime(pp['PeriodDate'],errors='coerce').dt.to_period('Q').astype(str).map(_norm)
-        pp['IndustryMean']=pd.to_numeric(pp.get('IndustryMean'),errors='coerce')
-        pp=pp.dropna(subset=['IndustryMean'])
-        pp['_ord']=pp['Period'].map(_ord)
-        pp=pp.sort_values('_ord').drop_duplicates('Period',keep='last')[['Period','IndustryMean','_ord']]
-    if et=='SECURITIES' and (pp.empty or pp['Period'].nunique()<3):
-        rp=_security_peer_raw_mean_history(ticker,metric,10)
-        if len(rp):
-            rp=rp.copy(); rp['Period']=rp['Period'].map(_norm); rp['_ord']=rp['Period'].map(_ord)
-            pp=rp.sort_values('_ord').drop_duplicates('Period',keep='last')[['Period','IndustryMean','_ord']]
-
+    from scripts.financial_views import history_comparison, BASIS_LABELS
+    h=history_comparison(ticker,metric,globals().get('_history_basis','YTD'),globals().get('_history_years',5))
     fig=go.Figure()
-    if len(z):
-        fig.add_trace(go.Scatter(
-            x=z['Period'], y=z['Value'],
-            mode='lines+markers' if len(z)>=2 else 'markers',
-            name=ticker
-        ))
-    if len(pp):
-        fig.add_trace(go.Scatter(
-            x=pp['Period'], y=pp['IndustryMean'],
-            mode='lines+markers' if len(pp)>=2 else 'markers',
-            line=dict(dash='dash'),
-            name='Trung bình peer'
-        ))
-
-    periods=[]
-    for tr in fig.data:
-        try: periods.extend([_norm(x) for x in tr.x])
-        except Exception: pass
-    periods=sorted(set(periods),key=_ord)
-    final_title=title if len(periods)>=2 else title.replace('xu hướng DN và trung bình peer','kỳ gần nhất: DN và trung bình peer')
-
-    fig.update_layout(
-        title=final_title, height=330,
-        legend=dict(orientation='h',y=-.20),
-        margin=dict(t=45,b=70),
-        xaxis_title='',
-        xaxis=dict(type='category',categoryarray=periods,categoryorder='array')
-    )
-    if percent:
-        fig.update_yaxes(tickformat='.1%')
+    if len(h):
+        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.Value,name=ticker,mode='lines+markers',connectgaps=False))
+        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.PeerMean,name='TB peer cùng kỳ',mode='lines+markers',connectgaps=False,line=dict(dash='dash')))
+    fig.update_layout(title=title+' · '+BASIS_LABELS[globals().get('_history_basis','YTD')],height=330,legend=dict(orientation='h',y=-.2),margin=dict(t=50,b=70))
+    if percent:fig.update_yaxes(tickformat='.1%')
     return fig
 
 def _latest_metric_period(ticker,metric):
@@ -483,105 +361,12 @@ def _latest_metric_period(ticker,metric):
         return 'kỳ gần nhất'
 
 def latest_peer_bar_chart(ticker,metric,title,percent=False,max_peers=10):
-    """Latest company + peer bar chart with readable financial units."""
-    q=_peer_frame_safe(ticker)
-    if q is None or not len(q) or 'Ticker' not in q.columns:
-        return go.Figure()
-    if metric not in q.columns or pd.to_numeric(q.get(metric),errors='coerce').notna().sum()==0:
-        try:
-            q=pd.DataFrame([_snapshot_row(x) for x in q['Ticker'].astype(str).tolist()])
-        except Exception:
-            return go.Figure()
-    if metric not in q.columns:
-        return go.Figure()
-
-    z=q[['Ticker',metric]].copy()
-    z['Ticker']=z['Ticker'].astype(str).str.upper().str.strip()
-    z[metric]=pd.to_numeric(z[metric],errors='coerce')
-
-    # Same plausibility guards used elsewhere in the platform.
-    v=z[metric]
-    if metric=='DebtEquity': v=v.where((v>=0)&(v<=10))
-    elif metric=='CurrentRatio': v=v.where((v>0)&(v<=20))
-    elif metric=='PE': v=v.where((v>0)&(v<=200))
-    elif metric=='PB': v=v.where((v>0)&(v<=20))
-    elif metric in {'ROE','ROA'}: v=v.where((v>=-2)&(v<=2))
-    z[metric]=v
-    z=z.dropna(subset=[metric]).drop_duplicates('Ticker',keep='last')
-
-    selected=str(ticker).upper().strip()
-    order=[selected]
-    try:
-        from scripts.dynamic_peer_engine import select_dynamic_peers
-        d=select_dynamic_peers(selected)
-        if d is not None and len(d) and 'Ticker' in d.columns:
-            order += [str(x).upper().strip() for x in d['Ticker'].tolist()
-                      if str(x).upper().strip()!=selected][:max_peers]
-    except Exception:
-        pass
-    if len(order)==1:
-        order += [x for x in z['Ticker'].tolist() if x!=selected][:max_peers]
-
-    chosen=z.set_index('Ticker').reindex(order[:max_peers+1]).dropna(subset=[metric]).reset_index()
-    if chosen.empty:
-        return go.Figure()
-
-    # Monetary metrics: scale raw VND into readable report/platform units.
-    money_metrics={
-        'TotalAssets','GrossLoans','CustomerDeposits','Revenue','NPAT','Equity',
-        'Cash','Debt','TotalDebt','ShortTermDebt','LongTermDebt','MarketCap',
-        'NetInterestIncome','OperatingIncome','InterestIncome','InterestExpense',
-        'LoanLossProvision','BrokerageRevenue','MarginLoans','TradingAssets',
-        'FinancialAssets','AvailableCapital'
-    }
-    vals=chosen[metric].astype(float)
-    scale=1.0; unit=''
-    if percent:
-        plotvals=vals*100.0
-        unit='%'
-    elif metric in money_metrics:
-        mx=float(vals.abs().max()) if len(vals) else 0
-        # V8.97 display convention requested by user:
-        # < 100 nghìn tỷ đồng => show in tỷ đồng
-        # >= 100 nghìn tỷ đồng => show in nghìn tỷ đồng
-        if mx>=100e12:
-            scale=1e12; unit='nghìn tỷ đồng'
-        elif mx>=1e9:
-            scale=1e9; unit='tỷ đồng'
-        elif mx>=1e6:
-            scale=1e6; unit='triệu đồng'
-        else:
-            unit='đồng'
-        plotvals=vals/scale
-    else:
-        plotvals=vals
-
-    chosen['PlotValue']=plotvals
-
-    # Human-readable bar labels.
-    if percent:
-        text=[f'{x:.1f}%'.replace('.',',') for x in plotvals]
-    else:
-        def _fmt(x):
-            if abs(x)>=100:return f'{x:,.0f}'
-            if abs(x)>=10:return f'{x:,.1f}'
-            return f'{x:,.2f}'
-        text=[_fmt(x).replace(',','X').replace('.',',').replace('X','.') for x in plotvals]
-
-    fig=go.Figure(go.Bar(
-        x=chosen['Ticker'], y=chosen['PlotValue'],
-        text=text, textposition='outside',
-        cliponaxis=False
-    ))
-    fig.update_layout(
-        title=title,
-        yaxis_title=f'Đơn vị: {unit}' if unit else '',
-        xaxis_title='',
-        margin=dict(l=45,r=20,t=55,b=35),
-        height=360
-    )
-    if percent:
-        fig.update_yaxes(ticksuffix='%')
+    from scripts.financial_views import peer_metric_frame
+    q=peer_metric_frame(ticker,metric)
+    fig=go.Figure()
+    if len(q):fig.add_trace(go.Bar(x=q.Ticker,y=q.Value,marker_color=['#116b55' if t==ticker else '#9eb5c5' for t in q.Ticker]))
+    fig.update_layout(title=title+' · cùng kỳ/cơ sở',height=330,margin=dict(t=55,b=45))
+    if percent:fig.update_yaxes(tickformat='.1%')
     return fig
 
 def _growth_from_hist(metric):
@@ -594,22 +379,11 @@ def _growth_from_hist(metric):
     return pd.DataFrame(rows)
 
 def bank_rating_result(ticker,overrides=None):
-    if build_credit_rating is None:return {'ICR':'N/A','Error':'Bank rating engine unavailable'}
-    try:s=pd.read_csv(DATA/'bank_snapshot.csv')
-    except:return {'ICR':'N/A','Error':'No bank snapshot'}
-    s=s.copy(); s['ROE_Used']=pd.to_numeric(s.get('ROE'),errors='coerce')
-    for m in ['GrossLoans','CustomerDeposits','NPAT']:
-        g=_growth_from_hist(m); s=s.merge(g,on='Ticker',how='left')
-    try:
-        r=build_credit_rating(s,ticker,factor_score_overrides=overrides or {})
-        r['Anchor']=r.get('AnchorRating',r.get('Anchor'))
-        r['SACP']=r.get('SACPRating',r.get('SACP'))
-        r['ICR']=r.get('FinalRating',r.get('ICR'))
-        return r
-    except Exception as e:return {'ICR':'N/A','Error':str(e)}
+    return rate_three_methodologies(ticker,overrides)
 
 u=universe()
 st.sidebar.markdown('## PHÂN TÍCH DOANH NGHIỆP')
+st.sidebar.caption('Phiên bản đang chạy: '+BUILD_TAG)
 entity_filter=st.sidebar.selectbox('Nhóm doanh nghiệp',['Tất cả','Ngân hàng','Công ty chứng khoán','Công ty bảo hiểm','Doanh nghiệp phi tài chính'])
 maptype={'Ngân hàng':'BANK','Công ty chứng khoán':'SECURITIES','Công ty bảo hiểm':'INSURANCE','Doanh nghiệp phi tài chính':'CORPORATE'}
 if entity_filter=='Công ty bảo hiểm':
@@ -619,8 +393,8 @@ if entity_filter=='Công ty bảo hiểm':
     z=u[_et.isin(['INSURANCE','INSURER','INSURANCE_NONLIFE','INSURANCE_LIFE']) | _mt.str.startswith('INSURANCE') | (_sector.str.contains('bảo hiểm|bao hiem|insurance',regex=True) & ~_sector.str.contains('môi giới|moi gioi|broker',regex=True))]
 else:
     z=u if entity_filter=='Tất cả' else u[u.EntityType.eq(maptype[entity_filter])]
-labels={r.Ticker:f'{r.Ticker} — {r.CompanyName}' for _,r in z.iterrows()}
-selected=st.sidebar.selectbox('Mã doanh nghiệp',z.Ticker.tolist(),format_func=lambda x:labels.get(x,x)) if len(z) else None
+ticker_labels={r.Ticker:f'{r.Ticker} — {r.CompanyName}' for _,r in z.iterrows()}
+selected=st.sidebar.selectbox('Mã doanh nghiệp',z.Ticker.tolist(),format_func=lambda x,_names=ticker_labels:_names.get(x,x)) if len(z) else None
 presentation=st.sidebar.toggle('Chế độ trình bày',value=False)
 
 if not selected: st.error('Không có doanh nghiệp trong bộ lọc.'); st.stop()
@@ -646,12 +420,16 @@ _entity_type=_clean_text(meta.get('EntityType'))
 _sector=_clean_text(meta.get('Sector'))
 _peer_fallback=_clean_text(meta.get('PeerGroup'))
 _methodology=_clean_text(meta.get('Methodology'))
+_peer_label=_dynamic_peer_label_ui(selected, _peer_fallback)
+if _entity_type=='INSURANCE':
+    _peer_label=(f'{len(peer)} doanh nghiệp cùng mô hình đã xác định' if len(peer) else
+                 'Chưa xác nhận doanh nghiệp cùng mô hình bảo hiểm')
 
 # Exchange/stock exchange is intentionally omitted from the UI.
 st.sidebar.success(_entity_type)
 st.sidebar.caption(
     f"Ngành: {_sector}\n\n"
-    f"Nhóm so sánh: {_dynamic_peer_label_ui(selected, _peer_fallback)}\n\n"
+    f"Nhóm so sánh: {_peer_label}\n\n"
     f"Phương pháp: {_methodology}"
 )
 
@@ -665,15 +443,33 @@ st.subheader(f"{selected} — {meta.get('CompanyName')}")
 # Header KPIs adapt by entity.
 if meta['EntityType']=='BANK': kpis=[('Giá thị trường',money(val.get('Price'))),('P/B',mult(s.get('PB'))),('ROE',pct(s.get('ROE'))),('NPL',pct(s.get('NPL'))),('CAR',pct(s.get('CAR'))),('CASA',pct(s.get('CASA')))]
 elif meta['EntityType']=='SECURITIES': kpis=[('Giá thị trường',money(val.get('Price'))),('P/B',mult(s.get('PB'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('Nợ/VCSH',mult(s.get('DebtEquity'))),('Vốn khả dụng',pct((latest_capital_ratio(selected) or s.get('AvailableCapitalRatio'))))]
+elif meta['EntityType']=='INSURANCE':kpis=[('Giá thị trường',money(val.get('Price'))),('Tổng tài sản',bn(s.get('TotalAssets'))),('Vốn chủ sở hữu',bn(s.get('Equity'))),('Dự phòng nghiệp vụ',bn(s.get('InsuranceReserves'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA')))]
 else:kpis=[('Giá thị trường',money(val.get('Price'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA'))),('Nợ/EBITDA',mult(s.get('DebtEBITDA'))),('Thanh toán hiện hành',mult(s.get('CurrentRatio')))]
 cols=st.columns(6)
 for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
+if meta['EntityType']=='INSURANCE' and val.get('Price') is None:
+    st.caption('Giá thị trường: thiếu dữ liệu giá đóng cửa trong nguồn hiện có; không suy ra từ P/E hoặc P/B.')
 
 if meta.get('Methodology')=='EXCLUDED_SPECIALIZED' and not (str(meta.get('EntityType','')).upper().startswith('INSURANCE') or any(x in str(meta.get('Sector','')).lower() for x in ['bảo hiểm','insurance','bao hiem'])): st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
 if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['TotalAssets','Revenue','ROE','Price']): st.info(f'Chưa có đủ dữ liệu tài chính cho {selected}.')
 
 _sections=['HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','BÁO CÁO XẾP HẠNG TÍN NHIỆM','DỮ LIỆU & QUẢN TRỊ']
 _active_section=st.radio('Điều hướng',_sections,horizontal=True,label_visibility='collapsed',key='main_section_nav')
+from scripts.financial_views import BASIS_LABELS, HISTORY_METRICS, HISTORY_NOTE, history_table
+_history_basis=st.sidebar.selectbox('Cơ sở lịch sử',list(BASIS_LABELS),index=2 if meta['EntityType']=='INSURANCE' else 0,format_func=lambda k:BASIS_LABELS[k])
+_history_years=st.sidebar.selectbox('Số năm cùng kỳ',[5,4,3])
+if _active_section in _sections[:3]:
+    with st.expander('Lịch sử doanh nghiệp 3–5 năm cùng kỳ',expanded=True):
+        st.dataframe(history_table(selected,_history_basis,_history_years),hide_index=True,use_container_width=True)
+        st.caption(HISTORY_NOTE)
+        _history_options=HISTORY_METRICS[meta['EntityType']]
+        _hm=st.multiselect('Chỉ tiêu trên biểu đồ lịch sử',_history_options,default=_history_options[:2],key='history_metrics_'+selected)
+        for _i in range(0,len(_hm),2):
+            _hc=st.columns(2)
+            for _j,_m in enumerate(_hm[_i:_i+2]):
+                from scripts.methodology_kpi_engine import LABELS, PCT
+                with _hc[_j]:_plotly_chart_safe(metric_chart(selected,_m,LABELS.get(_m,_m),_m in PCT),use_container_width=True)
+
 
 def _safe_show(df, wanted, n=None):
     if df is None or not len(df): return pd.DataFrame()
@@ -707,7 +503,11 @@ def _download_report_block(report_type, rating_result=None):
     st.markdown('---');st.subheader('Xuất '+title)
     c1,c2=st.columns(2)
     suffix='Phan_tich_Dinh_gia_MA' if report_type=='analysis' else 'XHTN'
-    identity=f'{selected}_{report_type}'
+    import hashlib
+    from scripts.financial_evidence import signature
+    _report_sources=[signature(p) for p in (ROOT/'data/raw').glob('*.csv')]+[signature(ROOT/'config'/p) for p in ['insurance_entities.csv','insurance_metric_inputs.csv','raw_period_basis.csv']] if meta['EntityType']=='INSURANCE' else []
+    _digest=hashlib.sha256(json.dumps({'build':BUILD_TAG,'sources':_report_sources,'rating':rating_result,'basis':_history_basis,'years':_history_years,'snapshot':s.get('SnapshotPeriod')},sort_keys=True,default=str).encode()).hexdigest()[:12]
+    identity=f'{selected}_{report_type}_{_digest}'
     for kind, column, title, mime, ext in [
         ('docx',c1,'Word','application/vnd.openxmlformats-officedocument.wordprocessingml.document','docx'),
         ('pdf',c2,'PDF','application/pdf','pdf')]:
@@ -715,7 +515,7 @@ def _download_report_block(report_type, rating_result=None):
         with column:
             if st.button('Chuẩn bị báo cáo '+title,key='prepare_'+key,use_container_width=True):
                 try:
-                    data=(generate_docx(selected,report_type,rating_result) if kind=='docx' else generate_pdf(selected,report_type,rating_result))
+                    data=(generate_docx(selected,report_type,rating_result,{'history_basis':_history_basis,'history_years':_history_years}) if kind=='docx' else generate_pdf(selected,report_type,rating_result,{'history_basis':_history_basis,'history_years':_history_years}))
                     st.session_state[key]=data.getvalue() if hasattr(data,'getvalue') else data
                 except Exception as exc:
                     if kind=='docx' and report_type=='rating':
@@ -764,6 +564,10 @@ if _active_section==_sections[0]:
         ml=[('TotalAssets','Tổng tài sản',False),('GrossLoans','Cho vay khách hàng',False),
             ('CustomerDeposits','Tiền gửi khách hàng',False),('ROE','ROE',True),('ROA','ROA',True),
             ('NIM','NIM',True),('NPL','Nợ xấu',True),('CAR','CAR',True),('CASA','CASA',True),('LDR','LDR',True)]
+    elif meta['EntityType']=='INSURANCE':
+        from scripts.insurance_analysis import render_analysis
+        render_analysis(selected,_history_basis,_history_years,'profile_ins_')
+        ml=[]
     else:
         ml=[('Revenue','Doanh thu',False),('NPAT','Lợi nhuận sau thuế',False),('ROE','ROE',True),
             ('ROA','ROA',True),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Thanh toán hiện hành',False)]
@@ -782,14 +586,14 @@ if _active_section==_sections[0]:
             _peer_obs0=int(pd.to_numeric(skpi.get('Số DN có dữ liệu'),errors='coerce').fillna(0).max()) if len(skpi) else 0
         except Exception:
             _peer_obs0=0
-        if _peer_obs0==0:
+        if _peer_obs0==0 and skpi.empty:
             skpi=_securities_kpi_fallback(selected,peer)
     if len(skpi):
         wanted=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành',
-                'Số DN có dữ liệu','Chênh lệch với TB ngành','Trạng thái dữ liệu']
+                'Số DN có dữ liệu','Chênh lệch với TB ngành','Trạng thái dữ liệu','Kỳ dữ liệu','Cơ sở','Giải thích','Trạng thái peer']
         st.dataframe(_safe_show(skpi,wanted),hide_index=True,use_container_width=True)
     else: st.info('Chưa có dữ liệu methodology KPI.')
-    if len(peer):
+    if len(peer) and meta['EntityType']!='INSURANCE':
         st.markdown('### Vị trí tương đối trong peer group')
         q=peer.copy(); q['Doanh nghiệp']=q.Ticker.astype(str)
         cols_show=['Doanh nghiệp','ROE','ROA','PB','PE','DebtEquity','CurrentRatio','NPL','CAR','CASA','NIM','CIR','LDR']
@@ -811,6 +615,7 @@ if _active_section==_sections[1]:
 
     st.markdown('### Định giá')
     vr=valuation_regime(selected); fv=fair_value_range(selected); vt=triangulate(selected)
+    if val.get('Status')!='OK':st.info(val.get('Reason','Thiếu dữ liệu định giá'))
     a,b,c,d=st.columns(4)
     a.metric('Giá thị trường',money(val.get('Price'))); b.metric('Giá trị tham chiếu',money(val.get('FairValue')))
     c.metric('Tiềm năng',pct(val.get('Upside'))); d.metric('Chế độ định giá',vr.get('Regime','N/A'))
@@ -831,7 +636,7 @@ if _active_section==_sections[1]:
     if len(lenses): st.dataframe(lenses,hide_index=True,use_container_width=True)
 
     st.markdown('### M&A, quyền kiểm soát, tái cấu trúc & kịch bản stress')
-    base=num(val.get('FairValue')) or num(val.get('Price'))
+    base=num(val.get('FairValue'))
     c1,c2,c3=st.columns(3)
     premium=c1.slider('Thặng dư quyền kiểm soát',0.0,0.60,0.15,0.01)
     synergy=c2.slider('Giá trị cộng hưởng',0.0,0.50,0.08,0.01)
@@ -851,6 +656,9 @@ if _active_section==_sections[1]:
         else:
             rev=st.slider('Shock doanh thu',-50,20,-10,5); margin=st.slider('Shock biên lợi nhuận',-10,10,-2,1)
             st.write(f'Doanh thu {rev:+d}% · biên lợi nhuận {margin:+d} điểm %.')
+    if meta['EntityType']=='INSURANCE':
+        from scripts.insurance_analysis import render_analysis
+        render_analysis(selected,_history_basis,_history_years,'valuation_ins_')
     _download_report_block('analysis')
 
 if _active_section==_sections[2]:
@@ -859,21 +667,8 @@ if _active_section==_sections[2]:
     _entity_method=str(meta.get('EntityType','')).upper()
     _insurance_selected=(_entity_method.startswith('INSURANCE') or str(meta.get('Methodology','')).upper().startswith('INSURANCE') or any(x in str(meta.get('Sector','')).lower() for x in ['bảo hiểm','insurance','bao hiem']))
     if _insurance_selected:
-        with st.expander('Đầu vào thẩm định công ty bảo hiểm (bắt buộc để có bậc XHTN)',expanded=True):
-            st.caption('Tham chiếu ma trận Saigon Ratings 2025; nhập điểm sau khi kiểm tra bằng chứng. Không tự suy đoán điểm từ báo cáo tài chính doanh nghiệp thông thường.')
-            _c=st.columns(3)
-            _risk_fields=[('MacroIndustryRisk','Rủi ro vĩ mô và ngành',6),('BusinessRisk','Rủi ro kinh doanh',6),('FinancialRisk','Rủi ro tài chính',10)]
-            for _col,(_key,_lab,_max) in zip(_c,_risk_fields):
-                with _col:
-                    _v=st.selectbox(_lab,['Chưa đánh giá']+list(range(1,_max+1)),key=f'ins_{selected}_{_key}')
-                    if isinstance(_v,int): _rating_overrides[_key]=_v
-            st.caption('Điều chỉnh và hỗ trợ chỉ được nhập khi đã có đánh giá của chuyên viên/Hội đồng XHTN.')
-            _mods=[('GovernanceLiquidityNotches','Quản trị & thanh khoản'),('OtherAdjustmentsNotches','Điều chỉnh khác'),('ComparativeNotches','Điều chỉnh so sánh'),('GroupSupportNotches','Hỗ trợ tập đoàn'),('GovernmentSupportNotches','Hỗ trợ Chính phủ')]
-            for _key,_lab in _mods:
-                _v=st.selectbox(_lab,['Chưa đánh giá']+list(range(0,9) if 'Support' in _key else range(-6,7)),key=f'ins_{selected}_{_key}')
-                if isinstance(_v,int):_rating_overrides[_key]=_v
-            _choice=st.selectbox('Anchor nếu ma trận có nhiều lựa chọn',['Chưa chọn']+['vn'+x.upper() for x in ['aa+','aa','aa-','a+','a','a-','bbb+','bbb','bbb-','bb+','bb','bb-','b+','b','b-']],key=f'ins_{selected}_anchor_choice')
-            if _choice!='Chưa chọn':_rating_overrides['AnchorSelection']=_choice
+        from scripts.insurance_ui import render_assessment
+        _rating_overrides=render_assessment(selected)
     elif _entity_method=='BANK':
         with st.expander('Thẩm định yếu tố ngân hàng và hỗ trợ bên ngoài',expanded=False):
             st.caption('Anchor A− cố định. Chưa đủ chỉ tiêu và bằng chứng thì giữ N/A; không mặc định chấm trung tính.')
@@ -883,15 +678,43 @@ if _active_section==_sections[2]:
                 if _g!='Tự tính từ dữ liệu':_rating_overrides[_key]=_g
             _confirmed=st.checkbox('Đã đánh giá mức hỗ trợ bên ngoài',key=f'bank_{selected}_support_confirmed')
             if _confirmed:_rating_overrides['ExternalSupportNotches']=st.number_input('Notch hỗ trợ đã thẩm định',0,8,0,1,key=f'bank_{selected}_support')
+    elif _entity_method=='SECURITIES':
+        with st.expander('Thẩm định các yếu tố công ty chứng khoán',expanded=False):
+            for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Nguồn vốn và thanh khoản')]:
+                _v=st.selectbox(_lab,['Chưa thẩm định','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu'],key=f'sec_{selected}_{_key}')
+                if _v!='Chưa thẩm định':_rating_overrides[_key]=_v
+            _v=st.selectbox('Notch hỗ trợ bên ngoài',['Chưa thẩm định']+list(range(9)),key=f'sec_{selected}_support')
+            if isinstance(_v,int):_rating_overrides['ExternalSupportNotches']=_v
+    else:
+        with st.expander('Thẩm định yếu tố định tính doanh nghiệp phi tài chính',expanded=False):
+            for _key,_lab in [('IndustryRisk','Rủi ro vĩ mô và ngành'),('GovernanceRisk','Rủi ro quản trị và quản lý')]:
+                _v=st.selectbox(_lab,['Chưa thẩm định']+list(range(1,7)),key=f'corp_{selected}_{_key}')
+                if isinstance(_v,int):_rating_overrides[_key]=_v
+            for _key,_lab,_vals in [('ModifierNotches','Điều chỉnh khác',range(-6,7)),('ExternalSupportNotches','Hỗ trợ bên ngoài',range(9))]:
+                _v=st.selectbox(_lab,['Chưa thẩm định']+list(_vals),key=f'corp_{selected}_{_key}')
+                if isinstance(_v,int):_rating_overrides[_key]=_v
     rr3=rate_three_methodologies(selected,_rating_overrides)
+    if rr3.get('Methodology')=='INSURANCE':
+        from scripts.insurance_rating import insurance_scorecard, missing_evidence_labels
+        st.caption(f"Đầu vào thẩm định đã nhập: {rr3['AssessmentInputCount']}/{rr3['AssessmentInputTotal']}. Số 0 chỉ được dùng khi chuyên viên đã đánh giá không có điều chỉnh/hỗ trợ.")
+        if rr3.get('RatingStatus')=='SIMULATED':
+            st.success('Đã tính xong kết quả mô phỏng từ các đầu vào đã nhập; cần phê duyệt theo quy trình XHTN.')
+        elif rr3.get('RatingStatus')=='NOT_APPLICABLE':
+            st.warning('Ngoài phạm vi phương pháp phi nhân thọ hoặc ma trận không có bậc. '+ '; '.join(missing_evidence_labels(rr3)[-2:]))
+        else:
+            st.info('Chưa hình thành đầy đủ kết quả XHTN mô phỏng. Cần bổ sung: '+'; '.join(missing_evidence_labels(rr3)))
+    elif rr3.get('ICR') in (None,'N/A'):st.info('Chưa hình thành bậc XHTN mô phỏng: '+str(rr3.get('MissingEvidence','Chưa đủ bằng chứng')))
     r1,r2,r3=st.columns(3)
     r1.metric('Anchor',_rating_no_vn(rr3.get('Anchor','N/A')));r2.metric('SACP / SCA',_rating_no_vn(rr3.get('SACP',rr3.get('SCA','N/A'))));r3.metric('ICR',_rating_no_vn(rr3.get('ICR','N/A')))
 
+    if meta['EntityType']=='INSURANCE':
+        from scripts.insurance_analysis import render_analysis
+        render_analysis(selected,_history_basis,_history_years,'rating_ins_')
     st.markdown('### Phân tích các chỉ số tín dụng trọng yếu')
     _rating_metric_map={
         'BANK':['ROE','ROA','NIM','NPL','CAR','CASA','LDR','CIR'],
         'SECURITIES':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],
-        'INSURANCE':['ROE','ROA','CombinedRatio','SolvencyRatio','LossRatio','ExpenseRatio','InsurancePremiumRevenue'],
+        'INSURANCE':['ROE','ROA','CombinedRatio','SolvencyRatio','LossRatio','ExpenseRatio','NetInsurancePremium'],
         'CORPORATE':['Revenue','GrossMargin','EBITDAMargin','ROE','ROA','DebtEquity','DebtEBITDA','CFO_Debt','FOCF_Debt','CurrentRatio','CashDebt']
     }
     _rkpi,_,_=sector_kpi_table(selected)
@@ -901,22 +724,23 @@ if _active_section==_sections[2]:
             _peer_obs=int(pd.to_numeric(_rkpi.get('Số DN có dữ liệu'),errors='coerce').fillna(0).max()) if len(_rkpi) else 0
         except Exception:
             _peer_obs=0
-        if _peer_obs==0:
+        if _peer_obs==0 and _rkpi.empty:
             _rkpi=_securities_kpi_fallback(selected,peer)
-    if len(_rkpi):
+    if len(_rkpi) and meta.get('EntityType')!='INSURANCE':
         _want=set(_rating_metric_map.get(meta.get('EntityType'),[]))
         _show=_rkpi[_rkpi.Metric.astype(str).isin(_want)].copy() if 'Metric' in _rkpi.columns else _rkpi.copy()
-        _cols=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành','Số DN có dữ liệu','Chênh lệch với TB ngành','Trạng thái dữ liệu']
+        _cols=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành','Số DN có dữ liệu','Chênh lệch với TB ngành','Trạng thái dữ liệu','Kỳ dữ liệu','Cơ sở','Giải thích','Trạng thái peer']
         st.dataframe(_safe_show(_show,_cols),hide_index=True,use_container_width=True)
         # Current-period cross-sectional charts for the most decision-relevant metrics.
         if meta.get('EntityType')=='BANK': _bar_metrics=[('ROE','ROE',True),('NPL','Nợ xấu',True),('CAR','CAR',True),('CASA','CASA',True)]
+        elif meta.get('EntityType')=='INSURANCE': _bar_metrics=[('ROE','ROE',True),('ROA','ROA',True),('EquityAssets','VCSH/TTS',True),('InsuranceReservesEquity','Dự phòng nghiệp vụ/VCSH',False)]
         elif meta.get('EntityType')=='SECURITIES': _bar_metrics=[('ROE','ROE',True),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Thanh toán hiện hành',False),('AvailableCapitalRatio','Vốn khả dụng',True)]
         else: _bar_metrics=[('ROE','ROE',True),('DebtEquity','Nợ/VCSH',False),('DebtEBITDA','Nợ/EBITDA',False),('CurrentRatio','Thanh toán hiện hành',False)]
         for _i in range(0,len(_bar_metrics),2):
             _cc=st.columns(2)
             for _j,(_m,_t,_pf) in enumerate(_bar_metrics[_i:_i+2]):
                 with _cc[_j]: _plotly_chart_safe(latest_peer_bar_chart(selected,_m,f'{_t} · DN và 10 peer',_pf),use_container_width=True)
-    else:
+    elif meta.get('EntityType')!='INSURANCE':
         st.info('Chưa có đủ chỉ tiêu định lượng để phân tích XHTN.')
 
     if rr3.get('Methodology')=='CORPORATE':
@@ -932,16 +756,15 @@ if _active_section==_sections[2]:
             st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng.')
     elif rr3.get('Methodology')=='INSURANCE':
         st.markdown('### Ma trận và các điều chỉnh bảo hiểm')
-        _ins_rows=[{'Cấu phần':k,'Kết quả':str(rr3.get(k,'N/A'))} for k in ['CombinedRiskScore','FinancialRiskScore','AnchorCandidates','Anchor','SCA','ICR']]
+        _ins_rows=insurance_scorecard(rr3)
         st.dataframe(pd.DataFrame(_ins_rows),hide_index=True,use_container_width=True)
-        if rr3.get('MissingEvidence'): st.warning('Cần bổ sung/thẩm định: '+', '.join(map(str,rr3['MissingEvidence'])))
         st.caption(rr3.get('ScopeNote',''))
     elif rr3.get('Methodology') in ('BANK','SECURITIES'):
         st.markdown('### Tổng hợp hồ sơ rủi ro')
         st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
 
     # Component summary: missing assessments remain unknown, never converted to +0.
-    st.markdown('### Tổng kết cấu phần xếp hạng')
+    if rr3.get('Methodology')!='INSURANCE':st.markdown('### Tổng kết cấu phần xếp hạng')
     if rr3.get('Methodology') in ('BANK','SECURITIES'):
         _desc_score={'Rất Mạnh':'1/6','Mạnh':'2/6','Phù Hợp':'3/6','Trung Bình':'4/6','Yếu':'5/6','Rất Yếu':'6/6'}
         _desc_notch={'Rất Mạnh':2,'Mạnh':1,'Phù Hợp':0,'Trung Bình':-1,'Yếu':-2,'Rất Yếu':-4}
@@ -975,35 +798,16 @@ if _active_section==_sections[2]:
         try:_weighted_txt=f"{float(_weighted):.2f}/6"
         except Exception:_weighted_txt='N/A'
         def _corp_anchor_band_ui(x):
-            try:x=float(x)
-            except Exception:return 'N/A'
-            if x<=1.155:return f"{x:.2f}/6 → AAA"
-            if x<=1.47:return f"{x:.2f}/6 → AA+"
-            if x<=1.785:return f"{x:.2f}/6 → AA"
-            if x<=2.095:return f"{x:.2f}/6 → AA-"
-            if x<=2.405:return f"{x:.2f}/6 → A+"
-            if x<=2.72:return f"{x:.2f}/6 → A"
-            if x<=3.035:return f"{x:.2f}/6 → A-"
-            if x<=3.345:return f"{x:.2f}/6 → BBB+"
-            if x<=3.655:return f"{x:.2f}/6 → BBB"
-            if x<=3.97:return f"{x:.2f}/6 → BBB-"
-            if x<=4.285:return f"{x:.2f}/6 → BB+"
-            if x<=4.595:return f"{x:.2f}/6 → BB"
-            if x<=4.905:return f"{x:.2f}/6 → BB-"
-            if x<=5.22:return f"{x:.2f}/6 → B+"
-            if x<=5.535:return f"{x:.2f}/6 → B"
-            if x<=5.845:return f"{x:.2f}/6 → B-"
-            return f"{x:.2f}/6 → CCC-C"
-        def _corp_anchor_rating_ui(x):
-            s=_corp_anchor_band_ui(x)
-            return s.split('→')[-1].strip() if '→' in s else 'N/A'
+            from scripts.three_methodology_rating import _anchor_from_weighted
+            return 'Chưa thẩm định' if num(x) is None else _anchor_from_weighted(float(x)).upper()
+        def _corp_anchor_rating_ui(x):return _corp_anchor_band_ui(x)
         _sumrows += [
             {'Cấu phần':'Điểm rủi ro tổng hợp có trọng số','Điểm':_weighted_txt,'Mức rủi ro':'Điểm cuối trước modifier','Tác động':_corp_anchor_band_ui(_weighted)},
-            {'Cấu phần':'Anchor quy đổi từ điểm tổng hợp','Điểm':_corp_anchor_rating_ui(_weighted),'Mức rủi ro':'Quy đổi theo thang 17 bậc','Tác động':'Điểm → Anchor'},
+            {'Cấu phần':'Anchor quy đổi từ điểm tổng hợp','Điểm':_corp_anchor_rating_ui(_weighted),'Mức rủi ro':'Quy đổi theo engine mô phỏng','Tác động':'Điểm → Anchor'},
             {'Cấu phần':'Thanh khoản','Điểm':str(rr3.get('LiquidityScore','N/A')),'Mức rủi ro':rr3.get('Liquidity','N/A'),'Tác động':'Modifier/cap nếu trọng yếu; không cộng trực tiếp vào điểm tổng hợp'},
-            {'Cấu phần':'Modifier','Điểm':'—','Mức rủi ro':'—','Tác động':f"{int(rr3.get('ModifierNotches',0)):+d} notch"},
+            {'Cấu phần':'Modifier','Điểm':'—','Mức rủi ro':'—','Tác động':('Chưa thẩm định' if rr3.get('ModifierNotches') is None else f"{int(rr3['ModifierNotches']):+d} notch")},
             {'Cấu phần':'SCA','Điểm':_rating_no_vn(rr3.get('SCA','N/A')),'Mức rủi ro':'Sau modifier/cap','Tác động':'Anchor + modifier/cap'},
-            {'Cấu phần':'Hỗ trợ bên ngoài','Điểm':'—','Mức rủi ro':'—','Tác động':f"{int(rr3.get('ExternalSupportNotches') or 0):+d} notch"},
+            {'Cấu phần':'Hỗ trợ bên ngoài','Điểm':'—','Mức rủi ro':'—','Tác động':('Chưa thẩm định' if rr3.get('ExternalSupportNotches') is None else f"{int(rr3['ExternalSupportNotches']):+d} notch")},
             {'Cấu phần':'Kết quả XHTN','Điểm':_rating_no_vn(rr3.get('ICR','N/A')),'Mức rủi ro':rr3.get('Outlook','N/A'),'Tác động':'SCA + hỗ trợ bên ngoài'},
         ]
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
@@ -1017,7 +821,7 @@ if _active_section==_sections[2]:
                     {'Bước':'Hỗ trợ bên ngoài','Điều chỉnh':_fmt_notch(rr3.get('ExternalSupportNotches')),'Bậc XHTN':_rating_no_vn(rr3.get('ICR','N/A'))}])
         rc={'Waterfall':_wf}
     else:
-        rc=committee_pack(selected) if rr3.get('Methodology')!='INSURANCE' else {'Waterfall':[]}
+        rc=committee_pack(selected,_rating_overrides)
     st.markdown('### Waterfall trình Hội đồng XHTN')
     _waterfall=pd.DataFrame(rc.get('Waterfall',[]))
     if len(_waterfall):st.dataframe(_waterfall,hide_index=True,use_container_width=True)
@@ -1029,7 +833,13 @@ if _active_section==_sections[2]:
         ev={'ICR':rr3.get('ICR','N/A'),'RatingConfidence':'Chờ thẩm định' if rr3.get('ICR') in ('N/A',None) else 'Mô phỏng – cần phê duyệt','DataQuality':{'Coverage':_cov},'EvidenceLedger':[]}
         st.caption(f'Coverage định lượng: {len(_present)}/{len(_spec)} chỉ tiêu thiết kế; không bao gồm đánh giá định tính và hỗ trợ bên ngoài.')
     else:
-        ev=rating_evidence(selected) if rr3.get('Methodology')!='INSURANCE' else {'ICR':rr3.get('ICR','N/A'),'RatingConfidence':'Chờ thẩm định','DataQuality':{'Coverage':None},'EvidenceLedger':[]}
+        ev=rating_evidence(selected,_rating_overrides)
+        if rr3.get('Methodology')=='INSURANCE':
+            _dq=ev['DataQuality']
+            st.caption(f"Coverage định lượng: {len(_dq['Present'])}/{len(_dq['Present'])+len(_dq['Missing'])} chỉ tiêu cốt lõi; tách biệt với tiến độ nhập điểm thẩm định.")
+            if _dq['Missing']:
+                from scripts.methodology_kpi_engine import LABELS
+                st.caption('Chỉ tiêu cốt lõi còn thiếu: '+', '.join(LABELS.get(k,k) for k in _dq['Missing']))
     st.markdown('### Mức độ tin cậy của kết quả')
     _coverage=ev.get('DataQuality',{}).get('Coverage')
     _coverage_label=f'{_coverage*100:.0f}%' if isinstance(_coverage,(int,float)) and np.isfinite(_coverage) else 'N/A'
@@ -1047,6 +857,12 @@ if _active_section==_sections[2]:
 
 if _active_section==_sections[3]:
     st.subheader('Dữ liệu & Quản trị')
+    from scripts.financial_evidence import STATUS
+    _evidence_rows=[dict(r,Trạng_thái=STATUS.get(r['Status'],r['Status'])) for r in s.get('_MetricEvidence',{}).values()]
+    st.markdown('### Bằng chứng dữ liệu của doanh nghiệp đang chọn')
+    st.dataframe(pd.DataFrame(_evidence_rows),hide_index=True,use_container_width=True)
+    if s.get('_DataIssues'):st.warning('; '.join(s['_DataIssues']))
+    st.caption('Các bảng coverage và peer batch bên dưới là kết quả lần rebuild lưu gần nhất; bảng bằng chứng trên được đọc lại từ raw hiện tại.')
     try: cov=pd.read_csv(DATA/'coverage_matrix.csv')
     except Exception: cov=build_coverage_matrix() if build_coverage_matrix else pd.DataFrame()
     if len(cov):

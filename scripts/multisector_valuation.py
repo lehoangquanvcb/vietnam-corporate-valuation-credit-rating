@@ -43,60 +43,44 @@ def latest_market_price(ticker, snapshot=None):
     return _normalize_price(s.get('Price')) or _normalize_price(s.get('Close'))
 
 def valuation(ticker,s):
-    meta=get_company(ticker); typ=meta.get('EntityType'); p=peer_snapshot(ticker)
-    price=latest_market_price(ticker,s)
-    eps=num(s.get('EPS')); bvps=num(s.get('BVPS')); roe=num(s.get('ROE'))
-    out={'Ticker':ticker,'EntityType':typ,'Price':price,'PriceBasis':'LATEST_DAILY_CLOSE_OR_SNAPSHOT'}
-
-    if typ=='BANK':
-        pb=num(s.get('PB')) or (price/bvps if price and bvps else None)
-        _pb=pd.to_numeric(p.get('PB',pd.Series(dtype=float)),errors='coerce') if len(p) else pd.Series(dtype=float)
-        _pb=_pb[(_pb>0)&(_pb<=20)]
-        peer_pb=_safe_median(_pb)
-        # Derive BVPS transparently when only price/PB are present.
-        if bvps is None and price not in (None,0) and pb not in (None,0):
-            bvps=price/pb
-        fair=peer_pb*bvps if bvps and pd.notna(peer_pb) else None
-        out.update({'PrimaryMethod':'P/B nhóm so sánh','CurrentMultiple':pb,'PeerMultiple':peer_pb,
-                    'DerivedBVPS':bvps,'FairValue':fair})
-
+    from scripts.financial_evidence import metric_evidence
+    meta=get_company(ticker);typ=meta.get('EntityType');p=peer_snapshot(ticker)
+    price=latest_market_price(ticker,s);eps=num(s.get('EPS'));bvps=num(s.get('BVPS'))
+    target_period=s.get('SnapshotPeriod')
+    def median(metric,limit):
+        target=metric_evidence(s,metric); vals=[]
+        for row in p.to_dict('records') if len(p) else []:
+            ev=metric_evidence(row,metric);v=num(ev['Value'])
+            if ev['Period']==target['Period'] and ev['Basis']==target['Basis'] and v is not None and 0<v<=limit:vals.append(v)
+        return (float(np.median(vals)) if len(vals)>=5 else None),len(vals)
+    peer_pb,npb=median('PB',20);peer_pe,npe=median('PE',100)
+    out={'Ticker':ticker,'EntityType':typ,'Price':price,'PriceBasis':'LATEST_DAILY_CLOSE_OR_SNAPSHOT',
+         'FinancialPeriod':target_period,'DerivedBVPS':bvps,'DerivedEPS':eps,
+         'EPSBasis':s.get('EPS_Basis'),'BVPSBasis':s.get('BVPS_Basis'),
+         'PeerPBCount':npb,'PeerPECount':npe,'FairValue':None,'Status':'MISSING'}
+    if typ=='INSURANCE':
+        subtype=meta.get('InsuranceSubtype')
+        pbv=peer_pb*bvps if subtype=='NONLIFE' and peer_pb and bvps is not None and bvps>0 else None
+        pev=peer_pe*eps if subtype=='NONLIFE' and peer_pe and eps is not None and eps>0 else None
+        out.update(PrimaryMethod='P/B peer phi nhân thọ cùng kỳ; P/E đối chiếu',CurrentMultiple=num(s.get('PB')),
+                   PeerMultiple=peer_pb,PeerPE=peer_pe,ImpliedPBValue=pbv,ImpliedPEValue=pev,
+                   FairValue=pbv,Status='MISSING' if subtype=='NONLIFE' else 'UNREVIEWED',
+                   Reason='Giá trị tham chiếu = BVPS × P/B trung vị của ít nhất 5 peer phi nhân thọ cùng kỳ; P/E chỉ đối chiếu. Cần xem chất lượng tài sản, ROE và cơ cấu nghiệp vụ.' if subtype=='NONLIFE' else
+                   'Tập đoàn/tái bảo hiểm cần phương pháp định giá phù hợp và mẫu so sánh đủ lớn; không gán bội số phi nhân thọ trực tiếp.')
+    elif typ=='BANK':
+        fair=peer_pb*bvps if peer_pb and bvps is not None and bvps>0 else None
+        out.update(PrimaryMethod='P/B peer cùng kỳ',CurrentMultiple=num(s.get('PB')),PeerMultiple=peer_pb,FairValue=fair)
     elif typ=='SECURITIES':
-        pb=num(s.get('PB')) or (price/bvps if price and bvps else None)
-        pe=num(s.get('PE')) or (price/eps if price and eps else None)
-        if bvps is None and price not in (None,0) and pb not in (None,0):
-            bvps=price/pb
-        if eps is None and price not in (None,0) and pe not in (None,0):
-            eps=price/pe
-
-        _pb=pd.to_numeric(p.get('PB',pd.Series(dtype=float)),errors='coerce') if len(p) else pd.Series(dtype=float)
-        _pe=pd.to_numeric(p.get('PE',pd.Series(dtype=float)),errors='coerce') if len(p) else pd.Series(dtype=float)
-        _pb=_pb[(_pb>0)&(_pb<=20)]
-        _pe=_pe[(_pe>0)&(_pe<=100)]
-        peer_pb=_safe_median(_pb); peer_pe=_safe_median(_pe)
-
-        pb_value=float(peer_pb*bvps) if bvps not in (None,0) and pd.notna(peer_pb) else None
-        pe_value=float(peer_pe*eps) if eps not in (None,0) and pd.notna(peer_pe) else None
-        vals=[x for x in [pb_value,pe_value] if x is not None and np.isfinite(x) and x>0]
-        fair=float(np.median(vals)) if vals else None
-        out.update({'PrimaryMethod':'P/B + P/E nhóm CTCK','CurrentMultiple':pb,'CurrentPE':pe,
-                    'PeerMultiple':peer_pb,'PeerPE':peer_pe,
-                    'DerivedBVPS':bvps,'DerivedEPS':eps,
-                    'ImpliedPBValue':pb_value,'ImpliedPEValue':pe_value,'FairValue':fair})
-
+        pbv=peer_pb*bvps if peer_pb and bvps is not None and bvps>0 else None
+        pev=peer_pe*eps if peer_pe and eps is not None and eps>0 else None
+        vals=[v for v in [pbv,pev] if v is not None]
+        out.update(PrimaryMethod='P/B và P/E peer CTCK cùng kỳ',CurrentMultiple=num(s.get('PB')),CurrentPE=num(s.get('PE')),
+                   PeerMultiple=peer_pb,PeerPE=peer_pe,ImpliedPBValue=pbv,ImpliedPEValue=pev,
+                   FairValue=float(np.median(vals)) if vals else None)
     else:
-        pe=num(s.get('PE')) or (price/eps if price and eps else None)
-        if eps is None and price not in (None,0) and pe not in (None,0):
-            eps=price/pe
-        ev_ebitda=num(s.get('EV_EBITDA'))
-        _pe=pd.to_numeric(p.get('PE',pd.Series(dtype=float)),errors='coerce') if len(p) else pd.Series(dtype=float)
-        _pe=_pe[(_pe>0)&(_pe<=100)]
-        peer_pe=_safe_median(_pe)
-        _ev=pd.to_numeric(p.get('EV_EBITDA',pd.Series(dtype=float)),errors='coerce') if len(p) else pd.Series(dtype=float)
-        _ev=_ev[(_ev>0)&(_ev<=50)]
-        peer_ev=_safe_median(_ev)
-        fair=float(peer_pe*eps) if eps not in (None,0) and pd.notna(peer_pe) else None
-        out.update({'PrimaryMethod':'P/E nhóm ngành + EV/EBITDA cross-check','CurrentMultiple':pe,
-                    'PeerMultiple':peer_pe,'PeerEVEBITDA':peer_ev,'DerivedEPS':eps,'FairValue':fair})
-
-    out['Upside']=out['FairValue']/price-1 if out.get('FairValue') and price else None
+        out.update(PrimaryMethod='P/E peer cùng kỳ',CurrentMultiple=num(s.get('PE')),PeerMultiple=peer_pe,
+                   FairValue=peer_pe*eps if peer_pe and eps is not None and eps>0 else None)
+    if out['FairValue'] is not None:out['Status']='OK'
+    out.setdefault('Reason','Tối thiểu 5 peer cùng kỳ/cơ sở và EPS hoặc BVPS dương; không suy ngược từ thị giá khác kỳ')
+    out['Upside']=out['FairValue']/price-1 if out['FairValue'] is not None and price else None
     return out

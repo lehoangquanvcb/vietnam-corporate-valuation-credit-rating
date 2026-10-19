@@ -11,7 +11,7 @@ from scripts.sector_kpi_engine import sector_kpi_table
 from scripts.multisector_valuation import valuation
 ROOT=Path(__file__).resolve().parents[1]; DATA=ROOT/'data'
 PCT={'ROE','ROA','NPL','CAR','CASA','NIM','LDR','AvailableCapitalRatio'}
-LOWER={'NPL','DebtEquity'}; VAL={'PE','PB'}
+LOWER={'NPL','DebtEquity','DebtAssets','NetDebtEquity','DebtEBITDA','NetDebtEBITDA','CIR','CreditCostProxy'}; VAL={'PE','PB'}
 def fmt(v,m):
     v=num(v)
     if v is None:return 'N/A'
@@ -22,12 +22,15 @@ def fmt(v,m):
     if abs(v)>=1e6:return (f'{v/1e6:,.1f} triệu').replace(',','X').replace('.',',').replace('X','.')
     return f'{v:,.2f}'.replace(',','X').replace('.',',').replace('X','.')
 def analyze(ticker):
+    if get_company(ticker).get('EntityType')=='INSURANCE':
+        from scripts.insurance_analysis import insurance_summary
+        return insurance_summary(ticker)
     meta=get_company(ticker); snap=get_snapshot(ticker); k,key,tmpl=sector_kpi_table(ticker); val=valuation(ticker,snap)
     fs=[];score=0
     for _,r in k.iterrows():
         c=num(r['Doanh nghiệp']);m=num(r['Trung bình ngành'])
         if c is None or m in (None,0):continue
-        gap=c/m-1
+        gap=(c-m)/abs(m)
         if abs(gap)<.05: pts=0
         else:
             good=(gap<0) if r.Metric in LOWER|VAL else (gap>0)
@@ -45,7 +48,7 @@ def analyze(ticker):
     if 'PE' in f and f['PE']['Gap']<-.15:inter.append('P/E discount đáng kể so với ngành chỉ hấp dẫn nếu không xuất phát từ suy giảm lợi nhuận hoặc rủi ro cấu trúc.')
     if 'PB' in f and f['PB']['Gap']<-.15:inter.append('P/B discount tạo dư địa re-rating nếu ROE và chất lượng tài sản cải thiện; discount có thể hợp lý nếu hiệu quả vốn yếu.')
     if not inter:inter=['Chưa có tín hiệu chéo đủ mạnh; kết luận nên dựa trên nhiều nhóm chỉ tiêu thay vì một KPI đơn lẻ.']
-    view='TÍCH CỰC' if score>=5 else 'THẬN TRỌNG' if score<=-5 else 'TRUNG LẬP'
+    view='CHƯA ĐỦ DỮ LIỆU' if not fs else 'TÍCH CỰC' if score>=5 else 'THẬN TRỌNG' if score<=-5 else 'TRUNG LẬP'
     fair=num(val.get('FairValue'));price=num(val.get('Price'));up=(fair/price-1) if fair and price else None
     conc=f'Quan điểm định lượng tổng hợp: {view}. '
     conc+=('Chưa đủ dữ liệu để lượng hóa upside/downside.' if up is None else f"Giá trị tham chiếu của engine chênh khoảng {(f'{up*100:.1f}').replace('.',',')}% so với thị giá; đây là kết quả mô hình, không phải khuyến nghị mua/bán.")
