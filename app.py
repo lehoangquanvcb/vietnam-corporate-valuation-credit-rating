@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.119.0-INSURANCE-METHOD'
+BUILD_TAG='V8.121.0-INSURANCE-PEERS'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -399,7 +399,7 @@ presentation=st.sidebar.toggle('Chế độ trình bày',value=False)
 
 if not selected: st.error('Không có doanh nghiệp trong bộ lọc.'); st.stop()
 meta=get_company(selected); s=get_snapshot(selected); val=valuation(selected,s); peer=_peer_frame_safe(selected)
-industry_name=industry_label(selected)
+industry_name=industry_label(selected) if meta['EntityType']!='INSURANCE' else 'Nhóm tham chiếu bảo hiểm'
 # Resolve the sector template once for the selected company.
 # get_template() returns (template_key, template_dict).
 sector_template_key, sector_template = get_template(meta.get('EntityType'), meta.get('Sector'))
@@ -422,8 +422,8 @@ _peer_fallback=_clean_text(meta.get('PeerGroup'))
 _methodology=_clean_text(meta.get('Methodology'))
 _peer_label=_dynamic_peer_label_ui(selected, _peer_fallback)
 if _entity_type=='INSURANCE':
-    _peer_label=(f'{len(peer)} doanh nghiệp cùng mô hình đã xác định' if len(peer) else
-                 'Chưa xác nhận doanh nghiệp cùng mô hình bảo hiểm')
+    from scripts.insurance_peers import peer_universe
+    _peer_label=f'{len(peer_universe(selected))} peer bảo hiểm; chỉ tiêu nghiệp vụ lọc cùng loại hình'
 
 # Exchange/stock exchange is intentionally omitted from the UI.
 st.sidebar.success(_entity_type)
@@ -556,7 +556,7 @@ if _active_section==_sections[0]:
                 _v=_dp[_show].copy()
                 if 'SimilarityScore' in _v.columns:_v['SimilarityScore']=(_v['SimilarityScore']*100).round(1).astype(str)+'%'
                 st.dataframe(_v,hide_index=True,use_container_width=True)
-                st.caption('Peer được tái tính sau mỗi Full Refresh từ toàn bộ universe Vnstock; Master chỉ còn là metadata/fallback.')
+                st.caption('Nhóm tương đồng này phục vụ định giá; biểu đồ tài chính chung dùng toàn bộ nhóm bảo hiểm.' if meta['EntityType']=='INSURANCE' else 'Peer được tái tính sau mỗi Full Refresh từ toàn bộ universe Vnstock; Master chỉ còn là metadata/fallback.')
     except Exception:
         pass
     st.markdown('### Hồ sơ tài chính & xu hướng')
@@ -591,7 +591,10 @@ if _active_section==_sections[0]:
     if len(skpi):
         wanted=['Nhóm phân tích','Chỉ tiêu','Doanh nghiệp','Trung bình ngành','Trung vị ngành',
                 'Số DN có dữ liệu','Chênh lệch với TB ngành','Trạng thái dữ liệu','Kỳ dữ liệu','Cơ sở','Giải thích','Trạng thái peer']
-        st.dataframe(_safe_show(skpi,wanted),hide_index=True,use_container_width=True)
+        _kpi_display=_safe_show(skpi,wanted)
+        if meta['EntityType']=='INSURANCE':
+            _kpi_display=_kpi_display.rename(columns={'Trung bình ngành':'Bình quân nhóm tham chiếu','Trung vị ngành':'Trung vị nhóm tham chiếu','Chênh lệch với TB ngành':'Chênh lệch với bình quân nhóm'})
+        st.dataframe(_kpi_display,hide_index=True,use_container_width=True)
     else: st.info('Chưa có dữ liệu methodology KPI.')
     if len(peer) and meta['EntityType']!='INSURANCE':
         st.markdown('### Vị trí tương đối trong peer group')
@@ -695,22 +698,31 @@ if _active_section==_sections[2]:
                 if isinstance(_v,int):_rating_overrides[_key]=_v
     rr3=rate_three_methodologies(selected,_rating_overrides)
     if rr3.get('Methodology')=='INSURANCE':
-        from scripts.insurance_rating import insurance_scorecard, missing_evidence_labels
-        st.caption(f"Đầu vào thẩm định đã nhập: {rr3['AssessmentInputCount']}/{rr3['AssessmentInputTotal']}. Số 0 chỉ được dùng khi chuyên viên đã đánh giá không có điều chỉnh/hỗ trợ.")
+        from scripts.insurance_rating import insurance_scorecard, missing_evidence_labels, rating_status_text, rating_value_text
+        from scripts.insurance_presentation import pending_assessment_groups
         if rr3.get('RatingStatus')=='SIMULATED':
             st.success('Đã tính xong kết quả mô phỏng từ các đầu vào đã nhập; cần phê duyệt theo quy trình XHTN.')
         elif rr3.get('RatingStatus')=='NOT_APPLICABLE':
-            st.warning('Ngoài phạm vi phương pháp phi nhân thọ hoặc ma trận không có bậc. '+ '; '.join(missing_evidence_labels(rr3)[-2:]))
+            st.info(rating_status_text(rr3)+'. '+rr3.get('ApplicabilityReason',''))
         else:
-            st.info('Chưa hình thành đầy đủ kết quả XHTN mô phỏng. Cần bổ sung: '+'; '.join(missing_evidence_labels(rr3)))
+            st.info('Phân tích tài chính đã tách khỏi bước phê duyệt XHTN. Chưa đủ hồ sơ để xác định bậc mô phỏng; xem các nhóm cần bổ sung bên dưới.')
+        if rr3.get('RatingBlocker')!='SCOPE':
+            with st.expander('Hồ sơ cần bổ sung để xác định bậc XHTN',expanded=False):
+                st.caption(f"Đầu vào đã nhập: {rr3['AssessmentInputCount']}/{rr3['AssessmentInputTotal']}. Đây là tiến độ hồ sơ, không phải độ đầy đủ BCTC.")
+                _pending=pending_assessment_groups(rr3)
+                if _pending:st.dataframe(pd.DataFrame(_pending),hide_index=True,use_container_width=True)
+                st.write('; '.join(missing_evidence_labels(rr3)))
     elif rr3.get('ICR') in (None,'N/A'):st.info('Chưa hình thành bậc XHTN mô phỏng: '+str(rr3.get('MissingEvidence','Chưa đủ bằng chứng')))
     r1,r2,r3=st.columns(3)
-    r1.metric('Anchor',_rating_no_vn(rr3.get('Anchor','N/A')));r2.metric('SACP / SCA',_rating_no_vn(rr3.get('SACP',rr3.get('SCA','N/A'))));r3.metric('ICR',_rating_no_vn(rr3.get('ICR','N/A')))
+    if rr3.get('Methodology')=='INSURANCE':
+        r1.metric('Anchor',rating_value_text(rr3,'Anchor'));r2.metric('SCA',rating_value_text(rr3,'SCA'));r3.metric('ICR',rating_value_text(rr3,'ICR'))
+    else:
+        r1.metric('Anchor',_rating_no_vn(rr3.get('Anchor','N/A')));r2.metric('SACP / SCA',_rating_no_vn(rr3.get('SACP',rr3.get('SCA','N/A'))));r3.metric('ICR',_rating_no_vn(rr3.get('ICR','N/A')))
 
     if meta['EntityType']=='INSURANCE':
         from scripts.insurance_analysis import render_analysis
         render_analysis(selected,_history_basis,_history_years,'rating_ins_')
-    st.markdown('### Phân tích các chỉ số tín dụng trọng yếu')
+    if meta['EntityType']!='INSURANCE':st.markdown('### Phân tích các chỉ số tín dụng trọng yếu')
     _rating_metric_map={
         'BANK':['ROE','ROA','NIM','NPL','CAR','CASA','LDR','CIR'],
         'SECURITIES':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],
@@ -755,7 +767,7 @@ if _active_section==_sections[2]:
         if not rr3.get('DataSufficientForAutoRating'):
             st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng.')
     elif rr3.get('Methodology')=='INSURANCE':
-        st.markdown('### Ma trận và các điều chỉnh bảo hiểm')
+        st.markdown('### Tổng kết cấu phần xếp hạng')
         _ins_rows=insurance_scorecard(rr3)
         st.dataframe(pd.DataFrame(_ins_rows),hide_index=True,use_container_width=True)
         st.caption(rr3.get('ScopeNote',''))
@@ -822,10 +834,11 @@ if _active_section==_sections[2]:
         rc={'Waterfall':_wf}
     else:
         rc=committee_pack(selected,_rating_overrides)
-    st.markdown('### Waterfall trình Hội đồng XHTN')
-    _waterfall=pd.DataFrame(rc.get('Waterfall',[]))
-    if len(_waterfall):st.dataframe(_waterfall,hide_index=True,use_container_width=True)
-    else:st.info('Chưa có waterfall; cần hoàn thành thẩm định cấu phần.')
+    if rr3.get('Methodology')!='INSURANCE':
+        st.markdown('### Waterfall trình Hội đồng XHTN')
+        _waterfall=pd.DataFrame(rc.get('Waterfall',[]))
+        if len(_waterfall):st.dataframe(_waterfall,hide_index=True,use_container_width=True)
+        else:st.info('Chưa có waterfall; cần hoàn thành thẩm định cấu phần.')
     if rr3.get('Methodology')=='BANK':
         _spec={'CAR','ROA','ROE','NIM','CIR','NPL','LoanLossCoverage','CreditCost','Group2LoansRatio','CASA','LDR','LiquidityCoverageRatio','StableFundingRatio'}
         _present={m for m in _spec if num(s.get(m)) is not None}
@@ -836,14 +849,16 @@ if _active_section==_sections[2]:
         ev=rating_evidence(selected,_rating_overrides)
         if rr3.get('Methodology')=='INSURANCE':
             _dq=ev['DataQuality']
-            st.caption(f"Coverage định lượng: {len(_dq['Present'])}/{len(_dq['Present'])+len(_dq['Missing'])} chỉ tiêu cốt lõi; tách biệt với tiến độ nhập điểm thẩm định.")
-            if _dq['Missing']:
-                from scripts.methodology_kpi_engine import LABELS
-                st.caption('Chỉ tiêu cốt lõi còn thiếu: '+', '.join(LABELS.get(k,k) for k in _dq['Missing']))
-    st.markdown('### Mức độ tin cậy của kết quả')
-    _coverage=ev.get('DataQuality',{}).get('Coverage')
-    _coverage_label=f'{_coverage*100:.0f}%' if isinstance(_coverage,(int,float)) and np.isfinite(_coverage) else 'N/A'
-    e1,e2,e3=st.columns(3);e1.metric('ICR mô phỏng',_rating_no_vn(ev.get('ICR','N/A')));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',_coverage_label)
+            st.markdown('### Độ đầy đủ dữ liệu phân tích')
+            e1,e2,e3=st.columns(3)
+            e1.metric('Có số / chỉ tiêu áp dụng',f"{len(_dq['Present'])}/{_dq['ApplicableTotal']}")
+            e2.metric('Cần bổ sung',len(_dq['Missing']));e3.metric('Không áp dụng',len(_dq['NotApplicable']))
+            st.caption(_dq['Note'])
+    if rr3.get('Methodology')!='INSURANCE':
+        st.markdown('### Mức độ tin cậy của kết quả')
+        _coverage=ev.get('DataQuality',{}).get('Coverage')
+        _coverage_label=f'{_coverage*100:.0f}%' if isinstance(_coverage,(int,float)) and np.isfinite(_coverage) else 'N/A'
+        e1,e2,e3=st.columns(3);e1.metric('ICR mô phỏng',_rating_no_vn(ev.get('ICR','N/A')));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',_coverage_label)
 
     with st.expander('Phương pháp, audit trail & chi tiết máy tính',expanded=False):
         st.write(f"**Phương pháp tự động lựa chọn:** {rr3.get('MethodologyName','N/A')}")

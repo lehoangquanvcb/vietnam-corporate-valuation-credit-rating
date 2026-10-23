@@ -44,8 +44,7 @@ def committee_pack(ticker, overrides=None):
     elif method=='INSURANCE':
         from scripts.insurance_rating import insurance_scorecard
         for i,row in enumerate(insurance_scorecard(rr),1):
-            rows.append({**row,'Bước':str(i),'Điều chỉnh':'Theo ma trận và đầu vào đã nhập'})
-            rows[-1]['Luận cứ']='Chưa có đầu vào thẩm định' if row['Kết quả']=='Chưa thẩm định' else 'Đầu vào do chuyên viên nhập hoặc kết quả tính từ ma trận; cần phê duyệt'
+            rows.append({**row,'Bước':str(i),'Điều chỉnh':'Không áp dụng' if rr.get('RatingBlocker')=='SCOPE' else 'Theo hồ sơ và ma trận'})
 
     for row in rows:
         if row.get('Kết quả') is None or str(row.get('Kết quả'))=='N/A':row['Kết quả']='Chưa thẩm định'

@@ -84,7 +84,7 @@ class SuppliedData(unittest.TestCase):
         r=rate_company('ABB',{'BusinessProfile':'Phù Hợp','CapitalEarnings':'Phù Hợp','RiskPosition':'Phù Hợp','FundingLiquidity':'Phù Hợp','ExternalSupportNotches':0})
         self.assertEqual(r['ICR'],'vnA-')
     def test_insurance_requires_scope_confirmation(self):
-        r=rate_company('BVH',{'MacroIndustryRisk':1,'BusinessRisk':1,'FinancialRisk':1})
+        r=rate_company('ABI',{'MacroIndustryRisk':1,'BusinessRisk':1,'FinancialRisk':1})
         self.assertEqual(r['Anchor'],'N/A');self.assertTrue(any('ScopeConfirmed' in x for x in r['MissingEvidence']))
     def test_five_years_no_stock_sum(self):
         h=same_period_history('FPT','CORPORATE','YTD',5,metrics=['TotalAssets','Revenue'])

@@ -16,6 +16,9 @@ CORE = {
 def assess_data_quality(ticker):
     meta=get_company(ticker); s=get_snapshot(ticker)
     typ=str(meta.get('EntityType','CORPORATE'))
+    if typ=='INSURANCE':
+        from scripts.insurance_presentation import quantitative_coverage
+        return quantitative_coverage(ticker)
     fields=CORE.get(typ,CORE['CORPORATE'])
     present=[x for x in fields if num(s.get(x)) is not None]
     missing=[x for x in fields if x not in present]

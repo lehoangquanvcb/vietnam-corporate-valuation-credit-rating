@@ -23,7 +23,8 @@ def rating_evidence(ticker,overrides=None):
         })
     # Rating confidence intentionally cannot be "high" on automated qualitative scoring alone.
     if rr.get('Methodology')=='INSURANCE':
-        conf='Mô phỏng — chờ phê duyệt' if rr.get('RatingStatus')=='SIMULATED' else 'Ngoài phạm vi hoặc ô ma trận không áp dụng' if rr.get('RatingStatus')=='NOT_APPLICABLE' else 'Chưa thẩm định'
+        from scripts.insurance_rating import rating_status_text
+        conf=rating_status_text(rr)
     elif rr.get('ICR') in (None,'N/A'):conf='Chưa thẩm định'
     elif dq['Confidence']=='THẤP': conf='THẤP'
     elif any(r['Trạng thái kiểm chứng']=='Cần chuyên viên xác nhận' for r in rows): conf='TRUNG BÌNH'

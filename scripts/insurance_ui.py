@@ -6,6 +6,8 @@ from scripts.insurance_rating import insurance_rating, anchor_options, INPUT_LAB
 
 def render_assessment(ticker):
     import streamlit as st
+    scope=insurance_rating(ticker)
+    if scope.get('RatingBlocker')=='SCOPE':return {}
     saved_key='insurance_assessment_saved_'+ticker
     saved=st.session_state.get(saved_key,{})
     out=dict(saved)

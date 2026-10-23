@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
 
 def main():
-    from scripts.insurance_rating import ENGINE_VERSION,insurance_rating
+    from scripts.insurance_rating import ENGINE_VERSION,insurance_rating,rating_status_text
     from scripts.universal_data import get_snapshot
     from scripts.data_quality_engine import assess_data_quality
     source=(ROOT/'app.py').read_text(encoding='utf-8')
@@ -17,14 +17,19 @@ def main():
         if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='BUILD_TAG' for t in node.targets):
             build=ast.literal_eval(node.value)
     version=(ROOT/'VERSION.txt').read_text(encoding='utf-8').strip()
+    from scripts.insurance_analysis import metric_pair, peer_universe
     checks=[]
     for ticker in ['ABI','BVH']:
         s=get_snapshot(ticker);dq=assess_data_quality(ticker);r=insurance_rating(ticker)
+        pair=metric_pair(ticker,'TotalAssets')
         checks.append({'Ticker':ticker,'EntityType':s.get('EntityType'),'Period':s.get('SnapshotPeriod'),
-                       'QuantitativePresent':len(dq['Present']),'QuantitativeTotal':len(dq['Present'])+len(dq['Missing']),
+                       'SectorPeerCandidates':peer_universe(ticker),'TotalAssetsPeerCount':pair['PeerCount'],
+                       'TotalAssetsExcludedPeers':pair['PeerExclusions'],
+                       'QuantitativePresent':len(dq['Present']),'QuantitativeTotal':dq['Total'],'ApplicableTotal':dq['ApplicableTotal'],
+                       'NotApplicableMetrics':dq['NotApplicable'],'RatingDisplay':rating_status_text(r),
                        'MissingMetrics':dq['Missing'],'RatingStatus':r['RatingStatus'],
                        'DebtEBITDAStatus':s.get('_MetricEvidence',{}).get('DebtEBITDA',{}).get('Status')})
-    ok=(version=='8.119.0' and build=='V8.119.0-INSURANCE-METHOD' and ENGINE_VERSION=='8.119.0'
+    ok=(version=='8.121.0' and build=='V8.121.0-INSURANCE-PEERS' and ENGINE_VERSION=='8.121.0'
         and all(r['EntityType']=='INSURANCE' and r['DebtEBITDAStatus']=='NOT_APPLICABLE' for r in checks))
     result={'ProjectPath':str(ROOT),'VersionFile':version,'AppBuild':build,'InsuranceEngine':ENGINE_VERSION,
             'Checks':checks,'Result':'PASS' if ok else 'FAIL',

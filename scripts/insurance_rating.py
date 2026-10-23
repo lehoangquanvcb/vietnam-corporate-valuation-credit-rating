@@ -1,6 +1,6 @@
 """Mô phỏng phương pháp bảo hiểm phi nhân thọ Saigon Ratings 20.01.2025."""
 from scripts.insurance_methodology import capital_earnings, flexibility, financial_score, governance_result, rubric_rows, GOV_LEVELS
-ENGINE_VERSION='8.119.0'
+ENGINE_VERSION='8.121.0'
 INPUT_LABELS={
  'ScopeConfirmed':'Xác nhận phạm vi phi nhân thọ', 'MacroIndustryRisk':'Rủi ro vĩ mô và ngành',
  'BusinessRisk':'Rủi ro kinh doanh','CapitalAdequacy':'An toàn vốn dự phóng (Bảng 12)',
@@ -75,6 +75,19 @@ def insurance_rating(ticker,overrides=None):
     from scripts.financial_evidence import SCOPE_NOTE
     r['ScopeNote']=SCOPE_NOTE
     r['Audit']='Ma trận 01, 02, 16, 17 và giới hạn phương pháp 20.01.2025. Các đánh giá định tính, dự báo và quy tắc chưa lượng hóa cần bằng chứng thẩm định; chưa phải xếp hạng được phê duyệt.'
+    from scripts.universal_data import get_company
+    meta=get_company(ticker)
+    r['InsuranceSubtype']=meta.get('InsuranceSubtype')
+    r['RatingBlocker']='INPUTS'
+    # Ngoài phạm vi không phải 65 đánh giá còn trống. Giữ nguyên dữ liệu phân tích,
+    # nhưng không mở phiếu/ma trận phi nhân thọ cho báo cáo tập đoàn hoặc tái BH.
+    if r['InsuranceSubtype'] in ['GROUP','LIFE','REINSURANCE']:
+        r.update(RatingStatus='NOT_APPLICABLE',RatingBlocker='SCOPE',
+                 AssessmentInputTotal=0,AssessmentInputCount=0,SubfactorEvidence=[])
+        r['ApplicabilityReason']=(str(meta.get('InsuranceScope'))+'. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. '
+            'Cần phương pháp phù hợp với loại hình hoặc BCTC riêng của pháp nhân thuộc phạm vi để xác định Anchor, SCA và ICR.')
+        r['MissingEvidence']=['Phạm vi: '+r['ApplicabilityReason']]
+        return r
     absent=r['MissingEvidence']
     for key in REQUIRED:
         v=o.get(key)
@@ -99,10 +112,6 @@ def insurance_rating(ticker,overrides=None):
                         ('ManagementAssessment',GOV_LEVELS),('FinancialPolicyAssessment',GOV_LEVELS)]:
         if o.get(key) is not None and o[key] not in choices:raise ValueError('Giá trị không hợp lệ: '+key)
     # Phương pháp gốc chỉ bao phủ pháp nhân phi nhân thọ trực tiếp.
-    from scripts.universal_data import get_company
-    subtype=get_company(ticker).get('InsuranceSubtype')
-    if subtype in ['GROUP','LIFE','REINSURANCE']:
-        r['RatingStatus']='NOT_APPLICABLE';absent.append('Phạm vi: cần phương pháp phù hợp hoặc dữ liệu riêng pháp nhân phi nhân thọ; không chấm BCTC tập đoàn/tái bảo hiểm bằng phương pháp này');return r
     if o.get('ScopeConfirmed') is not True:return r
     core=['MacroIndustryRisk','BusinessRisk','CapitalAdequacy','ModelRepresentativeness','RegulatoryRisk','FinancialAdjustment','AssetQuality','InvestmentStress','RiskPosition']
     if any(o.get(k) is None for k in core):return r
@@ -134,7 +143,9 @@ def insurance_rating(ticker,overrides=None):
     r['CombinedRiskScore']=combined
     raw=MATRIX_2[combined-1][fin-1];r['AnchorCandidates']=raw
     if raw is None:
-        r['RatingStatus']='NOT_APPLICABLE';absent.append('Ma trận 02: không quy định bậc cho tổ hợp điểm');return r
+        r['RatingStatus']='NOT_APPLICABLE';r['RatingBlocker']='MATRIX'
+        r['ApplicabilityReason']='Ma trận 02 không quy định bậc cho tổ hợp điểm đã nhập; cần quyết định xử lý có căn cứ, không ngoại suy.'
+        absent.append('Ma trận 02: không quy định bậc cho tổ hợp điểm');return r
     if isinstance(raw,tuple):
         r['AssessmentInputTotal']+=1
         selected=str(o.get('AnchorSelection','')).lower().replace('vn','')
@@ -168,18 +179,41 @@ def insurance_rating(ticker,overrides=None):
         absent.append('ExternalSupportNotches: vượt tổng hỗ trợ từng nguồn; cần đối chiếu');return r
     if absent:return r
     r['ICR']='vn'+_move(sca,o['ExternalSupportNotches']).upper()
-    r['RatingStatus']='SIMULATED';r['AssessmentComplete']=True
+    r['RatingStatus']='SIMULATED';r['AssessmentComplete']=True;r['RatingBlocker']=None
     return r
 
-def insurance_scorecard(result):
+def rating_status_text(result):
+    if result.get('RatingBlocker')=='SCOPE':return 'Ngoài phạm vi phương pháp'
+    if result.get('RatingBlocker')=='MATRIX':return 'Ma trận không quy định bậc'
+    if result.get('RatingStatus')=='SIMULATED':return 'Mô phỏng — chờ phê duyệt'
+    return 'Chưa đủ hồ sơ xếp hạng'
+
+def rating_value_text(result,key='ICR'):
+    value=result.get(key)
+    if value is not None and str(value) not in ('N/A','nan','None'):return str(value).removeprefix('vn')
+    if result.get('RatingBlocker')=='SCOPE':return 'Không áp dụng'
+    if result.get('RatingBlocker')=='MATRIX':return 'Không có bậc tại ô ma trận'
+    return 'Chưa xác định'
+
+def insurance_scorecard(result,include_pending=False):
+    if result.get('RatingBlocker')=='SCOPE':
+        return [{'Cấu phần':'Phạm vi phương pháp','Kết quả':'Ngoài phạm vi phương pháp','Luận cứ':result['ApplicabilityReason']},
+                {'Cấu phần':'Anchor / SCA / ICR','Kết quả':'Không áp dụng','Luận cứ':'Báo cáo tiếp tục phân tích tài chính và peer; không áp ma trận phi nhân thọ lên toàn tập đoàn hoặc loại hình khác.'}]
     o=result.get('AssessmentInputs',{});rows=[]
-    def add(label,value):rows.append({'Cấu phần':label,'Kết quả':'Chưa thẩm định' if value is None or value=='N/A' else str(value)})
+    def add(label,value):
+        missing=value is None or value=='N/A'
+        if missing and not include_pending:return
+        rows.append({'Cấu phần':label,'Kết quả':'Cần bổ sung đánh giá' if missing else str(value),
+                     'Luận cứ':'Chưa có đầu vào hoặc chưa đủ điều kiện tính.' if missing else 'Đầu vào chuyên viên hoặc kết quả ma trận; xem nguồn trong phiếu thẩm định.'})
     for k in ['MacroIndustryRisk','BusinessRisk','CapitalAdequacy','ModelRepresentativeness','RegulatoryRisk','RiskPosition','FinancialAdjustment','AssetQuality']:
         add(INPUT_LABELS[k],o.get(k))
     for k,label in [('BusinessRiskScore','Kinh doanh sau giới hạn'),('CapitalEarningsScore','Vốn và lợi nhuận'),('FinancialFlexibilityScore','Linh hoạt tài chính'),('FinancialRiskScore','Rủi ro tài chính sau giới hạn'),('CombinedRiskCandidates','Các lựa chọn ma trận 01'),('CombinedRiskScore','Điểm kết hợp đã chọn'),('Anchor','Anchor'),('GovernanceAssessment','Đánh giá quản trị tổng hợp'),('AfterGovernance','Bậc sau Bảng 17')]:add(label,result.get(k))
     for k in ['LiquidityScore','LiquidityNotches','OtherAdjustmentsNotches','ComparativeNotches']:add(INPUT_LABELS[k],o.get(k))
     add('SCA — xếp hạng độc lập',result.get('SCA'))
-    add('Giới hạn áp dụng','; '.join(result.get('RatingCaps',[])) or 'Chưa có giới hạn được xác định')
+    if result.get('RatingCaps'):add('Giới hạn áp dụng','; '.join(result['RatingCaps']))
     for k in SUPPORT+('ExternalSupportNotches',):add(INPUT_LABELS[k],o.get(k))
     add('ICR — mô phỏng chờ phê duyệt',result.get('ICR'))
+    if result.get('RatingStatus')!='SIMULATED':
+        reason=result.get('ApplicabilityReason') or (str(result.get('AssessmentInputCount',0))+'/'+str(result.get('AssessmentInputTotal',0))+' đầu vào đã có; chi tiết hồ sơ cần bổ sung được tách khỏi phân tích tài chính.')
+        rows.append({'Cấu phần':'Trạng thái hồ sơ XHTN','Kết quả':rating_status_text(result),'Luận cứ':reason})
     return rows

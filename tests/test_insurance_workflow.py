@@ -128,16 +128,16 @@ class InsuranceData(unittest.TestCase):
         self.assertAlmostEqual(a['FairValue'],a['DerivedBVPS']*a['PeerMultiple'])
         self.assertGreaterEqual(a['PeerPBCount'],5)
         self.assertIsNone(valuation('BVH',get_snapshot('BVH'))['FairValue'])
-    def test_peers_separate_legal_models(self):
-        self.assertEqual(set(peer_universe('ABI')),{'AIC','BIC','BLI','BMI','MIG','PGI','PTI'})
-        self.assertEqual(peer_universe('BVH'),['PVI']);self.assertEqual(peer_universe('PRE'),['VNR'])
+    def test_same_model_option_keeps_legal_models(self):
+        self.assertEqual(set(peer_universe('ABI',same_model=True)),{'AIC','BIC','BLI','BMI','MIG','PGI','PTI'})
+        self.assertEqual(peer_universe('BVH',same_model=True),['PVI']);self.assertEqual(peer_universe('PRE',same_model=True),['VNR'])
     def test_quarter_is_not_ttm(self):
         p=metric_pair('ABI','GrossWrittenPremium');v=p['Peers'].iloc[0].Value
         self.assertEqual(v,763469894410);self.assertNotEqual(v,get_snapshot('ABI')['GrossWrittenPremium']);self.assertEqual(set(p['Peers'].Period),{'2026-Q2'})
     def test_every_metric_has_paired_history_peer(self):
         pack=analysis_pack('ABI');self.assertEqual(len(pack),34)
         for r in pack:
-            self.assertEqual(len(r['History']),5);self.assertEqual(len(r['Peers']),8);self.assertTrue(r['HistoryText'] and r['PeerText'] and r['MethodNote'])
+            self.assertEqual(len(r['History']),5);self.assertEqual(len(r['Peers']),12);self.assertTrue(r['HistoryText'] and r['PeerText'] and r['MethodNote'])
     def test_underwriting_reconciles(self):
         for t in ['ABI','AIC','BIC','BLI','BMI','MIG','PGI','PTI']:
             r=at_period(t,'INSURANCE','2026-Q2','QUARTER');ratio=r['CombinedRatio']['Value']
@@ -148,8 +148,10 @@ class InsuranceData(unittest.TestCase):
     def test_missing_regulatory_data_not_invented(self):
         r=at_period('ABI','INSURANCE','2026-Q2','QUARTER')
         for m in ['InsuranceLiquidity','PaidInCapitalRequired','SolvencyRatio']:self.assertIsNone(r[m]['Value'])
-    def test_small_group_has_no_mean(self):
-        self.assertIsNone(metric_pair('BVH','TotalAssets')['PeerMean']);self.assertEqual(metric_pair('ABI','TotalAssets')['PeerCount'],7)
+    def test_sector_mean_and_specialist_small_group(self):
+        self.assertIsNotNone(metric_pair('BVH','TotalAssets')['PeerMean'])
+        self.assertEqual(metric_pair('ABI','TotalAssets')['PeerCount'],11)
+        self.assertIsNone(metric_pair('BVH','InsuranceReserves')['PeerMean'])
     def test_group_underwriting_not_applied(self):
         self.assertEqual(at_period('BVH','INSURANCE','2026-Q2','QUARTER')['CombinedRatio']['Status'],'NOT_APPLICABLE')
     def test_manual_liquidity_haircuts(self):
