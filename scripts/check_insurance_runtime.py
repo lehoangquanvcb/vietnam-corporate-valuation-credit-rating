@@ -19,6 +19,7 @@ def main():
     version=(ROOT/'VERSION.txt').read_text(encoding='utf-8').strip()
     from scripts.insurance_analysis import metric_pair, peer_universe
     from scripts.insurance_peers import configured_peer_universe
+    from scripts.insurance_narrative import ENGINE_VERSION as NARRATIVE_VERSION
     checks=[]
     for ticker in ['ABI','BVH','PVI']:
         s=get_snapshot(ticker);dq=assess_data_quality(ticker);r=insurance_rating(ticker)
@@ -30,17 +31,20 @@ def main():
                        'UnderwritingProfitPeerCount':metric_pair(ticker,'UnderwritingProfit')['PeerCount'],
                        'SectorPeerCandidates':peer_universe(ticker),'TotalAssetsPeerCount':pair['PeerCount'],
                        'TotalAssetsExcludedPeers':pair['PeerExclusions'],
+                       'HistoryPeerCounts':pair['PeerHistory'].PeerCount.tolist(),
+                       'HistoryPeerMeanPresent':bool(pair['PeerHistory'].PeerMean.notna().all()),
                        'QuantitativePresent':len(dq['Present']),'QuantitativeTotal':dq['Total'],'ApplicableTotal':dq['ApplicableTotal'],
                        'NotApplicableMetrics':dq['NotApplicable'],'RatingDisplay':rating_status_text(r),
                        'MissingMetrics':dq['Missing'],'RatingStatus':r['RatingStatus'],
                        'DebtEBITDAStatus':s.get('_MetricEvidence',{}).get('DebtEBITDA',{}).get('Status')})
     from scripts.dynamic_peer_engine import ENGINE_VERSION as PEER_ENGINE_VERSION
-    ok=(version=='8.123.0' and build=='V8.123.0-AUTO-PEERS-ALL' and ENGINE_VERSION=='8.122.0' and PEER_ENGINE_VERSION=='8.123.0'
+    ok=(version=='8.125.0' and build=='V8.125.0-INSURANCE-HISTORY-PEERS' and ENGINE_VERSION=='8.122.0' and PEER_ENGINE_VERSION=='8.123.0' and NARRATIVE_VERSION=='8.125.0'
+        and all(r['HistoryPeerMeanPresent'] for r in checks)
         and all(r['EntityType']=='INSURANCE' and r['DebtEBITDAStatus']=='NOT_APPLICABLE'
                 and r['InsuranceSubtype']=='NONLIFE' and len(r['ConfiguredPeerCandidates'])==9
                 and r['GrossWrittenPremiumPeerCount']==9 and r['UnderwritingProfitPeerCount']==9 for r in checks)
         and all(r['InsuranceReportingSubtype']=='GROUP' for r in checks if r['Ticker'] in ['BVH','PVI']))
-    result={'ProjectPath':str(ROOT),'VersionFile':version,'AppBuild':build,'InsuranceEngine':ENGINE_VERSION,'PeerEngine':PEER_ENGINE_VERSION,
+    result={'ProjectPath':str(ROOT),'VersionFile':version,'AppBuild':build,'InsuranceEngine':ENGINE_VERSION,'PeerEngine':PEER_ENGINE_VERSION,'NarrativeEngine':NARRATIVE_VERSION,
             'Checks':checks,'Result':'PASS' if ok else 'FAIL',
             'Note':'Only checks this local project. Confirm the visible app version separately; missing assessments are not software errors.'}
     text=json.dumps(result,ensure_ascii=False,indent=2)

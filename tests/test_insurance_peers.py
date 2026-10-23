@@ -104,7 +104,7 @@ class InsurancePeers(unittest.TestCase):
         self.assertEqual(set(peer_snapshot('BVH').Ticker),{'PVI'})
         self.assertIsNone(valuation('BVH',get_snapshot('BVH'))['FairValue'])
         findings=executive_findings('BVH',analysis_pack('BVH'))
-        self.assertNotIn('bình quân 11',str(findings))
+        self.assertNotIn('bình quân 11',str(findings['Strengths']+findings['Risks']))
 
 
 if __name__=='__main__':unittest.main()

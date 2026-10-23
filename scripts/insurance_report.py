@@ -18,6 +18,7 @@ from scripts.financial_views import BASIS_LABELS
 from scripts.financial_evidence import STATUS, insurance_reporting_subtype
 from scripts.methodology_kpi_engine import PCT, MULT
 from scripts.universal_data import get_company
+from scripts.insurance_narrative import section_findings, sensitivity_narrative, overall_conclusion, ENGINE_VERSION
 
 SECTIONS = [
     ('HỒ SƠ KINH DOANH', ['GrossWrittenPremium','NetInsurancePremium','Revenue','TotalAssets','MarketSharePremium','LargestProductShare']),
@@ -29,7 +30,8 @@ SECTIONS = [
 ]
 
 
-def pair_image(pair):
+def chart_image(pair,kind):
+    """Mỗi biểu đồ là một ảnh riêng toàn chiều rộng, dùng chung số liệu với UI."""
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -37,40 +39,60 @@ def pair_image(pair):
     font='Lato' if any(f.name=='Lato' for f in font_manager.fontManager.ttflist) else 'DejaVu Sans'
     m=pair['Metric'];scale=100 if m in PCT else 1 if m in MULT else 1e-9
     unit='%' if m in PCT else 'lần' if m in MULT else 'tỷ đồng'
-    h,p=pair['History'],pair['Peers']
+    h,p=pair['History'],pair['Peers'];ph=pair.get('PeerHistory',pd.DataFrame())
     with plt.rc_context({'font.family':font,'font.size':9}):
-        fig,axes=plt.subplots(1,2,figsize=(6.9,1.4),dpi=190)
-        a,b=axes
-        if len(h) and h.Value.notna().any():
-            vals=pd.to_numeric(h.Value,errors='coerce').where(h.Status.eq('OK'))*scale
-            cuts=[0]+pair.get('HistoryBreaks',[])+[len(h)]
-            for start,stop in zip(cuts,cuts[1:]):
-                a.plot(range(start,stop),vals.iloc[start:stop],'o-',color='#2F6F12',lw=1.6,markersize=3)
-            a.set_xticks(range(len(h)),h.DisplayPeriod,fontsize=8)
+        fig,ax=plt.subplots(figsize=(6.9,1.85 if kind=='history' else 1.65),dpi=190)
+        if kind=='history':
+            if len(h):
+                vals=pd.to_numeric(h.Value,errors='coerce').where(h.Status.eq('OK'))*scale
+                cuts=[0]+pair.get('HistoryBreaks',[])+[len(h)]
+                for start,stop in zip(cuts,cuts[1:]):
+                    ax.plot(range(start,stop),vals.iloc[start:stop],'o-',color='#2F6F12',lw=1.6,markersize=3,
+                            label='Doanh nghiệp' if start==0 else '_nolegend_')
+                ax.set_xticks(range(len(h)),h.DisplayPeriod,fontsize=9)
+            if len(ph):
+                cuts=[0]+pair.get('PeerHistoryBreaks',[])+[len(ph)]
+                for start,stop in zip(cuts,cuts[1:]):
+                    ax.plot(range(start,stop),ph.PeerMean.iloc[start:stop]*scale,'s--',color='#C07820',lw=1.4,markersize=3,
+                            label='Bình quân peer' if start==0 else '_nolegend_')
+            if not len(h) or not h.Value.notna().any():
+                ax.text(.5,.5,'Chưa có chuỗi lịch sử doanh nghiệp',ha='center',va='center',transform=ax.transAxes)
+            if len(h) or len(ph):ax.legend(loc='lower left',bbox_to_anchor=(0,1.02),ncol=2,fontsize=8,frameon=False,borderaxespad=0)
+            title='Chuỗi năm gần nhất · Doanh nghiệp và bình quân peer'
+            ax.margins(y=.22)
         else:
-            a.text(.5,.5,'Chưa có chuỗi lịch sử',ha='center',va='center',transform=a.transAxes,fontsize=9)
-            a.set_xticks([]);a.set_yticks([])
-        z=included_rows(p)
-        if len(z):
-            b.bar(z.Ticker,z.Value*scale,color=['#4F9E1E' if t==p.iloc[0].Ticker else '#ADB7A5' for t in z.Ticker],width=.6)
-            b.tick_params(axis='x',labelsize=7 if len(z)>8 else 8)
-        else:
-            b.text(.5,.5,'Chưa có số cùng kỳ/cơ sở',ha='center',va='center',transform=b.transAxes,fontsize=9)
-            b.set_xticks([]);b.set_yticks([])
-        for ax,title in [(a,'Chuỗi năm gần nhất'),(b,f"Doanh nghiệp và {pair['PeerCount']} peer · {pair['Period']}")]:
-            ax.set_title(title,loc='left',fontsize=9,fontweight='bold',pad=6)
-            ax.set_ylabel(unit,fontsize=8);ax.tick_params(axis='y',labelsize=8)
-            ax.spines[['top','right']].set_visible(False);ax.grid(axis='y',alpha=.15)
-            ax.ticklabel_format(axis='y',style='plain',useOffset=False)
-        fig.tight_layout(pad=.5,w_pad=1.6)
+            z=included_rows(p)
+            if len(z):
+                ax.bar(z.Ticker,z.Value*scale,color=['#4F9E1E' if t==p.iloc[0].Ticker else '#ADB7A5' for t in z.Ticker],width=.6)
+                ax.tick_params(axis='x',labelsize=9)
+            else:
+                ax.text(.5,.5,'Chưa có số cùng kỳ/cơ sở',ha='center',va='center',transform=ax.transAxes)
+                ax.set_xticks([]);ax.set_yticks([])
+            title=f"So sánh quý gần nhất · Doanh nghiệp và {pair['PeerCount']} peer · {pair['Period']}"
+        ax.set_title(title,loc='left',fontsize=10,fontweight='bold',pad=24 if kind=='history' else 7)
+        ax.set_ylabel(unit,fontsize=9);ax.tick_params(axis='y',labelsize=8)
+        ax.spines[['top','right']].set_visible(False);ax.grid(axis='y',alpha=.15)
+        ax.ticklabel_format(axis='y',style='plain',useOffset=False)
+        fig.tight_layout(pad=.6)
         stream=BytesIO();fig.savefig(stream,format='png');plt.close(fig);stream.seek(0)
     return stream
+
+
+def pair_image(pair):
+    """Tương thích các nơi gọi cũ: bản ghép cũng xếp dọc, không ghép ngang."""
+    from PIL import Image
+    images=[Image.open(chart_image(pair,k)).convert('RGB') for k in ('history','quarter')]
+    canvas=Image.new('RGB',(max(i.width for i in images),sum(i.height for i in images)),'white')
+    offset=0
+    for image in images:canvas.paste(image,(0,offset));offset+=image.height
+    stream=BytesIO();canvas.save(stream,format='PNG');stream.seek(0);return stream
 
 
 def _para(doc,text,size=10.5,label=None,keep=False):
     p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.space_after=Pt(3);p.paragraph_format.line_spacing=1.05
     p.paragraph_format.widow_control=True;p.paragraph_format.keep_with_next=keep
+    p.paragraph_format.keep_together=True
     if label:
         r=p.add_run(label+' ');r.bold=True;r.font.size=Pt(size)
     r=p.add_run(str(text));r.font.name='Lato';r.font.size=Pt(size)
@@ -123,11 +145,11 @@ def _summary(doc,ticker,meta,rr,pack,report_type):
     _cell_text(left,'Triển vọng: '+str(rr.get('Outlook') or 'Chưa xác định'),size=10)
     _cell_text(left,'Kỳ tài chính: '+str(pack[0]['Period'] or 'Chưa có'),size=10)
     _cell_text(left,'Dữ liệu có số: '+str(len(cov['Present']))+'/'+str(cov['Total'])+' chỉ tiêu',size=10)
-    _cell_text(right,' '.join(findings['Facts']),size=10.5)
+    for text in findings['Narrative']:_cell_text(right,text,size=10.5)
     if rr.get('RatingBlocker')=='SCOPE':
         _cell_text(right,rr['ApplicabilityReason'],size=10.5)
     else:
-        _cell_text(right,'Luận điểm tài chính được xây dựng từ chuỗi năm và so sánh quý. Bậc mô phỏng chỉ hình thành khi đủ hồ sơ định tính, dự báo vốn, thanh khoản và quyết định điều chỉnh theo phương pháp.',size=10.5)
+        _cell_text(right,'Kết luận tài chính dựa trên bằng chứng nêu trên. Bậc mô phỏng cần thêm hồ sơ định tính, dự báo vốn, thanh khoản và quyết định điều chỉnh theo phương pháp.',size=10)
     _cell_text(right,f'Nhóm tham chiếu ngành gồm {len(peer_universe(ticker))} peer: '+(', '.join(peer_universe(ticker)) or 'chưa có')+'.',size=10)
     _section_band(doc,'NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG' if report_type=='rating' else 'ĐIỂM MẠNH VÀ RỦI RO CẦN THEO DÕI')
     table=doc.add_table(rows=1,cols=2);table.autofit=False
@@ -167,7 +189,9 @@ def _context(doc,ticker,meta,pack,basis,years):
             _para(doc,'Phần này nêu cơ chế rủi ro để phân tích; chưa có hồ sơ nghiên cứu theo kỳ để gán điểm vĩ mô/ngành.',9)
     _section_band(doc,'CƠ SỞ PHÂN TÍCH VÀ SO SÁNH')
     _para(doc,f'Lịch sử: {BASIS_LABELS[basis]}, tối đa {years} năm gần nhất có trong phạm vi yêu cầu. So sánh ngang dùng {pack[0]["Period"] or "quý chưa xác định"}; không chuyển sang quý khác khi peer thiếu số. Thu nhập/chi phí là quý riêng lẻ, số dư là cuối quý; ROE, ROA, P/B và P/E giữ cơ sở tỷ số nguồn.',10)
-    _para(doc,POLICY_NOTE+' Chỉ công bố bình quân và trung vị khi đủ ít nhất 5 peer cùng kỳ, cùng cơ sở; không gồm doanh nghiệp đang phân tích.',10)
+    _para(doc,POLICY_NOTE+' So sánh quý công bố bình quân và trung vị khi đủ ít nhất 5 peer cùng kỳ, cùng cơ sở.',10)
+    from scripts.insurance_history import HISTORY_PEER_NOTE
+    _para(doc,'Đường bình quân lịch sử: '+HISTORY_PEER_NOTE,10)
     for subtype,label in SUBTYPE_LABELS.items():
         members=[t for t in [ticker]+peer_universe(ticker) if get_company(t).get('InsuranceSubtype')==subtype]
         if members:_para(doc,label+': '+', '.join(members)+'.',10)
@@ -178,34 +202,31 @@ def _metric(doc,ticker,pair):
     m=pair['Metric'];h,p=pair['History'],pair['Peers']
     _subhead(doc,pair['Label'])
     chart=doc.add_paragraph();chart.paragraph_format.space_after=Pt(2);chart.paragraph_format.keep_with_next=True
-    chart.add_run().add_picture(pair_image(pair),width=Mm(176))
+    chart.add_run().add_picture(chart_image(pair,'history'),width=Mm(176))
     if len(h):
-        _table(doc,['Lịch sử']+h.DisplayPeriod.tolist(),[[ticker]+[fmt(m,r.Value,r.Status,True) if r.Status=='OK' else '—' for r in h.itertuples()]],[26]+[150/len(h)]*len(h))
-    if len(p):
-        table_rows=p[p.Included | p.Ticker.eq(ticker)]
-        values=[(r.Ticker,fmt(m,r.Value,r.Status,True) if r.Included else '—') for r in table_rows.itertuples()]
-        if len(values)>6:
-            rows=[]
-            for start in range(0,len(values),4):
-                row=[item for cell in values[start:start+4] for item in cell]
-                rows.append(row+['']*(8-len(row)))
-            _table(doc,['Mã','Giá trị']*4,rows,[14,30]*4)
-        else:
-            _table(doc,[str(pair['Period'])]+[t for t,v in values],[['Giá trị']+[v for t,v in values]],[26]+[150/len(values)]*len(values))
+        ph=pair['PeerHistory']
+        rows=[[ticker]+[fmt(m,r.Value,r.Status,True) if r.Status=='OK' else '—' for r in h.itertuples()],
+              ['TB peer']+[fmt(m,r.PeerMean,'OK',True) if pd.notna(r.PeerMean) else '—' for r in ph.itertuples()],
+              ['Số peer (N)']+[str(r.PeerCount) for r in ph.itertuples()]]
+        _table(doc,['Lịch sử']+h.DisplayPeriod.tolist(),rows,[26]+[150/len(h)]*len(h))
     # Chuỗi có từng năm và thay đổi năm liền kề; giữ nguyên cơ sở UI.
-    history=pair['HistoryText']
+    history=pair['NarrativeHistory']
     _para(doc,history,10,label='Diễn biến nhiều năm:')
     for warning in pair.get('HistoryWarnings',[]):_para(doc,warning,9,label='Lưu ý chất lượng dữ liệu:')
-    _para(doc,pair['PeerText'],10,label='So sánh quý gần nhất:')
-    if pair['PeerExclusions']:_para(doc,pair['PeerExclusions'],9)
-    _para(doc,pair['AnalysisText'],10,label='Hàm ý phân tích:')
+    chart=doc.add_paragraph();chart.paragraph_format.space_after=Pt(2);chart.paragraph_format.keep_with_next=True
+    chart.add_run().add_picture(chart_image(pair,'quarter'),width=Mm(176))
+    _para(doc,pair['NarrativePeer'],10,label='So sánh quý gần nhất:')
+    _para(doc,pair['AnalysisText'],10,label='Hàm ý phân tích:',keep=True)
+    _para(doc,pair['ConclusionText'],10,label='Kết luận:')
 
 
-def _qualitative(doc,rr):
+def _qualitative(doc,rr,pack,subtype):
     from scripts.multisector_report import _section_band
+    _section_band(doc,'KẾT LUẬN PHÂN TÍCH')
+    for text in overall_conclusion(pack,subtype):_para(doc,text)
     _section_band(doc,'QUẢN TRỊ VÀ QUẢN LÝ')
     _para(doc,'Đánh giá quản trị cần xem cơ cấu kiểm soát, khẩu vị rủi ro, chính sách tài chính và chất lượng thực thi. Số liệu lợi nhuận hoặc quy mô không thay thế bằng chứng về các yếu tố này.')
-    reviewed=[r for r in rr.get('SubfactorEvidence',[]) if r.get('Đủ bằng chứng')]
+    reviewed=[r for r in rr.get('SubfactorEvidence',[]) if r.get('Đủ bằng chứng') and r.get('Nhóm','').startswith('V.')]
     if reviewed:
         for r in reviewed:_para(doc,r['Chỉ tiêu']+': '+r['Đánh giá']+'. '+r['Lập luận']+' Nguồn: '+r['Nguồn'],10)
     elif rr.get('RatingBlocker')!='SCOPE':
@@ -215,11 +236,12 @@ def _qualitative(doc,rr):
     if o.get('SupportSource'):_para(doc,str(o['SupportSource']))
     else:_para(doc,'Chưa có hồ sơ xác nhận năng lực, động cơ và cơ chế hỗ trợ bên ngoài. Không mặc định quan hệ cổ đông hoặc thương hiệu tạo ra hỗ trợ; chưa xác định số bậc điều chỉnh.')
     _section_band(doc,'ĐỘ NHẠY XẾP HẠNG')
-    if rr.get('RatingBlocker')=='SCOPE':
-        _para(doc,'Chưa xây dựng độ nhạy theo bậc xếp hạng cho loại hình này bằng phương pháp hiện tại. Những biến số cần theo dõi trong phân tích tài chính gồm lợi nhuận, vốn, chất lượng đầu tư, dự phòng và nghĩa vụ chi trả; cần phương pháp phù hợp để chuyển thành kịch bản xếp hạng.')
-    else:
-        _para(doc,'Hồ sơ tài chính có thể cải thiện khi hiệu quả khai thác bền vững, vốn tăng tương ứng rủi ro và nguồn thanh khoản đủ trong kịch bản căng thẳng. Chiều ngược lại cần theo dõi tổn thất gia tăng, suy giảm vốn, tập trung đầu tư và áp lực bồi thường. Đây là hướng phân tích; chưa xác định mức nâng/hạ bậc khi thiếu dự báo và quyết định thẩm định.')
+    sensitivity=sensitivity_narrative(pack,subtype)
+    _para(doc,sensitivity['Positive'],label='Điều kiện cải thiện:')
+    _para(doc,sensitivity['Negative'],label='Điều kiện gây sức ép:')
+    _para(doc,sensitivity['Limit'],9.5)
     _section_band(doc,'TỔNG KẾT CẤU PHẦN XẾP HẠNG')
+    _para(doc,'Các kết luận về kinh doanh, sinh lời, vốn và thanh khoản ở trên là cơ sở lập luận của báo cáo. Trạng thái dưới đây phản ánh bước thẩm định và phạm vi áp dụng phương pháp, không xóa bỏ các kết luận tài chính đã có bằng chứng.',10)
     _table(doc,['Cấu phần','Kết quả','Cơ sở'],[[r['Cấu phần'],r['Kết quả'],r.get('Luận cứ','')] for r in insurance_scorecard(rr)],[48,43,85])
     if o.get('DecisionReason'):_para(doc,str(o['DecisionReason']))
 
@@ -253,6 +275,24 @@ def _appendix(doc,pack,rr):
         if not has_evidence(p):continue
         q=p['Peers'];src=str(q.iloc[0].Source) if len(q) else ''
         _para(doc,p['Label']+': '+p['MethodNote']+(' Nguồn/công thức: '+src if src else ''),9)
+    _section_band(doc,'THÀNH PHẦN PEER TRONG CHUỖI NĂM')
+    _para(doc,'Bình quân trong biểu đồ và bảng lịch sử dùng các mã dưới đây tại đúng từng kỳ. Thành phần mẫu hiện được chọn theo danh mục phân ngành của project.',9)
+    for p in pack:
+        if not has_evidence(p):continue
+        ph=p['PeerHistory'];groups={}
+        for r in ph.itertuples():groups.setdefault(tuple(r.PeerTickers),[]).append(r.DisplayPeriod)
+        details=[]
+        for members,periods in groups.items():
+            details.append(', '.join(periods)+': '+(', '.join(members) if members else 'chưa có peer hợp lệ'))
+        _para(doc,p['Label']+' — '+'; '.join(details)+'.',9)
+    _section_band(doc,'CHI TIẾT MẪU SO SÁNH QUÝ GẦN NHẤT')
+    for p in pack:
+        if not has_evidence(p):continue
+        _subhead(doc,p['Label'])
+        q=p['Peers'];m=p['Metric']
+        values=[f"{r.Ticker}: {fmt(m,r.Value,r.Status)}" for r in q.itertuples() if r.Included]
+        _para(doc,'; '.join(values)+'.',9)
+        if p['PeerExclusions']:_para(doc,p['PeerExclusions'],9)
 
 
 def generate_insurance_docx(ticker,report_type='analysis',rating_result=None,options=None):
@@ -260,22 +300,31 @@ def generate_insurance_docx(ticker,report_type='analysis',rating_result=None,opt
     ticker=str(ticker).upper();options=options or {}
     basis=options.get('history_basis','FY');years=int(options.get('history_years',5))
     meta=get_company(ticker);pack=analysis_pack(ticker,basis,years);rr=rating_result or insurance_rating(ticker)
+    subtype=insurance_reporting_subtype(meta)
+    findings=section_findings(pack,subtype)
     doc=Document();_style_doc(doc,report_type)
     doc.styles['Normal'].font.size=Pt(10.5)
     _cover_sample(doc,ticker,meta,report_type)
     _summary(doc,ticker,meta,rr,pack,report_type)
     doc.add_page_break();_context(doc,ticker,meta,pack,basis,years)
+    for row in rr.get('SubfactorEvidence',[]):
+        if row.get('Đủ bằng chứng') and row.get('Nhóm','').startswith('I.'):
+            _para(doc,row['Lập luận']+' Nguồn: '+row['Nguồn'],10,label=row['Chỉ tiêu']+' — '+row['Đánh giá']+':')
     pairs={p['Metric']:p for p in pack}
     for heading,metrics in SECTIONS:
         available=[pairs[m] for m in metrics if has_evidence(pairs[m])]
-        if not available:
-            # Giữ cấu phần của mẫu báo cáo, không xuất nhiều biểu đồ/bảng trống.
-            _section_band(doc,heading)
-            _para(doc,'Chưa có dữ liệu phù hợp để kết luận cho nhóm này tại kỳ so sánh. Các chỉ tiêu và hồ sơ còn thiếu được liệt kê ở phụ lục; không suy ra điểm số từ vốn kế toán hoặc dữ liệu khác.',10)
-            continue
-        doc.add_page_break();_section_band(doc,heading)
-        for i,pair in enumerate(available):
-            if i and i%2==0:doc.add_page_break();_section_band(doc,heading+' (tiếp)')
+        if heading == 'HỒ SƠ KINH DOANH':
+            doc.add_page_break()
+        _section_band(doc,heading)
+        from scripts.multisector_report import _subhead
+        for title,text in findings[heading]:
+            _subhead(doc,title);_para(doc,text)
+        evidence_groups={'HỒ SƠ KINH DOANH':['II.'],'VỐN VÀ DỰ PHÒNG NGHIỆP VỤ':['III.'],
+                         'THANH KHOẢN VÀ KHẢ NĂNG THANH TOÁN':['IV.']}.get(heading,[])
+        for row in rr.get('SubfactorEvidence',[]):
+            if row.get('Đủ bằng chứng') and any(row.get('Nhóm','').startswith(x) for x in evidence_groups):
+                _para(doc,row['Lập luận']+' Nguồn: '+row['Nguồn'],10,label=row['Chỉ tiêu']+' — '+row['Đánh giá']+':')
+        for pair in available:
             _metric(doc,ticker,pair)
         if report_type=='analysis' and heading=='ĐỊNH GIÁ THAM KHẢO':
             from scripts.multisector_valuation import valuation
@@ -284,10 +333,10 @@ def generate_insurance_docx(ticker,report_type='analysis',rating_result=None,opt
             v=valuation(ticker,get_snapshot(ticker));fv=fair_value_range(ticker)
             _para(doc,str(v.get('PrimaryMethod',''))+'. '+str(v.get('Reason','')),10)
             _table(doc,['Kịch bản','Giá trị đồng/cổ phiếu'],[[k,fmt('FairValue',fv.get(k),v.get('Status'))] for k in ['Bear','Base','Bull','StrategicMA']],[88,88])
-    doc.add_page_break();_qualitative(doc,rr)
-    doc.add_page_break();_appendix(doc,pack,rr)
+    _qualitative(doc,rr,pack,subtype)
+    _appendix(doc,pack,rr)
     sec=doc.sections[0];footer=sec.footer.paragraphs[0];footer.clear();footer.alignment=WD_ALIGN_PARAGRAPH.RIGHT
-    r=footer.add_run(ticker+' | Lê Hoàng Quân | V8.122.0 | '+date.today().strftime('%d/%m/%Y')+' | Trang ');r.font.name='Lato';r.font.size=Pt(8)
+    r=footer.add_run(ticker+' | Lê Hoàng Quân | V'+ENGINE_VERSION+' | '+date.today().strftime('%d/%m/%Y')+' | Trang ');r.font.name='Lato';r.font.size=Pt(8)
     field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');footer._p.append(field)
     for scope in [doc.element,doc.styles.element]:
         for el in list(scope.iter(qn('w:pBdr'))):el.getparent().remove(el)

@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.123.0-AUTO-PEERS-ALL'
+BUILD_TAG='V8.125.0-INSURANCE-HISTORY-PEERS'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 

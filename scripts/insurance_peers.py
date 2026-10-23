@@ -1,5 +1,6 @@
 """Phạm vi so sánh ngành cho báo cáo; tách khỏi peer dùng để định giá/XHTN."""
 import pandas as pd
+import math
 from scripts.universal_data import get_company, universe
 from scripts.financial_evidence import at_period, latest_period, comparable_model, insurance_reporting_subtype, _record
 
@@ -49,10 +50,10 @@ def scope_label(metric):
     return 'Toàn nhóm bảo hiểm' if metric in SECTOR_METRICS else 'Nhóm so sánh bảo hiểm đã cấu hình'
 
 
-def quarter_peers(ticker,metric,target,peers=None):
+def period_peers(ticker,metric,target,peers=None,basis='QUARTER',companies=None):
     ticker=str(ticker).strip().upper()
     # Đọc metadata một lần cho cả nhóm, tránh dựng lại universe cho từng mã.
-    companies={r['Ticker']:r for r in universe().to_dict('records')}
+    if companies is None:companies={r['Ticker']:r for r in universe().to_dict('records')}
     meta=companies.get(ticker,{})
     peers=peer_universe(ticker) if peers is None else peers
     # Danh sách truyền từ bên ngoài vẫn phải loại trùng, loại chính DN và khác ngành.
@@ -61,7 +62,7 @@ def quarter_peers(ticker,metric,target,peers=None):
     rows=[]
     for t in [ticker]+candidates:
         company=companies.get(t,{})
-        e=at_period(t,'INSURANCE',target,'QUARTER').get(metric,_record(metric,per=target)) if target else _record(metric)
+        e=at_period(t,'INSURANCE',target,basis).get(metric,_record(metric,per=target)) if target else _record(metric)
         subtype=company.get('InsuranceSubtype','')
         reporting_subtype=insurance_reporting_subtype(company)
         rows.append(dict(Ticker=t,Value=e['Value'],Status=e['Status'],Period=target,
@@ -74,7 +75,7 @@ def quarter_peers(ticker,metric,target,peers=None):
     own=rows[0]
     for r in rows:
         reason=''
-        if r['Status']!='OK' or pd.isna(r['Value']):
+        if r['Status']!='OK' or pd.isna(r['Value']) or not math.isfinite(float(r['Value'])):
             reason='Không áp dụng' if r['Status']=='NOT_APPLICABLE' else 'Thiếu số hợp lệ đúng quý'
         elif own['Status']=='NOT_APPLICABLE':reason='Chỉ tiêu không áp dụng cho doanh nghiệp đang phân tích'
         elif r['Basis']!=own['Basis']:reason='Khác cơ sở tính'
@@ -83,6 +84,10 @@ def quarter_peers(ticker,metric,target,peers=None):
         r['Included']=not reason
         r['ExclusionReason']=reason
     return pd.DataFrame(rows)
+
+
+def quarter_peers(ticker,metric,target,peers=None):
+    return period_peers(ticker,metric,target,peers,'QUARTER')
 
 
 def included_rows(frame):

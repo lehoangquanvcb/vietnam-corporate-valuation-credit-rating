@@ -52,7 +52,10 @@ def quantitative_coverage(ticker,pack=None):
 
 def own_value(pair):
     p=pair['Peers']
-    if len(p) and p.iloc[0].Status=='OK' and pd.notna(p.iloc[0].Value):return float(p.iloc[0].Value)
+    if len(p) and p.iloc[0].Status=='OK' and pd.notna(p.iloc[0].Value):
+        import math
+        v=float(p.iloc[0].Value)
+        if math.isfinite(v):return v
     return None
 
 
@@ -62,48 +65,8 @@ def has_evidence(pair):
 
 
 def metric_interpretation(pair,subtype):
-    m=pair['Metric'];v=own_value(pair);group=subtype in ('GROUP','LIFE')
-    notes={
-        'GrossWrittenPremium':'Phí gốc thể hiện quy mô khai thác; tăng phí cần đi cùng kiểm soát bồi thường và chi phí. Chưa có mẫu số toàn thị trường nên chưa kết luận về thị phần.',
-        'NetInsurancePremium':'Phí thuần phản ánh phần doanh thu bảo hiểm giữ lại theo BCTC. Đọc cùng phí gốc, cơ cấu tái bảo hiểm và biến động dự phòng; chênh lệch giữa hai khoản chưa đủ xác định khẩu vị rủi ro.',
-        'Revenue':'Doanh thu cần được đối chiếu với lợi nhuận và biên ròng để phân biệt tăng quy mô với cải thiện hiệu quả. Cơ cấu hoạt động khác nhau làm hạn chế so sánh tuyệt đối.',
-        'TotalAssets':'Tài sản lớn tạo quy mô tài chính nhưng không tự chứng minh sức mạnh tín dụng. Khả năng hấp thụ rủi ro còn phụ thuộc vốn, chất lượng tài sản và nghĩa vụ bảo hiểm.',
-        'MarketSharePremium':'Thị phần cần tính trên toàn thị trường cùng loại hình, cùng kỳ. Quy mô mẫu cổ phiếu niêm yết không thay thế mẫu số toàn ngành.',
-        'LargestProductShare':'Mức tập trung sản phẩm cao làm kết quả nhạy hơn với tổn thất hoặc cạnh tranh trong một nghiệp vụ; cần đọc cùng chất lượng tái bảo hiểm.',
-        'NPAT':'Lợi nhuận sau thuế hỗ trợ tích lũy vốn khi được giữ lại. Cần tách đóng góp từ khai thác, đầu tư và các khoản không lặp lại trước khi dự báo khả năng sinh lời.',
-        'ROE':'ROE phản ánh lợi nhuận trên vốn chủ sở hữu; cần đối chiếu ROA và tỷ trọng vốn để nhận diện ảnh hưởng của đòn bẩy. Tỷ số nguồn tại quý báo cáo không được coi là tỷ suất riêng ba tháng.',
-        'ROA':'ROA phản ánh hiệu quả sử dụng tài sản; khác biệt về quy mô dự phòng và cơ cấu tài sản có thể tạo khoảng cách giữa các công ty. Tỷ số nguồn giữ nguyên cơ sở tính của nhà cung cấp.',
-        'NetMargin':'Biên ròng cho biết phần lợi nhuận sau thuế trên doanh thu. Biên tốt chưa đồng nghĩa khai thác bảo hiểm hiệu quả nếu thu nhập đầu tư đóng góp lớn.',
-        'LossRatio':'Tỷ lệ bồi thường phải được đọc qua nhiều năm để nhận diện chu kỳ tổn thất; mức thấp tại một quý có thể chịu ảnh hưởng thời điểm ghi nhận hoặc hoàn nhập dự phòng.',
-        'ExpenseRatio':'Tỷ lệ chi phí cho thấy mức tiêu hao phí thuần cho khai thác và quản lý theo quy ước BCTC. Cần đọc cùng tỷ lệ bồi thường và tốc độ tăng phí.',
-        'CombinedRatio':'Tỷ lệ kết hợp gộp bồi thường và chi phí theo cùng cơ sở thuần. Cần xác nhận tính nhất quán định nghĩa và độ bền qua chuỗi năm trước khi dùng cho thẩm định.',
-        'UnderwritingProfit':('Khoản mục hoạt động bảo hiểm ở cấp hợp nhất chịu ảnh hưởng cơ cấu nhân thọ, phi nhân thọ và dự phòng. Không diễn giải số âm của tập đoàn thành lỗ khai thác phi nhân thọ.' if group else 'Lợi nhuận khai thác cần được đọc cùng tỷ lệ kết hợp và biến động dự phòng. Một quý cải thiện chưa chứng minh hiệu quả bền vững.'),
-        'InvestmentIncome':'Thu nhập đầu tư hỗ trợ kết quả kinh doanh nhưng đi kèm rủi ro lãi suất, chất lượng tín dụng và biến động thị trường. Không đồng nhất thu nhập đầu tư với lợi nhuận đầu tư ròng.',
-        'Equity':'Vốn chủ sở hữu là nguồn hấp thụ tổn thất kế toán. Tăng vốn có thể đến từ lợi nhuận giữ lại hoặc huy động mới; chưa đồng nghĩa đáp ứng vốn pháp định hay biên khả năng thanh toán.',
-        'EquityAssets':'Tỷ trọng vốn trên tài sản thể hiện bộ đệm vốn kế toán. Cơ cấu dự phòng và mô hình kinh doanh khác nhau cần được xét trước khi kết luận vốn mạnh/yếu.',
-        'PaidInCapital':'Vốn thực góp và thặng dư được tách khỏi tổng vốn chủ sở hữu. Khả năng đáp ứng vốn pháp định cần đối chiếu giấy phép và mức yêu cầu đúng pháp nhân.',
-        'PaidInCapitalRequired':'Tỷ số này chỉ đánh giá một khía cạnh vốn pháp định; cần xét dự báo vốn, tăng trưởng kinh doanh và mức tối thiểu đúng giấy phép.',
-        'InsuranceReserves':'Dự phòng tăng thể hiện nghĩa vụ bảo hiểm được ghi nhận, không tự chứng minh dự phòng đầy đủ. Cần cấu trúc kỳ hạn và đánh giá chất lượng trích lập.',
-        'InsuranceReservesEquity':'Dự phòng so với vốn phản ánh quy mô nghĩa vụ kế toán tương đối với bộ đệm vốn. Không xem dự phòng là nợ vay; sự khác biệt nhân thọ/phi nhân thọ ảnh hưởng lớn đến tỷ số.',
-        'ReservesPremium':'Tỷ số dự phòng/phí liên hệ quy mô dự phòng với hoạt động khai thác. Tại quý dùng phí 12 tháng để tránh so sánh số dư với riêng ba tháng; chưa thay thế đánh giá đầy đủ dự phòng.',
-        'FXMismatchLiabilities':'Chênh lệch ngoại tệ chưa phòng vệ cần được đọc cùng đồng tiền bồi thường và tài sản đối ứng, không chỉ mức tuyệt đối.',
-        'InvestmentLeverage':'Tỷ trọng tài sản đầu tư rủi ro cần được đối chiếu với chất lượng tín dụng, phòng vệ và vốn hấp thụ tổn thất.',
-        'LargestSectorShare':'Tập trung danh mục có thể làm tổn thất đồng thời gia tăng; cần phân biệt tập trung ngành, tổ chức phát hành và các ngoại lệ theo phương pháp.',
-        'DebtEquity':'Tỷ số chỉ bao gồm nợ vay, không gồm toàn bộ nợ phải trả hay dự phòng bảo hiểm. Nợ vay thấp chưa đủ kết luận thanh khoản an toàn nếu thiếu lịch bồi thường và đáo hạn.',
-        'DebtDue24MEquity':'Nợ đáo hạn hai năm cần được đối chiếu với nguồn tiền sẵn có và khả năng tái cấp vốn; không dùng dư nợ tổng cộng thay thế lịch đáo hạn.',
-        'InsuranceEBITDAInterest':'Khả năng trả lãi chỉ có ý nghĩa khi EBITDA và lãi vay được đối chiếu cùng kỳ. Không áp dụng công thức nợ/EBITDA của doanh nghiệp phi tài chính.',
-        'StressedLiquidAssets':'Giá trị thanh khoản đã khấu trừ phải dựa trên cơ cấu tài sản đủ điều kiện, kỳ hạn và chất lượng tín dụng; tổng tài sản không phải nguồn thanh khoản tương đương.',
-        'InsuranceContractObligations':'Nghĩa vụ hợp đồng bảo hiểm là mẫu số riêng của phép đo thanh khoản, không thay bằng toàn bộ nợ phải trả hoặc chỉ số dư dự phòng.',
-        'InsuranceLiquidity':'Khả năng thanh khoản cần xét tài sản đủ điều kiện sau khấu trừ so với nghĩa vụ hợp đồng và tình huống căng thẳng.',
-        'SolvencyRatio':'Biên khả năng thanh toán cần nguồn công bố đúng kỳ và đúng pháp nhân; tỷ trọng vốn kế toán không thay thế chỉ tiêu này.',
-        'PB':'P/B phản ánh mức giá so với giá trị sổ sách tại kỳ nguồn. Chênh lệch định giá cần đọc cùng ROE và cơ cấu hoạt động; không trực tiếp quyết định bậc tín nhiệm.',
-        'PE':'P/E phản ánh mức giá so với lợi nhuận theo cơ sở nguồn. Mức thấp không tự chứng minh cổ phiếu rẻ nếu lợi nhuận thiếu bền vững; không dùng để tự chấm XHTN.',
-    }
-    text=notes[m]
-    if m=='CombinedRatio' and v is not None:
-        text=('Tại quý so sánh, tỷ lệ '+('dưới' if v<1 else 'trên' if v>1 else 'bằng')+' 100%, '+
-              ('cho thấy thặng dư' if v<1 else 'cho thấy thâm hụt' if v>1 else 'ở mức hòa vốn')+' khai thác theo quy ước đang dùng. ')+text
-    return text
+    from scripts.insurance_narrative import metric_narrative
+    return metric_narrative(pair,subtype=subtype)['AnalysisText']
 
 
 def executive_findings(ticker,pack):
@@ -119,7 +82,27 @@ def executive_findings(ticker,pack):
         if b.Value==a.Value:continue
         txt=f"{p['Label']} {'tăng' if b.Value>a.Value else 'giảm'} từ {fmt(m,a.Value,'OK')} ({a.DisplayPeriod}) lên {fmt(m,b.Value,'OK')} ({b.DisplayPeriod})." if b.Value>a.Value else f"{p['Label']} giảm từ {fmt(m,a.Value,'OK')} ({a.DisplayPeriod}) xuống {fmt(m,b.Value,'OK')} ({b.DisplayPeriod})."
         # Tăng lỗ không được ghi nhận thành điểm mạnh; giảm lỗ chỉ là cải thiện.
-        (good if b.Value>a.Value else risks).append(txt)
+        if b.Value<=0:
+            txt+=' Mức cuối chuỗi chưa dương, chưa tạo bộ đệm tài chính tích cực.'
+        else:
+            txt+=(' Nguồn tích lũy từ lợi nhuận được cải thiện nếu được giữ lại.' if m=='NPAT' and b.Value>a.Value else
+                  ' Bộ đệm vốn kế toán được mở rộng.' if m=='Equity' and b.Value>a.Value else
+                  ' Hiệu quả sử dụng vốn có cải thiện.' if m=='ROE' and b.Value>a.Value else
+                  ' Diễn biến này làm giảm mức hỗ trợ đối với hồ sơ tài chính so với năm trước.')
+        (good if b.Value>a.Value and b.Value>0 else risks).append(txt)
+    # Không để phục hồi năm cuối che khuất suy giảm trong cả chuỗi năm.
+    for m in ['NPAT','EquityAssets','CombinedRatio']:
+        p=pairs[m];h=p['History']
+        if len(h)<3 or p.get('HistoryBreaks'):continue
+        a,b=h.iloc[0],h.iloc[-1]
+        if a.Status!='OK' or b.Status!='OK' or pd.isna(a.Value) or pd.isna(b.Value):continue
+        adverse=b.Value>a.Value if m=='CombinedRatio' else b.Value<a.Value
+        if not adverse:continue
+        text=f"{p['Label']} từ {fmt(m,a.Value,'OK')} ({a.DisplayPeriod}) về {fmt(m,b.Value,'OK')} ({b.DisplayPeriod}). "
+        text+=('Biên khai thác theo quy ước thu hẹp so với đầu chuỗi.' if m=='CombinedRatio' else
+               'Bộ đệm vốn tương đối mỏng hơn đầu chuỗi.' if m=='EquityAssets' else
+               'Lợi nhuận năm cuối chưa trở lại mức đầu chuỗi.')
+        risks.append(text)
     for m in ['ROE','ROA','CombinedRatio']:
         p=pairs[m];v=own_value(p);q=p['Peers']
         if v is None or len(q)<2:continue
@@ -130,13 +113,27 @@ def executive_findings(ticker,pack):
         if abs(v-ref)<1e-9:continue
         better=v<ref if m=='CombinedRatio' else v>ref
         txt=f"{p['Label']} {fmt(m,v,'OK')}, {'thấp' if v<ref else 'cao'} hơn {name} {fmt(m,ref,'OK')} tại {p['Period']}."
-        (good if better else risks).append(txt)
+        if m=='CombinedRatio' and v>1:
+            txt+=' Tỷ lệ vẫn trên 100%, cho thấy thâm hụt khai thác theo quy ước BCTC.'
+            risks.append(txt)
+        elif m in ('ROE','ROA') and v<0:
+            risks.append(txt+' Tỷ suất vẫn âm.')
+        else:
+            (good if better else risks).append(txt)
     if not good:good=['Chưa đủ bằng chứng để kết luận điểm mạnh tài chính; các chỉ tiêu có số được phân tích riêng ở phần nội dung.']
     cov=quantitative_coverage(ticker,pack)
     if 'SolvencyRatio' in cov['Missing']:risks.append('Thiếu biên khả năng thanh toán đúng kỳ; chưa kết luận mức an toàn vốn pháp định.')
     from scripts.financial_evidence import insurance_reporting_subtype
     if insurance_reporting_subtype(get_company(ticker))=='GROUP':risks.append('Số liệu hợp nhất có cơ cấu hoạt động khác nhau; đối chiếu nhóm Phi nhân thọ chỉ có giá trị tham khảo tài chính.')
-    return dict(Facts=facts,Strengths=good[:3],Risks=risks[:4])
+    from scripts.insurance_narrative import executive_narrative
+    subtype=insurance_reporting_subtype(get_company(ticker))
+    # Giữ cảnh báo thiếu biên thanh toán trong bảng tóm tắt, không để bị cắt bởi các KPI.
+    critical=[x for x in risks if x.startswith(('Thiếu biên','Số liệu hợp nhất'))]
+    urgent=[x for x in risks if 'thâm hụt khai thác' in x]
+    other=[x for x in risks if x not in critical and x not in urgent]
+    return dict(Facts=facts,Strengths=good[:3],Risks=(urgent+other[:max(0,4-len(critical)-len(urgent))]+critical),
+                Narrative=executive_narrative(pack,subtype))
+
 
 
 def pending_assessment_groups(result):

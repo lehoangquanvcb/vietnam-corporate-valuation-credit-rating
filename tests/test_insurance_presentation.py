@@ -91,10 +91,14 @@ class WordReport(unittest.TestCase):
         self.assertIn('4F9E1E',self.doc.element.xml)
 
     def test_only_evidenced_metrics_receive_chart_pairs(self):
-        self.assertEqual(len(self.doc.inline_shapes),18)
+        self.assertEqual(len(self.doc.inline_shapes),36)
         self.assertEqual(self.text.count('Diễn biến nhiều năm:'),18)
         self.assertEqual(self.text.count('So sánh quý gần nhất:'),18)
         self.assertEqual(self.text.count('Hàm ý phân tích:'),18)
+        self.assertEqual(self.text.count('Kết luận:'),18)
+        self.assertIn('Quy mô và khả năng chuyển hóa tăng trưởng',self.text)
+        self.assertIn('Kết luận về vốn và dự phòng',self.text)
+        self.assertIn('Điều kiện cải thiện:',self.text)
         self.assertIn('PHỤ LỤC — DỮ LIỆU VÀ HỒ SƠ CẦN BỔ SUNG',self.text)
         self.assertNotIn('Chưa thẩm định',self.text)
         self.assertNotIn('0/65',self.text)

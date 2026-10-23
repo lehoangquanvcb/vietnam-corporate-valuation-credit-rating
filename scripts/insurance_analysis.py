@@ -73,8 +73,10 @@ def metric_pair(ticker,metric,basis='FY',years=5,peers=None):
                 PeerCandidateCount=max(len(p)-1,0),PeerScope=scope_label(metric),
                 PeerExclusions=exclusion_text(p),
                 HistoryBreaks=breaks,HistoryWarnings=warnings)
-    from scripts.insurance_presentation import metric_interpretation
-    result['AnalysisText']=metric_interpretation(result,insurance_reporting_subtype(get_company(ticker)))
+    from scripts.insurance_narrative import metric_narrative
+    from scripts.insurance_history import historical_peer_benchmark
+    result.update(historical_peer_benchmark(ticker,metric,h,basis,peers))
+    result.update(metric_narrative(result,subtype=insurance_reporting_subtype(get_company(ticker))))
     return result
 
 def analysis_pack(ticker,basis='FY',years=5):
@@ -82,7 +84,8 @@ def analysis_pack(ticker,basis='FY',years=5):
     for group,metrics in GROUPS.items():
         for metric in metrics:
             r=metric_pair(ticker,metric,basis,years,peers);r['Group']=group;rows.append(r)
-    return rows
+    from scripts.insurance_narrative import enrich_pack
+    return enrich_pack(rows,insurance_reporting_subtype(get_company(ticker)))
 
 def quarter_kpi_table(ticker,include_missing=True):
     from scripts.financial_evidence import STATUS
@@ -100,39 +103,40 @@ def quarter_kpi_table(ticker,include_missing=True):
     return pd.DataFrame(rows)
 
 def insurance_summary(ticker):
-    meta=get_company(ticker);table=quarter_kpi_table(ticker);pos=[];risks=[]
-    for m in ['ROE','ROA','NetMargin','CombinedRatio','LossRatio']:
-        row=table[table.Metric.eq(m)].iloc[0];own=row['Doanh nghiệp']
-        p=quarter_peers(ticker,m,row['Kỳ dữ liệu']);z=included_rows(p.iloc[1:]);z=z[z.SameModel]
-        mean=z.Value.mean() if len(z)>=5 else np.nan
-        if pd.isna(own) or pd.isna(mean):continue
-        gap=own-mean
-        if abs(gap)<1e-6:continue
-        lower_good=m in ['CombinedRatio','LossRatio']
-        text=f"{LABELS.get(m,m)} {fmt(m,own,'OK')}, {'cao' if gap>0 else 'thấp'} hơn bình quân peer {abs(gap)*100:.2f} điểm phần trăm tại {row['Kỳ dữ liệu']} (N={len(z)}, cùng loại hình)."
-        (pos if (gap<0 if lower_good else gap>0) else risks).append(text)
+    from scripts.insurance_presentation import executive_findings,quantitative_coverage
+    meta=get_company(ticker);pack=analysis_pack(ticker);findings=executive_findings(ticker,pack)
+    cov=quantitative_coverage(ticker,pack)
     return {'Ticker':ticker,'CompanyName':meta.get('DisplayName'),'Sector':'Bảo hiểm','Template':'Bảo hiểm theo phương pháp 2025',
-            'Focus':list(GROUPS),'Score':None,'View':'ĐỐI CHIẾU CHUYÊN NGÀNH','Strengths':pos,'Risks':risks,
-            'Interpretations':['Hiệu quả khai thác phải xem cùng vốn, thanh khoản, chất lượng tài sản và dự báo.'],
-            'Conclusion':f"Có {table['Doanh nghiệp'].notna().sum()}/34 chỉ tiêu có số tại quý so sánh. Tỷ lệ bồi thường/kết hợp thấp hơn chỉ là tín hiệu hiệu quả theo quy ước BCTC; không cộng các KPI thành điểm XHTN hoặc mặc định quy mô lớn là tín hiệu tốt."}
+            'Focus':list(GROUPS),'Score':None,'View':'ĐỐI CHIẾU CHUYÊN NGÀNH',
+            'Strengths':findings['Strengths'],'Risks':findings['Risks'],'Interpretations':findings['Narrative'],
+            'Conclusion':' '.join(findings['Narrative'])+' '+cov['Note']}
+
 
 def figures(pair):
     """Hai biểu đồ có cùng đơn vị; giữ khoảng trống tại mốc thiếu."""
     import plotly.graph_objects as go
     m=pair['Metric'];scale=100 if m in PCT else 1 if m in MULT else 1e-9
     unit='%' if m in PCT else 'lần' if m in MULT else 'tỷ đồng'
-    h=pair['History'];p=pair['Peers']
+    h=pair['History'];p=pair['Peers'];ph=pair.get('PeerHistory',pd.DataFrame())
     a=go.Figure();b=go.Figure()
     if len(h):
         cuts=[0]+pair.get('HistoryBreaks',[])+[len(h)]
         for start,stop in zip(cuts,cuts[1:]):
             z=h.iloc[start:stop]
-            a.add_scatter(x=z.DisplayPeriod,y=pd.to_numeric(z.Value,errors='coerce')*scale,mode='lines+markers',connectgaps=False,name='Doanh nghiệp',line_color='#166b55')
+            a.add_scatter(x=z.DisplayPeriod,y=pd.to_numeric(z.Value,errors='coerce').where(z.Status.eq('OK'))*scale,mode='lines+markers',connectgaps=False,name='Doanh nghiệp',legendgroup='company',showlegend=start==0,line_color='#166b55')
+    if len(ph):
+        cuts=[0]+pair.get('PeerHistoryBreaks',[])+[len(ph)]
+        for start,stop in zip(cuts,cuts[1:]):
+            z=ph.iloc[start:stop]
+            a.add_scatter(x=z.DisplayPeriod,y=z.PeerMean*scale,customdata=z.PeerCount,
+                          mode='lines+markers',connectgaps=False,name='Bình quân peer',legendgroup='peers',showlegend=start==0,
+                          line=dict(color='#C07820',dash='dash'),hovertemplate='%{x}: %{y:.2f}<br>N = %{customdata}<extra>Bình quân peer</extra>')
     if len(p):
         z=included_rows(p)
         if len(z):b.add_bar(x=z.Ticker,y=z.Value*scale,marker_color=['#166b55' if t==p.iloc[0].Ticker else '#8da6b9' for t in z.Ticker])
     for fig,title in [(a,'Chuỗi năm gần nhất'),(b,f"Doanh nghiệp và {pair['PeerCount']} peer · {pair['Period']}")]:
-        fig.update_layout(title=title,height=265,margin=dict(t=45,l=45,r=10,b=45),yaxis_title=unit,showlegend=False)
+        fig.update_layout(title=title,height=310,margin=dict(t=50,l=60,r=15,b=65),yaxis_title=unit,showlegend=fig is a,
+                          legend=dict(orientation='h',y=-.18,x=0))
     return a,b
 
 def render_analysis(ticker,basis='FY',years=5,key='insurance'):
@@ -163,19 +167,36 @@ def render_analysis(ticker,basis='FY',years=5,key='insurance'):
     with b:
         st.markdown('**Điểm hạn chế / rủi ro**')
         for text in findings['Risks']:st.write(text)
+    from scripts.insurance_narrative import section_findings,overall_conclusion
+    conclusions=section_findings(pack,insurance_reporting_subtype(meta))
+    st.markdown('**Kết luận tổng hợp**')
+    for text in overall_conclusion(pack,insurance_reporting_subtype(meta)):st.write(text)
+    st.markdown('**Luận điểm phân tích**')
+    for text in findings['Narrative']:st.write(text)
+    from scripts.insurance_report import SECTIONS
+    for heading,metrics in SECTIONS:
+        with st.expander('Nhận định tổng hợp · '+heading,expanded=False):
+            for title,text in conclusions[heading]:
+                st.markdown('**'+title+'**');st.write(text)
     for pair in pack:
         if not has_evidence(pair):continue
         with st.expander(pair['Group']+' · '+pair['Label'],expanded=False):
-            a,b=st.columns(2)
             f1,f2=figures(pair)
-            with a:st.plotly_chart(f1,use_container_width=True,key=key+'hist_'+pair['Metric'])
-            with b:st.plotly_chart(f2,use_container_width=True,key=key+'peer_'+pair['Metric'])
-            st.write(pair['HistoryText']);st.write(pair['PeerText']);st.write(pair['AnalysisText']);st.caption(pair['MethodNote'])
+            st.plotly_chart(f1,use_container_width=True,key=key+'hist_'+pair['Metric'])
+            st.write(pair['NarrativeHistory'])
+            st.caption(pair['PeerHistoryNote'])
+            st.plotly_chart(f2,use_container_width=True,key=key+'peer_'+pair['Metric'])
+            st.write(pair['NarrativePeer']);st.write(pair['AnalysisText'])
+            st.markdown('**Kết luận:** '+pair['ConclusionText']);st.caption(pair['MethodNote'])
             if pair['PeerExclusions']:st.caption(pair['PeerExclusions'])
             for warning in pair.get('HistoryWarnings',[]):st.warning(warning)
             h=pair['History'];p=pair['Peers'];m=pair['Metric']
             if len(h):
-                st.dataframe(pd.DataFrame([{'Kỳ':r.DisplayPeriod,'Giá trị':fmt(m,r.Value,r.Status),'Cơ sở':BASIS_TEXT.get(r.Basis,r.Basis),'Nguồn':r.Source,'Lưu ý':r.Reason} for r in h.itertuples()]),hide_index=True,use_container_width=True)
+                ph=pair['PeerHistory'].set_index('Period')
+                st.dataframe(pd.DataFrame([{'Kỳ':r.DisplayPeriod,'Giá trị':fmt(m,r.Value,r.Status),'Bình quân peer':fmt(m,ph.loc[r.Period,'PeerMean'],'OK'),
+                    'Số peer':int(ph.loc[r.Period,'PeerCount']),'Cơ sở':BASIS_TEXT.get(r.Basis,r.Basis),'Nguồn':r.Source,'Lưu ý':r.Reason} for r in h.itertuples()]),hide_index=True,use_container_width=True)
+            with st.expander('Nguồn và thành phần peer từng năm',expanded=False):
+                st.dataframe(pair['PeerHistoryEvidence'],hide_index=True,use_container_width=True)
             if len(p):
                 st.dataframe(pd.DataFrame([{'Mã':r.Ticker,'Nhóm so sánh':r.Model,'Phạm vi số liệu':r.ReportingScope,'Kỳ':r.Period,'Giá trị':fmt(m,r.Value,r.Status),'Đưa vào so sánh':'Có' if r.Included else 'Không','Lý do loại':r.ExclusionReason,'Cơ sở':BASIS_TEXT.get(r.Basis,r.Basis),'Nguồn':r.Source,'Lưu ý':r.Reason} for r in p.itertuples()]),hide_index=True,use_container_width=True)
     with st.expander('Dữ liệu cần bổ sung và chỉ tiêu không áp dụng',expanded=False):
