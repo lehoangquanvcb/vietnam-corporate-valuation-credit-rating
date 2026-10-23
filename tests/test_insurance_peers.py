@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 import pandas as pd
 from scripts.insurance_analysis import metric_pair, analysis_pack, quarter_kpi_table
-from scripts.insurance_peers import peer_universe, quarter_peers, included_rows
+from scripts.insurance_peers import peer_universe, configured_peer_universe, quarter_peers, included_rows
 from scripts.universal_data import get_snapshot
 
 INSURERS={'ABI','AIC','BIC','BLI','BMI','BVH','MIG','PGI','PRE','PTI','PVI','VNR'}
@@ -31,11 +31,42 @@ class InsurancePeers(unittest.TestCase):
         self.assertTrue(q.loc[~q.Included,'ExclusionReason'].str.len().gt(0).all())
         self.assertIn('PVI',p['PeerExclusions'])
 
-    def test_group_reserves_are_not_averaged_with_nonlife(self):
-        p=metric_pair('BVH','InsuranceReserves')
-        self.assertEqual(set(included_rows(p['Peers']).Ticker),{'BVH','PVI'})
-        self.assertIsNone(p['PeerMean'])
-        self.assertIn('khác loại hình',p['PeerExclusions'])
+    def test_bvh_pvi_nonlife_cohort_includes_all_ten_symbols(self):
+        nonlife=INSURERS-{'PRE','VNR'}
+        from scripts.universal_data import get_company
+        for ticker in sorted(nonlife):
+            self.assertEqual(get_company(ticker)['InsuranceSubtype'],'NONLIFE')
+            self.assertEqual(set(configured_peer_universe(ticker)),nonlife-{ticker})
+            for metric in ['GrossWrittenPremium','NetInsurancePremium','UnderwritingProfit','InsuranceReserves']:
+                p=metric_pair(ticker,metric);q=included_rows(p['Peers'])
+                self.assertEqual(set(q.Ticker),nonlife,(ticker,metric))
+                self.assertEqual(p['PeerCount'],9)
+                self.assertAlmostEqual(p['PeerMean'],q[q.Ticker.ne(ticker)].Value.mean())
+                self.assertIn('9/11',p['PeerText'])
+                self.assertIn('PRE',p['PeerExclusions']);self.assertIn('VNR',p['PeerExclusions'])
+        for ticker in ['PRE','VNR']:
+            p=metric_pair(ticker,'UnderwritingProfit')
+            self.assertEqual(set(included_rows(p['Peers']).Ticker),{'PRE','VNR'})
+
+    def test_comparison_reclassification_preserves_reporting_scope(self):
+        from scripts.financial_evidence import insurance_reporting_subtype, comparable_model
+        from scripts.insurance_rating import insurance_rating
+        from scripts.universal_data import get_company
+        for ticker in ['BVH','PVI']:
+            meta=get_company(ticker);snap=get_snapshot(ticker)
+            self.assertEqual(meta['InsuranceSubtype'],'NONLIFE')
+            self.assertEqual(snap['InsuranceSubtype'],'NONLIFE')
+            self.assertEqual(insurance_reporting_subtype(meta),'GROUP')
+            self.assertEqual(insurance_reporting_subtype(snap),'GROUP')
+            self.assertFalse(comparable_model(meta,get_company('ABI')))
+            self.assertEqual(insurance_rating(ticker)['RatingBlocker'],'SCOPE')
+            self.assertEqual(snap['_MetricEvidence']['CombinedRatio']['Status'],'NOT_APPLICABLE')
+        q=metric_pair('BVH','UnderwritingProfit')['Peers'].set_index('Ticker')
+        self.assertEqual(q.loc['BVH','Model'],'Phi nhân thọ')
+        self.assertTrue(q.loc['ABI','SamePeerGroup']);self.assertFalse(q.loc['ABI','SameModel'])
+        self.assertTrue(q.loc['ABI','Included'])
+        for legacy in ['GROUP','NONLIFE','REINSURANCE','LIFE']:
+            self.assertEqual(insurance_reporting_subtype({'InsuranceSubtype':legacy}),legacy)
 
     def test_kpi_chart_and_narrative_share_counts_and_values(self):
         table=quarter_kpi_table('BVH').set_index('Metric')

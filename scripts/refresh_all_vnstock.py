@@ -22,7 +22,6 @@ def main():
     # 1) Discover the current market directly from Vnstock. This intentionally
     # does NOT use a hard-coded ticker list.
     run(['scripts/discover_listed_universe.py'])
-    run(['scripts/industry_classifier.py'], fatal=False)
 
     u = pd.read_csv(CFG/'company_universe.csv')
     u['Ticker'] = u['Ticker'].astype(str).str.upper().str.strip()

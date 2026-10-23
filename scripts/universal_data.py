@@ -38,11 +38,15 @@ def universe():
         x.loc[mask,'PeerGroup']='Bảo hiểm'
     registry=read_csv(CFG/'insurance_entities.csv')
     if len(registry) and 'InsuranceSubtype' in registry and 'Ticker' in registry:
+        insurance_fields=['InsuranceSubtype','InsuranceReportingSubtype','InsuranceScope','InsuranceSource','InsurancePeerNote']
+        for key in insurance_fields:
+            if key in registry:
+                x[key]=x[key].astype(object) if key in x else pd.Series('',index=x.index,dtype=object)
         for row in registry.to_dict('records'):
             match=x.Ticker.eq(row['Ticker'])
             if row.get('InsuranceName'):
                 x.loc[match,'CompanyName']=row['InsuranceName']
-            for key in ['InsuranceSubtype','InsuranceScope','InsuranceSource']:
+            for key in insurance_fields:
                 if key in row:x.loc[match,key]=row[key]
     return x
 
@@ -111,7 +115,7 @@ def get_snapshot(ticker):
     from scripts.financial_evidence import repair_snapshot
     out=repair_snapshot(t,meta['EntityType'],out)
     # Métadonnées của nhóm phải thắng cache cũ sau refresh.
-    out.update({k:meta[k] for k in ['EntityType','Methodology','Sector','PeerGroup','InsuranceSubtype','InsuranceScope','InsuranceSource'] if k in meta})
+    out.update({k:meta[k] for k in ['EntityType','Methodology','Sector','PeerGroup','InsuranceSubtype','InsuranceReportingSubtype','InsuranceScope','InsuranceSource','InsurancePeerNote'] if k in meta})
     return out
 
 def entity_history(ticker):
@@ -136,16 +140,8 @@ def industry_label(ticker):
     return _il(ticker)
 
 def peer_tickers(ticker):
-    try:
-        from scripts.dynamic_peer_engine import dynamic_peer_tickers
-        p=dynamic_peer_tickers(ticker,include_target=True)
-        if len(p)>1:return p
-    except Exception:
-        pass
-    # fallback to legacy PeerGroup only when dynamic selection cannot be built
-    m=get_company(ticker); u=universe()
-    p=u[u.PeerGroup.astype(str).eq(str(m.get('PeerGroup')))].Ticker.astype(str).tolist() if 'PeerGroup' in u.columns else []
-    return p or [ticker]
+    from scripts.dynamic_peer_engine import dynamic_peer_tickers
+    return dynamic_peer_tickers(ticker,include_target=True)
 
 def peer_snapshot(ticker):
     meta=get_company(ticker)

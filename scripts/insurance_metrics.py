@@ -13,7 +13,7 @@ RAW_MAP={
 }
 
 def extend_records(ticker,target,basis,records,root):
-    from scripts.financial_evidence import _record, read_csv, number
+    from scripts.financial_evidence import _record, read_csv, number, insurance_reporting_subtype
     r=records;provided={}
     def calc(m,keys,fn,den=None,record_basis=None):
         if m in provided:
@@ -80,7 +80,7 @@ def extend_records(ticker,target,basis,records,root):
     # Phạm vi phi nhân thọ không tự áp cho BCTC hợp nhất hỗn hợp nhân thọ/đầu tư.
     entities=read_csv(Path(root)/'config/insurance_entities.csv')
     z=entities[entities.Ticker.eq(ticker)] if 'Ticker' in entities else entities.iloc[:0]
-    if len(z) and str(z.iloc[0].InsuranceSubtype)=='GROUP':
+    if len(z) and insurance_reporting_subtype(z.iloc[0])=='GROUP':
         for m in FLOW_RATIOS|{'PaidInCapitalRequired','ReservesPremium'}:
             r[m]=_record(m,per=target,status='NOT_APPLICABLE',reason='BCTC tập đoàn: cần tách pháp nhân phi nhân thọ và cơ sở phù hợp trước khi tính tỷ số chuyên ngành')
     return r

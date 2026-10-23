@@ -104,7 +104,8 @@ def signature(path):
 @lru_cache(maxsize=128)
 def _csv_cached(sig):
     if not sig[1]: return pd.DataFrame()
-    try: return pd.read_csv(sig[0])
+    # Metadata ICB là mã định danh, không phải số; giữ số 0 đầu khi đọc lại CSV.
+    try: return pd.read_csv(sig[0],dtype={f'ICBCode{lv}':str for lv in range(1,5)})
     except pd.errors.EmptyDataError: return pd.DataFrame()
     except (OSError,ValueError,pd.errors.ParserError) as e:
         x=pd.DataFrame(); x.attrs['error']=f'{type(e).__name__}: {e}'; return x
@@ -352,10 +353,17 @@ def repair_snapshot(ticker,typ,base=None,root=ROOT):
     d['PerShareUnit']='VND/share'
     return d
 
+def insurance_reporting_subtype(meta):
+    """Phạm vi BCTC tách khỏi nhóm so sánh do người dùng cấu hình."""
+    value=str(meta.get('InsuranceReportingSubtype','')).strip().upper()
+    if value in {'LIFE','NONLIFE','REINSURANCE','GROUP'}:return value
+    return str(meta.get('InsuranceSubtype','')).strip().upper()
+
+
 def comparable_model(target,peer):
     if target.get('EntityType')!=peer.get('EntityType'):return False
     if target.get('EntityType')!='INSURANCE':return True
-    a=str(target.get('InsuranceSubtype','')).upper();b=str(peer.get('InsuranceSubtype','')).upper()
+    a=insurance_reporting_subtype(target);b=insurance_reporting_subtype(peer)
     return a in {'LIFE','NONLIFE','REINSURANCE','GROUP'} and a==b
 
 

@@ -5,8 +5,7 @@ _PROJECT_ROOT = _Path(__file__).resolve().parents[1]
 if str(_PROJECT_ROOT) not in _sys.path:
     _sys.path.insert(0, str(_PROJECT_ROOT))
 
-from vnstock_env import load_vnstock_env
-load_vnstock_env()
+from scripts.vnstock_env import load_vnstock_env
 
 from pathlib import Path
 import pandas as pd, re
@@ -31,8 +30,8 @@ def _from_vnstock_data_reference():
     from vnstock_data import Reference
     ref=Reference()
     calls=[
-        ('Reference.equity.list', lambda: ref.equity.list()),
         ('Reference.equity.list_by_exchange', lambda: ref.equity.list_by_exchange()),
+        ('Reference.equity.list', lambda: ref.equity.list()),
     ]
     errs=[]
     for label,fn in calls:
@@ -82,6 +81,7 @@ def _from_vnstock_legacy():
     raise RuntimeError('Không tìm được method Listing tương thích trong vnstock')
 
 def fetch_listing():
+    load_vnstock_env()
     errs=[]
     for label,loader in [
         ('vnstock_data Reference v3', _from_vnstock_data_reference),
@@ -109,7 +109,7 @@ def main():
     CFG.mkdir(parents=True,exist_ok=True)
     df.to_csv(CFG/'vnstock_listing_full.csv',index=False,encoding='utf-8-sig')
     tc=first_col(df,['symbol','ticker','code'])
-    nc=first_col(df,['organ_name','company_name','name','organName','organ_short_name'])
+    nc=first_col(df,['organ_name','org_name','company_name','name','organName','organ_short_name'])
     ec=first_col(df,['exchange','comGroupCode','exchange_name','board'])
     ic=first_col(df,['icb_name3','icb_name2','icb_name','industry_name','industry','sector','vi_sector'])
     if tc is None:raise RuntimeError(f'Không xác định được cột ticker trong listing. Columns={list(df.columns)}')
@@ -126,13 +126,17 @@ def main():
     seed=pd.read_csv(CFG/'company_universe.csv') if (CFG/'company_universe.csv').exists() else pd.DataFrame()
     if len(seed):
         seed['Ticker']=seed.Ticker.astype(str).str.upper().str.strip()
-        override_cols=[c for c in ['CompanyName','LegalName','EntityType','Sector','PeerGroup','Methodology'] if c in seed.columns]
+        override_cols=[c for c in ['CompanyName','LegalName','EntityType','Sector','PeerGroup','Methodology','IndustrySource','IndustryLevelUsed',
+            'ICBCode1','ICBName1','ICBCode2','ICBName2','ICBCode3','ICBName3','ICBCode4','ICBName4'] if c in seed.columns]
         ov=seed[['Ticker',*override_cols]].drop_duplicates('Ticker',keep='last').set_index('Ticker')
         new=new.set_index('Ticker')
         for c in override_cols:
+            if c not in new:new[c]=''
             common=new.index.intersection(ov.index)
             vals=ov.loc[common,c]
             mask=vals.notna() & vals.astype(str).str.strip().ne('')
+            if c in ['CompanyName','LegalName']:
+                mask=mask & vals.astype(str).ne(vals.index.to_series())
             if mask.any(): new.loc[vals.index[mask],c]=vals[mask]
         new=new.reset_index()
     merged=new.copy(); merged['Active']=1
@@ -146,8 +150,5 @@ def main():
 
 if __name__=='__main__':
     main()
-    try:
-        from scripts.industry_classifier import apply_industry_classification
-        apply_industry_classification()
-    except Exception as e:
-        print('CẢNH BÁO: chưa tự phân ngành ICB:',e)
+    from scripts.industry_classifier import apply_industry_classification
+    apply_industry_classification()

@@ -99,6 +99,9 @@ class WordReport(unittest.TestCase):
         self.assertNotIn('Chưa thẩm định',self.text)
         self.assertNotIn('0/65',self.text)
         self.assertIn('Ngoài phạm vi phương pháp',self.text)
+        self.assertIn('BVH và PVI được xếp vào nhóm so sánh Phi nhân thọ',self.text)
+        self.assertIn('Có 9/11 peer được dùng',self.text)
+        self.assertNotIn('Có 1/11 peer được dùng',self.text)
         for pair in analysis_pack('BVH'):
             self.assertIn(pair['Label'],self.text)
 

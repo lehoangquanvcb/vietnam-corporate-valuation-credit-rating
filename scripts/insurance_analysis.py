@@ -2,9 +2,9 @@
 import numpy as np
 import pandas as pd
 from scripts.insurance_catalog import GROUPS, NOTES, DEFAULT_NOTE
-from scripts.financial_evidence import latest_period, same_period_history
+from scripts.financial_evidence import latest_period, same_period_history, insurance_reporting_subtype
 from scripts.universal_data import get_company
-from scripts.insurance_peers import peer_universe, quarter_peers, included_rows, scope_label, exclusion_text, POLICY_NOTE
+from scripts.insurance_peers import peer_universe, configured_peer_universe, quarter_peers, included_rows, scope_label, exclusion_text, POLICY_NOTE, SUBTYPE_LABELS
 from scripts.financial_views import BASIS_LABELS
 from scripts.insurance_presentation import format_metric as fmt
 from scripts.methodology_kpi_engine import LABELS, PCT, MULT
@@ -74,7 +74,7 @@ def metric_pair(ticker,metric,basis='FY',years=5,peers=None):
                 PeerExclusions=exclusion_text(p),
                 HistoryBreaks=breaks,HistoryWarnings=warnings)
     from scripts.insurance_presentation import metric_interpretation
-    result['AnalysisText']=metric_interpretation(result,get_company(ticker).get('InsuranceSubtype'))
+    result['AnalysisText']=metric_interpretation(result,insurance_reporting_subtype(get_company(ticker)))
     return result
 
 def analysis_pack(ticker,basis='FY',years=5):
@@ -143,10 +143,13 @@ def render_analysis(ticker,basis='FY',years=5,key='insurance'):
                '. Lịch sử dùng cơ sở đã chọn; so sánh ngang dùng đúng quý gần nhất của doanh nghiệp. Dòng tiền quý riêng lẻ, số dư cuối quý; ROE/ROA/PB/PE giữ cơ sở tỷ số nguồn.')
     peers=peer_universe(ticker)
     st.caption(f'Nhóm so sánh ngành: {len(peers)+1} doanh nghiệp, gồm {ticker} và {len(peers)} peer: '+(', '.join(peers) or 'chưa có')+'.')
+    configured=configured_peer_universe(ticker)
+    st.caption('Nhóm so sánh nghiệp vụ: '+SUBTYPE_LABELS.get(meta.get('InsuranceSubtype'),'Chưa xác minh')+
+               f'; {len(configured)} peer: '+(', '.join(configured) or 'chưa có')+'. Số peer thực dùng phụ thuộc dữ liệu đúng quý và cơ sở tính.')
     st.caption(POLICY_NOTE)
     with st.expander('Danh sách bảo hiểm và độ phủ dữ liệu quý gần nhất',expanded=False):
         audit=quarter_peers(ticker,'TotalAssets',latest_period(ticker,'INSURANCE'),peers)
-        st.dataframe(pd.DataFrame([{'Mã':r.Ticker,'Loại hình':r.Model,'Quý so sánh':r.Period,
+        st.dataframe(pd.DataFrame([{'Mã':r.Ticker,'Nhóm so sánh':r.Model,'Phạm vi số liệu':r.ReportingScope,'Quý so sánh':r.Period,
             'Tổng tài sản':fmt('TotalAssets',r.Value,r.Status),
             'Đưa vào biểu đồ tài sản':'Có' if r.Included else 'Không','Lý do':r.ExclusionReason} for r in audit.itertuples()]),hide_index=True,use_container_width=True)
     from scripts.insurance_presentation import has_evidence,quantitative_coverage,executive_findings
@@ -174,7 +177,7 @@ def render_analysis(ticker,basis='FY',years=5,key='insurance'):
             if len(h):
                 st.dataframe(pd.DataFrame([{'Kỳ':r.DisplayPeriod,'Giá trị':fmt(m,r.Value,r.Status),'Cơ sở':BASIS_TEXT.get(r.Basis,r.Basis),'Nguồn':r.Source,'Lưu ý':r.Reason} for r in h.itertuples()]),hide_index=True,use_container_width=True)
             if len(p):
-                st.dataframe(pd.DataFrame([{'Mã':r.Ticker,'Loại hình':r.Model,'Kỳ':r.Period,'Giá trị':fmt(m,r.Value,r.Status),'Đưa vào so sánh':'Có' if r.Included else 'Không','Lý do loại':r.ExclusionReason,'Cơ sở':BASIS_TEXT.get(r.Basis,r.Basis),'Nguồn':r.Source,'Lưu ý':r.Reason} for r in p.itertuples()]),hide_index=True,use_container_width=True)
+                st.dataframe(pd.DataFrame([{'Mã':r.Ticker,'Nhóm so sánh':r.Model,'Phạm vi số liệu':r.ReportingScope,'Kỳ':r.Period,'Giá trị':fmt(m,r.Value,r.Status),'Đưa vào so sánh':'Có' if r.Included else 'Không','Lý do loại':r.ExclusionReason,'Cơ sở':BASIS_TEXT.get(r.Basis,r.Basis),'Nguồn':r.Source,'Lưu ý':r.Reason} for r in p.itertuples()]),hide_index=True,use_container_width=True)
     with st.expander('Dữ liệu cần bổ sung và chỉ tiêu không áp dụng',expanded=False):
         from scripts.insurance_presentation import data_gap_explanation
         table=quarter_kpi_table(ticker)

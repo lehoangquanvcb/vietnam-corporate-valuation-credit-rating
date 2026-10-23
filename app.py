@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.121.0-INSURANCE-PEERS'
+BUILD_TAG='V8.123.0-AUTO-PEERS-ALL'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -422,8 +422,9 @@ _peer_fallback=_clean_text(meta.get('PeerGroup'))
 _methodology=_clean_text(meta.get('Methodology'))
 _peer_label=_dynamic_peer_label_ui(selected, _peer_fallback)
 if _entity_type=='INSURANCE':
-    from scripts.insurance_peers import peer_universe
-    _peer_label=f'{len(peer_universe(selected))} peer bảo hiểm; chỉ tiêu nghiệp vụ lọc cùng loại hình'
+    from scripts.insurance_peers import peer_universe, configured_peer_universe, SUBTYPE_LABELS
+    _configured_label=SUBTYPE_LABELS.get(meta.get('InsuranceSubtype'),'Chưa xác minh')
+    _peer_label=f'{_configured_label}: {len(configured_peer_universe(selected))} peer nghiệp vụ; {len(peer_universe(selected))} peer tài chính chung'
 
 # Exchange/stock exchange is intentionally omitted from the UI.
 st.sidebar.success(_entity_type)
@@ -505,7 +506,8 @@ def _download_report_block(report_type, rating_result=None):
     suffix='Phan_tich_Dinh_gia_MA' if report_type=='analysis' else 'XHTN'
     import hashlib
     from scripts.financial_evidence import signature
-    _report_sources=[signature(p) for p in (ROOT/'data/raw').glob('*.csv')]+[signature(ROOT/'config'/p) for p in ['insurance_entities.csv','insurance_metric_inputs.csv','raw_period_basis.csv']] if meta['EntityType']=='INSURANCE' else []
+    from scripts.dynamic_peer_engine import peer_source_fingerprint
+    _report_sources=[peer_source_fingerprint()]
     _digest=hashlib.sha256(json.dumps({'build':BUILD_TAG,'sources':_report_sources,'rating':rating_result,'basis':_history_basis,'years':_history_years,'snapshot':s.get('SnapshotPeriod')},sort_keys=True,default=str).encode()).hexdigest()[:12]
     identity=f'{selected}_{report_type}_{_digest}'
     for kind, column, title, mime, ext in [
@@ -551,14 +553,20 @@ if _active_section==_sections[0]:
         from scripts.dynamic_peer_engine import select_dynamic_peers
         _dp=select_dynamic_peers(selected)
         if len(_dp):
-            with st.expander('Nhóm doanh nghiệp tương đồng được hệ thống tự chọn'):
-                _show=[c for c in ['PeerRank','Ticker','CompanyName','Sector','SimilarityScore','SimilarityBasis','PeerPool'] if c in _dp.columns]
+            with st.expander('Peer định giá cùng phạm vi BCTC' if meta['EntityType']=='INSURANCE' else 'Nhóm doanh nghiệp tương đồng được hệ thống tự chọn'):
+                _show=[c for c in ['PeerRank','Ticker','CompanyName','Sector','SimilarityScore','SimilarityBasis','DataStatus','IndustryStatus','PeerPool'] if c in _dp.columns]
                 _v=_dp[_show].copy()
-                if 'SimilarityScore' in _v.columns:_v['SimilarityScore']=(_v['SimilarityScore']*100).round(1).astype(str)+'%'
+                if 'SimilarityScore' in _v.columns:_v['SimilarityScore']=_v['SimilarityScore'].map(lambda v:f'{v*100:.1f}%' if pd.notna(v) else '—')
+                if 'DataStatus' in _v:
+                    _v['DataStatus']=_v['DataStatus'].replace({'COMPARABLE':'Có chỉ tiêu so sánh cùng kỳ','NO_COMMON_PERIOD_OR_METRICS':'Chưa đủ chỉ tiêu cùng kỳ','MISSING_VERIFIED_DATA':'Thiếu số liệu đã xác minh'})
                 st.dataframe(_v,hide_index=True,use_container_width=True)
-                st.caption('Nhóm tương đồng này phục vụ định giá; biểu đồ tài chính chung dùng toàn bộ nhóm bảo hiểm.' if meta['EntityType']=='INSURANCE' else 'Peer được tái tính sau mỗi Full Refresh từ toàn bộ universe Vnstock; Master chỉ còn là metadata/fallback.')
-    except Exception:
-        pass
+                st.caption('Nhóm tương đồng này phục vụ định giá; biểu đồ tài chính chung dùng toàn bộ nhóm bảo hiểm.' if meta['EntityType']=='INSURANCE' else 'Peer tự chọn từ danh mục ngành dùng chung cho toàn thị trường. Danh sách tự cập nhật khi nguồn thay đổi; không cần chuẩn bị riêng cho từng mã. Thiếu số liệu được ghi rõ trong bảng.')
+                if _dp.IndustryStatus.eq('LEGACY_ICB_REFRESH_REQUIRED').any():
+                    st.warning('Danh mục ICB cũ bị lặp cấp. Chạy RUN_REFRESH_PEERS_ALL.bat một lần để cập nhật phân ngành cho toàn thị trường.')
+        else:
+            st.info('Chưa có peer phù hợp trong danh mục hiện có. Cập nhật phân ngành toàn thị trường bằng RUN_REFRESH_PEERS_ALL.bat.')
+    except Exception as exc:
+        st.warning('Không đọc được danh mục peer: '+str(exc))
     st.markdown('### Hồ sơ tài chính & xu hướng')
     if meta['EntityType']=='BANK':
         ml=[('TotalAssets','Tổng tài sản',False),('GrossLoans','Cho vay khách hàng',False),
@@ -890,12 +898,13 @@ if _active_section==_sections[3]:
         st.dataframe(cov,hide_index=True,use_container_width=True)
     st.markdown('### Dynamic peer engine')
     try:
-        dps=pd.read_csv(DATA/'dynamic_peer_summary.csv')
+        from scripts.dynamic_peer_engine import peer_catalog_summary
+        dps=peer_catalog_summary()
         if len(dps):
             st.dataframe(dps,hide_index=True,use_container_width=True)
         else: st.info('Chưa có dữ liệu nhóm doanh nghiệp tương đồng.')
     except Exception:
-        st.info('Dynamic peer map sẽ được tạo sau RUN_FULL_REFRESH.bat.')
+        st.info('Không đọc được danh mục peer. Cập nhật chung bằng RUN_REFRESH_PEERS_ALL.bat.')
     st.markdown('### Universe & methodology router')
     cols=[c for c in ['Ticker','CompanyName','EntityType','Sector','Exchange','PeerGroup','Methodology'] if c in u.columns]
     st.dataframe(u[cols],hide_index=True,use_container_width=True)

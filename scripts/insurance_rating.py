@@ -1,6 +1,6 @@
 """Mô phỏng phương pháp bảo hiểm phi nhân thọ Saigon Ratings 20.01.2025."""
 from scripts.insurance_methodology import capital_earnings, flexibility, financial_score, governance_result, rubric_rows, GOV_LEVELS
-ENGINE_VERSION='8.121.0'
+ENGINE_VERSION='8.122.0'
 INPUT_LABELS={
  'ScopeConfirmed':'Xác nhận phạm vi phi nhân thọ', 'MacroIndustryRisk':'Rủi ro vĩ mô và ngành',
  'BusinessRisk':'Rủi ro kinh doanh','CapitalAdequacy':'An toàn vốn dự phóng (Bảng 12)',
@@ -72,16 +72,17 @@ def insurance_rating(ticker,overrides=None):
            MissingEvidence=[],AssessmentInputs=o,SubfactorEvidence=rubric,
            AssessmentInputTotal=len(REQUIRED)+len(rubric),AssessmentInputCount=0,
            CombinedRiskScore=None,CombinedRiskCandidates=None,FinancialRiskScore=None,AnchorCandidates=None)
-    from scripts.financial_evidence import SCOPE_NOTE
+    from scripts.financial_evidence import SCOPE_NOTE, insurance_reporting_subtype
     r['ScopeNote']=SCOPE_NOTE
     r['Audit']='Ma trận 01, 02, 16, 17 và giới hạn phương pháp 20.01.2025. Các đánh giá định tính, dự báo và quy tắc chưa lượng hóa cần bằng chứng thẩm định; chưa phải xếp hạng được phê duyệt.'
     from scripts.universal_data import get_company
     meta=get_company(ticker)
     r['InsuranceSubtype']=meta.get('InsuranceSubtype')
+    r['InsuranceReportingSubtype']=insurance_reporting_subtype(meta)
     r['RatingBlocker']='INPUTS'
     # Ngoài phạm vi không phải 65 đánh giá còn trống. Giữ nguyên dữ liệu phân tích,
     # nhưng không mở phiếu/ma trận phi nhân thọ cho báo cáo tập đoàn hoặc tái BH.
-    if r['InsuranceSubtype'] in ['GROUP','LIFE','REINSURANCE']:
+    if r['InsuranceReportingSubtype'] in ['GROUP','LIFE','REINSURANCE']:
         r.update(RatingStatus='NOT_APPLICABLE',RatingBlocker='SCOPE',
                  AssessmentInputTotal=0,AssessmentInputCount=0,SubfactorEvidence=[])
         r['ApplicabilityReason']=(str(meta.get('InsuranceScope'))+'. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. '

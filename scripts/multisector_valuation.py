@@ -43,7 +43,7 @@ def latest_market_price(ticker, snapshot=None):
     return _normalize_price(s.get('Price')) or _normalize_price(s.get('Close'))
 
 def valuation(ticker,s):
-    from scripts.financial_evidence import metric_evidence
+    from scripts.financial_evidence import metric_evidence, insurance_reporting_subtype
     meta=get_company(ticker);typ=meta.get('EntityType');p=peer_snapshot(ticker)
     price=latest_market_price(ticker,s);eps=num(s.get('EPS'));bvps=num(s.get('BVPS'))
     target_period=s.get('SnapshotPeriod')
@@ -59,7 +59,7 @@ def valuation(ticker,s):
          'EPSBasis':s.get('EPS_Basis'),'BVPSBasis':s.get('BVPS_Basis'),
          'PeerPBCount':npb,'PeerPECount':npe,'FairValue':None,'Status':'MISSING'}
     if typ=='INSURANCE':
-        subtype=meta.get('InsuranceSubtype')
+        subtype=insurance_reporting_subtype(meta)
         pbv=peer_pb*bvps if subtype=='NONLIFE' and peer_pb and bvps is not None and bvps>0 else None
         pev=peer_pe*eps if subtype=='NONLIFE' and peer_pe and eps is not None and eps>0 else None
         out.update(PrimaryMethod='P/B peer phi nhân thọ cùng kỳ; P/E đối chiếu',CurrentMultiple=num(s.get('PB')),

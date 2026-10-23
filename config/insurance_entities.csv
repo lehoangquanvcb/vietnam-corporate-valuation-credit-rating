@@ -1,13 +1,13 @@
-﻿Ticker,InsuranceSubtype,InsuranceScope,InsuranceSource,CheckedOn,InsuranceName
-ABI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Ngân hàng Nông nghiệp
-BIC,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm BIDV
-BLI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Bảo Long
-BMI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo Minh
-PGI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Petrolimex
-PTI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Bưu điện
-AIC,NONLIFE,Phi nhân thọ trực tiếp; DBV (trước đây VNI),https://dbvi.com.vn/tap-doan-bao-hiem-dbv-to-chuc-dai-hoi-dong-co-dong-thuong-nien-2026.html,2026-10-19,Tập đoàn Bảo hiểm DBV
-MIG,NONLIFE,Phi nhân thọ trực tiếp,https://e.mic.vn/,2026-10-19,Bảo hiểm Quân đội
-PRE,REINSURANCE,Tái bảo hiểm Hanoi Re,https://www.hanoire.com/vi,2026-10-19,Tái bảo hiểm Hà Nội
-VNR,REINSURANCE,Tái bảo hiểm VINARE,https://vinare.com.vn/wp-content/uploads/2026/05/20260518-VNR-SR2025-VN-web.pdf,2026-10-19,Tái bảo hiểm Quốc gia Việt Nam
-PVI,GROUP,PVI Holdings; không đồng nhất Tổng công ty Bảo hiểm PVI,https://online.pvi.com.vn/tin-tuc-su-kien/tong-cong-ty-bao-hiem-pvi,2026-10-19,PVI Holdings
-BVH,GROUP,Tập đoàn hỗn hợp bảo hiểm/đầu tư,https://www.baoviet.com.vn/vi/tap-doan-bao-viet-1,2026-10-19,Tập đoàn Bảo Việt
+﻿Ticker,InsuranceSubtype,InsuranceScope,InsuranceSource,CheckedOn,InsuranceName,InsuranceReportingSubtype,InsurancePeerNote
+ABI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Ngân hàng Nông nghiệp,NONLIFE,
+BIC,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm BIDV,NONLIFE,
+BLI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Bảo Long,NONLIFE,
+BMI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo Minh,NONLIFE,
+PGI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Petrolimex,NONLIFE,
+PTI,NONLIFE,Phi nhân thọ trực tiếp,https://mof.gov.vn/ebtc/list-of-foreign-enterprises-branches-and-foreign-representative-offices/mofucm205191,2026-10-19,Bảo hiểm Bưu điện,NONLIFE,
+AIC,NONLIFE,Phi nhân thọ trực tiếp; DBV (trước đây VNI),https://dbvi.com.vn/tap-doan-bao-hiem-dbv-to-chuc-dai-hoi-dong-co-dong-thuong-nien-2026.html,2026-10-19,Tập đoàn Bảo hiểm DBV,NONLIFE,
+MIG,NONLIFE,Phi nhân thọ trực tiếp,https://e.mic.vn/,2026-10-19,Bảo hiểm Quân đội,NONLIFE,
+PRE,REINSURANCE,Tái bảo hiểm Hanoi Re,https://www.hanoire.com/vi,2026-10-19,Tái bảo hiểm Hà Nội,REINSURANCE,
+VNR,REINSURANCE,Tái bảo hiểm VINARE,https://vinare.com.vn/wp-content/uploads/2026/05/20260518-VNR-SR2025-VN-web.pdf,2026-10-19,Tái bảo hiểm Quốc gia Việt Nam,REINSURANCE,
+PVI,NONLIFE,PVI Holdings; không đồng nhất Tổng công ty Bảo hiểm PVI,https://pviholdings.com.vn/vi/pvi-present,2026-10-19,PVI Holdings,GROUP,Nhóm so sánh Phi nhân thọ theo cấu hình người dùng ngày 2026-10-23; giữ nguyên phạm vi BCTC hợp nhất.
+BVH,NONLIFE,Tập đoàn hỗn hợp bảo hiểm/đầu tư,https://www.baoviet.com.vn/vi/tap-doan-bao-viet-1,2026-10-19,Tập đoàn Bảo Việt,GROUP,Nhóm so sánh Phi nhân thọ theo cấu hình người dùng ngày 2026-10-23; giữ nguyên phạm vi BCTC hợp nhất.

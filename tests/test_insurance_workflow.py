@@ -151,7 +151,8 @@ class InsuranceData(unittest.TestCase):
     def test_sector_mean_and_specialist_small_group(self):
         self.assertIsNotNone(metric_pair('BVH','TotalAssets')['PeerMean'])
         self.assertEqual(metric_pair('ABI','TotalAssets')['PeerCount'],11)
-        self.assertIsNone(metric_pair('BVH','InsuranceReserves')['PeerMean'])
+        self.assertIsNotNone(metric_pair('BVH','InsuranceReserves')['PeerMean'])
+        self.assertEqual(metric_pair('BVH','InsuranceReserves')['PeerCount'],9)
     def test_group_underwriting_not_applied(self):
         self.assertEqual(at_period('BVH','INSURANCE','2026-Q2','QUARTER')['CombinedRatio']['Status'],'NOT_APPLICABLE')
     def test_manual_liquidity_haircuts(self):

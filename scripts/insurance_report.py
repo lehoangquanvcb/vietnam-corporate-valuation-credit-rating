@@ -15,7 +15,7 @@ from scripts.insurance_peers import included_rows, POLICY_NOTE, SUBTYPE_LABELS
 from scripts.insurance_rating import insurance_rating, insurance_scorecard, rating_status_text, rating_value_text
 from scripts.insurance_presentation import quantitative_coverage, executive_findings, has_evidence, pending_assessment_groups,format_metric as fmt,data_gap_explanation
 from scripts.financial_views import BASIS_LABELS
-from scripts.financial_evidence import STATUS
+from scripts.financial_evidence import STATUS, insurance_reporting_subtype
 from scripts.methodology_kpi_engine import PCT, MULT
 from scripts.universal_data import get_company
 
@@ -39,7 +39,7 @@ def pair_image(pair):
     unit='%' if m in PCT else 'lần' if m in MULT else 'tỷ đồng'
     h,p=pair['History'],pair['Peers']
     with plt.rc_context({'font.family':font,'font.size':9}):
-        fig,axes=plt.subplots(1,2,figsize=(6.9,1.55),dpi=190)
+        fig,axes=plt.subplots(1,2,figsize=(6.9,1.4),dpi=190)
         a,b=axes
         if len(h) and h.Value.notna().any():
             vals=pd.to_numeric(h.Value,errors='coerce').where(h.Status.eq('OK'))*scale
@@ -69,7 +69,7 @@ def pair_image(pair):
 
 def _para(doc,text,size=10.5,label=None,keep=False):
     p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    p.paragraph_format.space_after=Pt(4);p.paragraph_format.line_spacing=1.05
+    p.paragraph_format.space_after=Pt(3);p.paragraph_format.line_spacing=1.05
     p.paragraph_format.widow_control=True;p.paragraph_format.keep_with_next=keep
     if label:
         r=p.add_run(label+' ');r.bold=True;r.font.size=Pt(size)
@@ -88,7 +88,7 @@ def _table(doc,headers,rows,widths):
         tr=row._tr.get_or_add_trPr();tr.append(OxmlElement('w:cantSplit'))
         if i==0:tr.append(OxmlElement('w:tblHeader'))
         for j,(c,w) in enumerate(zip(row.cells,widths)):
-            c.width=Mm(w);_set_cell_margins(c,top=45,start=65,bottom=45,end=65)
+            c.width=Mm(w);_set_cell_margins(c,top=30,start=65,bottom=30,end=65)
             _set_cell_shading(c,'E6F3D8' if i==0 else 'F6F8F3' if i%2==0 else 'FFFFFF')
             for p in c.paragraphs:
                 p.paragraph_format.space_after=Pt(1);p.paragraph_format.line_spacing=1.0
@@ -149,10 +149,10 @@ def _context(doc,ticker,meta,pack,basis,years):
     if profile:
         _para(doc,profile_overview_text(ticker));_para(doc,profile_source_text(ticker),9)
     else:
-        _para(doc,str(meta.get('DisplayName',ticker))+' ('+ticker+') được phân loại trong nhóm bảo hiểm, mô hình '+str(meta.get('InsuranceScope','chưa xác nhận'))+'. Phạm vi này quyết định nhóm so sánh và khả năng áp dụng phương pháp xếp hạng.')
+        _para(doc,str(meta.get('DisplayName',ticker))+' ('+ticker+') thuộc nhóm so sánh '+SUBTYPE_LABELS.get(meta.get('InsuranceSubtype'),'chưa xác nhận')+'. Phạm vi số liệu: '+str(meta.get('InsuranceScope','chưa xác nhận'))+'.')
         _para(doc,'Nguồn phân loại trong hồ sơ: '+str(meta.get('InsuranceSource','chưa có'))+'.',9)
-    if meta.get('InsuranceSubtype')=='GROUP':
-        _para(doc,'Báo cáo sử dụng dữ liệu cấp tập đoàn. So sánh với tập đoàn bảo hiểm khác cần xét sự khác biệt cơ cấu nhân thọ, phi nhân thọ và đầu tư; không xem các tập đoàn là hai doanh nghiệp phi nhân thọ đồng nhất.')
+    if insurance_reporting_subtype(meta)=='GROUP':
+        _para(doc,'BVH và PVI được xếp vào nhóm so sánh Phi nhân thọ theo cấu hình phân tích. Báo cáo vẫn sử dụng số liệu hợp nhất; cơ cấu nhân thọ, phi nhân thọ, tái bảo hiểm và đầu tư có thể khác nhau. Đối chiếu mang tính tham khảo, không thay số liệu riêng của pháp nhân phi nhân thọ để chấm XHTN.')
     for title,kind,fallback in [
         ('RỦI RO VĨ MÔ','MACRO','Lãi suất tác động đến thu nhập tái đầu tư và giá trị danh mục; lạm phát chi phí có thể làm tăng mức bồi thường. Khi thẩm định cần đối chiếu thời hạn tài sản với nghĩa vụ bảo hiểm, độ nhạy lợi nhuận và vốn trong kịch bản bất lợi.'),
         ('RỦI RO NGÀNH','INDUSTRY','Cạnh tranh phí, biến động tổn thất và điều kiện tái bảo hiểm ảnh hưởng kết quả khai thác. Tăng doanh thu cần được đọc cùng bồi thường, chi phí, dự phòng và chất lượng đối tác tái bảo hiểm; quy mô lớn chưa đủ kết luận rủi ro thấp.')]:
@@ -287,7 +287,7 @@ def generate_insurance_docx(ticker,report_type='analysis',rating_result=None,opt
     doc.add_page_break();_qualitative(doc,rr)
     doc.add_page_break();_appendix(doc,pack,rr)
     sec=doc.sections[0];footer=sec.footer.paragraphs[0];footer.clear();footer.alignment=WD_ALIGN_PARAGRAPH.RIGHT
-    r=footer.add_run(ticker+' | Lê Hoàng Quân | V8.121.0 | '+date.today().strftime('%d/%m/%Y')+' | Trang ');r.font.name='Lato';r.font.size=Pt(8)
+    r=footer.add_run(ticker+' | Lê Hoàng Quân | V8.122.0 | '+date.today().strftime('%d/%m/%Y')+' | Trang ');r.font.name='Lato';r.font.size=Pt(8)
     field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');footer._p.append(field)
     for scope in [doc.element,doc.styles.element]:
         for el in list(scope.iter(qn('w:pBdr'))):el.getparent().remove(el)

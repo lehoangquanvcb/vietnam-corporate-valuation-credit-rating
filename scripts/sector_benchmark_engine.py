@@ -25,13 +25,8 @@ def sector_universe_tickers(ticker):
 
 def industry_tickers(ticker):
     """Compatibility name: benchmarks now use a dynamic similarity peer group."""
-    try:
-        from scripts.dynamic_peer_engine import dynamic_peer_tickers
-        p=dynamic_peer_tickers(ticker,include_target=True)
-        if len(p)>1:return p
-    except Exception:
-        pass
-    return sector_universe_tickers(ticker)
+    from scripts.dynamic_peer_engine import dynamic_peer_tickers
+    return dynamic_peer_tickers(ticker,include_target=True)
 
 def industry_label(ticker):
     try:

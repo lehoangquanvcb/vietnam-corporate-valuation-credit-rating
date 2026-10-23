@@ -1,129 +1,171 @@
-
-from vnstock_env import load_vnstock_env
-load_vnstock_env()
-
+"""Danh mục ICB dùng chung; đọc đúng schema long/wide của Vnstock Reference."""
+from __future__ import annotations
 from pathlib import Path
-import re, unicodedata
+import re
+import sys
+import unicodedata
 import pandas as pd
-ROOT=Path(__file__).resolve().parents[1]; CFG=ROOT/'config'; DATA=ROOT/'data'
 
-def _norm(s):
-    s=unicodedata.normalize('NFKD',str(s)).encode('ascii','ignore').decode().lower()
-    return re.sub(r'[^a-z0-9]+',' ',s).strip()
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+CFG = ROOT / 'config'
+ICB_COLUMNS = [f'ICB{kind}{lv}' for lv in range(1, 5) for kind in ('Code', 'Name')]
 
-def _first(df,names):
-    low={_norm(c):c for c in df.columns}
-    for n in names:
-        if _norm(n) in low:return low[_norm(n)]
-    for c in df.columns:
-        nc=_norm(c)
-        if any(_norm(n) in nc or nc in _norm(n) for n in names):return c
-    return None
 
-def _reference():
-    try:
-        from vnstock_data import Reference
-        return Reference()
-    except Exception:
-        return None
+def _norm(value):
+    s = unicodedata.normalize('NFKD', str(value).replace('đ', 'd').replace('Đ', 'D'))
+    return re.sub(r'[^a-z0-9]+', '', s.encode('ascii', 'ignore').decode().lower())
 
-def _listing():
-    # Legacy compatibility only. Current vnstock_data v3 uses Reference.
-    try:
-        from vnstock_data import Listing
-        for make in [lambda:Listing(source='VCI'),lambda:Listing(),lambda:Listing(source='KBS')]:
-            try:return make()
-            except Exception:pass
-    except Exception:
-        pass
-    try:
-        from vnstock import Listing
-        for make in [lambda:Listing(source='VCI'),lambda:Listing(),lambda:Listing(source='KBS')]:
-            try:return make()
-            except Exception:pass
-    except Exception:
-        pass
-    return None
+
+def _first(df, names):
+    # Không dùng substring: icb_code KHÔNG phải icb_code1/2/3/4.
+    columns = {_norm(c): c for c in df.columns}
+    return next((columns[_norm(n)] for n in names if _norm(n) in columns), None)
+
+
+def clean(value):
+    return '' if pd.isna(value) or str(value).strip().lower() in ('', 'nan', 'none', '<na>') else str(value).strip()
+
+
+def code(value):
+    return re.sub(r'\.0$', '', clean(value))
+
+
+def normalize_industry_frames(frames, taxonomy=None):
+    """Gộp theo ticker + cấp ICB, không làm mất các cấp khi nguồn có nhiều dòng/mã."""
+    records = {}
+    for df in frames:
+        df = pd.DataFrame(df)
+        tc = _first(df, ['Ticker', 'symbol'])
+        if tc is None:
+            continue
+        lc, cc, nc = (_first(df, [x]) for x in ('icb_level', 'icb_code', 'icb_name'))
+        wide = {(lv, kind): _first(df, [f'ICB{kind}{lv}', f'icb_{kind}_lv{lv}', f'icb_{kind}_{lv}', f'industry_{kind}_{lv}'])
+                for lv in range(1, 5) for kind in ('Code', 'Name')}
+        seen = {}
+        for row in df.to_dict('records'):
+            ticker = clean(row.get(tc)).upper()
+            if not ticker:
+                continue
+            rec = records.setdefault(ticker, {'Ticker': ticker})
+            values = {}
+            if lc and cc:
+                level = pd.to_numeric(row.get(lc), errors='coerce')
+                if pd.notna(level) and level in (1, 2, 3, 4):
+                    values[f'ICBCode{int(level)}'] = code(row.get(cc))
+                    values[f'ICBName{int(level)}'] = clean(row.get(nc)) if nc else ''
+            for (lv, kind), column in wide.items():
+                if column:
+                    values[f'ICB{kind}{lv}'] = code(row.get(column)) if kind == 'Code' else clean(row.get(column))
+            for field, value in values.items():
+                if not value:
+                    continue
+                key = (ticker, field)
+                if field.startswith('ICBCode') and key in seen and seen[key] != value:
+                    raise ValueError(f'ICB mâu thuẫn: {ticker} {field}: {seen[key]} / {value}')
+                seen[key] = value
+                # Nguồn chính đứng trước; nguồn bổ sung chỉ điền cấp còn thiếu.
+                if not rec.get(field):
+                    rec[field] = value
+    out = pd.DataFrame(records.values()).reindex(columns=['Ticker', *ICB_COLUMNS]).fillna('')
+    tax = pd.DataFrame(taxonomy) if taxonomy is not None else pd.DataFrame()
+    if not tax.empty:
+        cc, nc, lc = (_first(tax, [x]) for x in ('icb_code', 'icb_name', 'icb_level'))
+        if cc and nc and lc:
+            lookup = {(int(r[lc]), code(r[cc])): clean(r[nc]) for r in tax.to_dict('records')
+                      if pd.to_numeric(r[lc], errors='coerce') in (1, 2, 3, 4)}
+            for idx, row in out.iterrows():
+                for lv in range(4, 0, -1):
+                    current = code(out.at[idx, f'ICBCode{lv}'])
+                    if not current:
+                        continue
+                    if not out.at[idx, f'ICBName{lv}']:
+                        out.at[idx, f'ICBName{lv}'] = lookup.get((lv, current), '')
+                    # Chỉ bổ sung tổ tiên ICB 4 chữ số có thật trong danh mục nguồn.
+                    if re.fullmatch(r'\d{4}', current):
+                        for parent in range(1, lv):
+                            parent_code = current[:parent] + '0' * (4-parent)
+                            if (parent, parent_code) in lookup and not out.at[idx, f'ICBCode{parent}']:
+                                out.at[idx, f'ICBCode{parent}'] = parent_code
+                                out.at[idx, f'ICBName{parent}'] = lookup[(parent, parent_code)]
+    if out.empty or not out[[f'ICBCode{i}' for i in range(1, 5)]].ne('').any().any():
+        raise ValueError('Nguồn Vnstock không có mã ICB theo cấp; giữ nguyên danh mục cũ.')
+    return out.sort_values('Ticker').reset_index(drop=True)
+
+
+def atomic_csv(frame, path):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp = path.with_suffix(path.suffix + '.tmp')
+    frame.to_csv(temp, index=False, encoding='utf-8-sig')
+    temp.replace(path)
+
 
 def fetch_industry_map():
-    frames=[]
-    ref=_reference()
-    if ref is not None:
-        for call in [lambda:ref.equity.list(),lambda:ref.industry.sectors(lang='vi'),lambda:ref.industry.sectors()]:
-            try:
-                z=pd.DataFrame(call())
-                if len(z):frames.append(z)
-            except Exception:pass
-    lst=_listing()
-    if lst is not None:
-        for method in ['symbols_by_industries','all_symbols_with_industry']:
-            try:
-                z=pd.DataFrame(getattr(lst,method)())
-                if len(z):frames.append(z)
-            except Exception:pass
-    if not frames:raise RuntimeError('Không lấy được dữ liệu ngành từ Vnstock Reference/Listing.')
-    # choose richest frame with ticker and industry information
-    frames=sorted(frames,key=lambda x:(len(x.columns),len(x)),reverse=True)
-    for df in frames:
-        tc=_first(df,['symbol','ticker','code'])
-        if tc is None:continue
-        out=[]
-        for _,r in df.iterrows():
-            t=str(r.get(tc,'')).upper().strip()
-            if not t or t in ('NAN','NONE'):continue
-            rec={'Ticker':t}
-            # Capture ICB levels robustly across vnstock/vnstock_data schema versions.
-            for lv in [1,2,3,4]:
-                cc=_first(df,[f'icb_code{lv}',f'icb_code_{lv}',f'icb code {lv}',f'icbcode{lv}'])
-                nc=_first(df,[f'icb_name{lv}',f'icb_name_{lv}',f'icb name {lv}',f'industry_name{lv}',f'industry{lv}',f'sector_lv{lv}'])
-                rec[f'ICBCode{lv}']=r.get(cc) if cc else None
-                rec[f'ICBName{lv}']=r.get(nc) if nc else None
-            # Common fields seen in Vnstock insights/reference.
-            if not rec.get('ICBCode2'):
-                c=_first(df,['icb_code2']); rec['ICBCode2']=r.get(c) if c else None
-            if not rec.get('ICBName2'):
-                c=_first(df,['vi_sector','industry','industry_name','sector']); rec['ICBName2']=r.get(c) if c else None
-            out.append(rec)
-        z=pd.DataFrame(out).drop_duplicates('Ticker')
-        if len(z):
-            z.to_csv(CFG/'vnstock_industry_map.csv',index=False,encoding='utf-8-sig')
-            return z
-    raise RuntimeError('Dữ liệu ngành Vnstock không có cột ticker phù hợp.')
+    from scripts.vnstock_env import load_vnstock_env
+    load_vnstock_env()
+    from vnstock_data import Reference
+    ref = Reference()
+    # Hai lệnh cho toàn thị trường, không gọi company(ticker) trong báo cáo.
+    sectors = pd.DataFrame(ref.industry.sectors(lang='vi'))
+    taxonomy = pd.DataFrame(ref.industry.list(lang='vi'))
+    listing = pd.read_csv(CFG/'vnstock_listing_full.csv', dtype=str) if (CFG/'vnstock_listing_full.csv').exists() else pd.DataFrame()
+    result = normalize_industry_frames([sectors, listing], taxonomy)
+    atomic_csv(sectors, CFG/'vnstock_industry_source.csv')
+    atomic_csv(taxonomy, CFG/'vnstock_icb_taxonomy.csv')
+    atomic_csv(result, CFG/'vnstock_industry_map.csv')
+    return result
 
-def _entity_and_method(name1,name2,company=''):
-    s=' '.join(map(str,[name1,name2,company])); n=_norm(s)
-    if 'ngan hang' in n or re.search(r'\bbank\b',n):return 'BANK','BANK_2026'
-    if 'chung khoan' in n or 'securities' in n or 'brokerage' in n:return 'SECURITIES','SECURITIES_2025'
-    if 'hang khong' in n or 'airline' in n:return 'CORPORATE','EXCLUDED_SPECIALIZED'
-    return 'CORPORATE','CORPORATE_2025'
 
-def _best_sector(r):
-    # ICB cấp 2 is the default benchmark level: specific enough for economics, broad enough for peer counts.
-    for c in ['ICBName2','ICBName3','ICBName1','ICBName4']:
-        v=r.get(c)
-        if pd.notna(v) and str(v).strip() not in ('','nan','None'):return str(v).strip(),c
-    return 'Chưa phân loại','NONE'
+def _entity_and_method(*names):
+    # Ngành chi tiết thắng tên công ty: công ty chứng khoán có chữ "Ngân hàng"
+    # trong tên pháp lý vẫn phải đi theo phương pháp Securities.
+    ordered = [*reversed(names[:-1]), names[-1]] if names else []
+    for value in ordered:
+        n = _norm(clean(value))
+        if 'baohiem' in n or 'insurance' in n:
+            return 'INSURANCE', 'INSURANCE_2025'
+        if 'chungkhoan' in n or 'securities' in n or 'brokerage' in n:
+            return 'SECURITIES', 'SECURITIES_2025'
+        if 'nganhang' in n or 'bank' in n:
+            return 'BANK', 'BANK_2026'
+        if 'hangkhong' in n or 'airline' in n:
+            return 'CORPORATE', 'EXCLUDED_SPECIALIZED'
+    return 'CORPORATE', 'CORPORATE_2025'
+
 
 def apply_industry_classification(industry_map=None):
-    u=pd.read_csv(CFG/'company_universe.csv');u['Ticker']=u.Ticker.astype(str).str.upper().str.strip()
-    im=industry_map if industry_map is not None else fetch_industry_map(); im['Ticker']=im.Ticker.astype(str).str.upper().str.strip()
-    # Drop stale auto-classification columns before merge.
-    for c in ['ICBCode1','ICBName1','ICBCode2','ICBName2','ICBCode3','ICBName3','ICBCode4','ICBName4']:
-        if c in u.columns:u=u.drop(columns=[c])
-    u=u.merge(im,on='Ticker',how='left')
-    sectors=[]; levels=[]; etypes=[]; methods=[]; groups=[]
-    for _,r in u.iterrows():
-        sec,lv=_best_sector(r); et,method=_entity_and_method(r.get('ICBName1'),sec,r.get('CompanyName'))
-        # Banks are intentionally one benchmark universe: all listed/registered-trading banks in the master.
-        if et=='BANK': sec='Ngân hàng'; group='20 ngân hàng niêm yết/ĐKGD' if len(u[u.get('EntityType','').astype(str).eq('BANK')])==20 else 'Ngân hàng niêm yết/ĐKGD'
-        elif et=='SECURITIES': sec='Công ty chứng khoán'; group='Công ty chứng khoán niêm yết/ĐKGD'
-        else: group=sec
-        sectors.append(sec);levels.append(lv);etypes.append(et);methods.append(method);groups.append(group)
-    u['Sector']=sectors;u['IndustryLevelUsed']=levels;u['EntityType']=etypes;u['Methodology']=methods;u['PeerGroup']=groups;u['IndustrySource']='VNSTOCK_ICB_AUTO'
-    u.to_csv(CFG/'company_universe.csv',index=False,encoding='utf-8-sig')
-    audit=u.groupby(['EntityType','Sector'],dropna=False).size().reset_index(name='Companies').sort_values(['EntityType','Companies'],ascending=[True,False])
-    audit.to_csv(CFG/'industry_classification_audit.csv',index=False,encoding='utf-8-sig')
-    print(f'OK - auto-classified {len(u)} companies using Vnstock ICB.');print(audit.head(40).to_string(index=False))
+    u = pd.read_csv(CFG/'company_universe.csv', dtype=str).fillna('')
+    u['Ticker'] = u.Ticker.str.upper().str.strip()
+    im = (industry_map.copy() if industry_map is not None else fetch_industry_map()).fillna('')
+    im['Ticker'] = im.Ticker.astype(str).str.upper().str.strip()
+    im = im.drop_duplicates('Ticker').set_index('Ticker')
+    for c in ICB_COLUMNS + ['IndustryLevelUsed', 'IndustrySource']:
+        if c not in u:
+            u[c] = ''
+    for idx, row in u.iterrows():
+        t = row.Ticker
+        if t not in im.index or not any(clean(im.loc[t].get(f'ICBCode{lv}')) for lv in range(1, 5)):
+            continue  # Nguồn thiếu mã không được xóa metadata đã có.
+        incoming = im.loc[t]
+        for c in ICB_COLUMNS:
+            u.at[idx, c] = clean(incoming.get(c))
+        level = next(lv for lv in (4, 3, 2, 1) if clean(incoming.get(f'ICBCode{lv}')))
+        sec = clean(incoming.get(f'ICBName{level}')) or f'ICB {incoming[f"ICBCode{level}"]}'
+        et, method = _entity_and_method(*(incoming.get(f'ICBName{lv}') for lv in range(1, 5)), row.get('CompanyName'))
+        u.loc[idx, ['Sector', 'EntityType', 'Methodology', 'PeerGroup', 'IndustryLevelUsed', 'IndustrySource']] = [sec, et, method, sec, f'ICBCode{level}', 'VNSTOCK_ICB_AUTO_V8.123']
+    registry_path = CFG/'insurance_entities.csv'
+    if registry_path.exists():
+        registry = pd.read_csv(registry_path)
+        mask = u.Ticker.isin(registry.Ticker.astype(str).str.upper())
+        u.loc[mask, ['EntityType', 'Methodology', 'Sector', 'PeerGroup']] = ['INSURANCE', 'INSURANCE_2025', 'Bảo hiểm', 'Bảo hiểm']
+    atomic_csv(u, CFG/'company_universe.csv')
+    audit = u.groupby(['EntityType', 'Sector'], dropna=False).size().reset_index(name='Companies')
+    atomic_csv(audit, CFG/'industry_classification_audit.csv')
+    print(f'OK - cập nhật ICB dùng chung cho {len(u)} mã; giữ metadata cũ khi nguồn thiếu mã.')
     return u
 
-if __name__=='__main__':apply_industry_classification()
+
+if __name__ == '__main__':
+    apply_industry_classification()

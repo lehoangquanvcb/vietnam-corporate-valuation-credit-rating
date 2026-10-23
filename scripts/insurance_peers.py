@@ -1,10 +1,10 @@
 """Phạm vi so sánh ngành cho báo cáo; tách khỏi peer dùng để định giá/XHTN."""
 import pandas as pd
 from scripts.universal_data import get_company, universe
-from scripts.financial_evidence import at_period, latest_period, comparable_model, _record
+from scripts.financial_evidence import at_period, latest_period, comparable_model, insurance_reporting_subtype, _record
 
 # Chỉ tiêu kế toán chung có thể đối chiếu quy mô/tỷ số giữa các loại hình.
-# Các chỉ tiêu nghiệp vụ/pháp định còn lại cần cùng loại hình bảo hiểm.
+# Các chỉ tiêu nghiệp vụ còn lại dùng nhóm so sánh cấu hình trong registry.
 SECTOR_METRICS = frozenset({
     'Revenue', 'TotalAssets', 'NPAT', 'ROE', 'ROA', 'NetMargin',
     'Equity', 'EquityAssets', 'PaidInCapital', 'InvestmentIncome',
@@ -13,8 +13,21 @@ SECTOR_METRICS = frozenset({
 SUBTYPE_LABELS = {'NONLIFE':'Phi nhân thọ', 'LIFE':'Nhân thọ',
                   'REINSURANCE':'Tái bảo hiểm', 'GROUP':'Tập đoàn bảo hiểm'}
 POLICY_NOTE = ('Chỉ tiêu tài chính chung đối chiếu toàn bộ nhóm bảo hiểm trong danh mục; '
-               'chỉ tiêu nghiệp vụ/pháp định chỉ so sánh cùng loại hình. '
-               'Bình quân mẫu không đại diện toàn thị trường và không dùng trực tiếp để chấm XHTN hoặc định giá.')
+               'chỉ tiêu nghiệp vụ dùng nhóm so sánh đã cấu hình. BVH và PVI thuộc nhóm Phi nhân thọ. '
+               'Số liệu hợp nhất của hai mã được giữ nguyên phạm vi; bình quân mẫu chỉ để tham khảo, không dùng trực tiếp để chấm XHTN hoặc định giá.')
+
+
+def same_peer_group(target,peer):
+    a=str(target.get('InsuranceSubtype','')).strip().upper()
+    b=str(peer.get('InsuranceSubtype','')).strip().upper()
+    return (target.get('EntityType')==peer.get('EntityType')=='INSURANCE'
+            and a in SUBTYPE_LABELS and a==b)
+
+
+def configured_peer_universe(ticker):
+    meta=get_company(ticker)
+    companies={r['Ticker']:r for r in universe().to_dict('records')}
+    return [t for t in peer_universe(ticker) if same_peer_group(meta,companies[t])]
 
 
 def peer_universe(ticker, same_model=False):
@@ -33,7 +46,7 @@ def peer_universe(ticker, same_model=False):
 
 
 def scope_label(metric):
-    return 'Nhóm tham chiếu bảo hiểm' if metric in SECTOR_METRICS else 'Bảo hiểm cùng loại hình'
+    return 'Toàn nhóm bảo hiểm' if metric in SECTOR_METRICS else 'Nhóm so sánh bảo hiểm đã cấu hình'
 
 
 def quarter_peers(ticker,metric,target,peers=None):
@@ -50,9 +63,13 @@ def quarter_peers(ticker,metric,target,peers=None):
         company=companies.get(t,{})
         e=at_period(t,'INSURANCE',target,'QUARTER').get(metric,_record(metric,per=target)) if target else _record(metric)
         subtype=company.get('InsuranceSubtype','')
+        reporting_subtype=insurance_reporting_subtype(company)
         rows.append(dict(Ticker=t,Value=e['Value'],Status=e['Status'],Period=target,
                          Basis=e['Basis'],Source=e['Source'],Reason=e['Reason'],
                          InsuranceSubtype=subtype,Model=SUBTYPE_LABELS.get(subtype,'Chưa xác minh'),
+                         InsuranceReportingSubtype=reporting_subtype,
+                         ReportingScope=company.get('InsuranceScope','Chưa xác minh'),
+                         SamePeerGroup=same_peer_group(meta,company),
                          SameModel=comparable_model(meta,company)))
     own=rows[0]
     for r in rows:
@@ -61,8 +78,8 @@ def quarter_peers(ticker,metric,target,peers=None):
             reason='Không áp dụng' if r['Status']=='NOT_APPLICABLE' else 'Thiếu số hợp lệ đúng quý'
         elif own['Status']=='NOT_APPLICABLE':reason='Chỉ tiêu không áp dụng cho doanh nghiệp đang phân tích'
         elif r['Basis']!=own['Basis']:reason='Khác cơ sở tính'
-        elif r['Ticker']!=ticker and metric not in SECTOR_METRICS and not r['SameModel']:
-            reason='Khác loại hình đối với chỉ tiêu nghiệp vụ'
+        elif r['Ticker']!=ticker and metric not in SECTOR_METRICS and not r['SamePeerGroup']:
+            reason='Khác nhóm so sánh đối với chỉ tiêu nghiệp vụ'
         r['Included']=not reason
         r['ExclusionReason']=reason
     return pd.DataFrame(rows)

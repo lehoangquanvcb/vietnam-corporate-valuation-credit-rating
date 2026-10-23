@@ -134,7 +134,8 @@ def executive_findings(ticker,pack):
     if not good:good=['Chưa đủ bằng chứng để kết luận điểm mạnh tài chính; các chỉ tiêu có số được phân tích riêng ở phần nội dung.']
     cov=quantitative_coverage(ticker,pack)
     if 'SolvencyRatio' in cov['Missing']:risks.append('Thiếu biên khả năng thanh toán đúng kỳ; chưa kết luận mức an toàn vốn pháp định.')
-    if get_company(ticker).get('InsuranceSubtype')=='GROUP':risks.append('Nhóm tập đoàn có cơ cấu hoạt động khác nhau; đối chiếu peer chỉ có giá trị tham khảo tài chính.')
+    from scripts.financial_evidence import insurance_reporting_subtype
+    if insurance_reporting_subtype(get_company(ticker))=='GROUP':risks.append('Số liệu hợp nhất có cơ cấu hoạt động khác nhau; đối chiếu nhóm Phi nhân thọ chỉ có giá trị tham khảo tài chính.')
     return dict(Facts=facts,Strengths=good[:3],Risks=risks[:4])
 
 

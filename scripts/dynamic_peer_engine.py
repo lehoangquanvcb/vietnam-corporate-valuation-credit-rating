@@ -34,261 +34,315 @@ WEIGHTS = {
 }
 
 
-def _norm_ticker(x):
-    return str(x).upper().strip()
+# V8.123: một danh mục dùng chung, không prepare riêng cho từng doanh nghiệp.
+import hashlib
+import json
+from functools import lru_cache
+from threading import RLock
+from scripts.industry_classifier import clean, code, atomic_csv
+from scripts.financial_evidence import signature, metric_evidence, repair_snapshot
+
+ENGINE_VERSION = '8.123.0'
+OUTPUT_COLUMNS = ['TargetTicker','Ticker','PeerRank','SimilarityScore','DistanceScore',
+    'MetricsCoverage','PeerPool','SimilarityBasis','DataStatus','IndustryStatus',
+    'CompanyName','LegalName','Sector','EntityType']
 
 
-def _snapshot_for_type(entity_type: str) -> pd.DataFrame:
-    s = bank_snapshot() if str(entity_type).upper() == 'BANK' else generic_snapshot()
-    if s is None or s.empty or 'Ticker' not in s.columns:
-        return pd.DataFrame()
-    s = s.copy()
-    s['Ticker'] = s['Ticker'].map(_norm_ticker)
-    return s.drop_duplicates('Ticker', keep='last')
+def _norm_ticker(value):
+    return str(value).upper().strip()
 
 
-
-def _override_pool(ticker: str, u: pd.DataFrame):
-    """Optional analyst-maintained peer set.
-
-    Overrides are used before broad ICB/sector matching. They solve cases where the
-    provider's ICB hierarchy is too coarse (e.g. HPG classified only as Materials).
-    The target itself is appended so similarity can be calculated once peer data exist.
-    """
-    t=_norm_ticker(ticker)
-    try:
-        o=pd.read_csv(OVERRIDE_FILE)
-    except Exception:
-        return pd.DataFrame(), None
-    if o.empty or 'TargetTicker' not in o.columns or 'PeerTicker' not in o.columns:
-        return pd.DataFrame(), None
-    o=o.copy()
-    o['TargetTicker']=o['TargetTicker'].map(_norm_ticker)
-    o['PeerTicker']=o['PeerTicker'].map(_norm_ticker)
-    if 'Active' in o.columns:
-        o=o[pd.to_numeric(o['Active'],errors='coerce').fillna(1).eq(1)]
-    z=o[o['TargetTicker'].eq(t)].copy()
-    if z.empty:return pd.DataFrame(), None
-    if 'Priority' in z.columns:
-        z['_p']=pd.to_numeric(z['Priority'],errors='coerce').fillna(9999)
-        z=z.sort_values(['_p','PeerTicker'])
-    wanted=[t]+[x for x in z['PeerTicker'].tolist() if x!=t]
-    pool=u[u['Ticker'].isin(wanted)].copy()
-    # preserve analyst order instead of alphabetical/provider order
-    order={x:i for i,x in enumerate(wanted)}
-    pool['_override_order']=pool['Ticker'].map(order).fillna(9999)
-    pool=pool.sort_values('_override_order').drop(columns=['_override_order'])
-    return pool, 'Nhóm peer chuyên ngành (analyst override)'
-
-def _candidate_pool(ticker: str, u: pd.DataFrame) -> tuple[pd.DataFrame, str]:
-    t = _norm_ticker(ticker)
-    z = u[u.Ticker.eq(t)]
-    if z.empty:
-        return u[u.Ticker.eq(t)].copy(), 'Không xác định'
-    r = z.iloc[0]
-    et = str(r.get('EntityType','CORPORATE')).upper()
-    same_type = u[u.EntityType.astype(str).str.upper().eq(et)].copy()
-    if et == 'CORPORATE':
-        opool, olabel = _override_pool(t, same_type)
-        if len(opool) >= 2:
-            return opool, olabel
-    if et == 'BANK':
-        return same_type, 'Ngân hàng niêm yết/ĐKGD'
-    if et == 'INSURANCE':
-        subtype=str(r.get('InsuranceSubtype',''))
-        if subtype in ['NONLIFE','LIFE','REINSURANCE','GROUP'] and 'InsuranceSubtype' in same_type:
-            return same_type[same_type.InsuranceSubtype.eq(subtype)], 'Bảo hiểm cùng mô hình '+subtype
-        return same_type[same_type.Ticker.eq(t)], 'Chưa xác minh mô hình bảo hiểm'
-    if et == 'SECURITIES':
-        return same_type, 'Công ty chứng khoán niêm yết/ĐKGD'
-
-    # Corporate: prefer economically coherent ICB level 2; broaden only if too few.
-    for col, label in [('ICBCode2','ICB cấp 2'), ('Sector','ngành'), ('ICBCode1','ICB cấp 1')]:
-        val = r.get(col)
-        if pd.isna(val) or str(val).strip() in ('','nan','None') or col not in same_type.columns:
-            continue
-        p = same_type[same_type[col].astype(str).eq(str(val))].copy()
-        if len(p) >= MIN_PEERS + 1:
-            return p, f'{label}: {r.get("Sector", val)}'
-    return same_type, 'Doanh nghiệp phi tài chính (mở rộng do ngành ít peer)'
-
-
-def _pct_rank_distance(series: pd.Series, target_value: float, candidate_value: float, log_scale=False):
-    vals = pd.to_numeric(series, errors='coerce').replace([np.inf,-np.inf], np.nan).dropna()
-    if len(vals) < 3 or not np.isfinite(target_value) or not np.isfinite(candidate_value):
-        return None
-    if log_scale:
-        vals = np.log1p(np.maximum(vals.astype(float), 0))
-        target_value = math.log1p(max(float(target_value),0))
-        candidate_value = math.log1p(max(float(candidate_value),0))
-    # percentile positions are robust to outliers and scale differences.
-    arr = np.sort(vals.to_numpy(dtype=float))
-    tr = np.searchsorted(arr, target_value, side='right') / len(arr)
-    cr = np.searchsorted(arr, candidate_value, side='right') / len(arr)
-    return abs(tr-cr)
-
-
-def _select_dynamic_peers_uncached(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap_cache=None) -> pd.DataFrame:
-    t = _norm_ticker(ticker)
-    u = (_u.copy() if _u is not None else universe().copy())
+def _normalized_universe(frame):
+    u = frame.copy()
     if u.empty:
-        return pd.DataFrame()
+        return u
     u['Ticker'] = u.Ticker.map(_norm_ticker)
+    if 'Active' in u:
+        u = u[pd.to_numeric(u.Active, errors='coerce').fillna(1).eq(1)].copy()
+    u = u.drop_duplicates('Ticker', keep='last')
+    u['EntityType'] = u.EntityType.astype(str).str.upper()
+    for lv in range(1, 5):
+        col = f'ICBCode{lv}'
+        u[col] = u[col].map(code) if col in u else ''
+    # Nhận diện cache từ parser cũ gán một mã cho cả bốn cấp; không gọi là ICB4.
+    collapsed = u.ICBCode1.ne('') & u[[f'ICBCode{i}' for i in (2,3,4)]].eq(u.ICBCode1, axis=0).all(axis=1)
+    u['IndustryStatus'] = np.where(collapsed, 'LEGACY_ICB_REFRESH_REQUIRED', 'ICB_OR_SECTOR')
+    u.loc[collapsed, [f'ICBCode{i}' for i in range(1,5)]] = ''
+    return u
+
+
+def _overrides():
+    from scripts.universal_data import read_csv
+    o = read_csv(OVERRIDE_FILE)
+    if not {'TargetTicker','PeerTicker'}.issubset(o.columns):
+        return pd.DataFrame(columns=['TargetTicker','PeerTicker'])
+    o = o.copy()
+    for c in ['TargetTicker','PeerTicker']:
+        o[c] = o[c].map(_norm_ticker)
+    if 'Active' in o:
+        o = o[pd.to_numeric(o.Active, errors='coerce').fillna(1).eq(1)]
+    o['_priority'] = pd.to_numeric(o['Priority'], errors='coerce').fillna(9999) if 'Priority' in o else 9999
+    return o.sort_values(['_priority','PeerTicker']).drop_duplicates(['TargetTicker','PeerTicker'])
+
+
+def _override_pool(ticker, u, overrides=None):
+    o = _overrides() if overrides is None else overrides
+    wanted = [ticker] + o.loc[o.TargetTicker.eq(ticker),'PeerTicker'].tolist()
+    order = {t: i for i,t in enumerate(dict.fromkeys(wanted))}
+    pool = u[u.Ticker.isin(order)].copy()
+    if len(pool) < 2:
+        return pool.iloc[0:0], None
+    return pool.assign(_order=pool.Ticker.map(order)).sort_values('_order').drop(columns='_order'), 'Nhóm peer chuyên ngành (analyst override)'
+
+
+def _candidate_pool(ticker, u, overrides=None):
+    t = _norm_ticker(ticker)
+    u = _normalized_universe(u) if 'IndustryStatus' not in u else u
     z = u[u.Ticker.eq(t)]
     if z.empty:
-        return pd.DataFrame()
-    et = str(z.iloc[0].get('EntityType','CORPORATE')).upper()
-    pool, pool_label = _candidate_pool(t, u)
-    s = (_snap_cache.get(et, pd.DataFrame()) if _snap_cache is not None else _snapshot_for_type(et))
-    if s.empty:
-        return pd.DataFrame()
-    pool = pool.merge(s, on='Ticker', how='inner', suffixes=('','_snap'))
-    if pool.empty:
-        return pd.DataFrame()
-    if t not in set(pool.Ticker):
-        # Metadata-only fallback: still expose economically coherent peers, but do not
-        # pretend a quantitative similarity score exists. This is useful while a
-        # ticker's Bronze snapshot is missing/incomplete.
-        base=_candidate_pool(t,u)[0].copy()
-        base=base[~base.Ticker.eq(t)].head(max_peers).copy()
-        if base.empty:return pd.DataFrame()
-        out=pd.DataFrame({'TargetTicker':t,'Ticker':base.Ticker.astype(str).tolist()})
-        out['PeerRank']=np.arange(1,len(out)+1);out['SimilarityScore']=np.nan;out['DistanceScore']=np.nan;out['MetricsCoverage']=0.0
-        out['PeerPool']=pool_label;out['SimilarityBasis']='Cùng ngành/ICB; chờ dữ liệu tài chính để xếp hạng tương đồng'
-        names=u[['Ticker']+[c for c in ['CompanyName','LegalName','Sector','EntityType'] if c in u.columns]].drop_duplicates('Ticker')
-        return out.merge(names,on='Ticker',how='left')
-    # Xếp hạng tương đồng cũng dùng dữ liệu đã sửa, tránh nợ vay fuzzy trong snapshot cũ.
-    from scripts.universal_data import get_snapshot
-    from scripts.financial_evidence import metric_evidence
-    weights = WEIGHTS.get(et, WEIGHTS['CORPORATE'])
-    repaired={ct:get_snapshot(ct) for ct in pool.Ticker}
-    target_data=repaired[t]
-    for metric in weights:
-        te=metric_evidence(target_data,metric)
-        pool[metric]=pool.Ticker.map(lambda ct: repaired[ct].get(metric) if metric_evidence(repaired[ct],metric)['Period']==te['Period'] and metric_evidence(repaired[ct],metric)['Basis']==te['Basis'] else np.nan)
-    target = pool[pool.Ticker.eq(t)].iloc[-1]
-    rows=[]
-    for _, r in pool.iterrows():
-        ct = _norm_ticker(r.Ticker)
+        return z, 'Không tìm thấy mã trong danh mục đang hoạt động'
+    r = z.iloc[0]
+    same = u[u.EntityType.eq(r.EntityType)]
+    if r.EntityType == 'CORPORATE':
+        pool, label = _override_pool(t, same, overrides)
+        if label:
+            return pool, label
+    if r.EntityType == 'BANK':
+        return same, 'Ngân hàng niêm yết/ĐKGD'
+    if r.EntityType == 'SECURITIES':
+        return same, 'Công ty chứng khoán niêm yết/ĐKGD'
+    if r.EntityType == 'INSURANCE':
+        from scripts.financial_evidence import insurance_reporting_subtype, comparable_model
+        scope = insurance_reporting_subtype(r)
+        return same[same.apply(lambda p: comparable_model(r, p), axis=1)], 'Định giá bảo hiểm cùng phạm vi BCTC ' + scope
+    # Ngành nhỏ vẫn giữ; chỉ lùi cấp khi không có bất kỳ peer nào ở cấp chi tiết.
+    first = None
+    for lv in (4, 3, 2):
+        val = code(r.get(f'ICBCode{lv}'))
+        if not val:
+            continue
+        pool = same[same[f'ICBCode{lv}'].eq(val)]
+        label = f'ICB cấp {lv}: {clean(r.get(f"ICBName{lv}")) or val} ({val})'
+        if first is None:
+            first = (pool, label)
+        if len(pool) > 1:
+            return pool, label
+    if first is not None:
+        return first  # Không tự ghép toàn thị trường để đủ 5/10 peer.
+    sector = clean(r.get('Sector'))
+    if sector and sector.lower() not in {'chưa phân loại','unknown','n/a','none','nan'}:
+        label = 'Ngành hiện có: ' + sector + ' (chưa có ICB chi tiết)'
+        return same[same.Sector.astype(str).eq(sector)], label
+    return z, 'Thiếu phân ngành ICB; chưa xác định được peer'
+
+
+@lru_cache(maxsize=16384)
+def _file_digest(sig):
+    if not sig[1]:
+        return 'MISSING'
+    digest = hashlib.sha256()
+    with Path(sig[0]).open('rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def peer_source_fingerprint():
+    # Hash nội dung dùng lại được sau git clone/đổi Windows -> Cloud.
+    # Stat chỉ dùng để tránh đọc lại tệp không đổi trong cùng tiến trình.
+    paths = [('config/'+p, CFG/p) for p in ['company_universe.csv','vnstock_industry_map.csv','dynamic_peer_overrides.csv',
+        'manual_financial_inputs.csv','raw_period_basis.csv','insurance_entities.csv','insurance_metric_inputs.csv']]
+    paths += [('data/'+p, DATA/p) for p in ['company_snapshot.csv','bank_snapshot.csv','bank_history_long.csv','securities_capital_ratio_master.csv']]
+    paths += [('data/raw/'+p.name, p) for p in sorted((DATA/'raw').glob('*.csv'))]
+    return hashlib.sha256(repr((ENGINE_VERSION, tuple((name,_file_digest(signature(p))) for name,p in paths))).encode()).hexdigest()
+
+
+class _Catalog:
+    def __init__(self, u, snap_cache=None):
+        self.u = _normalized_universe(u)
+        self.overrides = _overrides()
+        self.metadata = self.u.set_index('Ticker').to_dict('index') if len(self.u) else {}
+        # Đọc hai bảng tổng hợp một lần cho cả universe, bao gồm INSURANCE.
+        frames = list(snap_cache.values()) if snap_cache is not None else [bank_snapshot(), generic_snapshot()]
+        self.base = {}
+        for frame in frames:
+            if frame is not None and len(frame) and 'Ticker' in frame:
+                for r in frame.to_dict('records'):
+                    self.base[_norm_ticker(r['Ticker'])] = r
+        self.evidence = {}
+        self.pools = {}
+        self.results = {}
+        self.lock = RLock()
+
+    def pool(self, t):
+        if t not in self.pools:
+            self.pools[t] = _candidate_pool(t, self.u, self.overrides)
+        return self.pools[t]
+
+    def snapshot(self, t):
+        if t not in self.evidence:
+            meta = dict(self.metadata.get(t, {}), Ticker=t)
+            base = dict(self.base.get(t, {}))
+            base.update(meta)
+            out = repair_snapshot(t, meta.get('EntityType','CORPORATE'), base, root=ROOT)
+            out.update(meta)
+            self.evidence[t] = out
+        return self.evidence[t]
+
+
+@lru_cache(maxsize=2)
+def _catalog(fingerprint):
+    return _Catalog(universe())
+
+
+def _selection(t, max_peers, catalog):
+    key = (t, max_peers)
+    if key in catalog.results:
+        return catalog.results[key].copy()
+    pool, label = catalog.pool(t)
+    if pool.empty or max_peers <= 0:
+        return pd.DataFrame(columns=OUTPUT_COLUMNS)
+    weights = WEIGHTS.get(str(pool.iloc[0].EntityType), WEIGHTS['CORPORATE'])
+    evidence = {ct: catalog.snapshot(ct) for ct in pool.Ticker}
+    target = evidence[t]
+    # Xếp hạng vector hóa, chỉ so sánh dữ liệu có chứng cứ cùng kỳ/cơ sở tính.
+    distances = pd.Series(0., index=pool.Ticker)
+    coverage = distances.copy()
+    reasons = {ct: [] for ct in pool.Ticker}
+    for metric, weight in weights.items():
+        te = metric_evidence(target, metric)
+        if te['Status'] != 'OK' or not te['Period'] or not te['Basis']:
+            continue
+        values = {}
+        for ct, snap in evidence.items():
+            ce = metric_evidence(snap, metric)
+            if ce['Status'] == 'OK' and ce['Period'] == te['Period'] and ce['Basis'] == te['Basis']:
+                values[ct] = ce['Value']
+        values = pd.to_numeric(pd.Series(values), errors='coerce').replace([np.inf,-np.inf], np.nan).dropna()
+        if len(values) < 2 or t not in values:
+            continue
+        ranks = values.rank(method='max', pct=True)
+        d = (ranks - ranks[t]).abs()
+        distances.loc[d.index] += weight * d
+        coverage.loc[d.index] += weight
+        for ct in d.index:
+            reasons[ct].append(metric)
+    rows = []
+    for row in pool.to_dict('records'):
+        ct = row['Ticker']
         if ct == t:
             continue
-        weighted=0.0; used=0.0; missing=0.0; components=[]
-        for m,w in weights.items():
-            if m not in pool.columns:
-                continue
-            tv = pd.to_numeric(pd.Series([target.get(m)]), errors='coerce').iloc[0]
-            cv = pd.to_numeric(pd.Series([r.get(m)]), errors='coerce').iloc[0]
-            if pd.isna(tv) or pd.isna(cv):
-                missing += w
-                continue
-            d = _pct_rank_distance(pool[m], float(tv), float(cv), log_scale=(m in SIZE_METRICS))
-            if d is None:
-                continue
-            weighted += w*d; used += w
-            components.append((m,d,w))
-        if used <= 0:
-            continue
-        # modest penalty for missing comparable dimensions; do not over-penalize sparse Vnstock fields.
-        score = weighted/used + 0.18*missing
-        sim = max(0.0, 1.0-score)
-        main = sorted(components, key=lambda x:x[2]*(1-x[1]), reverse=True)[:3]
-        reason = ', '.join([m for m,_,_ in main]) if main else 'các chỉ tiêu hiện có'
-        rows.append({'Ticker':ct,'SimilarityScore':sim,'DistanceScore':score,'MetricsCoverage':used,
-                     'PeerPool':pool_label,'SimilarityBasis':reason})
+        used = float(coverage[ct])
+        distance = float(distances[ct]/used + .18*(1-used)) if used > 0 else np.nan
+        available = any(metric_evidence(evidence[ct], m)['Status'] == 'OK' for m in weights)
+        status = 'COMPARABLE' if used else ('NO_COMMON_PERIOD_OR_METRICS' if available else 'MISSING_VERIFIED_DATA')
+        rows.append(dict(row, TargetTicker=t, SimilarityScore=max(0.,1-distance) if used else np.nan,
+            DistanceScore=distance, MetricsCoverage=used, PeerPool=label, DataStatus=status,
+            SimilarityBasis=', '.join(reasons[ct]) if used else 'Cùng ngành; chưa đủ dữ liệu cùng kỳ để xếp hạng'))
     out = pd.DataFrame(rows)
-    if out.empty:
-        base=_candidate_pool(t,u)[0].copy()
-        base=base[~base.Ticker.eq(t)].head(max_peers).copy()
-        if base.empty:return out
-        out=pd.DataFrame({'TargetTicker':t,'Ticker':base.Ticker.astype(str).tolist()})
-        out['PeerRank']=np.arange(1,len(out)+1);out['SimilarityScore']=np.nan;out['DistanceScore']=np.nan;out['MetricsCoverage']=0.0
-        out['PeerPool']=pool_label;out['SimilarityBasis']='Cùng ngành/ICB; chờ đủ KPI để tính similarity'
-        names=u[['Ticker']+[c for c in ['CompanyName','LegalName','Sector','EntityType'] if c in u.columns]].drop_duplicates('Ticker')
-        return out.merge(names,on='Ticker',how='left')
-    out = out.sort_values(['DistanceScore','Ticker']).head(max_peers).reset_index(drop=True)
-    out.insert(0,'TargetTicker',t)
-    out['PeerRank'] = np.arange(1,len(out)+1)
-    # attach readable names if available
-    names = u[['Ticker'] + [c for c in ['CompanyName','LegalName','Sector','EntityType'] if c in u.columns]].drop_duplicates('Ticker')
-    out = out.merge(names, on='Ticker', how='left')
-    return out
+    if len(out):
+        # Giữ peer metadata khi thiếu raw; không tạo score giả, thứ tự hòa theo ticker.
+        out = out.sort_values(['DistanceScore','Ticker'], na_position='last').head(max_peers).reset_index(drop=True)
+        out['PeerRank'] = np.arange(1, len(out)+1)
+    out = out.reindex(columns=OUTPUT_COLUMNS)
+    catalog.results[key] = out
+    return out.copy()
 
 
-from functools import lru_cache
-
-@lru_cache(maxsize=128)
-def _selection_cached(ticker,max_peers,fingerprint):
-    return _select_dynamic_peers_uncached(ticker,max_peers)
-
-def select_dynamic_peers(ticker: str, max_peers: int = MAX_PEERS, _u=None, _snap_cache=None):
-    if _u is not None or _snap_cache is not None:
-        return _select_dynamic_peers_uncached(ticker,max_peers,_u,_snap_cache)
-    from scripts.financial_evidence import signature, _paths
-    t=_norm_ticker(ticker);u=universe();pool,_=_candidate_pool(t,u)
-    files=[CFG/'company_universe.csv',CFG/'dynamic_peer_overrides.csv',CFG/'manual_financial_inputs.csv',
-           CFG/'raw_period_basis.csv',CFG/'insurance_entities.csv',CFG/'insurance_metric_inputs.csv',DATA/'company_snapshot.csv',DATA/'bank_snapshot.csv',
-           DATA/'bank_history_long.csv',DATA/'securities_capital_ratio_master.csv']
-    for row in pool.itertuples():files.extend(_paths(row.Ticker,row.EntityType,ROOT))
-    return _selection_cached(t,max_peers,tuple(signature(p) for p in files)).copy()
+@lru_cache(maxsize=2)
+def _persisted(fingerprint, map_signature, manifest_signature):
+    try:
+        manifest = json.loads((DATA/'dynamic_peer_manifest.json').read_text(encoding='utf-8'))
+        if manifest.get('Fingerprint') != fingerprint or manifest.get('EngineVersion') != ENGINE_VERSION:
+            return None
+        p = pd.read_csv(DATA/'dynamic_peer_map.csv')
+        return {t: g.copy() for t,g in p.groupby('TargetTicker')}
+    except (OSError, ValueError, KeyError):
+        return None
 
 
-def dynamic_peer_tickers(ticker: str, include_target=True, max_peers: int=MAX_PEERS):
+def select_dynamic_peers(ticker, max_peers=MAX_PEERS, _u=None, _snap_cache=None):
     t = _norm_ticker(ticker)
-    p = select_dynamic_peers(t, max_peers=max_peers)
-    peers = p.Ticker.astype(str).tolist() if len(p) else []
-    return ([t] if include_target else []) + peers
+    max_peers = max(0, int(max_peers))
+    if _u is not None or _snap_cache is not None:
+        return _selection(t, max_peers, _Catalog(_u if _u is not None else universe(), _snap_cache))
+    fingerprint = peer_source_fingerprint()
+    saved = _persisted(fingerprint, signature(DATA/'dynamic_peer_map.csv'), signature(DATA/'dynamic_peer_manifest.json'))
+    if saved is not None and max_peers <= MAX_PEERS:
+        return saved.get(t, pd.DataFrame(columns=OUTPUT_COLUMNS)).head(max_peers).copy()
+    catalog = _catalog(fingerprint)
+    with catalog.lock:
+        return _selection(t, max_peers, catalog)
 
 
-def dynamic_peer_label(ticker: str):
-    # Analyst override is authoritative for the label as well as selection.
-    u=universe(); ov,olabel=_override_pool(_norm_ticker(ticker),u)
-    if olabel and len(ov)>=2:
-        n=max(0,len(ov)-1)
-        return f'Nhóm tương đồng động: {n} DN từ {olabel}'
+def _select_dynamic_peers_uncached(ticker, max_peers=MAX_PEERS, _u=None, _snap_cache=None):
+    return _selection(_norm_ticker(ticker), max_peers, _Catalog(_u if _u is not None else universe(), _snap_cache))
+
+
+def dynamic_peer_tickers(ticker, include_target=True, max_peers=MAX_PEERS):
+    t = _norm_ticker(ticker)
+    return ([t] if include_target else []) + select_dynamic_peers(t, max_peers).Ticker.tolist()
+
+
+def dynamic_peer_label(ticker):
     p = select_dynamic_peers(ticker)
-    if p.empty:
-        return 'Nhóm tương đồng động (chưa đủ dữ liệu)'
-    pool = str(p.iloc[0].get('PeerPool','toàn thị trường'))
-    return f'Nhóm tương đồng động: {len(p)} DN từ {pool}'
+    if len(p):
+        return f'Nhóm tương đồng tự động: {len(p)} DN từ {p.iloc[0].PeerPool}'
+    catalog = _catalog(peer_source_fingerprint())
+    return catalog.pool(_norm_ticker(ticker))[1]
+
+
+def peer_catalog_summary():
+    catalog = _catalog(peer_source_fingerprint())
+    rows = []
+    for t in catalog.metadata:
+        pool, label = catalog.pool(t)
+        rows.append({'Ticker':t, 'EligiblePeerCount':max(0,len(pool)-1), 'PeerPool':label,
+                     'IndustryStatus':catalog.metadata[t].get('IndustryStatus','')})
+    return pd.DataFrame(rows)
 
 
 def build_dynamic_peer_map(target_ticker=None):
-    u = universe(); all_rows=[]; summaries=[]
-    if u.empty:
-        return pd.DataFrame()
-    u=u.copy(); u['Ticker']=u.Ticker.map(_norm_ticker)
-    targets=u.Ticker.astype(str).tolist()
+    fingerprint = peer_source_fingerprint()
+    catalog = _catalog(fingerprint)
+    targets = [_norm_ticker(target_ticker)] if target_ticker else list(catalog.metadata)
+    parts, summaries = [], []
+    with catalog.lock:
+        for i,t in enumerate(targets,1):
+            p = _selection(t, MAX_PEERS, catalog)
+            pool, label = catalog.pool(t)
+            parts.append(p)
+            summaries.append({'Ticker':t, 'DynamicPeerGroup':label, 'EligiblePeerCount':max(0,len(pool)-1),
+                'DynamicPeerCount':len(p), 'ComparablePeerCount':int(p.DataStatus.eq('COMPARABLE').sum()),
+                'DynamicPeers':','.join(p.Ticker), 'IndustryStatus':catalog.metadata.get(t,{}).get('IndustryStatus','UNKNOWN')})
+            if i % 100 == 0:
+                print(f'Peer toàn thị trường: {i}/{len(targets)}', flush=True)
+    result = pd.concat(parts, ignore_index=True) if parts else pd.DataFrame(columns=OUTPUT_COLUMNS)
+    summary = pd.DataFrame(summaries)
+    manifest_path = DATA/'dynamic_peer_manifest.json'
+    # Không để cache một mã được nhận nhầm là cache đã xây cho toàn thị trường.
+    if manifest_path.exists():
+        manifest_path.unlink()
     if target_ticker:
-        tt=_norm_ticker(target_ticker); targets=[tt] if tt in set(targets) else []
-    snap_cache={'BANK':_snapshot_for_type('BANK'),'SECURITIES':_snapshot_for_type('SECURITIES'),'CORPORATE':_snapshot_for_type('CORPORATE')}
-    for i,t in enumerate(targets,1):
-        p = select_dynamic_peers(t, _u=u, _snap_cache=snap_cache)
-        if len(p):
-            all_rows.append(p)
-            pool=str(p.iloc[0].get('PeerPool','toàn thị trường'))
-            label=f'Nhóm tương đồng động: {len(p)} DN từ {pool}'
-            summaries.append({'Ticker':_norm_ticker(t),'DynamicPeerGroup':label,'DynamicPeerCount':len(p),'DynamicPeers':','.join(p.Ticker.astype(str))})
-        else:
-            summaries.append({'Ticker':_norm_ticker(t),'DynamicPeerGroup':'Nhóm tương đồng động (chưa đủ dữ liệu)','DynamicPeerCount':0,'DynamicPeers':''})
-        if not target_ticker and i % 100 == 0: print(f'Dynamic peer: {i}/{len(targets)}')
-    z = pd.concat(all_rows, ignore_index=True) if all_rows else pd.DataFrame()
-    map_path=DATA/'dynamic_peer_map.csv'; sum_path=DATA/'dynamic_peer_summary.csv'
-    if target_ticker:
-        tt=_norm_ticker(target_ticker)
-        try: old=pd.read_csv(map_path); old=old[old.TargetTicker.astype(str).str.upper().ne(tt)] if 'TargetTicker' in old.columns else pd.DataFrame()
-        except Exception: old=pd.DataFrame()
-        z=pd.concat([old,z],ignore_index=True,sort=False) if len(old) or len(z) else pd.DataFrame()
-        try: olds=pd.read_csv(sum_path); olds=olds[olds.Ticker.astype(str).str.upper().ne(tt)] if 'Ticker' in olds.columns else pd.DataFrame()
-        except Exception: olds=pd.DataFrame()
-        sums=pd.concat([olds,pd.DataFrame(summaries)],ignore_index=True,sort=False)
+        for name, field, frame in [('dynamic_peer_map.csv','TargetTicker',result), ('dynamic_peer_summary.csv','Ticker',summary)]:
+            try:
+                old = pd.read_csv(DATA/name)
+                old = old[~old[field].isin(targets)]
+            except (OSError, ValueError, KeyError):
+                old = pd.DataFrame()
+            atomic_csv(pd.concat([old,frame], ignore_index=True), DATA/name)
     else:
-        sums=pd.DataFrame(summaries)
-    z.to_csv(map_path,index=False,encoding='utf-8-sig'); sums.to_csv(sum_path,index=False,encoding='utf-8-sig')
-    print(f'OK - dynamic peer update: {len(targets)} target(s)')
-    return z
+        atomic_csv(result, DATA/'dynamic_peer_map.csv')
+        atomic_csv(summary, DATA/'dynamic_peer_summary.csv')
+        if peer_source_fingerprint() != fingerprint:
+            raise RuntimeError('Nguồn thay đổi trong lúc tạo peer map; chạy lại để tạo cache nhất quán.')
+        temp = manifest_path.with_suffix('.tmp')
+        temp.write_text(json.dumps({'EngineVersion':ENGINE_VERSION,'Fingerprint':fingerprint,'TargetCount':len(targets)}, indent=2), encoding='utf-8')
+        temp.replace(manifest_path)
+    print(f'OK - đã xử lý {len(targets)} mã; peer thiếu số liệu vẫn có trong danh mục.')
+    return result
 
 
 if __name__ == '__main__':
-    import sys
-    target=sys.argv[1] if len(sys.argv)>1 and str(sys.argv[1]).upper() not in {'ALL','--ALL'} else None
+    target = sys.argv[1] if len(sys.argv)>1 and sys.argv[1].upper() not in {'ALL','--ALL'} else None
     build_dynamic_peer_map(target)
