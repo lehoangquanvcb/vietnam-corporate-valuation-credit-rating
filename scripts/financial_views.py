@@ -21,11 +21,11 @@ def fmt(metric,value,status='MISSING',compact=False):
     if metric in {'EPS','BVPS','Price','FairValue'}:return f'{v:,.0f}'
     return f'{v/1e9:,.1f}' if compact else f'{v/1e9:,.1f} tỷ đồng'
 
-def history_data(ticker,basis='YTD',years=5,metrics=None):
+def history_data(ticker,basis='FY',years=5,metrics=None):
     typ=get_company(ticker)['EntityType']
     return same_period_history(ticker,typ,basis,years,metrics=metrics or HISTORY_METRICS[typ])
 
-def history_table(ticker,basis='YTD',years=5,metrics=None):
+def history_table(ticker,basis='FY',years=5,metrics=None):
     h=history_data(ticker,basis,years,metrics)
     if h.empty:return pd.DataFrame()
     rows=[]
@@ -34,7 +34,7 @@ def history_table(ticker,basis='YTD',years=5,metrics=None):
         r.update({v.DisplayPeriod:fmt(m,v.Value,v.Status,True) for v in q.itertuples()});rows.append(r)
     return pd.DataFrame(rows)
 
-def history_comparison(ticker,metric,basis='YTD',years=5):
+def history_comparison(ticker,metric,basis='FY',years=5):
     h=history_data(ticker,basis,years,[metric])
     if h.empty:return h
     typ=get_company(ticker)['EntityType']
@@ -52,11 +52,15 @@ def history_comparison(ticker,metric,basis='YTD',years=5):
     return h
 
 def peer_metric_frame(ticker,metric):
-    s=get_snapshot(ticker);target=metric_evidence(s,metric);rows=[]
-    for row in [s]+peer_snapshot(ticker).to_dict('records'):
-        e=metric_evidence(row,metric)
-        if e['Status']=='OK' and e['Period']==target['Period'] and e['Basis']==target['Basis']:
-            rows.append({'Ticker':row['Ticker'],'Value':e['Value'],'Period':e['Period'],'Basis':e['Basis']})
+    from scripts.financial_evidence import latest_period,comparable_model
+    from scripts.report_evidence import window_ends_at
+    meta=get_company(ticker);typ=meta['EntityType'];target=latest_period(ticker,typ)
+    own=at_period(ticker,typ,target,'QUARTER').get(metric,{}) if target else {}
+    rows=[]
+    for t in [ticker]+list(dict.fromkeys(t for t in peer_tickers(ticker) if t!=ticker and comparable_model(meta,get_company(t)))):
+        e=at_period(t,typ,target,'QUARTER').get(metric,{}) if target else {}
+        if e.get('Status')=='OK' and window_ends_at(e.get('Period'),target) and e.get('Basis')==own.get('Basis'):
+            rows.append({'Ticker':t,'Value':e['Value'],'Period':target,'Basis':e['Basis']})
     return pd.DataFrame(rows,columns=['Ticker','Value','Period','Basis'])
 
 HISTORY_NOTE=('Tiền tệ: tỷ đồng. Số dư lấy cuối kỳ; tỷ số nguồn giữ nguyên tại kỳ báo cáo, không cộng. '

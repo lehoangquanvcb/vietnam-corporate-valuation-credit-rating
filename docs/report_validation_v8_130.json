@@ -1,0 +1,852 @@
+{
+  "Version": "8.130.0",
+  "Date": "2026-10-30",
+  "Tests": {
+    "Command": "python -m pytest -q tests",
+    "Passed": 233,
+    "SubtestsPassed": 22
+  },
+  "Coverage": {
+    "Build": "V8.130.0-UNIFIED-REPORTS",
+    "RoutingTickers": 1754,
+    "RoutingByType": {
+      "BANK": 28,
+      "CORPORATE": 1699,
+      "INSURANCE": 12,
+      "SECURITIES": 15
+    },
+    "EvidenceTickers": 75,
+    "Checks": [
+      {
+        "Ticker": "ABB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "ACB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "BAB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "BID",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "BVB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "CTG",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "EIB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "HDB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "KLB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "LPB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "MBB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "MSB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "NAB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "NVB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "OCB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "PCB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 16,
+        "ExpectedCharts": 32,
+        "MissingLatestMetrics": 11,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "PGB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "SGB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "SHB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "SSB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "STB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "TCB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "TPB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VAB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VBB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VCB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VIB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VPB",
+        "Type": "BANK",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 23,
+        "ExpectedCharts": 46,
+        "MissingLatestMetrics": 4,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "ABI",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "AIC",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "BIC",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "BLI",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "BMI",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "BVH",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 21,
+        "ExpectedCharts": 42,
+        "MissingLatestMetrics": 16,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "MIG",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "PGI",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "PRE",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "PTI",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "PVI",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 21,
+        "ExpectedCharts": 42,
+        "MissingLatestMetrics": 16,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "VNR",
+        "Type": "INSURANCE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 25,
+        "ExpectedCharts": 50,
+        "MissingLatestMetrics": 12,
+        "PeerCandidates": 11
+      },
+      {
+        "Ticker": "AAS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "APG",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "BSI",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "BVS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "CTS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "EVS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "FTS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "MBS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "ORS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "SHS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "SSI",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "TVS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VCI",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VDS",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VIX",
+        "Type": "SECURITIES",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 28,
+        "ExpectedCharts": 56,
+        "MissingLatestMetrics": 5,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "FPT",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "HPG",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VNM",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "GAS",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VIC",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VHM",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "MWG",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "PNJ",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "REE",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "GMD",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "DPM",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "DGC",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "SAB",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VJC",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "HVN",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "HAG",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "HNG",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "VCG",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "ACV",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      },
+      {
+        "Ticker": "KDH",
+        "Type": "CORPORATE",
+        "Period": "2026-Q2",
+        "AnnualYears": 5,
+        "ActiveMetrics": 35,
+        "ExpectedCharts": 70,
+        "MissingLatestMetrics": 0,
+        "PeerCandidates": 10
+      }
+    ],
+    "Errors": [],
+    "Result": "PASS",
+    "Note": "PASS kiểm tra phần mềm và gói bằng chứng; không xác nhận đủ dữ liệu hay bậc xếp hạng cho mọi mã."
+  },
+  "StreamlitAppTest": {
+    "Tickers": [
+      "TCB",
+      "SSI",
+      "FPT",
+      "ABI"
+    ],
+    "Views": [
+      "profile",
+      "rating",
+      "Word preparation"
+    ],
+    "Result": "PASS"
+  },
+  "WordSamples": {
+    "TCB": {
+      "Pages": 28,
+      "Charts": 46,
+      "Issues": [],
+      "VisualPagesReviewed": 28,
+      "ExactWording": true,
+      "AnnualYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "Quarter": "2026-Q2"
+    },
+    "SSI": {
+      "Pages": 30,
+      "Charts": 56,
+      "Issues": [],
+      "VisualPagesReviewed": 30,
+      "ExactWording": true,
+      "AnnualYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "Quarter": "2026-Q2"
+    },
+    "FPT": {
+      "Pages": 36,
+      "Charts": 70,
+      "Issues": [],
+      "VisualPagesReviewed": 36,
+      "ExactWording": true,
+      "AnnualYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "Quarter": "2026-Q2"
+    },
+    "ABI": {
+      "Pages": 28,
+      "Charts": 50,
+      "Issues": [],
+      "VisualPagesReviewed": 28,
+      "ExactWording": true,
+      "AnnualYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "Quarter": "2026-Q2"
+    }
+  },
+  "Limit": "Routing was checked for all 1754 tickers; evidence checked for 75; Word and Streamlit checked for four. This does not certify ratings or source financial statements."
+}

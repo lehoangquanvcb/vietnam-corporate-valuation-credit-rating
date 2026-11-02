@@ -12,6 +12,8 @@ from scripts.securities_public_metrics import latest_capital_ratio
 LABELS={
 'Price':'Giá thị trường','TotalAssets':'Tổng tài sản','GrossLoans':'Cho vay khách hàng',
 'CustomerDeposits':'Tiền gửi khách hàng','Equity':'Vốn chủ sở hữu','NPAT':'Lợi nhuận sau thuế',
+'NetInterestIncome':'Thu nhập lãi thuần','OperatingIncome':'Tổng thu nhập hoạt động',
+'ProvisionExpense':'Chi phí dự phòng tín dụng',
 'ROE':'ROE/ROAE','ROA':'ROA/ROAA','NIM':'Biên lãi thuần (NIM)','NPL':'Tỷ lệ nợ xấu (NPL)',
 'CAR':'Hệ số an toàn vốn (CAR)','CIR':'Tỷ lệ chi phí/thu nhập (CIR)','LDR':'Cho vay/Tiền gửi (LDR)',
 'CASA':'Tiền gửi không kỳ hạn (CASA)','LoanAssets':'Cho vay/Tổng tài sản',

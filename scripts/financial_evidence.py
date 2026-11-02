@@ -80,6 +80,17 @@ INSURANCE_NA = {'EBIT','EBITDA','EBITDAMargin','DebtEBITDA','NetDebtEBITDA','Int
 BANK_NA = INSURANCE_NA | {'Revenue','NetMargin','DebtEquity','DebtAssets','TotalDebt',
  'ShortTermBorrowings','LongTermBorrowings','NetDebtEquity','AssetTurnover','CFO_Margin','CapexRevenue'}
 SEC_NA = {'EBITDA','EBITDAMargin','DebtEBITDA','NetDebtEBITDA','EV_EBITDA'}
+# Bảng ngân hàng do refresh_vnstock xuất: tiền tệ VND, tỷ số dạng thập phân,
+# dòng thu nhập theo quý riêng lẻ. Không dùng snapshot thiếu kỳ để lấp lịch sử.
+# EPS/BVPS không nằm trong hợp đồng này: cache cũ có thể dùng nghìn đồng/cp.
+BANK_HISTORY_METRICS = {
+ 'TotalAssets','GrossLoans','CustomerDeposits','Equity','IntangibleAssets',
+ 'NPAT','NetInterestIncome','OperatingIncome','ProvisionExpense',
+ 'ROE','ROA','NIM','NPL','CAR','CIR','LDR','CASA','PB','PE','LoanLossCoverage',
+}
+# Giữ quy tắc sửa placeholder đã dùng ở V8.125; không mở rộng sang zero thật
+# của lợi nhuận, dư nợ hoặc các tỷ số khác.
+BANK_HISTORY_ZERO_PLACEHOLDERS = {'CustomerDeposits','OperatingIncome','CAR','ProvisionExpense'}
 
 def number(v):
     try:
@@ -159,6 +170,20 @@ def _record(metric,value=None,basis='',per='',source='',reason='',status=None):
 def _not_applicable(metric,typ):
     return metric in (BANK_NA if typ=='BANK' else INSURANCE_NA if typ=='INSURANCE' else SEC_NA if typ=='SECURITIES' else set())
 
+def _bank_history_metric(cached, metric, source):
+    """Chỉ lấy đúng Metric/kỳ; phát hiện xung đột, giữ Basis nếu được khai báo."""
+    if cached.empty or not {'Ticker','Period','Metric','Value'} <= set(cached):
+        return pd.DataFrame()
+    q=cached[cached.Metric.astype(str).str.strip().eq(metric)].copy()
+    if q.empty:return pd.DataFrame()
+    raw=pd.DataFrame({'period':q.Period,'id':metric,'value':q.Value})
+    for field in ['Basis','Unit']:
+        if field in q:raw[field.lower()]=q[field]
+    z=normalize_raw(raw,source,default_basis='QUARTER')
+    # SourceRow trỏ đúng tên Metric trong tệp lịch sử, không phải ID raw giả.
+    z['Field']=metric
+    return z[z.Value.map(number).notna() | z.Error.ne('')].copy()
+
 @lru_cache(maxsize=128)
 def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig):
     frames={};errors={};cfg=read_csv(Path(root)/'config/raw_period_basis.csv')
@@ -173,8 +198,9 @@ def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig):
             if raw.attrs.get('error'): errors[ds]=raw.attrs['error']
         except ValueError as e: frames[ds]=pd.DataFrame();errors[ds]=str(e)
     cached=_csv_cached(cache_sig)
-    if len(cached) and 'Ticker' in cached:cached=cached[cached.Ticker.astype(str).str.upper().eq(ticker)]
-    # Cache chỉ bổ sung các mã ngân hàng không có trong nguồn raw chi tiết.
+    if len(cached) and 'Ticker' in cached:cached=cached[cached.Ticker.astype(str).str.upper().str.strip().eq(ticker)]
+    # Nguồn raw được ưu tiên; lịch sử ngân hàng bổ sung từng chỉ tiêu/kỳ bị thiếu.
+    # Streamlit Cloud có thể không chứa data/raw do .gitignore của project.
     # Không tái sử dụng dữ liệu doanh nghiệp bị fuzzy mapping trong bản cũ.
     mapped={}
     for metric,(ds,ids) in MAP.items():
@@ -184,12 +210,16 @@ def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig):
                 q=f[f.Field.eq(sid)].copy()
                 if len(q):chunks.append(q)
         z=pd.concat(chunks,ignore_index=True).drop_duplicates('Period',keep='first') if chunks else pd.DataFrame()
-        if typ=='BANK' and metric in {'CustomerDeposits','OperatingIncome','CAR','ProvisionExpense'} and len(cached):
-            q=cached[cached.Metric.eq(metric)].copy()
+        if typ=='BANK' and metric in BANK_HISTORY_METRICS and len(cached):
+            q=_bank_history_metric(cached,metric,str(Path(cache_sig[0]).relative_to(root)))
             if len(q):
-                q=q.rename(columns={'Metric':'Field'})
-                q['Source']=str(Path(cache_sig[0]).relative_to(root));q['Basis']='QUARTER';q['Unit']='';q['Error']=''
-                if len(z):q=q[~q.Period.isin(z.loc[z.Value.notna() & z.Value.ne(0),'Period'])]
+                if len(z):
+                    protected=z.Value.map(number).notna()
+                    if metric in BANK_HISTORY_ZERO_PLACEHOLDERS:
+                        protected &= z.Value.ne(0)
+                    # Không dùng cache để che lỗi xung đột của nguồn raw.
+                    protected |= z.Error.fillna('').ne('')
+                    q=q[~q.Period.isin(z.loc[protected,'Period'])]
                 z=pd.concat([q,z],ignore_index=True).drop_duplicates('Period',keep='first')
         mapped[metric]=z
     return mapped,errors
@@ -384,7 +414,7 @@ def history(ticker,typ,root=ROOT,basis='QUARTER'):
                 rows.append(dict(Ticker=ticker,Period=p,Metric=m,Value=r['Value'],Basis=r['Basis'],Source=r['Source'],Status=r['Status']))
     return pd.DataFrame(rows,columns=['Ticker','Period','Metric','Value','Basis','Source','Status'])
 
-def same_period_history(ticker,typ,basis='YTD',years=5,root=ROOT,metrics=None):
+def same_period_history(ticker,typ,basis='FY',years=5,root=ROOT,metrics=None):
     latest=latest_period(ticker,typ,root)
     if not latest:return pd.DataFrame()
     y,q,_=period(latest);years=max(3,min(int(years),5))

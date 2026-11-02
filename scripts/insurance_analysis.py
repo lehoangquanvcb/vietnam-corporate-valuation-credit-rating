@@ -187,7 +187,7 @@ def render_analysis(ticker,basis='FY',years=5,key='insurance'):
             st.caption(pair['PeerHistoryNote'])
             st.plotly_chart(f2,use_container_width=True,key=key+'peer_'+pair['Metric'])
             st.write(pair['NarrativePeer']);st.write(pair['AnalysisText'])
-            st.markdown('**Kết luận:** '+pair['ConclusionText']);st.caption(pair['MethodNote'])
+            st.markdown('**Kết luận:** '+pair['ConclusionText'])
             if pair['PeerExclusions']:st.caption(pair['PeerExclusions'])
             for warning in pair.get('HistoryWarnings',[]):st.warning(warning)
             h=pair['History'];p=pair['Peers'];m=pair['Metric']

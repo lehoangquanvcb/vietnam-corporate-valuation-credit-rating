@@ -1,0 +1,76 @@
+{
+  "methodology": "BANK_2026",
+  "assessments": [
+    {
+      "Ticker": "TCB",
+      "Period": "2026-Q2",
+      "BusinessProfile": "Rất Mạnh",
+      "BusinessProfileNotches": 2,
+      "CapitalEarnings": "Mạnh",
+      "CapitalEarningsNotches": 1,
+      "RiskPosition": "Mạnh",
+      "RiskPositionNotches": 1,
+      "FundingLiquidity": "Mạnh",
+      "FundingLiquidityNotches": 1,
+      "ExternalSupportNotches": 0,
+      "Outlook": "Ổn định",
+      "Source": "TCB_XHTN(1).docx",
+      "SourceType": "REFERENCE_REPORT",
+      "SourceSHA256": "aac8681bc894fcbcdc0a92178472c830d46eee1b6c126b5f8545ce6c0a6c7eef",
+      "SourceScorecard": [
+        [
+          "Điểm ban đầu ngành / BICRA",
+          "A-",
+          "—",
+          "Điểm khởi đầu"
+        ],
+        [
+          "Hồ sơ Kinh doanh",
+          "Rất Mạnh (1/6)",
+          "+2",
+          "Điều chỉnh nội sinh"
+        ],
+        [
+          "Vốn và Lợi nhuận",
+          "Mạnh (2/6)",
+          "+1",
+          "Điều chỉnh nội sinh"
+        ],
+        [
+          "Vị thế Rủi ro",
+          "Mạnh (2/6)",
+          "+1",
+          "Điều chỉnh nội sinh"
+        ],
+        [
+          "Huy động vốn và Thanh khoản",
+          "Mạnh (2/6)",
+          "+1",
+          "Điều chỉnh nội sinh"
+        ],
+        [
+          "Tổng điều chỉnh nội sinh",
+          "—",
+          "+5",
+          "AA+"
+        ],
+        [
+          "Hỗ trợ bên ngoài",
+          "Trung lập",
+          "+0",
+          "AA+"
+        ],
+        [
+          "Kết quả Xếp hạng",
+          "Ổn định",
+          "—",
+          "AA+"
+        ]
+      ],
+      "ReferenceSACP": "vnAA+",
+      "ReferenceICR": "vnAA+",
+      "Rationale": "Kế thừa các đánh giá và số bậc trong bảng tổng kết của báo cáo mô phỏng do người dùng cung cấp; tính lại từ bậc neo, không phải kết luận thẩm định mới.",
+      "ImportedAt": "2026-10-30T04:12:09.766801+00:00"
+    }
+  ]
+}

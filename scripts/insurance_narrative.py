@@ -8,7 +8,7 @@ import pandas as pd
 from scripts.insurance_presentation import format_metric as fmt, own_value
 from scripts.methodology_kpi_engine import PCT, MULT
 
-ENGINE_VERSION = '8.125.0'
+ENGINE_VERSION = '8.128.0'
 
 
 def number(value):
@@ -86,7 +86,7 @@ def trend_sentence(pair):
     if b.Value < a.Value:
         text = text.replace(' từ ', ' giảm từ ').replace(' lên ', ' xuống ')
     elif b.Value == a.Value:
-        text = f"Trong {len(z)} mốc có dữ liệu, đầu và cuối chuỗi {a.DisplayPeriod}–{b.DisplayPeriod} cùng ở mức {fmt(m,b.Value,'OK')}."
+        text = f"Đầu và cuối chuỗi {a.DisplayPeriod}–{b.DisplayPeriod} cùng ở mức {fmt(m,b.Value,'OK')}."
     if len(z) == 1:
         text = f"Chỉ có mốc {b.DisplayPeriod}: {fmt(m,b.Value,'OK')}; chưa đủ chuỗi để nhận định xu hướng."
     if pair.get('HistoryBreaks'):
@@ -100,8 +100,6 @@ def trend_sentence(pair):
             text += f' Hai năm cuối {x.DisplayPeriod}–{y.DisplayPeriod} không thay đổi.'
     elif len(h)>1:
         text += ' Không tính biến động năm cuối khi mốc liền kề thiếu hoặc không so sánh được.'
-    if len(z)<len(h):
-        text += f' Có {len(z)}/{len(h)} mốc đủ nguồn; khoảng thiếu được giữ nguyên.'
     return text
 
 
@@ -125,7 +123,7 @@ def peer_sentence(pair):
     if n>=5:
         med=float(z.Value.median());mean=float(z.Value.mean())
         relation='cao hơn' if v>med else 'thấp hơn' if v<med else 'bằng'
-        text+=f"Bình quân {n} peer là {fmt(m,mean,'OK')}, trung vị {fmt(m,med,'OK')}; doanh nghiệp {relation} trung vị"
+        text+=f"Bình quân peer là {fmt(m,mean,'OK')}, trung vị {fmt(m,med,'OK')}; doanh nghiệp {relation} trung vị"
         if v!=med:text+=' '+delta(m,med,v)
         text+='.'
         if (v-mean)*(v-med)<0:
@@ -134,9 +132,6 @@ def peer_sentence(pair):
         text+='Đối chiếu trực tiếp: '+'; '.join(f'{r.Ticker} {fmt(m,r.Value,"OK")}' for r in z.itertuples())+'.'
     else:
         text+='Chưa có peer cùng kỳ, cùng cơ sở đủ dữ liệu.'
-    text+=f" Có {n}/{pair.get('PeerCandidateCount',n)} peer được dùng; {pair.get('PeerScope','cùng kỳ và cơ sở').lower()}."
-    if m in ('ROE','ROA','PB','PE'):
-        text+=' Giữ cơ sở tỷ số nguồn tại quý báo cáo.'
     return text
 
 

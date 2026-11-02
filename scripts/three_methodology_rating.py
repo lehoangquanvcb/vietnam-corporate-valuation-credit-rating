@@ -343,7 +343,8 @@ def rate_company(ticker,overrides=None):
     if _is_insurance(m):
         return insurance_rating(ticker,overrides)
     if typ=='BANK':
-        return bank_rating_v875(ticker,overrides)
+        from scripts.bank_method_2026 import bank_rating as current_bank_rating
+        return current_bank_rating(ticker,overrides)
     if typ=='SECURITIES':
         return securities_rating(ticker,overrides)
     if method=='EXCLUDED_SPECIALIZED':
@@ -351,4 +352,4 @@ def rate_company(ticker,overrides=None):
     return corporate_rating(ticker,overrides)
 
 # Compatibility: fixed Anchor A- and evidence gate for every bank caller.
-bank_rating = bank_rating_v875
+from scripts.bank_method_2026 import bank_rating

@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.125.0-INSURANCE-HISTORY-PEERS'
+BUILD_TAG='V8.129.0-REFERENCE-RATING'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -342,13 +342,15 @@ def _security_peer_raw_mean_history(ticker, metric, max_peers=10):
 
 def metric_chart(ticker,metric,title,percent=False):
     from scripts.financial_views import history_comparison, BASIS_LABELS
-    h=history_comparison(ticker,metric,globals().get('_history_basis','YTD'),globals().get('_history_years',5))
+    from scripts.report_evidence import scale,unit
+    h=history_comparison(ticker,metric,'FY',5)
+    _sc=scale(metric)
     fig=go.Figure()
     if len(h):
-        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.Value,name=ticker,mode='lines+markers',connectgaps=False))
-        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.PeerMean,name='TB peer cùng kỳ',mode='lines+markers',connectgaps=False,line=dict(dash='dash')))
-    fig.update_layout(title=title+' · '+BASIS_LABELS[globals().get('_history_basis','YTD')],height=330,legend=dict(orientation='h',y=-.2),margin=dict(t=50,b=70))
-    if percent:fig.update_yaxes(tickformat='.1%')
+        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.Value*_sc,name=ticker,mode='lines+markers',connectgaps=False))
+        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.PeerMean*_sc,name='TB peer cùng kỳ',mode='lines+markers',connectgaps=False,line=dict(dash='dash')))
+    fig.update_layout(title=title+' · '+BASIS_LABELS[globals().get('_history_basis','FY')],height=330,legend=dict(orientation='h',y=-.2),margin=dict(t=50,b=70))
+    fig.update_yaxes(title=unit(metric))
     return fig
 
 def _latest_metric_period(ticker,metric):
@@ -362,11 +364,12 @@ def _latest_metric_period(ticker,metric):
 
 def latest_peer_bar_chart(ticker,metric,title,percent=False,max_peers=10):
     from scripts.financial_views import peer_metric_frame
+    from scripts.report_evidence import scale,unit
     q=peer_metric_frame(ticker,metric)
     fig=go.Figure()
-    if len(q):fig.add_trace(go.Bar(x=q.Ticker,y=q.Value,marker_color=['#116b55' if t==ticker else '#9eb5c5' for t in q.Ticker]))
+    if len(q):fig.add_trace(go.Bar(x=q.Ticker,y=q.Value*scale(metric),marker_color=['#116b55' if t==ticker else '#9eb5c5' for t in q.Ticker]))
     fig.update_layout(title=title+' · cùng kỳ/cơ sở',height=330,margin=dict(t=55,b=45))
-    if percent:fig.update_yaxes(tickformat='.1%')
+    fig.update_yaxes(title=unit(metric))
     return fig
 
 def _growth_from_hist(metric):
@@ -448,6 +451,8 @@ elif meta['EntityType']=='INSURANCE':kpis=[('Giá thị trường',money(val.get
 else:kpis=[('Giá thị trường',money(val.get('Price'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA'))),('Nợ/EBITDA',mult(s.get('DebtEBITDA'))),('Thanh toán hiện hành',mult(s.get('CurrentRatio')))]
 cols=st.columns(6)
 for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
+if meta['EntityType']=='BANK' and num(s.get('CAR')) is not None and s.get('CAR_AsOf') != s.get('SnapshotPeriod'):
+    st.caption(f"CAR: kỳ công bố {s.get('CAR_AsOf','chưa xác định')}; kỳ tài chính hiện tại {s.get('SnapshotPeriod','chưa xác định')}.")
 if meta['EntityType']=='INSURANCE' and val.get('Price') is None:
     st.caption('Giá thị trường: thiếu dữ liệu giá đóng cửa trong nguồn hiện có; không suy ra từ P/E hoặc P/B.')
 
@@ -457,19 +462,19 @@ if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['T
 _sections=['HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','BÁO CÁO XẾP HẠNG TÍN NHIỆM','DỮ LIỆU & QUẢN TRỊ']
 _active_section=st.radio('Điều hướng',_sections,horizontal=True,label_visibility='collapsed',key='main_section_nav')
 from scripts.financial_views import BASIS_LABELS, HISTORY_METRICS, HISTORY_NOTE, history_table
-_history_basis=st.sidebar.selectbox('Cơ sở lịch sử',list(BASIS_LABELS),index=2 if meta['EntityType']=='INSURANCE' else 0,format_func=lambda k:BASIS_LABELS[k])
-_history_years=st.sidebar.selectbox('Số năm cùng kỳ',[5,4,3])
+_history_basis='FY'
+_history_years=5
+st.sidebar.caption('Lịch sử tài chính: 5 năm tài chính đã kết thúc gần nhất. Peer: quý gần nhất.')
 if _active_section in _sections[:3]:
-    with st.expander('Lịch sử doanh nghiệp 3–5 năm cùng kỳ',expanded=True):
+    with st.expander('Lịch sử tài chính 5 năm gần nhất',expanded=True):
         st.dataframe(history_table(selected,_history_basis,_history_years),hide_index=True,use_container_width=True)
         st.caption(HISTORY_NOTE)
         _history_options=HISTORY_METRICS[meta['EntityType']]
         _hm=st.multiselect('Chỉ tiêu trên biểu đồ lịch sử',_history_options,default=_history_options[:2],key='history_metrics_'+selected)
-        for _i in range(0,len(_hm),2):
-            _hc=st.columns(2)
-            for _j,_m in enumerate(_hm[_i:_i+2]):
-                from scripts.methodology_kpi_engine import LABELS, PCT
-                with _hc[_j]:_plotly_chart_safe(metric_chart(selected,_m,LABELS.get(_m,_m),_m in PCT),use_container_width=True)
+        for _m in _hm:
+            from scripts.methodology_kpi_engine import LABELS, PCT
+            _plotly_chart_safe(metric_chart(selected,_m,LABELS.get(_m,_m),_m in PCT),use_container_width=True)
+
 
 
 def _safe_show(df, wanted, n=None):
@@ -579,12 +584,16 @@ if _active_section==_sections[0]:
     else:
         ml=[('Revenue','Doanh thu',False),('NPAT','Lợi nhuận sau thuế',False),('ROE','ROE',True),
             ('ROA','ROA',True),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Thanh toán hiện hành',False)]
-    for i in range(0,len(ml),2):
-        cc=st.columns(2)
-        for j,(m,t,pf) in enumerate(ml[i:i+2]):
-            with cc[j]:
-                _plotly_chart_safe(metric_chart(selected,m,f'{t} · xu hướng DN và trung bình peer',pf),use_container_width=True)
-                _plotly_chart_safe(latest_peer_bar_chart(selected,m,f'{t} · DN và 10 peer tại kỳ gần nhất',pf),use_container_width=True)
+    if ml:
+        from scripts.report_evidence import build_pack, narrative
+        _financial_pack=build_pack(selected,'FY',5)
+        for m,t,pf in ml:
+            _plotly_chart_safe(metric_chart(selected,m,f'{t} · 5 năm tài chính và bình quân peer',pf),use_container_width=True)
+            _plotly_chart_safe(latest_peer_bar_chart(selected,m,f'{t} · quý gần nhất',pf),use_container_width=True)
+            if m in _financial_pack['Items']:
+                _note=narrative(_financial_pack,m)
+                st.write(_note['History']);st.write(_note['Peers'])
+                st.write(' '.join([_note['Meaning'],_note['Conclusion']]))
     st.markdown('### Bộ chỉ tiêu theo methodology & nhóm tương đồng động')
     st.caption('Benchmark loại chính doanh nghiệp đang phân tích; chỉ hiển thị trung bình/trung vị khi có tối thiểu 5 peer có dữ liệu cho chỉ tiêu đó.')
     skpi,_,_=sector_kpi_table(selected)
@@ -682,13 +691,32 @@ if _active_section==_sections[2]:
         _rating_overrides=render_assessment(selected)
     elif _entity_method=='BANK':
         with st.expander('Thẩm định yếu tố ngân hàng và hỗ trợ bên ngoài',expanded=False):
-            st.caption('Anchor A− cố định. Chưa đủ chỉ tiêu và bằng chứng thì giữ N/A; không mặc định chấm trung tính.')
-            _grades=['Tự tính từ dữ liệu','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu']
-            for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Huy động vốn và thanh khoản')]:
-                _g=st.selectbox(_lab,_grades,key=f'bank_{selected}_{_key}')
-                if _g!='Tự tính từ dữ liệu':_rating_overrides[_key]=_g
-            _confirmed=st.checkbox('Đã đánh giá mức hỗ trợ bên ngoài',key=f'bank_{selected}_support_confirmed')
-            if _confirmed:_rating_overrides['ExternalSupportNotches']=st.number_input('Notch hỗ trợ đã thẩm định',0,8,0,1,key=f'bank_{selected}_support')
+            st.caption('Đánh giá theo phương pháp ngân hàng 2026. Bậc độc lập hiển thị khi đủ bốn cấu phần; bậc tổ chức phát hành bổ sung đánh giá hỗ trợ.')
+            from scripts.bank_method_2026 import saved_assessment
+            from scripts.financial_evidence import latest_period
+            _saved_bank=saved_assessment(selected,latest_period(selected,'BANK'))
+            _inherit_bank=False
+            if _saved_bank:
+                _mode=st.radio('Nguồn bảng chấm',['Kế thừa bảng chấm đã lưu','Nhập lại đánh giá'],key=f'bank_{selected}_assessment_mode')
+                _inherit_bank=(_mode=='Kế thừa bảng chấm đã lưu')
+                if _inherit_bank:
+                    st.caption('Nguồn: '+_saved_bank['Source']+' | Kỳ: '+_saved_bank['Period'])
+                    st.dataframe(pd.DataFrame([{'Cấu phần':_title,'Đánh giá':_saved_bank.get(_key,'Chưa xác định')} for _key,_title in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Huy động vốn và thanh khoản')]]),hide_index=True,use_container_width=True)
+            if not _inherit_bank:
+                _rating_overrides={'UseSavedAssessment':False}
+                _grades=['Chưa xác định','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu']
+                for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận — kết luận sau đánh giá CAR'),('RiskPosition','Vị thế rủi ro')]:
+                    _g=st.selectbox(_lab,_grades,key=f'bank_{selected}_{_key}')
+                    if _g!='Chưa xác định':_rating_overrides[_key]=_g
+                for _key,_lab in [('Funding','Huy động vốn'),('Liquidity','Thanh khoản')]:
+                    _g=st.selectbox(_lab,['Chưa xác định','Mạnh','Phù Hợp','Trung Bình','Yếu'],key=f'bank_{selected}_{_key}')
+                    if _g!='Chưa xác định':_rating_overrides[_key]=_g
+                if _rating_overrides.get('Funding')==_rating_overrides.get('Liquidity')=='Mạnh':
+                    _rating_overrides['FundingStrongExceptionConfirmed']=st.checkbox('Đã kết luận đủ điều kiện điều chỉnh +1 bậc theo ma trận',key=f'bank_{selected}_funding_exception')
+                _confirmed=st.checkbox('Đã đánh giá mức hỗ trợ bên ngoài',key=f'bank_{selected}_support_confirmed')
+                if _confirmed:_rating_overrides['ExternalSupportNotches']=st.number_input('Notch hỗ trợ đã thẩm định',0,8,0,1,key=f'bank_{selected}_support')
+                _outlook=st.selectbox('Triển vọng',['Chưa xác định','Ổn định','Tích cực','Tiêu cực'],key=f'bank_{selected}_outlook')
+                if _outlook!='Chưa xác định':_rating_overrides['Outlook']=_outlook
     elif _entity_method=='SECURITIES':
         with st.expander('Thẩm định các yếu tố công ty chứng khoán',expanded=False):
             for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Nguồn vốn và thanh khoản')]:
@@ -721,6 +749,8 @@ if _active_section==_sections[2]:
                 if _pending:st.dataframe(pd.DataFrame(_pending),hide_index=True,use_container_width=True)
                 st.write('; '.join(missing_evidence_labels(rr3)))
     elif rr3.get('ICR') in (None,'N/A'):st.info('Chưa hình thành bậc XHTN mô phỏng: '+str(rr3.get('MissingEvidence','Chưa đủ bằng chứng')))
+    if str(rr3.get('RatingOrigin','')).startswith('REFERENCE_REPORT'):
+        st.caption('Kết quả mô phỏng kế thừa bảng chấm: '+rr3.get('AssessmentSource','')+' | '+rr3.get('AssessmentPeriod','')+'. Các bậc được tính lại từ từng cấu phần của báo cáo nguồn.')
     r1,r2,r3=st.columns(3)
     if rr3.get('Methodology')=='INSURANCE':
         r1.metric('Anchor',rating_value_text(rr3,'Anchor'));r2.metric('SCA',rating_value_text(rr3,'SCA'));r3.metric('ICR',rating_value_text(rr3,'ICR'))
@@ -756,10 +786,15 @@ if _active_section==_sections[2]:
         elif meta.get('EntityType')=='INSURANCE': _bar_metrics=[('ROE','ROE',True),('ROA','ROA',True),('EquityAssets','VCSH/TTS',True),('InsuranceReservesEquity','Dự phòng nghiệp vụ/VCSH',False)]
         elif meta.get('EntityType')=='SECURITIES': _bar_metrics=[('ROE','ROE',True),('DebtEquity','Nợ/VCSH',False),('CurrentRatio','Thanh toán hiện hành',False),('AvailableCapitalRatio','Vốn khả dụng',True)]
         else: _bar_metrics=[('ROE','ROE',True),('DebtEquity','Nợ/VCSH',False),('DebtEBITDA','Nợ/EBITDA',False),('CurrentRatio','Thanh toán hiện hành',False)]
-        for _i in range(0,len(_bar_metrics),2):
-            _cc=st.columns(2)
-            for _j,(_m,_t,_pf) in enumerate(_bar_metrics[_i:_i+2]):
-                with _cc[_j]: _plotly_chart_safe(latest_peer_bar_chart(selected,_m,f'{_t} · DN và 10 peer',_pf),use_container_width=True)
+        from scripts.report_evidence import build_pack, narrative
+        _financial_pack=build_pack(selected,'FY',5)
+        for _m,_t,_pf in _bar_metrics:
+            _plotly_chart_safe(metric_chart(selected,_m,f'{_t} · 5 năm tài chính',_pf),use_container_width=True)
+            _plotly_chart_safe(latest_peer_bar_chart(selected,_m,f'{_t} · quý gần nhất',_pf),use_container_width=True)
+            if _m in _financial_pack['Items']:
+                _note=narrative(_financial_pack,_m)
+                st.write(_note['History']);st.write(_note['Peers'])
+                st.write(' '.join([_note['Meaning'],_note['Conclusion']]))
     elif meta.get('EntityType')!='INSURANCE':
         st.info('Chưa có đủ chỉ tiêu định lượng để phân tích XHTN.')
 

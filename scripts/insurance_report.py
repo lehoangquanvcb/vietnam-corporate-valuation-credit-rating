@@ -144,7 +144,6 @@ def _summary(doc,ticker,meta,rr,pack,report_type):
     for label,key in [('Anchor','Anchor'),('SCA','SCA'),('ICR','ICR')]:_cell_text(left,label+': '+rating_value_text(rr,key),size=10)
     _cell_text(left,'Triển vọng: '+str(rr.get('Outlook') or 'Chưa xác định'),size=10)
     _cell_text(left,'Kỳ tài chính: '+str(pack[0]['Period'] or 'Chưa có'),size=10)
-    _cell_text(left,'Dữ liệu có số: '+str(len(cov['Present']))+'/'+str(cov['Total'])+' chỉ tiêu',size=10)
     for text in findings['Narrative']:_cell_text(right,text,size=10.5)
     if rr.get('RatingBlocker')=='SCOPE':
         _cell_text(right,rr['ApplicabilityReason'],size=10.5)
@@ -160,7 +159,6 @@ def _summary(doc,ticker,meta,rr,pack,report_type):
         c.paragraphs[0].text=head
         for r in c.paragraphs[0].runs:r.bold=True;r.font.size=Pt(10)
         for text in items:_cell_text(c,text,size=10)
-    _para(doc,'Các điểm mạnh và hạn chế trên phản ánh số liệu quan sát, chưa phải điểm chấm tín nhiệm. '+cov['Note'],9)
 
 
 def _context(doc,ticker,meta,pack,basis,years):
@@ -206,8 +204,7 @@ def _metric(doc,ticker,pair):
     if len(h):
         ph=pair['PeerHistory']
         rows=[[ticker]+[fmt(m,r.Value,r.Status,True) if r.Status=='OK' else '—' for r in h.itertuples()],
-              ['TB peer']+[fmt(m,r.PeerMean,'OK',True) if pd.notna(r.PeerMean) else '—' for r in ph.itertuples()],
-              ['Số peer (N)']+[str(r.PeerCount) for r in ph.itertuples()]]
+              ['TB peer']+[fmt(m,r.PeerMean,'OK',True) if pd.notna(r.PeerMean) else '—' for r in ph.itertuples()]]
         _table(doc,['Lịch sử']+h.DisplayPeriod.tolist(),rows,[26]+[150/len(h)]*len(h))
     # Chuỗi có từng năm và thay đổi năm liền kề; giữ nguyên cơ sở UI.
     history=pair['NarrativeHistory']
@@ -298,7 +295,7 @@ def _appendix(doc,pack,rr):
 def generate_insurance_docx(ticker,report_type='analysis',rating_result=None,options=None):
     from scripts.multisector_report import _style_doc,_cover_sample,_section_band
     ticker=str(ticker).upper();options=options or {}
-    basis=options.get('history_basis','FY');years=int(options.get('history_years',5))
+    basis='FY';years=5
     meta=get_company(ticker);pack=analysis_pack(ticker,basis,years);rr=rating_result or insurance_rating(ticker)
     subtype=insurance_reporting_subtype(meta)
     findings=section_findings(pack,subtype)
