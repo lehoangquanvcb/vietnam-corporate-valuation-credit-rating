@@ -293,61 +293,6 @@ def _appendix(doc,pack,rr):
 
 
 def generate_insurance_docx(ticker,report_type='analysis',rating_result=None,options=None):
-    from scripts.multisector_report import _style_doc,_cover_sample,_section_band
-    ticker=str(ticker).upper();options=options or {}
-    basis='FY';years=5
-    meta=get_company(ticker);pack=analysis_pack(ticker,basis,years);rr=rating_result or insurance_rating(ticker)
-    subtype=insurance_reporting_subtype(meta)
-    findings=section_findings(pack,subtype)
-    doc=Document();_style_doc(doc,report_type)
-    doc.styles['Normal'].font.size=Pt(10.5)
-    _cover_sample(doc,ticker,meta,report_type)
-    _summary(doc,ticker,meta,rr,pack,report_type)
-    doc.add_page_break();_context(doc,ticker,meta,pack,basis,years)
-    for row in rr.get('SubfactorEvidence',[]):
-        if row.get('Đủ bằng chứng') and row.get('Nhóm','').startswith('I.'):
-            _para(doc,row['Lập luận']+' Nguồn: '+row['Nguồn'],10,label=row['Chỉ tiêu']+' — '+row['Đánh giá']+':')
-    pairs={p['Metric']:p for p in pack}
-    for heading,metrics in SECTIONS:
-        available=[pairs[m] for m in metrics if has_evidence(pairs[m])]
-        if heading == 'HỒ SƠ KINH DOANH':
-            doc.add_page_break()
-        _section_band(doc,heading)
-        from scripts.multisector_report import _subhead
-        for title,text in findings[heading]:
-            _subhead(doc,title);_para(doc,text)
-        evidence_groups={'HỒ SƠ KINH DOANH':['II.'],'VỐN VÀ DỰ PHÒNG NGHIỆP VỤ':['III.'],
-                         'THANH KHOẢN VÀ KHẢ NĂNG THANH TOÁN':['IV.']}.get(heading,[])
-        for row in rr.get('SubfactorEvidence',[]):
-            if row.get('Đủ bằng chứng') and any(row.get('Nhóm','').startswith(x) for x in evidence_groups):
-                _para(doc,row['Lập luận']+' Nguồn: '+row['Nguồn'],10,label=row['Chỉ tiêu']+' — '+row['Đánh giá']+':')
-        for pair in available:
-            _metric(doc,ticker,pair)
-        if report_type=='analysis' and heading=='ĐỊNH GIÁ THAM KHẢO':
-            from scripts.multisector_valuation import valuation
-            from scripts.fair_value_range import fair_value_range
-            from scripts.universal_data import get_snapshot
-            v=valuation(ticker,get_snapshot(ticker));fv=fair_value_range(ticker)
-            _para(doc,str(v.get('PrimaryMethod',''))+'. '+str(v.get('Reason','')),10)
-            _table(doc,['Kịch bản','Giá trị đồng/cổ phiếu'],[[k,fmt('FairValue',fv.get(k),v.get('Status'))] for k in ['Bear','Base','Bull','StrategicMA']],[88,88])
-    _qualitative(doc,rr,pack,subtype)
-    _appendix(doc,pack,rr)
-    sec=doc.sections[0];footer=sec.footer.paragraphs[0];footer.clear();footer.alignment=WD_ALIGN_PARAGRAPH.RIGHT
-    r=footer.add_run(ticker+' | Lê Hoàng Quân | V'+ENGINE_VERSION+' | '+date.today().strftime('%d/%m/%Y')+' | Trang ');r.font.name='Lato';r.font.size=Pt(8)
-    field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');footer._p.append(field)
-    for scope in [doc.element,doc.styles.element]:
-        for el in list(scope.iter(qn('w:pBdr'))):el.getparent().remove(el)
-        for el in scope.iter(qn('w:color')):el.attrib.pop(qn('w:themeColor'),None)
-    # Ngắt trang gắn vào đoạn kế tiếp, tránh trang trắng khi đoạn trước vừa đầy trang.
-    from docx.text.paragraph import Paragraph
-    for node in list(doc.element.body):
-        if node.tag!=qn('w:p'):continue
-        paragraph=Paragraph(node,doc)
-        breaks=node.findall('.//'+qn('w:br'))
-        nxt=node.getnext()
-        if not paragraph.text.strip() and any(b.get(qn('w:type'))=='page' for b in breaks) and nxt is not None and nxt.tag==qn('w:p'):
-            following=Paragraph(nxt,doc)
-            following.paragraph_format.page_break_before=True
-            following.paragraph_format.keep_with_next=True
-            node.getparent().remove(node)
-    out=BytesIO();doc.save(out);return out.getvalue()
+    """Mọi mã bảo hiểm sử dụng cùng mẫu Word của bốn lĩnh vực."""
+    from scripts.professional_report import generate_docx
+    return generate_docx(ticker,report_type,rating_result,options)

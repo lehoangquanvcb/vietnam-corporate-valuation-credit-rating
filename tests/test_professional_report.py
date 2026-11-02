@@ -89,10 +89,10 @@ def test_export_uses_green_layout_vertical_charts_and_passed_rating():
             assert t.rows[0]._tr.find(qn('w:trPr')).find(qn('w:tblHeader')) is not None
 
 
-def test_insurance_export_keeps_existing_engine():
-    from scripts.evidence_report import generate_docx
-    with patch('scripts.insurance_report.generate_insurance_docx',return_value=b'insurance') as render:
-        assert generate_docx('BVH','rating',{'ICR':'N/A'},{'history_basis':'FY'})==b'insurance'
+def test_insurance_export_uses_shared_renderer():
+    from scripts.insurance_report import generate_insurance_docx
+    with patch('scripts.professional_report.generate_docx',return_value=b'shared') as render:
+        assert generate_insurance_docx('BVH','rating',{'ICR':'N/A'},{'history_basis':'FY'})==b'shared'
         render.assert_called_once_with('BVH','rating',{'ICR':'N/A'},{'history_basis':'FY'})
 
 

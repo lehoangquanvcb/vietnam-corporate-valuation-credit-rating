@@ -496,7 +496,7 @@ def _style_doc(doc, report_type=None):
     # Header is report-specific and functions as a clear simulation/disclaimer notice.
     header=sec.header.paragraphs[0]
     if report_type == 'rating':
-        header.text='Báo cáo mô phỏng quá trình Xếp hạng tín nhiệm (tài liệu này không thể thay thế Báo cáo Xếp hạng tín nhiệm)'
+        header.text='Báo cáo Xếp hạng tín nhiệm không chỉ định (tài liệu này không thể thay thế Báo cáo Xếp hạng tín nhiệm)'
     elif report_type == 'analysis':
         header.text='Báo cáo mô phỏng quá trình Phân tích, định giá cổ phiếu (tài liệu này không nhằm mục đích khuyến nghị đầu tư cổ phiếu)'
     else:
@@ -511,7 +511,7 @@ def _style_doc(doc, report_type=None):
 
 def _add_title(doc,ticker,meta,report_type):
     p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    r=p.add_run('BÁO CÁO MÔ PHỎNG QUÁ TRÌNH XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH GIÁ CỔ PHIẾU, ĐỊNH GIÁ & M&A')
+    r=p.add_run('Báo cáo Xếp hạng tín nhiệm không chỉ định' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH GIÁ CỔ PHIẾU, ĐỊNH GIÁ & M&A')
     r.bold=True;r.font.name='Lato';r.font.size=Pt(17 if report_type=='rating' else 20)
     p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
     r=p.add_run(company_display_name(meta,ticker));r.bold=True;r.font.name='Lato';r.font.size=Pt(16)
@@ -1343,7 +1343,7 @@ def _cover_sample(doc,ticker,meta,report_type):
     for _ in range(3): doc.add_paragraph()
     t=doc.add_table(rows=1,cols=1);c=t.cell(0,0);_set_cell_shading(c,GREEN);_set_cell_margins(c,top=850,start=320,bottom=850,end=320)
     p=c.paragraphs[0];p.alignment=WD_ALIGN_PARAGRAPH.LEFT
-    title='BÁO CÁO MÔ PHỎNG QUÁ TRÌNH XẾP HẠNG TÍN NHIỆM' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH CỔ PHIẾU'
+    title='Báo cáo Xếp hạng tín nhiệm không chỉ định' if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH CỔ PHIẾU'
     r=p.add_run(title+'\n');r.bold=True;r.font.name='Lato';r.font.size=Pt(24 if report_type=='rating' else 30)
     col=OxmlElement('w:color');col.set(qn('w:val'),'FFFFFF');r._r.get_or_add_rPr().append(col)
     r=p.add_run(company_display_name(meta,ticker));r.bold=True;r.font.name='Lato';r.font.size=Pt(22)

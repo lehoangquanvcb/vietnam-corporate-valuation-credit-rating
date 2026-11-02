@@ -11,7 +11,8 @@ SOURCES = {
 }
 REPORT_TITLE = 'Báo cáo Xếp hạng tín nhiệm không chỉ định'
 RESEARCH_NOTE = 'Tài liệu này chỉ phục vụ mục đích nghiên cứu'
-LIMITATION_NOTE = 'Tài liệu này không thay thế Báo cáo xếp hạng tín nhiệm thông thường'
+from scripts.report_identity import NOTICE
+LIMITATION_NOTE = NOTICE
 
 GROUPS = {
  'BANK': {

@@ -1,0 +1,1036 @@
+{
+  "Build": "V8.131.0-REPORT-SCORES",
+  "RoutingTickers": 1754,
+  "CheckedTickers": 80,
+  "ByStatus": {
+    "INSUFFICIENT_DATA": 26,
+    "SIMULATION": 1,
+    "ESTIMATED": 49,
+    "NOT_APPLICABLE": 4
+  },
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định ABB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "ACB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định ACB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "BAB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định BAB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "BID",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định BID 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "BVB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định BVB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "CTG",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định CTG 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "EIB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định EIB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "HDB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định HDB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "KLB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định KLB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "LPB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định LPB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "MBB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định MBB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "MSB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định MSB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "NAB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định NAB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "NVB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định NVB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "OCB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định OCB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "PGB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định PGB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "SGB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định SGB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "SHB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định SHB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "SSB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định SSB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "STB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định STB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "TCB",
+      "Methodology": "BANK",
+      "Status": "SIMULATION",
+      "Origin": "REFERENCE_REPORT",
+      "Anchor": "vnA-",
+      "SCA": "vnAA+",
+      "ICR": "vnAA+",
+      "ConditionalAssumptions": 0,
+      "FileName": "Báo cáo XHTN không chỉ định TCB 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "TPB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định TPB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "VAB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định VAB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "VBB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định VBB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "VCB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định VCB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "VIB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định VIB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "VPB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 1,
+      "FileName": "Báo cáo XHTN không chỉ định VPB 02-11-2026.docx",
+      "MissingEvidence": {
+        "FinancialInputs": "Thiếu bằng chứng định lượng cho Vốn và Lợi nhuận. Cần dữ liệu cùng kỳ hoặc đánh giá riêng."
+      }
+    },
+    {
+      "Ticker": "ABI",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 11,
+      "FileName": "Báo cáo XHTN không chỉ định ABI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BIC",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnAA",
+      "SCA": "vnA+",
+      "ICR": "vnA+",
+      "ConditionalAssumptions": 11,
+      "FileName": "Báo cáo XHTN không chỉ định BIC 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BLI",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB+",
+      "SCA": "vnBB",
+      "ICR": "vnBB",
+      "ConditionalAssumptions": 11,
+      "FileName": "Báo cáo XHTN không chỉ định BLI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BMI",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA+",
+      "SCA": "vnA",
+      "ICR": "vnA",
+      "ConditionalAssumptions": 11,
+      "FileName": "Báo cáo XHTN không chỉ định BMI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "PGI",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 11,
+      "FileName": "Báo cáo XHTN không chỉ định PGI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "PTI",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 12,
+      "FileName": "Báo cáo XHTN không chỉ định PTI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "AIC",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB-",
+      "SCA": "vnB+",
+      "ICR": "vnB+",
+      "ConditionalAssumptions": 13,
+      "FileName": "Báo cáo XHTN không chỉ định AIC 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "MIG",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 12,
+      "FileName": "Báo cáo XHTN không chỉ định MIG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "PRE",
+      "Methodology": "INSURANCE",
+      "Status": "NOT_APPLICABLE",
+      "Origin": null,
+      "Anchor": "N/A",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 0,
+      "FileName": "Báo cáo XHTN không chỉ định PRE 02-11-2026.docx",
+      "MissingEvidence": [
+        "Phạm vi: Tái bảo hiểm Hanoi Re. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. Cần phương pháp phù hợp với loại hình hoặc BCTC riêng của pháp nhân thuộc phạm vi để xác định Anchor, SCA và ICR."
+      ]
+    },
+    {
+      "Ticker": "VNR",
+      "Methodology": "INSURANCE",
+      "Status": "NOT_APPLICABLE",
+      "Origin": null,
+      "Anchor": "N/A",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 0,
+      "FileName": "Báo cáo XHTN không chỉ định VNR 02-11-2026.docx",
+      "MissingEvidence": [
+        "Phạm vi: Tái bảo hiểm VINARE. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. Cần phương pháp phù hợp với loại hình hoặc BCTC riêng của pháp nhân thuộc phạm vi để xác định Anchor, SCA và ICR."
+      ]
+    },
+    {
+      "Ticker": "PVI",
+      "Methodology": "INSURANCE",
+      "Status": "NOT_APPLICABLE",
+      "Origin": null,
+      "Anchor": "N/A",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 0,
+      "FileName": "Báo cáo XHTN không chỉ định PVI 02-11-2026.docx",
+      "MissingEvidence": [
+        "Phạm vi: PVI Holdings; không đồng nhất Tổng công ty Bảo hiểm PVI. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. Cần phương pháp phù hợp với loại hình hoặc BCTC riêng của pháp nhân thuộc phạm vi để xác định Anchor, SCA và ICR."
+      ]
+    },
+    {
+      "Ticker": "BVH",
+      "Methodology": "INSURANCE",
+      "Status": "NOT_APPLICABLE",
+      "Origin": null,
+      "Anchor": "N/A",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 0,
+      "FileName": "Báo cáo XHTN không chỉ định BVH 02-11-2026.docx",
+      "MissingEvidence": [
+        "Phạm vi: Tập đoàn hỗn hợp bảo hiểm/đầu tư. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. Cần phương pháp phù hợp với loại hình hoặc BCTC riêng của pháp nhân thuộc phạm vi để xác định Anchor, SCA và ICR."
+      ]
+    },
+    {
+      "Ticker": "SSI",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định SSI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VND",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB+",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định VND 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "HCM",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB",
+      "SCA": "vnBB",
+      "ICR": "vnBB",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định HCM 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VCI",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định VCI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "MBS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định MBS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "SHS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định SHS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "FTS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB",
+      "ICR": "vnBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định FTS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BSI",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định BSI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "CTS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB-",
+      "ICR": "vnBB-",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định CTS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "AGR",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB+",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định AGR 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VIX",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnA+",
+      "ICR": "vnA+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định VIX 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "TVS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định TVS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BVS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB",
+      "ICR": "vnBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định BVS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "APG",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnB+",
+      "ICR": "vnB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định APG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ORS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định ORS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VDS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB-",
+      "ICR": "vnBBB-",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định VDS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "HPG",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định HPG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "FPT",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA+",
+      "SCA": "vnA+",
+      "ICR": "vnA+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định FPT 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VNM",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA+",
+      "SCA": "vnA+",
+      "ICR": "vnA+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định VNM 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "MSN",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định MSN 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "MWG",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định MWG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "PNJ",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA",
+      "SCA": "vnA",
+      "ICR": "vnA",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định PNJ 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "REE",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định REE 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "GMD",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA",
+      "SCA": "vnA",
+      "ICR": "vnA",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định GMD 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "DGC",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định DGC 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "DPM",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB+",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định DPM 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "DCM",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB+",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định DCM 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "GAS",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA",
+      "SCA": "vnA",
+      "ICR": "vnA",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định GAS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "PLX",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA",
+      "SCA": "vnA",
+      "ICR": "vnA",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định PLX 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VHC",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định VHC 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ANV",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB+",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định ANV 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "DHC",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB+",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định DHC 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VCG",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA",
+      "SCA": "vnA",
+      "ICR": "vnA",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định VCG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "CTD",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB-",
+      "SCA": "vnBBB-",
+      "ICR": "vnBBB-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định CTD 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "HSG",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB-",
+      "SCA": "vnBBB-",
+      "ICR": "vnBBB-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định HSG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "NKG",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB+",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định NKG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VIC",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB-",
+      "SCA": "vnBBB-",
+      "ICR": "vnBBB-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định VIC 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VHM",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định VHM 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "KDH",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB+",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định KDH 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "PDR",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định PDR 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "NVL",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBB+",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định NVL 02-11-2026.docx",
+      "MissingEvidence": {}
+    }
+  ],
+  "Errors": [],
+  "Result": "PASS",
+  "Note": "PASS xác nhận kiểm tra phần mềm. Bậc tự động có giả định, không phải thẩm định hoàn chỉnh; không tạo bậc khi thiếu dữ liệu cốt lõi hoặc ngoài phạm vi phương pháp."
+}

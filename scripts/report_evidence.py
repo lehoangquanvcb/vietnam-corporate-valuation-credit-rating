@@ -7,13 +7,14 @@ from scripts.financial_evidence import at_period, latest_period, same_period_his
 from scripts.methodology_kpi_engine import LABELS, PCT, MULT, BANK_GROUPS, SEC_GROUPS, CORP_GROUPS
 from scripts.financial_views import HISTORY_METRICS, BASIS_LABELS
 
-ENGINE_VERSION = '8.129.0'
+ENGINE_VERSION = '8.131.0'
 GROUPS = {'BANK': {
  'Hồ sơ kinh doanh':['TotalAssets','GrossLoans','CustomerDeposits'],
  'Vốn và lợi nhuận':['Equity','CAR','EquityAssets','TangibleEquityAssets','AssetEquity','NPAT','NetInterestIncome','ROE','ROA','NIM','CIR','ProfitAssets','NII_OperatingIncome'],
  'Vị thế rủi ro':['NPL','LoanLossCoverage','CreditCostProxy','ProvisionOperatingIncome','LoanAssets'],
  'Huy động vốn và thanh khoản':['CASA','LDR','DepositAssets','FundingGapAssets'],
  'Chỉ tiêu thị trường':['PB','PE']}, 'SECURITIES': SEC_GROUPS, 'CORPORATE': CORP_GROUPS}
+from scripts.report_methodology import GROUPS
 EXTRA_LABELS = {'TotalDebt':'Nợ vay', 'CFO':'Dòng tiền từ hoạt động kinh doanh',
     'Capex':'Chi đầu tư tài sản cố định', 'EBITDA':'Lợi nhuận trước lãi vay thuế và khấu hao',
     'CreditCost':'Chi phí tín dụng', 'Group2LoansRatio':'Tỷ lệ nợ nhóm 2',
@@ -57,6 +58,10 @@ def window_ends_at(record_period,target):
 def build_pack(ticker,basis='FY',years=5):
     ticker=str(ticker).upper(); meta=get_company(ticker);typ=meta['EntityType']
     if basis not in BASIS_LABELS:raise ValueError('Cơ sở lịch sử không hợp lệ: '+str(basis))
+    if not latest_period(ticker,typ):
+        return _empty_pack(ticker,meta,basis,years)
+    if typ=='INSURANCE':
+        return _insurance_pack(ticker,basis,years)
     years=max(3,min(int(years),5)); target=latest_period(ticker,typ)
     peers=list(dict.fromkeys(t for t in peer_tickers(ticker) if t!=ticker and comparable_model(meta,get_company(t))))
     sections=[];seen=set()
@@ -107,11 +112,62 @@ def delta_text(m,a,b):
 
 def narrative(pack,m):
     from scripts.financial_narrative import analyse
-    return analyse(pack,m)
+    from scripts.report_insights import enrich_narrative
+    return enrich_narrative(pack,m,analyse(pack,m))
 
 def cross_findings(pack):
-    from scripts.financial_narrative import conclusions
-    return conclusions(pack)
+    metrics={'BANK':['Equity','NPAT','NPL','CASA'],
+             'SECURITIES':['Revenue','ROE','Loans','CashDebt'],
+             'CORPORATE':['Revenue','NetMargin','CFO','DebtEBITDA'],
+             'INSURANCE':['CombinedRatio','NPAT','Equity','InsuranceReserves']}[pack['Type']]
+    result=[]
+    for m in metrics:
+        if m not in pack['Items']:continue
+        x=pack['Items'][m]
+        if not finite(x['Value']) and not x['History'].Value.notna().any():continue
+        n=narrative(pack,m);text=' '.join(z for z in [n['Meaning'],n['Conclusion']] if z)
+        if text and text not in result:result.append(text)
+    return result
+
+
+def _insurance_pack(ticker,basis,years):
+    """Chuyển bằng chứng bảo hiểm sang giao diện chung, giữ phạm vi so sánh."""
+    from scripts.insurance_analysis import analysis_pack,metric_pair
+    from scripts.insurance_peers import peer_universe, included_rows
+    from scripts.insurance_presentation import own_value
+    pairs=analysis_pack(ticker,basis,years);items={}
+    present={p['Metric'] for p in pairs}
+    peers=peer_universe(ticker)
+    for m in dict.fromkeys(m for ms in GROUPS['INSURANCE'].values() for m in ms):
+        if m not in present:pairs.append(metric_pair(ticker,m,basis,years,peers))
+    for pair in pairs:
+        h=pair['History'].copy();ph=pair['PeerHistory']
+        h['Value']=pd.to_numeric(h.Value,errors='coerce').where(h.Status.eq('OK'))
+        h=h.merge(ph[['Period','PeerMean','PeerCount']],on='Period',how='left',validate='one_to_one')
+        # Đồng nhất điều kiện bình quân với ba lĩnh vực còn lại.
+        h['PeerMean']=h.PeerMean.where(h.PeerCount.ge(5))
+        q=pair['Peers'];rows=included_rows(q.iloc[1:]) if len(q) else q
+        own=q.iloc[0].to_dict() if len(q) else {}
+        items[pair['Metric']]={'Metric':pair['Metric'],'Value':own_value(pair),'Record':own,
+            'Peers':rows[['Ticker','Value','Basis']].to_dict('records') if len(rows) else [],
+            'Excluded':q.iloc[1:][~q.iloc[1:].Ticker.isin(rows.Ticker)].Ticker.tolist() if len(q) else [],
+            'PeerCount':len(rows),'PeerMean':pair['PeerMean'],'History':h,
+            'HistoryBreaks':pair['HistoryBreaks'],'PeerHistoryBreaks':pair['PeerHistoryBreaks'],
+            'HistoryWarnings':pair['HistoryWarnings'],'InsurancePair':pair}
+    return {'Ticker':ticker,'Meta':get_company(ticker),'Type':'INSURANCE',
+            'Period':latest_period(ticker,'INSURANCE'),'Basis':basis,'Years':years,
+            'PeerUniverse':peer_universe(ticker),'Sections':list(GROUPS['INSURANCE'].items()),'Items':items}
+
+
+def _empty_pack(ticker,meta,basis,years):
+    """Mã chưa có BCTC vẫn xuất được hồ sơ; không tạo số hoặc kỳ giả."""
+    sections=list(GROUPS[meta['EntityType']].items())
+    columns=['Metric','Period','DisplayPeriod','Value','Status','Basis','PeerMean','PeerCount']
+    items={m:{'Metric':m,'Value':None,'Record':{},'Peers':[],'Excluded':[],
+              'PeerCount':0,'PeerMean':None,'History':pd.DataFrame(columns=columns)}
+           for _,ms in sections for m in ms}
+    return {'Ticker':ticker,'Meta':meta,'Type':meta['EntityType'],'Period':None,'Basis':basis,
+            'Years':years,'PeerUniverse':[],'Sections':sections,'Items':items}
 
 
 def findings(pack):
@@ -121,5 +177,8 @@ def findings(pack):
         if fmt(m,x['Value'])==fmt(m,x['PeerMean']):continue
         good=x['Value']>=x['PeerMean'] if m in HIGHER else x['Value']<=x['PeerMean']
         difference=abs(x['Value']-x['PeerMean'])/max(abs(x['PeerMean']),1e-12)
-        (strengths if good else risks).append((difference,f'{label(m)} {fmt(m,x["Value"])} so với bình quân peer {fmt(m,x["PeerMean"])}.'))
+        negative=m in HIGHER and x['Value']<0
+        text=f'{label(m)} {fmt(m,x["Value"])} so với bình quân peer {fmt(m,x["PeerMean"])}.'
+        if negative:text+=' Giá trị còn âm nên chưa tạo điểm hỗ trợ tài chính.'
+        (strengths if good and not negative else risks).append((difference,text))
     return ([t for _,t in sorted(strengths,reverse=True)[:3]], [t for _,t in sorted(risks,reverse=True)[:3]])

@@ -81,34 +81,31 @@ class WordReport(unittest.TestCase):
         cls.text=document_text(cls.doc)
 
     def test_report_matches_reference_structure(self):
-        for label in ['KẾT QUẢ XẾP HẠNG','LUẬN ĐIỂM XẾP HẠNG','ĐIỂM MẠNH','ĐIỂM HẠN CHẾ / RỦI RO',
-                      'THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH','RỦI RO VĨ MÔ','RỦI RO NGÀNH','HỒ SƠ KINH DOANH',
-                      'VỐN VÀ DỰ PHÒNG NGHIỆP VỤ','THANH KHOẢN VÀ KHẢ NĂNG THANH TOÁN','QUẢN TRỊ VÀ QUẢN LÝ',
-                      'YẾU TỐ BÊN NGOÀI','ĐỘ NHẠY XẾP HẠNG','TỔNG KẾT CẤU PHẦN XẾP HẠNG']:
+        from scripts.report_methodology import GROUPS,REPORT_TITLE
+        for label in ['KẾT QUẢ XẾP HẠNG','LUẬN ĐIỂM XẾP HẠNG','ĐIỂM MẠNH','ĐIỂM HẠN CHẾ VÀ RỦI RO',
+                      'THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH',
+                      'QUẢN TRỊ, ĐIỀU HÀNH VÀ CÁC ĐIỀU CHỈNH KHÁC',
+                      'YẾU TỐ BÊN NGOÀI','ĐỘ NHẠY XẾP HẠNG','TỔNG KẾT CẤU PHẦN XẾP HẠNG',REPORT_TITLE]:
             self.assertIn(label,self.text)
+        for group in GROUPS['INSURANCE']:
+            self.assertIn(group.upper(),self.text)
         self.assertEqual(self.doc.styles['Normal'].font.name,'Lato')
         self.assertAlmostEqual(self.doc.sections[0].page_width.mm,210,places=1)
         self.assertIn('4F9E1E',self.doc.element.xml)
 
     def test_only_evidenced_metrics_receive_chart_pairs(self):
-        self.assertEqual(len(self.doc.inline_shapes),36)
-        self.assertEqual(self.text.count('Diễn biến nhiều năm:'),18)
-        self.assertEqual(self.text.count('So sánh quý gần nhất:'),18)
-        self.assertEqual(self.text.count('Hàm ý phân tích:'),18)
-        self.assertEqual(self.text.count('Kết luận:'),18)
-        self.assertIn('Quy mô và khả năng chuyển hóa tăng trưởng',self.text)
-        self.assertIn('Kết luận về vốn và dự phòng',self.text)
-        self.assertIn('Điều kiện cải thiện:',self.text)
-        self.assertIn('PHỤ LỤC — DỮ LIỆU VÀ HỒ SƠ CẦN BỔ SUNG',self.text)
-        self.assertNotIn('Chưa thẩm định',self.text)
+        from scripts.report_evidence import build_pack,finite
+        p=build_pack('BVH')
+        active=[x for x in p['Items'].values() if finite(x['Value']) or x['History'].Value.notna().any()]
+        self.assertEqual(len(self.doc.inline_shapes),len(active)*2)
+        self.assertEqual(self.text.count('Diễn biến doanh nghiệp'),len(active))
+        self.assertEqual(self.text.count('So sánh quý gần nhất'),len(active))
+        self.assertIn('NGUỒN VÀ PHẠM VI BÁO CÁO',self.text)
         self.assertNotIn('0/65',self.text)
-        self.assertIn('Ngoài phạm vi phương pháp',self.text)
-        self.assertIn('BVH và PVI được xếp vào nhóm so sánh Phi nhân thọ',self.text)
         self.assertNotIn('Có 9/11 peer được dùng',self.text)
         self.assertNotIn('Dữ liệu có số:',self.text)
         self.assertNotIn('Có 1/11 peer được dùng',self.text)
-        for pair in analysis_pack('BVH'):
-            self.assertIn(pair['Label'],self.text)
+        self.assertNotIn('6T/2026',self.text)
 
 
 if __name__=='__main__':unittest.main()

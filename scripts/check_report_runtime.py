@@ -1,54 +1,54 @@
-"""Xuất và kiểm tra báo cáo Word thực tế của đúng project đang chạy."""
-from pathlib import Path
-from io import BytesIO
-from zipfile import ZipFile
-import argparse
-import json
+"""Kiểm tra cấu trúc cho toàn danh mục và bằng chứng cho các mã được chọn.
+
+Chạy --all để kiểm tra gói bằng chứng mọi mã; thao tác chỉ đọc số liệu cục bộ.
+Không đồng nhất kiểm tra phần mềm với xác nhận dữ liệu hay thẩm định XHTN.
+"""
 import sys
+from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
-
-
-def check(ticker='VCB',output=None):
-    from docx import Document
-    from scripts.report_evidence import build_pack,finite
-    from scripts.multisector_report import generate_docx
-    from scripts.three_methodology_rating import rate_company
-    rr=rate_company(ticker)
-    pack=build_pack(ticker);data=generate_docx(ticker,'rating');doc=Document(BytesIO(data))
-    chart_metrics=sum(finite(x['Value']) or (len(x['History'])>0 and x['History'].Value.notna().any()) for x in pack['Items'].values())
-    failures=[];xml=doc.element.xml
-    if (ROOT/'VERSION.txt').read_text().strip()!='8.129.0':failures.append('VERSION.txt chưa phải 8.129.0')
-    if len(doc.inline_shapes)!=2*chart_metrics:failures.append('Số biểu đồ không khớp danh mục có bằng chứng')
-    if not all(s.width.mm>170 for s in doc.inline_shapes):failures.append('Biểu đồ chưa đủ chiều rộng')
-    if doc.element.xpath('.//w:tbl//w:drawing'):failures.append('Còn biểu đồ nằm trong bảng ghép ngang')
-    if not all(s in xml for s in ['4F9E1E','E6F3D8','Lato']):failures.append('Chưa nhận đúng mẫu xanh Lato')
-    year=int(pack['Period'][:4])-(pack['Period'][-1]!='4')
-    expected=[str(y) for y in range(year-4,year+1)]
-    if any(list(x['History'].DisplayPeriod)!=expected for x in pack['Items'].values()):failures.append('Chuỗi lịch sử chưa đúng 5 năm tài chính')
-    with ZipFile(BytesIO(data)) as z:
-        fonts=[n for n in z.namelist() if n.startswith('word/fonts/')]
-    if len(fonts)!=4:failures.append('Chưa nhúng đủ các phông Lato')
-    histories={m:{'OwnCells':int(x['History'].Value.notna().sum()),'PeerMeanCells':int(x['History'].PeerMean.notna().sum())}
-        for m,x in pack['Items'].items() if len(x['History'])}
-    if output:
-        out=Path(output);out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(data)
-    return {'ProjectPath':str(ROOT),'Ticker':ticker,'Period':pack['Period'],'ReportEngine':'8.129.0',
-        'HistoryBasis':pack['Basis'],'AnnualYears':expected,'PeerBasis':'QUARTER',
-        'Rating':{k:rr.get(k) for k in ['Anchor','InternalNotches','SACP','ExternalSupportNotches','ICR','Outlook','RatingOrigin','AssessmentSource','AssessmentPeriod']},
-        'CurrentMetricsPresent':sum(finite(x['Value']) for x in pack['Items'].values()),'CurrentMetricsTotal':len(pack['Items']),
-        'MissingMetrics':[m for m,x in pack['Items'].items() if not finite(x['Value'])],
-        'Peers':pack['PeerUniverse'],'ChartCount':len(doc.inline_shapes),'EmbeddedFonts':len(fonts),'History':histories,
-        'Failures':failures,'Result':'PASS' if not failures else 'FAIL',
-        'Note':'Đã thực sự xuất Word và kiểm tra cấu trúc. Không xác nhận app Cloud đã triển khai hoặc mọi chỉ tiêu đều đủ; bố cục cần kiểm tra trực quan khi đổi dữ liệu.'}
+import argparse,json
+from scripts.universal_data import universe
+from scripts.report_methodology import GROUPS
+from scripts.report_evidence import build_pack,narrative,finite
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--ticker',default='VCB');parser.add_argument('--output');args=parser.parse_args()
-    try:result=check(args.ticker.upper(),args.output)
-    except Exception as exc:result={'Result':'FAIL','Error':f'{type(exc).__name__}: {exc}'}
-    try:print(json.dumps(result,ensure_ascii=False,indent=2))
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--all',action='store_true')
+    parser.add_argument('--tickers',nargs='+')
+    parser.add_argument('--output')
+    args=parser.parse_args();u=universe()
+    invalid=u[~u.EntityType.isin(GROUPS)]
+    if len(invalid):raise ValueError('Loại hình chưa có mẫu: '+', '.join(invalid.Ticker))
+    selected=args.tickers or (u.Ticker.tolist() if args.all else ['TCB','SSI','FPT','ABI','BVH'])
+    rows=[];errors=[]
+    for i,t in enumerate(selected):
+        try:
+            p=build_pack(t);active=0;gaps=0
+            if p['Period']:
+                end=int(p['Period'][:4])-(p['Period'][-1]!='4')
+                expected=[str(y) for y in range(end-4,end+1)]
+                for m,x in p['Items'].items():
+                    assert x['History'].DisplayPeriod.tolist()==expected,(t,m,'Không phải 5 năm hoàn chỉnh')
+                    assert t not in [r['Ticker'] for r in x['Peers']],(t,m,'Peer có chính doanh nghiệp')
+                    if finite(x['Value']) or x['History'].Value.notna().any():
+                        n=narrative(p,m);assert n['History'] and n['Peers'] and (n['Meaning'] or n['Conclusion']),(t,m)
+                        active+=1
+                    if not finite(x['Value']):gaps+=1
+            rows.append({'Ticker':t,'Type':p['Type'],'Period':p['Period'],'AnnualYears':5,
+                         'ActiveMetrics':active,'ExpectedCharts':active*2,'MissingLatestMetrics':gaps,
+                         'PeerCandidates':len(p['PeerUniverse'])})
+        except Exception as exc:errors.append({'Ticker':t,'Error':str(exc)})
+        if (i+1)%10==0:print(f'Checked {i+1}/{len(selected)} tickers',flush=True)
+    result={'Build':'V8.131.0-REPORT-SCORES','RoutingTickers':len(u),'RoutingByType':u.groupby('EntityType').size().to_dict(),
+            'EvidenceTickers':len(rows),'Checks':rows,'Errors':errors,'Result':'PASS' if not errors else 'FAIL',
+            'Note':'PASS kiểm tra phần mềm và gói bằng chứng; không xác nhận đủ dữ liệu hay bậc xếp hạng cho mọi mã.'}
+    text=json.dumps(result,ensure_ascii=False,indent=2)
+    if args.output:Path(args.output).write_text(text,encoding='utf-8')
+    try:print(text)
     except UnicodeEncodeError:print(json.dumps(result,ensure_ascii=True,indent=2))
-    return 0 if result['Result']=='PASS' else 1
+    return int(bool(errors))
+
 
 if __name__=='__main__':raise SystemExit(main())

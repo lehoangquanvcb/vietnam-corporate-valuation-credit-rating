@@ -9,7 +9,7 @@ from scripts.financial_evidence import at_period, latest_period, comparable_mode
 SECTOR_METRICS = frozenset({
     'Revenue', 'TotalAssets', 'NPAT', 'ROE', 'ROA', 'NetMargin',
     'Equity', 'EquityAssets', 'PaidInCapital', 'InvestmentIncome',
-    'DebtEquity', 'DebtDue24MEquity', 'PB', 'PE',
+    'DebtEquity', 'DebtDue24MEquity', 'PB', 'PE', 'Cash','CashAssets','CFO',
 })
 SUBTYPE_LABELS = {'NONLIFE':'Phi nhân thọ', 'LIFE':'Nhân thọ',
                   'REINSURANCE':'Tái bảo hiểm', 'GROUP':'Tập đoàn bảo hiểm'}

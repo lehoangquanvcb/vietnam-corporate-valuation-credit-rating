@@ -7,17 +7,18 @@ if str(_PROJECT_ROOT) not in _sys.path:
 from pathlib import Path
 import sys, subprocess, shutil
 from scripts.multisector_report import generate_docx,generate_pdf
+from scripts.report_identity import export_date, report_filename
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'reports';OUT.mkdir(exist_ok=True)
 
 def export(ticker,report_type='analysis'):
     ticker=str(ticker).upper()
-    label='XHTN' if report_type=='rating' else 'Phan_tich_Gia_CP_Dinh_gia_MA'
-    docx=OUT/f'{ticker}_{label}.docx'
-    docx.write_bytes(generate_docx(ticker,report_type))
-    pdf=OUT/f'{ticker}_{label}.pdf'
-    pdf.write_bytes(generate_pdf(ticker,report_type))
+    when=export_date()
+    docx=OUT/report_filename(ticker,report_type,when)
+    docx.write_bytes(generate_docx(ticker,report_type,mna={'export_date':when}))
+    pdf=OUT/report_filename(ticker,report_type,when,'pdf')
+    pdf.write_bytes(generate_pdf(ticker,report_type,mna={'export_date':when}))
     print(docx);print(pdf)
     return docx,pdf
 

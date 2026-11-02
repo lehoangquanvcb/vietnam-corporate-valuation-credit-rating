@@ -11,7 +11,7 @@ from scripts.sector_templates import get_template
 from scripts.sector_kpi_engine import sector_kpi_table
 from scripts.intelligent_analyst import analyze as intelligent_analyze
 from scripts.valuation_regime import assess as valuation_regime
-from scripts.three_methodology_rating import rate_company as rate_three_methodologies
+from scripts.report_rating import rate_company as rate_three_methodologies
 from scripts.fair_value_range import fair_value_range
 from scripts.rating_committee_engine import committee_pack
 from scripts.valuation_triangulation import triangulate
@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.129.0-REFERENCE-RATING'
+BUILD_TAG='V8.131.0-REPORT-SCORES'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -483,37 +483,17 @@ def _safe_show(df, wanted, n=None):
     q=df[cols].copy() if cols else df.copy()
     return q.head(n) if n else q
 
-def _rating_report_fallback(ticker, rating_result, error):
-    """Minimal transparent DOCX when legacy report generator rejects missing rating values."""
-    from docx import Document
-    from docx.shared import Pt
-    doc=Document()
-    doc.add_heading('BÁO CÁO MÔ PHỎNG XẾP HẠNG TÍN NHIỆM', 0)
-    doc.add_paragraph(f'Doanh nghiệp: {ticker}')
-    doc.add_paragraph('BẢN DỰ THẢO – KHÔNG PHẢI KẾT QUẢ XHTN ĐƯỢC PHÊ DUYỆT')
-    r=rating_result or {}
-    for k in ('MethodologyName','Anchor','SACP','SCA','ICR','Outlook'):
-        v=r.get(k)
-        if v is not None: doc.add_paragraph(f'{k}: {v}')
-    doc.add_heading('Các cấu phần',level=1)
-    for k,v in (r.get('Factors') or {}).items(): doc.add_paragraph(f'{k}: {v}')
-    doc.add_heading('Bằng chứng và dữ liệu cần bổ sung',level=1)
-    for k,v in (r.get('MissingEvidence') or {}).items() if isinstance(r.get('MissingEvidence'),dict) else []:
-        doc.add_paragraph(f'{k}: {v}')
-    doc.add_paragraph('Bộ tạo báo cáo chi tiết chưa xử lý được dữ liệu thiếu; bản này chỉ trình bày kết quả thực tế có sẵn, không suy diễn bậc XHTN.')
-    out=io.BytesIO();doc.save(out);return out.getvalue()
-
-
 def _download_report_block(report_type, rating_result=None):
-    title='Báo cáo Phân tích – Định giá – M&A' if report_type=='analysis' else 'Báo cáo mô phỏng quá trình Xếp hạng tín nhiệm'
+    title='Báo cáo Phân tích – Định giá – M&A' if report_type=='analysis' else 'Báo cáo Xếp hạng tín nhiệm không chỉ định'
     st.markdown('---');st.subheader('Xuất '+title)
     c1,c2=st.columns(2)
-    suffix='Phan_tich_Dinh_gia_MA' if report_type=='analysis' else 'XHTN'
+    from scripts.report_identity import export_date, report_filename
+    _export_date=export_date().isoformat()
     import hashlib
     from scripts.financial_evidence import signature
     from scripts.dynamic_peer_engine import peer_source_fingerprint
     _report_sources=[peer_source_fingerprint()]
-    _digest=hashlib.sha256(json.dumps({'build':BUILD_TAG,'sources':_report_sources,'rating':rating_result,'basis':_history_basis,'years':_history_years,'snapshot':s.get('SnapshotPeriod')},sort_keys=True,default=str).encode()).hexdigest()[:12]
+    _digest=hashlib.sha256(json.dumps({'build':BUILD_TAG,'export_date':_export_date,'sources':_report_sources,'rating':rating_result,'basis':_history_basis,'years':_history_years,'snapshot':s.get('SnapshotPeriod')},sort_keys=True,default=str).encode()).hexdigest()[:12]
     identity=f'{selected}_{report_type}_{_digest}'
     for kind, column, title, mime, ext in [
         ('docx',c1,'Word','application/vnd.openxmlformats-officedocument.wordprocessingml.document','docx'),
@@ -522,18 +502,14 @@ def _download_report_block(report_type, rating_result=None):
         with column:
             if st.button('Chuẩn bị báo cáo '+title,key='prepare_'+key,use_container_width=True):
                 try:
-                    data=(generate_docx(selected,report_type,rating_result,{'history_basis':_history_basis,'history_years':_history_years}) if kind=='docx' else generate_pdf(selected,report_type,rating_result,{'history_basis':_history_basis,'history_years':_history_years}))
+                    data=(generate_docx(selected,report_type,rating_result,{'history_basis':_history_basis,'history_years':_history_years,'export_date':_export_date}) if kind=='docx' else generate_pdf(selected,report_type,rating_result,{'history_basis':_history_basis,'history_years':_history_years,'export_date':_export_date}))
                     st.session_state[key]=data.getvalue() if hasattr(data,'getvalue') else data
                 except Exception as exc:
-                    if kind=='docx' and report_type=='rating':
-                        st.session_state[key]=_rating_report_fallback(selected,rating_result,str(exc))
-                        st.warning('Báo cáo chi tiết chưa tạo được; đã chuẩn bị bản Word dự thảo với dữ liệu thực có. Lỗi: '+str(exc))
-                    else:
-                        st.session_state.pop(key,None)
-                        st.error('Không thể tạo báo cáo '+title+': '+str(exc))
+                    st.session_state.pop(key,None)
+                    st.error('Không thể tạo báo cáo '+title+': '+str(exc))
             data=st.session_state.get(key)
             if isinstance(data,(bytes,bytearray)) and data:
-                st.download_button('Tải báo cáo '+title,data,file_name=f'{selected}_{suffix}.{ext}',mime=mime,key='download_'+key,use_container_width=True)
+                st.download_button('Tải báo cáo '+title,data,file_name=report_filename(selected,report_type,_export_date,ext),mime=mime,key='download_'+key,use_container_width=True)
 
 if _active_section==_sections[0]:
     st.subheader('Thông tin tổng quan')
@@ -733,16 +709,22 @@ if _active_section==_sections[2]:
                 _v=st.selectbox(_lab,['Chưa thẩm định']+list(_vals),key=f'corp_{selected}_{_key}')
                 if isinstance(_v,int):_rating_overrides[_key]=_v
     rr3=rate_three_methodologies(selected,_rating_overrides)
+    if rr3.get('RatingOrigin')=='AUTO_RESEARCH':
+        st.caption(rr3.get('RatingBasisNote',''))
+        with st.expander('Giả định của bảng điểm tự động',expanded=False):
+            for _assumption in rr3.get('Assumptions',[]):st.write('• '+_assumption)
     if rr3.get('Methodology')=='INSURANCE':
         from scripts.insurance_rating import insurance_scorecard, missing_evidence_labels, rating_status_text, rating_value_text
         from scripts.insurance_presentation import pending_assessment_groups
-        if rr3.get('RatingStatus')=='SIMULATED':
+        if rr3.get('RatingStatus')=='ESTIMATED':
+            st.success('Đã tính Anchor, SCA và bậc ước tính; xem bảng điểm và các giả định công bố.')
+        elif rr3.get('RatingStatus')=='SIMULATED':
             st.success('Đã tính xong kết quả mô phỏng từ các đầu vào đã nhập; cần phê duyệt theo quy trình XHTN.')
         elif rr3.get('RatingStatus')=='NOT_APPLICABLE':
             st.info(rating_status_text(rr3)+'. '+rr3.get('ApplicabilityReason',''))
         else:
             st.info('Phân tích tài chính đã tách khỏi bước phê duyệt XHTN. Chưa đủ hồ sơ để xác định bậc mô phỏng; xem các nhóm cần bổ sung bên dưới.')
-        if rr3.get('RatingBlocker')!='SCOPE':
+        if rr3.get('RatingBlocker')!='SCOPE' and rr3.get('RatingOrigin')!='AUTO_RESEARCH':
             with st.expander('Hồ sơ cần bổ sung để xác định bậc XHTN',expanded=False):
                 st.caption(f"Đầu vào đã nhập: {rr3['AssessmentInputCount']}/{rr3['AssessmentInputTotal']}. Đây là tiến độ hồ sơ, không phải độ đầy đủ BCTC.")
                 _pending=pending_assessment_groups(rr3)
@@ -811,7 +793,7 @@ if _active_section==_sections[2]:
             st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng.')
     elif rr3.get('Methodology')=='INSURANCE':
         st.markdown('### Tổng kết cấu phần xếp hạng')
-        _ins_rows=insurance_scorecard(rr3)
+        _ins_rows=rr3.get('Scorecard') or insurance_scorecard(rr3)
         st.dataframe(pd.DataFrame(_ins_rows),hide_index=True,use_container_width=True)
         st.caption(rr3.get('ScopeNote',''))
     elif rr3.get('Methodology') in ('BANK','SECURITIES'):
@@ -820,7 +802,9 @@ if _active_section==_sections[2]:
 
     # Component summary: missing assessments remain unknown, never converted to +0.
     if rr3.get('Methodology')!='INSURANCE':st.markdown('### Tổng kết cấu phần xếp hạng')
-    if rr3.get('Methodology') in ('BANK','SECURITIES'):
+    if rr3.get('Scorecard'):
+        if rr3.get('Methodology')!='INSURANCE':st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
+    elif rr3.get('Methodology') in ('BANK','SECURITIES'):
         _desc_score={'Rất Mạnh':'1/6','Mạnh':'2/6','Phù Hợp':'3/6','Trung Bình':'4/6','Yếu':'5/6','Rất Yếu':'6/6'}
         _desc_notch={'Rất Mạnh':2,'Mạnh':1,'Phù Hợp':0,'Trung Bình':-1,'Yếu':-2,'Rất Yếu':-4}
         _sumrows=[]
@@ -867,41 +851,13 @@ if _active_section==_sections[2]:
         ]
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
 
-    # Show an auditable factor waterfall even before the final rating is approved.
-    if rr3.get('Methodology')=='BANK':
-        _wf=[{'Bước':'Anchor cố định','Điều chỉnh':'—','Bậc XHTN':_rating_no_vn(rr3.get('Anchor','N/A'))}]
-        for _k,_v in (rr3.get('Factors') or {}).items():
-            _wf.append({'Bước':_k,'Điều chỉnh':f"{_desc_notch[_v]:+d}" if _v in _desc_notch else 'N/A','Bậc XHTN':'Đang tổng hợp'})
-        _wf.extend([{'Bước':'SACP','Điều chỉnh':'—','Bậc XHTN':_rating_no_vn(rr3.get('SACP','N/A'))},
-                    {'Bước':'Hỗ trợ bên ngoài','Điều chỉnh':_fmt_notch(rr3.get('ExternalSupportNotches')),'Bậc XHTN':_rating_no_vn(rr3.get('ICR','N/A'))}])
-        rc={'Waterfall':_wf}
-    else:
-        rc=committee_pack(selected,_rating_overrides)
     if rr3.get('Methodology')!='INSURANCE':
-        st.markdown('### Waterfall trình Hội đồng XHTN')
-        _waterfall=pd.DataFrame(rc.get('Waterfall',[]))
-        if len(_waterfall):st.dataframe(_waterfall,hide_index=True,use_container_width=True)
-        else:st.info('Chưa có waterfall; cần hoàn thành thẩm định cấu phần.')
-    if rr3.get('Methodology')=='BANK':
-        _spec={'CAR','ROA','ROE','NIM','CIR','NPL','LoanLossCoverage','CreditCost','Group2LoansRatio','CASA','LDR','LiquidityCoverageRatio','StableFundingRatio'}
-        _present={m for m in _spec if num(s.get(m)) is not None}
-        _cov=len(_present)/len(_spec)
-        ev={'ICR':rr3.get('ICR','N/A'),'RatingConfidence':'Chờ thẩm định' if rr3.get('ICR') in ('N/A',None) else 'Mô phỏng – cần phê duyệt','DataQuality':{'Coverage':_cov},'EvidenceLedger':[]}
-        st.caption(f'Coverage định lượng: {len(_present)}/{len(_spec)} chỉ tiêu thiết kế; không bao gồm đánh giá định tính và hỗ trợ bên ngoài.')
-    else:
-        ev=rating_evidence(selected,_rating_overrides)
-        if rr3.get('Methodology')=='INSURANCE':
-            _dq=ev['DataQuality']
-            st.markdown('### Độ đầy đủ dữ liệu phân tích')
-            e1,e2,e3=st.columns(3)
-            e1.metric('Có số / chỉ tiêu áp dụng',f"{len(_dq['Present'])}/{_dq['ApplicableTotal']}")
-            e2.metric('Cần bổ sung',len(_dq['Missing']));e3.metric('Không áp dụng',len(_dq['NotApplicable']))
-            st.caption(_dq['Note'])
-    if rr3.get('Methodology')!='INSURANCE':
-        st.markdown('### Mức độ tin cậy của kết quả')
-        _coverage=ev.get('DataQuality',{}).get('Coverage')
-        _coverage_label=f'{_coverage*100:.0f}%' if isinstance(_coverage,(int,float)) and np.isfinite(_coverage) else 'N/A'
-        e1,e2,e3=st.columns(3);e1.metric('ICR mô phỏng',_rating_no_vn(ev.get('ICR','N/A')));e2.metric('Độ tin cậy XHTN',ev.get('RatingConfidence','N/A'));e3.metric('Độ đầy đủ dữ liệu',_coverage_label)
+        st.markdown('### Chuỗi hình thành bậc xếp hạng')
+        _waterfall=[{'Bước':name,'Bậc':_rating_no_vn(value)} for name,value in [
+            ('Anchor',rr3.get('Anchor','N/A')),('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A'))),('ICR',rr3.get('ICR','N/A'))]]
+        st.dataframe(pd.DataFrame(_waterfall),hide_index=True,use_container_width=True)
+    ev={'ICR':rr3.get('ICR','N/A'),'RatingConfidence':('Ước tính theo giả định công bố' if rr3.get('RatingOrigin')=='AUTO_RESEARCH' else 'Theo bảng chấm đã lưu / nhập'),
+        'EvidenceLedger':rr3.get('QuantitativeEvidence',[])}
 
     with st.expander('Phương pháp, audit trail & chi tiết máy tính',expanded=False):
         st.write(f"**Phương pháp tự động lựa chọn:** {rr3.get('MethodologyName','N/A')}")

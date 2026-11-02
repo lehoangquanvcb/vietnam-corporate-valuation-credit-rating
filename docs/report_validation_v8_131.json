@@ -1,0 +1,96 @@
+{
+  "Build": "V8.131.0-REPORT-SCORES",
+  "DateVietnam": "2026-11-02",
+  "FullTestSuite": {
+    "Passed": 261,
+    "MatrixSubtestsPassed": 22,
+    "LogTail": "261 passed, 22 subtests passed in 123.86s (0:02:03)"
+  },
+  "FinalReportTests": {
+    "Passed": 41,
+    "LogTail": "41 passed in 37.14s"
+  },
+  "StreamlitAppTest": [
+    {
+      "Ticker": "TCB",
+      "ICR": "vnAA+",
+      "Status": "SIMULATION",
+      "WordButton": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "WordButton": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "WordButton": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "WordButton": true,
+      "Exceptions": 0
+    }
+  ],
+  "RoutingTickers": 1754,
+  "ScoreBatch": {
+    "CheckedTickers": 80,
+    "ByStatus": {
+      "INSUFFICIENT_DATA": 26,
+      "SIMULATION": 1,
+      "ESTIMATED": 49,
+      "NOT_APPLICABLE": 4
+    },
+    "Errors": [],
+    "Result": "PASS"
+  },
+  "RenderedReports": {
+    "TCB": {
+      "Pages": 28,
+      "Header": true,
+      "Footer": true,
+      "AuthorDate": true,
+      "NoSoftwareVersion": true,
+      "SparsePages": []
+    },
+    "SSI": {
+      "Pages": 34,
+      "Header": true,
+      "Footer": true,
+      "AuthorDate": true,
+      "NoSoftwareVersion": true,
+      "SparsePages": []
+    },
+    "ABI": {
+      "Pages": 30,
+      "Header": true,
+      "Footer": true,
+      "AuthorDate": true,
+      "NoSoftwareVersion": true,
+      "SparsePages": []
+    },
+    "HPG": {
+      "Pages": 42,
+      "Header": true,
+      "Footer": true,
+      "AuthorDate": true,
+      "NoSoftwareVersion": true,
+      "SparsePages": []
+    }
+  },
+  "VisualReview": "All pages of four rendered samples reviewed; annual history table kept together; no clipping or overlap observed.",
+  "Limitations": [
+    "Automatic ratings are conditional research estimates with published assumptions, not completed assessments.",
+    "No grade is generated when core inputs are missing.",
+    "BVH/PVI consolidated group financials and PRE/VNR reinsurance remain outside the direct non-life rating method scope.",
+    "80 actual ticker score runs, not 1754 completed company assessments."
+  ]
+}
