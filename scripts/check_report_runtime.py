@@ -41,7 +41,7 @@ def main():
                          'PeerCandidates':len(p['PeerUniverse'])})
         except Exception as exc:errors.append({'Ticker':t,'Error':str(exc)})
         if (i+1)%10==0:print(f'Checked {i+1}/{len(selected)} tickers',flush=True)
-    result={'Build':'V8.131.0-REPORT-SCORES','RoutingTickers':len(u),'RoutingByType':u.groupby('EntityType').size().to_dict(),
+    result={'Build':'V8.132.0-RATING-FIRST-CHARTS','RoutingTickers':len(u),'RoutingByType':u.groupby('EntityType').size().to_dict(),
             'EvidenceTickers':len(rows),'Checks':rows,'Errors':errors,'Result':'PASS' if not errors else 'FAIL',
             'Note':'PASS kiểm tra phần mềm và gói bằng chứng; không xác nhận đủ dữ liệu hay bậc xếp hạng cho mọi mã.'}
     text=json.dumps(result,ensure_ascii=False,indent=2)

@@ -1,0 +1,69 @@
+{
+  "Build": "V8.132.0-RATING-FIRST-CHARTS",
+  "DateVietnam": "2026-11-02",
+  "RegressionTests": "27 passed in 14.48s",
+  "FinalChartTests": "6 passed in 3.55s",
+  "Streamlit": {
+    "Result": "PASS",
+    "Checks": [
+      {
+        "Ticker": "ABB",
+        "DefaultRatingTab": true,
+        "UpgradeResetsOnce": true,
+        "Charts": [
+          8,
+          5
+        ]
+      },
+      {
+        "Ticker": "TCB",
+        "RatingTabRetained": true,
+        "Charts": [
+          8,
+          5
+        ],
+        "WordDownload": true,
+        "Exceptions": 0
+      },
+      {
+        "Ticker": "SSI",
+        "RatingTabRetained": true,
+        "Charts": [
+          8,
+          5
+        ],
+        "WordDownload": true,
+        "Exceptions": 0
+      },
+      {
+        "Ticker": "ABI",
+        "RatingTabRetained": true,
+        "Charts": [
+          46,
+          24
+        ],
+        "WordDownload": true,
+        "Exceptions": 0
+      },
+      {
+        "Ticker": "HPG",
+        "RatingTabRetained": true,
+        "Charts": [
+          10,
+          6
+        ],
+        "WordDownload": true,
+        "Exceptions": 0
+      }
+    ],
+    "AllNavigationRoutes": true
+  },
+  "CARSourceFinding": {
+    "Ticker": "ABB",
+    "LastObserved": 0.0987,
+    "AsOf": "2025-Q2",
+    "CurrentFinancialPeriod": "2026-Q2",
+    "AnnualYearEndValuesAvailable": false,
+    "SourceValuesChanged": false
+  }
+}

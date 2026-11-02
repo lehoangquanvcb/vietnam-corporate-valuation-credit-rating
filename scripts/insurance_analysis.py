@@ -115,6 +115,7 @@ def insurance_summary(ticker):
 def figures(pair):
     """Hai biểu đồ có cùng đơn vị; giữ khoảng trống tại mốc thiếu."""
     import plotly.graph_objects as go
+    from scripts.financial_charts import clean_figure, COMPANY_COLOR, PEER_BAR_COLOR
     m=pair['Metric'];scale=100 if m in PCT else 1 if m in MULT else 1e-9
     unit='%' if m in PCT else 'lần' if m in MULT else 'tỷ đồng'
     h=pair['History'];p=pair['Peers'];ph=pair.get('PeerHistory',pd.DataFrame())
@@ -123,7 +124,7 @@ def figures(pair):
         cuts=[0]+pair.get('HistoryBreaks',[])+[len(h)]
         for start,stop in zip(cuts,cuts[1:]):
             z=h.iloc[start:stop]
-            a.add_scatter(x=z.DisplayPeriod,y=pd.to_numeric(z.Value,errors='coerce').where(z.Status.eq('OK'))*scale,mode='lines+markers',connectgaps=False,name='Doanh nghiệp',legendgroup='company',showlegend=start==0,line_color='#166b55')
+            a.add_scatter(x=z.DisplayPeriod,y=pd.to_numeric(z.Value,errors='coerce').where(z.Status.eq('OK'))*scale,mode='lines+markers',connectgaps=False,name='Doanh nghiệp',legendgroup='company',showlegend=start==0,line_color=COMPANY_COLOR)
     if len(ph):
         cuts=[0]+pair.get('PeerHistoryBreaks',[])+[len(ph)]
         for start,stop in zip(cuts,cuts[1:]):
@@ -133,11 +134,13 @@ def figures(pair):
                           line=dict(color='#C07820',dash='dash'),hovertemplate='%{x}: %{y:.2f}<br>N = %{customdata}<extra>Bình quân peer</extra>')
     if len(p):
         z=included_rows(p)
-        if len(z):b.add_bar(x=z.Ticker,y=z.Value*scale,marker_color=['#166b55' if t==p.iloc[0].Ticker else '#8da6b9' for t in z.Ticker])
+        if len(z):b.add_bar(x=z.Ticker,y=z.Value*scale,marker_color=[COMPANY_COLOR if t==p.iloc[0].Ticker else PEER_BAR_COLOR for t in z.Ticker])
     for fig,title in [(a,'Chuỗi năm gần nhất'),(b,f"Doanh nghiệp và {pair['PeerCount']} peer · {pair['Period']}")]:
         fig.update_layout(title=title,height=310,margin=dict(t=50,l=60,r=15,b=65),yaxis_title=unit,showlegend=fig is a,
                           legend=dict(orientation='h',y=-.18,x=0))
-    return a,b
+    periods=h.DisplayPeriod.tolist() if len(h) else ph.DisplayPeriod.tolist() if len(ph) else []
+    b.update_xaxes(type='category')
+    return clean_figure(a,periods),clean_figure(b)
 
 def render_analysis(ticker,basis='FY',years=5,key='insurance'):
     import streamlit as st
@@ -182,11 +185,16 @@ def render_analysis(ticker,basis='FY',years=5,key='insurance'):
         if not has_evidence(pair):continue
         with st.expander(pair['Group']+' · '+pair['Label'],expanded=False):
             f1,f2=figures(pair)
-            st.plotly_chart(f1,use_container_width=True,key=key+'hist_'+pair['Metric'])
-            st.write(pair['NarrativeHistory'])
-            st.caption(pair['PeerHistoryNote'])
-            st.plotly_chart(f2,use_container_width=True,key=key+'peer_'+pair['Metric'])
-            st.write(pair['NarrativePeer']);st.write(pair['AnalysisText'])
+            if f1 is not None:
+                st.plotly_chart(f1,use_container_width=True,key=key+'hist_'+pair['Metric'])
+                st.write(pair['NarrativeHistory'])
+                st.caption(pair['PeerHistoryNote'])
+            else:st.caption(pair['Label']+': chưa có số liệu năm để vẽ biểu đồ lịch sử.')
+            if f2 is not None:
+                st.plotly_chart(f2,use_container_width=True,key=key+'peer_'+pair['Metric'])
+                st.write(pair['NarrativePeer'])
+            else:st.caption(pair['Label']+': chưa có số liệu đúng quý để vẽ biểu đồ so sánh.')
+            st.write(pair['AnalysisText'])
             st.markdown('**Kết luận:** '+pair['ConclusionText'])
             if pair['PeerExclusions']:st.caption(pair['PeerExclusions'])
             for warning in pair.get('HistoryWarnings',[]):st.warning(warning)

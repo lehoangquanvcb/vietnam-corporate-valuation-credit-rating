@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.131.0-REPORT-SCORES'
+BUILD_TAG='V8.132.0-RATING-FIRST-CHARTS'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -341,17 +341,12 @@ def _security_peer_raw_mean_history(ticker, metric, max_peers=10):
     return allh.groupby('Period',as_index=False)['Value'].mean().rename(columns={'Value':'IndustryMean'})
 
 def metric_chart(ticker,metric,title,percent=False):
-    from scripts.financial_views import history_comparison, BASIS_LABELS
+    from scripts.financial_views import history_comparison
     from scripts.report_evidence import scale,unit
-    h=history_comparison(ticker,metric,'FY',5)
-    _sc=scale(metric)
-    fig=go.Figure()
-    if len(h):
-        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.Value*_sc,name=ticker,mode='lines+markers',connectgaps=False))
-        fig.add_trace(go.Scatter(x=h.DisplayPeriod,y=h.PeerMean*_sc,name='TB peer cùng kỳ',mode='lines+markers',connectgaps=False,line=dict(dash='dash')))
-    fig.update_layout(title=title+' · '+BASIS_LABELS[globals().get('_history_basis','FY')],height=330,legend=dict(orientation='h',y=-.2),margin=dict(t=50,b=70))
-    fig.update_yaxes(title=unit(metric))
-    return fig
+    from scripts.financial_charts import history_figure
+    return history_figure(history_comparison(ticker,metric,'FY',5),ticker,
+                          title+' · Cả năm',scale(metric),unit(metric))
+
 
 def _latest_metric_period(ticker,metric):
     try:
@@ -365,12 +360,48 @@ def _latest_metric_period(ticker,metric):
 def latest_peer_bar_chart(ticker,metric,title,percent=False,max_peers=10):
     from scripts.financial_views import peer_metric_frame
     from scripts.report_evidence import scale,unit
-    q=peer_metric_frame(ticker,metric)
-    fig=go.Figure()
-    if len(q):fig.add_trace(go.Bar(x=q.Ticker,y=q.Value*scale(metric),marker_color=['#116b55' if t==ticker else '#9eb5c5' for t in q.Ticker]))
-    fig.update_layout(title=title+' · cùng kỳ/cơ sở',height=330,margin=dict(t=55,b=45))
-    fig.update_yaxes(title=unit(metric))
-    return fig
+    from scripts.financial_charts import peer_figure
+    return peer_figure(peer_metric_frame(ticker,metric),ticker,
+                       title+' · cùng kỳ/cơ sở',scale(metric),unit(metric))
+
+
+def _metric_missing_caption(ticker,metric,title,history_only=False):
+    from scripts.financial_evidence import latest_period
+    period=latest_period(ticker,get_company(ticker)['EntityType']) or 'gần nhất'
+    text=f'{title}: chưa có số liệu cuối năm trong chuỗi 5 năm'+('.' if history_only else f' hoặc số liệu đúng quý {period}.')
+    if metric=='CAR':
+        snap=get_snapshot(ticker);value=num(snap.get('CAR'));asof=snap.get('CAR_AsOf')
+        if value is not None and asof:
+            text+=f' CAR công bố gần nhất trong nguồn hiện có: {vi(value*100,2)}% tại {asof}.'
+    return text
+
+
+def _render_metric_analysis(ticker,metric,title,pack):
+    from scripts.report_evidence import narrative,finite
+    from scripts.financial_charts import numeric_values
+    hist=metric_chart(ticker,metric,title+' · 5 năm tài chính')
+    peers=latest_peer_bar_chart(ticker,metric,title+' · quý gần nhất')
+    if hist is None and peers is None:
+        st.caption(_metric_missing_caption(ticker,metric,title))
+        return
+    item=pack['Items'].get(metric,{})
+    history=item.get('History',pd.DataFrame())
+    own_history=len(history)>0 and numeric_values(history.Value.tolist()).notna().any()
+    own_current=finite(item.get('Value'))
+    note=narrative(pack,metric) if metric in pack['Items'] and (own_history or own_current) else {}
+    if hist is not None:
+        _plotly_chart_safe(hist,use_container_width=True)
+        if own_history and note.get('History'):st.write(note['History'])
+        elif not own_history:st.caption(title+': chưa có số liệu năm của doanh nghiệp; biểu đồ chỉ hiển thị peer có số.')
+    if peers is not None:
+        _plotly_chart_safe(peers,use_container_width=True)
+        if own_current and note.get('Peers'):st.write(note['Peers'])
+        elif not own_current:st.caption(title+': chưa có số liệu doanh nghiệp tại quý so sánh.')
+    elif own_history:
+        st.caption(title+': chưa có số liệu cùng quý gần nhất để so sánh.')
+    conclusions=list(dict.fromkeys(note.get(k,'').strip() for k in ['Meaning','Conclusion'] if note.get(k,'').strip()))
+    if conclusions:st.write(' '.join(conclusions))
+
 
 def _growth_from_hist(metric):
     try:x=pd.read_csv(DATA/'bank_history_long.csv')
@@ -459,8 +490,12 @@ if meta['EntityType']=='INSURANCE' and val.get('Price') is None:
 if meta.get('Methodology')=='EXCLUDED_SPECIALIZED' and not (str(meta.get('EntityType','')).upper().startswith('INSURANCE') or any(x in str(meta.get('Sector','')).lower() for x in ['bảo hiểm','insurance','bao hiem'])): st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
 if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['TotalAssets','Revenue','ROE','Price']): st.info(f'Chưa có đủ dữ liệu tài chính cho {selected}.')
 
-_sections=['HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','BÁO CÁO XẾP HẠNG TÍN NHIỆM','DỮ LIỆU & QUẢN TRỊ']
-_active_section=st.radio('Điều hướng',_sections,horizontal=True,label_visibility='collapsed',key='main_section_nav')
+_sections=['BÁO CÁO XẾP HẠNG TÍN NHIỆM','HỒ SƠ DOANH NGHIỆP','PHÂN TÍCH, ĐỊNH GIÁ & M&A','DỮ LIỆU & QUẢN TRỊ']
+# Chuyển một lần khi nâng cấp; các lần rerun sau giữ tab người dùng vừa chọn.
+if st.session_state.get('_main_nav_layout')!='rating-first':
+    st.session_state['main_section_nav']=_sections[0]
+    st.session_state['_main_nav_layout']='rating-first'
+_active_section=st.radio('Điều hướng',_sections,index=0,horizontal=True,label_visibility='collapsed',key='main_section_nav')
 from scripts.financial_views import BASIS_LABELS, HISTORY_METRICS, HISTORY_NOTE, history_table
 _history_basis='FY'
 _history_years=5
@@ -473,7 +508,9 @@ if _active_section in _sections[:3]:
         _hm=st.multiselect('Chỉ tiêu trên biểu đồ lịch sử',_history_options,default=_history_options[:2],key='history_metrics_'+selected)
         for _m in _hm:
             from scripts.methodology_kpi_engine import LABELS, PCT
-            _plotly_chart_safe(metric_chart(selected,_m,LABELS.get(_m,_m),_m in PCT),use_container_width=True)
+            _history_fig=metric_chart(selected,_m,LABELS.get(_m,_m),_m in PCT)
+            if _history_fig is None:st.caption(_metric_missing_caption(selected,_m,LABELS.get(_m,_m),history_only=True))
+            else:_plotly_chart_safe(_history_fig,use_container_width=True)
 
 
 
@@ -511,7 +548,7 @@ def _download_report_block(report_type, rating_result=None):
             if isinstance(data,(bytes,bytearray)) and data:
                 st.download_button('Tải báo cáo '+title,data,file_name=report_filename(selected,report_type,_export_date,ext),mime=mime,key='download_'+key,use_container_width=True)
 
-if _active_section==_sections[0]:
+if _active_section=='HỒ SƠ DOANH NGHIỆP':
     st.subheader('Thông tin tổng quan')
     _profile=load_company_profile(selected)
     if _profile:
@@ -564,12 +601,7 @@ if _active_section==_sections[0]:
         from scripts.report_evidence import build_pack, narrative
         _financial_pack=build_pack(selected,'FY',5)
         for m,t,pf in ml:
-            _plotly_chart_safe(metric_chart(selected,m,f'{t} · 5 năm tài chính và bình quân peer',pf),use_container_width=True)
-            _plotly_chart_safe(latest_peer_bar_chart(selected,m,f'{t} · quý gần nhất',pf),use_container_width=True)
-            if m in _financial_pack['Items']:
-                _note=narrative(_financial_pack,m)
-                st.write(_note['History']);st.write(_note['Peers'])
-                st.write(' '.join([_note['Meaning'],_note['Conclusion']]))
+            _render_metric_analysis(selected,m,t,_financial_pack)
     st.markdown('### Bộ chỉ tiêu theo methodology & nhóm tương đồng động')
     st.caption('Benchmark loại chính doanh nghiệp đang phân tích; chỉ hiển thị trung bình/trung vị khi có tối thiểu 5 peer có dữ liệu cho chỉ tiêu đó.')
     skpi,_,_=sector_kpi_table(selected)
@@ -595,7 +627,7 @@ if _active_section==_sections[0]:
         cols_show=['Doanh nghiệp','ROE','ROA','PB','PE','DebtEquity','CurrentRatio','NPL','CAR','CASA','NIM','CIR','LDR']
         st.dataframe(_safe_show(q,cols_show),hide_index=True,use_container_width=True)
 
-if _active_section==_sections[1]:
+if _active_section=='PHÂN TÍCH, ĐỊNH GIÁ & M&A':
     st.subheader('Phân tích, Định giá & M&A')
     aa=intelligent_analyze(selected)
     c1,c2,c3=st.columns(3)
@@ -657,7 +689,7 @@ if _active_section==_sections[1]:
         render_analysis(selected,_history_basis,_history_years,'valuation_ins_')
     _download_report_block('analysis')
 
-if _active_section==_sections[2]:
+if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
     st.subheader('Báo cáo Xếp hạng tín nhiệm')
     _rating_overrides={}
     _entity_method=str(meta.get('EntityType','')).upper()
@@ -771,12 +803,7 @@ if _active_section==_sections[2]:
         from scripts.report_evidence import build_pack, narrative
         _financial_pack=build_pack(selected,'FY',5)
         for _m,_t,_pf in _bar_metrics:
-            _plotly_chart_safe(metric_chart(selected,_m,f'{_t} · 5 năm tài chính',_pf),use_container_width=True)
-            _plotly_chart_safe(latest_peer_bar_chart(selected,_m,f'{_t} · quý gần nhất',_pf),use_container_width=True)
-            if _m in _financial_pack['Items']:
-                _note=narrative(_financial_pack,_m)
-                st.write(_note['History']);st.write(_note['Peers'])
-                st.write(' '.join([_note['Meaning'],_note['Conclusion']]))
+            _render_metric_analysis(selected,_m,_t,_financial_pack)
     elif meta.get('EntityType')!='INSURANCE':
         st.info('Chưa có đủ chỉ tiêu định lượng để phân tích XHTN.')
 
@@ -869,7 +896,7 @@ if _active_section==_sections[2]:
     st.session_state['rating_result']=rr3
     _download_report_block('rating',rr3)
 
-if _active_section==_sections[3]:
+if _active_section=='DỮ LIỆU & QUẢN TRỊ':
     st.subheader('Dữ liệu & Quản trị')
     from scripts.financial_evidence import STATUS
     _evidence_rows=[dict(r,Trạng_thái=STATUS.get(r['Status'],r['Status'])) for r in s.get('_MetricEvidence',{}).values()]
