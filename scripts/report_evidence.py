@@ -6,8 +6,9 @@ from scripts.universal_data import get_company, peer_tickers
 from scripts.financial_evidence import at_period, latest_period, same_period_history, comparable_model
 from scripts.methodology_kpi_engine import LABELS, PCT, MULT, BANK_GROUPS, SEC_GROUPS, CORP_GROUPS
 from scripts.financial_views import HISTORY_METRICS, BASIS_LABELS
+from scripts.bank_car import comparable_metric
 
-ENGINE_VERSION = '8.133.0'
+ENGINE_VERSION = '8.134.0'
 GROUPS = {'BANK': {
  'Hồ sơ kinh doanh':['TotalAssets','GrossLoans','CustomerDeposits'],
  'Vốn và lợi nhuận':['Equity','CAR','EquityAssets','TangibleEquityAssets','AssetEquity','NPAT','NetInterestIncome','ROE','ROA','NIM','CIR','ProfitAssets','NII_OperatingIncome'],
@@ -81,7 +82,7 @@ def build_pack(ticker,basis='FY',years=5):
         rows=[];excluded=[]
         for t in peers:
             r=peer_now.get(t,{}).get(m,{})
-            if r.get('Status')=='OK' and window_ends_at(r.get('Period'),target) and finite(r.get('Value')) and (not own.get('Basis') or not finite(current) or r.get('Basis')==own['Basis']):
+            if r.get('Status')=='OK' and window_ends_at(r.get('Period'),target) and finite(r.get('Value')) and comparable_metric(m,own,r) and (not own.get('Basis') or not finite(current) or r.get('Basis')==own['Basis']):
                 rows.append({'Ticker':t,'Value':r['Value'],'Basis':r['Basis']})
             else:excluded.append(t)
         # Không gộp các cơ sở khác nhau khi chính doanh nghiệp chưa có số.
@@ -94,7 +95,7 @@ def build_pack(ticker,basis='FY',years=5):
         means=[];counts=[]
         for row in h.itertuples():
             valid=[rr[m]['Value'] for rr in peer_history[row.Period].values() if m in rr and rr[m]['Status']=='OK' and window_ends_at(rr[m]['Period'],row.Period)
-                and rr[m]['Basis']==row.Basis and finite(rr[m]['Value'])]
+                and rr[m]['Basis']==row.Basis and comparable_metric(m,row._asdict(),rr[m]) and finite(rr[m]['Value'])]
             counts.append(len(valid));means.append(float(np.mean(valid)) if len(valid)>=5 else np.nan)
         if len(h):
             h['Value']=pd.to_numeric(h.Value,errors='coerce').where(h.Status.eq('OK'))

@@ -1,0 +1,44 @@
+{
+  "Result": "PASS",
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "CAR": 0.1272,
+      "ICR": "A-",
+      "Capital": "Phù Hợp",
+      "Word": true,
+      "ManualOverrideRestoresAuto": true,
+      "DefaultRatingTab": true
+    },
+    {
+      "Ticker": "TCB",
+      "ICR": "AA+",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "NAB",
+      "ICR": "BBB-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "ICR": "BBB+",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVH",
+      "ICR": "Không áp dụng",
+      "Exceptions": 0
+    }
+  ]
+}

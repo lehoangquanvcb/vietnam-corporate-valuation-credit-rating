@@ -1,0 +1,43 @@
+{
+  "Build": "V8.134.0-OFFICIAL-BANK-CAR",
+  "Date": "2026-11-03",
+  "SoftwareResult": "PASS",
+  "RegressionSuite": "131 passed",
+  "FinalCARAndReportSuite": "32 passed (includes repeated CAR tests)",
+  "CheckedRatings": 46,
+  "CheckedUI": 7,
+  "CheckedReportPacks": 7,
+  "ActualWordExport": "ABB, 29 pages rendered; cover, summary, CAR and source pages visually checked",
+  "DataCoverage": {
+    "Result": "PARTIAL",
+    "Verified": 12,
+    "TotalBanks": 28,
+    "Pending": [
+      "BAB",
+      "BVB",
+      "EIB",
+      "HDB",
+      "KLB",
+      "MBB",
+      "MSB",
+      "NVB",
+      "PCB",
+      "PGB",
+      "SGB",
+      "STB",
+      "TPB",
+      "VBB",
+      "VCB",
+      "VIB"
+    ]
+  },
+  "OriginalDataAndConfigUnchanged": true,
+  "AddedSource": "data/bank_car_disclosures.csv",
+  "CurrentCAR": {
+    "ABB": 12.72,
+    "TCB": 14.95
+  },
+  "ABBEstimatedICR": "vnA-",
+  "TCBSavedReferenceICR": "vnAA+",
+  "Limitations": "Chưa đủ CAR mọi mã; bộ nguồn này được đối chiếu thủ công, chưa có bộ đọc PDF tự động cho mọi kỳ. Phần mềm dùng chung mọi mã BANK; không biến thiếu nguồn thành kết luận chưa công bố."
+}

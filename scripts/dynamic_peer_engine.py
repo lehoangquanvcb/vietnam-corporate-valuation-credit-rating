@@ -152,7 +152,7 @@ def peer_source_fingerprint():
     # Stat chỉ dùng để tránh đọc lại tệp không đổi trong cùng tiến trình.
     paths = [('config/'+p, CFG/p) for p in ['company_universe.csv','vnstock_industry_map.csv','dynamic_peer_overrides.csv',
         'manual_financial_inputs.csv','raw_period_basis.csv','insurance_entities.csv','insurance_metric_inputs.csv']]
-    paths += [('data/'+p, DATA/p) for p in ['company_snapshot.csv','bank_snapshot.csv','bank_history_long.csv','securities_capital_ratio_master.csv']]
+    paths += [('data/'+p, DATA/p) for p in ['company_snapshot.csv','bank_snapshot.csv','bank_history_long.csv','bank_car_disclosures.csv','securities_capital_ratio_master.csv']]
     paths += [('data/raw/'+p.name, p) for p in sorted((DATA/'raw').glob('*.csv'))]
     return hashlib.sha256(repr((ENGINE_VERSION, tuple((name,_file_digest(signature(p))) for name,p in paths))).encode()).hexdigest()
 

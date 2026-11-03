@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.133.0-AUTO-FACTOR-STATUS'
+BUILD_TAG='V8.134.0-OFFICIAL-BANK-CAR'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -253,7 +253,7 @@ def vi(x,d=1):
     v=num(x)
     if v is None:return 'N/A'
     return f'{v:,.{d}f}'.replace(',','X').replace('.',',').replace('X','.')
-def pct(x):return 'N/A' if num(x) is None else vi(num(x)*100,1)+'%'
+def pct(x,digits=1):return 'N/A' if num(x) is None else vi(num(x)*100,digits)+'%'
 def mult(x):return 'N/A' if num(x) is None else vi(x,2)+'x'
 def _price_vnd(x):
     v=num(x)
@@ -476,7 +476,7 @@ st.markdown(
 st.subheader(f"{selected} — {meta.get('CompanyName')}")
 
 # Header KPIs adapt by entity.
-if meta['EntityType']=='BANK': kpis=[('Giá thị trường',money(val.get('Price'))),('P/B',mult(s.get('PB'))),('ROE',pct(s.get('ROE'))),('NPL',pct(s.get('NPL'))),('CAR',pct(s.get('CAR'))),('CASA',pct(s.get('CASA')))]
+if meta['EntityType']=='BANK': kpis=[('Giá thị trường',money(val.get('Price'))),('P/B',mult(s.get('PB'))),('ROE',pct(s.get('ROE'))),('NPL',pct(s.get('NPL'))),('CAR',pct(s.get('CAR'),2)),('CASA',pct(s.get('CASA')))]
 elif meta['EntityType']=='SECURITIES': kpis=[('Giá thị trường',money(val.get('Price'))),('P/B',mult(s.get('PB'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('Nợ/VCSH',mult(s.get('DebtEquity'))),('Vốn khả dụng',pct((latest_capital_ratio(selected) or s.get('AvailableCapitalRatio'))))]
 elif meta['EntityType']=='INSURANCE':kpis=[('Giá thị trường',money(val.get('Price'))),('Tổng tài sản',bn(s.get('TotalAssets'))),('Vốn chủ sở hữu',bn(s.get('Equity'))),('Dự phòng nghiệp vụ',bn(s.get('InsuranceReserves'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA')))]
 else:kpis=[('Giá thị trường',money(val.get('Price'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA'))),('Nợ/EBITDA',mult(s.get('DebtEBITDA'))),('Thanh toán hiện hành',mult(s.get('CurrentRatio')))]

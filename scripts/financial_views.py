@@ -4,6 +4,7 @@ import pandas as pd
 from scripts.financial_evidence import same_period_history, at_period, metric_evidence, STATUS
 from scripts.universal_data import get_company, get_snapshot, peer_snapshot, peer_tickers
 from scripts.methodology_kpi_engine import LABELS, PCT, MULT
+from scripts.bank_car import comparable_metric
 
 BASIS_LABELS={'YTD':'Lũy kế cùng kỳ','QUARTER':'Quý riêng lẻ cùng kỳ','FY':'Cả năm','TTM':'12 tháng kết thúc cùng kỳ'}
 HISTORY_METRICS={
@@ -46,7 +47,7 @@ def history_comparison(ticker,metric,basis='FY',years=5):
         vals=[]
         for t in peers:
             r=at_period(t,typ,row.Period,basis).get(metric)
-            if r and r['Status']=='OK' and r['Basis']==row.Basis and r['Value'] is not None:vals.append(r['Value'])
+            if r and r['Status']=='OK' and r['Basis']==row.Basis and comparable_metric(metric,row._asdict(),r) and r['Value'] is not None:vals.append(r['Value'])
         counts.append(len(vals));means.append(float(np.mean(vals)) if len(vals)>=5 else np.nan)
     h['PeerMean']=means;h['PeerCount']=counts
     return h
@@ -59,7 +60,7 @@ def peer_metric_frame(ticker,metric):
     rows=[]
     for t in [ticker]+list(dict.fromkeys(t for t in peer_tickers(ticker) if t!=ticker and comparable_model(meta,get_company(t)))):
         e=at_period(t,typ,target,'QUARTER').get(metric,{}) if target else {}
-        if e.get('Status')=='OK' and window_ends_at(e.get('Period'),target) and e.get('Basis')==own.get('Basis'):
+        if e.get('Status')=='OK' and window_ends_at(e.get('Period'),target) and comparable_metric(metric,own,e) and e.get('Basis')==own.get('Basis'):
             rows.append({'Ticker':t,'Value':e['Value'],'Period':target,'Basis':e['Basis']})
     return pd.DataFrame(rows,columns=['Ticker','Value','Period','Basis'])
 

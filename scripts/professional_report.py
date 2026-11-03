@@ -320,6 +320,15 @@ def _sources(doc,pack):
     _para(doc,'BCTC và tỷ số tài chính lưu trong ứng dụng; lịch sử sử dụng 5 năm tài chính đã kết thúc gần nhất. So sánh peer dùng số dư cuối quý, dòng thu nhập quý riêng lẻ và tỷ số công bố tại quý gần nhất. Tỷ số trả nợ dùng dòng tiền 12 tháng kết thúc tại kỳ so sánh.',10)
     _para(doc,'Nhóm peer: '+', '.join(pack['PeerUniverse'])+'. Bình quân loại chính doanh nghiệp, dùng các công ty có cùng kỳ và cơ sở tính; chỉ trình bày khi có ít nhất 5 peer. Thành phần có số có thể thay đổi theo năm và chỉ tiêu.',10)
     _para(doc,'Phương pháp áp dụng: '+SOURCES[pack['Type']]+'.',10)
+    if pack['Type']=='BANK':
+        car=pack['Items'].get('CAR',{}).get('Record',{})
+        if car.get('Status')=='OK' and car.get('SourceURL'):
+            from scripts.bank_car import SCOPES
+            _para(doc,'CAR tại '+str(car['Period'])+': '+fmt('CAR',car['Value'])+'; '+
+                SCOPES.get(car.get('Scope'),str(car.get('Scope','')))+'; '+str(car.get('Regime',''))+
+                '. Nguồn công bố, trang '+str(car.get('SourcePage',''))+'.',9,color=GRAY,keep=True)
+            _para(doc,car['SourceURL'],9,color=GRAY).alignment=WD_ALIGN_PARAGRAPH.LEFT
+            if car.get('Note'):_para(doc,car['Note'],9,color=GRAY)
     if pack['Type']=='INSURANCE' and pack['Meta'].get('InsuranceScope'):
         _para(doc,'Phạm vi BCTC: '+str(pack['Meta']['InsuranceScope'])+'. Phân nhóm peer không thay đổi phạm vi pháp nhân của số liệu.',9,color=GRAY)
     missing=[label(m) for m,x in pack['Items'].items() if not finite(x['Value'])]

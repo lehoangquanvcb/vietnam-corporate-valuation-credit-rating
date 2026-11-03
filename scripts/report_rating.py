@@ -10,6 +10,7 @@ from scripts.financial_evidence import at_period, latest_period, comparable_mode
 from scripts.three_methodology_rating import rate_company as assessed_rating, SCALE, NOTCH, move, label
 from scripts.bank_method_2026 import GRADES, FUNDING_GRADES, FUNDING_MATRIX, car_grade
 from scripts.methodology_kpi_engine import LABELS
+from scripts.bank_car import comparable_metric
 
 RISK_KEYS = ['IndustryRisk', 'BusinessRisk', 'FinancialRisk', 'GovernanceRisk']
 RISK_TITLES = ['Rủi ro Vĩ mô và Ngành', 'Rủi ro Kinh doanh', 'Rủi ro Tài chính', 'Rủi ro Quản trị và Quản lý']
@@ -119,7 +120,7 @@ class Evidence:
                 r = self.peer_records[t].get(metric, {})
                 v = number(r.get('Value'))
                 if (v is not None and r.get('Status') == 'OK' and r.get('Period') == own.get('Period')
-                        and r.get('Basis') == own.get('Basis')):
+                        and r.get('Basis') == own.get('Basis') and comparable_metric(metric,own,r)):
                     values.append(v)
             if len(values) < 3:
                 continue

@@ -1,0 +1,86 @@
+{
+  "Build": "V8.134.0-OFFICIAL-BANK-CAR",
+  "RoutingTickers": 1754,
+  "RoutingByType": {
+    "BANK": 28,
+    "CORPORATE": 1699,
+    "INSURANCE": 12,
+    "SECURITIES": 15
+  },
+  "EvidenceTickers": 7,
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "Type": "BANK",
+      "Period": "2026-Q2",
+      "AnnualYears": 5,
+      "ActiveMetrics": 24,
+      "ExpectedCharts": 48,
+      "MissingLatestMetrics": 3,
+      "PeerCandidates": 10
+    },
+    {
+      "Ticker": "TCB",
+      "Type": "BANK",
+      "Period": "2026-Q2",
+      "AnnualYears": 5,
+      "ActiveMetrics": 24,
+      "ExpectedCharts": 48,
+      "MissingLatestMetrics": 3,
+      "PeerCandidates": 10
+    },
+    {
+      "Ticker": "NAB",
+      "Type": "BANK",
+      "Period": "2026-Q2",
+      "AnnualYears": 5,
+      "ActiveMetrics": 24,
+      "ExpectedCharts": 48,
+      "MissingLatestMetrics": 3,
+      "PeerCandidates": 10
+    },
+    {
+      "Ticker": "ACB",
+      "Type": "BANK",
+      "Period": "2026-Q2",
+      "AnnualYears": 5,
+      "ActiveMetrics": 24,
+      "ExpectedCharts": 48,
+      "MissingLatestMetrics": 3,
+      "PeerCandidates": 10
+    },
+    {
+      "Ticker": "SSI",
+      "Type": "SECURITIES",
+      "Period": "2026-Q2",
+      "AnnualYears": 5,
+      "ActiveMetrics": 28,
+      "ExpectedCharts": 56,
+      "MissingLatestMetrics": 5,
+      "PeerCandidates": 10
+    },
+    {
+      "Ticker": "ABI",
+      "Type": "INSURANCE",
+      "Period": "2026-Q2",
+      "AnnualYears": 5,
+      "ActiveMetrics": 25,
+      "ExpectedCharts": 50,
+      "MissingLatestMetrics": 12,
+      "PeerCandidates": 11
+    },
+    {
+      "Ticker": "HPG",
+      "Type": "CORPORATE",
+      "Period": "2026-Q2",
+      "AnnualYears": 5,
+      "ActiveMetrics": 35,
+      "ExpectedCharts": 70,
+      "MissingLatestMetrics": 0,
+      "PeerCandidates": 10
+    }
+  ],
+  "Errors": [],
+  "Result": "PASS",
+  "Note": "PASS kiểm tra phần mềm và gói bằng chứng; không xác nhận đủ dữ liệu hay bậc xếp hạng cho mọi mã."
+}
