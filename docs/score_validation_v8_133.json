@@ -1,0 +1,628 @@
+{
+  "Build": "V8.133.0-AUTO-FACTOR-STATUS",
+  "RoutingTickers": 1754,
+  "CheckedTickers": 46,
+  "ByStatus": {
+    "INSUFFICIENT_DATA": 27,
+    "SIMULATION": 1,
+    "ESTIMATED": 17,
+    "NOT_APPLICABLE": 1
+  },
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định ABB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "TCB",
+      "Methodology": "BANK",
+      "Status": "SIMULATION",
+      "Origin": "REFERENCE_REPORT",
+      "Anchor": "vnA-",
+      "SCA": "vnAA+",
+      "ICR": "vnAA+",
+      "ConditionalAssumptions": 0,
+      "FileName": "Báo cáo XHTN không chỉ định TCB 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "SSI",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định SSI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ABI",
+      "Methodology": "INSURANCE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 11,
+      "FileName": "Báo cáo XHTN không chỉ định ABI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "HPG",
+      "Methodology": "CORPORATE",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "vnA-",
+      "ICR": "vnA-",
+      "ConditionalAssumptions": 9,
+      "FileName": "Báo cáo XHTN không chỉ định HPG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BVH",
+      "Methodology": "INSURANCE",
+      "Status": "NOT_APPLICABLE",
+      "Origin": null,
+      "Anchor": "N/A",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 0,
+      "FileName": "Báo cáo XHTN không chỉ định BVH 02-11-2026.docx",
+      "MissingEvidence": [
+        "Phạm vi: Tập đoàn hỗn hợp bảo hiểm/đầu tư. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. Cần phương pháp phù hợp với loại hình hoặc BCTC riêng của pháp nhân thuộc phạm vi để xác định Anchor, SCA và ICR."
+      ]
+    },
+    {
+      "Ticker": "ACB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định ACB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "BAB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định BAB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "BID",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định BID 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "BVB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định BVB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "CTG",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định CTG 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "EIB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định EIB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "HDB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định HDB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "KLB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định KLB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "LPB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định LPB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "MBB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định MBB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "MSB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định MSB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "NAB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định NAB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "NVB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định NVB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "OCB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định OCB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "PCB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định PCB 02-11-2026.docx",
+      "MissingEvidence": {
+        "BusinessProfile": "Thiếu đầu vào định lượng cùng kỳ cho Hồ sơ Kinh doanh; cần bổ sung số liệu hoặc đánh giá riêng.",
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ.",
+        "RiskPosition": "Thiếu đầu vào định lượng cùng kỳ cho Vị thế Rủi ro; cần bổ sung số liệu hoặc đánh giá riêng.",
+        "Funding": "Thiếu CASA hợp lệ tại 2026-Q2 hoặc đánh giá riêng về huy động vốn.",
+        "Liquidity": "Thiếu LDR hợp lệ tại 2026-Q2 hoặc đánh giá riêng về thanh khoản."
+      }
+    },
+    {
+      "Ticker": "PGB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định PGB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "SGB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định SGB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "SHB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định SHB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "SSB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định SSB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "STB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định STB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "TPB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định TPB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "VAB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định VAB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "VBB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định VBB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "VCB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định VCB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "VIB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định VIB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "VPB",
+      "Methodology": "BANK",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnA-",
+      "SCA": "N/A",
+      "ICR": "N/A",
+      "ConditionalAssumptions": 4,
+      "FileName": "Báo cáo XHTN không chỉ định VPB 02-11-2026.docx",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "AAS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định AAS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "APG",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnB+",
+      "ICR": "vnB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định APG 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BSI",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định BSI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BVS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB",
+      "ICR": "vnBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định BVS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "CTS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB-",
+      "ICR": "vnBB-",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định CTS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "EVS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định EVS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "FTS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB",
+      "ICR": "vnBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định FTS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "MBS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định MBS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ORS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB+",
+      "ICR": "vnBBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định ORS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "SHS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định SHS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "TVS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBB+",
+      "ICR": "vnBB+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định TVS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VCI",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB",
+      "ICR": "vnBBB",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định VCI 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VDS",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnBBB-",
+      "ICR": "vnBBB-",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định VDS 02-11-2026.docx",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VIX",
+      "Methodology": "SECURITIES",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Anchor": "vnBBB",
+      "SCA": "vnA+",
+      "ICR": "vnA+",
+      "ConditionalAssumptions": 5,
+      "FileName": "Báo cáo XHTN không chỉ định VIX 02-11-2026.docx",
+      "MissingEvidence": {}
+    }
+  ],
+  "Errors": [],
+  "Result": "PASS",
+  "Note": "PASS xác nhận kiểm tra phần mềm. Bậc tự động có giả định, không phải thẩm định hoàn chỉnh; không tạo bậc khi thiếu dữ liệu cốt lõi hoặc ngoài phạm vi phương pháp."
+}

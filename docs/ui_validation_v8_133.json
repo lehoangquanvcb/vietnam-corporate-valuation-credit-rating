@@ -1,0 +1,48 @@
+{
+  "Result": "PASS",
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "DefaultAutomaticComponents": true,
+      "OnlyCapitalMissing": true,
+      "ManualOverrideOptInAndOff": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "TCB",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVH",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": false,
+      "WordDownload": false,
+      "Exceptions": 0
+    }
+  ]
+}

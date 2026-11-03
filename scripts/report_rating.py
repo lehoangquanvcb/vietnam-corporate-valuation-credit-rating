@@ -145,10 +145,12 @@ def _base(ticker, typ, ctx, strict):
             'Audit': 'Bảng phương pháp gốc quyết định Anchor/notch; quy tắc định lượng thay thế và giả định được công bố riêng.'}
 
 
-def _missing(r, text):
+def _missing(r, text, missing=None):
     r.update(ICR='N/A', SCA='N/A', SACP='N/A', RatingStatus='INSUFFICIENT_DATA',
-             DataSufficientForAutoRating=False, RatingBlocker='INPUTS', MissingEvidence={'FinancialInputs': text})
-    r['Scorecard'].append(_row('Kết quả', 'Chưa xác định', '—', text))
+             DataSufficientForAutoRating=False, RatingBlocker='INPUTS',
+             MissingEvidence=missing or {'FinancialInputs': text},
+             RatingBasisNote='Các cấu phần có đủ đầu vào vẫn được tính riêng; chưa đủ căn cứ tổng hợp bậc xếp hạng.')
+    r['Scorecard'].append(_row('Kết quả', 'Chưa đủ căn cứ tổng hợp', '—', text))
     return r
 
 
@@ -268,6 +270,10 @@ def _financial_institution(ticker, typ, o, ctx, strict):
     r = _base(ticker, typ, ctx, strict);a = r['Assumptions']
     anchor = 'a-' if typ == 'BANK' else move('a-', -2)
     factors, notches = {}, {}
+    missing = {}
+    r.update(Anchor=label(anchor), Factors=factors, FactorNotches=notches,
+             InternalNotches=None, BICRAReference=label('a-'),
+             SectorAnchorAdjustment=-2 if typ=='SECURITIES' else 0)
     business = ctx.peer_score([('TotalAssets', .4, True), ('Revenue', .3, True), ('ROE', .3, True)])
     keys = [('BusinessProfile','Hồ sơ Kinh doanh'),('CapitalEarnings','Vốn và Lợi nhuận'),('RiskPosition','Vị thế Rủi ro')]
     auto = {'BusinessProfile': _clamp_grade(business) if business is not None else None}
@@ -296,44 +302,89 @@ def _financial_institution(ticker, typ, o, ctx, strict):
     auto['RiskPosition'] = _clamp_grade(risk) if risk is not None else None
     for key,title in keys:
         grade = o.get(key)
+        origin = 'Đánh giá nhập riêng'
+        # Retain partial saved/manual decisions, including a forecast-CAR decision
+        # already resolved by the strict bank engine. Never replace these with a proxy.
+        inherited = (strict.get('Factors') or {}).get(title)
+        inherited_notch = (strict.get('FactorNotches') or {}).get(title)
+        if grade not in NOTCH and inherited in NOTCH and inherited_notch is not None:
+            grade = inherited
+            origin = 'Bảng chấm đã lưu / đánh giá nhập riêng'
         if grade not in NOTCH:
             score = auto[key]
             if score is None:
-                return _missing(r, 'Thiếu bằng chứng định lượng cho '+title+'. Cần dữ liệu cùng kỳ hoặc đánh giá riêng.')
+                reason = ('Thiếu CAR hợp lệ tại '+ctx.period+'; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ.'
+                          if typ=='BANK' and key=='CapitalEarnings' else
+                          'Thiếu đầu vào định lượng cùng kỳ cho '+title+'; cần bổ sung số liệu hoặc đánh giá riêng.')
+                missing[key] = reason
+                r['Scorecard'].append(_row(title, 'Thiếu đầu vào', '—', reason))
+                continue
             grade = GRADES[score-1]
-        n = o.get(key+'Notches', NOTCH[grade])
+            origin = 'Tín hiệu định lượng tự động'
+        n = o.get(key+'Notches', inherited_notch if origin.startswith('Bảng chấm') else NOTCH[grade])
         allowed = {'Yếu':{-2,-3},'Rất Yếu':{-4,-5}}.get(grade,{NOTCH[grade]})
         if isinstance(n,bool) or n not in allowed:
             raise ValueError('Notch không phù hợp mức đánh giá '+key)
         factors[title] = grade;notches[title] = n
-        r['Scorecard'].append(_row(title, f'{GRADES.index(grade)+1}/6 • {grade}', f'{n:+d} bậc', 'Đánh giá nhập riêng' if o.get(key) in NOTCH else 'Tín hiệu định lượng tự động'))
+        r['Scorecard'].append(_row(title, f'{GRADES.index(grade)+1}/6 • {grade}', f'{n:+d} bậc', origin))
     a.append('Hồ sơ kinh doanh/vị thế rủi ro tự động dùng các chỉ tiêu tương đối với peer; các nhận định quản trị, tập trung và đa dạng hóa chưa được xác nhận riêng.')
     title = 'Huy động vốn và Thanh khoản' if typ == 'BANK' else 'Nguồn vốn và Thanh khoản'
+    n = None
     if o.get('FundingLiquidity') in NOTCH:
         grade = o['FundingLiquidity'];n = o.get('FundingLiquidityNotches',min(1,NOTCH[grade]))
         allowed = {'Yếu':{-2,-3},'Rất Yếu':{-4,-5}}.get(grade,{min(1,NOTCH[grade])})
         if isinstance(n,bool) or n not in allowed:
             raise ValueError('Notch nguồn vốn/thanh khoản không phù hợp')
+        funding_reason = 'Đánh giá tổng hợp nhập riêng'
+    elif title in (strict.get('FactorNotches') or {}):
+        grade = strict['Factors'][title]
+        n = strict['FactorNotches'][title]
+        funding_reason = 'Bảng chấm đã lưu / đánh giá nhập riêng'
     else:
         if typ == 'SECURITIES':
             debt_eq, current = ctx.value('DebtEquity'), ctx.value('CurrentRatio')
             f = 'Phù Hợp' if debt_eq is not None and debt_eq < 2.5 else 'Trung Bình' if debt_eq is not None and debt_eq < 4 else 'Yếu' if debt_eq is not None else None
             l = 'Mạnh' if current is not None and current >= 2 else 'Phù Hợp' if current is not None and current >= 1.2 else 'Trung Bình' if current is not None and current >= 1 else 'Yếu' if current is not None else None
             a.append('Nguồn vốn/thanh khoản: quy tắc thay thế dùng Nợ vay/VCSH (<2,5; <4) và thanh toán hiện hành (≥2; ≥1,2; ≥1); sau đó áp ma trận notch. Đây không phải đánh giá kỳ hạn nguồn vốn đầy đủ.')
+            funding_inputs = [('DebtEquity', debt_eq), ('CurrentRatio', current)]
         else:
             casa, ldr = ctx.value('CASA'), ctx.value('LDR')
             f = 'Mạnh' if casa is not None and casa >= .3 else 'Phù Hợp' if casa is not None and casa >= .15 else 'Trung Bình' if casa is not None else None
             l = 'Phù Hợp' if ldr is not None and ldr <= 1 else 'Trung Bình' if ldr is not None and ldr <= 1.2 else 'Yếu' if ldr is not None else None
             a.append('Nguồn vốn/thanh khoản: tín hiệu thay thế từ CASA và LDR, không tự cộng ngoại lệ +1; chưa thay thế đánh giá nguồn vốn bán buôn và dòng tiền stress.')
+            funding_inputs = [('CASA', casa), ('LDR', ldr)]
         f, l = o.get('Funding',f), o.get('Liquidity',l)
-        if f not in FUNDING_GRADES or l not in FUNDING_GRADES:
-            return _missing(r, 'Thiếu dữ liệu nguồn vốn/thanh khoản hoặc đánh giá riêng.')
-        n = FUNDING_MATRIX[FUNDING_GRADES.index(f)][FUNDING_GRADES.index(l)]
-        if n > 0 and o.get('FundingStrongExceptionConfirmed') is not True:
-            n = 0;a.append('Không cộng ngoại lệ nguồn vốn mạnh khi chưa có bằng chứng xác nhận điều kiện ngoại lệ.')
-        grade = f+' / '+l
-    factors[title]=grade;notches[title]=n
-    r['Scorecard'].append(_row(title, grade, f'{n:+d} bậc', 'Ma trận nguồn vốn và thanh khoản'))
+        r.update(Funding=f if f in FUNDING_GRADES else None, Liquidity=l if l in FUNDING_GRADES else None)
+        for key, value in funding_inputs:
+            if value is not None:
+                ctx.add(key, value, None, 'Tín hiệu thay thế huy động/thanh khoản; notch theo ma trận, không cộng điểm riêng')
+        for key, value, metric in [('Funding', f, funding_inputs[0][0]), ('Liquidity', l, funding_inputs[1][0])]:
+            if value not in FUNDING_GRADES:
+                missing[key] = 'Thiếu '+metric+' hợp lệ tại '+ctx.period+' hoặc đánh giá riêng về '+('huy động vốn.' if key=='Funding' else 'thanh khoản.')
+        if f in FUNDING_GRADES and l in FUNDING_GRADES:
+            n = FUNDING_MATRIX[FUNDING_GRADES.index(f)][FUNDING_GRADES.index(l)]
+            if n > 0 and o.get('FundingStrongExceptionConfirmed') is not True:
+                n = 0;a.append('Không cộng ngoại lệ nguồn vốn mạnh khi chưa có bằng chứng xác nhận điều kiện ngoại lệ.')
+        grade = (f if f in FUNDING_GRADES else 'Thiếu đầu vào huy động')+' / '+(l if l in FUNDING_GRADES else 'Thiếu đầu vào thanh khoản')
+        funding_reason = 'Huy động / Thanh khoản; áp ma trận từ đánh giá nhập riêng và/hoặc tín hiệu định lượng tự động'
+    if n is not None:
+        factors[title]=grade;notches[title]=n
+    r['Scorecard'].append(_row(title, grade, f'{n:+d} bậc' if n is not None else '—', funding_reason))
+    support_inputs = dict(o)
+    if support_inputs.get('ExternalSupportNotches') is None and strict.get('ExternalSupportNotches') is not None:
+        support_inputs['ExternalSupportNotches'] = strict['ExternalSupportNotches']
+    support = _notch(support_inputs, 'ExternalSupportNotches', a, 0, 8)
+    r['ExternalSupportNotches'] = support
+    r['ExternalSupportAssumed'] = support_inputs.get('ExternalSupportNotches') is None
+    outlook = o.get('Outlook') or strict.get('Outlook')
+    if outlook not in (None, '', 'Chưa xác định', 'Chưa thẩm định'):
+        r['Outlook'] = outlook
+    if missing:
+        r['Scorecard'].extend([
+            _row('Anchor', label(anchor), 'Điểm khởi đầu'),
+            _row('Hỗ trợ bên ngoài', support, f'{support:+d} bậc', 'Giả định 0 bậc; chưa thẩm định' if r['ExternalSupportAssumed'] else 'Bảng chấm đã lưu / đánh giá nhập riêng')])
+        r['EvidenceMetrics'] = list(dict.fromkeys(x['Chỉ tiêu'] for x in r['QuantitativeEvidence']))
+        return _missing(r, ' '.join(missing.values()), missing)
     sca = move(anchor,sum(notches.values()))
     if typ == 'SECURITIES' and SCALE.index(sca)>SCALE.index('b-') and o.get('DefaultEventConfirmed') is not True:
         sca='b-'
@@ -343,9 +394,12 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         sca = _cap(sca,'b-')
     elif regulatory == 'AT_RISK':
         sca = _cap(sca,'bb+')
-    support=_notch(o,'ExternalSupportNotches',a,0,8)
-    r.update(Factors=factors,FactorNotches=notches,BICRAReference=label('a-'),SectorAnchorAdjustment=-2 if typ=='SECURITIES' else 0)
-    return _finish(r,anchor,sca,support,o.get('Outlook'))
+    inherited_cap = strict.get('RegulatoryCap')
+    for ceiling in SCALE:
+        if inherited_cap == label(ceiling):
+            sca = _cap(sca, ceiling)
+            break
+    return _finish(r,anchor,sca,support,outlook)
 
 
 def _insurance(ticker,o,ctx,strict):

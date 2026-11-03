@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.132.0-RATING-FIRST-CHARTS'
+BUILD_TAG='V8.133.0-AUTO-FACTOR-STATUS'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -204,7 +204,7 @@ def _dynamic_peer_label_ui(ticker, fallback):
 def _rating_no_vn(value):
     """Display rating grades without the historical 'vn' prefix."""
     if value is None or str(value) in ('N/A','nan','None'):
-        return 'Chưa thẩm định'
+        return 'Chưa đủ căn cứ'
     s=str(value).strip()
     if re.match(r'(?i)^vn(?=[A-C])',s):
         s=s[2:]
@@ -694,52 +694,55 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
     _rating_overrides={}
     _entity_method=str(meta.get('EntityType','')).upper()
     _insurance_selected=(_entity_method.startswith('INSURANCE') or str(meta.get('Methodology','')).upper().startswith('INSURANCE') or any(x in str(meta.get('Sector','')).lower() for x in ['bảo hiểm','insurance','bao hiem']))
-    if _insurance_selected:
-        from scripts.insurance_ui import render_assessment
-        _rating_overrides=render_assessment(selected)
-    elif _entity_method=='BANK':
-        with st.expander('Thẩm định yếu tố ngân hàng và hỗ trợ bên ngoài',expanded=False):
-            st.caption('Đánh giá theo phương pháp ngân hàng 2026. Bậc độc lập hiển thị khi đủ bốn cấu phần; bậc tổ chức phát hành bổ sung đánh giá hỗ trợ.')
-            from scripts.bank_method_2026 import saved_assessment
-            from scripts.financial_evidence import latest_period
-            _saved_bank=saved_assessment(selected,latest_period(selected,'BANK'))
-            _inherit_bank=False
-            if _saved_bank:
-                _mode=st.radio('Nguồn bảng chấm',['Kế thừa bảng chấm đã lưu','Nhập lại đánh giá'],key=f'bank_{selected}_assessment_mode')
-                _inherit_bank=(_mode=='Kế thừa bảng chấm đã lưu')
-                if _inherit_bank:
-                    st.caption('Nguồn: '+_saved_bank['Source']+' | Kỳ: '+_saved_bank['Period'])
-                    st.dataframe(pd.DataFrame([{'Cấu phần':_title,'Đánh giá':_saved_bank.get(_key,'Chưa xác định')} for _key,_title in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Huy động vốn và thanh khoản')]]),hide_index=True,use_container_width=True)
-            if not _inherit_bank:
-                _rating_overrides={'UseSavedAssessment':False}
-                _grades=['Chưa xác định','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu']
-                for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận — kết luận sau đánh giá CAR'),('RiskPosition','Vị thế rủi ro')]:
-                    _g=st.selectbox(_lab,_grades,key=f'bank_{selected}_{_key}')
-                    if _g!='Chưa xác định':_rating_overrides[_key]=_g
-                for _key,_lab in [('Funding','Huy động vốn'),('Liquidity','Thanh khoản')]:
-                    _g=st.selectbox(_lab,['Chưa xác định','Mạnh','Phù Hợp','Trung Bình','Yếu'],key=f'bank_{selected}_{_key}')
-                    if _g!='Chưa xác định':_rating_overrides[_key]=_g
-                if _rating_overrides.get('Funding')==_rating_overrides.get('Liquidity')=='Mạnh':
-                    _rating_overrides['FundingStrongExceptionConfirmed']=st.checkbox('Đã kết luận đủ điều kiện điều chỉnh +1 bậc theo ma trận',key=f'bank_{selected}_funding_exception')
-                _confirmed=st.checkbox('Đã đánh giá mức hỗ trợ bên ngoài',key=f'bank_{selected}_support_confirmed')
-                if _confirmed:_rating_overrides['ExternalSupportNotches']=st.number_input('Notch hỗ trợ đã thẩm định',0,8,0,1,key=f'bank_{selected}_support')
-                _outlook=st.selectbox('Triển vọng',['Chưa xác định','Ổn định','Tích cực','Tiêu cực'],key=f'bank_{selected}_outlook')
-                if _outlook!='Chưa xác định':_rating_overrides['Outlook']=_outlook
-    elif _entity_method=='SECURITIES':
-        with st.expander('Thẩm định các yếu tố công ty chứng khoán',expanded=False):
-            for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Nguồn vốn và thanh khoản')]:
-                _v=st.selectbox(_lab,['Chưa thẩm định','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu'],key=f'sec_{selected}_{_key}')
-                if _v!='Chưa thẩm định':_rating_overrides[_key]=_v
-            _v=st.selectbox('Notch hỗ trợ bên ngoài',['Chưa thẩm định']+list(range(9)),key=f'sec_{selected}_support')
-            if isinstance(_v,int):_rating_overrides['ExternalSupportNotches']=_v
-    else:
-        with st.expander('Thẩm định yếu tố định tính doanh nghiệp phi tài chính',expanded=False):
-            for _key,_lab in [('IndustryRisk','Rủi ro vĩ mô và ngành'),('GovernanceRisk','Rủi ro quản trị và quản lý')]:
-                _v=st.selectbox(_lab,['Chưa thẩm định']+list(range(1,7)),key=f'corp_{selected}_{_key}')
-                if isinstance(_v,int):_rating_overrides[_key]=_v
-            for _key,_lab,_vals in [('ModifierNotches','Điều chỉnh khác',range(-6,7)),('ExternalSupportNotches','Hỗ trợ bên ngoài',range(9))]:
-                _v=st.selectbox(_lab,['Chưa thẩm định']+list(_vals),key=f'corp_{selected}_{_key}')
-                if isinstance(_v,int):_rating_overrides[_key]=_v
+    _review_enabled=st.checkbox('Nhập hoặc điều chỉnh đánh giá riêng',key=f'rating_review_enabled_{selected}')
+    st.caption('Kết quả bên dưới được tính tự động hoặc kế thừa bảng chấm đã lưu. Chỉ bật tùy chọn trên khi cần nhập đánh giá riêng cho báo cáo này.')
+    if _review_enabled:
+        if _insurance_selected:
+            from scripts.insurance_ui import render_assessment
+            _rating_overrides=render_assessment(selected)
+        elif _entity_method=='BANK':
+            with st.expander('Thẩm định yếu tố ngân hàng và hỗ trợ bên ngoài',expanded=True):
+                st.caption('Chỉ nhập cấu phần có kết luận riêng. Các ô Dùng kết quả tự động không phải đầu vào bị thiếu; xem kết quả thực tế trong bảng bên dưới.')
+                from scripts.bank_method_2026 import saved_assessment
+                from scripts.financial_evidence import latest_period
+                _saved_bank=saved_assessment(selected,latest_period(selected,'BANK'))
+                _inherit_bank=False
+                if _saved_bank:
+                    _mode=st.radio('Nguồn bảng chấm',['Kế thừa bảng chấm đã lưu','Nhập lại đánh giá'],key=f'bank_{selected}_assessment_mode')
+                    _inherit_bank=(_mode=='Kế thừa bảng chấm đã lưu')
+                    if _inherit_bank:
+                        st.caption('Nguồn: '+_saved_bank['Source']+' | Kỳ: '+_saved_bank['Period'])
+                        st.dataframe(pd.DataFrame([{'Cấu phần':_title,'Đánh giá':_saved_bank.get(_key,'Chưa xác định')} for _key,_title in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Huy động vốn và thanh khoản')]]),hide_index=True,use_container_width=True)
+                if not _inherit_bank:
+                    _rating_overrides={'UseSavedAssessment':False}
+                    _grades=['Dùng kết quả tự động','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu']
+                    for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận — kết luận sau đánh giá CAR'),('RiskPosition','Vị thế rủi ro')]:
+                        _g=st.selectbox(_lab,_grades,key=f'bank_{selected}_{_key}')
+                        if _g!='Dùng kết quả tự động':_rating_overrides[_key]=_g
+                    for _key,_lab in [('Funding','Huy động vốn'),('Liquidity','Thanh khoản')]:
+                        _g=st.selectbox(_lab,['Dùng kết quả tự động','Mạnh','Phù Hợp','Trung Bình','Yếu'],key=f'bank_{selected}_{_key}')
+                        if _g!='Dùng kết quả tự động':_rating_overrides[_key]=_g
+                    if _rating_overrides.get('Funding')==_rating_overrides.get('Liquidity')=='Mạnh':
+                        _rating_overrides['FundingStrongExceptionConfirmed']=st.checkbox('Đã kết luận đủ điều kiện điều chỉnh +1 bậc theo ma trận',key=f'bank_{selected}_funding_exception')
+                    _confirmed=st.checkbox('Đã đánh giá mức hỗ trợ bên ngoài',key=f'bank_{selected}_support_confirmed')
+                    if _confirmed:_rating_overrides['ExternalSupportNotches']=st.number_input('Notch hỗ trợ đã thẩm định',0,8,0,1,key=f'bank_{selected}_support')
+                    _outlook=st.selectbox('Triển vọng',['Chưa nhập triển vọng','Ổn định','Tích cực','Tiêu cực'],key=f'bank_{selected}_outlook')
+                    if _outlook!='Chưa nhập triển vọng':_rating_overrides['Outlook']=_outlook
+        elif _entity_method=='SECURITIES':
+            with st.expander('Thẩm định các yếu tố công ty chứng khoán',expanded=True):
+                for _key,_lab in [('BusinessProfile','Hồ sơ kinh doanh'),('CapitalEarnings','Vốn và lợi nhuận'),('RiskPosition','Vị thế rủi ro'),('FundingLiquidity','Nguồn vốn và thanh khoản')]:
+                    _v=st.selectbox(_lab,['Dùng kết quả tự động','Rất Mạnh','Mạnh','Phù Hợp','Trung Bình','Yếu','Rất Yếu'],key=f'sec_{selected}_{_key}')
+                    if _v!='Dùng kết quả tự động':_rating_overrides[_key]=_v
+                _v=st.selectbox('Notch hỗ trợ bên ngoài',['Giữ giả định tự động']+list(range(9)),key=f'sec_{selected}_support')
+                if isinstance(_v,int):_rating_overrides['ExternalSupportNotches']=_v
+        else:
+            with st.expander('Thẩm định yếu tố định tính doanh nghiệp phi tài chính',expanded=True):
+                for _key,_lab in [('IndustryRisk','Rủi ro vĩ mô và ngành'),('GovernanceRisk','Rủi ro quản trị và quản lý')]:
+                    _v=st.selectbox(_lab,['Giữ giả định tự động']+list(range(1,7)),key=f'corp_{selected}_{_key}')
+                    if isinstance(_v,int):_rating_overrides[_key]=_v
+                for _key,_lab,_vals in [('ModifierNotches','Điều chỉnh khác',range(-6,7)),('ExternalSupportNotches','Hỗ trợ bên ngoài',range(9))]:
+                    _v=st.selectbox(_lab,['Giữ giả định tự động']+list(_vals),key=f'corp_{selected}_{_key}')
+                    if isinstance(_v,int):_rating_overrides[_key]=_v
     rr3=rate_three_methodologies(selected,_rating_overrides)
     if rr3.get('RatingOrigin')=='AUTO_RESEARCH':
         st.caption(rr3.get('RatingBasisNote',''))
@@ -762,7 +765,10 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
                 _pending=pending_assessment_groups(rr3)
                 if _pending:st.dataframe(pd.DataFrame(_pending),hide_index=True,use_container_width=True)
                 st.write('; '.join(missing_evidence_labels(rr3)))
-    elif rr3.get('ICR') in (None,'N/A'):st.info('Chưa hình thành bậc XHTN mô phỏng: '+str(rr3.get('MissingEvidence','Chưa đủ bằng chứng')))
+    elif rr3.get('ICR') in (None,'N/A'):
+        _missing=rr3.get('MissingEvidence') or {}
+        _reason=' '.join(str(v) for v in _missing.values()) if isinstance(_missing,dict) else str(_missing)
+        st.info('Chưa đủ căn cứ tổng hợp bậc XHTN. '+_reason)
     if str(rr3.get('RatingOrigin','')).startswith('REFERENCE_REPORT'):
         st.caption('Kết quả mô phỏng kế thừa bảng chấm: '+rr3.get('AssessmentSource','')+' | '+rr3.get('AssessmentPeriod','')+'. Các bậc được tính lại từ từng cấu phần của báo cáo nguồn.')
     r1,r2,r3=st.columns(3)
@@ -770,6 +776,11 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
         r1.metric('Anchor',rating_value_text(rr3,'Anchor'));r2.metric('SCA',rating_value_text(rr3,'SCA'));r3.metric('ICR',rating_value_text(rr3,'ICR'))
     else:
         r1.metric('Anchor',_rating_no_vn(rr3.get('Anchor','N/A')));r2.metric('SACP / SCA',_rating_no_vn(rr3.get('SACP',rr3.get('SCA','N/A'))));r3.metric('ICR',_rating_no_vn(rr3.get('ICR','N/A')))
+
+    if rr3.get('Scorecard'):
+        st.markdown('### Kết quả từng cấu phần xếp hạng')
+        st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
+        st.caption('Các mức tự động là ước tính theo giả định công bố. Triển vọng: '+str(rr3.get('Outlook','Chưa đánh giá'))+'.')
 
     if meta['EntityType']=='INSURANCE':
         from scripts.insurance_analysis import render_analysis
@@ -818,19 +829,19 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
         p1,p2,p3=st.columns(3); p1.metric('Peer có dữ liệu',rr3.get('PeerCount',0)); p2.metric('Thanh khoản',rr3.get('Liquidity','N/A')); p3.metric('Đủ dữ liệu để tự động XHTN','CÓ' if rr3.get('DataSufficientForAutoRating') else 'CHƯA')
         if not rr3.get('DataSufficientForAutoRating'):
             st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng.')
-    elif rr3.get('Methodology')=='INSURANCE':
+    elif rr3.get('Methodology')=='INSURANCE' and not rr3.get('Scorecard'):
         st.markdown('### Tổng kết cấu phần xếp hạng')
         _ins_rows=rr3.get('Scorecard') or insurance_scorecard(rr3)
         st.dataframe(pd.DataFrame(_ins_rows),hide_index=True,use_container_width=True)
         st.caption(rr3.get('ScopeNote',''))
-    elif rr3.get('Methodology') in ('BANK','SECURITIES'):
+    elif rr3.get('Methodology') in ('BANK','SECURITIES') and not rr3.get('Scorecard'):
         st.markdown('### Tổng hợp hồ sơ rủi ro')
         st.dataframe(pd.DataFrame([{'Yếu tố':k,'Đánh giá':v} for k,v in rr3.get('Factors',{}).items()]),hide_index=True,use_container_width=True)
 
     # Component summary: missing assessments remain unknown, never converted to +0.
-    if rr3.get('Methodology')!='INSURANCE':st.markdown('### Tổng kết cấu phần xếp hạng')
+    if rr3.get('Methodology')!='INSURANCE' and not rr3.get('Scorecard'):st.markdown('### Tổng kết cấu phần xếp hạng')
     if rr3.get('Scorecard'):
-        if rr3.get('Methodology')!='INSURANCE':st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
+        pass  # The complete scorecard is already displayed before financial analysis.
     elif rr3.get('Methodology') in ('BANK','SECURITIES'):
         _desc_score={'Rất Mạnh':'1/6','Mạnh':'2/6','Phù Hợp':'3/6','Trung Bình':'4/6','Yếu':'5/6','Rất Yếu':'6/6'}
         _desc_notch={'Rất Mạnh':2,'Mạnh':1,'Phù Hợp':0,'Trung Bình':-1,'Yếu':-2,'Rất Yếu':-4}

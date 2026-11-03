@@ -28,13 +28,16 @@ def main():
                 assert r.get('AssessmentComplete') is False
                 assert r.get('Anchor') not in (None,'N/A') and r.get('SCA') not in (None,'N/A')
             if r.get('RatingBlocker')=='SCOPE':assert not has_grade
+            if r.get('RatingStatus')=='INSUFFICIENT_DATA':
+                assert not has_grade and not r.get('DataSufficientForAutoRating')
+                assert r.get('MissingEvidence')
             rows.append({'Ticker':t,'Methodology':r.get('Methodology'),'Status':r.get('RatingStatus'),
                 'Origin':r.get('RatingOrigin'),'Anchor':r.get('Anchor'),'SCA':r.get('SCA',r.get('SACP')),
                 'ICR':r.get('ICR'),'ConditionalAssumptions':len(r.get('Assumptions',[])),
                 'FileName':report_filename(t),'MissingEvidence':r.get('MissingEvidence')})
         except Exception as exc:errors.append({'Ticker':t,'Error':repr(exc)})
         if (i+1)%10==0:print(f'Checked {i+1}/{len(selected)}',flush=True)
-    result={'Build':'V8.132.0-RATING-FIRST-CHARTS','RoutingTickers':len(u),'CheckedTickers':len(rows),
+    result={'Build':'V8.133.0-AUTO-FACTOR-STATUS','RoutingTickers':len(u),'CheckedTickers':len(rows),
         'ByStatus':dict(Counter(r['Status'] for r in rows)),'Checks':rows,'Errors':errors,
         'Result':'PASS' if not errors else 'FAIL',
         'Note':'PASS xác nhận kiểm tra phần mềm. Bậc tự động có giả định, không phải thẩm định hoàn chỉnh; không tạo bậc khi thiếu dữ liệu cốt lõi hoặc ngoài phạm vi phương pháp.'}

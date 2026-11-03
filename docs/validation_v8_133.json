@@ -1,0 +1,66 @@
+{
+  "Build": "V8.133.0-AUTO-FACTOR-STATUS",
+  "Date": "2026-11-02",
+  "Result": "PASS",
+  "RegressionTestsPassed": 55,
+  "TestFiles": [
+    "tests/test_partial_factor_scores.py",
+    "tests/test_report_release.py",
+    "tests/test_rating_reference.py"
+  ],
+  "RatingChecks": 46,
+  "RatingChecksByType": {
+    "BANK": 28,
+    "SECURITIES": 15,
+    "INSURANCE": 2,
+    "CORPORATE": 1
+  },
+  "UIChecks": [
+    {
+      "Ticker": "ABB",
+      "DefaultAutomaticComponents": true,
+      "OnlyCapitalMissing": true,
+      "ManualOverrideOptInAndOff": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "TCB",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": true,
+      "WordDownload": true,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVH",
+      "DefaultAutomaticOrSaved": true,
+      "ManualOptIn": false,
+      "WordDownload": false,
+      "Exceptions": 0
+    }
+  ],
+  "UnchangedFinancialAndConfigurationFiles": 8698,
+  "PythonCompilation": "PASS",
+  "Limitation": "Kiểm tra phần mềm và bảo toàn kết quả từng cấu phần; không xác nhận đủ đầu vào hoặc bậc xếp hạng cho mọi mã."
+}
