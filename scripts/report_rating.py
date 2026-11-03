@@ -342,6 +342,13 @@ def _financial_institution(ticker, typ, o, ctx, strict):
     a.append('Hồ sơ kinh doanh/vị thế rủi ro tự động dùng các chỉ tiêu tương đối với peer; các nhận định quản trị, tập trung và đa dạng hóa chưa được xác nhận riêng.')
     title = 'Huy động vốn và Thanh khoản' if typ == 'BANK' else 'Nguồn vốn và Thanh khoản'
     n = None
+    funding_assessment = None
+    if typ == 'BANK':
+        from scripts.bank_funding import factor_assessment, observations
+        r['FundingObservations'] = observations(ticker, ctx.period)
+        if not any(k in o for k in ('Funding', 'Liquidity', 'FundingLiquidity', 'FundingLiquidityNotches',
+                                    'FundingStrongExceptionConfirmed')) and o.get('UseFundingAssessment') is not False:
+            funding_assessment = factor_assessment(ticker, ctx.period)
     if o.get('FundingLiquidity') in NOTCH:
         grade = o['FundingLiquidity'];n = o.get('FundingLiquidityNotches',min(1,NOTCH[grade]))
         allowed = {'Yếu':{-2,-3},'Rất Yếu':{-4,-5}}.get(grade,{min(1,NOTCH[grade])})
@@ -352,6 +359,17 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         grade = strict['Factors'][title]
         n = strict['FactorNotches'][title]
         funding_reason = 'Bảng chấm đã lưu / đánh giá nhập riêng'
+    elif funding_assessment:
+        f, l = funding_assessment['Funding'], funding_assessment['Liquidity']
+        n = FUNDING_MATRIX[FUNDING_GRADES.index(f)][FUNDING_GRADES.index(l)]
+        if n > 0 and funding_assessment.get('FundingStrongExceptionConfirmed') is not True:
+            n = 0
+        grade = f+' / '+l
+        r.update(Funding=f, Liquidity=l, FundingAssessment=funding_assessment,
+                 FundingAssessmentOrigin='USER_CONFIRMED_FACTOR', LiquidityAssumed=False)
+        funding_reason = 'Đánh giá cấu phần được chủ mô hình xác nhận; kỳ '+ctx.period+'; xem căn cứ tại chương huy động và thanh khoản'
+        a.append('Huy động và thanh khoản: kế thừa đánh giá cấu phần do chủ mô hình xác nhận tại '+ctx.period+
+                 '; chưa kiểm định độc lập dòng tiền stress. Không suy ra mức Mạnh chỉ từ CASA hoặc LDR.')
     else:
         if typ == 'SECURITIES':
             debt_eq, current = ctx.value('DebtEquity'), ctx.value('CurrentRatio')
@@ -362,8 +380,12 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         else:
             casa, ldr = ctx.value('CASA'), ctx.value('LDR')
             f = 'Mạnh' if casa is not None and casa >= .3 else 'Phù Hợp' if casa is not None and casa >= .15 else 'Trung Bình' if casa is not None else None
-            l = 'Phù Hợp' if ldr is not None and ldr <= 1 else 'Trung Bình' if ldr is not None and ldr <= 1.2 else 'Yếu' if ldr is not None else None
-            a.append('Nguồn vốn/thanh khoản: tín hiệu thay thế từ CASA và LDR, không tự cộng ngoại lệ +1; chưa thay thế đánh giá nguồn vốn bán buôn và dòng tiền stress.')
+            # BCTC loans/deposits does not measure stressed liquidity or regulatory LDR.
+            # Preserve a conditional research result, explicitly marking the neutral
+            # liquidity assumption, rather than imposing unsupported downgrades.
+            l = 'Phù Hợp' if ldr is not None and ldr >= 0 else None
+            r['LiquidityAssumed'] = l is not None and o.get('Liquidity') not in FUNDING_GRADES
+            a.append('Huy động: CASA chỉ là tín hiệu định lượng. Thanh khoản chưa có đánh giá riêng dùng giả định Phù Hợp trong phép tính có điều kiện; không phải kết luận đã đạt mức này. Không hạ bậc hoặc cộng ngoại lệ +1 chỉ từ cho vay/tiền gửi trên BCTC; cần xét nguồn vốn, kỳ hạn, tài sản thanh khoản và dòng tiền stress.')
             funding_inputs = [('CASA', casa), ('LDR', ldr)]
         f, l = o.get('Funding',f), o.get('Liquidity',l)
         r.update(Funding=f if f in FUNDING_GRADES else None, Liquidity=l if l in FUNDING_GRADES else None)
@@ -379,6 +401,8 @@ def _financial_institution(ticker, typ, o, ctx, strict):
                 n = 0;a.append('Không cộng ngoại lệ nguồn vốn mạnh khi chưa có bằng chứng xác nhận điều kiện ngoại lệ.')
         grade = (f if f in FUNDING_GRADES else 'Thiếu đầu vào huy động')+' / '+(l if l in FUNDING_GRADES else 'Thiếu đầu vào thanh khoản')
         funding_reason = 'Huy động / Thanh khoản; áp ma trận từ đánh giá nhập riêng và/hoặc tín hiệu định lượng tự động'
+        if r.get('LiquidityAssumed'):
+            funding_reason = 'Thanh khoản Phù Hợp là giả định trung tính để tính bậc có điều kiện; cho vay/tiền gửi BCTC không phải LDR công bố hoặc stress test'
     if n is not None:
         factors[title]=grade;notches[title]=n
     r['Scorecard'].append(_row(title, grade, f'{n:+d} bậc' if n is not None else '—', funding_reason))

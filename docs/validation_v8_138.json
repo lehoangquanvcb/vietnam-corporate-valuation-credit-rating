@@ -1,0 +1,17 @@
+{
+  "Build": "V8.138.0-BANK-FUNDING-REPORT",
+  "Result": "PASS",
+  "BankCalculationChecks": 28,
+  "UICompanyChecks": 9,
+  "PytestUniqueChecks": 185,
+  "PytestInitialPassed": 182,
+  "PytestInitialFailed": 3,
+  "PytestAffectedRerunPassed": 85,
+  "UnresolvedFailures": 0,
+  "Report": "TCB 2026-Q2",
+  "ReportPages": 29,
+  "Notes": [
+    "Initial 3 failures were old nonbank appendix heading assertions. Preserved nonbank heading, reran all affected report suites (85 passed).",
+    "28 bank checks do not certify every bank liquidity assessment; unreviewed liquidity remains an explicit neutral assumption."
+  ]
+}

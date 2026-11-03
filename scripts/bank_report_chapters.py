@@ -9,7 +9,7 @@ CHAPTERS=[
  ('CHỈ TIÊU THỊ TRƯỜNG','',['PB','PE'])]
 
 
-def chapter_findings(pack,key):
+def chapter_findings(pack,key,rating_result=None):
     items=pack['Items'];ticker=pack['Ticker'];out=[]
     def v(m):return items.get(m,{}).get('Value')
     def mean(m):return items.get(m,{}).get('PeerMean')
@@ -52,7 +52,46 @@ def chapter_findings(pack,key):
             a,b=hc.iloc[0],hc.iloc[-1]
             out.append(f'Trong chuỗi năm, CASA từ {fmt("CASA",a.Value)} năm {a.DisplayPeriod} xuống {fmt("CASA",b.Value)} năm {b.DisplayPeriod}. Tỷ trọng nguồn vốn không kỳ hạn giảm làm mức tài trợ bằng tiền gửi có kỳ hạn lớn hơn tương đối.' if b.Value<a.Value else f'CASA tăng từ {fmt("CASA",a.Value)} lên {fmt("CASA",b.Value)} trong chuỗi năm, hỗ trợ cơ cấu chi phí vốn.')
         out.append(content('LDR'))
+        from scripts.bank_funding import funding_commentary
+        out.extend(funding_commentary(ticker,pack['Period'],(rating_result or {}).get('FundingAssessment')))
     return list(dict.fromkeys(s for s in out if s))
+
+
+def component_scorecard(rr, pack=None):
+    """A compact financial scorecard, shared by the app and Word report."""
+    wanted=[key for _,key,_ in CHAPTERS if key]
+    rows=[]
+    for key in wanted:
+        original=next((row for row in rr.get('Scorecard',[]) if row['Cấu phần']==key),None)
+        if original:
+            row=dict(original)
+        elif key in rr.get('Factors',{}):
+            n=rr.get('FactorNotches',{}).get(key)
+            row={'Cấu phần':key,'Điểm / Đánh giá':rr['Factors'][key],
+                 'Tác động':f'{n:+d} bậc' if n is not None else '—','Kết quả / Căn cứ':''}
+        else:
+            continue
+        if pack and key in rr.get('Factors',{}):
+            items=pack['Items']
+            def pair(metric):
+                x=items.get(metric,{})
+                if not finite(x.get('Value')):return ''
+                return fmt(metric,x['Value'])+(f'; peer {fmt(metric,x["PeerMean"])}' if finite(x.get('PeerMean')) else '')
+            if key=='Hồ sơ Kinh doanh':
+                row['Kết quả / Căn cứ']='Tổng tài sản '+pair('TotalAssets')+'. Điểm tương đối trong nhóm so sánh.'
+            elif key=='Vốn và Lợi nhuận':
+                car=rr.get('CARInput') or pack.get('CARInput') or {}
+                row['Kết quả / Căn cứ']=('CAR '+fmt('CAR',car.get('Value'))+' ('+str(car.get('Period',pack['Period']))+'); ' if finite(car.get('Value')) else '')+'VCSH/tài sản '+pair('EquityAssets')+'.'
+            elif key=='Vị thế Rủi ro':
+                row['Kết quả / Căn cứ']='NPL '+pair('NPL')+'. Bao phủ nợ xấu '+fmt('LoanLossCoverage',items.get('LoanLossCoverage',{}).get('Value'))+'.'
+        if key=='Huy động vốn và Thanh khoản':
+            if rr.get('FundingAssessment'):
+                row['Kết quả / Căn cứ']='Mức Mạnh được chủ mô hình xác nhận cho '+str(rr.get('Period'))+'. Chi phí vốn tăng là rủi ro cần theo dõi.'
+            elif rr.get('LiquidityAssumed'):
+                row['Điểm / Đánh giá']=str(rr.get('Funding') or 'Chưa xác định')+' / Phù Hợp (giả định)'
+                row['Kết quả / Căn cứ']='Huy động theo tín hiệu CASA; thanh khoản dùng giả định trung tính, chưa kiểm định dòng tiền stress. Không hạ bậc chỉ từ tỷ số cho vay/tiền gửi BCTC.'
+        rows.append(row)
+    return rows
 
 
 def rating_sensitivity(rr):

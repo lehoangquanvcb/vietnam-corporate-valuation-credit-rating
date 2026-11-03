@@ -44,7 +44,7 @@ def _shade(cell,fill):
 def _para(doc,text,size=10.5,bold=False,keep=False,color='000000',lead=None):
     p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     pf=p.paragraph_format;pf.space_after=Pt(6);pf.line_spacing=1.08
-    pf.keep_with_next=keep;pf.widow_control=True
+    pf.keep_with_next=keep;pf.widow_control=True;pf.keep_together=True
     if lead:_font(p.add_run(lead+' '),size,True,color)
     _font(p.add_run(str(text)),size,bold,color)
     return p
@@ -80,7 +80,7 @@ def _table(doc,headers,rows,widths,font_size=9):
             for p in c.paragraphs:
                 p.paragraph_format.space_after=Pt(1);p.paragraph_format.line_spacing=1.05
                 if len(t.rows)<=4:p.paragraph_format.keep_with_next=i<len(t.rows)-1
-                p.alignment=WD_ALIGN_PARAGRAPH.LEFT if j==0 else WD_ALIGN_PARAGRAPH.CENTER
+                p.alignment=WD_ALIGN_PARAGRAPH.LEFT if j==0 or headers[j] in {'Kết quả / Căn cứ','ĐIỂM HẠN CHẾ VÀ RỦI RO','Căn cứ'} else WD_ALIGN_PARAGRAPH.CENTER
                 for r in p.runs:_font(r,font_size,i==0)
     return t
 
@@ -212,7 +212,7 @@ def _summary(doc,pack,rr,report_type):
             _cell_para(right,text,10)
         if pack['Type']=='BANK':
             from scripts.bank_report_chapters import chapter_findings
-            texts=[chapter_findings(pack,k) for k in ['Vốn và Lợi nhuận','Vị thế Rủi ro','Huy động vốn và Thanh khoản']]
+            texts=[chapter_findings(pack,k,rr) for k in ['Vốn và Lợi nhuận','Vị thế Rủi ro','Huy động vốn và Thanh khoản']]
             for rows in texts:
                 if rows:_cell_para(right,rows[0],10)
         else:
@@ -233,7 +233,7 @@ def _summary(doc,pack,rr,report_type):
         ['\n'.join(good) or 'Chưa có kết luận so sánh.','\n'.join(bad) or 'Chưa có kết luận so sánh.']], [88,88],9.5)
     if pack['Type']=='BANK':
         from scripts.bank_report_chapters import chapter_findings
-        rows=chapter_findings(pack,'Huy động vốn và Thanh khoản')
+        rows=chapter_findings(pack,'Huy động vốn và Thanh khoản',rr)
         if len(rows)>1:_para(doc,rows[1],10)
     doc.add_page_break()
 
@@ -345,6 +345,13 @@ def _sources(doc,pack,rr=None):
         _para(doc,benchmark_text(rr['DomesticBenchmark']),9)
         _para(doc,'Nguồn tham khảo CRA: '+rr['DomesticBenchmark']['URL'],8,color=GRAY).alignment=WD_ALIGN_PARAGRAPH.LEFT
     if pack['Type']=='BANK':
+        from scripts.bank_funding import observations
+        funding=observations(pack['Ticker'],pack['Period'])
+        if funding:
+            _para(doc,'Nguồn huy động và thanh khoản: '+funding['Source']+'; kỳ '+funding['Period']+'. '+funding['BasisNote'],9,color=GRAY)
+            _para(doc,funding['SourceURL'],9,color=GRAY).alignment=WD_ALIGN_PARAGRAPH.LEFT
+        if rr.get('FundingAssessment'):
+            _para(doc,'Nguồn đánh giá cấu phần huy động và thanh khoản: '+rr['FundingAssessment']['Source']+'. Chỉ áp dụng cho kỳ '+rr['FundingAssessment']['Period']+'.',9,color=GRAY)
         from scripts.bank_car import car_usage_text
         from scripts.financial_evidence import at_period
         car=pack.get('CARInput',{})
@@ -411,9 +418,20 @@ def _scorecard(doc,pack,rr):
     _band(doc,'TỔNG KẾT CẤU PHẦN XẾP HẠNG')
     if rr.get('Scorecard'):
         headers=['Cấu phần','Điểm / Đánh giá','Tác động','Kết quả / Căn cứ']
-        _table(doc,headers,[[row.get(h,'') for h in headers] for row in rr['Scorecard']],[45,38,27,66],9)
+        rows=rr['Scorecard']
+        if pack['Type']=='BANK':
+            from scripts.bank_report_chapters import component_scorecard
+            components=component_scorecard(rr,pack)
+            names={r['Cấu phần'] for r in components}
+            rows=([r for r in rows if r['Cấu phần']=='Anchor']+components+
+                  [r for r in rows if r['Cấu phần'] not in names|{'Anchor'}])
+        _table(doc,headers,[[row.get(h,'') for h in headers] for row in rows],[43,36,23,74],9)
         if rr.get('QuantitativeEvidence'):
-            _band(doc,'CĂN CỨ ĐỊNH LƯỢNG CỦA BẢNG ĐIỂM',2)
+            if pack['Type']=='BANK':
+                doc.add_page_break()
+                _band(doc,'PHỤ LỤC: CĂN CỨ TÍNH ĐIỂM VÀ GIẢ ĐỊNH')
+            else:
+                _band(doc,'CĂN CỨ ĐỊNH LƯỢNG CỦA BẢNG ĐIỂM',2)
             rows=[]
             for e in rr['QuantitativeEvidence']:
                 value=e.get('Giá trị')
@@ -493,7 +511,7 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
                 if key in rr.get('Factors',{}):
                     n=rr.get('FactorNotches',{}).get(key)
                     _para(doc,'Đánh giá cấu phần: '+rr['Factors'][key]+(f' | Điều chỉnh {n:+d} bậc.' if n is not None else '.'),10,True,keep=True,color=DARK)
-                for text in chapter_findings(pack,key):_para(doc,text,10)
+                for text in chapter_findings(pack,key,rr):_para(doc,text,10)
         else:
             from scripts.report_methodology import chapter_findings as method_findings
             for text in method_findings(pack,group):_para(doc,text,10)

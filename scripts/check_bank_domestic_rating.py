@@ -34,7 +34,7 @@ def main():
                              'ICR':r.get('ICR'),'Status':r.get('DomesticCalibrationStatus','DISABLED'),
                              'Source':r.get('RatingBasisNote'),'MissingEvidence':r.get('MissingEvidence')})
             except Exception as exc:errors.append({'Ticker':t,'Error':repr(exc)})
-    report={'Build':'V8.137.0-DOMESTIC-BANK-RATING','Enabled':policy['Enabled'],
+    report={'Build':'V8.138.0-BANK-FUNDING-REPORT','Enabled':policy['Enabled'],
             'Fingerprint':source_fingerprint(),'Checks':rows,'Errors':errors,
             'Result':'PASS' if not errors else 'FAIL',
             'Note':'PASS xác nhận tính nhất quán phần mềm. AAA/AA- theo nhóm là hiệu chỉnh của chủ mô hình, không phải ý kiến CRA; Agribank chỉ là tham chiếu.'}

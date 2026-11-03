@@ -1,0 +1,53 @@
+{
+  "Result": "PASS",
+  "DefaultRatingTab": true,
+  "SharedFundingChapter": true,
+  "LegacyToggle": true,
+  "Checks": [
+    {
+      "Ticker": "TCB",
+      "ICR": "AA-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VCB",
+      "ICR": "AAA",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABB",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "OCB",
+      "ICR": "BBB-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "STB",
+      "ICR": "BB+",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "ICR": "BBB+",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVH",
+      "ICR": "Không áp dụng",
+      "Exceptions": 0
+    }
+  ]
+}

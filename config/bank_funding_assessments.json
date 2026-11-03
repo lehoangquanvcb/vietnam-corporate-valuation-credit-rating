@@ -1,0 +1,18 @@
+{
+  "Methodology": "BANK_2026",
+  "Records": [
+    {
+      "Ticker": "TCB",
+      "Period": "2026-Q2",
+      "Funding": "Mạnh",
+      "Liquidity": "Mạnh",
+      "FundingStrongExceptionConfirmed": true,
+      "SourceType": "USER_CONFIRMED_FACTOR",
+      "Source": "TCB_XHTN chuẩn.docx; xác nhận của Lê Hoàng Quân ngày 03/11/2026",
+      "SourceSHA256": "69d8173c2fabcfefce9d8b4ee69e780809cde747e29a0eb1dad59b1e21c723fc",
+      "ConfirmedAt": "2026-11-03",
+      "StressTestIndependentlyVerified": false,
+      "Rationale": "Giữ đánh giá Mạnh theo báo cáo tham chiếu và xác nhận của chủ mô hình cho kỳ 2026-Q2. Lợi thế nguồn vốn không kỳ hạn hỗ trợ khả năng huy động; số công bố về LDR và kỳ hạn nguồn vốn được đối chiếu riêng. Đánh giá này kế thừa nhận định chuyên gia, chưa phải kết quả kiểm định dòng tiền stress độc lập."
+    }
+  ]
+}

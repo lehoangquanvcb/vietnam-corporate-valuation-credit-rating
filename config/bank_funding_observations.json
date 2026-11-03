@@ -1,0 +1,49 @@
+{
+  "Records": [
+    {
+      "Ticker": "TCB",
+      "Period": "2025-Q4",
+      "Scope": "BANK_ONLY",
+      "RegulatoryLDR": 0.765,
+      "ShortTermFundingForLongLoans": 0.246,
+      "DisclosedCASA": 0.404,
+      "QuarterlyCostOfFunds": 0.036,
+      "CASAScope": "DISCLOSED_GROUP_BASIS",
+      "CostOfFundsScope": "DISCLOSED_GROUP_BASIS",
+      "Source": "Techcombank – Chỉ số nổi bật, bảng quý và chú thích (2)",
+      "SourceURL": "https://techcombank.com/nha-dau-tu/thong-tin-tai-chinh/chi-so-noi-bat",
+      "VerifiedAt": "2026-11-03",
+      "BasisNote": "LDR và vốn ngắn hạn cho vay trung dài hạn: ngân hàng riêng lẻ (chú thích 2). CASA và chi phí vốn: cơ sở công bố của TCB; không ghép vào peer BCTC."
+    },
+    {
+      "Ticker": "TCB",
+      "Period": "2026-Q1",
+      "Scope": "BANK_ONLY",
+      "RegulatoryLDR": 0.805,
+      "ShortTermFundingForLongLoans": 0.269,
+      "DisclosedCASA": 0.379,
+      "QuarterlyCostOfFunds": 0.042,
+      "CASAScope": "DISCLOSED_GROUP_BASIS",
+      "CostOfFundsScope": "DISCLOSED_GROUP_BASIS",
+      "Source": "Techcombank – Chỉ số nổi bật, bảng quý và chú thích (2)",
+      "SourceURL": "https://techcombank.com/nha-dau-tu/thong-tin-tai-chinh/chi-so-noi-bat",
+      "VerifiedAt": "2026-11-03",
+      "BasisNote": "LDR và vốn ngắn hạn cho vay trung dài hạn: ngân hàng riêng lẻ (chú thích 2). CASA và chi phí vốn: cơ sở công bố của TCB; không ghép vào peer BCTC."
+    },
+    {
+      "Ticker": "TCB",
+      "Period": "2026-Q2",
+      "Scope": "BANK_ONLY",
+      "RegulatoryLDR": 0.801,
+      "ShortTermFundingForLongLoans": 0.278,
+      "DisclosedCASA": 0.383,
+      "QuarterlyCostOfFunds": 0.048,
+      "CASAScope": "DISCLOSED_GROUP_BASIS",
+      "CostOfFundsScope": "DISCLOSED_GROUP_BASIS",
+      "Source": "Techcombank – Chỉ số nổi bật, bảng quý và chú thích (2)",
+      "SourceURL": "https://techcombank.com/nha-dau-tu/thong-tin-tai-chinh/chi-so-noi-bat",
+      "VerifiedAt": "2026-11-03",
+      "BasisNote": "LDR và vốn ngắn hạn cho vay trung dài hạn: ngân hàng riêng lẻ (chú thích 2). CASA và chi phí vốn: cơ sở công bố của TCB; không ghép vào peer BCTC."
+    }
+  ]
+}

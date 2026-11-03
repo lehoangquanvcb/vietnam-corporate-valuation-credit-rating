@@ -137,6 +137,6 @@ def test_word_preserves_partial_components_without_inventing_final_grade():
     assert rows['Vị thế Rủi ro'][1] == '2/6 • Mạnh'
     assert rows['Vốn và Lợi nhuận'][2] == '—'
     assert '2026-Q2' in rows['Vốn và Lợi nhuận'][3]
-    assert rows['Huy động vốn và Thanh khoản'][1] == 'Phù Hợp / Phù Hợp'
+    assert rows['Huy động vốn và Thanh khoản'][1] == 'Phù Hợp / Phù Hợp (giả định)'
     assert rows['Kết quả'][1] == 'Chưa đủ căn cứ tổng hợp'
     assert 'Bậc xếp hạng ước tính' not in rows

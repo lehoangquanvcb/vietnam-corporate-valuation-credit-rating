@@ -64,6 +64,8 @@ def analyse(pack, metric):
                 reasoning.append(f'Tại quý gần nhất, tiền gửi khách hàng {"vượt" if gap>=0 else "thấp hơn"} dư nợ {fmt("CustomerDeposits",abs(gap))}; '+('phần dư huy động này hỗ trợ cân đối nguồn tài trợ tín dụng.' if gap>=0 else 'phần chênh lệch phải được tài trợ bằng vốn chủ sở hữu hoặc các nguồn vốn khác.'))
             if metric=='LoanAssets' and finite(val('NPL')):
                 reasoning.append(f'Tỷ lệ nợ xấu hiện là {fmt("NPL",val("NPL"))}; tăng tỷ trọng tín dụng sẽ làm kết quả nhạy hơn với diễn biến chất lượng khoản vay.')
+            if metric=='LDR':
+                reasoning.append('Cho vay/tiền gửi trên BCTC phản ánh nhu cầu bổ sung nguồn tài trợ ngoài tiền gửi khách hàng; mức cao không tự nó xác định thanh khoản yếu. Cần đối chiếu LDR công bố, kỳ hạn nguồn vốn và khả năng đáp ứng dòng tiền khi thị trường khó khăn.')
             if metric=='CASA' and finite(val('NIM')):
                 reasoning.append(f'CASA hiện ở {fmt("CASA",v)}, nhưng NIM chỉ đạt {fmt("NIM",val("NIM"))}'+(f', so với {fmt("NIM",items["NIM"]["PeerMean"])} của peer.' if finite(items['NIM']['PeerMean']) else '.')+' Nguồn vốn không kỳ hạn chưa đủ để tạo ưu thế về biên lãi nếu NIM vẫn thấp hơn nhóm so sánh.' if finite(items.get('NIM',{}).get('PeerMean')) and val('NIM')<items['NIM']['PeerMean'] else f'NIM hiện đạt {fmt("NIM",val("NIM"))}; cần duy trì nguồn tiền gửi không kỳ hạn để bảo vệ biên thu nhập.')
         if metric in {'NPAT','ROE','ROA','ProfitAssets'}:

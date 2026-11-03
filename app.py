@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.137.0-DOMESTIC-BANK-RATING'
+BUILD_TAG='V8.138.0-BANK-FUNDING-REPORT'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -800,7 +800,15 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
 
     if rr3.get('Scorecard'):
         st.markdown('### Kết quả từng cấu phần xếp hạng')
-        st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
+        if rr3.get('Methodology')=='BANK':
+            from scripts.bank_report_chapters import component_scorecard
+            from scripts.report_evidence import build_pack
+            _financial_pack=build_pack(selected,'FY',5)
+            st.dataframe(pd.DataFrame(component_scorecard(rr3,_financial_pack)),hide_index=True,use_container_width=True)
+            with st.expander('Chi tiết phép tính từ Anchor đến bậc cuối cùng',expanded=False):
+                st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
+        else:
+            st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
         st.caption('Các mức tự động là ước tính theo giả định công bố. Triển vọng: '+str(rr3.get('Outlook','Chưa đánh giá'))+'.')
 
     if meta['EntityType']=='INSURANCE':
@@ -834,8 +842,28 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
         else: _bar_metrics=[('ROE','ROE',True),('DebtEquity','Nợ/VCSH',False),('DebtEBITDA','Nợ/EBITDA',False),('CurrentRatio','Thanh toán hiện hành',False)]
         from scripts.report_evidence import build_pack, narrative
         _financial_pack=build_pack(selected,'FY',5)
-        for _m,_t,_pf in _bar_metrics:
-            _render_metric_analysis(selected,_m,_t,_financial_pack)
+        if meta.get('EntityType')=='BANK':
+            from scripts.bank_report_chapters import CHAPTERS,chapter_findings
+            from scripts.report_evidence import label as _financial_label,finite as _financial_finite
+            for _chapter,_factor,_metrics in CHAPTERS:
+                if not _factor:continue
+                st.markdown('### '+_chapter)
+                if _factor in rr3.get('Factors',{}):
+                    _grade=rr3['Factors'][_factor]
+                    if _factor=='Huy động vốn và Thanh khoản' and rr3.get('LiquidityAssumed'):
+                        _grade+=' (thanh khoản là giả định)'
+                    _notch=rr3.get('FactorNotches',{}).get(_factor)
+                    st.markdown('**Đánh giá: '+_grade+(f' · {_notch:+d} bậc' if _notch is not None else '')+'**')
+                for _text in chapter_findings(_financial_pack,_factor,rr3):st.write(_text)
+                if _factor=='Huy động vốn và Thanh khoản' and rr3.get('FundingObservations'):
+                    st.caption('Nguồn tỷ lệ công bố: '+rr3['FundingObservations']['SourceURL']+'; '+rr3['FundingObservations']['BasisNote'])
+                for _m in _metrics:
+                    _item=_financial_pack['Items'].get(_m,{})
+                    if _item and (_financial_finite(_item['Value']) or _item['History'].Value.notna().any()):
+                        _render_metric_analysis(selected,_m,_financial_label(_m),_financial_pack)
+        else:
+            for _m,_t,_pf in _bar_metrics:
+                _render_metric_analysis(selected,_m,_t,_financial_pack)
     elif meta.get('EntityType')!='INSURANCE':
         st.info('Chưa có đủ chỉ tiêu định lượng để phân tích XHTN.')
 

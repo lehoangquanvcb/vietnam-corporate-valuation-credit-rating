@@ -43,7 +43,8 @@ def load_policy(root=None):
 def source_fingerprint(root=None):
     root = Path(root or ROOT)
     h = hashlib.sha256()
-    for name in (POLICY_FILE, REFERENCE_FILE, 'bank_rating_assessments.json', 'bank_rating_references.json'):
+    for name in (POLICY_FILE, REFERENCE_FILE, 'bank_rating_assessments.json', 'bank_rating_references.json',
+                 'bank_funding_assessments.json', 'bank_funding_observations.json'):
         path = root / 'config' / name
         h.update(name.encode())
         h.update(path.read_bytes() if path.exists() else b'MISSING')
