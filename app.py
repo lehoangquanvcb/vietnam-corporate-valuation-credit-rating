@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.134.0-OFFICIAL-BANK-CAR'
+BUILD_TAG='V8.135.0-BANK-CAR-FALLBACK'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -370,15 +370,18 @@ def _metric_missing_caption(ticker,metric,title,history_only=False):
     period=latest_period(ticker,get_company(ticker)['EntityType']) or 'gần nhất'
     text=f'{title}: chưa có số liệu cuối năm trong chuỗi 5 năm'+('.' if history_only else f' hoặc số liệu đúng quý {period}.')
     if metric=='CAR':
-        snap=get_snapshot(ticker);value=num(snap.get('CAR'));asof=snap.get('CAR_AsOf')
-        if value is not None and asof:
-            text+=f' CAR công bố gần nhất trong nguồn hiện có: {vi(value*100,2)}% tại {asof}.'
+        from scripts.bank_car import car_usage_text
+        snap=get_snapshot(ticker)
+        text+=' '+car_usage_text(snap.get('_MetricEvidence',{}).get('CAR',{}),snap.get('SnapshotPeriod'))
     return text
 
 
 def _render_metric_analysis(ticker,metric,title,pack):
     from scripts.report_evidence import narrative,finite
     from scripts.financial_charts import numeric_values
+    if metric=='CAR' and pack.get('CARInput'):
+        from scripts.bank_car import car_usage_text
+        st.caption(car_usage_text(pack['CARInput'],pack.get('Period')))
     hist=metric_chart(ticker,metric,title+' · 5 năm tài chính')
     peers=latest_peer_bar_chart(ticker,metric,title+' · quý gần nhất')
     if hist is None and peers is None:
@@ -482,8 +485,9 @@ elif meta['EntityType']=='INSURANCE':kpis=[('Giá thị trường',money(val.get
 else:kpis=[('Giá thị trường',money(val.get('Price'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA'))),('Nợ/EBITDA',mult(s.get('DebtEBITDA'))),('Thanh toán hiện hành',mult(s.get('CurrentRatio')))]
 cols=st.columns(6)
 for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
-if meta['EntityType']=='BANK' and num(s.get('CAR')) is not None and s.get('CAR_AsOf') != s.get('SnapshotPeriod'):
-    st.caption(f"CAR: kỳ công bố {s.get('CAR_AsOf','chưa xác định')}; kỳ tài chính hiện tại {s.get('SnapshotPeriod','chưa xác định')}.")
+if meta['EntityType']=='BANK' and num(s.get('CAR')) is not None:
+    from scripts.bank_car import car_usage_text
+    st.caption(car_usage_text(s.get('_MetricEvidence',{}).get('CAR',{}),s.get('SnapshotPeriod')))
 if meta['EntityType']=='INSURANCE' and val.get('Price') is None:
     st.caption('Giá thị trường: thiếu dữ liệu giá đóng cửa trong nguồn hiện có; không suy ra từ P/E hoặc P/B.')
 

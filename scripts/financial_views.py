@@ -60,7 +60,7 @@ def peer_metric_frame(ticker,metric):
     rows=[]
     for t in [ticker]+list(dict.fromkeys(t for t in peer_tickers(ticker) if t!=ticker and comparable_model(meta,get_company(t)))):
         e=at_period(t,typ,target,'QUARTER').get(metric,{}) if target else {}
-        if e.get('Status')=='OK' and window_ends_at(e.get('Period'),target) and comparable_metric(metric,own,e) and e.get('Basis')==own.get('Basis'):
+        if e.get('Status')=='OK' and window_ends_at(e.get('Period'),target) and (t==ticker or comparable_metric(metric,own,e)) and e.get('Basis')==own.get('Basis'):
             rows.append({'Ticker':t,'Value':e['Value'],'Period':target,'Basis':e['Basis']})
     return pd.DataFrame(rows,columns=['Ticker','Value','Period','Basis'])
 

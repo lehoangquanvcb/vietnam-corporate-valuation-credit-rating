@@ -81,6 +81,9 @@ class Evidence:
         self.period = latest_period(ticker, typ)
         self.meta = get_company(ticker)
         self.records = at_period(ticker, typ, self.period, 'TTM') if self.period else {}
+        if typ=='BANK' and self.period:
+            from scripts.financial_evidence import rating_car_record
+            self.records['CAR']=rating_car_record(ticker,self.period)
         self.peers = list(dict.fromkeys(t for t in peer_tickers(ticker)
                                        if t != ticker and comparable_model(self.meta, get_company(t)))) if self.period else []
         self.peer_records = {}
@@ -91,8 +94,10 @@ class Evidence:
             ebitda, interest = self.value('EBITDA'), self.value('InterestExpense')
             return ebitda/abs(interest) if ebitda is not None and interest is not None and interest != 0 else None
         r = self.records.get(metric, {})
-        # A current-period record or exact TTM window only. No stale CAR/cache.
-        if r.get('Status') != 'OK' or not str(r.get('Period', '')).split('|')[-1] == self.period:
+        # Ngoại lệ CAR cuối 2025 chỉ được bộ chọn nguồn chung phê chuẩn cho Q2/2026.
+        allowed_car=(metric=='CAR' and self.typ=='BANK' and r.get('FallbackUsed') is True
+                     and r.get('UsePeriod')==self.period=='2026-Q2' and r.get('Period')=='2025-Q4')
+        if r.get('Status') != 'OK' or (not str(r.get('Period', '')).split('|')[-1] == self.period and not allowed_car):
             return None
         return number(r.get('Value'))
 
@@ -297,9 +302,15 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         grade = car_grade(car)
         auto['CapitalEarnings'] = GRADES.index(grade)+1 if grade else None
         if car is not None:
-            ctx.add('CAR', car, auto['CapitalEarnings'], 'Bảng CAR ngân hàng; dùng CAR hiện tại làm giả định giữ nguyên, không ghi thành CAR dự báo')
+            from scripts.bank_car import car_usage_text
+            car_record=getattr(ctx,'records',{}).get('CAR',{})
+            r['CARInput']=car_record
+            usage=car_usage_text(car_record,ctx.period)
+            ctx.add('CAR', car, auto['CapitalEarnings'], 'Bảng CAR ngân hàng; '+(usage or 'giả định giữ nguyên CAR đầu vào'))
+            if car_record.get('FallbackUsed') or car_record.get('SourceKind') in {'USER_PROVIDED','USER_ESTIMATE'}:
+                a.append(usage)
         risk = ctx.peer_score([('NPL', .5, False), ('LoanLossCoverage', .3, True), ('ROA', .2, True)])
-        a.append('Vốn/lợi nhuận: giả định CAR hiện tại duy trì, điều chỉnh chất lượng vốn 0 bậc; không tạo CAR dự báo hay dùng CAR kỳ cũ.')
+        a.append('Vốn/lợi nhuận: giả định CAR đầu vào được chọn duy trì, điều chỉnh chất lượng vốn 0 bậc; không tạo CAR dự báo. Kỳ và loại nguồn được nêu trong căn cứ chấm điểm.')
     auto['RiskPosition'] = _clamp_grade(risk) if risk is not None else None
     for key,title in keys:
         grade = o.get(key)

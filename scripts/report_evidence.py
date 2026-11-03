@@ -8,7 +8,7 @@ from scripts.methodology_kpi_engine import LABELS, PCT, MULT, BANK_GROUPS, SEC_G
 from scripts.financial_views import HISTORY_METRICS, BASIS_LABELS
 from scripts.bank_car import comparable_metric
 
-ENGINE_VERSION = '8.134.0'
+ENGINE_VERSION = '8.135.0'
 GROUPS = {'BANK': {
  'Hồ sơ kinh doanh':['TotalAssets','GrossLoans','CustomerDeposits'],
  'Vốn và lợi nhuận':['Equity','CAR','EquityAssets','TangibleEquityAssets','AssetEquity','NPAT','NetInterestIncome','ROE','ROA','NIM','CIR','ProfitAssets','NII_OperatingIncome'],
@@ -47,6 +47,7 @@ def fmt(m,v,with_unit=True):
     return n+(' '+unit(m) if with_unit else '')
 def basis_text(v):
     return {'END_PERIOD':'Số dư cuối kỳ','REPORTED_RATIO':'Tỷ số nguồn công bố','QUARTER':'Quý riêng lẻ',
+        'USER_PROVIDED_RATIO':'Số liệu người dùng cung cấp','USER_ESTIMATE':'Ước tính theo chỉ định người dùng',
         'YTD':'Lũy kế đầu năm','FY':'Cả năm','TTM':'12 tháng gần nhất','DERIVED_QUARTER':'Tỷ số tính từ quý riêng lẻ',
         'DERIVED_YTD':'Tỷ số tính từ lũy kế','DERIVED_TTM':'Tỷ số tính từ 12 tháng','DERIVED_FY':'Tỷ số tính từ cả năm'}.get(v, v or 'Chưa có cơ sở tính')
 
@@ -102,8 +103,12 @@ def build_pack(ticker,basis='FY',years=5):
             h['PeerMean']=means;h['PeerCount']=counts
         items[m]={'Metric':m,'Value':current,'Record':own,'Peers':rows,'Excluded':excluded,'PeerCount':len(rows),
             'PeerMean':float(np.mean([r['Value'] for r in rows])) if len(rows)>=5 else None,'History':h}
-    return {'Ticker':ticker,'Meta':meta,'Type':typ,'Period':target,'Basis':basis,'Years':years,
+    result={'Ticker':ticker,'Meta':meta,'Type':typ,'Period':target,'Basis':basis,'Years':years,
             'PeerUniverse':peers,'Sections':sections,'Items':items}
+    if typ=='BANK':
+        from scripts.financial_evidence import rating_car_record
+        result['CARInput']=rating_car_record(ticker,target)
+    return result
 
 def delta_text(m,a,b):
     if m in PCT:return vi((b-a)*100,2)+' điểm phần trăm'
@@ -114,7 +119,23 @@ def delta_text(m,a,b):
 def narrative(pack,m):
     from scripts.financial_narrative import analyse
     from scripts.report_insights import enrich_narrative
-    return enrich_narrative(pack,m,analyse(pack,m))
+    result=enrich_narrative(pack,m,analyse(pack,m))
+    if m=='CAR' and pack['Type']=='BANK':
+        car=pack.get('CARInput',{})
+        if car.get('Status')=='OK' and finite(car.get('Value')):
+            from scripts.bank_car import car_usage_text
+            from scripts.bank_method_2026 import car_grade
+            if car.get('SourceKind') in {'USER_PROVIDED','USER_ESTIMATE'} or car.get('FallbackUsed'):
+                result['Peers']=car_usage_text(car,pack.get('Period'))
+            grade=car_grade(car['Value'])
+            qualifier='giả định ' if car.get('SourceKind')=='USER_ESTIMATE' or car.get('FallbackUsed') else ''
+            result['Meaning']=f"Với {qualifier}CAR đầu vào {fmt(m,car['Value'])}, riêng tín hiệu vốn theo CAR ở mức {grade}."
+            result['Conclusion']=('Bộ đệm này hỗ trợ khả năng hấp thụ tổn thất và tăng trưởng tài sản có rủi ro; duy trì lợi nhuận giữ lại giúp hạn chế áp lực bổ sung vốn.'
+                if grade in {'Rất Mạnh','Mạnh'} else
+                'Dư địa vốn cần được giữ cùng nhịp mở rộng tín dụng; tăng trưởng tài sản có rủi ro nhanh hơn tích lũy vốn có thể làm suy yếu mức CAR đầu vào.'
+                if grade=='Phù Hợp' else
+                'Bộ đệm vốn là điểm hạn chế; tăng trưởng tài sản có rủi ro hoặc tổn thất tín dụng sẽ làm tăng nhu cầu bổ sung vốn và giữ lại lợi nhuận.')
+    return result
 
 def cross_findings(pack):
     metrics={'BANK':['Equity','NPAT','NPL','CASA'],

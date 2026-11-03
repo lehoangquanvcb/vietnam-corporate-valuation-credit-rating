@@ -1,0 +1,110 @@
+{
+  "Result": "PASS",
+  "DefaultRatingTab": true,
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "CAR": "12,72%",
+      "ICR": "A-",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "TCB",
+      "CAR": "14,95%",
+      "ICR": "AA+",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSB",
+      "CAR": "12,06%",
+      "ICR": "BB",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "STB",
+      "CAR": "9,89%",
+      "ICR": "BB+",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BAB",
+      "CAR": "8,95%",
+      "ICR": "BB+",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "EIB",
+      "CAR": "12,60%",
+      "ICR": "BB",
+      "SourceCaption": "số liệu người dùng cung cấp",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "MSB",
+      "CAR": "12,28%",
+      "ICR": "BBB",
+      "SourceCaption": "số liệu người dùng cung cấp",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VCB",
+      "CAR": "12,50%",
+      "ICR": "A",
+      "SourceCaption": "ước tính theo chỉ định người dùng",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "MBB",
+      "CAR": "11,50%",
+      "ICR": "BBB-",
+      "SourceCaption": "31/12/2025",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VIB",
+      "CAR": "12,20%",
+      "ICR": "BB-",
+      "SourceCaption": "31/12/2025",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HDB",
+      "CAR": "16,00%",
+      "ICR": "A-",
+      "SourceCaption": "31/12/2025",
+      "Exceptions": 0,
+      "WordExport": true,
+      "ManualOverrideRestoresAuto": true
+    },
+    {
+      "Ticker": "NVB",
+      "ICR": "Chưa đủ căn cứ",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "ICR": "BBB+",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVH",
+      "ICR": "Không áp dụng",
+      "Exceptions": 0
+    }
+  ]
+}

@@ -51,8 +51,14 @@ def test_vcb_quarter_not_ttm_and_no_stale_car():
     assert x['Value']!=at_period('VCB','BANK',p['Period'],'TTM')['NPAT']['Value']
     for row in x['Peers']:
         assert row['Value']==at_period(row['Ticker'],'BANK',p['Period'],'QUARTER')['NPAT']['Value']
-    assert p['Items']['CAR']['Value'] is None
-    assert p['Items']['CAR']['History'].Value.isna().all() # Không dùng CAR quý 2 làm số cuối năm.
+    car=p['Items']['CAR']
+    assert car['Value']==.125 and car['Record']['Period']==p['Period']=='2026-Q2'
+    assert car['Record']['SourceKind']=='USER_ESTIMATE'
+    assert car['Record']['InputText']=='> 12,00%'
+    history=car['History']
+    assert history.Value.notna().sum()==1
+    assert history.iloc[-1].DisplayPeriod=='2025' and history.iloc[-1].Value==pytest.approx(.117)
+    assert not history.Value.eq(.125).any() # Không dùng ước tính quý 2 làm số cuối năm.
     metrics=[m for _,ms in p['Sections'] for m in ms]
     assert len(metrics)==len(set(metrics))
 

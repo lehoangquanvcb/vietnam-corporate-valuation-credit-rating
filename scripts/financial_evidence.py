@@ -185,7 +185,7 @@ def _bank_history_metric(cached, metric, source):
     return z[z.Value.map(number).notna() | z.Error.ne('')].copy()
 
 @lru_cache(maxsize=128)
-def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig,car_sig):
+def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig,car_sig,user_car_sig):
     frames={};errors={};cfg=read_csv(Path(root)/'config/raw_period_basis.csv')
     for ds,sig in zip(['balance','income','cashflow','ratio'],sigs):
         raw=_csv_cached(sig)
@@ -223,7 +223,14 @@ def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig,car_sig):
                 z=pd.concat([q,z],ignore_index=True).drop_duplicates('Period',keep='first')
         mapped[metric]=z
     if typ=='BANK':
-        from scripts.bank_car import disclosure_frame
+        from scripts.bank_car import disclosure_frame, user_input_frame
+        inputs=_csv_cached(user_car_sig)
+        try:
+            if inputs.attrs.get('error'):raise ValueError(inputs.attrs['error'])
+            supplied=user_input_frame(inputs,ticker,str(Path(user_car_sig[0]).relative_to(root)))
+            if len(supplied):
+                mapped['CAR']=pd.concat([supplied,mapped['CAR']],ignore_index=True).drop_duplicates('Period',keep='first')
+        except ValueError as exc:errors['car_user_inputs']=str(exc)
         public=_csv_cached(car_sig)
         try:
             if public.attrs.get('error'):raise ValueError(public.attrs['error'])
@@ -238,7 +245,7 @@ def source_data(ticker,typ,root=ROOT):
     root=Path(root);p=_paths(ticker,typ,root)
     return _source_cached(ticker,typ,str(root),tuple(signature(x) for x in p),
                           signature(root/'data/bank_history_long.csv'),signature(root/'config/raw_period_basis.csv'),
-                          signature(root/'data/bank_car_disclosures.csv'))
+                          signature(root/'data/bank_car_disclosures.csv'),signature(root/'data/bank_car_user_inputs.csv'))
 
 def aggregate(metric, frame, target, basis='TTM'):
     """Tính tại một kỳ; thiếu bất kỳ quý nào thì không cộng thành TTM/YTD/FY."""
@@ -261,6 +268,8 @@ def aggregate(metric, frame, target, basis='TTM'):
         if metric=='CAR':
             from scripts.bank_car import EXTRA_FIELDS
             result.update({k:row[k] for k in EXTRA_FIELDS if k in row and pd.notna(row[k])})
+            if result.get('SourceKind') in {'USER_PROVIDED','USER_ESTIMATE'}:
+                result['Basis']=str(row.Basis)
         return result
     if basis=='FY': wanted=[f'{y}-Q{i}' for i in range(1,5)]
     elif basis=='YTD':wanted=[f'{y}-Q{i}' for i in range(1,q+1)]
@@ -294,7 +303,9 @@ def _at_period_cached(ticker,typ,target,basis='TTM',root=ROOT,fingerprint=()):
     # Lỗi feed tỷ số không được che bản CAR công bố hợp lệ; lỗi registry chỉ ảnh hưởng CAR.
     if typ=='BANK':
         public_car=aggregate('CAR',mapped['CAR'],target,basis)
-        if public_car.get('SourceURL'):records['CAR']=public_car
+        if public_car.get('SourceKind'):records['CAR']=public_car
+        if 'car_user_inputs' in errors and public_car.get('SourceKind')!='VERIFIED_DISCLOSURE':
+            records['CAR']=_record('CAR',per=target,status='ERROR',reason=errors['car_user_inputs'])
         if 'car_disclosures' in errors:
             records['CAR']=_record('CAR',per=target,status='ERROR',reason=errors['car_disclosures'])
     def calc(m,keys,fn,ratio=False,positive=None):
@@ -364,7 +375,7 @@ def _at_period_cached(ticker,typ,target,basis='TTM',root=ROOT,fingerprint=()):
 
 def at_period(ticker,typ,target,basis='TTM',root=ROOT):
     root=Path(root)
-    fingerprint=tuple(signature(p) for p in _paths(ticker,typ,root))+ (signature(root/'data/bank_history_long.csv'),signature(root/'config/raw_period_basis.csv'),signature(root/'data/bank_car_disclosures.csv'))
+    fingerprint=tuple(signature(p) for p in _paths(ticker,typ,root))+ (signature(root/'data/bank_history_long.csv'),signature(root/'config/raw_period_basis.csv'),signature(root/'data/bank_car_disclosures.csv'),signature(root/'data/bank_car_user_inputs.csv'))
     return {m:dict(r) for m,r in _at_period_cached(ticker,typ,target,basis,root,fingerprint+(signature(root/'config/insurance_metric_inputs.csv'),signature(root/'config/insurance_entities.csv'))).items()}
 
 
@@ -374,6 +385,25 @@ def latest_period(ticker,typ,root=ROOT):
     if z.empty:z=next((f for f in mapped.values() if len(f)),pd.DataFrame())
     ps=[p if period(p)[2]=='Q' else f'{period(p)[0]}-Q4' for p in z.get('Period',[]) if period(p)]
     return max(ps,key=period_date) if ps else None
+
+
+def rating_car_record(ticker,target,root=ROOT):
+    """Chọn CAR để tính điểm; không thay kỳ của at_period/biểu đồ peer.
+
+    Chỉ định lần này cho phép dùng số 31/12/2025 cho báo cáo 30/6/2026.
+    Không tự kéo chỉ định sang các quý tương lai, không che lỗi nguồn.
+    """
+    current=at_period(ticker,'BANK',target,'QUARTER',root).get('CAR',{})
+    if current.get('Status')=='OK' and number(current.get('Value')) is not None and 0<current['Value']<1:
+        return dict(current,UsePeriod=target,FallbackUsed=False)
+    if current.get('Status')=='ERROR' or target!='2026-Q2':return current
+    older=at_period(ticker,'BANK','2025-Q4','QUARTER',root).get('CAR',{})
+    if (older.get('Status')=='OK' and number(older.get('Value')) is not None and 0<older['Value']<1
+            and (not older.get('ApplyThroughPeriod') or target<=older['ApplyThroughPeriod'])):
+        return dict(older,UsePeriod=target,FallbackUsed=True,
+                    Reason='Dùng CAR cuối 2025 để tính điểm 30/6/2026 theo chỉ định người dùng')
+    return current
+
 
 def repair_snapshot(ticker,typ,base=None,root=ROOT):
     d=dict(base or {});target=latest_period(ticker,typ,root)
@@ -386,8 +416,9 @@ def repair_snapshot(ticker,typ,base=None,root=ROOT):
         for m in d['_MetricEvidence']:d[m]=None
         return d
     records=at_period(ticker,typ,target,'TTM',root)
+    if typ=='BANK':records['CAR']=rating_car_record(ticker,target,root)
     # Chỉ CAR được phép hiển thị kỳ công bố cũ; gắn kỳ riêng, không trộn vào benchmark hiện hành.
-    if typ=='BANK' and records['CAR']['Value'] is None:
+    if typ=='BANK' and records['CAR']['Value'] is None and records['CAR']['Status']!='ERROR':
         mapped,_=source_data(ticker,typ,root);f=mapped['CAR']
         for p in sorted(set(f.get('Period',[])),key=period_date,reverse=True):
             if period_date(p)>period_date(target):continue

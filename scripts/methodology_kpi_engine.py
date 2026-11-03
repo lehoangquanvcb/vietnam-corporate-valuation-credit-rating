@@ -153,6 +153,7 @@ def methodology_kpi_table(ticker, include_missing=True):
     s=enrich_row(s)
     peers=pd.DataFrame([enrich_row(r) for r in peers.to_dict('records')]) if peers is not None and len(peers) else peers
     from scripts.financial_evidence import metric_evidence, STATUS
+    from scripts.bank_car import comparable_metric
     rows=[]
     seen=set()
     for group,metrics in groups_for(ticker).items():
@@ -164,7 +165,7 @@ def methodology_kpi_table(ticker, include_missing=True):
                 if str(peer.get('Ticker')).upper()==str(ticker).upper():continue
                 pe=metric_evidence(peer,m)
                 # Đối chiếu cùng kỳ và cùng cơ sở; không trộn CAR cũ với tỷ số kỳ hiện tại.
-                if pe['Status']=='OK' and pe['Period']==ev['Period'] and pe['Basis']==ev['Basis']:
+                if pe['Status']=='OK' and pe['Period']==ev['Period'] and pe['Basis']==ev['Basis'] and comparable_metric(m,ev,pe):
                     v=_n(pe['Value'])
                     if np.isfinite(v):compatible.append(v)
             vals=pd.Series(compatible,dtype=float)

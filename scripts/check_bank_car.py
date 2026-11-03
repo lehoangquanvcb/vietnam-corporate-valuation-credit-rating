@@ -6,7 +6,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path: sys.path.insert(0, str(ROOT))
-from scripts.financial_evidence import at_period
+from scripts.financial_evidence import at_period, rating_car_record
 from scripts.universal_data import universe
 
 
@@ -14,21 +14,29 @@ def audit(period='2026-Q2'):
     u = universe()
     rows = []
     for ticker in sorted(u.loc[u.EntityType.eq('BANK'), 'Ticker'].unique()):
-        r = at_period(ticker, 'BANK', period, 'QUARTER').get('CAR', {})
-        ok = r.get('Status') == 'OK' and r.get('Period') == period
-        rows.append({'Ticker': ticker, 'Period': period,
+        current = at_period(ticker, 'BANK', period, 'QUARTER').get('CAR', {})
+        r = rating_car_record(ticker, period)
+        ok = r.get('Status') == 'OK' and r.get('Value') is not None
+        kind = r.get('SourceKind') or 'AVAILABLE_FEED'
+        status = ('FALLBACK_2025_' if r.get('FallbackUsed') else '')+kind if ok else 'SOURCE_ERROR' if r.get('Status')=='ERROR' else 'NOT_YET_INGESTED'
+        rows.append({'Ticker': ticker, 'Period': period, 'SourcePeriod': r.get('Period'),
                      'CARPercent': round(r['Value'] * 100, 6) if ok else None,
-                     'Status': ('VERIFIED_DISCLOSURE' if r.get('SourceURL') else 'AVAILABLE_FEED') if ok
-                               else 'SOURCE_ERROR' if r.get('Status') == 'ERROR' else 'NOT_YET_INGESTED',
+                     'Status': status, 'SourceKind': kind if ok else None,
+                     'CurrentPeriodAvailable': current.get('Status')=='OK' and current.get('Value') is not None,
+                     'FallbackUsed': bool(r.get('FallbackUsed')), 'InputText':r.get('InputText'),
                      'Scope': r.get('Scope'), 'Regime': r.get('Regime'),
                      'SourceURL': r.get('SourceURL'), 'SourcePage': r.get('SourcePage'),
+                     'SourceReference':r.get('SourceReference'),
                      'Note': r.get('Note', r.get('Reason', ''))})
     missing = [r['Ticker'] for r in rows if r['CARPercent'] is None]
-    return {'Build': 'V8.134.0-OFFICIAL-BANK-CAR', 'Period': period, 'BankCount': len(rows),
+    return {'Build': 'V8.135.0-BANK-CAR-FALLBACK', 'Period': period, 'BankCount': len(rows),
             'VerifiedDisclosures': sum(r['Status'] == 'VERIFIED_DISCLOSURE' for r in rows),
+            'CurrentPeriodAvailable':sum(r['CurrentPeriodAvailable'] for r in rows),
+            'Fallback2025':sum(r['FallbackUsed'] for r in rows),
+            'UserInputsUsed':sum(r['SourceKind'] in {'USER_PROVIDED','USER_ESTIMATE'} for r in rows),
             'Available': len(rows) - len(missing), 'PendingIngestion': missing,
             'Result': 'COMPLETE' if not missing else 'PARTIAL', 'Checks': rows,
-            'Note': 'PARTIAL là mức bao phủ dữ liệu ứng dụng, không phải kết luận ngân hàng chưa công bố CAR. Số 0 từ feed không phải CAR thực tế.'}
+            'Note': 'Available là CAR dùng được để tính điểm, gồm số cuối 2025 theo chỉ định cho kỳ 2026-Q2. CurrentPeriodAvailable chỉ đếm đúng kỳ. PARTIAL không phải kết luận ngân hàng chưa công bố CAR. SourceKind phân biệt nguồn đối chiếu, người dùng và ước tính.'}
 
 
 def main():

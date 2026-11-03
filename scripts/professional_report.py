@@ -299,6 +299,10 @@ def _picture(doc,bio,keep=False):
 def _metric_page(doc,pack,group,m):
     x=pack['Items'][m];h=x['History'];n=narrative(pack,m)
     _band(doc,label(m),2)
+    if m=='CAR' and pack['Type']=='BANK':
+        from scripts.bank_car import car_usage_text
+        text=car_usage_text(pack.get('CARInput',{}),pack.get('Period'))
+        if text:_para(doc,text,9,color=GRAY,keep=True)
     _para(doc,n['History'],10,lead='Diễn biến doanh nghiệp',keep=True)
     _para(doc,'BCTC 5 năm gần nhất và bình quân peer',9,True,keep=True,color=DARK);_picture(doc,_chart(pack,m,'history'),keep=True)
     if len(h):
@@ -306,7 +310,9 @@ def _metric_page(doc,pack,group,m):
         _table(doc,[unit(m)]+list(h.DisplayPeriod),rows,[31]+[145/len(h)]*len(h),8)
     _para(doc,n['Peers'],10,lead='So sánh quý gần nhất',keep=True)
     _para(doc,str(pack['Period'] or 'Chưa xác định kỳ')+' • '+basis_text(x['Record'].get('Basis'))+' | '+label(m),9,True,keep=True,color=DARK)
-    _picture(doc,_chart(pack,m,'quarter'),keep=True);_para(doc,(n['Meaning']+' '+n['Conclusion']).strip(),10,lead='Đánh giá')
+    if m!='CAR' or finite(x['Value']) or x['Peers']:
+        _picture(doc,_chart(pack,m,'quarter'),keep=True)
+    _para(doc,(n['Meaning']+' '+n['Conclusion']).strip(),10,lead='Đánh giá')
 
 def _readable(text):
     from scripts.methodology_kpi_engine import LABELS
@@ -321,18 +327,32 @@ def _sources(doc,pack):
     _para(doc,'Nhóm peer: '+', '.join(pack['PeerUniverse'])+'. Bình quân loại chính doanh nghiệp, dùng các công ty có cùng kỳ và cơ sở tính; chỉ trình bày khi có ít nhất 5 peer. Thành phần có số có thể thay đổi theo năm và chỉ tiêu.',10)
     _para(doc,'Phương pháp áp dụng: '+SOURCES[pack['Type']]+'.',10)
     if pack['Type']=='BANK':
-        car=pack['Items'].get('CAR',{}).get('Record',{})
-        if car.get('Status')=='OK' and car.get('SourceURL'):
-            from scripts.bank_car import SCOPES
-            _para(doc,'CAR tại '+str(car['Period'])+': '+fmt('CAR',car['Value'])+'; '+
-                SCOPES.get(car.get('Scope'),str(car.get('Scope','')))+'; '+str(car.get('Regime',''))+
-                '. Nguồn công bố, trang '+str(car.get('SourcePage',''))+'.',9,color=GRAY,keep=True)
-            _para(doc,car['SourceURL'],9,color=GRAY).alignment=WD_ALIGN_PARAGRAPH.LEFT
-            if car.get('Note'):_para(doc,car['Note'],9,color=GRAY)
+        from scripts.bank_car import car_usage_text
+        from scripts.financial_evidence import at_period
+        car=pack.get('CARInput',{})
+        records=[car]
+        history=pack['Items'].get('CAR',{}).get('History')
+        if history is not None:
+            for p in history.get('Period',[]):
+                if p!=car.get('Period'):
+                    records.append(at_period(pack['Ticker'],'BANK',p,'FY').get('CAR',{}))
+        for source in records:
+            text=car_usage_text(source,pack.get('Period') if source is car else None)
+            if not text:continue
+            _para(doc,text,9,color=GRAY,keep=bool(source.get('SourceURL')))
+            if source.get('SourceURL'):
+                _para(doc,'Nguồn công bố, trang '+str(source.get('SourcePage',''))+'; '+str(source.get('Regime',''))+'.',9,color=GRAY,keep=True)
+                _para(doc,source['SourceURL'],9,color=GRAY).alignment=WD_ALIGN_PARAGRAPH.LEFT
+            elif source.get('SourceReference'):
+                _para(doc,str(source['SourceReference'])+'; ngày cung cấp '+str(source.get('ProvidedOn',''))+'.',9,color=GRAY)
+            if source.get('Note'):_para(doc,source['Note'],9,color=GRAY)
     if pack['Type']=='INSURANCE' and pack['Meta'].get('InsuranceScope'):
         _para(doc,'Phạm vi BCTC: '+str(pack['Meta']['InsuranceScope'])+'. Phân nhóm peer không thay đổi phạm vi pháp nhân của số liệu.',9,color=GRAY)
     missing=[label(m) for m,x in pack['Items'].items() if not finite(x['Value'])]
-    if missing:_para(doc,'Các chỉ tiêu chưa có giá trị quý hiện tại: '+', '.join(missing)+'. Không thay bằng số 0 hay số kỳ cũ.',9,color=GRAY)
+    if missing:
+        note=('Biểu đồ so sánh quý giữ đúng kỳ; CAR dùng thay thế cho bảng điểm, nếu có, được nêu riêng ở trên.'
+              if pack['Type']=='BANK' else 'Không thay bằng số 0 hay số kỳ cũ.')
+        _para(doc,'Các chỉ tiêu chưa có giá trị quý hiện tại: '+', '.join(missing)+'. '+note,9,color=GRAY)
     for m,x in pack['Items'].items():
         for warning in x.get('HistoryWarnings',[]):_para(doc,label(m)+': '+warning,9,color=GRAY)
     _para(doc,NOTICE,9,color=GRAY)

@@ -14,7 +14,8 @@ REQUIRED = {'Ticker', 'Period', 'Metric', 'Value', 'Unit', 'Scope', 'Regime',
             'SourceURL', 'SourcePage', 'VerifiedOn'}
 SCOPES = {'CONSOLIDATED': 'Hợp nhất', 'BANK_ONLY': 'Riêng lẻ'}
 REGIMES = {'TT41', 'TT14'}
-EXTRA_FIELDS = ['Scope', 'Regime', 'SourceURL', 'SourcePage', 'VerifiedOn', 'Note']
+EXTRA_FIELDS = ['Scope', 'Regime', 'SourceURL', 'SourcePage', 'VerifiedOn', 'Note',
+                'SourceKind', 'InputText', 'ProvidedOn', 'SourceReference', 'ApplyThroughPeriod']
 
 
 def disclosure_frame(df, ticker, source='data/bank_car_disclosures.csv'):
@@ -57,6 +58,7 @@ def disclosure_frame(df, ticker, source='data/bank_car_disclosures.csv'):
                'Error': '; '.join(errors)}
         row.update({k: item.get(k, '') for k in EXTRA_FIELDS})
         row.update(Scope=scope, Regime=regime, SourceURL=url)
+        row['SourceKind'] = 'VERIFIED_DISCLOSURE'
         rows.append(row)
     if not rows:
         return pd.DataFrame()
@@ -73,7 +75,83 @@ def disclosure_frame(df, ticker, source='data/bank_car_disclosures.csv'):
     return pd.DataFrame(selected)
 
 
+def user_input_frame(df, ticker, source='data/bank_car_user_inputs.csv'):
+    """Giữ số do người dùng cung cấp tách biệt với nguồn đã đối chiếu.
+
+    Kỳ trong tệp là kỳ của số liệu, không phải kỳ báo cáo đang sử dụng.
+    Không suy diễn TT41/TT14 hoặc tự chuyển mọi dấu > thành một số ước.
+    """
+    if df.empty:
+        return pd.DataFrame()
+    required = {'Ticker', 'Period', 'Value', 'Unit', 'Scope', 'SourceKind',
+                'InputText', 'ProvidedOn', 'SourceReference', 'ApplyThroughPeriod'}
+    if required - set(df):
+        raise ValueError('Nguồn CAR người dùng thiếu cột: ' + ', '.join(sorted(required-set(df))))
+    q = df[df.Ticker.fillna('').astype(str).str.strip().str.upper().eq(str(ticker).strip().upper())]
+    rows = []
+    for item in q.fillna('').to_dict('records'):
+        per = str(item['Period']).strip().upper()
+        errors = []
+        kind = str(item['SourceKind'])
+        if not re.fullmatch(r'\d{4}-Q[1-4]', per): errors.append('Kỳ CAR không hợp lệ')
+        through = str(item['ApplyThroughPeriod'])
+        if not re.fullmatch(r'\d{4}-Q[1-4]', through) or per > through:
+            errors.append('Giới hạn kỳ sử dụng không hợp lệ')
+        if kind not in {'USER_PROVIDED', 'USER_ESTIMATE'}: errors.append('Loại nguồn không hợp lệ')
+        if item['Scope'] not in SCOPES: errors.append('Phạm vi không hợp lệ')
+        if not item['InputText'] or not item['SourceReference']: errors.append('Thiếu nội dung/nguồn nhập')
+        try: date.fromisoformat(str(item['ProvidedOn']))
+        except ValueError: errors.append('Ngày cung cấp không hợp lệ')
+        try:
+            value = float(item['Value'])
+            if item['Unit'] == 'PERCENT': value /= 100
+            elif item['Unit'] != 'RATIO': raise ValueError('Đơn vị không hợp lệ')
+            if not math.isfinite(value) or not 0 < value < 1: raise ValueError('CAR ngoài phạm vi')
+        except (ValueError, TypeError) as exc:
+            value = float('nan'); errors.append(str(exc))
+        regime = str(item.get('Regime') or 'UNKNOWN').upper()
+        if regime not in REGIMES | {'UNKNOWN'}: errors.append('Cơ sở quy định không hợp lệ')
+        origin = 'ước tính theo chỉ định người dùng' if kind == 'USER_ESTIMATE' else 'số liệu người dùng cung cấp'
+        row = {k: item.get(k, '') for k in EXTRA_FIELDS}
+        row.update(Period=per, Field='CAR', Value=value if not errors else float('nan'),
+                   Basis='USER_ESTIMATE' if kind == 'USER_ESTIMATE' else 'USER_PROVIDED_RATIO',
+                   Source=f"{source} | {origin} | {item['SourceReference']} | {item['InputText']}",
+                   Unit='RATIO', Regime=regime, Error='; '.join(errors))
+        rows.append(row)
+    if not rows:return pd.DataFrame()
+    selected = []
+    for per, group in pd.DataFrame(rows).groupby('Period', sort=False):
+        scope = 'CONSOLIDATED' if group.Scope.eq('CONSOLIDATED').any() else 'BANK_ONLY'
+        candidates = group[group.Scope.eq(scope)]
+        row = candidates.iloc[0].to_dict()
+        if candidates.Error.ne('').any() or any(candidates[c].nunique() > 1 for c in ['Value', 'SourceKind', 'Regime']):
+            row.update(Value=float('nan'), Error='Nguồn CAR người dùng lỗi hoặc xung đột')
+        selected.append(row)
+    return pd.DataFrame(selected)
+
+
+def car_usage_text(record, target=None):
+    """Một nhãn chung cho KPI, bảng điểm và báo cáo xuất file."""
+    if record.get('Status') != 'OK' or record.get('Value') is None:
+        return ''
+    value = f"{record['Value']*100:.2f}".replace('.', ',')
+    p = str(record.get('Period', ''))
+    y, q = p.split('-Q') if re.fullmatch(r'\d{4}-Q[1-4]', p) else (p, '')
+    when = {'1':'31/03/', '2':'30/06/', '3':'30/09/', '4':'31/12/'}.get(q, '')+y
+    kind = record.get('SourceKind')
+    origin = ('ước tính theo chỉ định người dùng' if kind == 'USER_ESTIMATE' else
+              'số liệu người dùng cung cấp' if kind == 'USER_PROVIDED' else
+              'đã đối chiếu báo cáo gốc' if kind == 'VERIFIED_DISCLOSURE' else 'số liệu trong nguồn ứng dụng')
+    text = f"CAR {value}% tại {when}; {SCOPES.get(record.get('Scope'), 'phạm vi theo nguồn')}; {origin}."
+    if kind == 'USER_ESTIMATE': text += ' Đầu vào: '+str(record.get('InputText', ''))+'.'
+    if target and p != target:
+        text += f' Dùng thay thế để tính điểm tại {target} theo chỉ định; giữ nguyên kỳ số liệu {p}.'
+    return text
+
+
 def comparable_metric(metric, own, peer):
     """CAR không trộn hai chế độ quy định, kể cả một bên chưa xác định chế độ."""
     if metric != 'CAR': return True
+    # Nguồn người dùng chưa xác định TT41/TT14 vẫn chấm được, nhưng không gộp peer.
+    if 'UNKNOWN' in {str(own.get('Regime', '')), str(peer.get('Regime', ''))}: return False
     return str(own.get('Regime', '') or '') == str(peer.get('Regime', '') or '')
