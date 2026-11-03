@@ -1,0 +1,138 @@
+{
+  "Build": "V8.137.0-DOMESTIC-BANK-RATING",
+  "Enabled": true,
+  "Fingerprint": "c90cd8f2c277f9106376779e22288bd2f0f6b600e207162030a9a8a11fe170f3",
+  "Checks": [
+    {
+      "Ticker": "VCB",
+      "PolicyMode": "TARGET",
+      "PolicyGrade": "AAA",
+      "SACP": "vnA",
+      "RawICR": "vnA",
+      "CalibrationNotches": 5,
+      "ICR": "vnAAA",
+      "Status": "APPLIED",
+      "Source": "Bậc vnAAA sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày 03/11/2026. Bậc trước hiệu chỉnh vnA; điều chỉnh +5 bậc. Đây là mức hiệu chỉnh của mô hình, không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BID",
+      "PolicyMode": "TARGET",
+      "PolicyGrade": "AAA",
+      "SACP": "vnBBB",
+      "RawICR": "vnBBB",
+      "CalibrationNotches": 8,
+      "ICR": "vnAAA",
+      "Status": "APPLIED",
+      "Source": "Bậc vnAAA sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày 03/11/2026. Bậc trước hiệu chỉnh vnBBB; điều chỉnh +8 bậc. Đây là mức hiệu chỉnh của mô hình, không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "CTG",
+      "PolicyMode": "TARGET",
+      "PolicyGrade": "AAA",
+      "SACP": "vnBBB+",
+      "RawICR": "vnBBB+",
+      "CalibrationNotches": 7,
+      "ICR": "vnAAA",
+      "Status": "APPLIED",
+      "Source": "Bậc vnAAA sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày 03/11/2026. Bậc trước hiệu chỉnh vnBBB+; điều chỉnh +7 bậc. Đây là mức hiệu chỉnh của mô hình, không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": null,
+      "EntityId": "AGRIBANK",
+      "PolicyGrade": "AAA",
+      "ComputedICR": null,
+      "Status": "POLICY_REFERENCE_ONLY",
+      "FinancialRatingAvailable": false
+    },
+    {
+      "Ticker": "TCB",
+      "PolicyMode": "TARGET",
+      "PolicyGrade": "AA-",
+      "SACP": "vnBBB",
+      "RawICR": "vnBBB",
+      "CalibrationNotches": 5,
+      "ICR": "vnAA-",
+      "Status": "APPLIED",
+      "Source": "Bậc vnAA- sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày 03/11/2026. Bậc trước hiệu chỉnh vnBBB; điều chỉnh +5 bậc. Đây là mức hiệu chỉnh của mô hình, không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VPB",
+      "PolicyMode": "TARGET",
+      "PolicyGrade": "AA-",
+      "SACP": "vnBBB-",
+      "RawICR": "vnBBB-",
+      "CalibrationNotches": 6,
+      "ICR": "vnAA-",
+      "Status": "APPLIED",
+      "Source": "Bậc vnAA- sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày 03/11/2026. Bậc trước hiệu chỉnh vnBBB-; điều chỉnh +6 bậc. Đây là mức hiệu chỉnh của mô hình, không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ACB",
+      "PolicyMode": "TARGET",
+      "PolicyGrade": "AA-",
+      "SACP": "vnBBB-",
+      "RawICR": "vnBBB-",
+      "CalibrationNotches": 6,
+      "ICR": "vnAA-",
+      "Status": "APPLIED",
+      "Source": "Bậc vnAA- sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày 03/11/2026. Bậc trước hiệu chỉnh vnBBB-; điều chỉnh +6 bậc. Đây là mức hiệu chỉnh của mô hình, không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ABB",
+      "PolicyMode": "TARGET",
+      "PolicyGrade": "A-",
+      "SACP": "vnA-",
+      "RawICR": "vnA-",
+      "CalibrationNotches": 0,
+      "ICR": "vnA-",
+      "Status": "APPLIED",
+      "Source": "Bậc vnA- sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày 03/11/2026. Bậc trước hiệu chỉnh vnA-; điều chỉnh +0 bậc. Đây là mức hiệu chỉnh của mô hình, không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "OCB",
+      "PolicyMode": "CEILING",
+      "PolicyGrade": "A-",
+      "SACP": "vnBB",
+      "RawICR": "vnBB",
+      "CalibrationNotches": 0,
+      "ICR": "vnBB",
+      "Status": "WITHIN_CEILING",
+      "Source": "Bậc ước tính tự động theo số liệu và các giả định công bố; chưa phải kết quả thẩm định.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "KLB",
+      "PolicyMode": "CEILING",
+      "PolicyGrade": "A-",
+      "SACP": "vnBBB",
+      "RawICR": "vnBBB",
+      "CalibrationNotches": 0,
+      "ICR": "vnBBB",
+      "Status": "WITHIN_CEILING",
+      "Source": "Bậc ước tính tự động theo số liệu và các giả định công bố; chưa phải kết quả thẩm định.",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "STB",
+      "PolicyMode": "CEILING",
+      "PolicyGrade": "A-",
+      "SACP": "vnBB+",
+      "RawICR": "vnBB+",
+      "CalibrationNotches": 0,
+      "ICR": "vnBB+",
+      "Status": "WITHIN_CEILING",
+      "Source": "Bậc ước tính tự động theo số liệu và các giả định công bố; chưa phải kết quả thẩm định.",
+      "MissingEvidence": {}
+    }
+  ],
+  "Errors": [],
+  "Result": "PASS",
+  "Note": "PASS xác nhận tính nhất quán phần mềm. AAA/AA- theo nhóm là hiệu chỉnh của chủ mô hình, không phải ý kiến CRA; Agribank chỉ là tham chiếu."
+}

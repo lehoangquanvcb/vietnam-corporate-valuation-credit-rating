@@ -97,12 +97,12 @@ def test_actual_priority_fallback_and_scores_all_supplied_listed_codes():
         assert car['Value']==pytest.approx(v) and car['Period']==p,t
         rr=rate_company(t)
         assert rr['ICR'] not in ('N/A','',None), (t,rr.get('MissingEvidence'))
-        if rr.get('RatingOrigin')=='AUTO_RESEARCH':
+        if rr.get('RatingOrigin') in {'AUTO_RESEARCH','DOMESTIC_CALIBRATION'}:
             e=next(e for e in rr['QuantitativeEvidence'] if e['Metric']=='CAR')
             assert e['Kỳ']==p and e['Giá trị']==pytest.approx(v)
             assert rr['AssessmentComplete'] is False
     assert at_period('TCB','BANK','2025-Q4')['CAR']['Value']==.1461
-    assert rate_company('TCB')['ICR']=='vnAA+'
+    assert rate_company('TCB')['ICR']=='vnAA-'
 
 
 def test_pack_and_peer_chart_do_not_relabel_2025_as_current(monkeypatch):

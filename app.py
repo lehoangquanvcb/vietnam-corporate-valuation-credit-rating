@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.136.0-VERIFIED-VCB-CAR'
+BUILD_TAG='V8.137.0-DOMESTIC-BANK-RATING'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -533,7 +533,8 @@ def _download_report_block(report_type, rating_result=None):
     import hashlib
     from scripts.financial_evidence import signature
     from scripts.dynamic_peer_engine import peer_source_fingerprint
-    _report_sources=[peer_source_fingerprint()]
+    from scripts.bank_domestic_rating import source_fingerprint as bank_rating_fingerprint
+    _report_sources=[peer_source_fingerprint(),bank_rating_fingerprint()]
     _digest=hashlib.sha256(json.dumps({'build':BUILD_TAG,'export_date':_export_date,'sources':_report_sources,'rating':rating_result,'basis':_history_basis,'years':_history_years,'snapshot':s.get('SnapshotPeriod')},sort_keys=True,default=str).encode()).hexdigest()[:12]
     identity=f'{selected}_{report_type}_{_digest}'
     for kind, column, title, mime, ext in [
@@ -747,11 +748,27 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
                 for _key,_lab,_vals in [('ModifierNotches','Điều chỉnh khác',range(-6,7)),('ExternalSupportNotches','Hỗ trợ bên ngoài',range(9))]:
                     _v=st.selectbox(_lab,['Giữ giả định tự động']+list(_vals),key=f'corp_{selected}_{_key}')
                     if isinstance(_v,int):_rating_overrides[_key]=_v
+    if _entity_method=='BANK':
+        from scripts.bank_domestic_rating import policy_rows, benchmark_text, load_policy
+        _domestic_enabled=load_policy().get('Enabled',False)
+        _use_domestic=st.checkbox('Áp dụng khung hiệu chỉnh xếp hạng trong nước',value=_domestic_enabled,key='domestic_calibration_'+selected)
+        if not _use_domestic:_rating_overrides['UseDomesticCalibration']=False
+        with st.expander('Khung hiệu chỉnh ngân hàng trong nước',expanded=False):
+            st.dataframe(pd.DataFrame(policy_rows()),hide_index=True,use_container_width=True)
+            st.caption('Mức đích do chủ mô hình lựa chọn. Agribank là tham chiếu AAA; chưa có BCTC để tính điểm. Các phiếu nhập riêng được ưu tiên. Không quy đổi xếp hạng quốc tế sang thang này.')
     rr3=rate_three_methodologies(selected,_rating_overrides)
-    if rr3.get('RatingOrigin')=='AUTO_RESEARCH':
+    if rr3.get('RatingOrigin') in {'AUTO_RESEARCH','DOMESTIC_CALIBRATION'}:
         st.caption(rr3.get('RatingBasisNote',''))
         with st.expander('Giả định của bảng điểm tự động',expanded=False):
             for _assumption in rr3.get('Assumptions',[]):st.write('• '+_assumption)
+    if rr3.get('DomesticCalibrationApplied'):
+        st.info('Bậc sau hiệu chỉnh: '+_rating_no_vn(rr3['ICR'])+' | Bậc trước hiệu chỉnh: '+_rating_no_vn(rr3['RawICR'])+' | Hiệu chỉnh: '+f"{rr3['DomesticCalibrationNotches']:+d}"+' bậc. SACP và số liệu tài chính giữ nguyên.')
+    elif rr3.get('DomesticCalibrationStatus')=='MANUAL_PRIORITY':
+        st.caption('Đang dùng đánh giá nhập riêng; khung hiệu chỉnh tự động không ghi đè phiếu này.')
+    if rr3.get('DomesticBenchmark'):
+        with st.expander('Xếp hạng CRA trong nước để tham khảo',expanded=False):
+            st.write(benchmark_text(rr3['DomesticBenchmark']))
+            st.link_button('Nguồn tham khảo',rr3['DomesticBenchmark']['URL'])
     if rr3.get('Methodology')=='INSURANCE':
         from scripts.insurance_rating import insurance_scorecard, missing_evidence_labels, rating_status_text, rating_value_text
         from scripts.insurance_presentation import pending_assessment_groups
@@ -895,10 +912,13 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
 
     if rr3.get('Methodology')!='INSURANCE':
         st.markdown('### Chuỗi hình thành bậc xếp hạng')
-        _waterfall=[{'Bước':name,'Bậc':_rating_no_vn(value)} for name,value in [
-            ('Anchor',rr3.get('Anchor','N/A')),('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A'))),('ICR',rr3.get('ICR','N/A'))]]
+        _steps=[('Anchor',rr3.get('Anchor','N/A')),('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A')))]
+        if rr3.get('DomesticCalibrationApplied'):
+            _steps += [('Bậc trước hiệu chỉnh',rr3['RawICR']),('Hiệu chỉnh thang trong nước',f"{rr3['DomesticCalibrationNotches']:+d} bậc")]
+        _steps += [('ICR sau hiệu chỉnh' if rr3.get('DomesticCalibrationApplied') else 'ICR',rr3.get('ICR','N/A'))]
+        _waterfall=[{'Bước':name,'Bậc':_rating_no_vn(value)} for name,value in _steps]
         st.dataframe(pd.DataFrame(_waterfall),hide_index=True,use_container_width=True)
-    ev={'ICR':rr3.get('ICR','N/A'),'RatingConfidence':('Ước tính theo giả định công bố' if rr3.get('RatingOrigin')=='AUTO_RESEARCH' else 'Theo bảng chấm đã lưu / nhập'),
+    ev={'ICR':rr3.get('ICR','N/A'),'RatingConfidence':('Hiệu chỉnh theo khung trong nước' if rr3.get('DomesticCalibrationApplied') else 'Ước tính theo giả định công bố' if rr3.get('RatingOrigin')=='AUTO_RESEARCH' else 'Theo bảng chấm đã lưu / nhập'),
         'EvidenceLedger':rr3.get('QuantitativeEvidence',[])}
 
     with st.expander('Phương pháp, audit trail & chi tiết máy tính',expanded=False):

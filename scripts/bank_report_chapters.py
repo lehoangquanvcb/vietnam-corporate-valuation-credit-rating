@@ -59,7 +59,7 @@ def rating_sensitivity(rr):
     """Độ nhạy theo thay đổi cấu phần, không tự đặt ngưỡng hạ bậc tài chính."""
     from scripts.three_methodology_rating import move,label
     if rr.get('ICR') in (None,'N/A',''):return []
-    result=[];baseline=rr['ICR'];notches=rr.get('FactorNotches',{})
+    result=[];baseline=rr.get('RawICR',rr['ICR']) if rr.get('DomesticCalibrationApplied') else rr['ICR'];notches=rr.get('FactorNotches',{})
     for key,description in [('Vốn và Lợi nhuận','Vốn và lợi nhuận mất 1 bậc điều chỉnh'),('Vị thế Rủi ro','Vị thế rủi ro mất 1 bậc điều chỉnh'),('Huy động vốn và Thanh khoản','Huy động và thanh khoản mất 1 bậc điều chỉnh')]:
         if key in notches:result.append([description,'−1',label(move(baseline,-1))])
     result.append(['Hai cấu phần cùng mất 1 bậc điều chỉnh','−2',label(move(baseline,-2))])

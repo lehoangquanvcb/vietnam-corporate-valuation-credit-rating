@@ -1,0 +1,45 @@
+{
+  "Build": "V8.137.0-DOMESTIC-BANK-RATING",
+  "Result": "PASS",
+  "Pytest": {
+    "Passed": 168,
+    "Failed": 0,
+    "Scope": "8 relevant suites including domestic calibration and report/CAR regression"
+  },
+  "ScoreAudit": {
+    "CheckedTickers": 32,
+    "RoutingTickers": 1754,
+    "Errors": [],
+    "ByStatus": {
+      "CALIBRATED_ESTIMATE": 7,
+      "ESTIMATED": 20,
+      "INSUFFICIENT_DATA": 4,
+      "NOT_APPLICABLE": 1
+    }
+  },
+  "UI": {
+    "CheckedTickers": 23,
+    "Exceptions": 0,
+    "DefaultRatingTab": true,
+    "LegacyToggle": true
+  },
+  "Word": {
+    "RenderedReports": [
+      "VCB",
+      "ACB"
+    ],
+    "PagesEach": 29,
+    "VisuallyReviewedChangedPages": [
+      2,
+      27,
+      28,
+      29
+    ],
+    "SourcesURLAlignment": "LEFT"
+  },
+  "Limitations": [
+    "Agribank chỉ có mức đích tham chiếu AAA, chưa có BCTC để tính SACP/ICR.",
+    "Bậc theo nhóm là hiệu chỉnh do chủ mô hình lựa chọn; không chứng minh năng lực tín dụng hoặc xếp hạng CRA.",
+    "Chưa push GitHub hoặc triển khai Streamlit Cloud."
+  ]
+}

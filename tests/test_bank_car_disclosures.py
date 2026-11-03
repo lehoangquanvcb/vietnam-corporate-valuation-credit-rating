@@ -96,10 +96,10 @@ def test_actual_abb_current_car_completes_capital_and_preserves_tcb_reference():
     r = rate_company('ABB')
     assert r['Factors']['Vốn và Lợi nhuận'] == 'Phù Hợp'
     assert r['ICR'] == 'vnA-' and not r['MissingEvidence']
-    assert r['RatingOrigin'] == 'AUTO_RESEARCH' and not r['AssessmentComplete']
+    assert r['RatingOrigin'] == 'DOMESTIC_CALIBRATION' and not r['AssessmentComplete']
     assert at_period('TCB','BANK','2026-Q2')['CAR']['Value'] == .1495
     assert car_grade(.1495) != car_grade(.15)
-    assert rate_company('TCB')['ICR'] == 'vnAA+'
+    assert rate_company('TCB')['ICR'] == 'vnAA-'
 
 
 def test_report_pack_and_ui_peers_use_same_verified_value():

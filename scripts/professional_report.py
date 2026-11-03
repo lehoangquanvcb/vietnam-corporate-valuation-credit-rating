@@ -197,12 +197,18 @@ def _summary(doc,pack,rr,report_type):
         if rr.get('RatingOrigin')=='AUTO_RESEARCH':
             _cell_para(left,'Bậc ước tính tự động',9,True,DARK)
             _cell_para(left,'Theo các giả định công bố cuối báo cáo',9,False,GRAY)
+        if rr.get('DomesticCalibrationApplied'):
+            _cell_para(left,'Bậc hiệu chỉnh trong nước',9,True,DARK)
+            _cell_para(left,'Trước hiệu chỉnh: '+_show_rating(rr['RawICR']),9)
+            _cell_para(left,'Hiệu chỉnh: '+f"{rr['DomesticCalibrationNotches']:+d}"+' bậc',9)
         if str(rr.get('RatingOrigin','')).startswith('REFERENCE_REPORT'):
             _cell_para(left,'Kế thừa bảng chấm trong báo cáo tham chiếu',9,False,GRAY)
         if rr.get('ICR') not in (None,'N/A',''):
-            text=('Bậc xếp hạng ước tính ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Kết quả xếp hạng ')+rating+'; Anchor '+_show_rating(rr.get('Anchor'))+'.'
+            text=('Bậc hiệu chỉnh trong nước ' if rr.get('DomesticCalibrationApplied') else 'Bậc xếp hạng ước tính ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Kết quả xếp hạng ')+rating+'; Anchor '+_show_rating(rr.get('Anchor'))+'.'
             if rr.get('InternalNotches') is not None:text+=' Điều chỉnh nội tại '+str(rr['InternalNotches'])+' bậc.'
             if rr.get('ExternalSupportNotches') is not None:text+=' Hỗ trợ bên ngoài '+str(rr['ExternalSupportNotches'])+' bậc.'
+            if rr.get('DomesticCalibrationApplied'):
+                text+=' Từ bậc '+_show_rating(rr['RawICR'])+', hiệu chỉnh theo nhóm '+f"{rr['DomesticCalibrationNotches']:+d}"+' bậc. Mức đích của chủ mô hình được tách khỏi năng lực tín dụng độc lập và mức CRA công bố.'
             _cell_para(right,text,10)
         if pack['Type']=='BANK':
             from scripts.bank_report_chapters import chapter_findings
@@ -213,6 +219,11 @@ def _summary(doc,pack,rr,report_type):
             for text in cross_findings(pack)[:3]:_cell_para(right,text,10)
         if str(rr.get('RatingOrigin','')).startswith('REFERENCE_REPORT'):
             _para(doc,'Nguồn bảng chấm: '+re.sub(r'[_ |–-]*V?8[._]\d+(?:[._]\d+)?(?:-[A-Z-]+)?','',rr.get('AssessmentSource',''))+'; kỳ '+rr.get('AssessmentPeriod','')+'. Bậc được tính lại từ các đánh giá trong nguồn, không phải kết luận thẩm định mới.',8.5,color=GRAY)
+        if rr.get('DomesticCalibrationApplied'):
+            _para(doc,rr['RatingBasisNote'],8.5,color=GRAY)
+        if rr.get('DomesticBenchmark'):
+            from scripts.bank_domestic_rating import benchmark_text
+            _para(doc,benchmark_text(rr['DomesticBenchmark']),8.5,color=GRAY)
     else:
         _band(doc,'LUẬN ĐIỂM PHÂN TÍCH',2)
         for text in cross_findings(pack)[:3]:_para(doc,text,10)
@@ -321,11 +332,18 @@ def _readable(text):
     for key,val in sorted({**LABELS,**EXTRA_LABELS,**FACTOR_LABELS}.items(),key=lambda kv:-len(kv[0])):text=re.sub(r'\b'+re.escape(key)+r'\b',val,text)
     return text
 
-def _sources(doc,pack):
+def _sources(doc,pack,rr=None):
     doc.add_page_break();_band(doc,'NGUỒN VÀ PHẠM VI BÁO CÁO')
     _para(doc,'BCTC và tỷ số tài chính lưu trong ứng dụng; lịch sử sử dụng 5 năm tài chính đã kết thúc gần nhất. So sánh peer dùng số dư cuối quý, dòng thu nhập quý riêng lẻ và tỷ số công bố tại quý gần nhất. Tỷ số trả nợ dùng dòng tiền 12 tháng kết thúc tại kỳ so sánh.',10)
     _para(doc,'Nhóm peer: '+', '.join(pack['PeerUniverse'])+'. Bình quân loại chính doanh nghiệp, dùng các công ty có cùng kỳ và cơ sở tính; chỉ trình bày khi có ít nhất 5 peer. Thành phần có số có thể thay đổi theo năm và chỉ tiêu.',10)
     _para(doc,'Phương pháp áp dụng: '+SOURCES[pack['Type']]+'.',10)
+    rr=rr or {}
+    if rr.get('DomesticPolicy'):
+        _para(doc,'Khung hiệu chỉnh: '+rr['DomesticPolicy']['Source']+'. SACP và bảng điểm tài chính gốc được lưu riêng; mức đích không thay thế đánh giá tín dụng độc lập.',9)
+    if rr.get('DomesticBenchmark'):
+        from scripts.bank_domestic_rating import benchmark_text
+        _para(doc,benchmark_text(rr['DomesticBenchmark']),9)
+        _para(doc,'Nguồn tham khảo CRA: '+rr['DomesticBenchmark']['URL'],8,color=GRAY).alignment=WD_ALIGN_PARAGRAPH.LEFT
     if pack['Type']=='BANK':
         from scripts.bank_car import car_usage_text
         from scripts.financial_evidence import at_period
@@ -369,7 +387,9 @@ def _scorecard(doc,pack,rr):
         _para(doc,'Đánh giá quản trị: '+str(governance)+'.' if governance else 'Chưa có kết luận quản trị và điều hành được xác nhận trong hồ sơ hiện tại.',9,color=GRAY)
     _band(doc,'YẾU TỐ BÊN NGOÀI')
     support=rr.get('ExternalSupportNotches')
-    if support is not None:
+    if rr.get('DomesticCalibrationApplied'):
+        _para(doc,'Hỗ trợ bên ngoài trong bảng điểm gốc: '+str(support)+' bậc; bậc trước hiệu chỉnh '+_show_rating(rr['RawICR'])+'. Hiệu chỉnh thang trong nước '+f"{rr['DomesticCalibrationNotches']:+d}"+' bậc đưa kết quả về '+_show_rating(rr['ICR'])+'. Phần hiệu chỉnh này không được ghi nhận là hỗ trợ Nhà nước hoặc chủ sở hữu.')
+    elif support is not None:
         _para(doc,('Trong kịch bản tự động, hỗ trợ bên ngoài đóng góp ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Hỗ trợ bên ngoài đóng góp ')+str(support)+' bậc. '+('ICR bằng SACP khi không cộng điều chỉnh hỗ trợ.' if support==0 else 'Điều chỉnh này đưa kết quả từ '+_show_rating(rr.get('SACP'))+' lên '+_show_rating(rr.get('ICR'))+'.'))
     else:_para(doc,'Chưa xác định điều chỉnh hỗ trợ bên ngoài cho kỳ xếp hạng này.')
     _band(doc,'ĐỘ NHẠY XẾP HẠNG')
@@ -386,8 +406,8 @@ def _scorecard(doc,pack,rr):
         for text in sensitivity_findings(pack):_para(doc,text)
     rows=rating_sensitivity(rr) if pack['Type']=='BANK' else []
     if rows:
-        _table(doc,['Kịch bản thay đổi đánh giá','Thay đổi bậc','ICR mô phỏng'],[[a,b,_show_rating(c)] for a,b,c in rows],[110,29,37],9)
-        _para(doc,'Các kịch bản giữ nguyên cấu phần khác và hỗ trợ bên ngoài; thể hiện độ nhạy của phép tính, không phải dự báo thay đổi xếp hạng.',8.5,color=GRAY)
+        _table(doc,['Kịch bản thay đổi đánh giá','Thay đổi bậc','Bậc trước hiệu chỉnh' if rr.get('DomesticCalibrationApplied') else 'ICR mô phỏng'],[[a,b,_show_rating(c)] for a,b,c in rows],[110,29,37],9)
+        _para(doc,('Độ nhạy được tính trên bậc gốc trước hiệu chỉnh. Mức đích theo nhóm không tự thay đổi trong các kịch bản này; cần xem xét lại khung khi hồ sơ rủi ro thay đổi. ' if rr.get('DomesticCalibrationApplied') else '')+'Các kịch bản giữ nguyên cấu phần khác và hỗ trợ bên ngoài; thể hiện độ nhạy của phép tính, không phải dự báo thay đổi xếp hạng.',8.5,color=GRAY)
     _band(doc,'TỔNG KẾT CẤU PHẦN XẾP HẠNG')
     if rr.get('Scorecard'):
         headers=['Cấu phần','Điểm / Đánh giá','Tác động','Kết quả / Căn cứ']
@@ -481,7 +501,7 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     doc.add_page_break()
     if report_type=='rating':_scorecard(doc,pack,rr)
     else:_valuation(doc,pack)
-    _sources(doc,pack)
+    _sources(doc,pack,rr)
     _normalize_page_breaks(doc)
     _embed_fonts(doc)
     out=BytesIO();doc.save(out);return out.getvalue()

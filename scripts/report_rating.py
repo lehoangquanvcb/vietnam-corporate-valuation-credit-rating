@@ -493,7 +493,7 @@ def _insurance(ticker,o,ctx,strict):
     return _finish(r,anchor,sca,support,o.get('Outlook'))
 
 
-def rate_company(ticker, overrides=None):
+def _base_rate_company(ticker, overrides=None):
     ticker=str(ticker).strip().upper();o={k:v for k,v in dict(overrides or {}).items() if v is not None}
     strict=assessed_rating(ticker,o)
     typ=strict.get('Methodology')
@@ -509,3 +509,24 @@ def rate_company(ticker, overrides=None):
     if typ in ('BANK','SECURITIES'):return _financial_institution(ticker,typ,o,ctx,strict)
     if typ=='INSURANCE':return _insurance(ticker,o,ctx,strict)
     return strict
+
+
+def rate_company(ticker, overrides=None):
+    from scripts.bank_domestic_rating import load_policy, apply_calibration
+    ticker = str(ticker).strip().upper()
+    o = {k:v for k,v in dict(overrides or {}).items() if v is not None}
+    inputs = {k:v for k,v in o.items() if k != 'UseDomesticCalibration'}
+    base = _base_rate_company(ticker, inputs)
+    if base.get('Methodology') != 'BANK':
+        return base
+    policy = load_policy()
+    manual = any(k != 'UseSavedAssessment' for k in inputs)
+    # Bảng mẫu TCB không được ưu tiên riêng khi so sánh theo khung trong nước.
+    # Phiếu thẩm định nhập riêng và công cụ chạy lại phương pháp cũ vẫn giữ nguyên.
+    if (policy.get('Enabled') and o.get('UseDomesticCalibration') is not False and not manual
+            and str(base.get('RatingOrigin', '')).startswith('REFERENCE_REPORT')):
+        old = base
+        base = _base_rate_company(ticker, dict(inputs, UseSavedAssessment=False))
+        base['LegacyReference'] = {'ICR': old.get('ICR'), 'Source': old.get('AssessmentSource'),
+                                   'Period': old.get('AssessmentPeriod'), 'UsedForCurrentRating': False}
+    return apply_calibration(base, ticker, o, policy)

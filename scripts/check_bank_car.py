@@ -29,7 +29,7 @@ def audit(period='2026-Q2'):
                      'SourceReference':r.get('SourceReference'),
                      'Note': r.get('Note', r.get('Reason', ''))})
     missing = [r['Ticker'] for r in rows if r['CARPercent'] is None]
-    return {'Build': 'V8.136.0-VERIFIED-VCB-CAR', 'Period': period, 'BankCount': len(rows),
+    return {'Build': 'V8.137.0-DOMESTIC-BANK-RATING', 'Period': period, 'BankCount': len(rows),
             'VerifiedDisclosures': sum(r['Status'] == 'VERIFIED_DISCLOSURE' for r in rows),
             'CurrentPeriodAvailable':sum(r['CurrentPeriodAvailable'] for r in rows),
             'Fallback2025':sum(r['FallbackUsed'] for r in rows),

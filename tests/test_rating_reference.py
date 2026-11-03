@@ -77,7 +77,7 @@ def test_reference_word_has_rating_chapters_notches_annuals_and_source():
     from scripts.professional_report import generate_docx
     p=build_pack('TCB');p['Sections']=[('HUY ĐỘNG VỐN VÀ THANH KHOẢN',['CASA'])]
     with patch('scripts.professional_report.build_pack',return_value=p):
-        d=Document(BytesIO(generate_docx('TCB','rating')))
+        d=Document(BytesIO(generate_docx('TCB','rating',bank_rating('TCB'))))
     xml=d.element.xml
     for text in ['AA+','Ổn định','TCB_XHTN(1).docx','LUẬN ĐIỂM XẾP HẠNG','ĐỘ NHẠY XẾP HẠNG','TỔNG KẾT CẤU PHẦN XẾP HẠNG','2021','2025','2026-Q2']:
         assert text in xml

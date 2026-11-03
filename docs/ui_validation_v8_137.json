@@ -1,0 +1,158 @@
+{
+  "ToggleLegacyPass": true,
+  "Result": "PASS",
+  "DefaultRatingTab": true,
+  "Checks": [
+    {
+      "Ticker": "VCB",
+      "CAR": "11,71%",
+      "ICR": "AAA",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HDB",
+      "CAR": "14,27%",
+      "ICR": "BBB-",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VIB",
+      "CAR": "11,80%",
+      "ICR": "B+",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "EIB",
+      "CAR": "12,60%",
+      "ICR": "BB",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVB",
+      "CAR": "12,08%",
+      "ICR": "BB",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "KLB",
+      "CAR": "13,50%",
+      "ICR": "BBB",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "PGB",
+      "CAR": "12,51%",
+      "ICR": "BBB-",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SGB",
+      "CAR": "15,48%",
+      "ICR": "BB",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "TCB",
+      "CAR": "14,95%",
+      "ICR": "AA-",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BID",
+      "CAR": "10,01%",
+      "ICR": "AAA",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "CTG",
+      "CAR": "10,10%",
+      "ICR": "AAA",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ACB",
+      "CAR": "11,80%",
+      "ICR": "AA-",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VPB",
+      "CAR": "13,29%",
+      "ICR": "AA-",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "OCB",
+      "CAR": "13,07%",
+      "ICR": "BB",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "STB",
+      "CAR": "9,89%",
+      "ICR": "BB+",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "MBB",
+      "CAR": "11,60%",
+      "ICR": "BBB-",
+      "SourceCaption": "ước tính theo chỉ định người dùng",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "MSB",
+      "CAR": "12,28%",
+      "ICR": "BBB",
+      "SourceCaption": "số liệu người dùng cung cấp",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABB",
+      "CAR": "12,72%",
+      "ICR": "A-",
+      "SourceCaption": "đã đối chiếu báo cáo gốc",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "NVB",
+      "ICR": "Chưa đủ căn cứ",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "ICR": "BBB+",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "ICR": "A-",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVH",
+      "ICR": "Không áp dụng",
+      "Exceptions": 0
+    }
+  ]
+}
