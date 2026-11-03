@@ -1,0 +1,210 @@
+[
+  {
+    "Ticker": "BVB",
+    "URL": "https://static2.vietstock.vn/data/HOSE/2026/BCTLATV/VN/QUY%202/BVB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "77a70abf6fcc9368c587e053068cb13388895744ca0836e7e671bd32d028db87",
+    "Bytes": 7338002,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "12.03",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT41",
+        "SourcePage": "2",
+        "Note": "Biểu 2 dòng G; không dùng tỷ lệ vốn cấp 1 8.98%/9.03%."
+      },
+      {
+        "Period": "2026-Q2",
+        "Value": "12.08",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT41",
+        "SourcePage": "2",
+        "Note": "Biểu 2 dòng G; không dùng tỷ lệ vốn cấp 1 8.98%/9.03%."
+      }
+    ]
+  },
+  {
+    "Ticker": "EIB",
+    "URL": "https://static2.vietstock.vn/data/HOSE/2026/BCTLATV/VN/QUY%202/EIB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "a3f77690b72569697bbeda9ce96ba1f349b792af68504503bc4c0a027ed7b718",
+    "Bytes": 875223,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "12.55",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT41",
+        "SourcePage": "4",
+        "Note": "Biểu 2 tiếp trang 3, dòng Tỷ lệ an toàn vốn."
+      },
+      {
+        "Period": "2026-Q2",
+        "Value": "12.6",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT41",
+        "SourcePage": "4",
+        "Note": "Biểu 2 tiếp trang 3, dòng Tỷ lệ an toàn vốn."
+      }
+    ]
+  },
+  {
+    "Ticker": "HDB",
+    "URL": "https://static2.vietstock.vn/data/HOSE/2026/BCTLATV/VN/QUY%202/HDB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "c39676b65755bc0767e77b64a9f7f5fd8b0ce2ea778777ed37111d6aac03ae75",
+    "Bytes": 5061140,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "12.8",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT41",
+        "SourcePage": "5",
+        "Note": "Bảng mục 3.b, dòng 6 CAR; cột 31/12/2025 và 30/06/2026 riêng biệt. Nguồn gốc ưu tiên hơn bảng tổng hợp người dùng."
+      },
+      {
+        "Period": "2026-Q2",
+        "Value": "14.27",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT41",
+        "SourcePage": "5",
+        "Note": "Bảng mục 3.b, dòng 6 CAR; cột 31/12/2025 và 30/06/2026 riêng biệt. Nguồn gốc ưu tiên hơn bảng tổng hợp người dùng."
+      },
+      {
+        "Period": "2025-Q4",
+        "Value": "16.37",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT41",
+        "SourcePage": "5",
+        "Note": "Bảng mục 3.b, dòng 6 CAR; cột 31/12/2025 và 30/06/2026 riêng biệt. Nguồn gốc ưu tiên hơn bảng tổng hợp người dùng."
+      },
+      {
+        "Period": "2025-Q4",
+        "Value": "16.72",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT41",
+        "SourcePage": "5",
+        "Note": "Bảng mục 3.b, dòng 6 CAR; cột 31/12/2025 và 30/06/2026 riêng biệt. Nguồn gốc ưu tiên hơn bảng tổng hợp người dùng."
+      }
+    ]
+  },
+  {
+    "Ticker": "KLB",
+    "URL": "https://static2.vietstock.vn/data/HOSE/2026/BCTLATV/VN/QUY%202/KLB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "88b91a05ff7b96afbbaf1627dd12dc8e15e11c82c1e5051923c3a85acefecf0e",
+    "Bytes": 6328399,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "13.1",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT14",
+        "SourcePage": "5 (trang in 3)",
+        "Note": "Mục 1.1.b dòng 3. CCB 0.625% ở dòng 4, không cộng vào CAR."
+      },
+      {
+        "Period": "2026-Q2",
+        "Value": "13.5",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT14",
+        "SourcePage": "5 (trang in 3)",
+        "Note": "Mục 1.1.b dòng 3. CCB 0.625% ở dòng 4, không cộng vào CAR."
+      }
+    ]
+  },
+  {
+    "Ticker": "PGB",
+    "URL": "https://static2.vietstock.vn/data/UPCOM/2026/BCTLATV/VN/QUY%202/PGB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "780c8577d309aca6bc415e29c9acc7865453591d054f3886ffc834921f340fd9",
+    "Bytes": 3264269,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "12.51",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT41",
+        "SourcePage": "5 (trang in 4)",
+        "Note": "Bảng 02 dòng F. Trang PDF 4 xác nhận không có công ty con/công ty liên kết, không phát sinh BCTC hợp nhất; không tự gán phạm vi hợp nhất. Giữ CAR công bố 12.51%, không tính lại từ các số làm tròn trong bảng."
+      }
+    ]
+  },
+  {
+    "Ticker": "SGB",
+    "URL": "https://static2.vietstock.vn/data/UPCOM/2026/BCTLATV/VN/QUY%202/SGB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "a4c67533c01b2a064ad9f22c8d0a19d2ef742f92150a7ceb482f041b019f279c",
+    "Bytes": 566266,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "14.22",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT41",
+        "SourcePage": "5",
+        "Note": "Mục 3.2 dòng 5.b; không dùng tỷ lệ vốn cấp 1 14.72%/15.01%."
+      },
+      {
+        "Period": "2026-Q2",
+        "Value": "15.48",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT41",
+        "SourcePage": "5",
+        "Note": "Mục 3.2 dòng 5.b; không dùng tỷ lệ vốn cấp 1 14.72%/15.01%."
+      }
+    ]
+  },
+  {
+    "Ticker": "VCB",
+    "URL": "https://static2.vietstock.vn/data/HOSE/2026/BCTLATV/VN/QUY%202/VCB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "00398b608ac1b0d6d3aafe958e4d041ee8c1972812550a744c7fb2146c9c7481",
+    "Bytes": 4614716,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "11.03",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT14",
+        "SourcePage": "2, Biểu 1 dòng 3; đối chiếu Biểu 2 trang 3 và Biểu 4 trang 4",
+        "Note": "Báo cáo gốc VCB lưu trên Vietstock. CAR hợp nhất 11,71%, riêng lẻ 11,03%; Tier 1 hợp nhất 11,43% không phải CAR tổng vốn. CCB 0,625% trình bày riêng, không cộng vào CAR. Kiểm tra lại tổng vốn/RWA: 252.649.555/2.158.120.481 triệu đồng = 11,7069%, làm tròn 11,71%."
+      },
+      {
+        "Period": "2026-Q2",
+        "Value": "11.71",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT14",
+        "SourcePage": "2, Biểu 1 dòng 3; đối chiếu Biểu 2 trang 3 và Biểu 4 trang 4",
+        "Note": "Báo cáo gốc VCB lưu trên Vietstock. CAR hợp nhất 11,71%, riêng lẻ 11,03%; Tier 1 hợp nhất 11,43% không phải CAR tổng vốn. CCB 0,625% trình bày riêng, không cộng vào CAR. Kiểm tra lại tổng vốn/RWA: 252.649.555/2.158.120.481 triệu đồng = 11,7069%, làm tròn 11,71%."
+      }
+    ]
+  },
+  {
+    "Ticker": "VIB",
+    "URL": "https://static2.vietstock.vn/data/HOSE/2026/BCTLATV/VN/QUY%202/VIB_BaocaoTyleAnToanVon_6T_2026.pdf",
+    "SHA256": "a7001fa07e8c13fc3f701bb3475a8ff095faabe33d22c7c8c9ff37e46389ffd8",
+    "Bytes": 6738109,
+    "VerifiedOn": "2026-11-03",
+    "Rows": [
+      {
+        "Period": "2026-Q2",
+        "Value": "11.6",
+        "Scope": "BANK_ONLY",
+        "Regime": "TT14",
+        "SourcePage": "6",
+        "Note": "Giữ nguyên tỷ lệ VIB công bố trong cột VIB, dòng Tỷ lệ an toàn vốn (bao gồm CCB); không lấy mức yêu cầu 8.625% và không tự cộng/trừ CCB."
+      },
+      {
+        "Period": "2026-Q2",
+        "Value": "11.8",
+        "Scope": "CONSOLIDATED",
+        "Regime": "TT14",
+        "SourcePage": "6",
+        "Note": "Giữ nguyên tỷ lệ VIB công bố trong cột VIB, dòng Tỷ lệ an toàn vốn (bao gồm CCB); không lấy mức yêu cầu 8.625% và không tự cộng/trừ CCB."
+      }
+    ]
+  }
+]

@@ -88,8 +88,10 @@ def test_actual_priority_fallback_and_scores_all_supplied_listed_codes():
     from scripts.report_rating import rate_company
     expected={'ABB':(.1272,'2026-Q2'),'TCB':(.1495,'2026-Q2'),'SSB':(.1206,'2026-Q2'),
               'BAB':(.0895,'2026-Q2'),'STB':(.0989,'2026-Q2'),'EIB':(.126,'2026-Q2'),
-              'MSB':(.1228,'2026-Q2'),'VCB':(.125,'2026-Q2'),'HDB':(.16,'2025-Q4'),
-              'VIB':(.122,'2025-Q4'),'MBB':(.115,'2025-Q4')}
+              'MSB':(.1228,'2026-Q2'),'VCB':(.1171,'2026-Q2'),'HDB':(.1427,'2026-Q2'),
+              'VIB':(.118,'2026-Q2'),'MBB':(.116,'2026-Q2'),
+              'BVB':(.1208,'2026-Q2'),'KLB':(.135,'2026-Q2'),
+              'PGB':(.1251,'2026-Q2'),'SGB':(.1548,'2026-Q2')}
     for t,(v,p) in expected.items():
         car=rating_car_record(t,'2026-Q2')
         assert car['Value']==pytest.approx(v) and car['Period']==p,t
@@ -103,24 +105,61 @@ def test_actual_priority_fallback_and_scores_all_supplied_listed_codes():
     assert rate_company('TCB')['ICR']=='vnAA+'
 
 
-def test_pack_and_peer_chart_do_not_relabel_2025_as_current():
+def test_pack_and_peer_chart_do_not_relabel_2025_as_current(monkeypatch):
+    import scripts.financial_evidence as fe
+    import scripts.report_evidence as re
+    import scripts.financial_views as fv
     from scripts.report_evidence import build_pack
     from scripts.financial_views import peer_metric_frame
+    # Giả lập một ngân hàng chỉ có CAR cuối 2025; dữ liệu HDB thật nay đã đủ Q2.
+    original=fe.at_period
+    def no_current_car(ticker, typ, target, *args, **kwargs):
+        rows=original(ticker,typ,target,*args,**kwargs).copy()
+        if ticker=='HDB' and target=='2026-Q2':
+            rows['CAR']=dict(rows['CAR'],Value=None,Status='MISSING')
+        return rows
+    monkeypatch.setattr(fe,'at_period',no_current_car)
+    monkeypatch.setattr(re,'at_period',no_current_car)
+    monkeypatch.setattr(fv,'at_period',no_current_car)
     pack=build_pack('HDB')
-    assert pack['CARInput']['Value']==.16
+    assert pack['CARInput']['Value']==pytest.approx(.1672)
+    assert pack['CARInput']['Period']=='2025-Q4' and pack['CARInput']['FallbackUsed']
     assert pack['Items']['CAR']['Value'] is None
     assert 'HDB' not in set(peer_metric_frame('HDB','CAR').Ticker)
-    pack=build_pack('VCB')
-    assert pack['Items']['CAR']['Value']==.125
+    pack=build_pack('MBB')
+    assert pack['Items']['CAR']['Value']==pytest.approx(.116)
     assert pack['Items']['CAR']['Record']['SourceKind']=='USER_ESTIMATE'
-    assert peer_metric_frame('VCB','CAR').Ticker.tolist()==['VCB']
+    assert peer_metric_frame('MBB','CAR').Ticker.tolist()==['MBB']
 
 
-def test_car_narrative_keeps_estimate_and_fallback_explicit():
+def test_car_narrative_keeps_estimate_and_fallback_explicit(monkeypatch):
     from scripts.report_evidence import build_pack, narrative
-    estimated=narrative(build_pack('VCB'),'CAR')
+    estimated=narrative(build_pack('MBB'),'CAR')
     assert 'ước tính' in estimated['Peers'] and 'ghi nhận' not in estimated['Peers']
-    assert '12,50' in estimated['Meaning'] and 'giả định' in estimated['Meaning']
-    older=narrative(build_pack('HDB'),'CAR')
+    assert '11,60' in estimated['Meaning'] and 'giả định' in estimated['Meaning']
+    pack=build_pack('HDB')
+    pack['CARInput']=dict(at_period('HDB','BANK','2025-Q4')['CAR'],FallbackUsed=True,UsePeriod='2026-Q2')
+    older=narrative(pack,'CAR')
     assert '31/12/2025' in older['Peers'] and 'Dùng thay thế' in older['Peers']
-    assert '16,00' in older['Meaning'] and 'giả định' in older['Meaning']
+    assert '16,72' in older['Meaning'] and 'giả định' in older['Meaning']
+
+
+def test_vietstock_disclosures_override_latest_user_table_and_keep_original_scope():
+    from scripts.report_evidence import build_pack
+    from scripts.financial_views import peer_metric_frame
+    expected={'VCB':(.1171,'CONSOLIDATED','TT14'), 'HDB':(.1427,'CONSOLIDATED','TT41'),
+              'VIB':(.118,'CONSOLIDATED','TT14'), 'EIB':(.126,'CONSOLIDATED','TT41'),
+              'BVB':(.1208,'CONSOLIDATED','TT41'), 'KLB':(.135,'CONSOLIDATED','TT14'),
+              'SGB':(.1548,'CONSOLIDATED','TT41'), 'PGB':(.1251,'BANK_ONLY','TT41')}
+    for t,(value,scope,regime) in expected.items():
+        r=rating_car_record(t,'2026-Q2')
+        assert r['Value']==pytest.approx(value),t
+        assert (r['Scope'],r['Regime'],r['SourceKind'])==(scope,regime,'VERIFIED_DISCLOSURE'),t
+        assert not r['FallbackUsed'] and 'static2.vietstock.vn' in r['SourceURL']
+        assert build_pack(t)['Items']['CAR']['Value']==pytest.approx(value)
+        ui=peer_metric_frame(t,'CAR')
+        assert ui.loc[ui.Ticker.eq(t),'Value'].iloc[0]==pytest.approx(value)
+    assert at_period('HDB','BANK','2025-Q4')['CAR']['Value']==pytest.approx(.1672)
+    assert at_period('STB','BANK','2026-Q2')['CAR']['Value']==pytest.approx(.0989)
+    # VCB: tổng vốn/RWA, không nhầm riêng lẻ, vốn cấp 1 hay cộng thêm CCB.
+    assert rating_car_record('VCB','2026-Q2')['Value'] not in (.1114,.1103,.1143,.12335)

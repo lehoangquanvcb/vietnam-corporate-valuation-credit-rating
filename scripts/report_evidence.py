@@ -8,7 +8,7 @@ from scripts.methodology_kpi_engine import LABELS, PCT, MULT, BANK_GROUPS, SEC_G
 from scripts.financial_views import HISTORY_METRICS, BASIS_LABELS
 from scripts.bank_car import comparable_metric
 
-ENGINE_VERSION = '8.135.0'
+ENGINE_VERSION = '8.136.0'
 GROUPS = {'BANK': {
  'Hồ sơ kinh doanh':['TotalAssets','GrossLoans','CustomerDeposits'],
  'Vốn và lợi nhuận':['Equity','CAR','EquityAssets','TangibleEquityAssets','AssetEquity','NPAT','NetInterestIncome','ROE','ROA','NIM','CIR','ProfitAssets','NII_OperatingIncome'],

@@ -1,0 +1,786 @@
+{
+  "Build": "V8.136.0-VERIFIED-VCB-CAR",
+  "Base": "V8.135.0-BANK-CAR-FALLBACK",
+  "Layout": "Root overlay into existing project; no UPDATE folder",
+  "ExcludedUserFiles": [
+    "config/bank_rating_assessments.json",
+    "config/insurance_metric_inputs.csv"
+  ],
+  "Files": [
+    {
+      "Path": "GIT_FILES_V8_136.txt",
+      "Bytes": 4672,
+      "SHA256": "0327b00e0edddcc25520463cec9eb148950be309b52bf589c9359c1c50242ba8"
+    },
+    {
+      "Path": "README_V8_136.txt",
+      "Bytes": 4076,
+      "SHA256": "100bcd9782cf0a258c53fe772b82d919e46806a3d6f9faaf680983444afaa4e7"
+    },
+    {
+      "Path": "RUN_REFRESH_PEERS_ALL.bat",
+      "Bytes": 688,
+      "SHA256": "31fe20fb1b87e32cf971f60e73ac5077cf7aa72a87df6e6c67313eebc104c78f"
+    },
+    {
+      "Path": "VERSION.txt",
+      "Bytes": 8,
+      "SHA256": "30c705810a870ece07ce0c9af8e2833e6a3c568301ce1650aa04aeb85cd2e802"
+    },
+    {
+      "Path": "app.py",
+      "Bytes": 61232,
+      "SHA256": "db53ab88dfa5a821536e340e3e10433d0706dbb7b2b5f64d570acea876886a9a"
+    },
+    {
+      "Path": "assets/fonts/Lato-Bold.ttf",
+      "Bytes": 656544,
+      "SHA256": "8a0aace75d33794eece4b28187bfc1df0bbd2888b5d8a56e01788c8d65d16be1"
+    },
+    {
+      "Path": "assets/fonts/Lato-BoldItalic.ttf",
+      "Bytes": 698364,
+      "SHA256": "62c1b7f0d2e74b45960154c3520efc337b553db0961bfdc950d5618334596cc8"
+    },
+    {
+      "Path": "assets/fonts/Lato-Italic.ttf",
+      "Bytes": 722900,
+      "SHA256": "e399c44efe1387100531d26c7e4800c5d12251b890d6654a3098c7c679cb1786"
+    },
+    {
+      "Path": "assets/fonts/Lato-Regular.ttf",
+      "Bytes": 656568,
+      "SHA256": "d636e4683231f931eda222d588e944d082bfd3bdba02f928bee461c0f185b251"
+    },
+    {
+      "Path": "assets/fonts/OFL.txt",
+      "Bytes": 4407,
+      "SHA256": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e"
+    },
+    {
+      "Path": "config/bank_rating_references.json",
+      "Bytes": 2064,
+      "SHA256": "d544e9b06851bdd6a7ee061d34d5e618937c601a5ead38ae627482d765ca03c5"
+    },
+    {
+      "Path": "config/insurance_entities.csv",
+      "Bytes": 2487,
+      "SHA256": "0c20ff4e18a6e0f3d811a284bf68f45029c62887e1beb944804200ff750d50fa"
+    },
+    {
+      "Path": "data/bank_car_disclosures.csv",
+      "Bytes": 13694,
+      "SHA256": "df7cbb38fef7775bd5d7faaf12ad962ef4e632b15a73e2b49360284ce61b067b"
+    },
+    {
+      "Path": "data/bank_car_user_inputs.csv",
+      "Bytes": 8629,
+      "SHA256": "abbc99a9b5352c307017fd9710aef3bd60f7f1127ad01aa775eaf59b39f99d54"
+    },
+    {
+      "Path": "data/bank_history_long.csv",
+      "Bytes": 489200,
+      "SHA256": "f0b87212f44370e636231efcff5e1547be482c2c70d28b1fa42ebad322a56537"
+    },
+    {
+      "Path": "data/raw/ABB_ratio_q.csv",
+      "Bytes": 92043,
+      "SHA256": "e57615e41eeb499324cb58d7fb13ca30695fab47fe4ea9528783c0d52ceb7715"
+    },
+    {
+      "Path": "data/raw/ACB_ratio_q.csv",
+      "Bytes": 138284,
+      "SHA256": "c64d5b01d0c8146fbddb473fca3a96d063e4a639c9e663091fcc1cc77024c2bc"
+    },
+    {
+      "Path": "data/raw/BAB_ratio_q.csv",
+      "Bytes": 134105,
+      "SHA256": "fbae91ec00ec42a8bccda3d94b307c9833146fcd620483ad4b6fa82fbd529e2c"
+    },
+    {
+      "Path": "data/raw/BID_ratio_q.csv",
+      "Bytes": 138487,
+      "SHA256": "6e65eb0ad43e62cd6b21126b6bf4044acbaf1288a33a38715e651be6ae7eac8f"
+    },
+    {
+      "Path": "data/raw/BVB_ratio_q.csv",
+      "Bytes": 92020,
+      "SHA256": "e56b45cf66fe2fe4d57fb59dc65e1d13124aac2443b1e466a92fc9280bda322d"
+    },
+    {
+      "Path": "data/raw/CTG_ratio_q.csv",
+      "Bytes": 138455,
+      "SHA256": "5457cfcd9dd9e6202560cd3254bd8cf8568aec01f30d4e62a03fadf038baca67"
+    },
+    {
+      "Path": "data/raw/EIB_ratio_q.csv",
+      "Bytes": 138222,
+      "SHA256": "013c7c9be970a349f10f522243a30a210a364918b852acb18f632d0806577067"
+    },
+    {
+      "Path": "data/raw/HDB_ratio_q.csv",
+      "Bytes": 138424,
+      "SHA256": "220fa66f34c21fa4b9bf5f8378fbd676a597ae87480877c4410d41c5a7803aea"
+    },
+    {
+      "Path": "data/raw/KLB_ratio_q.csv",
+      "Bytes": 142066,
+      "SHA256": "4f2ebae5578c498b344c380e31ed57ea09cdecc5b1d0406ad3d2a207171d5b84"
+    },
+    {
+      "Path": "data/raw/LPB_ratio_q.csv",
+      "Bytes": 138286,
+      "SHA256": "f328fda401ac739f6ca0bad965c4f91cefb05c19d9bc2c49d5f0382a8d7fab28"
+    },
+    {
+      "Path": "data/raw/MBB_ratio_q.csv",
+      "Bytes": 138287,
+      "SHA256": "2c78ff6d56889ef1904e34174671ea5b0ba8d7696f156c986b7ef5b36cd6732e"
+    },
+    {
+      "Path": "data/raw/MSB_ratio_q.csv",
+      "Bytes": 92323,
+      "SHA256": "848394ce3d8ab678292b09a67f11d2f71d3b6ddf22a993575c708c067cc1bca1"
+    },
+    {
+      "Path": "data/raw/NAB_ratio_q.csv",
+      "Bytes": 92330,
+      "SHA256": "9e9de9143f01a33936870ad216b07ce959ebbeb080b44309199fd1a2df7b9d09"
+    },
+    {
+      "Path": "data/raw/NVB_ratio_q.csv",
+      "Bytes": 133773,
+      "SHA256": "b967778d86e3ebd5dce50a6560cf5749c08faa3bb2c692a28263aa89087fd54e"
+    },
+    {
+      "Path": "data/raw/OCB_ratio_q.csv",
+      "Bytes": 87982,
+      "SHA256": "b57d1674c9a1bb57e285e0fbf1c118b2b11fbfc3210cb925969863f218bde993"
+    },
+    {
+      "Path": "data/raw/PGB_ratio_q.csv",
+      "Bytes": 92015,
+      "SHA256": "cb7f7ed515b940f12015077140fcb805a07ff90832939317554583824f270f7b"
+    },
+    {
+      "Path": "data/raw/SGB_ratio_q.csv",
+      "Bytes": 91966,
+      "SHA256": "502b2890fc8fe7be74f9159a307d59179da8dfb0a0b583944f14aa47ed0fdecc"
+    },
+    {
+      "Path": "data/raw/SHB_ratio_q.csv",
+      "Bytes": 138437,
+      "SHA256": "223a23d08dd4a597522dc5cea855a622335627e8861e72fccae4c1a97b53b2c2"
+    },
+    {
+      "Path": "data/raw/SSB_ratio_q.csv",
+      "Bytes": 88164,
+      "SHA256": "8ce192840495fbaed14a4ee162af32e3cc51f1d10666476697f8cdc9c2ebc246"
+    },
+    {
+      "Path": "data/raw/STB_ratio_q.csv",
+      "Bytes": 138452,
+      "SHA256": "a4e126de368c6d201c526bada3b108fc80410545956c98e4f595233cf61f8f3d"
+    },
+    {
+      "Path": "data/raw/TCB_ratio_q.csv",
+      "Bytes": 134056,
+      "SHA256": "33bdafff9b1b49ff9290f9163e04809e08ac9737599ded96d3fbf186cd7ae7c8"
+    },
+    {
+      "Path": "data/raw/TPB_ratio_q.csv",
+      "Bytes": 134096,
+      "SHA256": "f02f631f85c50cdbfd7e6371c6d2717657a7dd94aed6fb0ce6d550d2440e5b5a"
+    },
+    {
+      "Path": "data/raw/VAB_ratio_q.csv",
+      "Bytes": 83658,
+      "SHA256": "5ac4e846c5b27a6c3c3cc28c3828c473774cead0adc1eb2d5064ee04c423186a"
+    },
+    {
+      "Path": "data/raw/VBB_ratio_q.csv",
+      "Bytes": 113096,
+      "SHA256": "c6325075f663780d6b3fbc67fbb1aa209ec924f2fb4006df25b53f0ae05d4c27"
+    },
+    {
+      "Path": "data/raw/VCB_ratio_q.csv",
+      "Bytes": 138487,
+      "SHA256": "fa8134ae577f9b5f39c3f6083fc0228a9c063e583c731b9ee708b48fdc1da568"
+    },
+    {
+      "Path": "data/raw/VIB_ratio_q.csv",
+      "Bytes": 138209,
+      "SHA256": "37717221456a6127ba8e6a9c07c7d1038498df06eb7e59ca6a33a0ffe83f4873"
+    },
+    {
+      "Path": "data/raw/VPB_ratio_q.csv",
+      "Bytes": 138291,
+      "SHA256": "3b293f879495cf082e9a5eede68f34fe024a4428695b57848a8387d0f8c54bb1"
+    },
+    {
+      "Path": "docs/ANNUAL_ANALYSIS_V8_128.md",
+      "Bytes": 4256,
+      "SHA256": "833968d33c0158fb306b7ca869480f3f6207d4d005dba0550cfb56528a38bb26"
+    },
+    {
+      "Path": "docs/AUTOMATIC_PEERS_V8_123.md",
+      "Bytes": 6475,
+      "SHA256": "5b9f96cc270b826167479418cde365e64cc2d8d6b41bf2e62f76e325c843a6f9"
+    },
+    {
+      "Path": "docs/AUTO_FACTORS_V8_133.md",
+      "Bytes": 2219,
+      "SHA256": "b40965a19c91e753d67464fc2f0f21060b6f6e7d66fbdd3e3bdf098dd425b4a5"
+    },
+    {
+      "Path": "docs/BANK_CAR_DISCLOSURES_V8_134.md",
+      "Bytes": 7278,
+      "SHA256": "6d7c1ed84c443296a50b4efa77a37d421cb519f720d00958afb2e38d43939eb8"
+    },
+    {
+      "Path": "docs/BANK_CAR_USER_INPUTS_V8_135.md",
+      "Bytes": 5200,
+      "SHA256": "bc0c7fb7db7ad2f2135b7ae1b37d972b19e6d8375f49dd90d2d68f5178a7676a"
+    },
+    {
+      "Path": "docs/BANK_CAR_VERIFIED_V8_136.md",
+      "Bytes": 4854,
+      "SHA256": "b34df24a1201318f60b6e91c45dc349b4db417b4533f5ee50947fc7db8c68962"
+    },
+    {
+      "Path": "docs/BANK_HISTORY_FALLBACK_V8_126.md",
+      "Bytes": 2988,
+      "SHA256": "172c3517e0d529c4ee8cf4a6318200c25829aa19fceeaa4f1da7523aca91395b"
+    },
+    {
+      "Path": "docs/INSURANCE_CHARTS_V8_125.md",
+      "Bytes": 2525,
+      "SHA256": "c3ceff2622e44a2a01416a8477247ddf3bb7167829e01969e9e7f25b19134364"
+    },
+    {
+      "Path": "docs/INSURANCE_INPUT_GUIDE.md",
+      "Bytes": 3595,
+      "SHA256": "0d7220d9bc1af6bac36a04a9c8c4e2bed3123e1ae9228aedeb750512b892dfcd"
+    },
+    {
+      "Path": "docs/INSURANCE_METHOD_2025_AUDIT.md",
+      "Bytes": 9122,
+      "SHA256": "eaa46819d6f8314410f8b57ccc919bebc1e574ebd868f9616369e88e9431df5b"
+    },
+    {
+      "Path": "docs/INSURANCE_NARRATIVE_V8_124.md",
+      "Bytes": 5309,
+      "SHA256": "94cec4956f1b06c972adf9b7c27c7c96ea99f6e6f51cc2e383cf05a55a6222bc"
+    },
+    {
+      "Path": "docs/INSURANCE_PEERS_V8_121.md",
+      "Bytes": 3077,
+      "SHA256": "ed95f6595ee4cd190670bf51e503727f8059b20c10f963d0ac22264cc82d7460"
+    },
+    {
+      "Path": "docs/INSURANCE_PEERS_V8_122.md",
+      "Bytes": 3262,
+      "SHA256": "d36f1eb1e1ac8875497620bd692e8ba3284a826e02bdac1b0c6595cfbe7e483f"
+    },
+    {
+      "Path": "docs/INSURANCE_REPORT_V8_120.md",
+      "Bytes": 4034,
+      "SHA256": "7c8060f17987289b4f08329e7de2f0d19e41c7ec407fb0a01f998e0c9e900a5c"
+    },
+    {
+      "Path": "docs/REFERENCE_REPORT_V8_129.md",
+      "Bytes": 2310,
+      "SHA256": "77b56358e412abe0cafe2f5d4fced7a9ea3a0825989cdfa8d1a325ba30490f69"
+    },
+    {
+      "Path": "docs/REPORT_EXPORT_AND_SCORING_V8_131.md",
+      "Bytes": 7518,
+      "SHA256": "d5a3df537e0168d1e118873876545be6a1141995a71d0629e30eb5269b4b439d"
+    },
+    {
+      "Path": "docs/REPORT_FORMAT_V8_127.md",
+      "Bytes": 4478,
+      "SHA256": "a6e422feea23202becf41c5839414b54fe286d73ecb7b1ab10a6d6e4a680d5cd"
+    },
+    {
+      "Path": "docs/UI_FIX_V8_132.md",
+      "Bytes": 2126,
+      "SHA256": "583d4a22891c49e61249a6ae3b1cb82665edf7377177530a9ca1db011d03963f"
+    },
+    {
+      "Path": "docs/UNIFIED_REPORTS_V8_130.md",
+      "Bytes": 5211,
+      "SHA256": "6219db88e3363a33ab18f279e28a575ada1b0a1834c70cca9e6d7efecd2d22bb"
+    },
+    {
+      "Path": "docs/bank_car_coverage_v8_136.json",
+      "Bytes": 18559,
+      "SHA256": "3e2a083313ba7164682bfa7a0603c2f4a648e1f9785f6f6a559ebc20c97ff0ea"
+    },
+    {
+      "Path": "docs/bank_car_source_files_v8_136.json",
+      "Bytes": 7857,
+      "SHA256": "545a76c87e219ed4a6a464f73c4abd674430a713d2bac1d39158fe7c9018dc2e"
+    },
+    {
+      "Path": "docs/car_coverage_v8_134.json",
+      "Bytes": 10862,
+      "SHA256": "92360a3157dbabb3a14d0d8f22c78676babe61ffbc22c622bc7cc74ed7062b78"
+    },
+    {
+      "Path": "docs/car_coverage_v8_135.json",
+      "Bytes": 17389,
+      "SHA256": "a03e38f20096fe8f33a8b7a29e8b21d92342e896a4d98073bcc364497304961a"
+    },
+    {
+      "Path": "docs/insurance_input_dictionary.csv",
+      "Bytes": 4651,
+      "SHA256": "b55fb4f311f7c18252407770d78bf81e7b8d51995987d910d4c922b035551e7f"
+    },
+    {
+      "Path": "docs/report_score_validation_v8_136.json",
+      "Bytes": 12701,
+      "SHA256": "4cdecd6e1b65caf3fad5d8e32d320d0fe648122f41f8351700f546741bf07356"
+    },
+    {
+      "Path": "docs/report_scores_validation_v8_131.json",
+      "Bytes": 33110,
+      "SHA256": "2e8ba978d1808bd4f1476459a8cf812a223186270fa63ca45e6afbc79b0f26fb"
+    },
+    {
+      "Path": "docs/report_validation_v8_130.json",
+      "Bytes": 20640,
+      "SHA256": "46b1b9aea0f22914a98110f975a28a5904a065eb79c920e57d750bf9948ea71c"
+    },
+    {
+      "Path": "docs/report_validation_v8_131.json",
+      "Bytes": 2334,
+      "SHA256": "7d566e1b83603ad57d4c0b3b942b6eb42208a7f535790cb9861b3baf2baa00f3"
+    },
+    {
+      "Path": "docs/report_validation_v8_134.json",
+      "Bytes": 1981,
+      "SHA256": "f340172cb455caaa75f2fc99cb3cced78d159da64a7c561297351b99ce221f26"
+    },
+    {
+      "Path": "docs/score_validation_v8_133.json",
+      "Bytes": 21028,
+      "SHA256": "42bad6cf5752075a96e0c9b9314a8b3866004d322ec50d5e30156c458a59ec47"
+    },
+    {
+      "Path": "docs/score_validation_v8_134.json",
+      "Bytes": 19336,
+      "SHA256": "63605ea39857f89e28b6cdfe3479c0b10fece2c42bffdc9bc98eba9632b0ca68"
+    },
+    {
+      "Path": "docs/score_validation_v8_135.json",
+      "Bytes": 13312,
+      "SHA256": "7cb4b707df6036487e77b7316ec7e683bc4e647921e0d1e724edd989e45d27d7"
+    },
+    {
+      "Path": "docs/ui_validation_v8_132.json",
+      "Bytes": 1395,
+      "SHA256": "4e6560d553a863309117229178a4bc3815d21e9b5ea6605a3c493a87ac14bebb"
+    },
+    {
+      "Path": "docs/ui_validation_v8_133.json",
+      "Bytes": 1005,
+      "SHA256": "8c7a787ae3b340dcc926cc97a37a8ec3a31dc0de45d356c7d32e176a4bcf5fb7"
+    },
+    {
+      "Path": "docs/ui_validation_v8_134.json",
+      "Bytes": 722,
+      "SHA256": "3940ce14e5b8c48b1e76085cb5dc998fa953da1109922f4725a7559e349bf3e1"
+    },
+    {
+      "Path": "docs/ui_validation_v8_135.json",
+      "Bytes": 2283,
+      "SHA256": "063d774720dc79ecb60a97e59899f68ce807b65df8a478e0e1924dad674e5c79"
+    },
+    {
+      "Path": "docs/ui_validation_v8_136.json",
+      "Bytes": 2454,
+      "SHA256": "27b9b9b13036018395d59bd264d719b4e13e022caea0462511c1d417c9bb58e2"
+    },
+    {
+      "Path": "docs/validation_v8_133.json",
+      "Bytes": 1625,
+      "SHA256": "354b109cf5eab7685df666e05cbe72953619953111dd5f078cb0ec080d72c775"
+    },
+    {
+      "Path": "docs/validation_v8_134.json",
+      "Bytes": 1176,
+      "SHA256": "83eef3437f644602225e43fa08f0e754bd2ec5cfedfb3a4dfe70e0ab20695de0"
+    },
+    {
+      "Path": "docs/validation_v8_135.json",
+      "Bytes": 4018,
+      "SHA256": "a8a9d0d0947b748e4fc90c18a30fc480a8d9858253dc37988c4975313632c226"
+    },
+    {
+      "Path": "docs/validation_v8_136.json",
+      "Bytes": 2374,
+      "SHA256": "509ac07356864b6d186ae241a68cca742ec79122929a2b2033466a8168e192e0"
+    },
+    {
+      "Path": "scripts/bank_car.py",
+      "Bytes": 9245,
+      "SHA256": "452c099ef3fdaf3bf3d21a51fe7bf4a1c9844edcb17ff7ed7c21aa09816a923b"
+    },
+    {
+      "Path": "scripts/bank_method_2026.py",
+      "Bytes": 6807,
+      "SHA256": "fa754925a6374d9adb11831330cf722ac35b229135bf5488220a0ead62f9efe4"
+    },
+    {
+      "Path": "scripts/bank_report_chapters.py",
+      "Bytes": 7399,
+      "SHA256": "a3b265b8a2a70ef6ebb16baaad57563c7ac66999ff7948ab43b70fa0f110b6d2"
+    },
+    {
+      "Path": "scripts/check_bank_car.py",
+      "Bytes": 3311,
+      "SHA256": "7dd05107e1d5710fc90ce37c59e27628aadba70c14dad0f0819abd5fd4b25940"
+    },
+    {
+      "Path": "scripts/check_bank_runtime.py",
+      "Bytes": 5145,
+      "SHA256": "654f77bfadd36cb9fa36f2da44eb257f39002dbb0ddd6edcd732a53829a65cd5"
+    },
+    {
+      "Path": "scripts/check_insurance_runtime.py",
+      "Bytes": 3883,
+      "SHA256": "bb40345ff73390c52069b355c06e6fba9620ed81a9cf21d61a5a2892cc03e618"
+    },
+    {
+      "Path": "scripts/check_report_runtime.py",
+      "Bytes": 3039,
+      "SHA256": "a0fa5381a366d1af3f76a3b6004c6e3f44079fcf02d9f59e36fe9346e19ce6a3"
+    },
+    {
+      "Path": "scripts/check_report_scores.py",
+      "Bytes": 2912,
+      "SHA256": "5ca11563294bc6e60dcc223fc28acc73e1d219448952a38b0b46e6d8024f75f7"
+    },
+    {
+      "Path": "scripts/data_quality_engine.py",
+      "Bytes": 1547,
+      "SHA256": "2ba9b8d976ac638387db29d40f5894ef227623af9be5facf0e6798447e119362"
+    },
+    {
+      "Path": "scripts/discover_listed_universe.py",
+      "Bytes": 7480,
+      "SHA256": "1261954f1da7ab32adf0f4e61a908513b0aa9be8301e7a334e50e7e49a44322e"
+    },
+    {
+      "Path": "scripts/dynamic_peer_engine.py",
+      "Bytes": 15765,
+      "SHA256": "bdfdf441612ae6e5eb9af662005a7bbb838f6674cb9f1edb7a73a0a688396e31"
+    },
+    {
+      "Path": "scripts/evidence_report.py",
+      "Bytes": 302,
+      "SHA256": "ad14a45e68536a704b1d90bebd1f9878b536150b90994f78f88a44746be26f1a"
+    },
+    {
+      "Path": "scripts/export_professional_report.py",
+      "Bytes": 1029,
+      "SHA256": "055dc2d1d2297c7eb77c183b1057fa2515bcac795963d7f0a8fae1be8f692cc8"
+    },
+    {
+      "Path": "scripts/fair_value_range.py",
+      "Bytes": 4522,
+      "SHA256": "f89c76132cac7a4a2f853452e33f1f5fb3f9d107966b9c5c83b4bf974b4a91fe"
+    },
+    {
+      "Path": "scripts/financial_charts.py",
+      "Bytes": 3289,
+      "SHA256": "4f0bbf69d4a3c008fe36c9a30e49cc53a3606710483fc3be5d9e7ea1d349709d"
+    },
+    {
+      "Path": "scripts/financial_evidence.py",
+      "Bytes": 30310,
+      "SHA256": "1af4bef2ee5fdfd22c7929395afb7f9d3e7363c0304fdeab9260cafbc678a3cf"
+    },
+    {
+      "Path": "scripts/financial_narrative.py",
+      "Bytes": 19926,
+      "SHA256": "06c62fc97a93b2c7999cf53d9e9d1497d355af3963b9b2b40f688524e26e0ba7"
+    },
+    {
+      "Path": "scripts/financial_views.py",
+      "Bytes": 4633,
+      "SHA256": "cf8226ae0486f926774a59e3d7c578337268bd5bf7c6ec8364776e3eb7c6ba80"
+    },
+    {
+      "Path": "scripts/generate_multisector_report.py",
+      "Bytes": 1555,
+      "SHA256": "22061d991863e9ddc4e144bd4de01c53a5c25d7a121f25d2ec6f02fc8d57a89a"
+    },
+    {
+      "Path": "scripts/industry_classifier.py",
+      "Bytes": 8449,
+      "SHA256": "e4f39a7be457d5927b3c489c08cf0571c5acc4fd44a0623f3e93f6b1fdd03b3a"
+    },
+    {
+      "Path": "scripts/insurance_analysis.py",
+      "Bytes": 16225,
+      "SHA256": "cebb3b0c0da72bb477115865176ee2ae7fe56ebe7728a58d139459c7af207cf9"
+    },
+    {
+      "Path": "scripts/insurance_catalog.py",
+      "Bytes": 8029,
+      "SHA256": "b09b4017032ec00074b79c4d9b1f48e3ea73a2b045fcae83a217c2cba8e91a91"
+    },
+    {
+      "Path": "scripts/insurance_history.py",
+      "Bytes": 4234,
+      "SHA256": "ab487dafb011cb8f74c3dfb4ee5a92e413d56f5788d02212520cb5164585505a"
+    },
+    {
+      "Path": "scripts/insurance_methodology.py",
+      "Bytes": 11642,
+      "SHA256": "eafb6117cc40f123b497d54f52534b744678f1856f272ec4c9036439b5b27795"
+    },
+    {
+      "Path": "scripts/insurance_metrics.py",
+      "Bytes": 6890,
+      "SHA256": "25f96d094074c677c33a51d3d111a0b476e37aa40caa5df82a58cbf9c63be566"
+    },
+    {
+      "Path": "scripts/insurance_narrative.py",
+      "Bytes": 39920,
+      "SHA256": "2975556263a3de90dfd4655aa9a9020eccf2248379427da70acb7e7cbeca6986"
+    },
+    {
+      "Path": "scripts/insurance_peers.py",
+      "Bytes": 5762,
+      "SHA256": "af437596d06b22a3b86d65748c701c26541e8d829bb5fe46660df13eade69ffd"
+    },
+    {
+      "Path": "scripts/insurance_presentation.py",
+      "Bytes": 9478,
+      "SHA256": "57308e177e3741eee576f78d171d99df2a0489954cb7f1a8ade39f134a2b54db"
+    },
+    {
+      "Path": "scripts/insurance_rating.py",
+      "Bytes": 16217,
+      "SHA256": "bac74c6563335daa050b936abc221ef52f2063d0646a63c67e1ab64d481b14dd"
+    },
+    {
+      "Path": "scripts/insurance_report.py",
+      "Bytes": 21474,
+      "SHA256": "e92c3434db47529cb7125c30709469e059124bfa0abf707080ee432d17d5cd8d"
+    },
+    {
+      "Path": "scripts/insurance_ui.py",
+      "Bytes": 5625,
+      "SHA256": "ca0299e0145c00e08e921166d1f0f093053a9821c232676c3547cbddfa683004"
+    },
+    {
+      "Path": "scripts/intelligent_analyst.py",
+      "Bytes": 5812,
+      "SHA256": "ea04c23b6edca32db7e17b47082f3f956bf5b9babfd825e594f12d7676fedd8b"
+    },
+    {
+      "Path": "scripts/methodology_kpi_engine.py",
+      "Bytes": 12872,
+      "SHA256": "229ebf28569ddc40f9beca660892af362469f6a54aef576d63549534b000ce21"
+    },
+    {
+      "Path": "scripts/multisector_report.py",
+      "Bytes": 159667,
+      "SHA256": "bfaa5009a19904c636057a2ed116502c4f81c59d691a7d55b21687c0c123a04f"
+    },
+    {
+      "Path": "scripts/multisector_valuation.py",
+      "Bytes": 4955,
+      "SHA256": "8595d3b11e444f713ee04dc74bddb64b10d6b0f4766ba843095018d5f9098aff"
+    },
+    {
+      "Path": "scripts/professional_report.py",
+      "Bytes": 35779,
+      "SHA256": "b5a4463b4e8ef0c149e607b4c3a27dc1f4e7563f2bb4ccb6ec9d3edd283db609"
+    },
+    {
+      "Path": "scripts/rating_committee_engine.py",
+      "Bytes": 6201,
+      "SHA256": "6fcdd890c5e7ee0e085e86816c4fbcee8d232edbb9466f023d5abd5d11f39195"
+    },
+    {
+      "Path": "scripts/rating_evidence_engine.py",
+      "Bytes": 2096,
+      "SHA256": "325a7bef4d1531480225f60e9a1a58bc2cdca960fa9e5fd75c6cf6e6a97a9f0a"
+    },
+    {
+      "Path": "scripts/rating_reference.py",
+      "Bytes": 5359,
+      "SHA256": "d19cee2ed380e54784c32a44672e2c26cab57ddb1ec8c33df59d922d42122cea"
+    },
+    {
+      "Path": "scripts/rebuild_multisector_from_raw.py",
+      "Bytes": 8692,
+      "SHA256": "f50492afb12a13f1492af0c6f1463e03a73cfa07bda342f4de7a35e575a597c3"
+    },
+    {
+      "Path": "scripts/refresh_all_vnstock.py",
+      "Bytes": 2546,
+      "SHA256": "3aa84af9e98f7b6680a4928f780ac67e65e2c287ab171f14eb88f68c0e8d6f33"
+    },
+    {
+      "Path": "scripts/refresh_market_peers.py",
+      "Bytes": 6226,
+      "SHA256": "7621187df35955e7e4234c63a893a884458de9dd490976feae26a5b8c5233b51"
+    },
+    {
+      "Path": "scripts/refresh_vnstock_multisector.py",
+      "Bytes": 53388,
+      "SHA256": "8738e8c0632ba793b0ee7821c7353f55777d85fadac64b80c4a767c66210efad"
+    },
+    {
+      "Path": "scripts/report_evidence.py",
+      "Bytes": 13844,
+      "SHA256": "f6a94905a7230d3d1ae4666af36246c043ac9f7f0bceffd3b34db62d81e47e5e"
+    },
+    {
+      "Path": "scripts/report_identity.py",
+      "Bytes": 1522,
+      "SHA256": "5d0d17ec8b46f019f1c7e9cbcb3a4f0438ad0e8c76602a231a00f6dd819d33e3"
+    },
+    {
+      "Path": "scripts/report_insights.py",
+      "Bytes": 15749,
+      "SHA256": "42884d5537e10fe14875713415a31667717df363cb373d35c421dcb30c957452"
+    },
+    {
+      "Path": "scripts/report_methodology.py",
+      "Bytes": 6778,
+      "SHA256": "7abe4bf32c04e3c1b2509d74905631c53455bffe0d0856e829b87d265ef8431c"
+    },
+    {
+      "Path": "scripts/report_rating.py",
+      "Bytes": 34925,
+      "SHA256": "bdd84520abda6ea23a859687d5ecfb95da8c1df5b24a192b612528f570b1b1be"
+    },
+    {
+      "Path": "scripts/sector_benchmark_engine.py",
+      "Bytes": 4858,
+      "SHA256": "e276d066252bfe630e5f691af3d3a5cac29eed9cf559f9b94b24fe4e1e98edc9"
+    },
+    {
+      "Path": "scripts/sector_templates.py",
+      "Bytes": 6408,
+      "SHA256": "dec4c10b21f0c0ab874e6e844ff4ad72f3f11d25dbb2f208ee74e19e37371cc6"
+    },
+    {
+      "Path": "scripts/three_methodology_rating.py",
+      "Bytes": 20106,
+      "SHA256": "78bc7535ca3c90bf262051324e4287340f7579513f7ae6d1b1f909a950ae37f7"
+    },
+    {
+      "Path": "scripts/universal_data.py",
+      "Bytes": 8791,
+      "SHA256": "6abe9b579669aa220e85d0785b79e1c344a120fcfe29a24423705fd8f0aa3f31"
+    },
+    {
+      "Path": "scripts/valuation_regime.py",
+      "Bytes": 1674,
+      "SHA256": "0dd8c044a207f76a153714c7bd983c384b8a242a7aceecf2cc76c880a4427e00"
+    },
+    {
+      "Path": "scripts/valuation_triangulation.py",
+      "Bytes": 2186,
+      "SHA256": "60fbcda6ed4de0f3058a78eb867dc7f67ae66b48c88a8e7ce976d8d0f7b1383c"
+    },
+    {
+      "Path": "tests/insurance_matrix_reference.json",
+      "Bytes": 7031,
+      "SHA256": "39950399a918b89345e608fdac9c3d001771aac14eedd32a8582579cc8e2070a"
+    },
+    {
+      "Path": "tests/test_annual_report.py",
+      "Bytes": 6021,
+      "SHA256": "98d2bd0164e5d5bb68ff61b7c47ccc5252826482ddc630946f5d909f16f1206a"
+    },
+    {
+      "Path": "tests/test_automatic_peers.py",
+      "Bytes": 14337,
+      "SHA256": "cdd1dd08a0e4730d4d6ec8da220a1ddb3f37d1c9e6f0c2ace468135fab95648b"
+    },
+    {
+      "Path": "tests/test_bank_car_disclosures.py",
+      "Bytes": 6066,
+      "SHA256": "17fde0e5082dc8db41a0c9ab183c6d57f298465de9e79cd02aede57b5d5ea46f"
+    },
+    {
+      "Path": "tests/test_bank_car_user_inputs.py",
+      "Bytes": 8958,
+      "SHA256": "5cf8ad6b6e022069337fbc9d194d28166584c7b0140e52b2c02fdd975c964899"
+    },
+    {
+      "Path": "tests/test_bank_history_fallback.py",
+      "Bytes": 6518,
+      "SHA256": "74bd4b7e5cfa9c40cee5eece8bbeeefae309e28de71e7183a8683236765a2832"
+    },
+    {
+      "Path": "tests/test_evidence_pipeline.py",
+      "Bytes": 7449,
+      "SHA256": "7215bdb7e897835c350bebcc2c758c9d7249eaadc155ebce45553272f3dfe202"
+    },
+    {
+      "Path": "tests/test_financial_charts.py",
+      "Bytes": 3346,
+      "SHA256": "4f9466a431a834a537659f364c1c9d8e6b7ee058391cebe0b33b961424ab9575"
+    },
+    {
+      "Path": "tests/test_insurance_history.py",
+      "Bytes": 4194,
+      "SHA256": "032d2bdf305da72e1bafb0afdd68dae03030e1e69226a4d648c15948ec477a9f"
+    },
+    {
+      "Path": "tests/test_insurance_narrative.py",
+      "Bytes": 9743,
+      "SHA256": "99d702d1b185e9ddc5d41997ed2be5c9923786885332892e613ba0423bf32f4c"
+    },
+    {
+      "Path": "tests/test_insurance_peers.py",
+      "Bytes": 6828,
+      "SHA256": "7d337b62e195709f7f310323eac9fd4e4d2e4e67ead71a1f642f603cb6d472eb"
+    },
+    {
+      "Path": "tests/test_insurance_presentation.py",
+      "Bytes": 6216,
+      "SHA256": "ec7ddcf2b76bec44a3294baf784e5ebe35b48c5092aa72524ca9dcb1ea62c10e"
+    },
+    {
+      "Path": "tests/test_insurance_workflow.py",
+      "Bytes": 14011,
+      "SHA256": "5d7827974c38c2571917f786ea187cf77d1664d59ca46fbafc6af7a473eb7dfc"
+    },
+    {
+      "Path": "tests/test_partial_factor_scores.py",
+      "Bytes": 6716,
+      "SHA256": "aaf46ec75e0824ade2367cf504bc118f328250fee4dd586d8ac137ef76bf10cd"
+    },
+    {
+      "Path": "tests/test_professional_report.py",
+      "Bytes": 5982,
+      "SHA256": "3e8b231a75dd070bab42861ec099fc970e81f1f1c9cd23b5bf3f63efacde6e69"
+    },
+    {
+      "Path": "tests/test_rating_reference.py",
+      "Bytes": 5092,
+      "SHA256": "f95de925715915c4729cd81a384017fe18fc2a525106c4486ee1e9bdd0532cad"
+    },
+    {
+      "Path": "tests/test_report_release.py",
+      "Bytes": 6240,
+      "SHA256": "fd8270b3b4d2aec296194278206e8dfdfe96a1a3a97b6f9a3a6d0449ada3578b"
+    },
+    {
+      "Path": "tests/test_unified_reports.py",
+      "Bytes": 5075,
+      "SHA256": "11712bbeb45196e18836fb284e49b515f498c872abc8eb3a1032d0777975d803"
+    }
+  ]
+}

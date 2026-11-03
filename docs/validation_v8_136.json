@@ -1,0 +1,89 @@
+{
+  "Build": "V8.136.0-VERIFIED-VCB-CAR",
+  "ExecutedOn": "2026-11-03",
+  "Result": "PASS",
+  "Scope": "Kiểm tra phần mềm; không phải xác nhận đã có đủ mọi nguồn hoặc thẩm định chính thức. Chưa triển khai vào máy Windows/GitHub/Streamlit Cloud của người dùng.",
+  "Pytest": {
+    "Passed": 141,
+    "Failed": 0,
+    "Seconds": 59.06,
+    "Command": "python -m pytest -q tests/test_bank_car_disclosures.py tests/test_bank_car_user_inputs.py tests/test_professional_report.py tests/test_partial_factor_scores.py tests/test_report_release.py tests/test_annual_report.py tests/test_rating_reference.py"
+  },
+  "ScoreAudit": {
+    "Checked": 32,
+    "Banks": 28,
+    "ByStatus": {
+      "ESTIMATED": 26,
+      "INSUFFICIENT_DATA": 4,
+      "SIMULATION": 1,
+      "NOT_APPLICABLE": 1
+    },
+    "Result": "PASS"
+  },
+  "CARCoverage": {
+    "BankCount": 28,
+    "VerifiedDisclosures": 22,
+    "Available": 24,
+    "CurrentPeriodAvailable": 24,
+    "Fallback2025": 0,
+    "UserInputsUsed": 2,
+    "PendingIngestion": [
+      "NVB",
+      "PCB",
+      "TPB",
+      "VBB"
+    ],
+    "Result": "PARTIAL"
+  },
+  "UI": {
+    "CheckedTickers": 17,
+    "DefaultRatingTab": true,
+    "Result": "PASS"
+  },
+  "Word": {
+    "Generated": [
+      {
+        "Ticker": "VCB",
+        "CAR": "11,71%",
+        "ICR": "vnA",
+        "Bytes": 2491608,
+        "CorrectSourceAndDate": true
+      },
+      {
+        "Ticker": "HDB",
+        "CAR": "14,27%",
+        "ICR": "vnBBB-",
+        "Bytes": 2524363,
+        "CorrectSourceAndDate": true
+      }
+    ],
+    "RenderedPages": {
+      "VCB": 29,
+      "HDB": 29
+    },
+    "InspectedPages": {
+      "VCB": [
+        1,
+        8,
+        27,
+        29
+      ],
+      "HDB": [
+        1,
+        7,
+        8,
+        27,
+        29
+      ]
+    },
+    "Verified": "Trang bìa, CAR, bảng điểm và nguồn đúng số/kỳ mới; không ghi phiên bản vào báo cáo. Đây là mẫu kiểm tra nội bộ, không kèm gói."
+  },
+  "DataRules": [
+    "Ưu tiên báo cáo gốc hơn bảng người dùng",
+    "Giữ riêng hợp nhất/riêng lẻ và TT14/TT41",
+    "Không dùng Q2/2026 làm số năm 2025",
+    "Giữ cơ chế fallback cuối 2025 với kỳ gốc",
+    "Giữ nhãn ước tính, nguồn người dùng",
+    "Không ghi đè bảng thẩm định riêng đã lưu"
+  ]
+}
