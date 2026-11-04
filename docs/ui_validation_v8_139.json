@@ -1,0 +1,62 @@
+{
+  "Result": "PASS",
+  "DefaultRatingTab": true,
+  "CalibrationControlRemoved": true,
+  "Checks": [
+    {
+      "Ticker": "TCB",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VCB",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HDB",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABB",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "OCB",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "STB",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "SSI",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "ABI",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "HPG",
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "BVH",
+      "Exceptions": 0
+    }
+  ],
+  "FinalScoreCrossChecks": [
+    {
+      "Ticker": "TCB",
+      "ICR": "AA",
+      "CARPeers": 23,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VCB",
+      "ICR": "AA-",
+      "CARPeers": 23,
+      "Exceptions": 0
+    }
+  ],
+  "Note": "10 mã kiểm tra bố cục/ngoại lệ; TCB/VCB đối chiếu lại bậc UI với engine sau thay đổi cuối về chỉ báo vốn kế toán."
+}

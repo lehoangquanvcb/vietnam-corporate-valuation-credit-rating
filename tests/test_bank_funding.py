@@ -11,11 +11,24 @@ from scripts.report_rating import _financial_institution, rate_company
 from scripts.bank_domestic_rating import source_fingerprint
 from scripts.bank_report_chapters import component_scorecard
 
+@pytest.fixture(autouse=True)
+def isolate_factor_assessor_for_engine_fixtures(monkeypatch):
+    import scripts.bank_factor_evidence as module
+    from scripts.bank_method_2026 import car_grade,GRADES
+    original=module.assess
+    def assessed(ctx):
+        if not isinstance(ctx,Inputs):return original(ctx)
+        grade=car_grade(ctx.value('CAR'))
+        return {'BusinessProfile':getattr(ctx,'business',3),'CapitalEarnings':GRADES.index(grade)+1 if grade else None,'RiskPosition':getattr(ctx,'risk',3)}, {
+            'AutomationPolicy':'Fixture; testing component assembly independently',
+            'AnnualEvidence':{'CustomerDeposits':{'2023-Q4':50,'2024-Q4':55,'2025-Q4':60}}}
+    monkeypatch.setattr(module,'assess',assessed)
+
 
 class Inputs:
     period='2026-Q2'; peers=[]
     def __init__(self, ldr):
-        self.rows=[]; self.values={'CAR':.1495,'CASA':.35,'LDR':ldr}
+        self.rows=[];self.records={}; self.values={'CAR':.1495,'CASA':.35,'LDR':ldr,'TotalAssets':100,'CustomerDeposits':60}
     def value(self, key):return self.values.get(key)
     def peer_score(self, specs):return 3
     def add(self, metric, value, score=None, rule='', count=None):
@@ -42,8 +55,8 @@ def test_tcb_partial_assessment_changes_sacp_not_car_or_external_support():
     r=rate_company('TCB')
     assert r['Funding']==r['Liquidity']=='Mạnh'
     assert r['FactorNotches']['Huy động vốn và Thanh khoản']==1
-    assert r['SACP']==r['RawICR']=='vnA'
-    assert r['DomesticCalibrationNotches']==2 and r['ICR']=='vnAA-'
+    assert r['SACP']==r['ICR']
+    assert 'DomesticCalibrationNotches' not in r
     assert r['CARInput']['Value']==.1495 and r['ExternalSupportNotches']==0
     assert not r['AssessmentComplete'] and not r['LiquidityAssumed']
     assert r['FundingAssessmentOrigin']=='USER_CONFIRMED_FACTOR'

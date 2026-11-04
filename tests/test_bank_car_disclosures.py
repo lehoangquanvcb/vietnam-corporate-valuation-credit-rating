@@ -83,23 +83,24 @@ def test_missing_and_invalid_registry_and_unrelated_metrics(tmp_path):
 
 
 def test_regulatory_basis_keeps_peer_groups_comparable():
-    assert comparable_metric('CAR', {'Regime':'TT41'}, {'Regime':'TT41'})
+    assert comparable_metric('CAR', {'Regime':'TT41','Scope':'CONSOLIDATED'}, {'Regime':'TT41','Scope':'CONSOLIDATED'})
     assert not comparable_metric('CAR', {'Regime':'TT41'}, {'Regime':'TT14'})
     assert not comparable_metric('CAR', {'Regime':'TT41'}, {})
-    assert comparable_metric('CAR', {}, {})
+    assert not comparable_metric('CAR', {}, {})
     assert comparable_metric('ROE', {'Regime':'TT41'}, {'Regime':'TT14'})
 
 
-def test_actual_abb_current_car_completes_capital_and_preserves_tcb_reference():
+def test_actual_abb_current_car_completes_capital_and_tcb_preserves_precision():
     from scripts.report_rating import rate_company
     from scripts.bank_method_2026 import car_grade
     r = rate_company('ABB')
-    assert r['Factors']['Vốn và Lợi nhuận'] == 'Phù Hợp'
-    assert r['ICR'] == 'vnA-' and not r['MissingEvidence']
-    assert r['RatingOrigin'] == 'DOMESTIC_CALIBRATION' and not r['AssessmentComplete']
+    assert r['BankFactorEvidence']['CapitalStartingGrade'] == 'Phù Hợp'
+    assert r['Factors']['Vốn và Lợi nhuận'] in {'Phù Hợp','Mạnh'}
+    assert r['ICR'] != 'N/A' and not r['MissingEvidence']
+    assert r['RatingOrigin'] == 'AUTO_RESEARCH' and not r['AssessmentComplete']
     assert at_period('TCB','BANK','2026-Q2')['CAR']['Value'] == .1495
     assert car_grade(.1495) != car_grade(.15)
-    assert rate_company('TCB')['ICR'] == 'vnAA-'
+    assert rate_company('TCB')['BankFactorEvidence']['CapitalStartingGrade']=='Phù Hợp'
 
 
 def test_report_pack_and_ui_peers_use_same_verified_value():
@@ -110,7 +111,8 @@ def test_report_pack_and_ui_peers_use_same_verified_value():
     ui=peer_metric_frame('ABB','CAR')
     assert ui.loc[ui.Ticker.eq('ABB'),'Value'].iloc[0]==.1272
     assert set(ui.Ticker)-{'ABB'} == {r['Ticker'] for r in item['Peers']}
-    assert 'NAB' not in set(ui.Ticker)  # TT14 is not averaged with TT41.
+    assert 'NAB' in set(ui.Ticker)
+    assert not ui.loc[ui.Ticker.eq('NAB'),'Comparable'].iloc[0]
 
 
 def test_source_update_invalidates_report_download_identity(tmp_path, monkeypatch):

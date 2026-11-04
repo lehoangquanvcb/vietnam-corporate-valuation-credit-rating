@@ -5,16 +5,29 @@ import pytest
 
 from scripts.report_rating import _financial_institution, Evidence
 
+@pytest.fixture(autouse=True)
+def isolate_factor_assessor_for_engine_fixtures(monkeypatch):
+    import scripts.bank_factor_evidence as module
+    from scripts.bank_method_2026 import car_grade,GRADES
+    original=module.assess
+    def assessed(ctx):
+        if not isinstance(ctx,Inputs):return original(ctx)
+        grade=car_grade(ctx.value('CAR'))
+        return {'BusinessProfile':getattr(ctx,'business',3),'CapitalEarnings':GRADES.index(grade)+1 if grade else None,'RiskPosition':getattr(ctx,'risk',3)}, {
+            'AutomationPolicy':'Fixture; testing component assembly independently',
+            'AnnualEvidence':{'CustomerDeposits':{'2023-Q4':50,'2024-Q4':55,'2025-Q4':60}}}
+    monkeypatch.setattr(module,'assess',assessed)
+
 
 class Inputs:
     period = '2026-Q2'
     peers = ['P1', 'P2', 'P3']
 
     def __init__(self, values=None, business=3, risk=2):
-        self.values = dict(CAR=.13, CASA=.2, LDR=.9)
+        self.values = dict(CAR=.13, CASA=.2, LDR=.9,TotalAssets=100,CustomerDeposits=60)
         self.values.update(values or {})
         self.business, self.risk = business, risk
-        self.rows = []
+        self.rows = [];self.records={}
 
     def value(self, metric):
         return self.values.get(metric)

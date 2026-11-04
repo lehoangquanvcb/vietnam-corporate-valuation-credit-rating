@@ -23,27 +23,23 @@ def main():
     for i,t in enumerate(selected):
         try:
             r=rate_company(t);has_grade=r.get('ICR') not in (None,'','N/A')
-            if r.get('RatingOrigin') in {'AUTO_RESEARCH','DOMESTIC_CALIBRATION'} and has_grade:
+            if r.get('RatingOrigin')=='AUTO_RESEARCH' and has_grade:
                 assert r.get('Scorecard') and r.get('Assumptions')
                 assert r.get('AssessmentComplete') is False
                 assert r.get('Anchor') not in (None,'N/A') and r.get('SCA') not in (None,'N/A')
-            if r.get('DomesticCalibrationApplied'):
-                assert r['PreCalibrationResult']['ICR']==r['RawICR']
-                assert r['PreCalibrationResult']['SACP']==r['SACP']
+            assert not r.get('DomesticCalibrationApplied'),'Không được hiệu chỉnh theo mức đích'
             if r.get('RatingBlocker')=='SCOPE':assert not has_grade
             if r.get('RatingStatus')=='INSUFFICIENT_DATA':
                 assert not has_grade and not r.get('DataSufficientForAutoRating')
                 assert r.get('MissingEvidence')
             rows.append({'Ticker':t,'Methodology':r.get('Methodology'),'Status':r.get('RatingStatus'),
                 'Origin':r.get('RatingOrigin'),'Anchor':r.get('Anchor'),'SCA':r.get('SCA',r.get('SACP')),
-                'ICR':r.get('ICR'),'RawICR':r.get('RawICR',r.get('ICR')),
-                'DomesticCalibrationNotches':r.get('DomesticCalibrationNotches'),
-                'CalibrationStatus':r.get('DomesticCalibrationStatus'),
+                'ICR':r.get('ICR'),
                 'ConditionalAssumptions':len(r.get('Assumptions',[])),
                 'FileName':report_filename(t),'MissingEvidence':r.get('MissingEvidence')})
         except Exception as exc:errors.append({'Ticker':t,'Error':repr(exc)})
         if (i+1)%10==0:print(f'Checked {i+1}/{len(selected)}',flush=True)
-    result={'Build':'V8.138.0-BANK-FUNDING-REPORT','RoutingTickers':len(u),'CheckedTickers':len(rows),
+    result={'Build':'V8.139.0-BANK-EVIDENCE-CAR','RoutingTickers':len(u),'CheckedTickers':len(rows),
         'ByStatus':dict(Counter(r['Status'] for r in rows)),'Checks':rows,'Errors':errors,
         'Result':'PASS' if not errors else 'FAIL',
         'Note':'PASS xác nhận kiểm tra phần mềm. Bậc tự động có giả định, không phải thẩm định hoàn chỉnh; không tạo bậc khi thiếu dữ liệu cốt lõi hoặc ngoài phạm vi phương pháp.'}

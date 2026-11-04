@@ -44,14 +44,15 @@ def test_inconsistent_scorecard_is_rejected(change):
     with pytest.raises(ValueError):parse_bank_reference(source_bytes(change),'TCB','2026-Q2','fixture.docx')
 
 
-def test_exact_tcb_reference_and_manual_changes_are_not_fixed_rating():
-    r=bank_rating('TCB')
+def explicit_reference():
+    return json.loads((ROOT/'config/bank_rating_references.json').read_text())['assessments'][0]
+
+
+def test_reference_is_reproducible_but_not_implicitly_applied_to_current_period():
+    assert saved_assessment('TCB','2026-Q2')=={}
+    assert bank_rating('TCB')['ICR']=='N/A'
+    r=bank_rating('TCB',explicit_reference())
     assert r['ICR']=='vnAA+' and r['InternalNotches']==5
-    assert r['RatingOrigin']=='REFERENCE_REPORT'
-    assert r['AssessmentSource']=='TCB_XHTN(1).docx'
-    assert bank_rating('TCB',{'CapitalEarnings':'Phù Hợp'})['ICR']=='vnAA'
-    assert bank_rating('TCB',{'UseSavedAssessment':False})['ICR']=='N/A'
-    assert bank_rating('TCB',{'Funding':'Mạnh'})['ICR']=='N/A'
     assert bank_rating('VCB')['ICR']=='N/A'
     assert saved_assessment('TCB','2026-Q3')=={}
 
@@ -77,9 +78,9 @@ def test_reference_word_has_rating_chapters_notches_annuals_and_source():
     from scripts.professional_report import generate_docx
     p=build_pack('TCB');p['Sections']=[('HUY ĐỘNG VỐN VÀ THANH KHOẢN',['CASA'])]
     with patch('scripts.professional_report.build_pack',return_value=p):
-        d=Document(BytesIO(generate_docx('TCB','rating',bank_rating('TCB'))))
+        d=Document(BytesIO(generate_docx('TCB','rating',bank_rating('TCB',explicit_reference()))))
     xml=d.element.xml
-    for text in ['AA+','Ổn định','TCB_XHTN(1).docx','LUẬN ĐIỂM XẾP HẠNG','ĐỘ NHẠY XẾP HẠNG','TỔNG KẾT CẤU PHẦN XẾP HẠNG','2021','2025','2026-Q2']:
+    for text in ['AA+','Ổn định','LUẬN ĐIỂM XẾP HẠNG','ĐỘ NHẠY XẾP HẠNG','TỔNG KẾT CẤU PHẦN XẾP HẠNG','2021','2025','2026-Q2']:
         assert text in xml
     assert '6T/' not in xml and 'Chưa thẩm định' not in xml
     assert not d.element.xpath('.//w:tbl//w:drawing')
@@ -96,4 +97,4 @@ def test_tcb_chapter_reasoning_identifies_strengths_and_deterioration():
     funding=' '.join(chapter_findings(p,'Huy động vốn và Thanh khoản'))
     assert 'ROE thấp hơn đi cùng ROA cao hơn' in capital
     assert 'lợi thế nguồn vốn không kỳ hạn' in funding and 'giảm' in funding
-    assert rating_sensitivity(bank_rating('TCB'))[0][2]=='vnAA'
+    assert rating_sensitivity(bank_rating('TCB',explicit_reference()))[0][2]=='vnAA'

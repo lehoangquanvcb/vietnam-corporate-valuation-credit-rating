@@ -280,7 +280,7 @@ def _financial_institution(ticker, typ, o, ctx, strict):
     r.update(Anchor=label(anchor), Factors=factors, FactorNotches=notches,
              InternalNotches=None, BICRAReference=label('a-'),
              SectorAnchorAdjustment=-2 if typ=='SECURITIES' else 0)
-    business = ctx.peer_score([('TotalAssets', .4, True), ('Revenue', .3, True), ('ROE', .3, True)])
+    business = ctx.peer_score([('TotalAssets', .4, True), ('Revenue', .3, True), ('ROE', .3, True)]) if typ=='SECURITIES' else None
     keys = [('BusinessProfile','Hồ sơ Kinh doanh'),('CapitalEarnings','Vốn và Lợi nhuận'),('RiskPosition','Vị thế Rủi ro')]
     auto = {'BusinessProfile': _clamp_grade(business) if business is not None else None}
     if typ == 'SECURITIES':
@@ -297,21 +297,21 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         a.append('Vốn/lợi nhuận lấy mức yếu nhất trong các benchmark có số: tổng nợ phải trả/VCSH, vốn khả dụng, Nợ/EBITDA. Cách gộp thận trọng là quy tắc tự động; phần thiếu không được coi là đạt ngưỡng.')
         if capital is None:
             a.append('Chưa có tỷ lệ vốn khả dụng cùng kỳ: chưa xác nhận mức tuân thủ vốn pháp định.')
+        auto['RiskPosition'] = _clamp_grade(risk) if risk is not None else None
     else:
-        car = ctx.value('CAR')
-        grade = car_grade(car)
-        auto['CapitalEarnings'] = GRADES.index(grade)+1 if grade else None
-        if car is not None:
-            from scripts.bank_car import car_usage_text
-            car_record=getattr(ctx,'records',{}).get('CAR',{})
-            r['CARInput']=car_record
-            usage=car_usage_text(car_record,ctx.period)
-            ctx.add('CAR', car, auto['CapitalEarnings'], 'Bảng CAR ngân hàng; '+(usage or 'giả định giữ nguyên CAR đầu vào'))
-            if car_record.get('FallbackUsed') or car_record.get('SourceKind') in {'USER_PROVIDED','USER_ESTIMATE'}:
-                a.append(usage)
-        risk = ctx.peer_score([('NPL', .5, False), ('LoanLossCoverage', .3, True), ('ROA', .2, True)])
-        a.append('Vốn/lợi nhuận: giả định CAR đầu vào được chọn duy trì, điều chỉnh chất lượng vốn 0 bậc; không tạo CAR dự báo. Kỳ và loại nguồn được nêu trong căn cứ chấm điểm.')
-    auto['RiskPosition'] = _clamp_grade(risk) if risk is not None else None
+        from scripts.bank_factor_evidence import assess
+        from scripts.bank_car import car_usage_text
+        auto, assessment = assess(ctx)
+        r['BankFactorEvidence'] = assessment
+        r['CARInput'] = ctx.records.get('CAR', {})
+        starting=assessment.get('CapitalStartingGrade')
+        ctx.add('CAR',ctx.value('CAR'),GRADES.index(starting)+1 if starting in GRADES else None,car_usage_text(r['CARInput'],ctx.period))
+        a.append(assessment['AutomationPolicy'])
+        if assessment.get('CapitalQualityProxy')=='EquityAssets':
+            a.append('Chất lượng vốn dùng VCSH/tài sản như chỉ báo vốn kế toán khi chưa đủ tài sản vô hình; chưa xác nhận các khoản khấu trừ và chất lượng công cụ vốn.')
+        a.append('CAR đầu vào là giả định duy trì khi chưa có CAR dự phóng. Quản trị, tập trung và rủi ro ngoại bảng chưa được xác nhận; không mặc định là yếu hoặc rất mạnh.')
+        if r['CARInput'].get('FallbackUsed') or r['CARInput'].get('SourceKind') in {'USER_PROVIDED','USER_ESTIMATE'}:
+            a.append(car_usage_text(r['CARInput'],ctx.period))
     for key,title in keys:
         grade = o.get(key)
         origin = 'Đánh giá nhập riêng'
@@ -332,14 +332,14 @@ def _financial_institution(ticker, typ, o, ctx, strict):
                 r['Scorecard'].append(_row(title, 'Thiếu đầu vào', '—', reason))
                 continue
             grade = GRADES[score-1]
-            origin = 'Tín hiệu định lượng tự động'
+            origin = (r.get('BankFactorEvidence',{}).get('Reasons',{}).get(title) or 'Tín hiệu định lượng tự động')
         n = o.get(key+'Notches', inherited_notch if origin.startswith('Bảng chấm') else NOTCH[grade])
         allowed = {'Yếu':{-2,-3},'Rất Yếu':{-4,-5}}.get(grade,{NOTCH[grade]})
         if isinstance(n,bool) or n not in allowed:
             raise ValueError('Notch không phù hợp mức đánh giá '+key)
         factors[title] = grade;notches[title] = n
         r['Scorecard'].append(_row(title, f'{GRADES.index(grade)+1}/6 • {grade}', f'{n:+d} bậc', origin))
-    a.append('Hồ sơ kinh doanh/vị thế rủi ro tự động dùng các chỉ tiêu tương đối với peer; các nhận định quản trị, tập trung và đa dạng hóa chưa được xác nhận riêng.')
+    if typ!='BANK':a.append('Hồ sơ kinh doanh/vị thế rủi ro tự động dùng chỉ tiêu tương đối với peer; định tính chưa được xác nhận riêng.')
     title = 'Huy động vốn và Thanh khoản' if typ == 'BANK' else 'Nguồn vốn và Thanh khoản'
     n = None
     funding_assessment = None
@@ -379,14 +379,22 @@ def _financial_institution(ticker, typ, o, ctx, strict):
             funding_inputs = [('DebtEquity', debt_eq), ('CurrentRatio', current)]
         else:
             casa, ldr = ctx.value('CASA'), ctx.value('LDR')
-            f = 'Mạnh' if casa is not None and casa >= .3 else 'Phù Hợp' if casa is not None and casa >= .15 else 'Trung Bình' if casa is not None else None
+            deposits, assets = ctx.value('CustomerDeposits'), ctx.value('TotalAssets')
+            annual_deposits=list(r.get('BankFactorEvidence',{}).get('AnnualEvidence',{}).get('CustomerDeposits',{}).values())
+            stable=len(annual_deposits)>=3 and all(b>=a*.9 for a,b in zip(annual_deposits[-3:],annual_deposits[-2:]))
+            core=deposits/assets if deposits is not None and assets and assets>0 else None
+            f = ('Mạnh' if casa>=.3 and core is not None and core>=.5 and stable else
+                 'Phù Hợp' if core is not None and core>=.5 and stable else
+                 'Trung Bình' if core is not None and core<.35 and not stable else 'Phù Hợp') if casa is not None and core is not None else None
+            r['FundingEvidence']={'DepositAssets':core,'AnnualDepositsStable':stable,'CASA':casa}
+            a.append('Huy động: kết hợp CASA, tiền gửi/tài sản và ổn định tiền gửi qua 3 năm; không coi CASA thấp đồng nghĩa nguồn vốn yếu. Chưa xác nhận tập trung người gửi tiền/kỳ hạn.')
             # BCTC loans/deposits does not measure stressed liquidity or regulatory LDR.
             # Preserve a conditional research result, explicitly marking the neutral
             # liquidity assumption, rather than imposing unsupported downgrades.
             l = 'Phù Hợp' if ldr is not None and ldr >= 0 else None
             r['LiquidityAssumed'] = l is not None and o.get('Liquidity') not in FUNDING_GRADES
             a.append('Huy động: CASA chỉ là tín hiệu định lượng. Thanh khoản chưa có đánh giá riêng dùng giả định Phù Hợp trong phép tính có điều kiện; không phải kết luận đã đạt mức này. Không hạ bậc hoặc cộng ngoại lệ +1 chỉ từ cho vay/tiền gửi trên BCTC; cần xét nguồn vốn, kỳ hạn, tài sản thanh khoản và dòng tiền stress.')
-            funding_inputs = [('CASA', casa), ('LDR', ldr)]
+            funding_inputs = [('CASA', casa), ('LDR', ldr), ('DepositAssets', core), ('CustomerDeposits', deposits)]
         f, l = o.get('Funding',f), o.get('Liquidity',l)
         r.update(Funding=f if f in FUNDING_GRADES else None, Liquidity=l if l in FUNDING_GRADES else None)
         for key, value in funding_inputs:
@@ -422,7 +430,7 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         r['EvidenceMetrics'] = list(dict.fromkeys(x['Chỉ tiêu'] for x in r['QuantitativeEvidence']))
         return _missing(r, ' '.join(missing.values()), missing)
     sca = move(anchor,sum(notches.values()))
-    if typ == 'SECURITIES' and SCALE.index(sca)>SCALE.index('b-') and o.get('DefaultEventConfirmed') is not True:
+    if typ in {'BANK','SECURITIES'} and SCALE.index(sca)>SCALE.index('b-') and o.get('DefaultEventConfirmed') is not True:
         sca='b-'
         r['Scorecard'].append(_row('Sàn của phương pháp', 'vnB-', 'Giới hạn', 'Không áp sàn khi đã xác nhận sự kiện vỡ nợ'))
     regulatory = o.get('RegulatoryCapitalStatus')
@@ -435,7 +443,17 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         if inherited_cap == label(ceiling):
             sca = _cap(sca, ceiling)
             break
-    return _finish(r,anchor,sca,support,outlook)
+    if typ=='BANK' and r.get('ExternalSupportAssumed') and ticker in {'VCB','BID','CTG','AGRIBANK'}:
+        from scripts.bank_factor_evidence import support_notches
+        support=support_notches(ticker,sca)
+        r['ExternalSupportAssumed']=False
+        r['GovernmentSupportMethod']='Bảng 17 của phương pháp ngân hàng do người dùng cung cấp'
+        a[:]=[v for v in a if not v.startswith('Hỗ trợ bên ngoài:')]
+    result=_finish(r,anchor,sca,support,outlook)
+    if r.get('GovernmentSupportMethod'):
+        for row in result['Scorecard']:
+            if row['Cấu phần']=='Hỗ trợ bên ngoài':row['Kết quả / Căn cứ']=r['GovernmentSupportMethod']
+    return result
 
 
 def _insurance(ticker,o,ctx,strict):
@@ -536,21 +554,8 @@ def _base_rate_company(ticker, overrides=None):
 
 
 def rate_company(ticker, overrides=None):
-    from scripts.bank_domestic_rating import load_policy, apply_calibration
-    ticker = str(ticker).strip().upper()
-    o = {k:v for k,v in dict(overrides or {}).items() if v is not None}
-    inputs = {k:v for k,v in o.items() if k != 'UseDomesticCalibration'}
-    base = _base_rate_company(ticker, inputs)
-    if base.get('Methodology') != 'BANK':
-        return base
-    policy = load_policy()
-    manual = any(k != 'UseSavedAssessment' for k in inputs)
-    # Bảng mẫu TCB không được ưu tiên riêng khi so sánh theo khung trong nước.
-    # Phiếu thẩm định nhập riêng và công cụ chạy lại phương pháp cũ vẫn giữ nguyên.
-    if (policy.get('Enabled') and o.get('UseDomesticCalibration') is not False and not manual
-            and str(base.get('RatingOrigin', '')).startswith('REFERENCE_REPORT')):
-        old = base
-        base = _base_rate_company(ticker, dict(inputs, UseSavedAssessment=False))
-        base['LegacyReference'] = {'ICR': old.get('ICR'), 'Source': old.get('AssessmentSource'),
-                                   'Period': old.get('AssessmentPeriod'), 'UsedForCurrentRating': False}
-    return apply_calibration(base, ticker, o, policy)
+    ticker=str(ticker).strip().upper()
+    inputs={k:v for k,v in dict(overrides or {}).items() if v is not None and k!='UseDomesticCalibration'}
+    # Báo cáo mẫu cũ là tài liệu tham khảo, không tự trở thành phiếu thẩm định
+    # cho kỳ hiện tại. Phiếu bank_rating_assessments.json vẫn được ưu tiên.
+    return _base_rate_company(ticker,inputs)

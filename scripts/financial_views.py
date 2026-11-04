@@ -42,6 +42,9 @@ def history_comparison(ticker,metric,basis='FY',years=5):
     from scripts.financial_evidence import comparable_model
     target_meta=get_company(ticker)
     peers=[t for t in peer_tickers(ticker) if t!=ticker and comparable_model(target_meta,get_company(t))]
+    if typ=='BANK' and metric=='CAR':
+        from scripts.bank_car import bank_universe
+        peers=bank_universe(ticker)
     h=h.copy(); means=[];counts=[]
     for row in h.itertuples():
         vals=[]
@@ -56,6 +59,9 @@ def peer_metric_frame(ticker,metric):
     from scripts.financial_evidence import latest_period,comparable_model
     from scripts.report_evidence import window_ends_at
     meta=get_company(ticker);typ=meta['EntityType'];target=latest_period(ticker,typ)
+    if typ=='BANK' and metric=='CAR':
+        from scripts.bank_car import peer_frame
+        return peer_frame(ticker,target)
     own=at_period(ticker,typ,target,'QUARTER').get(metric,{}) if target else {}
     rows=[]
     for t in [ticker]+list(dict.fromkeys(t for t in peer_tickers(ticker) if t!=ticker and comparable_model(meta,get_company(t)))):

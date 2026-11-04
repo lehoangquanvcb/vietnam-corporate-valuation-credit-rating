@@ -71,7 +71,7 @@ def component_scorecard(rr, pack=None):
                  'Tác động':f'{n:+d} bậc' if n is not None else '—','Kết quả / Căn cứ':''}
         else:
             continue
-        if pack and key in rr.get('Factors',{}):
+        if not original and pack and key in rr.get('Factors',{}):
             items=pack['Items']
             def pair(metric):
                 x=items.get(metric,{})
@@ -89,7 +89,7 @@ def component_scorecard(rr, pack=None):
                 row['Kết quả / Căn cứ']='Mức Mạnh được chủ mô hình xác nhận cho '+str(rr.get('Period'))+'. Chi phí vốn tăng là rủi ro cần theo dõi.'
             elif rr.get('LiquidityAssumed'):
                 row['Điểm / Đánh giá']=str(rr.get('Funding') or 'Chưa xác định')+' / Phù Hợp (giả định)'
-                row['Kết quả / Căn cứ']='Huy động theo tín hiệu CASA; thanh khoản dùng giả định trung tính, chưa kiểm định dòng tiền stress. Không hạ bậc chỉ từ tỷ số cho vay/tiền gửi BCTC.'
+                row['Kết quả / Căn cứ']='Huy động theo CASA, tiền gửi/tài sản và ổn định tiền gửi; thanh khoản dùng giả định trung tính, chưa kiểm định dòng tiền stress. Không hạ bậc chỉ từ tỷ số cho vay/tiền gửi BCTC.'
         rows.append(row)
     return rows
 
@@ -98,8 +98,14 @@ def rating_sensitivity(rr):
     """Độ nhạy theo thay đổi cấu phần, không tự đặt ngưỡng hạ bậc tài chính."""
     from scripts.three_methodology_rating import move,label
     if rr.get('ICR') in (None,'N/A',''):return []
-    result=[];baseline=rr.get('RawICR',rr['ICR']) if rr.get('DomesticCalibrationApplied') else rr['ICR'];notches=rr.get('FactorNotches',{})
+    result=[];baseline=rr['ICR'];notches=rr.get('FactorNotches',{})
+    def scenario(delta):
+        if rr.get('GovernmentSupportMethod'):
+            from scripts.bank_factor_evidence import support_notches
+            sca=move(rr['SACP'],delta)
+            return label(move(sca,support_notches(rr['Ticker'],sca)))
+        return label(move(baseline,delta))
     for key,description in [('Vốn và Lợi nhuận','Vốn và lợi nhuận mất 1 bậc điều chỉnh'),('Vị thế Rủi ro','Vị thế rủi ro mất 1 bậc điều chỉnh'),('Huy động vốn và Thanh khoản','Huy động và thanh khoản mất 1 bậc điều chỉnh')]:
-        if key in notches:result.append([description,'−1',label(move(baseline,-1))])
-    result.append(['Hai cấu phần cùng mất 1 bậc điều chỉnh','−2',label(move(baseline,-2))])
+        if key in notches:result.append([description,'−1',scenario(-1)])
+    result.append(['Hai cấu phần cùng mất 1 bậc điều chỉnh','−2',scenario(-2)])
     return result

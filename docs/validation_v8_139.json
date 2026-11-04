@@ -1,0 +1,47 @@
+{
+  "Build": "V8.139.0-BANK-EVIDENCE-CAR",
+  "Result": "PASS",
+  "FullSuiteAttempt": {
+    "tests": 392,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "AffectedTestsAfterFinalChanges": {
+    "tests": 70,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "Resolution": "Full run: 369 passed plus 22 subtests; one old ABB capital-grade expectation failed after introducing the disclosed book-equity quality proxy. The expectation was updated to check the CAR starting grade and permitted quality adjustment. All 70 affected tests then passed.",
+  "BankRuntimeCount": 28,
+  "AppLayoutTickers": 10,
+  "FinalUIScoreCrossChecks": [
+    {
+      "Ticker": "TCB",
+      "ICR": "AA",
+      "CARPeers": 23,
+      "Exceptions": 0
+    },
+    {
+      "Ticker": "VCB",
+      "ICR": "AA-",
+      "CARPeers": 23,
+      "Exceptions": 0
+    }
+  ],
+  "WordQA": {
+    "Generator": "scripts.professional_report.generate_docx",
+    "Ticker": "TCB",
+    "Scope": "Cover, summary, annual overview, CAR/CASA charts, scorecard and source appendix; other metric sections omitted only in the QA document",
+    "RenderedPages": 9,
+    "CalibrationAbsent": true
+  },
+  "WorkbookQA": {
+    "SourceRows": 154,
+    "FormulaErrors": 0,
+    "SourceEditRecalculation": true,
+    "SheetsVisuallyChecked": 2
+  },
+  "Limitations": "Automated ratings are conditional estimates, not completed qualitative credit assessments. Annual/current CAR gaps are recorded in bank_validation_v8_139.json."
+}

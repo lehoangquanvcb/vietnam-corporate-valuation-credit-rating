@@ -1,8 +1,4 @@
-"""Hiệu chỉnh thang trong nước theo cấu hình; tách khỏi điểm tài chính và CRA.
-
-Mức đích là lựa chọn của chủ mô hình, không phải kết quả suy ra từ BCTC.
-Không sửa CAR, SACP, notch hỗ trợ, phiếu nhập riêng hoặc xếp hạng CRA.
-"""
+"""Tương thích cấu hình cũ và dấu vân tay nguồn; không còn hiệu chỉnh ICR."""
 from copy import deepcopy
 from datetime import date
 import hashlib
@@ -86,64 +82,5 @@ def benchmark_text(reference):
 
 
 def apply_calibration(base, ticker, overrides=None, policy=None):
-    """Áp một lớp riêng và giữ nguyên toàn bộ bảng điểm gốc để kiểm tra."""
-    if base.get('Methodology') != 'BANK':
-        return base
-    policy = load_policy() if policy is None else policy
-    o = dict(overrides or {})
-    if not policy.get('Enabled') or o.get('UseDomesticCalibration') is False:
-        return base
-    r = deepcopy(base)
-    r['DomesticBenchmark'] = benchmark_for(ticker)
-    p = profile_for(ticker, policy)
-    if not p:
-        return r
-    r['DomesticPolicy'] = {'Id': policy['Id'], 'EffectiveDate': policy['EffectiveDate'],
-                           'Source': policy['Source'], 'Profile': deepcopy(p)}
-    r['RawICR'] = base.get('ICR', 'N/A')
-    r['DomesticCalibrationApplied'] = False
-    manual = any(k not in {'UseDomesticCalibration', 'UseSavedAssessment'} for k in o)
-    if manual or (base.get('AssessmentSource') and not str(base.get('RatingOrigin', '')).startswith('REFERENCE_REPORT')):
-        r['DomesticCalibrationStatus'] = 'MANUAL_PRIORITY'
-        return r
-    raw = grade(base.get('ICR'))
-    if (not raw or base.get('RatingBlocker') or base.get('MissingEvidence')
-            or base.get('DataSufficientForAutoRating') is False):
-        r['DomesticCalibrationStatus'] = 'MISSING_EVIDENCE'
-        return r
-    # Không để mức đích che lấp giới hạn vốn, sự kiện vỡ nợ hoặc kiểm soát đặc biệt.
-    car = (base.get('CARInput') or {}).get('Value')
-    weak_capital = isinstance(car, (int, float)) and not isinstance(car, bool) and car < .08
-    if (weak_capital or base.get('RegulatoryCap') or base.get('DefaultEventConfirmed')
-            or base.get('RegulatoryCapitalStatus') in {'BREACH', 'SPECIAL_CONTROL', 'AT_RISK'}):
-        r['DomesticCalibrationStatus'] = 'RISK_LIMIT'
-        return r
-    target = grade(p['Grade'])
-    final = target if p['Mode'] == 'TARGET' else max((raw, target), key=SCALE.index)
-    if p['Mode'] == 'CEILING' and final == raw:
-        r['DomesticCalibrationStatus'] = 'WITHIN_CEILING'
-        return r
-    notch = SCALE.index(raw) - SCALE.index(final)
-    r['PreCalibrationResult'] = deepcopy(base)
-    r.update(ICR=label(final), RatingOrigin='DOMESTIC_CALIBRATION', RatingStatus='CALIBRATED_ESTIMATE',
-             AssessmentComplete=False, ProvisionalAutoScoring=True,
-             DomesticCalibrationApplied=True, DomesticCalibrationStatus='APPLIED',
-             DomesticCalibrationNotches=notch)
-    note = ('Bậc ' + label(final) + ' sau hiệu chỉnh thang trong nước theo khung do Lê Hoàng Quân lựa chọn ngày '
-            + date.fromisoformat(policy['EffectiveDate']).strftime('%d/%m/%Y') + '. Bậc trước hiệu chỉnh '
-            + label(raw) + '; điều chỉnh ' + f'{notch:+d}' + ' bậc. Đây là mức hiệu chỉnh của mô hình, '
-            'không phải kết luận xếp hạng của tổ chức CRA hoặc xác nhận bảo lãnh của Nhà nước.')
-    r['RatingBasisNote'] = note
-    r['Assumptions'] = list(base.get('Assumptions', [])) + [note, p['Rationale']]
-    r['Scorecard'] = deepcopy(base.get('Scorecard', []))
-    for row in r['Scorecard']:
-        if row.get('Cấu phần') == 'Bậc xếp hạng ước tính':
-            row['Cấu phần'] = 'Bậc trước hiệu chỉnh'
-    r['Scorecard'].extend([
-        {'Cấu phần': 'Hiệu chỉnh thang trong nước', 'Điểm / Đánh giá': p['Name'],
-         'Tác động': f'{notch:+d} bậc', 'Kết quả / Căn cứ': p['Rationale']},
-        {'Cấu phần': 'ICR sau hiệu chỉnh', 'Điểm / Đánh giá': label(final),
-         'Tác động': label(raw) + ' → ' + label(final),
-         'Kết quả / Căn cứ': 'Mức đích của mô hình; không đổi SACP hoặc notch hỗ trợ bên ngoài'}])
-    r['Audit'] = str(base.get('Audit', '')) + ' ' + note
-    return r
+    """Compatibility only: calibration was withdrawn by the user on 03/11/2026."""
+    return deepcopy(base)

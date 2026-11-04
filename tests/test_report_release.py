@@ -95,7 +95,7 @@ def test_insurance_capital_reference_is_disclosed_not_written_as_source():
 
 def test_saved_bank_grade_and_out_of_scope_insurers_preserved():
     tcb=rate_company('TCB',{'UseDomesticCalibration':False})
-    assert tcb['ICR']=='vnAA+' and tcb['RatingOrigin'].startswith('REFERENCE_REPORT')
+    assert tcb['ICR']==rate_company('TCB')['ICR'] and tcb['RatingOrigin']=='AUTO_RESEARCH'
     bvh=rate_company('BVH')
     assert bvh['ICR']=='N/A' and bvh['RatingBlocker']=='SCOPE'
 

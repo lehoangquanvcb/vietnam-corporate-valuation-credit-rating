@@ -1,0 +1,458 @@
+{
+  "Build": "V8.139.0-BANK-EVIDENCE-CAR",
+  "Result": "PASS",
+  "Banks": 28,
+  "AnnualPoints": 130,
+  "AnnualPossible": 140,
+  "FullFiveYears": 25,
+  "MissingAnnual": {
+    "NVB": [
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "PCB": [
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "VBB": [
+      "2022",
+      "2024"
+    ]
+  },
+  "CurrentPeriod": "2026-Q2",
+  "CurrentCount": 24,
+  "CurrentVerified": 22,
+  "CurrentUnverified": [
+    "MBB",
+    "MSB"
+  ],
+  "MissingCurrent": [
+    "NVB",
+    "PCB",
+    "TPB",
+    "VBB"
+  ],
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "ICR": "vnA+",
+      "SACP": "vnA+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "ACB",
+      "ICR": "vnA+",
+      "SACP": "vnA+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "BAB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Yếu",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "BID",
+      "ICR": "vnAA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "BVB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "CTG",
+      "ICR": "vnAA-",
+      "SACP": "vnA",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "EIB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "HDB",
+      "ICR": "vnA",
+      "SACP": "vnA",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "KLB",
+      "ICR": "vnA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "LPB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "MBB",
+      "ICR": "vnA",
+      "SACP": "vnA",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Mạnh / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "MSB",
+      "ICR": "vnA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "NAB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "NVB",
+      "ICR": "N/A",
+      "SACP": "N/A",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vị thế Rủi ro": "Yếu",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 0,
+      "CARCurrentPeers": 24
+    },
+    {
+      "Ticker": "OCB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "PCB",
+      "ICR": "N/A",
+      "SACP": "N/A",
+      "Status": "INSUFFICIENT_DATA",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Yếu"
+      },
+      "CARAnnualPoints": 2,
+      "CARCurrentPeers": 24
+    },
+    {
+      "Ticker": "PGB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "SGB",
+      "ICR": "vnA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "SHB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "SSB",
+      "ICR": "vnA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "STB",
+      "ICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "TCB",
+      "ICR": "vnAA",
+      "SACP": "vnAA",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Mạnh / Mạnh"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "TPB",
+      "ICR": "vnA",
+      "SACP": "vnA",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 24
+    },
+    {
+      "Ticker": "VAB",
+      "ICR": "vnA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "VBB",
+      "ICR": "vnA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 3,
+      "CARCurrentPeers": 24
+    },
+    {
+      "Ticker": "VCB",
+      "ICR": "vnAA-",
+      "SACP": "vnA+",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Mạnh / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "VIB",
+      "ICR": "vnBBB",
+      "SACP": "vnBBB",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    },
+    {
+      "Ticker": "VPB",
+      "ICR": "vnA-",
+      "SACP": "vnA-",
+      "Status": "ESTIMATED",
+      "Origin": "AUTO_RESEARCH",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "CARAnnualPoints": 5,
+      "CARCurrentPeers": 23
+    }
+  ]
+}

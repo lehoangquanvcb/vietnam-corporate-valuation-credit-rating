@@ -56,8 +56,8 @@ def test_vcb_quarter_not_ttm_and_no_stale_car():
     assert car['Record']['SourceKind']=='VERIFIED_DISCLOSURE'
     assert car['Record']['Scope']=='CONSOLIDATED' and car['Record']['Regime']=='TT14'
     history=car['History']
-    assert history.Value.notna().sum()==1
-    assert history.iloc[-1].DisplayPeriod=='2025' and history.iloc[-1].Value==pytest.approx(.117)
+    assert history.Value.notna().sum()==5
+    assert history.iloc[-1].DisplayPeriod=='2025' and history.iloc[-1].Value==pytest.approx(.1156)
     assert not history.Value.eq(.1171).any() # Không dùng số quý 2 làm số cuối năm.
     metrics=[m for _,ms in p['Sections'] for m in ms]
     assert len(metrics)==len(set(metrics))

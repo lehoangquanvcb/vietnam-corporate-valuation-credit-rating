@@ -24,7 +24,7 @@ def car_grade(value):
 def saved_assessment(ticker,period):
     selected={}
     # Phiếu nhập riêng có ưu tiên cao hơn kết quả kế thừa từ báo cáo mẫu.
-    for name in ['bank_rating_references.json','bank_rating_assessments.json']:
+    for name in ['bank_rating_assessments.json']:
         path=ROOT/'config'/name
         if not path.exists():continue
         payload=json.loads(path.read_text(encoding='utf-8'))

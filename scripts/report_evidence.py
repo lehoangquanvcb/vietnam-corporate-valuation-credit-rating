@@ -8,7 +8,7 @@ from scripts.methodology_kpi_engine import LABELS, PCT, MULT, BANK_GROUPS, SEC_G
 from scripts.financial_views import HISTORY_METRICS, BASIS_LABELS
 from scripts.bank_car import comparable_metric
 
-ENGINE_VERSION = '8.138.0'
+ENGINE_VERSION = '8.139.0'
 GROUPS = {'BANK': {
  'Hồ sơ kinh doanh':['TotalAssets','GrossLoans','CustomerDeposits'],
  'Vốn và lợi nhuận':['Equity','CAR','EquityAssets','TangibleEquityAssets','AssetEquity','NPAT','NetInterestIncome','ROE','ROA','NIM','CIR','ProfitAssets','NII_OperatingIncome'],
@@ -103,6 +103,19 @@ def build_pack(ticker,basis='FY',years=5):
             h['PeerMean']=means;h['PeerCount']=counts
         items[m]={'Metric':m,'Value':current,'Record':own,'Peers':rows,'Excluded':excluded,'PeerCount':len(rows),
             'PeerMean':float(np.mean([r['Value'] for r in rows])) if len(rows)>=5 else None,'History':h}
+    if typ=='BANK' and 'CAR' in items:
+        from scripts.bank_car import peer_frame, bank_universe, history_breaks
+        from scripts.financial_views import history_comparison
+        q=peer_frame(ticker,target)
+        displayed=q[q.Ticker.ne(ticker)]
+        compatible=displayed[displayed.Comparable]
+        items['CAR'].update(Peers=displayed.to_dict('records'),PeerCount=len(displayed),
+            ComparablePeerCount=len(compatible),
+            PeerMean=float(compatible.Value.mean()) if len(compatible)>=5 else None,
+            History=history_comparison(ticker,'CAR',basis,years),
+            Excluded=[t for t in bank_universe(ticker) if t not in set(displayed.Ticker)])
+        cuts=history_breaks(items['CAR']['History'])
+        items['CAR'].update(HistoryBreaks=cuts,PeerHistoryBreaks=cuts)
     result={'Ticker':ticker,'Meta':meta,'Type':typ,'Period':target,'Basis':basis,'Years':years,
             'PeerUniverse':peers,'Sections':sections,'Items':items}
     if typ=='BANK':
@@ -121,6 +134,14 @@ def narrative(pack,m):
     from scripts.report_insights import enrich_narrative
     result=enrich_narrative(pack,m,analyse(pack,m))
     if m=='CAR' and pack['Type']=='BANK':
+        item=pack['Items'][m]
+        if item.get('HistoryBreaks'):
+            h=item['History'];last=h.iloc[-1]
+            result['History']=('CAR cuối năm: '+ '; '.join(
+                str(r.DisplayPeriod)+': '+fmt(m,r.Value)+' ('+str(r.Regime)+', '+
+                ('hợp nhất' if r.Scope=='CONSOLIDATED' else 'riêng lẻ')+')'
+                for r in h.itertuples() if finite(r.Value))+'. '
+                'Phạm vi hoặc quy định tính CAR thay đổi giữa các năm; chênh lệch qua điểm đổi cơ sở không phản ánh riêng thay đổi sức khỏe vốn.')
         car=pack.get('CARInput',{})
         if car.get('Status')=='OK' and finite(car.get('Value')):
             from scripts.bank_car import car_usage_text

@@ -1,62 +1,8 @@
 {
-  "Id": "DOMESTIC_BANK_GROUPS_2026_11_03",
-  "Enabled": true,
+  "Enabled": false,
   "Scale": "VIETNAM_DOMESTIC",
   "EffectiveDate": "2026-11-03",
-  "Source": "Yêu cầu hiệu chỉnh của Lê Hoàng Quân ngày 03/11/2026; không phải kết quả chấm của CRA",
-  "Profiles": [
-    {
-      "Name": "Nhóm ngân hàng quốc doanh theo yêu cầu",
-      "Entities": [
-        "VCB",
-        "BID",
-        "CTG",
-        "AGRIBANK"
-      ],
-      "Mode": "TARGET",
-      "Grade": "AAA",
-      "Rationale": "Mức đích AAA cho nhóm quốc doanh do chủ mô hình lựa chọn; không suy ra bảo lãnh Nhà nước từ sở hữu."
-    },
-    {
-      "Name": "Nhóm TCB, VPB, ACB",
-      "Entities": [
-        "TCB",
-        "VPB",
-        "ACB"
-      ],
-      "Mode": "TARGET",
-      "Grade": "AA-",
-      "Rationale": "Mức đích AA- theo yêu cầu hiệu chỉnh. Mức của ACB trong khung này khác mức AA+ trong tài liệu CRA tham khảo."
-    },
-    {
-      "Name": "Nhóm ABB",
-      "Entities": [
-        "ABB"
-      ],
-      "Mode": "TARGET",
-      "Grade": "A-",
-      "Rationale": "Giữ mức tham chiếu A- cho ABB theo đánh giá của chủ mô hình; không coi xếp hạng VIS đã rút là đang có hiệu lực."
-    },
-    {
-      "Name": "Nhóm OCB, KLB, STB",
-      "Entities": [
-        "OCB",
-        "KLB",
-        "STB"
-      ],
-      "Mode": "CEILING",
-      "Grade": "A-",
-      "Rationale": "Trần A- để nhóm này nằm dưới AA-; bậc thấp hơn tiếp tục theo điểm tài chính. Người dùng chưa chỉ định một bậc cố định cho từng ngân hàng."
-    }
-  ],
-  "UnlistedReferences": [
-    {
-      "EntityId": "AGRIBANK",
-      "CompanyName": "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam",
-      "Grade": "AAA",
-      "Status": "POLICY_REFERENCE_ONLY",
-      "FinancialRatingAvailable": false,
-      "Note": "AGRIBANK là định danh nội bộ, không phải mã chứng khoán; không đưa vào peer niêm yết hoặc tạo điểm từ dữ liệu trống."
-    }
-  ]
+  "Profiles": [],
+  "WithdrawnOn": "2026-11-03",
+  "Reason": "Đã bỏ theo yêu cầu người dùng; không còn mục tiêu hoặc trần bậc theo mã."
 }

@@ -154,4 +154,62 @@ def comparable_metric(metric, own, peer):
     if metric != 'CAR': return True
     # Nguồn người dùng chưa xác định TT41/TT14 vẫn chấm được, nhưng không gộp peer.
     if 'UNKNOWN' in {str(own.get('Regime', '')), str(peer.get('Regime', ''))}: return False
-    return str(own.get('Regime', '') or '') == str(peer.get('Regime', '') or '')
+    regime = str(own.get('Regime', '') or '')
+    scope = str(own.get('Scope', '') or '')
+    return (regime in REGIMES and regime == str(peer.get('Regime', '') or '')
+            and scope in SCOPES and scope == str(peer.get('Scope', '') or ''))
+
+
+def bank_universe(ticker=None):
+    from scripts.universal_data import universe
+    u = universe()
+    return sorted(set(u.loc[u.EntityType.eq('BANK'), 'Ticker']) - {ticker})
+
+
+def peer_frame(ticker, target):
+    """Hiển thị toàn bộ CAR đúng kỳ; chỉ gộp bình quân cùng phạm vi/chế độ.
+
+    Số người dùng cung cấp vẫn hiện, nhưng không được biến thành số đã xác minh.
+    CAR kỳ trước dùng cho chấm điểm không được đưa vào biểu đồ quý hiện tại.
+    """
+    from scripts.financial_evidence import at_period
+    own = at_period(ticker, 'BANK', target, 'QUARTER').get('CAR', {}) if target else {}
+    rows = []
+    for t in [ticker] + bank_universe(ticker):
+        r = at_period(t, 'BANK', target, 'QUARTER').get('CAR', {}) if target else {}
+        if r.get('Status') != 'OK' or r.get('Period') != target:
+            continue
+        value = r.get('Value')
+        if not isinstance(value, (int, float)) or not math.isfinite(value):
+            continue
+        verified = r.get('SourceKind') == 'VERIFIED_DISCLOSURE'
+        basis = r.get('Regime', 'UNKNOWN') + ' / ' + SCOPES.get(r.get('Scope'), 'Chưa xác định phạm vi')
+        if not verified:
+            basis += ' / ' + ('Ước tính' if r.get('SourceKind') == 'USER_ESTIMATE' else 'Người dùng cung cấp')
+        rows.append(dict(Ticker=t, Value=value, Period=target, Basis=r.get('Basis'),
+                         Regime=r.get('Regime', 'UNKNOWN'), Scope=r.get('Scope', ''),
+                         SourceKind=r.get('SourceKind', ''), SourceURL=r.get('SourceURL', ''),
+                         BasisLabel=basis, Comparable=verified and comparable_metric('CAR', own, r)))
+    return pd.DataFrame(rows, columns=['Ticker','Value','Period','Basis','Regime','Scope',
+                                      'SourceKind','SourceURL','BasisLabel','Comparable'])
+
+
+def peer_note(item):
+    rows = item.get('Peers', [])
+    groups = sorted(set(r.get('BasisLabel', '') for r in rows if r.get('BasisLabel')))
+    if not groups:
+        return ''
+    unverified=[r['Ticker'] for r in rows if r.get('SourceKind')!='VERIFIED_DISCLOSURE']
+    return ('Nhóm tham chiếu CAR toàn ngành, đúng kỳ công bố; TT41/TT14 ghi dưới mã. '
+            'Bình quân chỉ gồm CAR đã đối chiếu, cùng phạm vi và cùng TT41/TT14 với doanh nghiệp. '
+            'Không dùng số cuối năm trước thay số quý trên biểu đồ.'
+            +(' Dấu *: '+', '.join(unverified)+' là số người dùng cung cấp hoặc ước tính, chưa đưa vào bình quân. Dấu ? là chưa xác định chế độ tính.' if unverified else ''))
+
+
+def history_breaks(history):
+    """Không nối đường qua thay đổi phạm vi hoặc chế độ tính CAR."""
+    if not {'Regime','Scope'}.issubset(history.columns):return []
+    if not history.Regime.isin(REGIMES).any():return []
+    return [i for i in range(1,len(history))
+            if not comparable_metric('CAR',history.iloc[i-1],history.iloc[i])
+            and history.iloc[i-1].get('Status')=='OK' and history.iloc[i].get('Status')=='OK']

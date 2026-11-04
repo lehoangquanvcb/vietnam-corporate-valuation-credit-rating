@@ -42,6 +42,8 @@ def history_figure(history, ticker, title, scale=1, unit=''):
     if history is None or history.empty:
         return None
     labels = history.DisplayPeriod.astype(str).tolist()
+    from scripts.bank_car import history_breaks
+    cuts=history_breaks(history)
     for column, name, color, dash in [('Value', ticker, COMPANY_COLOR, 'solid'),
                                       ('PeerMean', 'Bình quân peer cùng kỳ', PEER_COLOR, 'dash')]:
         if column not in history:
@@ -50,8 +52,11 @@ def history_figure(history, ticker, title, scale=1, unit=''):
         if column == 'Value' and 'Status' in history:
             values = values.where(history.Status.reset_index(drop=True).eq('OK'))
         points = [float(v * scale) if pd.notna(v) else None for v in values]
-        fig.add_trace(go.Scatter(x=labels, y=points, name=name, mode='lines+markers',
-                                connectgaps=False, line=dict(color=color, dash=dash)))
+        starts=[0]+cuts;stops=cuts+[len(labels)]
+        for j,(a,b) in enumerate(zip(starts,stops)):
+            fig.add_trace(go.Scatter(x=labels[a:b], y=points[a:b], name=name, mode='lines+markers',
+                                    legendgroup=name,showlegend=j==0,
+                                    connectgaps=False, line=dict(color=color, dash=dash)))
     fig.update_layout(title=title, height=330, legend=dict(orientation='h', y=-.2),
                       margin=dict(t=50, b=70), yaxis_title=unit)
     return clean_figure(fig, labels)
@@ -67,10 +72,16 @@ def peer_figure(frame, ticker, title, scale=1, unit=''):
         return None
     fig = go.Figure(go.Bar(x=q.Ticker.tolist(), y=(q.Value * scale).tolist(),
                           marker_color=[COMPANY_COLOR if t == ticker else PEER_BAR_COLOR for t in q.Ticker]))
-    peers = q.loc[q.Ticker.ne(ticker), 'Value']
+    if 'BasisLabel' in q:
+        fig.data[0].customdata=q[['BasisLabel']].values
+        fig.data[0].hovertemplate='%{x}: %{y:.2f}%<br>%{customdata[0]}<extra></extra>'
+        fig.update_xaxes(tickmode='array',tickvals=q.Ticker.tolist(),ticktext=[r.Ticker+('*' if r.SourceKind!='VERIFIED_DISCLOSURE' else '')+'<br>'+r.Regime for r in q.itertuples()])
+    mask=q.Ticker.ne(ticker)
+    if 'Comparable' in q:mask &= q.Comparable
+    peers = q.loc[mask, 'Value']
     if len(peers) >= 5:
         fig.add_hline(y=float(peers.mean() * scale), line_dash='dash', line_color=PEER_COLOR,
-                      annotation_text='Bình quân peer', annotation_position='top right')
-    fig.update_layout(title=title, height=330, margin=dict(t=55, b=45), yaxis_title=unit)
+                      annotation_text='Bình quân cùng cơ sở' if 'Comparable' in q else 'Bình quân peer', annotation_position='top right')
+    fig.update_layout(title=title, height=380 if 'BasisLabel' in q else 330, margin=dict(t=55, b=80 if 'BasisLabel' in q else 45), yaxis_title=unit)
     fig.update_xaxes(type='category')
     return fig
