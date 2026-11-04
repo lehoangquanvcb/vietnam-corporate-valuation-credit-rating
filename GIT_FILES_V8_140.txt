@@ -1,0 +1,7 @@
+app.py
+VERSION.txt
+scripts/check_report_scores.py
+README_V8_140.txt
+GIT_FILES_V8_140.txt
+docs/header_validation_v8_140.json
+docs/release_manifest_v8_140.json

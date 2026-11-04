@@ -1,0 +1,118 @@
+{
+  "Build": "V8.140.0-RATING-HEADER",
+  "Checks": [
+    {
+      "case": "MSB",
+      "header": "A",
+      "result": "PASS"
+    },
+    {
+      "case": "TCB",
+      "header": "AA",
+      "result": "PASS"
+    },
+    {
+      "case": "SSI",
+      "header": "A+",
+      "result": "PASS"
+    },
+    {
+      "case": "ABI",
+      "header": "A-",
+      "result": "PASS"
+    },
+    {
+      "case": "HPG",
+      "header": "BBB+",
+      "result": "PASS"
+    },
+    {
+      "case": "BVH",
+      "header": "Không áp dụng",
+      "result": "PASS"
+    },
+    {
+      "case": "MISSING_BANK",
+      "header": "Chưa đủ căn cứ",
+      "result": "PASS"
+    },
+    {
+      "case": "MISSING_CORP",
+      "header": "Chưa đủ căn cứ",
+      "result": "PASS"
+    },
+    {
+      "case": "MISSING_INS",
+      "header": "Chưa xác định",
+      "result": "PASS"
+    },
+    {
+      "case": "EXCLUDED",
+      "header": "Không áp dụng",
+      "result": "PASS"
+    },
+    {
+      "case": "MATRIX_INS",
+      "header": "Không có bậc tại ô ma trận",
+      "result": "PASS"
+    },
+    {
+      "case": "TCB",
+      "header": "AA",
+      "result": "PASS"
+    },
+    {
+      "case": "TCB",
+      "header": "BBB+",
+      "result": "PASS"
+    },
+    {
+      "case": "MSB",
+      "header": "A",
+      "result": "PASS"
+    },
+    {
+      "case": "TCB",
+      "header": "AA",
+      "result": "PASS"
+    },
+    {
+      "case": "HỒ SƠ DOANH NGHIỆP",
+      "result": "PASS"
+    },
+    {
+      "case": "PHÂN TÍCH, ĐỊNH GIÁ & M&A",
+      "result": "PASS"
+    },
+    {
+      "case": "DỮ LIỆU & QUẢN TRỊ",
+      "result": "PASS"
+    },
+    {
+      "case": "TCB",
+      "header": "AA",
+      "result": "PASS"
+    },
+    {
+      "case": "Insurance market header and missing-price caption outside rating tab",
+      "result": "PASS"
+    }
+  ],
+  "Result": "PASS",
+  "Scope": "Streamlit UI/navigation using actual header code and controlled rating fixtures; no financial-rating recalculation.",
+  "Guarantees": [
+    "Header uses current-run final ICR, never Anchor or SCA.",
+    "Header, body and export receive the same rating result.",
+    "No extra call to the rating engine; no stale ticker result.",
+    "Market header remains on other sections."
+  ],
+  "FixtureRatingsOnly": true,
+  "SyntaxCheck": "PASS",
+  "ChangedExistingFiles": [
+    "VERSION.txt",
+    "app.py",
+    "scripts/check_report_scores.py"
+  ],
+  "RatingEngineAndCARDataUnchanged": true,
+  "FullFinancialSuiteRerun": false
+}

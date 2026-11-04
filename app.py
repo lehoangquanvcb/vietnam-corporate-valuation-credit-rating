@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.139.0-BANK-EVIDENCE-CAR'
+BUILD_TAG='V8.140.0-RATING-HEADER'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -247,6 +247,8 @@ h2{font-size:1.4rem!important} h3{font-size:1.1rem!important}
     overflow:visible!important;white-space:normal;
 }
 [data-testid="stMetricValue"]{font-size:1.3rem} div[data-testid="stTabs"] button{white-space:nowrap;font-weight:650}
+.st-key-rating_header_metrics [data-testid="stMetricLabel"] p{white-space:normal;overflow:visible;text-overflow:clip}
+.st-key-rating_header_metrics [data-testid="stColumn"]:first-child [data-testid="stMetricValue"]{color:#65A82A;font-size:1.65rem;font-weight:750;white-space:normal}
 </style>''',unsafe_allow_html=True)
 
 def vi(x,d=1):
@@ -488,13 +490,32 @@ if meta['EntityType']=='BANK': kpis=[('Giá thị trường',money(val.get('Pric
 elif meta['EntityType']=='SECURITIES': kpis=[('Giá thị trường',money(val.get('Price'))),('P/B',mult(s.get('PB'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('Nợ/VCSH',mult(s.get('DebtEquity'))),('Vốn khả dụng',pct((latest_capital_ratio(selected) or s.get('AvailableCapitalRatio'))))]
 elif meta['EntityType']=='INSURANCE':kpis=[('Giá thị trường',money(val.get('Price'))),('Tổng tài sản',bn(s.get('TotalAssets'))),('Vốn chủ sở hữu',bn(s.get('Equity'))),('Dự phòng nghiệp vụ',bn(s.get('InsuranceReserves'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA')))]
 else:kpis=[('Giá thị trường',money(val.get('Price'))),('P/E',mult(s.get('PE'))),('ROE',pct(s.get('ROE'))),('ROA',pct(s.get('ROA'))),('Nợ/EBITDA',mult(s.get('DebtEBITDA'))),('Thanh toán hiện hành',mult(s.get('CurrentRatio')))]
-cols=st.columns(6)
-for c,(lab,v) in zip(cols,kpis):c.metric(lab,v)
+# Reserve the header's position; fill it with this run's final result after
+# analyst overrides are collected. Never reuse another ticker's session result.
+_header_slot=st.container()
+
+def _render_header_kpis(rating_result=None):
+    items=list(kpis)
+    if rating_result is not None:
+        if rating_result.get('Methodology')=='INSURANCE':
+            from scripts.insurance_rating import rating_value_text
+            grade=rating_value_text(rating_result,'ICR')
+        elif rating_result.get('RatingBlocker')=='SCOPE' or rating_result.get('Methodology')=='EXCLUDED_SPECIALIZED':
+            grade='Không áp dụng'
+        else:
+            grade=_rating_no_vn(rating_result.get('ICR'))
+        items=[('Mức Xếp hạng tín nhiệm không chỉ định',grade)]+[(lab,v) for lab,v in items if lab not in {'Giá thị trường','P/B'}]
+    with _header_slot:
+        with st.container(key='rating_header_metrics' if rating_result is not None else 'company_header_metrics'):
+            widths=([2.6]+[1]*(len(items)-1)) if rating_result is not None else [1]*len(items)
+            cols=st.columns(widths)
+            for c,(lab,v) in zip(cols,items):c.metric(lab,v)
+        if rating_result is None and meta['EntityType']=='INSURANCE' and val.get('Price') is None:
+            st.caption('Giá thị trường: thiếu dữ liệu giá đóng cửa trong nguồn hiện có; không suy ra từ P/E hoặc P/B.')
+
 if meta['EntityType']=='BANK' and num(s.get('CAR')) is not None:
     from scripts.bank_car import car_usage_text
     st.caption(car_usage_text(s.get('_MetricEvidence',{}).get('CAR',{}),s.get('SnapshotPeriod')))
-if meta['EntityType']=='INSURANCE' and val.get('Price') is None:
-    st.caption('Giá thị trường: thiếu dữ liệu giá đóng cửa trong nguồn hiện có; không suy ra từ P/E hoặc P/B.')
 
 if meta.get('Methodology')=='EXCLUDED_SPECIALIZED' and not (str(meta.get('EntityType','')).upper().startswith('INSURANCE') or any(x in str(meta.get('Sector','')).lower() for x in ['bảo hiểm','insurance','bao hiem'])): st.warning('Ngành/loại hình này cần phương pháp XHTN chuyên biệt. App vẫn cho phép phân tích tài chính và định giá, nhưng không phát hành kết quả XHTN tự động.')
 if meta['EntityType']!='BANK' and not any(num(s.get(k)) is not None for k in ['TotalAssets','Revenue','ROE','Price']): st.info(f'Chưa có đủ dữ liệu tài chính cho {selected}.')
@@ -505,6 +526,8 @@ if st.session_state.get('_main_nav_layout')!='rating-first':
     st.session_state['main_section_nav']=_sections[0]
     st.session_state['_main_nav_layout']='rating-first'
 _active_section=st.radio('Điều hướng',_sections,index=0,horizontal=True,label_visibility='collapsed',key='main_section_nav')
+if _active_section!=_sections[0]:
+    _render_header_kpis()
 from scripts.financial_views import BASIS_LABELS, HISTORY_METRICS, HISTORY_NOTE, history_table
 _history_basis='FY'
 _history_years=5
@@ -754,6 +777,7 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
                     _v=st.selectbox(_lab,['Giữ giả định tự động']+list(_vals),key=f'corp_{selected}_{_key}')
                     if isinstance(_v,int):_rating_overrides[_key]=_v
     rr3=rate_three_methodologies(selected,_rating_overrides)
+    _render_header_kpis(rr3)
     if rr3.get('RatingOrigin') in {'AUTO_RESEARCH'}:
         st.caption(rr3.get('RatingBasisNote',''))
         with st.expander('Giả định của bảng điểm tự động',expanded=False):

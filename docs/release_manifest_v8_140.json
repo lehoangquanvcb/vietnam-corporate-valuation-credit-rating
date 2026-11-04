@@ -1,0 +1,37 @@
+{
+  "Build": "V8.140.0-RATING-HEADER",
+  "RequiredBase": "V8.139.0-BANK-EVIDENCE-CAR",
+  "ReleaseDate": "2026-11-04",
+  "Files": [
+    {
+      "Path": "app.py",
+      "Bytes": 65288,
+      "SHA256": "0b48c4e11e858115275e05e22903a363e5b65a4413bf7fd3e877a2be075b80bf"
+    },
+    {
+      "Path": "VERSION.txt",
+      "Bytes": 8,
+      "SHA256": "2a86f0febec23bea3598c3201d35bd8437edb7850cc67985c3abe4a7a2924963"
+    },
+    {
+      "Path": "scripts/check_report_scores.py",
+      "Bytes": 3036,
+      "SHA256": "bde4e7d39c9ade3fc8e6dd681f0d687d37305ef6961d8d5546d9bd65951b05f1"
+    },
+    {
+      "Path": "README_V8_140.txt",
+      "Bytes": 2784,
+      "SHA256": "f5c73c03c1c06eeb2e7a2e7941c06f0a58b4b1284756e6b85d3ffeeecaf2bb1f"
+    },
+    {
+      "Path": "GIT_FILES_V8_140.txt",
+      "Bytes": 158,
+      "SHA256": "f9241a98e31f64041d484ba7003e61482ed0b85d55d9e955d1ac876a84cbec1d"
+    },
+    {
+      "Path": "docs/header_validation_v8_140.json",
+      "Bytes": 2493,
+      "SHA256": "2999b1d7514b5b2a4cdfb7f5275e8c91b9c1d33aa38330db29f8368372dd2ab4"
+    }
+  ]
+}
