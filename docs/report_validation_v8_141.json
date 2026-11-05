@@ -1,0 +1,94 @@
+{
+  "Build": "V8.141.0-COMPACT-PUBLIC-REPORTS",
+  "BaseGitCommit": "dc3f92dd7c9d45c7cb2c80429e62bf4fc1cf9a6b",
+  "Date": "2026-11-05",
+  "Pytest": "74 passed",
+  "PytestFiles": [
+    "tests/test_professional_report.py",
+    "tests/test_unified_reports.py",
+    "tests/test_report_release.py",
+    "tests/test_report_compact_context.py"
+  ],
+  "PythonSyntaxFiles": [
+    "app.py",
+    "scripts/professional_report.py",
+    "scripts/public_company_profile.py",
+    "scripts/refresh_public_profiles.py",
+    "scripts/report_context.py",
+    "scripts/report_strengths.py",
+    "scripts/check_report_layout.py",
+    "tests/test_report_compact_context.py"
+  ],
+  "DocumentChecks": [
+    {
+      "Ticker": "ABI",
+      "Charts": 50,
+      "IntermediateTables": 0,
+      "SourceLinks": 6,
+      "Errors": [],
+      "File": "Bao_cao_XHTN_ABI_05-11-2026.docx",
+      "SHA256": "6691b943f806649a9205cfdb3b0dbb3a3b603e99d1b68f73439fd8b659f014c5"
+    },
+    {
+      "Ticker": "HPG",
+      "Charts": 70,
+      "IntermediateTables": 0,
+      "SourceLinks": 6,
+      "Errors": [],
+      "File": "Bao_cao_XHTN_HPG_05-11-2026.docx",
+      "SHA256": "65aa16a3d459d8af81e6d9d333ad55402d61fb2499534a2c234707ad6609f73f"
+    },
+    {
+      "Ticker": "OCB",
+      "Charts": 48,
+      "IntermediateTables": 0,
+      "SourceLinks": 4,
+      "Errors": [],
+      "File": "Bao_cao_XHTN_OCB_05-11-2026.docx",
+      "SHA256": "0b67684daa6f354e0382bf2635c9d86cadab557fcbdf50cfee3c9e9797bfe244"
+    },
+    {
+      "Ticker": "SSI",
+      "Charts": 56,
+      "IntermediateTables": 0,
+      "SourceLinks": 4,
+      "Errors": [],
+      "File": "Bao_cao_XHTN_SSI_05-11-2026.docx",
+      "SHA256": "cd3e82aa770708925bc1ca60631cd0e46fd1b186a9ad332b497c5f1ab07b76f5"
+    }
+  ],
+  "PublicResearchRoutingTickers": 1754,
+  "PDFExportAPI": {
+    "Ticker": "OCB",
+    "Successful": true
+  },
+  "FinancialInputProvenance": "GitHub V8.140 plus missing raw CSV recovered from the user-provided project archive dated 2026-10-16, used for validation only. No raw financial CSV included in update.",
+  "RatingsUnchanged": [
+    "OCB vnBBB+",
+    "SSI vnBBB+",
+    "ABI vnA-",
+    "HPG vnA-"
+  ],
+  "Scope": "Common report rendering and public context; no changes to financial evidence, rating engines or CAR data.",
+  "VisualQA": {
+    "Renderer": "LibreOffice via render_docx.py",
+    "AllPagesInspected": true,
+    "Pages": {
+      "OCB": 22,
+      "SSI": 23,
+      "ABI": 21,
+      "HPG": 27
+    },
+    "UnintendedBlankPages": 0,
+    "ObservedClippingOrOverlap": false,
+    "Note": "Natural page-end spacing remains to keep each chart with its caption; page count may differ slightly in Microsoft Word."
+  },
+  "PaginationComparison": {
+    "Ticker": "OCB",
+    "BeforePages": 33,
+    "AfterPages": 22,
+    "SameInputData": true,
+    "Identical48ChartImageHashes": true
+  },
+  "GitDiffCheck": "PASS"
+}

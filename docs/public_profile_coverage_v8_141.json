@@ -1,0 +1,27 @@
+{
+  "AsOf": "2026-11-05",
+  "RoutingUniverse": 1754,
+  "CachedKBSProfiles": 203,
+  "CuratedIssuerProfiles": 6,
+  "EffectiveCachedTickers": 206,
+  "OnDemandForOtherTickers": true,
+  "AllTickersIndividuallyResearched": false,
+  "ByType": {
+    "BANK": {
+      "Universe": 28,
+      "Cached": 12
+    },
+    "SECURITIES": {
+      "Universe": 15,
+      "Cached": 8
+    },
+    "INSURANCE": {
+      "Universe": 12,
+      "Cached": 8
+    },
+    "CORPORATE": {
+      "Universe": 1699,
+      "Cached": 178
+    }
+  }
+}

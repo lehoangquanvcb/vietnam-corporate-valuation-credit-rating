@@ -43,8 +43,8 @@ def _shade(cell,fill):
 
 def _para(doc,text,size=10.5,bold=False,keep=False,color='000000',lead=None):
     p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
-    pf=p.paragraph_format;pf.space_after=Pt(6);pf.line_spacing=1.08
-    pf.keep_with_next=keep;pf.widow_control=True;pf.keep_together=True
+    pf=p.paragraph_format;pf.space_after=Pt(5);pf.line_spacing=1.06
+    pf.keep_with_next=keep;pf.widow_control=True;pf.keep_together=False
     if lead:_font(p.add_run(lead+' '),size,True,color)
     _font(p.add_run(str(text)),size,bold,color)
     return p
@@ -79,7 +79,7 @@ def _table(doc,headers,rows,widths,font_size=9):
             tc.append(mar)
             for p in c.paragraphs:
                 p.paragraph_format.space_after=Pt(1);p.paragraph_format.line_spacing=1.05
-                if len(t.rows)<=4:p.paragraph_format.keep_with_next=i<len(t.rows)-1
+                p.paragraph_format.keep_with_next=(i==0)
                 p.alignment=WD_ALIGN_PARAGRAPH.LEFT if j==0 or headers[j] in {'Kết quả / Căn cứ','ĐIỂM HẠN CHẾ VÀ RỦI RO','Căn cứ'} else WD_ALIGN_PARAGRAPH.CENTER
                 for r in p.runs:_font(r,font_size,i==0)
     return t
@@ -135,26 +135,24 @@ def _embed_fonts(doc):
 
 def _cover(doc,pack,report_type,when=None):
     name=pack['Meta'].get('DisplayName') or pack['Meta'].get('CompanyName') or pack['Ticker']
-    doc.add_paragraph().paragraph_format.space_after=Mm(18)
     t=doc.add_table(rows=1,cols=1);t.autofit=False;t.columns[0].width=Mm(176)
     c=t.cell(0,0);c.width=Mm(176);_shade(c,GREEN)
     mar=OxmlElement('w:tcMar')
-    for edge,value in [('top',360),('bottom',360),('left',240),('right',240)]:
+    for edge,value in [('top',180),('bottom',180),('left',200),('right',200)]:
         e=OxmlElement('w:'+edge);e.set(qn('w:w'),str(value));e.set(qn('w:type'),'dxa');mar.append(e)
     c._tc.get_or_add_tcPr().append(mar)
     title=REPORT_TITLE if report_type=='rating' else 'BÁO CÁO PHÂN TÍCH ĐỊNH GIÁ VÀ M&A'
-    q=c.paragraphs[0];q.style='Title';q.paragraph_format.space_after=Pt(14)
-    _font(q.add_run(title),24,True,'FFFFFF')
-    q=c.add_paragraph();_font(q.add_run(str(name)+' ('+pack['Ticker']+')'),18,True,'FFFFFF')
+    q=c.paragraphs[0];q.style='Title';q.paragraph_format.space_after=Pt(7)
+    _font(q.add_run(title),21,True,'FFFFFF')
+    q=c.add_paragraph();q.paragraph_format.space_after=Pt(0)
+    _font(q.add_run(str(name)+' ('+pack['Ticker']+')'),15,True,'FFFFFF')
     _para(doc,'NGÀNH: '+TYPE_LABELS[pack['Type']].upper(),11,True).paragraph_format.space_before=Pt(8)
     _para(doc,'QUỐC GIA: VIỆT NAM',11,True)
-    doc.add_paragraph().paragraph_format.space_after=Mm(12)
     first=next((x['History'] for x in pack['Items'].values() if len(x['History'])),None)
     years='–'.join([str(first.DisplayPeriod.iloc[0]),str(first.DisplayPeriod.iloc[-1])]) if first is not None else '5 năm gần nhất'
-    for text in ['Kỳ so sánh peer: '+str(pack['Period']),'Lịch sử BCTC năm: '+years,
+    for text in ['Kỳ so sánh peer: '+str(pack['Period'])+' | Lịch sử BCTC năm: '+years,
                  'Tác giả: Lê Hoàng Quân, phát hành ngày '+export_date(when).strftime('%d/%m/%Y')]:_para(doc,text,10,color=GRAY)
     _para(doc,LIMITATION_NOTE,9,color=GRAY)
-    doc.add_page_break()
 
 
 def _normalize_page_breaks(doc):
@@ -174,7 +172,6 @@ def _cell_para(cell,text,size=10,bold=False,color='000000'):
     _font(p.add_run(text),size,bold,color);return p
 
 def _summary(doc,pack,rr,report_type):
-    _band(doc,str(pack['Meta'].get('DisplayName',pack['Ticker'])).upper()+' ('+pack['Ticker']+')')
     if report_type=='rating':
         t=doc.add_table(rows=1,cols=2);t.autofit=False
         for col,w in zip(t.columns,[57,119]):col.width=Mm(w)
@@ -217,47 +214,59 @@ def _summary(doc,pack,rr,report_type):
         _band(doc,'LUẬN ĐIỂM PHÂN TÍCH',2)
         for text in cross_findings(pack)[:3]:_para(doc,text,10)
     _band(doc,'NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG' if report_type=='rating' else 'ĐIỂM MẠNH VÀ RỦI RO')
-    good,bad=findings(pack)
-    _table(doc,['ĐIỂM MẠNH','ĐIỂM HẠN CHẾ VÀ RỦI RO'],[
-        ['\n'.join(good) or 'Chưa có kết luận so sánh.','\n'.join(bad) or 'Chưa có kết luận so sánh.']], [88,88],9.5)
-    if pack['Type']=='BANK':
-        from scripts.bank_report_chapters import chapter_findings
-        rows=chapter_findings(pack,'Huy động vốn và Thanh khoản',rr)
-        if len(rows)>1:_para(doc,rows[1],10)
-    doc.add_page_break()
+    from scripts.report_strengths import summary_findings
+    from itertools import zip_longest
+    good,bad=summary_findings(pack)
+    _table(doc,['ĐIỂM MẠNH','ĐIỂM HẠN CHẾ VÀ RỦI RO'],list(zip_longest(
+        good or ['Chưa có kết luận so sánh.'],bad or ['Chưa có kết luận so sánh.'],fillvalue='')),[88,88],9.5)
 
-def _context(doc,pack):
-    from scripts.company_profile import load_company_profile,profile_source_text
-    from scripts.public_research import load_public_research
+def _source_link(doc,source):
+    """Tên nguồn có hyperlink; ngày công bố khác ngày thu thập."""
+    from scripts.report_context import safe_url
+    from docx.opc.constants import RELATIONSHIP_TYPE as RT
+    p=doc.add_paragraph();p.paragraph_format.space_after=Pt(5)
+    _font(p.add_run('Nguồn: '),8,False,GRAY)
+    url=safe_url(source.get('URL'))
+    name=source.get('Name') or 'Hồ sơ công khai'
+    if url:
+        link=OxmlElement('w:hyperlink');link.set(qn('r:id'),p.part.relate_to(url,RT.HYPERLINK,is_external=True))
+        run=OxmlElement('w:r');rpr=OxmlElement('w:rPr')
+        color=OxmlElement('w:color');color.set(qn('w:val'),DARK);rpr.append(color)
+        sz=OxmlElement('w:sz');sz.set(qn('w:val'),'16');rpr.append(sz)
+        run.append(rpr);text=OxmlElement('w:t');text.text=name;run.append(text);link.append(run);p._p.append(link)
+    else:_font(p.add_run(name),8,False,GRAY)
+    dates=[]
+    if source.get('PublishedOn'):dates.append('công bố '+source['PublishedOn'])
+    if source.get('AccessedOn'):dates.append('truy cập '+source['AccessedOn'])
+    if dates:_font(p.add_run(' | '+'; '.join(dates)),8,False,GRAY)
+
+def _context(doc,pack,when=None):
+    from scripts.report_context import issuer_context,research_sections
+    when=export_date(when)
     _band(doc,'THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH')
-    profile=load_company_profile(pack['Ticker']) or {}
-    text=' '.join(str(profile.get(k) or '').strip().rstrip('.')+'.' for k in ['Overview','CoreBusinesses','Strategy'] if profile.get(k))
-    _para(doc,text or (str(pack['Meta'].get('DisplayName',pack['Ticker']))+' thuộc nhóm '+TYPE_LABELS[pack['Type']]+'. Hồ sơ hoạt động chi tiết chưa có trong dữ liệu lưu sẵn.'))
-    if profile:_para(doc,profile_source_text(pack['Ticker']),8.5,color=GRAY)
-    for title,kind in [('RỦI RO VĨ MÔ','MACRO'),('RỦI RO NGÀNH','INDUSTRY')]:
-        rows=load_public_research(ticker=pack['Ticker'],entity_type=pack['Type'],sector=pack['Meta'].get('Sector'),kind=kind,limit=1)
-        if rows:
-            _band(doc,title)
-            row=rows[0];_para(doc,row.get('Narrative',''),10)
-            _para(doc,'Nguồn hồ sơ lưu sẵn: '+str(row.get('Source') or 'chưa ghi tên')+' • Ngày nguồn '+str(row.get('AsOf') or 'chưa ghi ngày')+'.',8.5,color=GRAY)
-    # Khi chưa có hồ sơ vĩ mô/ngành, không thay bằng định nghĩa phương pháp.
+    paragraphs,source=issuer_context(pack,when)
+    for text in paragraphs:_para(doc,text)
+    if source:_source_link(doc,source)
+    _overview(doc,pack)
+    for title,blocks in research_sections(pack,when):
+        _band(doc,title)
+        if title=='RỦI RO VĨ MÔ':
+            _para(doc,'Bối cảnh công khai đến ngày '+when.strftime('%d/%m/%Y')+'; kỳ số liệu tài chính doanh nghiệp: '+str(pack['Period'] or 'chưa xác định')+'.',8.5,color=GRAY)
+        for block in blocks:
+            _band(doc,block['Title'],2)
+            if block['Fact']:_para(doc,block['Fact'],10)
+            if block['Analysis']:_para(doc,block['Analysis'],10,lead='Tác động tín nhiệm:')
+            _source_link(doc,block['Source'])
 
 def _overview(doc,pack):
-    _band(doc,'LỊCH SỬ TÀI CHÍNH 5 NĂM GẦN NHẤT')
+    _band(doc,'LỊCH SỬ TÀI CHÍNH 5 NĂM GẦN NHẤT',2)
     first=next((x['History'] for x in pack['Items'].values() if len(x['History'])),None)
     if first is None:_para(doc,'Chưa có dữ liệu lịch sử với kỳ xác định.');return
     cols=list(first.DisplayPeriod);rows=[]
     for m in HISTORY_METRICS[pack['Type']]:
         h=pack['Items'][m]['History'];rows.append([label(m),unit(m)]+[fmt(m,v,False) for v in h.Value])
-    table=_table(doc,['Chỉ tiêu','Đơn vị']+cols,rows,[42,16]+[118/len(cols)]*len(cols),8)
-    # The compact five-year overview fits on one page. Move it as a block
-    # instead of leaving its last row alone on the next page.
-    for row in table.rows[:-1]:
-        for cell in row.cells:
-            for p in cell.paragraphs:p.paragraph_format.keep_with_next=True
+    _table(doc,['Chỉ tiêu','Đơn vị']+cols,rows,[42,16]+[118/len(cols)]*len(cols),8)
     _para(doc,'BCTC năm: số dư tại cuối năm, kết quả kinh doanh và dòng tiền cả năm; tỷ số công bố tại cuối năm. Đơn vị tiền tệ: tỷ đồng.',9,color=GRAY)
-    _band(doc,'Các trọng tâm tài chính',2)
-    for text in cross_findings(pack)[:2]:_para(doc,text,10)
 
 def _chart(pack,m,kind):
     x=pack['Items'][m];h=x['History'];sc=scale(m)
@@ -303,15 +312,12 @@ def _metric_page(doc,pack,group,m):
         from scripts.bank_car import car_usage_text
         text=car_usage_text(pack.get('CARInput',{}),pack.get('Period'))
         if text:_para(doc,text,9,color=GRAY,keep=True)
-    _para(doc,n['History'],10,lead='Diễn biến doanh nghiệp',keep=True)
-    _para(doc,'BCTC 5 năm gần nhất và bình quân peer',9,True,keep=True,color=DARK);_picture(doc,_chart(pack,m,'history'),keep=True)
-    if len(h):
-        rows=[[pack['Ticker']]+[fmt(m,v,False) for v in h.Value],['Bình quân peer']+[fmt(m,v,False) for v in h.PeerMean]]
-        _table(doc,[unit(m)]+list(h.DisplayPeriod),rows,[31]+[145/len(h)]*len(h),8)
-    _para(doc,n['Peers'],10,lead='So sánh quý gần nhất',keep=True)
+    _para(doc,n['History'],10,lead='Diễn biến doanh nghiệp')
+    _para(doc,'BCTC 5 năm gần nhất và bình quân peer',9,True,keep=True,color=DARK);_picture(doc,_chart(pack,m,'history'))
+    _para(doc,n['Peers'],10,lead='So sánh quý gần nhất')
     _para(doc,str(pack['Period'] or 'Chưa xác định kỳ')+' • '+basis_text(x['Record'].get('Basis'))+' | '+label(m),9,True,keep=True,color=DARK)
     if m!='CAR' or finite(x['Value']) or x['Peers']:
-        _picture(doc,_chart(pack,m,'quarter'),keep=True)
+        _picture(doc,_chart(pack,m,'quarter'))
     if m=='CAR':
         from scripts.bank_car import peer_note
         _para(doc,peer_note(x),8,color=GRAY)
@@ -325,7 +331,7 @@ def _readable(text):
     return text
 
 def _sources(doc,pack,rr=None):
-    doc.add_page_break();_band(doc,'NGUỒN VÀ PHẠM VI BÁO CÁO')
+    _band(doc,'NGUỒN VÀ PHẠM VI BÁO CÁO')
     _para(doc,'BCTC và tỷ số tài chính lưu trong ứng dụng; lịch sử sử dụng 5 năm tài chính đã kết thúc gần nhất. So sánh peer dùng số dư cuối quý, dòng thu nhập quý riêng lẻ và tỷ số công bố tại quý gần nhất. Tỷ số trả nợ dùng dòng tiền 12 tháng kết thúc tại kỳ so sánh.',10)
     _para(doc,'Nhóm peer: '+', '.join(pack['PeerUniverse'])+'. Bình quân loại chính doanh nghiệp, dùng các công ty có cùng kỳ và cơ sở tính; chỉ trình bày khi có ít nhất 5 peer. Thành phần có số có thể thay đổi theo năm và chỉ tiêu.',10)
     _para(doc,'Phương pháp áp dụng: '+SOURCES[pack['Type']]+'.',10)
@@ -414,7 +420,6 @@ def _scorecard(doc,pack,rr):
         _table(doc,headers,[[row.get(h,'') for h in headers] for row in rows],[43,36,23,74],9)
         if rr.get('QuantitativeEvidence'):
             if pack['Type']=='BANK':
-                doc.add_page_break()
                 _band(doc,'PHỤ LỤC: CĂN CỨ TÍNH ĐIỂM VÀ GIẢ ĐỊNH')
             else:
                 _band(doc,'CĂN CỨ ĐỊNH LƯỢNG CỦA BẢNG ĐIỂM',2)
@@ -471,7 +476,7 @@ def _valuation(doc,pack):
     from scripts.multisector_valuation import valuation
     from scripts.fair_value_range import fair_value_range
     v=valuation(pack['Ticker'],get_snapshot(pack['Ticker']));fv=fair_value_range(pack['Ticker'])
-    doc.add_page_break();_band(doc,'ĐỊNH GIÁ VÀ KỊCH BẢN M&A')
+    _band(doc,'ĐỊNH GIÁ VÀ KỊCH BẢN M&A')
     _para(doc,'Phương pháp chính: '+str(v.get('PrimaryMethod') or 'Chưa xác định')+'. '+str(v.get('Reason') or ''))
     _table(doc,['Kịch bản','Giá trị tham chiếu đồng/cp'],[[n,fmt('FairValue',fv.get(k))] for k,n in [('Bear','Thận trọng'),('Base','Cơ sở'),('Bull','Tích cực'),('StrategicMA','M&A chiến lược')]],[90,86],10)
     for k,t in fv.get('ScenarioAssumptions',{}).items():_para(doc,str(t),10,lead={'Bear':'Thận trọng','Base':'Cơ sở','Bull':'Tích cực','StrategicMA':'M&A chiến lược'}.get(k,k)+'.')
@@ -482,7 +487,7 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     pack=build_pack(ticker,'FY',5)
     rr=rating_result if rating_result is not None else rate_company(ticker)
     when=export_date((mna or {}).get('export_date'))
-    doc=Document();_style(doc,ticker,when,report_type);_cover(doc,pack,report_type,when);_summary(doc,pack,rr,report_type);_context(doc,pack);_overview(doc,pack)
+    doc=Document();_style(doc,ticker,when,report_type);_cover(doc,pack,report_type,when);_summary(doc,pack,rr,report_type);_context(doc,pack,when)
     doc.core_properties.author='Lê Hoàng Quân'
     doc.core_properties.title=REPORT_TITLE+' - '+ticker
     doc.core_properties.subject='Phát hành ngày '+when.strftime('%d/%m/%Y')
@@ -502,7 +507,6 @@ def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
             from scripts.report_methodology import chapter_findings as method_findings
             for text in method_findings(pack,group):_para(doc,text,10)
         for m in active:_metric_page(doc,pack,group,m)
-    doc.add_page_break()
     if report_type=='rating':_scorecard(doc,pack,rr)
     else:_valuation(doc,pack)
     _sources(doc,pack,rr)
