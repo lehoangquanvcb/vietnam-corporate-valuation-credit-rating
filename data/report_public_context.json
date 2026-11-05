@@ -1,371 +1,576 @@
 {
   "ResearchedOn": "2026-11-05",
+  "SourcePriority": "Nguồn Việt Nam; cơ quan quản lý, doanh nghiệp và hiệp hội trước, báo chí trong nước sau",
   "Sources": {
-    "WB_OCT": {
-      "Name": "World Bank – Viet Nam Macro Monitoring, tháng 10/2026",
-      "PublishedOn": "2026-10-08",
+    "NSO10": {
+      "Name": "Cục Thống kê – Kinh tế xã hội tháng 10/2026",
+      "URL": "https://www.nso.gov.vn/bai-top/2026/11/bao-cao-tinh-hinh-kinh-te-xa-hoi-thang-muoi-va-10-thang-nam-2026/",
+      "PublishedOn": "2026-11-03",
       "AccessedOn": "2026-11-05",
-      "URL": "https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099014110082634935",
-      "Fact": "World Bank ghi nhận GDP quý III/2026 tăng 9,9%, với động lực từ công nghiệp, xây dựng và đầu tư. Tuy nhiên, nhu cầu nhập khẩu lớn gây sức ép lên cân đối đối ngoại; đơn hàng xuất khẩu có dấu hiệu chậm lại. Giá dầu cao đi cùng lạm phát 5,1% cho thấy tăng trưởng mạnh vẫn đi kèm áp lực chi phí."
+      "Fact": "",
+      "Country": "VN"
     },
-    "IMF_2026": {
-      "Name": "IMF – Building Capacity in Macroeconomic Analysis and Forecasting, 2026",
-      "PublishedOn": "2026-09",
+    "NSO9": {
+      "Name": "Cục Thống kê – Thông cáo kinh tế xã hội quý III/2026",
+      "URL": "https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/10/thong-cao-bao-chi-tinh-hinh-kinh-te-xa-hoi-quy-iii-va-9-thang-nam-2026/",
+      "PublishedOn": "2026-10-03",
       "AccessedOn": "2026-11-05",
-      "URL": "https://www.elibrary.imf.org/view/journals/019/2026/065/article-A001-en.xml",
-      "Fact": "Báo cáo hỗ trợ kỹ thuật tháng 9/2026 của IMF nhấn mạnh dư địa nới lỏng tiền tệ hạn chế, cần theo dõi lạm phát và tỷ giá, đồng thời củng cố vốn và thanh khoản ngân hàng. Đầu tư công có thể hỗ trợ hoạt động kinh tế nhưng hiệu quả phụ thuộc tiến độ triển khai và kỷ luật tài khóa."
+      "Fact": "",
+      "Country": "VN"
     },
-    "IMF_BANK": {
-      "Name": "IMF – Vietnam: 2025 Article IV Consultation, phần Financial Sector",
-      "PublishedOn": "2025-09",
+    "RATE": {
+      "Name": "Cổng Chính phủ – Chỉ đạo giảm mặt bằng lãi suất của NHNN",
+      "URL": "https://xaydungchinhsach.chinhphu.vn/cong-van-9736-nhnn-cstt-ve-giam-mat-bang-lai-suat-119261022085552481.htm",
+      "PublishedOn": "2026-10-26",
       "AccessedOn": "2026-11-05",
-      "URL": "https://www.elibrary.imf.org/view/journals/002/2025/283/article-A001-en.xml",
-      "Fact": "Trong đánh giá cơ cấu hệ thống năm 2025, IMF xác định liên hệ rủi ro giữa ngân hàng, doanh nghiệp bất động sản và trái phiếu doanh nghiệp; cú sốc thương mại có thể truyền sang nợ xấu và dự phòng. Đây là nhận định cơ cấu từ báo cáo năm 2025, không phải số đo nợ xấu của năm 2026."
+      "Fact": "",
+      "Country": "VN"
     },
-    "LSEG": {
-      "Name": "FTSE Russell/LSEG – kết quả rà soát phân loại thị trường tháng 3/2026",
-      "PublishedOn": "2026-04-07",
+    "INDUSTRY": {
+      "Name": "Bộ Công Thương – Sản xuất công nghiệp 10 tháng năm 2026",
+      "URL": "https://moit.gov.vn/tin-tuc/phat-trien-cong-nghiep/san-xuat-cong-nghiep-10-thang-nam-2026-tang-truong-tren-dien-rong.html",
+      "PublishedOn": "2026-11-03",
       "AccessedOn": "2026-11-05",
-      "URL": "https://www.lseg.com/en/media-centre/press-releases/ftse-russell/2026/ftse-russell-announces-results-march-2026-semi-annual-country-classification-review-equities-fixed-income",
-      "Fact": "Thông báo ngày 7/4/2026 của FTSE Russell xác nhận lộ trình đưa Việt Nam lên nhóm thị trường mới nổi thứ cấp từ 21/9/2026. Các cải thiện được nêu gồm tiếp cận qua môi giới quốc tế, mô hình không yêu cầu ký quỹ trước cho nhà đầu tư tổ chức nước ngoài và cơ chế xử lý giao dịch thất bại."
+      "Fact": "",
+      "Country": "VN"
     },
-    "IAV_AUG": {
-      "Name": "Hiệp hội Bảo hiểm Việt Nam – thị trường phi nhân thọ lũy kế 31/8/2026",
+    "ENERGY": {
+      "Name": "Bộ Công Thương – Họp báo quý III/2026",
+      "URL": "https://moit.gov.vn/tin-tuc/bo-cong-thuong-hop-bao-thuong-ky-quy-iii-2026.html",
+      "PublishedOn": "2026-10-07",
+      "AccessedOn": "2026-11-05",
+      "Fact": "",
+      "Country": "VN"
+    },
+    "SSC": {
+      "Name": "Ủy ban Chứng khoán Nhà nước/HOSE – Thị trường tháng 9/2026",
+      "URL": "https://ssc.gov.vn/webcenter/portal/ubck/pages_r/l/chitit?dDocName=APPSSCGOVVN1620172598&dID=183084",
       "PublishedOn": "2026-10-05",
       "AccessedOn": "2026-11-05",
+      "Fact": "",
+      "Country": "VN"
+    },
+    "HNX": {
+      "Name": "HNX – Thị trường UPCoM tháng 10/2026",
+      "URL": "https://web02.hnx.vn/vi-vn/trung-tam-truyen-thong-bc.html",
+      "PublishedOn": "2026-11-04",
+      "AccessedOn": "2026-11-05",
+      "Fact": "",
+      "Country": "VN"
+    },
+    "MARKET": {
+      "Name": "Viện Chiến lược và Chính sách kinh tế tài chính – Thị trường sau nâng hạng",
+      "URL": "https://nief.mof.gov.vn/kinh-te-xa-hoi/giai-phap-thuc-day-phat-trien-thi-truong-chung-khoan-viet-nam-sau-khi-duoc-nang-hang-12890.html",
+      "PublishedOn": "2026-06-05",
+      "AccessedOn": "2026-11-05",
+      "Fact": "",
+      "Country": "VN"
+    },
+    "IAV": {
+      "Name": "Hiệp hội Bảo hiểm Việt Nam – Phi nhân thọ đến 31/8/2026",
       "URL": "https://www.hiephoibaohiemvietnam.vn/vong-quanh-thi-truong/345340-tong-quan-thi-truong-bao-hiem-phi-nhan-tho-luy-ke-den-3182026",
-      "Fact": "Tám tháng đầu 2026, phí bảo hiểm phi nhân thọ đạt 66.191 tỷ đồng, tăng 16,6%; bồi thường gốc đạt 21.365 tỷ đồng. Tỷ lệ bồi thường gốc 32,3% trong thống kê này chưa bao gồm dự phòng bồi thường. Nghiệp vụ xe cơ giới có tỷ lệ bồi thường gốc 49,6%, cao hơn mức 24,2% của bảo hiểm sức khỏe."
-    },
-    "MOF_INS": {
-      "Name": "Bộ Tài chính – Bản tin thị trường bảo hiểm tháng 8/2026",
-      "PublishedOn": "2026-09-29",
+      "PublishedOn": "2026-10-05",
       "AccessedOn": "2026-11-05",
-      "URL": "https://mof.gov.vn/quan-ly-giam-sat-bao-hiem/ban-tin-thi-truong-bao-hiem-toan-cau/ban-tin-thi-truong-bao-hiem-thang-82026",
-      "Fact": "Bản tin Bộ Tài chính ghi nhận bảy tháng đầu 2026: phí phi nhân thọ tăng 16,24%, trong khi phí nhân thọ giảm 4,1%. Sự phân hóa này cho thấy không thể dùng riêng tốc độ tăng trưởng phi nhân thọ để đại diện cho toàn bộ hoạt động hợp nhất của tập đoàn có cả nhân thọ và đầu tư."
+      "Fact": "",
+      "Country": "VN"
     },
-    "IAV_CLIMATE": {
-      "Name": "Hiệp hội Bảo hiểm Việt Nam – Hội nghị hội viên liên kết năm 2026",
-      "PublishedOn": "2026-09",
+    "INSURANCE": {
+      "Name": "Tạp chí Kinh tế Tài chính – Thị trường bảo hiểm 9 tháng 2026",
+      "URL": "https://tapchikinhtetaichinh.vn/infographic-thi-truong-bao-hiem-9-thang-nam-2026-168642.html",
+      "PublishedOn": "2026-10-03",
       "AccessedOn": "2026-11-05",
-      "URL": "https://www.hiephoibaohiemvietnam.vn/tieu-diem-thang/345259-hoi-nghi-hoi-vien-lien-ket-hiep-hoi-bao-hiem-viet-nam-nam-2026",
-      "Fact": "Hiệp hội Bảo hiểm Việt Nam lưu ý biến động tài chính, thiên tai và dịch bệnh tiếp tục là thách thức đối với thị trường năm 2026."
+      "Fact": "",
+      "Country": "VN"
     },
-    "OECD_FDI": {
-      "Name": "OECD – FDI Qualities Review of Viet Nam: Powering the Next Growth Phase, 2026",
-      "PublishedOn": "2026",
+    "VARS": {
+      "Name": "Hội Môi giới Bất động sản Việt Nam – Thị trường quý III/2026",
+      "URL": "https://varsvietnam.vn/nghien-cuu-thi-truong/bao-cao-thi-truong-bat-dong-san-viet-nam-quy-iii-2026-73",
+      "PublishedOn": "",
       "AccessedOn": "2026-11-05",
-      "URL": "https://www.oecd.org/en/publications/fdi-qualities-review-of-viet-nam_a3c78dac-en.html",
-      "Fact": "OECD đánh giá Việt Nam còn hạn chế về nghiên cứu phát triển, mức độ áp dụng công nghệ số và liên kết năng suất, đồng thời chịu rủi ro khí hậu trong hệ thống năng lượng phụ thuộc nhiều nhiên liệu hóa thạch."
+      "Fact": "",
+      "Country": "VN"
     },
-    "UNDP_ENERGY": {
-      "Name": "UNDP – Industrial Energy Transition: A Competitiveness Strategy for Viet Nam",
-      "PublishedOn": "2026-09-07",
+    "FINANCE": {
+      "Name": "Cổng Chính phủ – Định hướng phát triển thị trường tài chính",
+      "URL": "https://cms.baochinhphu.vn/chi-dao-dieu-hanh-cua-chinh-phu-thu-tuong-chinh-phu-ngay-28-7-2026-10226072817163945.htm",
+      "PublishedOn": "2026-07-28",
       "AccessedOn": "2026-11-05",
-      "URL": "https://www.undp.org/vietnam/blog/industrial-energy-transition-competitiveness-strategy-viet-nam",
-      "Fact": "UNDP nhận định các ngành sản xuất sử dụng nhiều năng lượng, gồm thép, xi măng, hóa chất và dệt may, chịu áp lực vừa tăng trưởng vừa đáp ứng yêu cầu sản xuất phát thải thấp của thị trường quốc tế. Tiết kiệm năng lượng và chuyển đổi công nghệ gắn trực tiếp với khả năng cạnh tranh."
+      "Fact": "",
+      "Country": "VN"
     },
-    "WB_CLIMATE": {
-      "Name": "World Bank – Viet Nam 2045: Growing Greener",
-      "PublishedOn": "2025",
+    "DIGITAL": {
+      "Name": "Bộ Khoa học và Công nghệ – Công nghiệp công nghệ số chín tháng 2026",
+      "URL": "https://mst.gov.vn/cong-nghiep-cong-nghe-so-but-toc-doanh-thu-gan-54-trieu-ty-dong-197261008102609376.htm",
+      "PublishedOn": "2026-10-08",
       "AccessedOn": "2026-11-05",
-      "URL": "https://www.worldbank.org/en/country/vietnam/publication/viet-nam-2045-growing-greener-pathways-to-a-resilient-and-sustainable-future",
-      "Fact": "World Bank xác định ngập lụt, nhiệt độ cao và suy giảm tài nguyên là rủi ro đối với cơ sở sản xuất, lao động và hạ tầng tại Việt Nam. Đầu tư thích ứng có thể hạn chế gián đoạn, nhưng cũng đòi hỏi nguồn vốn trước khi tạo lợi ích dài hạn."
+      "Country": "VN"
+    },
+    "OIL": {
+      "Name": "Petrovietnam – Hoạt động khai thác và phát triển dự án của PVEP",
+      "URL": "https://www.pvn.vn/pvep-tang-truong-san-luong-khai-thac-27-hieu-qua-tu-dieu-hanh-chu-dong-va-toi-uu-nguon-luc-35637",
+      "PublishedOn": "2026-10-02",
+      "AccessedOn": "2026-11-05",
+      "Country": "VN"
+    },
+    "PHARMA": {
+      "Name": "Cổng Chính phủ – Chương trình phát triển công nghiệp hóa dược",
+      "URL": "https://baochinhphu.vn/chi-dao-dieu-hanh-cua-chinh-phu-thu-tuong-chinh-phu-noi-bat-thang-10-2026-102261031090520806.htm",
+      "PublishedOn": "2026-11-01",
+      "AccessedOn": "2026-11-05",
+      "Country": "VN"
+    },
+    "TELECOM": {
+      "Name": "Bộ Khoa học và Công nghệ – Dự thảo sửa đổi quy định về viễn thông",
+      "URL": "https://mst.gov.vn/van-ban-phap-luat/du-thao/2605.htm",
+      "PublishedOn": "2026-10-31",
+      "AccessedOn": "2026-11-05",
+      "Country": "VN"
+    },
+    "MATERIALS": {
+      "Name": "Bộ Công Thương – Thông tin phòng vệ thương mại ngành thép",
+      "URL": "https://moit.gov.vn/?keyword=th%C3%A9p&page=search",
+      "PublishedOn": "2026-09-23",
+      "AccessedOn": "2026-11-05",
+      "Country": "VN"
     }
   },
   "Macro": [
     {
-      "Title": "Tăng trưởng và khả năng duy trì dòng thu nhập",
-      "Source": "WB_OCT",
+      "Title": "Cầu trong nước cải thiện, nhưng sức mua thực còn phân hóa",
+      "Source": "NSO10",
       "Analysis": {
-        "BANK": "Đối với ngân hàng, đầu tư và sản xuất mở rộng hỗ trợ nhu cầu tín dụng, thanh toán và tiền gửi. Ngược lại, khách hàng phụ thuộc đơn hàng xuất khẩu hoặc nguyên liệu nhập khẩu có thể suy giảm dòng tiền trước khi nợ xấu được ghi nhận. Vì vậy, tăng dư nợ chỉ củng cố tín nhiệm khi lợi nhuận sau dự phòng và vốn tích lũy theo kịp tài sản có rủi ro.",
-        "SECURITIES": "Đối với công ty chứng khoán, tăng trưởng kinh tế hỗ trợ nhu cầu huy động vốn và hoạt động đầu tư. Tuy nhiên, mức lợi nhuận thuận lợi của một quý có thể đảo chiều khi thanh khoản thị trường giảm. Thu nhập môi giới, lãi cho vay và tự doanh có thể cùng suy yếu, làm lợi ích đa dạng hóa thấp hơn nhìn từ số lượng nghiệp vụ.",
-        "INSURANCE": "Đầu tư và thương mại tạo nhu cầu bảo hiểm tài sản, hàng hóa và trách nhiệm. Giá đầu vào tăng đồng thời có thể làm chi phí sửa chữa, thay thế tài sản và bồi thường tăng nhanh hơn phí đã định. Tăng doanh thu phí vì vậy chưa đồng nghĩa cải thiện khả năng tạo vốn nếu tỷ lệ kết hợp và nhu cầu dự phòng cùng tăng.",
-        "CORPORATE": "Đầu tư và cầu trong nước hỗ trợ doanh thu, nhưng đơn hàng chậm lại và chi phí nhập khẩu tăng có thể đồng thời nén biên lợi nhuận. Doanh nghiệp phải tài trợ hàng tồn kho và công nợ trước khi thu tiền. Khi dòng tiền kinh doanh không theo kịp lợi nhuận, tăng doanh thu có thể kéo theo nhu cầu vay lớn hơn thay vì cải thiện khả năng trả nợ."
-      }
+        "BANK": "Sản xuất và tiêu dùng mở rộng tạo thêm nhu cầu vay vốn lưu động, đầu tư thiết bị và thanh toán. Tuy nhiên, doanh thu danh nghĩa tăng không đồng nghĩa dòng tiền trả nợ cải thiện tương ứng khi giá đầu vào và chi phí sinh hoạt cùng tăng. Các khách hàng có biên lợi nhuận mỏng hoặc phải kéo dài thời hạn bán chịu dễ chuyển phần thiếu hụt tiền sang dư nợ ngân hàng. Vì vậy, tác động thuận lợi đối với ngân hàng chủ yếu đến từ tăng trưởng tín dụng có khả năng thu hồi, đi kèm nguồn thu thanh toán và tiền gửi thực chất; mở rộng cho vay quá nhanh ở nhóm khách hàng nhạy cảm với chu kỳ sẽ làm chi phí dự phòng phát sinh chậm hơn doanh thu lãi.",
+        "SECURITIES": "Hoạt động doanh nghiệp cải thiện hỗ trợ nhu cầu huy động vốn và nền lợi nhuận của các công ty niêm yết. Mặc dù vậy, doanh thu môi giới và lãi cho vay ký quỹ còn phụ thuộc mức độ tham gia của nhà đầu tư, không biến động đồng nhất với tăng trưởng sản xuất. Khi kỳ vọng lợi nhuận đã được phản ánh vào giá cổ phiếu, một kết quả kinh doanh thấp hơn kỳ vọng vẫn có thể gây điều chỉnh thị trường. Đối với công ty chứng khoán, khả năng duy trì thu nhập qua chu kỳ vì vậy phụ thuộc sự cân đối giữa phí dịch vụ, lãi cho vay và kết quả đầu tư, cùng mức vốn có thể chịu được sự giảm giá tài sản.",
+        "INSURANCE": "Sản xuất, thương mại và tiêu dùng phục hồi mở rộng tài sản, hàng hóa và thu nhập cần được bảo hiểm. Lợi ích đối với doanh nghiệp bảo hiểm chỉ bền vững khi mức phí theo kịp giá trị được bảo hiểm và chi phí bồi thường. Cạnh tranh giảm phí để giành khách hàng có thể khiến doanh thu tăng nhưng lợi nhuận nghiệp vụ suy yếu, đặc biệt với hợp đồng tái tục có điều kiện bảo hiểm rộng. Đối với các hợp đồng phân phối qua ngân hàng hoặc đại lý, chất lượng tư vấn và khả năng duy trì hợp đồng ảnh hưởng trực tiếp đến chi phí khai thác, dòng phí thực thu và uy tín của doanh nghiệp.",
+        "DEFAULT": "Môi trường cầu thuận lợi hỗ trợ sản lượng tiêu thụ, nhưng mức cải thiện lợi nhuận phụ thuộc khả năng chuyển chi phí vào giá bán và tốc độ thu tiền. Doanh nghiệp tăng doanh thu bằng cách nới thời hạn thanh toán có thể đồng thời gia tăng phải thu và nhu cầu vay ngắn hạn. Trong khi đó, đầu tư thêm công suất tạo chi phí khấu hao và lãi vay trước khi đạt sản lượng tối ưu. Vì vậy, tác động tích cực của tăng trưởng kinh tế đối với khả năng trả nợ chỉ rõ ràng khi tăng trưởng doanh thu đi cùng biên lợi nhuận ổn định và dòng tiền kinh doanh đủ tài trợ vốn lưu động."
+      },
+      "Fact": "Mười tháng năm 2026, bán lẻ và dịch vụ tiêu dùng tăng 13,5%; mức tăng sau loại trừ giá là 7,7%."
     },
     {
-      "Title": "Lãi suất, tỷ giá và sức chịu đựng tài chính",
-      "Source": "IMF_2026",
+      "Title": "Lạm phát và điều hành lãi suất tạo tác động hai chiều",
+      "Source": "RATE",
       "Analysis": {
-        "BANK": "Chi phí tiền gửi tăng trong khi lãi cho vay điều chỉnh chậm sẽ gây áp lực lên NIM. Nền CASA cao giúp giảm một phần chi phí vốn nhưng không thay thế khả năng đáp ứng dòng tiền ra khi căng thẳng. Cần đọc đồng thời vốn, mức bao phủ nợ xấu và cơ cấu huy động để đánh giá sức chịu đựng của ngân hàng.",
-        "SECURITIES": "Nguồn vay ngắn hạn có thể tái định giá nhanh hơn lãi cho vay ký quỹ. Khi tài sản bảo đảm giảm giá cùng lúc khách hàng giảm giao dịch, công ty vừa chịu áp lực thu nhập vừa phải duy trì nguồn thanh toán. Vốn chủ sở hữu và tiền thực có ý nghĩa lớn hơn quy mô tài sản đơn thuần trong kịch bản đó.",
-        "INSURANCE": "Lãi suất tăng có thể cải thiện lợi suất tái đầu tư nhưng làm giảm giá trị thị trường của trái phiếu đang nắm giữ. Nếu bồi thường tăng đột biến, việc phải bán tài sản trước hạn có thể biến biến động định giá thành tổn thất thực. Khả năng chi trả phụ thuộc cả chất lượng tài sản đầu tư và sự phù hợp kỳ hạn với nghĩa vụ bảo hiểm.",
-        "CORPORATE": "Lãi vay tăng và biến động tỷ giá tác động mạnh hơn đến doanh nghiệp có nợ ngắn hạn, vay ngoại tệ hoặc nguyên liệu nhập khẩu mà không có nguồn thu đối ứng. Với doanh nghiệp đang mở rộng công suất, thời gian dự án chưa tạo tiền làm tăng rủi ro tái cấp vốn. Khả năng trả lãi và dòng tiền sau đầu tư là các điểm kiểm tra trực tiếp của sức chịu đựng này."
-      }
+        "BANK": "Giảm lãi suất huy động có thể hạ chi phí vốn, nhưng lợi ích đối với biên lãi phụ thuộc thời điểm đáo hạn tiền gửi và tốc độ điều chỉnh lãi suất cho vay. Ngân hàng có tỷ trọng tiền gửi kỳ hạn cao thường cần thời gian để thay thế nguồn vốn đã huy động ở mức lãi suất cũ. Ngược lại, giảm nhanh lãi cho vay để hỗ trợ khách hàng có thể làm thu nhập lãi co hẹp trước khi chi phí vốn giảm đủ. Khả năng giữ khách hàng tiền gửi khi điều chỉnh giá, duy trì nguồn vốn giao dịch và kiểm soát chi phí hoạt động sẽ quyết định mức độ bảo vệ lợi nhuận. Tăng quy mô cho vay để bù biên lãi thấp hơn cũng làm phát sinh yêu cầu vốn và dự phòng bổ sung.",
+        "SECURITIES": "Chi phí vay giảm có thể hỗ trợ chênh lệch lãi từ hoạt động cho vay ký quỹ và giảm chi phí tài trợ danh mục. Tuy nhiên, cạnh tranh lãi suất cho khách hàng có thể chuyển phần lớn lợi ích này sang người vay, khiến dư nợ tăng nhanh hơn lợi nhuận. Biến động lợi suất còn làm thay đổi giá trị trái phiếu trong danh mục tự doanh; tác động kế toán phụ thuộc cách phân loại tài sản, trong khi nhu cầu tiền trả nợ vẫn phát sinh theo lịch đáo hạn. Mức độ linh hoạt tài chính do đó gắn với kỳ hạn nguồn vay, lượng tài sản thanh khoản và khả năng thu hồi cho vay mà không phụ thuộc bán tài sản trong thị trường bất lợi.",
+        "INSURANCE": "Lãi suất giảm hỗ trợ giá trị trái phiếu hiện hữu nhưng làm giảm lợi suất tái đầu tư tiền gửi và tài sản đáo hạn. Doanh nghiệp phụ thuộc nhiều vào thu nhập tài chính để bù lỗ nghiệp vụ sẽ nhạy cảm hơn với diễn biến này. Đồng thời, chi phí sửa chữa, y tế và thay thế tài sản có thể tiếp tục tăng, khiến giá trị bồi thường cao hơn giả định khi định phí. Việc đánh đổi chất lượng tín dụng hoặc thanh khoản để tìm lợi suất cao hơn có thể làm suy yếu khả năng chi trả đúng hạn. Cơ cấu tài sản đầu tư phù hợp với nghĩa vụ bảo hiểm có ý nghĩa lớn hơn mức lợi suất của riêng một kỳ.",
+        "DEFAULT": "Mặt bằng lãi suất giảm tạo điều kiện cải thiện chi phí tài chính, nhưng mức hưởng lợi thực tế phụ thuộc điều khoản hợp đồng vay và khả năng tiếp cận tín dụng của doanh nghiệp. Các khoản vay lãi suất cố định hoặc trái phiếu chưa đến kỳ tái cấp vốn không tự động giảm chi phí. Khi doanh nghiệp mở rộng đầu tư, tổng lãi phải trả vẫn có thể tăng dù lãi suất đơn vị thấp hơn. Sức chịu đựng tài chính vì vậy gắn với tiền tạo ra từ hoạt động, kỳ hạn trả nợ và phần chi đầu tư có thể điều chỉnh; khoản tiền nhàn rỗi hạn chế sẽ làm rủi ro tái cấp vốn cao hơn nếu tín dụng trở nên chọn lọc."
+      },
+      "Fact": "NHNN yêu cầu giảm thực chất lãi suất huy động và cho vay trong các tháng cuối năm 2026."
+    },
+    {
+      "Title": "Cân đối ngoại thương và rủi ro tỷ giá",
+      "Source": "NSO10",
+      "Analysis": {
+        "BANK": "Nhập khẩu phục vụ sản xuất tạo nhu cầu tài trợ thương mại và ngoại hối, nhưng cũng làm khả năng trả nợ của khách hàng phụ thuộc giá nguyên liệu và biến động tỷ giá. Khách hàng vay ngoại tệ hoặc nhập khẩu đầu vào nhưng thu bằng đồng Việt Nam sẽ chịu áp lực khi đồng nội tệ giảm giá mà chưa kịp điều chỉnh giá bán. Ngay cả khi ngân hàng kiểm soát trạng thái ngoại tệ trực tiếp, rủi ro tỷ giá vẫn có thể chuyển thành rủi ro tín dụng thông qua khách hàng. Sự phân tán theo ngành, đồng tiền và thị trường đầu ra, cùng các biện pháp phòng ngừa của khách hàng, ảnh hưởng đến độ ổn định của danh mục cho vay.",
+        "SECURITIES": "Biến động tỷ giá và dòng vốn quốc tế có thể tác động đồng thời đến giá cổ phiếu, thanh khoản và chi phí huy động vốn của công ty chứng khoán. Dòng tiền ngoại rút ra không chỉ làm giảm thu nhập môi giới mà còn có thể làm giảm giá tài sản bảo đảm của dư nợ ký quỹ. Nếu danh mục cho vay và tự doanh cùng tập trung vào một nhóm cổ phiếu, tổn thất có thể khuếch đại trong thời gian ngắn. Khả năng giới hạn tập trung, điều chỉnh hạn mức và duy trì nguồn tiền thanh toán độc lập với việc bán tài sản là các yếu tố phân biệt sức chịu đựng giữa các doanh nghiệp.",
+        "INSURANCE": "Thương mại mở rộng hỗ trợ bảo hiểm hàng hóa, hàng hải và tài sản, nhưng biến động giá hàng nhập khẩu có thể làm tăng giá trị tổn thất. Với hợp đồng hoặc chương trình tái bảo hiểm có nghĩa vụ bằng ngoại tệ, chênh lệch đồng tiền giữa tài sản và trách nhiệm có thể gây thiếu hụt tiền khi chi trả. Tái bảo hiểm giúp phân tán tổn thất lớn, song không loại bỏ rủi ro đối tác và độ trễ thu hồi. Dòng tiền thu phí, lịch thanh toán bồi thường và thời gian thu hồi tái bảo hiểm cần tương thích để doanh nghiệp không phải bán tài sản đầu tư trong thời điểm bất lợi.",
+        "DEFAULT": "Tỷ giá ảnh hưởng khác nhau theo cơ cấu doanh thu và nguyên liệu. Doanh nghiệp xuất khẩu có thể được hỗ trợ về doanh thu quy đổi, nhưng lợi ích giảm đi nếu đồng thời nhập khẩu nhiều đầu vào hoặc vay ngoại tệ. Với doanh nghiệp tiêu thụ nội địa, giá nhập khẩu tăng thường tác động trước đến vốn lưu động và sau đó đến biên lợi nhuận. Khả năng điều chỉnh giá bán, thời hạn hợp đồng và sử dụng công cụ phòng ngừa quyết định mức độ chuyển biến động ngoại hối thành tổn thất thực tế. Dòng tiền xuất khẩu bị chậm thu còn có thể làm tăng nhu cầu vay dù lợi nhuận kế toán vẫn tăng."
+      },
+      "Fact": "Lũy kế mười tháng 2026, cán cân hàng hóa nhập siêu 12,07 tỷ USD; xuất khẩu tăng 27,5%, thấp hơn mức tăng nhập khẩu 37,4%."
+    },
+    {
+      "Title": "Mở rộng sản xuất và áp lực vốn lưu động",
+      "Source": "INDUSTRY",
+      "Analysis": {
+        "BANK": "Sản xuất tăng nhanh tạo thêm nhu cầu tài trợ tồn kho, phải thu và đầu tư dài hạn. Khi hàng bán chậm hơn sản lượng, nhu cầu vốn này có thể phản ánh sự tích tụ hàng hóa thay vì đơn hàng mới có dòng tiền chắc chắn. Đối với ngân hàng, rủi ro xuất hiện ở việc khách hàng liên tục đảo vòng khoản vay ngắn hạn trong khi thời gian chuyển hàng tồn kho thành tiền kéo dài. Danh mục tăng trưởng ở các ngành có chu kỳ vốn dài có thể làm nợ quá hạn và dự phòng xuất hiện trễ. Chất lượng tăng trưởng tín dụng vì vậy phụ thuộc dòng tiền từ bán hàng, khả năng trả nợ độc lập và giá trị có thể thu hồi của tài sản bảo đảm.",
+        "DEFAULT": "Sản xuất mở rộng làm tăng nhu cầu nguyên liệu, năng lượng và tài trợ vốn lưu động. Khi tiêu thụ không theo kịp, doanh nghiệp phải đồng thời gánh chi phí tồn kho, lãi vay và rủi ro giảm giá hàng hóa. Doanh nghiệp có vị thế thương lượng tốt có thể chuyển một phần áp lực sang nhà cung cấp hoặc khách hàng; ngược lại, đơn vị quy mô nhỏ thường phải chịu kỳ thu tiền dài hơn. Khoản đầu tư mới chỉ hỗ trợ tín nhiệm khi tạo thêm tiền đủ bù chi phí vận hành và nghĩa vụ vốn. Tốc độ tăng tài sản cao hơn tiền tạo ra từ hoạt động kéo dài sẽ làm khả năng tự tài trợ suy yếu.",
+        "SECURITIES": "Sản xuất mở rộng tạo nhu cầu huy động vốn và tư vấn tài chính của doanh nghiệp, qua đó có thể bổ sung nguồn thu cho công ty chứng khoán. Tuy nhiên, nhu cầu vốn chưa chắc chuyển thành giao dịch hoàn tất nếu khách hàng không đáp ứng điều kiện phát hành hoặc nhà đầu tư yêu cầu lợi suất cao hơn. Hàng tồn kho và phải thu tăng ở doanh nghiệp niêm yết còn ảnh hưởng gián tiếp đến chất lượng cổ phiếu trong danh mục tự doanh và tài sản bảo đảm ký quỹ. Mức độ truyền dẫn rủi ro phụ thuộc tỷ trọng từng ngành trong danh mục; tăng trưởng công nghiệp chung không bảo đảm lợi nhuận hay thanh khoản của từng mã cổ phiếu.",
+        "INSURANCE": "Hoạt động sản xuất và thương mại mở rộng tạo nhu cầu bảo hiểm tài sản, hàng hóa, vận chuyển và trách nhiệm. Quy mô tài sản được bảo hiểm lớn hơn giúp tăng phí nhưng cũng có thể làm số tiền tổn thất tối đa tăng nếu rủi ro tập trung tại một địa điểm hoặc chuỗi cung ứng. Giá nguyên liệu, thiết bị và chi phí sửa chữa biến động có thể khiến số tiền bồi thường cao hơn giả định định phí ban đầu. Khả năng tận dụng tăng trưởng vì vậy phụ thuộc mức phí phù hợp, kiểm soát tích tụ rủi ro và chương trình tái bảo hiểm; mở rộng khai thác thiếu kỷ luật sẽ làm nghĩa vụ tiềm tàng tăng nhanh hơn nguồn vốn."
+      },
+      "Fact": "Bộ Công Thương ghi nhận chế biến, chế tạo tăng 13,0% trong mười tháng 2026, đồng thời lưu ý sức tiêu thụ và tồn kho tại các địa phương."
     }
   ],
   "Industry": {
     "BANK": [
       {
-        "Title": "Chất lượng tín dụng và mức tập trung",
-        "Source": "IMF_BANK",
-        "Analysis": "Dư nợ tăng nhanh có thể làm tỷ lệ nợ xấu giảm về mặt mẫu số dù số dư nợ có vấn đề chưa giảm. Khi khách hàng bất động sản hoặc xuất khẩu chịu áp lực, khoản vay có thể suy giảm chất lượng trước khi chuyển nhóm. Ngân hàng có lợi nhuận trước dự phòng tốt và bộ đệm dự phòng cao sẽ có khả năng hấp thụ tốt hơn; ngược lại, dự phòng thấp khiến lợi nhuận và vốn nhạy hơn với cùng một mức tổn thất."
+        "Title": "Tăng trưởng tín dụng và cạnh tranh nguồn tiền gửi",
+        "Source": "NSO9",
+        "Analysis": "Chênh lệch tốc độ tăng trưởng cho thấy nhu cầu sử dụng vốn của hệ thống tiếp tục vượt tốc độ hình thành nguồn tiền gửi. Ngân hàng có thể bổ sung vốn qua thị trường liên ngân hàng hoặc phát hành giấy tờ có giá, nhưng các nguồn này thường nhạy cảm hơn với lãi suất và điều kiện thị trường. Lợi thế thuộc về ngân hàng duy trì được tiền gửi giao dịch, khách hàng gắn bó và kỳ hạn nguồn vốn phù hợp. Ở chiều ngược lại, tăng tín dụng bằng nguồn vay ngắn hạn làm khả năng sinh lời phụ thuộc hơn vào chi phí tái huy động. Vì vậy, mở rộng bảng cân đối chỉ hỗ trợ tín nhiệm nếu đồng thời duy trì được nguồn vốn ổn định và dự trữ thanh khoản thực chất.",
+        "Fact": "Đến 28/9/2026, tín dụng tăng 10,89% so với cuối năm trước, trong khi huy động vốn tăng 9,78%."
       },
       {
-        "Title": "Cạnh tranh huy động và bộ đệm vốn",
-        "Source": "IMF_2026",
-        "Fact": "IMF tiếp tục đặt trọng tâm vào củng cố bộ đệm vốn và thanh khoản ngân hàng trong báo cáo năm 2026.",
-        "Analysis": "Tăng trưởng tín dụng vượt tăng trưởng tiền gửi làm nhu cầu vốn thị trường lớn hơn, nhất là khi kỳ hạn tài sản dài hơn kỳ hạn huy động. CAR cần được đọc cùng cơ sở tính, phạm vi hợp nhất và tốc độ tăng tài sản có rủi ro. LDR từ BCTC chỉ là chỉ dấu cơ cấu tài trợ, không tự chứng minh thiếu thanh khoản hay thay thế tỷ lệ tuân thủ; đánh giá cuối cùng phải gắn với nguồn vốn ổn định và khả năng huy động khi căng thẳng."
+        "Title": "Chất lượng tài sản và khả năng hấp thụ tổn thất",
+        "Source": "VARS",
+        "Analysis": "Đối với ngân hàng có dư nợ liên quan bất động sản, tốc độ bán hàng và thu tiền của khách hàng quyết định khả năng trả nợ nhiều hơn giá trị định giá tài sản bảo đảm. Thanh khoản thị trường yếu có thể kéo dài thời gian xử lý tài sản, đồng thời làm chi phí dự phòng phát sinh trước dòng tiền thu hồi. Rủi ro còn lan sang nhà thầu, vật liệu xây dựng và khách hàng cá nhân mua nhà. Tỷ lệ nợ xấu giảm nhờ dư nợ tăng nhanh chưa phản ánh đầy đủ mức cải thiện nếu số dư nợ xấu vẫn tăng. Ngân hàng có mức bao phủ dự phòng cao và lợi nhuận trước dự phòng ổn định có khả năng hấp thụ tổn thất tốt hơn; hỗ trợ của tài sản bảo đảm phụ thuộc khả năng xử lý thực tế.",
+        "Fact": "Theo VARS, tỷ lệ hấp thụ nhà ở mở bán mới trong quý III/2026 ở mức 39,3%, phản ánh sự phân hóa của thanh khoản thị trường."
       },
       {
-        "Title": "Khả năng giữ biên và tích lũy vốn",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Trong môi trường chi phí vốn chịu sức ép, ưu thế của ngân hàng đến từ khả năng giữ tiền gửi chi phí thấp, kiểm soát chi phí hoạt động và duy trì chất lượng tín dụng. ROE cao do đòn bẩy lớn không tương đương ROA cao với vốn dày. Cùng một mức lợi nhuận, ngân hàng phải chia cổ tức cao hoặc tăng tài sản nhanh sẽ có dư địa bổ sung vốn nội sinh thấp hơn. Kết luận ở các phần tài chính dưới đây đối chiếu các yếu tố này với chuỗi năm và peer của chính ngân hàng."
+        "Title": "Biên lãi, dịch vụ và hiệu quả vận hành",
+        "Source": "RATE",
+        "Analysis": "Trong môi trường cạnh tranh giảm lãi suất, ngân hàng phải cân đối giữa bảo vệ chênh lệch lãi và duy trì khả năng trả nợ của khách hàng. CASA cao giúp giảm chi phí bình quân nhưng chưa bảo đảm biên lãi cao nếu lợi suất tài sản thấp hoặc tăng trưởng tập trung ở phân khúc cạnh tranh mạnh. Thu nhập thanh toán và dịch vụ tạo nguồn bổ sung ít sử dụng vốn hơn tín dụng, song mức độ bền vững phụ thuộc giao dịch thực tế và chất lượng phục vụ. Lợi nhuận từ mua bán chứng khoán hoặc hoàn nhập dự phòng có thể biến động mạnh giữa các kỳ. Năng lực tích lũy vốn được hỗ trợ rõ hơn khi thu nhập cốt lõi tăng nhanh hơn chi phí vận hành và đủ bù chi phí rủi ro.",
+        "Fact": ""
+      },
+      {
+        "Title": "Vốn, quy mô và khả năng thực hiện chiến lược",
+        "Source": "FINANCE",
+        "Analysis": "Tăng trưởng tài sản có rủi ro làm phát sinh nhu cầu vốn ngay cả khi lợi nhuận tăng. Giữ lại lợi nhuận hoặc phát hành thêm vốn có thể bổ sung nguồn lực, nhưng chỉ tiêu vốn công bố còn phụ thuộc phạm vi báo cáo và cơ cấu rủi ro tài sản. Vì vậy, quy mô vốn chủ sở hữu lớn không tự động tương đương dư địa an toàn vốn lớn. Cùng lúc, đầu tư vào ngân hàng số và quản trị dữ liệu có thể nâng hiệu suất nhưng làm tăng chi phí trước khi tạo lợi ích. Ngân hàng cần duy trì năng lực kiểm soát vận hành, an ninh thông tin và chất lượng tăng trưởng để tránh mở rộng quy mô vượt quá khả năng quản trị.",
+        "Fact": "Định hướng điều hành tháng 7/2026 nhấn mạnh nâng cao chất lượng tín dụng, chuẩn mực an toàn và hiện đại hóa hạ tầng tài chính."
       }
     ],
     "SECURITIES": [
       {
-        "Title": "Mở rộng thị trường và áp lực cạnh tranh",
-        "Source": "LSEG",
-        "Analysis": "Hạ tầng và khả năng tiếp cận tốt hơn mở cơ hội phục vụ nhà đầu tư tổ chức, nhưng không bảo đảm dòng vốn hoặc doanh thu tăng đều. Cạnh tranh phí và lãi vay có thể khiến công ty phải tăng quy mô mới giữ được lợi nhuận. Ưu thế bền vững phụ thuộc chất lượng khách hàng, dịch vụ và hiệu quả vốn, thay vì chỉ tăng dư nợ ký quỹ."
+        "Title": "Thanh khoản thị trường và tính chu kỳ của nguồn thu",
+        "Source": "SSC",
+        "Analysis": "Thu nhập môi giới và nhu cầu vay ký quỹ có thể giảm đồng thời khi nhà đầu tư thu hẹp giao dịch. Doanh nghiệp có thị phần lớn vẫn chịu áp lực nếu tổng giá trị giao dịch toàn thị trường giảm, trong khi chi phí nhân sự, công nghệ và mạng lưới không điều chỉnh tương ứng. Mức độ phụ thuộc vào tự doanh làm lợi nhuận biến động thêm theo giá tài sản. Do đó, kết quả tăng trưởng trong giai đoạn thị trường thuận lợi chỉ bền vững khi cơ cấu thu nhập được phân tán và chi phí được kiểm soát. Nguồn phí từ khách hàng tổ chức, tư vấn và quản lý tài sản có thể bổ sung tính ổn định, nhưng từng mảng vẫn chịu chu kỳ huy động vốn và đầu tư.",
+        "Fact": "Tháng 9/2026, giá trị giao dịch cổ phiếu bình quân trên HOSE giảm 5,33% so với tháng trước, còn khoảng 16.412 tỷ đồng mỗi phiên."
       },
       {
-        "Title": "Rủi ro ký quỹ và danh mục tự doanh",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Khi thị trường đảo chiều, thanh khoản giao dịch và giá tài sản bảo đảm có thể giảm đồng thời. Công ty có dư nợ ký quỹ tập trung hoặc danh mục tự doanh kém thanh khoản có nguy cơ tổn thất cao hơn mức phản ánh bởi nợ/vốn bình quân. Lợi nhuận từ đánh giá lại tài sản cũng không tạo ngay nguồn tiền trả nợ. Do đó, kết quả sinh lời phải được đặt cùng quy mô vị thế, vốn chủ sở hữu và dòng tiền kinh doanh."
+        "Title": "Cho vay ký quỹ và sự tập trung tài sản bảo đảm",
+        "Source": "HNX",
+        "Analysis": "Biến động chỉ số không phản ánh đầy đủ mức rủi ro của từng cổ phiếu được nhận làm tài sản bảo đảm. Danh mục ký quỹ tập trung vào cổ phiếu thanh khoản thấp có thể khó xử lý ngay cả khi tỷ lệ bảo đảm trên sổ sách còn cao. Khi giá giảm nhanh, việc bán giải chấp cùng lúc của nhiều công ty chứng khoán có thể làm giá tiếp tục giảm và khiến phần tiền thu hồi thấp hơn dư nợ. Kỷ luật cấp hạn mức, giới hạn theo khách hàng và nhóm cổ phiếu, cùng nguồn vốn đủ ổn định để xử lý sự cố, quyết định khả năng kiểm soát tổn thất. Dư nợ tăng nhanh hơn vốn chủ sở hữu làm biên chịu đựng thu hẹp nếu giá tài sản điều chỉnh.",
+        "Fact": "HNX ghi nhận UPCoM-Index giảm 2,04% trong tháng 10/2026; diễn biến giữa các nhóm cổ phiếu tiếp tục khác nhau."
       },
       {
-        "Title": "Nguồn vốn và rủi ro thanh toán",
-        "Source": "LSEG",
-        "Fact": "",
-        "Analysis": "Mô hình không yêu cầu ký quỹ trước làm chất lượng xử lý giao dịch và quản lý đối tác quan trọng hơn. Trong khi đó, vốn vay ngắn hạn tài trợ cho vay hoặc đầu tư tạo nhu cầu đảo nợ thường xuyên. Tiền gửi khách hàng không nên được coi như tiền tự do của công ty. Bộ đệm thanh khoản thực, hạn mức vay và tỷ lệ vốn khả dụng quyết định khả năng tiếp tục hoạt động khi doanh thu suy giảm hoặc giao dịch thanh toán chậm."
+        "Title": "Tài trợ danh mục và khả năng thanh toán",
+        "Source": "RATE",
+        "Analysis": "Công ty chứng khoán thường tài trợ một phần danh mục và cho vay bằng nguồn vay ngân hàng hoặc phát hành nợ. Khi nguồn này có kỳ hạn ngắn hơn tài sản, khả năng trả nợ phụ thuộc việc quay vòng hạn mức và thu hồi khoản cho vay đúng kế hoạch. Tài sản thanh khoản trên sổ sách chưa chắc có thể chuyển thành tiền ngay nếu đang cầm cố, hạn chế chuyển nhượng hoặc tập trung vào một số mã. Chi phí vốn giảm có thể hỗ trợ lợi nhuận, nhưng mở rộng đòn bẩy để tận dụng điều kiện thuận lợi sẽ làm nhu cầu tiền tăng khi thị trường đảo chiều. Vốn chủ sở hữu, tiền có thể sử dụng và lịch đáo hạn là các yếu tố có ý nghĩa trực tiếp đối với thanh toán.",
+        "Fact": ""
+      },
+      {
+        "Title": "Cạnh tranh dịch vụ và yêu cầu hạ tầng sau nâng hạng",
+        "Source": "MARKET",
+        "Analysis": "Khả năng tiếp cận nhà đầu tư quốc tế tốt hơn tạo cơ hội mở rộng khách hàng và dịch vụ, đồng thời làm yêu cầu về thanh toán, quản trị rủi ro và công nghệ cao hơn. Công ty có năng lực vốn, hệ thống vận hành và quan hệ khách hàng tổ chức phù hợp có điều kiện khai thác cơ hội này. Tuy nhiên, đầu tư hạ tầng và cạnh tranh phí có thể làm chi phí tăng trước khi doanh thu hình thành. Việc nâng hạng thị trường không bảo đảm mọi công ty chứng khoán đều cải thiện lợi nhuận hoặc khả năng trả nợ; tác động còn phụ thuộc chất lượng khách hàng, sản phẩm và mức độ sử dụng đòn bẩy của từng đơn vị.",
+        "Fact": "Viện Chiến lược và Chính sách kinh tế tài chính phân tích cơ hội thu hút vốn cùng yêu cầu cao hơn về minh bạch và năng lực thị trường sau nâng hạng."
       }
     ],
     "INSURANCE": [
       {
         "Title": "Tăng trưởng phí và chất lượng khai thác",
-        "Source": "IAV_AUG",
-        "Analysis": "Chênh lệch bồi thường giữa các nghiệp vụ khiến cơ cấu sản phẩm có thể chi phối lợi nhuận nhiều hơn tăng trưởng phí. Mở rộng ở nghiệp vụ bồi thường cao hoặc giảm phí để giành thị phần có thể làm tỷ lệ kết hợp xấu đi. Số bồi thường gốc của thị trường không được dùng thay cho tỷ lệ kết hợp của doanh nghiệp, vì chưa phản ánh đầy đủ chi phí và biến động dự phòng."
+        "Source": "NSO9",
+        "Analysis": "Tăng trưởng phi nhân thọ tạo dư địa mở rộng doanh thu nhưng không đồng nghĩa lợi nhuận nghiệp vụ tăng tương ứng. Cạnh tranh có thể thể hiện qua giảm phí, mở rộng điều khoản, tăng hoa hồng hoặc chấp nhận rủi ro cao hơn. Doanh nghiệp duy trì kỷ luật định phí và lựa chọn khách hàng có khả năng bảo vệ kết quả tốt hơn khi chi phí tổn thất tăng. Đối với nhóm có hoạt động nhân thọ, tái bảo hiểm hoặc đầu tư đáng kể, kết quả hợp nhất còn chịu các động lực khác nhau; tốc độ tăng phí của thị trường phi nhân thọ chỉ là một phần bối cảnh, không đại diện cho toàn bộ dòng tiền và nghĩa vụ của doanh nghiệp.",
+        "Fact": "Chín tháng 2026, phí phi nhân thọ tăng 15,1%; phí nhân thọ giảm 5,2%, theo Cục Thống kê."
       },
       {
-        "Title": "Dự phòng, tái bảo hiểm và tổn thất lớn",
-        "Source": "IAV_CLIMATE",
-        "Analysis": "Một sự kiện thiên tai có thể phát sinh nhiều yêu cầu bồi thường cùng lúc ở tài sản, xe và nông nghiệp. Tái bảo hiểm giảm tổn thất giữ lại nhưng tạo rủi ro đối tác và chậm thu hồi. Chất lượng dự phòng phải được xem cùng phạm vi bảo hiểm, mức khấu trừ và hạn mức giữ lại; số dự phòng tăng riêng lẻ không tự chứng minh an toàn hơn nếu nghĩa vụ tiềm tàng tăng nhanh hơn."
+        "Title": "Bồi thường, dự phòng và kỷ luật nhận bảo hiểm",
+        "Source": "IAV",
+        "Analysis": "Mức bồi thường khác biệt giữa các nghiệp vụ cho thấy cơ cấu sản phẩm có ảnh hưởng lớn đến khả năng sinh lời. Tỷ lệ bồi thường đã chi trả thấp có thể phản ánh hồ sơ chưa hoàn tất, chưa đủ để kết luận lợi nhuận nghiệp vụ tốt nếu dự phòng chưa bao quát nghĩa vụ phát sinh. Tăng phí bằng các hợp đồng rủi ro cao có thể tạo lợi nhuận ban đầu nhưng làm tổn thất xuất hiện ở các kỳ sau. Kết quả kết hợp giữa bồi thường, chi phí khai thác và dự phòng vì vậy có ý nghĩa hơn một chỉ tiêu đơn lẻ. Doanh nghiệp có khả năng kiểm soát gian lận, giám định và thời gian xử lý hồ sơ sẽ hạn chế được biến động chi phí và bảo vệ chất lượng dịch vụ.",
+        "Fact": "Thống kê đến tháng 8/2026 của Hiệp hội Bảo hiểm ghi nhận tỷ lệ bồi thường gốc xe cơ giới 49,6%, chưa bao gồm dự phòng."
       },
       {
-        "Title": "Đầu tư, thanh khoản và phạm vi hợp nhất",
-        "Source": "MOF_INS",
-        "Analysis": "Thu nhập đầu tư có thể bù một giai đoạn khai thác yếu, nhưng cũng làm lợi nhuận nhạy với lãi suất và giá tài sản. Tiền và tài sản dễ chuyển đổi cần đủ để xử lý bồi thường khi khoản phải thu tái bảo hiểm chưa về. Với pháp nhân hợp nhất nhiều hoạt động, kết luận dưới đây giữ nguyên phạm vi BCTC; phân nhóm peer không biến toàn bộ tập đoàn thành một doanh nghiệp phi nhân thọ thuần túy."
+        "Title": "Thanh khoản chi trả và khả năng thu hồi tái bảo hiểm",
+        "Source": "INSURANCE",
+        "Analysis": "Nghĩa vụ chi trả có thể tăng nhanh hơn phí thu trong một kỳ, đặc biệt khi phát sinh tổn thất lớn hoặc nhiều hồ sơ được giải quyết đồng thời. Tái bảo hiểm làm giảm phần tổn thất giữ lại nhưng doanh nghiệp có thể phải chi tiền trước khi thu hồi từ đối tác. Sự chậm trễ này tạo áp lực thanh khoản ngay cả khi tổn thất cuối cùng đã được phân chia theo hợp đồng. Mức độ tập trung theo đối tác tái bảo hiểm, điều khoản loại trừ và khả năng đòi bồi hoàn vì vậy tác động trực tiếp đến nguồn tiền. Tài sản đầu tư có kỳ hạn phù hợp và tiền sẵn có giúp hạn chế việc phải bán tài sản khi thị trường bất lợi.",
+        "Fact": "Theo Tạp chí Kinh tế Tài chính, chi trả quyền lợi bảo hiểm chín tháng 2026 đạt 77,9 nghìn tỷ đồng, tăng 13,1%."
+      },
+      {
+        "Title": "Thu nhập đầu tư và mức độ an toàn của nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Doanh nghiệp bảo hiểm thường đầu tư nguồn vốn nhàn rỗi trong thời gian từ thu phí đến chi trả. Khi lãi suất giảm, lợi suất tái đầu tư tiền gửi có thể giảm, làm rõ hơn sự phụ thuộc của lợi nhuận tổng thể vào kết quả nhận bảo hiểm. Nếu bù đắp bằng trái phiếu hoặc tài sản rủi ro cao hơn, doanh nghiệp đồng thời tăng rủi ro tín dụng và thanh khoản. Sự cân đối giữa nguồn vốn, dự phòng nghiệp vụ và thời hạn tài sản cần phù hợp với nghĩa vụ chi trả. Vốn chủ sở hữu và khả năng tạo lợi nhuận nghiệp vụ bền vững là nền tảng để hấp thụ tổn thất; thu nhập đầu tư cao trong một kỳ không thay thế được nền tảng này.",
+        "Fact": ""
       }
     ]
   },
   "CorporateSectors": {
-    "DEFAULT": [
-      {
-        "Title": "Chu kỳ kinh doanh và chuyển hóa doanh thu thành tiền",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Tăng trưởng kinh tế và đầu tư tạo cơ hội doanh thu, nhưng mức hưởng lợi phụ thuộc sản phẩm, khách hàng và địa bàn của từng doanh nghiệp. Doanh thu tăng cùng công nợ và hàng tồn kho có thể làm vốn lưu động bị chiếm dụng. Khi biên lợi nhuận giảm, doanh nghiệp cần nhiều doanh thu hơn mới tạo cùng một lượng tiền trả nợ. Chuỗi năm và peer ở phần tài chính giúp phân biệt tăng trưởng quy mô với cải thiện sức mạnh tài chính."
-      },
-      {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
-      },
-      {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
-      }
-    ],
     "Công nghiệp": [
       {
-        "Title": "Đơn hàng, tiến độ hợp đồng và chi phí sản xuất",
-        "Source": "UNDP_ENERGY",
-        "Fact": "",
-        "Analysis": "Đối với sản xuất công nghiệp, vận tải hoặc xây lắp, chu kỳ đầu tư tạo cơ hội đơn hàng nhưng doanh thu có thể đến trước dòng tiền. Chậm nghiệm thu, công nợ kéo dài và chi phí đầu vào tăng làm nhu cầu vốn lưu động lớn hơn. Khối lượng hợp đồng chưa đủ phản ánh chất lượng lợi nhuận nếu giá bán cố định còn chi phí thả nổi. Đầu tư tiết kiệm năng lượng hỗ trợ sức cạnh tranh dài hạn, song cần được cân đối với tiền hoạt động và lịch trả nợ trong thời gian triển khai."
+        "Title": "Công suất, đơn hàng và hiệu quả chuyển doanh thu thành tiền",
+        "Source": "INDUSTRY",
+        "Analysis": "Sản lượng sản xuất tăng chỉ cải thiện khả năng trả nợ khi hàng hóa được tiêu thụ và thu tiền đúng hạn. Nhà thầu, vận tải và doanh nghiệp chế tạo có chu kỳ vốn khác nhau, nhưng đều có thể chịu áp lực nếu công suất mở rộng nhanh hơn đơn hàng. Chi phí cố định cao làm lợi nhuận nhạy cảm với mức sử dụng tài sản; khoản phải thu kéo dài làm dòng tiền yếu hơn kết quả kế toán. Năng lực kiểm soát công nợ và thời điểm đầu tư có ý nghĩa lớn đối với nhu cầu vay bổ sung. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Theo Bộ Công Thương, sản xuất chế biến, chế tạo tăng 13,0% trong mười tháng 2026."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Chu kỳ hợp đồng và nhu cầu vốn trước nghiệm thu",
+        "Source": "INDUSTRY",
+        "Analysis": "Với doanh nghiệp xây lắp hoặc cung cấp thiết bị theo dự án, doanh thu có thể được ghi nhận trước khi tiền được thanh toán đầy đủ. Chi phí thi công, nguyên vật liệu và nhân công phát sinh sớm, trong khi nghiệm thu, quyết toán hoặc khoản giữ lại bảo hành kéo dài thời gian thu hồi vốn. Giá trị hợp đồng lớn vì vậy có thể làm nhu cầu vay tăng trước khi cải thiện dòng tiền. Khả năng được khách hàng ứng trước và sức mạnh tài chính của chủ đầu tư là hai yếu tố quan trọng. Với doanh nghiệp sản xuất công nghiệp, hàng tồn kho và mức sử dụng công suất lại quyết định vòng quay vốn; không nên đồng nhất hai mô hình này khi đánh giá khả năng trả nợ.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Nguyên vật liệu": [
       {
-        "Title": "Giá hàng hóa, tồn kho và mức sử dụng công suất",
-        "Source": "UNDP_ENERGY",
-        "Fact": "",
-        "Analysis": "Doanh nghiệp vật liệu chịu đồng thời biến động giá bán, nguyên liệu và mức sử dụng công suất. Khi giá đầu ra giảm nhanh hơn giá vốn tồn kho, doanh thu vẫn có thể tăng về sản lượng nhưng biên lợi nhuận thu hẹp. Với ngành có chi phí cố định lớn như thép, xi măng hoặc hóa chất, công suất mới chưa khai thác đủ làm thời gian thu hồi vốn dài hơn. Lợi thế chi phí chỉ hỗ trợ tín nhiệm khi chuyển thành tiền kinh doanh; tăng tồn kho và đầu tư vượt nguồn tiền nội bộ sẽ làm đòn bẩy nhạy hơn với chu kỳ."
+        "Title": "Chu kỳ giá hàng hóa và chênh lệch giá đầu ra đầu vào",
+        "Source": "MATERIALS",
+        "Analysis": "Doanh nghiệp vật liệu chịu tác động đồng thời của nhu cầu xây dựng, sản xuất và giá nguyên liệu. Giá bán giảm trong khi hàng tồn kho được tích lũy ở mức giá cao có thể làm biên lợi nhuận thu hẹp và phát sinh giảm giá tồn kho. Ngược lại, đầu vào tăng nhanh làm nhu cầu vốn lưu động lớn hơn ngay cả khi sản lượng không đổi. Công suất mới tạo lợi thế chi phí khi đạt quy mô vận hành, nhưng làm tăng khấu hao, chi phí lãi và nhu cầu tiền trong giai đoạn đầu. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Thông tin Bộ Công Thương công bố trong tháng 9/2026 cho thấy thép mạ kẽm từ Việt Nam tiếp tục thuộc diện rà soát biện pháp chống bán phá giá tại Úc. Rủi ro này gắn với sản phẩm và thị trường cụ thể, không áp dụng đồng loạt cho mọi doanh nghiệp vật liệu."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Giá vốn tồn kho và khả năng chuyển chi phí vào giá bán",
+        "Source": "MATERIALS",
+        "Analysis": "Giá bán có thể điều chỉnh nhanh hơn giá vốn của lượng hàng đã mua hoặc sản xuất, khiến lợi nhuận giảm mạnh trong giai đoạn giá hàng hóa đi xuống. Dự trữ nguyên liệu lớn hỗ trợ sản xuất khi nguồn cung gián đoạn nhưng đồng thời làm tiền bị giữ trong tồn kho và phát sinh rủi ro giảm giá. Mức độ tích hợp sản xuất, hợp đồng tiêu thụ và khả năng chuyển chi phí năng lượng vào giá bán tạo khác biệt giữa các doanh nghiệp. Khi nhu cầu xây dựng hoặc xuất khẩu yếu, kéo dài thời hạn thanh toán để giữ khách hàng còn làm tăng phải thu. Khả năng tạo tiền cần được đối chiếu với cả lượng hàng tồn, mức giá và điều khoản bán hàng.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Dầu khí": [
       {
-        "Title": "Biến động giá năng lượng và tiến độ dự án",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Giá dầu cao không tạo tác động giống nhau cho mọi doanh nghiệp dầu khí. Khai thác có thể hưởng lợi về giá bán, trong khi lọc hóa dầu, phân phối hoặc dịch vụ còn phụ thuộc chênh lệch giá, hàng tồn kho và tiến độ hợp đồng. Các dự án lớn cần vốn từ trước khi ghi nhận doanh thu; chậm triển khai kéo dài chi phí lãi và nhu cầu vốn lưu động. Rủi ro tỷ giá tăng nếu nhập thiết bị, nguyên liệu hoặc vay ngoại tệ mà nguồn thu không tương ứng. Vì vậy, cần đối chiếu lợi nhuận với dòng tiền và mức đầu tư thực tế."
+        "Title": "Biến động giá năng lượng và thời điểm thu hồi vốn",
+        "Source": "OIL",
+        "Analysis": "Giá dầu khí tạo tác động khác nhau giữa khai thác, phân phối, chế biến và dịch vụ. Doanh nghiệp hưởng lợi về doanh thu khi giá tăng vẫn có thể chịu áp lực vốn lưu động nếu phải mua hàng trước và thu tiền sau. Với đơn vị dịch vụ, nhu cầu phụ thuộc kế hoạch đầu tư của chủ mỏ và tiến độ dự án; hợp đồng dài hạn chỉ hỗ trợ khả năng trả nợ khi điều khoản thanh toán và thu hồi công nợ phù hợp. Đầu tư tài sản chuyên dụng lớn làm dòng tiền nhạy cảm với mức sử dụng công suất. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Petrovietnam công bố sản lượng khai thác của PVEP chín tháng 2026 tăng 27%, đồng thời nhấn mạnh yêu cầu bổ sung trữ lượng và kiểm soát tiến độ các dự án phát triển mỏ. Đây là dữ kiện của một đơn vị thượng nguồn, không phải mức tăng toàn ngành."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Thời điểm thu tiền và mức độ tập trung khách hàng",
+        "Source": "OIL",
+        "Analysis": "Dòng tiền trong chuỗi dầu khí phụ thuộc khác nhau vào giá hàng hóa, sản lượng vận chuyển hoặc khối lượng dịch vụ đã nghiệm thu. Đơn vị dịch vụ có thể phải tài trợ chi phí nhân sự, vật tư và thiết bị trước khi hoàn tất thanh toán với chủ dự án; chậm tiến độ vì thủ tục hoặc kỹ thuật sẽ kéo dài chu kỳ này. Doanh nghiệp kinh doanh xăng dầu lại nhạy với chênh lệch giá mua, giá bán và lượng hàng tồn trong từng kỳ điều hành. Sự tập trung vào một số khách hàng hoặc dự án lớn làm doanh thu và tiền thu biến động mạnh hơn. Quan hệ trong cùng tập đoàn có thể hỗ trợ giao dịch, nhưng không thay thế việc đánh giá nghĩa vụ thanh toán cụ thể.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Tiện ích Cộng đồng": [
       {
-        "Title": "Độ ổn định sản lượng và khả năng thu hồi chi phí",
-        "Source": "WB_CLIMATE",
-        "Fact": "",
-        "Analysis": "Điện, nước và các dịch vụ tiện ích có nhu cầu thiết yếu nhưng dòng tiền vẫn phụ thuộc sản lượng, điều kiện vận hành và hợp đồng tiêu thụ. Hạn hán hoặc sự cố có thể làm giảm công suất khả dụng; biến động nhiên liệu gây sức ép nếu giá bán điều chỉnh chậm. Hạ tầng cần vốn lớn và thời gian thu hồi dài, nên khoản phải thu kéo dài dễ làm nhu cầu vay ngắn hạn tăng. Đánh giá tích cực cần được hỗ trợ bởi tiền kinh doanh và khả năng trả lãi, không chỉ bởi tính thiết yếu của dịch vụ."
+        "Title": "Sản lượng tiêu thụ, giá bán và tính liên tục của vận hành",
+        "Source": "ENERGY",
+        "Analysis": "Nhu cầu điện, nước và năng lượng hỗ trợ doanh thu nhưng khả năng sinh lời còn phụ thuộc giá bán, cơ chế chuyển chi phí và điều kiện vận hành từng dự án. Đối với đơn vị có chi phí nhiên liệu lớn, độ trễ điều chỉnh giá có thể làm dòng tiền bị thu hẹp. Sự cố hoặc bảo dưỡng kéo dài làm giảm sản lượng trong khi nghĩa vụ nợ vẫn đến hạn. Mức độ tập trung vào một nguồn cung, một nhà máy hoặc một khách hàng mua sản phẩm sẽ quyết định mức nhạy cảm của dòng tiền. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Bộ Công Thương ghi nhận sản lượng điện sản xuất và nhập khẩu chín tháng 2026 đạt 266,58 tỷ kWh, tăng 9,65% cùng kỳ."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Cơ chế giá, công nợ và mức sử dụng tài sản",
+        "Source": "ENERGY",
+        "Analysis": "Nhu cầu sử dụng dịch vụ thiết yếu giúp ổn định thị trường đầu ra, nhưng nguồn tiền còn phụ thuộc cơ chế giá và thời điểm khách hàng thanh toán. Với phát điện, sản lượng huy động, điều kiện thủy văn hoặc giá nhiên liệu có thể làm lợi nhuận thay đổi dù công suất lắp đặt không đổi. Các khoản chênh lệch giá hoặc chi phí chưa được quyết toán có thể nằm ở phải thu trong thời gian dài. Với cấp nước và xử lý chất thải, khả năng thu phí và chi phí duy tu có vai trò lớn hơn. Vì vậy, tài sản hạ tầng có tuổi thọ dài chỉ hỗ trợ tín nhiệm khi doanh thu được chuyển thành tiền đủ đều để phục vụ nợ.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Hàng Tiêu dùng": [
       {
-        "Title": "Sức mua, giá bán và chi phí nguyên liệu",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Sức mua tăng hỗ trợ tiêu thụ nhưng người tiêu dùng có thể chuyển sang sản phẩm giá thấp khi chi phí sinh hoạt tăng. Doanh nghiệp khó chuyển toàn bộ chi phí nguyên liệu vào giá bán sẽ bị giảm biên lợi nhuận. Tồn kho chậm luân chuyển, hạn sử dụng và công nợ nhà phân phối làm rủi ro vốn lưu động khác nhau giữa thực phẩm, hàng gia dụng và sản xuất xuất khẩu. Tăng chiết khấu để giữ sản lượng có thể bảo vệ doanh thu trước mắt nhưng giảm nguồn tiền giữ lại; cần đọc tăng trưởng cùng biên và dòng tiền."
+        "Title": "Sức mua, quyền định giá và chất lượng hàng tồn kho",
+        "Source": "NSO10",
+        "Analysis": "Sức mua thực cải thiện tạo điều kiện tăng sản lượng, nhưng người tiêu dùng có thể chuyển sang sản phẩm giá thấp khi chi phí sinh hoạt tăng. Doanh nghiệp khó chuyển chi phí nguyên liệu vào giá bán thường phải dùng chiết khấu hoặc khuyến mại để bảo vệ doanh số, làm biên lợi nhuận suy giảm. Hàng tồn kho chậm luân chuyển, hạn sử dụng và công nợ nhà phân phối làm nhu cầu vốn lưu động tăng. Thương hiệu và hệ thống phân phối có thể hỗ trợ doanh thu, song cần chuyển được lợi thế đó thành tiền thu từ khách hàng. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Tổng mức bán lẻ và doanh thu dịch vụ tiêu dùng mười tháng 2026 tăng 13,5% theo giá hiện hành và 7,7% sau loại trừ yếu tố giá; đây là bối cảnh cầu tiêu dùng chung, không phải tốc độ tăng riêng của từng phân ngành."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Kênh phân phối, tồn kho và chi phí giữ thị phần",
+        "Source": "NSO10",
+        "Analysis": "Sức mua thực phục hồi tạo cơ hội tăng sản lượng nhưng cạnh tranh khuyến mại có thể làm lợi nhuận tăng chậm hơn doanh thu. Bán hàng qua nhà phân phối hoặc chuỗi bán lẻ thường đi kèm công nợ, chiết khấu và quyền trả hàng; doanh thu đã ghi nhận chưa chắc tương đương tiền đã thu. Hàng chậm luân chuyển làm phát sinh giảm giá, đặc biệt với sản phẩm có hạn sử dụng hoặc nhạy với xu hướng tiêu dùng. Thương hiệu và mạng lưới phân phối hỗ trợ vị thế thương lượng khi doanh nghiệp kiểm soát được chi phí duy trì kênh bán. Khi tồn kho và phải thu cùng tăng nhanh hơn doanh thu, nhu cầu tài trợ hoạt động có thể gia tăng dù báo cáo lợi nhuận vẫn tích cực.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Dịch vụ Tiêu dùng": [
       {
-        "Title": "Doanh thu phụ thuộc sức mua và chi phí cố định",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Bán lẻ, du lịch và dịch vụ tiêu dùng hưởng lợi từ thu nhập, đi lại và chi tiêu, nhưng mức độ nhạy theo phân khúc rất khác nhau. Chi phí thuê địa điểm, nhân sự và mạng lưới thường điều chỉnh chậm hơn doanh thu. Mở rộng điểm bán hoặc cơ sở dịch vụ có thể làm doanh thu tăng trong khi lợi nhuận trên vốn giảm nếu thời gian hòa vốn kéo dài. Trong giai đoạn sức mua yếu, quản trị tồn kho và tiền mặt quyết định khả năng duy trì hoạt động; tăng quy mô bằng vay ngắn hạn làm áp lực này lớn hơn."
+        "Title": "Lưu lượng khách, sức mua và chi phí cố định",
+        "Source": "NSO10",
+        "Analysis": "Bán lẻ, du lịch và dịch vụ có thể được hỗ trợ bởi tiêu dùng và lượng khách tăng, nhưng doanh thu giữa các địa điểm và phân khúc thường phân hóa. Chi phí thuê mặt bằng, nhân sự và tài sản vận hành tạo nghĩa vụ tiền tương đối cố định. Mở rộng mạng lưới quá nhanh có thể làm tiền đầu tư và tiền vận hành tăng trước khi địa điểm mới đạt điểm hòa vốn. Khả năng giữ khách, điều chỉnh giá và đóng các hoạt động kém hiệu quả ảnh hưởng trực tiếp đến lợi nhuận và dòng tiền. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Số liệu Cục Thống kê cho thấy mức tăng bán lẻ và doanh thu dịch vụ tiêu dùng mười tháng 2026 còn 7,7% sau loại trừ yếu tố giá, so với mức tăng danh nghĩa 13,5%."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Chi phí cố định và tính mùa vụ của tiền thu",
+        "Source": "NSO10",
+        "Analysis": "Mô hình bán lẻ, du lịch và dịch vụ có cơ cấu dòng tiền khác nhau. Bán lẻ thu tiền nhanh nhưng phải tài trợ hàng tồn và mặt bằng; dịch vụ lưu trú hoặc vận tải chịu chi phí cố định lớn ngay cả khi công suất sử dụng giảm. Khoản đặt trước của khách hàng hỗ trợ tiền mặt trong mùa cao điểm nhưng cũng đi kèm nghĩa vụ cung cấp dịch vụ hoặc hoàn tiền. Khi cầu yếu, giảm giá để duy trì lượng khách có thể làm biên lợi nhuận suy giảm nhanh hơn doanh thu. Khả năng điều chỉnh mạng lưới, hợp đồng thuê và chi phí nhân sự quyết định mức độ chịu đựng. Nợ vay cần phù hợp với dòng tiền qua cả chu kỳ mùa vụ thay vì chỉ dựa trên quý cao điểm.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Công nghệ Thông tin": [
       {
-        "Title": "Ngân sách khách hàng, nhân lực và chuyển đổi công nghệ",
-        "Source": "OECD_FDI",
-        "Fact": "",
-        "Analysis": "Nhu cầu số hóa tạo cơ hội cho phần mềm và dịch vụ công nghệ, nhưng ngân sách khách hàng có thể trì hoãn khi kinh tế hoặc thị trường xuất khẩu yếu. Chi phí nhân sự phát sinh trước khi nghiệm thu hợp đồng khiến dòng tiền nhạy với tiến độ dự án và công nợ. Sự thay đổi nhanh của công nghệ đòi hỏi đầu tư liên tục; quy mô doanh thu không bảo đảm lợi thế nếu biên và năng suất suy giảm. Doanh nghiệp cung cấp dịch vụ, sản xuất phần cứng và phân phối thiết bị có cấu trúc vốn lưu động khác nhau, cần được đọc cùng phân nhóm peer thực tế."
+        "Title": "Chất lượng hợp đồng, nhân lực và khả năng mở rộng dịch vụ",
+        "Source": "DIGITAL",
+        "Analysis": "Doanh nghiệp công nghệ có thể khai thác nhu cầu số hóa, nhưng khả năng sinh lời phụ thuộc chất lượng hợp đồng, năng suất nhân sự và mức độ khác biệt của dịch vụ. Chi phí tuyển dụng và phát triển sản phẩm thường phát sinh trước doanh thu. Hợp đồng giá cố định có thể làm doanh nghiệp chịu chi phí vượt dự toán khi triển khai kéo dài; tập trung vào ít khách hàng hoặc thị trường xuất khẩu làm dòng tiền nhạy cảm với việc cắt giảm ngân sách công nghệ. Tăng trưởng chỉ bền vững nếu kiểm soát được phải thu và duy trì tỷ lệ sử dụng nhân lực phù hợp. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Bộ Khoa học và Công nghệ ước doanh thu công nghiệp công nghệ số chín tháng 2026 tăng 32,1%; số liệu bao gồm phần cứng và điện tử, không đại diện riêng cho dịch vụ phần mềm."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Chất lượng hợp đồng và khả năng chuyển doanh thu thành tiền",
+        "Source": "DIGITAL",
+        "Analysis": "Với dịch vụ phần mềm, tiến độ bàn giao, nghiệm thu và tỷ lệ sử dụng nhân sự quyết định mức sinh lời; tuyển dụng trước đơn hàng làm chi phí tăng trước doanh thu. Hợp đồng định giá cố định có thể chịu áp lực nếu phạm vi công việc mở rộng hoặc chi phí nhân sự tăng. Doanh nghiệp phân phối phần cứng lại cần vốn cho tồn kho và công nợ khách hàng, đồng thời chịu rủi ro sản phẩm nhanh lỗi thời. Hợp đồng dài hạn và nguồn khách hàng phân tán giúp ổn định dòng tiền, nhưng cần xem xét điều khoản thanh toán và mức tập trung vào từng thị trường. Chỉ tiêu tăng trưởng chung của công nghệ số không thay thế được đánh giá chất lượng đơn hàng của từng mô hình.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Viễn thông": [
       {
-        "Title": "Đầu tư mạng lưới và khả năng tạo tiền dài hạn",
-        "Source": "OECD_FDI",
-        "Fact": "",
-        "Analysis": "Mạng lưới và dữ liệu là nền tảng tăng trưởng nhưng yêu cầu chi đầu tư thường xuyên. Cạnh tranh giá, chất lượng dịch vụ và thay đổi công nghệ có thể khiến tài sản phải nâng cấp trước khi hoàn vốn. Nguồn thu ổn định chỉ hỗ trợ tín nhiệm nếu đủ trang trải vận hành, đầu tư duy trì và nghĩa vụ nợ. Doanh nghiệp xây lắp, phân phối thiết bị viễn thông không có cùng đặc tính dòng tiền với nhà khai thác mạng; rủi ro của từng mã cần đối chiếu với nghiệp vụ thực tế, công nợ và đòn bẩy."
+        "Title": "Nhu cầu dữ liệu và áp lực đầu tư hạ tầng",
+        "Source": "TELECOM",
+        "Analysis": "Nhu cầu kết nối và dữ liệu hỗ trợ hoạt động viễn thông, nhưng cạnh tranh về giá có thể hạn chế mức tăng doanh thu trên mỗi khách hàng. Nâng cấp mạng lưới và mở rộng vùng phủ đòi hỏi vốn đầu tư trước khi tạo tiền. Đối với doanh nghiệp có tài sản hạ tầng lớn, chi phí khấu hao và duy trì hệ thống làm dòng tiền nhạy cảm với hiệu quả khai thác. Rủi ro gián đoạn dịch vụ, an ninh thông tin và nghĩa vụ chất lượng có thể ảnh hưởng đồng thời đến chi phí, khách hàng và uy tín. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Ngày 31/10/2026, Bộ Khoa học và Công nghệ công bố lấy ý kiến dự thảo sửa đổi quy định chi tiết về viễn thông. Tại ngày rà soát, nội dung này đang trong giai đoạn dự thảo, chưa được coi là quy định đã có hiệu lực."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Đầu tư mạng lưới và hiệu quả khai thác khách hàng",
+        "Source": "TELECOM",
+        "Analysis": "Nguồn thu thuê bao có tính lặp lại giúp dự báo tiền thu, nhưng đầu tư mạng lưới, thiết bị và công nghệ thường phát sinh trước khi lượng người dùng đủ lớn. Cạnh tranh giá và chi phí giữ khách hàng có thể kéo dài thời gian hoàn vốn. Doanh nghiệp hạ tầng cho thuê cần đánh giá chất lượng đối tác và điều khoản hợp đồng, trong khi nhà cung cấp dịch vụ trực tiếp nhạy hơn với doanh thu bình quân và tỷ lệ rời mạng. Đầu tư công nghệ mới chỉ hỗ trợ tín nhiệm khi tạo dòng tiền bổ sung hoặc giảm chi phí đủ bù vốn bỏ ra. Các thay đổi chính sách đang dự thảo được xem là yếu tố theo dõi, không được coi là lợi ích hay nghĩa vụ đã phát sinh.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Dược phẩm và Y tế": [
       {
-        "Title": "Nhu cầu thiết yếu và chu kỳ thu tiền",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Nhu cầu chăm sóc sức khỏe có tính thiết yếu nhưng doanh nghiệp vẫn chịu áp lực giá nguyên liệu nhập khẩu, tỷ giá và tiến độ thu tiền. Hàng tồn kho cần quản lý chất lượng, hạn sử dụng; cơ sở sản xuất hoặc khám chữa bệnh cần đầu tư trước khi tạo công suất ổn định. Doanh thu từ kênh bệnh viện và hợp đồng lớn có thể tạo khoản phải thu đáng kể. Vì vậy, lợi nhuận kế toán cần đi cùng dòng tiền kinh doanh; tính thiết yếu không tự loại bỏ rủi ro thanh khoản hoặc chi phí vốn khi đầu tư mở rộng."
+        "Title": "Nhu cầu tương đối ổn định nhưng dòng tiền phụ thuộc kênh phân phối",
+        "Source": "PHARMA",
+        "Analysis": "Nhu cầu chăm sóc sức khỏe có tính ổn định tương đối, song hiệu quả từng doanh nghiệp phụ thuộc danh mục sản phẩm, kênh bệnh viện, bán lẻ và điều kiện thanh toán. Nguyên liệu nhập khẩu tạo độ nhạy với tỷ giá, còn quy trình kiểm soát chất lượng và thời gian lưu kho làm vốn lưu động bị giam giữ. Doanh thu đã ghi nhận chưa đồng nghĩa tiền có thể sử dụng ngay nếu công nợ tập trung hoặc kéo dài. Đầu tư nhà máy, công nghệ và nghiên cứu có thể nâng vị thế dài hạn nhưng cần nguồn vốn tương ứng với thời gian hoàn vốn. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": "Chương trình phát triển công nghiệp hóa dược được Chính phủ phê duyệt tháng 10/2026 hướng đến giảm phụ thuộc nhập khẩu nguyên liệu và phát triển năng lực sản xuất trong nước; các chỉ tiêu của chương trình là mục tiêu dài hạn."
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Kênh bệnh viện, đấu thầu và vòng quay công nợ",
+        "Source": "PHARMA",
+        "Analysis": "Nhu cầu chăm sóc sức khỏe có tính thiết yếu, song doanh thu qua kênh bệnh viện phụ thuộc kết quả đấu thầu, khả năng cung ứng và thời điểm thanh toán. Doanh nghiệp phải duy trì nguyên liệu, thuốc thành phẩm và tiêu chuẩn bảo quản trong khi chu kỳ thu tiền có thể kéo dài. Rủi ro tỷ giá hoặc gián đoạn nguồn nguyên liệu nhập khẩu tác động đến giá vốn và tiến độ giao hàng; khả năng tăng giá bán thường chịu cạnh tranh và cơ chế mua sắm. Kênh bán lẻ phân tán nguồn khách hàng nhưng làm tăng chi phí phân phối. Tăng trưởng bền vững đòi hỏi chất lượng sản phẩm, tuân thủ và quản lý tồn kho đi cùng khả năng thu hồi công nợ, tránh đánh đổi dòng tiền để mở rộng doanh số.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Tài chính": [
       {
-        "Title": "Chất lượng tài sản và khả năng hiện thực hóa dòng tiền",
-        "Source": "IMF_BANK",
-        "Fact": "",
-        "Analysis": "Nhóm phân ngành này có thể gồm các mô hình rất khác nhau. Với công ty nắm giữ đầu tư, lợi nhuận định giá lại chưa chắc tạo tiền để trả nợ; khả năng thu cổ tức và bán tài sản mới quyết định nguồn tiền thực. Nếu hoạt động thực tế là phát triển bất động sản, tiến độ pháp lý, xây dựng và bàn giao có thể khiến doanh thu và dòng tiền lệch nhau nhiều kỳ. Không áp nhận định ngân hàng cho các doanh nghiệp này. Cần dựa trên hồ sơ hoạt động, lịch sử tiền kinh doanh và nghĩa vụ vay của chính pháp nhân để kết luận."
+        "Title": "Khả năng tạo tiền của danh mục và sự liên thông giữa các công ty",
+        "Source": "FINANCE",
+        "Analysis": "Nhóm doanh nghiệp phi tài chính được phân ngành rộng là tài chính có thể gồm đơn vị đầu tư, sở hữu tài sản hoặc phát triển dự án. Vì vậy, nguồn trả nợ phụ thuộc mô hình hoạt động thực tế của từng doanh nghiệp. Cổ tức, chuyển nhượng khoản đầu tư và thu tiền dự án thường không đều giữa các kỳ; lợi nhuận đánh giá lại tài sản có thể chưa tạo tiền. Nợ ở công ty mẹ trong khi tiền nằm tại công ty con làm khả năng điều chuyển và hạn chế pháp lý trở thành yếu tố quan trọng. Không suy ra khả năng thanh toán chỉ từ giá trị tài sản hợp nhất. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": ""
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Vốn lưu động và rủi ro tập trung đối tác",
+        "Source": "INDUSTRY",
+        "Analysis": "Tiền bán hàng thường được thu sau khi doanh nghiệp đã thanh toán một phần nguyên liệu, nhân công và chi phí vận hành. Khoảng cách này mở rộng khi khách hàng thanh toán chậm hoặc hàng tồn kho tăng. Việc dùng nợ ngắn hạn để bù đắp có thể duy trì sản lượng trước mắt nhưng làm doanh nghiệp phụ thuộc hơn vào hạn mức ngân hàng. Tập trung doanh thu hoặc phải thu vào một số đối tác còn khiến sự cố của một khách hàng tác động mạnh đến nguồn trả nợ. Ngược lại, chu kỳ thu tiền ổn định, khả năng thương lượng điều khoản thanh toán và cơ cấu khách hàng phân tán tạo dư địa ứng phó tốt hơn khi thị trường giảm tốc.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
+      }
+    ],
+    "DEFAULT": [
+      {
+        "Title": "Khả năng duy trì lợi nhuận và chuyển đổi thành dòng tiền",
+        "Source": "INDUSTRY",
+        "Analysis": "Môi trường kinh doanh thuận lợi có thể hỗ trợ doanh thu nhưng chưa phản ánh đầy đủ khả năng trả nợ của từng doanh nghiệp. Tập trung khách hàng, hàng tồn kho chậm luân chuyển hoặc đầu tư vượt năng lực tài trợ có thể làm dòng tiền suy yếu dù lợi nhuận vẫn dương. Khả năng chuyển chi phí vào giá bán và điều chỉnh quy mô hoạt động giúp phân biệt mức độ chống chịu khi nhu cầu thay đổi. Trọng tâm là tiền tạo ra từ hoạt động sau nhu cầu vốn lưu động và phần đầu tư thiết yếu. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": ""
+      },
+      {
+        "Title": "Vốn lưu động và rủi ro tập trung đối tác",
+        "Source": "INDUSTRY",
+        "Analysis": "Tiền bán hàng thường được thu sau khi doanh nghiệp đã thanh toán một phần nguyên liệu, nhân công và chi phí vận hành. Khoảng cách này mở rộng khi khách hàng thanh toán chậm hoặc hàng tồn kho tăng. Việc dùng nợ ngắn hạn để bù đắp có thể duy trì sản lượng trước mắt nhưng làm doanh nghiệp phụ thuộc hơn vào hạn mức ngân hàng. Tập trung doanh thu hoặc phải thu vào một số đối tác còn khiến sự cố của một khách hàng tác động mạnh đến nguồn trả nợ. Ngược lại, chu kỳ thu tiền ổn định, khả năng thương lượng điều khoản thanh toán và cơ cấu khách hàng phân tán tạo dư địa ứng phó tốt hơn khi thị trường giảm tốc.",
+        "Fact": ""
+      },
+      {
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ],
     "Chưa phân loại": [
       {
-        "Title": "Chu kỳ kinh doanh và chuyển hóa doanh thu thành tiền",
-        "Source": "WB_OCT",
-        "Fact": "",
-        "Analysis": "Tăng trưởng kinh tế và đầu tư tạo cơ hội doanh thu, nhưng mức hưởng lợi phụ thuộc sản phẩm, khách hàng và địa bàn của từng doanh nghiệp. Doanh thu tăng cùng công nợ và hàng tồn kho có thể làm vốn lưu động bị chiếm dụng. Khi biên lợi nhuận giảm, doanh nghiệp cần nhiều doanh thu hơn mới tạo cùng một lượng tiền trả nợ. Chuỗi năm và peer ở phần tài chính giúp phân biệt tăng trưởng quy mô với cải thiện sức mạnh tài chính."
+        "Title": "Khả năng duy trì lợi nhuận và chuyển đổi thành dòng tiền",
+        "Source": "INDUSTRY",
+        "Analysis": "Môi trường kinh doanh thuận lợi có thể hỗ trợ doanh thu nhưng chưa phản ánh đầy đủ khả năng trả nợ của từng doanh nghiệp. Tập trung khách hàng, hàng tồn kho chậm luân chuyển hoặc đầu tư vượt năng lực tài trợ có thể làm dòng tiền suy yếu dù lợi nhuận vẫn dương. Khả năng chuyển chi phí vào giá bán và điều chỉnh quy mô hoạt động giúp phân biệt mức độ chống chịu khi nhu cầu thay đổi. Trọng tâm là tiền tạo ra từ hoạt động sau nhu cầu vốn lưu động và phần đầu tư thiết yếu. Khả năng duy trì biên lợi nhuận trong giai đoạn bất lợi giúp bảo vệ nguồn tiền trả lãi và hạn chế nhu cầu vay thêm để tài trợ hoạt động thường xuyên.",
+        "Fact": ""
       },
       {
-        "Title": "Đầu tư, năng suất và khả năng tài trợ",
-        "Source": "OECD_FDI",
-        "Analysis": "Đổi mới công nghệ có thể nâng hiệu suất nhưng cần vốn trước khi tạo dòng tiền. Nếu chi đầu tư và cổ tức vượt tiền từ hoạt động, doanh nghiệp phải bổ sung vay hoặc vốn chủ. Nợ ngắn hạn tài trợ tài sản dài hạn làm áp lực tái cấp vốn lớn hơn. Kết quả tốt trong một năm thuận lợi chưa đủ chứng minh khả năng trả nợ qua chu kỳ; cần xét biên lợi nhuận, tiền sau đầu tư và mức bao phủ lãi đồng thời."
+        "Title": "Vốn lưu động và rủi ro tập trung đối tác",
+        "Source": "INDUSTRY",
+        "Analysis": "Tiền bán hàng thường được thu sau khi doanh nghiệp đã thanh toán một phần nguyên liệu, nhân công và chi phí vận hành. Khoảng cách này mở rộng khi khách hàng thanh toán chậm hoặc hàng tồn kho tăng. Việc dùng nợ ngắn hạn để bù đắp có thể duy trì sản lượng trước mắt nhưng làm doanh nghiệp phụ thuộc hơn vào hạn mức ngân hàng. Tập trung doanh thu hoặc phải thu vào một số đối tác còn khiến sự cố của một khách hàng tác động mạnh đến nguồn trả nợ. Ngược lại, chu kỳ thu tiền ổn định, khả năng thương lượng điều khoản thanh toán và cơ cấu khách hàng phân tán tạo dư địa ứng phó tốt hơn khi thị trường giảm tốc.",
+        "Fact": ""
       },
       {
-        "Title": "Gián đoạn hoạt động và rủi ro tập trung",
-        "Source": "WB_CLIMATE",
-        "Analysis": "Cơ sở sản xuất hoặc nguồn cung tập trung có thể làm một gián đoạn kéo dài tác động đến toàn bộ doanh thu. Mức độ chịu ảnh hưởng phải được đối chiếu với địa điểm tài sản và chuỗi cung ứng thực tế, không suy ra chỉ từ tên ngành. Tiền dự phòng, bảo hiểm và khả năng thay thế nhà cung cấp là các yếu tố có thể giảm áp lực thanh khoản khi hoạt động bị gián đoạn."
+        "Title": "Đầu tư tài sản và khả năng cân đối nguồn vốn",
+        "Source": "RATE",
+        "Analysis": "Đầu tư mở rộng có thể tạo nguồn thu mới, nhưng thời gian xây dựng và tăng công suất thường khiến chi tiền đi trước thu tiền. Nếu vốn chủ sở hữu và tiền kinh doanh không đủ tài trợ, doanh nghiệp phải bổ sung vay; khi đó chi phí lãi và nghĩa vụ gốc tăng trước khi dự án đóng góp đầy đủ. Sử dụng nguồn vay ngắn hạn cho tài sản dài hạn làm rủi ro tái cấp vốn lớn hơn. Khả năng giãn tiến độ đầu tư không thiết yếu, kiểm soát cổ tức và duy trì tiền dự phòng giúp bảo vệ thanh khoản. Vốn đầu tư chỉ hỗ trợ tín nhiệm khi hiệu quả vận hành và thời gian hoàn vốn phù hợp với cơ cấu nợ.",
+        "Fact": ""
+      },
+      {
+        "Title": "Biên an toàn trước biến động thị trường",
+        "Source": "NSO10",
+        "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
+        "Fact": ""
       }
     ]
   }

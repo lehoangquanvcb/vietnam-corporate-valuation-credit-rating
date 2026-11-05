@@ -1,0 +1,131 @@
+{
+  "Build": "V8.143.0-DOMESTIC-RESEARCH",
+  "BaseCommit": "800e337",
+  "ResearchAsOf": "2026-11-05",
+  "RoutingTickers": 1754,
+  "ByType": {
+    "BANK": 28,
+    "CORPORATE": 1699,
+    "INSURANCE": 12,
+    "SECURITIES": 15
+  },
+  "RegistrySectors": {
+    "Ngân hàng": 28,
+    "Chưa phân loại": 16,
+    "Tài chính": 175,
+    "Công nghiệp": 648,
+    "Công nghệ Thông tin": 29,
+    "Dược phẩm và Y tế": 63,
+    "Dầu khí": 12,
+    "Dịch vụ Tiêu dùng": 124,
+    "Hàng Tiêu dùng": 270,
+    "Nguyên vật liệu": 192,
+    "Tiện ích Cộng đồng": 162,
+    "Bảo hiểm": 12,
+    "Viễn thông": 8,
+    "Công ty chứng khoán": 15
+  },
+  "DomesticContextSources": 17,
+  "NewResearchedProfiles": [
+    "ABB",
+    "OCB",
+    "SSI",
+    "ABI",
+    "HPG"
+  ],
+  "SampleContextChecks": [
+    {
+      "Ticker": "ABB",
+      "Type": "BANK",
+      "OverviewParagraphs": 5,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": "https://abbank.vn/tin-tuc/9-thang-dau-nam-tang-truong-hieu-qua-abbank-day-manh-but-toc.html"
+    },
+    {
+      "Ticker": "OCB",
+      "Type": "BANK",
+      "OverviewParagraphs": 5,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": "https://ocb.com.vn/vi/ve-ocb/gioi-thieu"
+    },
+    {
+      "Ticker": "SSI",
+      "Type": "SECURITIES",
+      "OverviewParagraphs": 5,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": "https://www.ssi.com.vn/ve-ssi/tong-quan"
+    },
+    {
+      "Ticker": "ABI",
+      "Type": "INSURANCE",
+      "OverviewParagraphs": 5,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": "https://abic.com.vn/vi/thong-tin-chung-ve-abic/thong-tin-chung.html"
+    },
+    {
+      "Ticker": "HPG",
+      "Type": "CORPORATE",
+      "OverviewParagraphs": 5,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": "https://www.hoaphat.com.vn/gioi-thieu"
+    },
+    {
+      "Ticker": "FPT",
+      "Type": "CORPORATE",
+      "OverviewParagraphs": 3,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": "https://kbbuddywts.kbsec.com.vn/iis-server/investment/stockinfo/profile/FPT?l=1"
+    },
+    {
+      "Ticker": "VHM",
+      "Type": "CORPORATE",
+      "OverviewParagraphs": 4,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": null
+    },
+    {
+      "Ticker": "GAS",
+      "Type": "CORPORATE",
+      "OverviewParagraphs": 4,
+      "MacroBlocks": 4,
+      "IndustryBlocks": 4,
+      "Period": "2026-Q2",
+      "SourceURL": null
+    }
+  ],
+  "DistinctTestsPassed": 94,
+  "ValidationScope": "94 targeted tests, registry routing for all tickers, sample exports for four methods; not 1754 individually researched profiles or rendered reports.",
+  "RatingEngineChanged": false,
+  "FinancialInputsChanged": false,
+  "FullSample": {
+    "Ticker": "ABB",
+    "Pages": 22,
+    "AllPagesVisuallyReviewed": true,
+    "NoForcedChapterPageBreaks": true,
+    "RenderedWith": "LibreOffice via render_docx.py"
+  },
+  "TargetedTestFiles": [
+    "tests/test_report_compact_context.py",
+    "tests/test_professional_report.py",
+    "tests/test_unified_reports.py",
+    "tests/test_report_release.py",
+    "tests/test_financial_charts.py",
+    "tests/test_bank_car_coverage.py",
+    "tests/test_report_domestic_research.py"
+  ],
+  "PostContentUpdateChecks": "16 affected tests passed; Python compile and git diff --check passed"
+}

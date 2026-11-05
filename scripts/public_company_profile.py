@@ -109,13 +109,14 @@ def fetch_public_profile(ticker, *, cache_dir=None, allow_network=True, timeout=
 
 
 def public_profile_paragraphs(row, name):
-    parts = []
-    if row.get('Established'): parts.append('thành lập ngày ' + row['Established'])
+    text = name
+    if row.get('Established'): text += ' được thành lập ngày ' + row['Established']
+    else: text += ' có mã chứng khoán ' + row['Ticker']
+    text += '.'
     if row.get('ListedSince'):
-        parts.append('có ngày bắt đầu giao dịch được nguồn ghi nhận là ' + row['ListedSince'] +
-                     (' trên ' + row['Exchange'] if row.get('Exchange') else ''))
-    result = [name + ': ' + '; '.join(parts) + '.'] if parts else []
-    if row.get('BusinessExcerpt'):
-        result.append('Hoạt động theo hồ sơ công khai của KBS (trích): “' + row['BusinessExcerpt'] + '”.')
-    if row.get('Website'): result.append('Website doanh nghiệp: ' + row['Website'])
-    return result
+        text += (' Cổ phiếu ' + row['Ticker'] + ' bắt đầu giao dịch' +
+                 (' trên ' + row['Exchange'] if row.get('Exchange') else '') +
+                 ' ngày ' + row['ListedSince'] + ' theo hồ sơ thị trường công khai.')
+    # Không ghép đoạn giới thiệu bị cắt giữa câu thành văn bản báo cáo.
+    # Website và nguồn vẫn được giữ trong hồ sơ nguồn, không lặp thành dòng giới thiệu.
+    return [text]

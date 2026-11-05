@@ -1,0 +1,11 @@
+app.py
+VERSION.txt
+scripts/professional_report.py
+scripts/public_company_profile.py
+scripts/report_context.py
+data/report_public_context.json
+data/report_issuer_research.json
+tests/test_report_domestic_research.py
+docs/validation_v8_143.json
+README_V8_143.txt
+GIT_FILES_V8_143.txt

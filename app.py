@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.142.0-CAR-CLEAN-LABELS'
+BUILD_TAG='V8.143.0-DOMESTIC-RESEARCH'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -561,9 +561,9 @@ def _download_report_block(report_type, rating_result=None):
     from scripts.dynamic_peer_engine import peer_source_fingerprint
     from scripts.bank_domestic_rating import source_fingerprint as bank_rating_fingerprint
     _report_sources=[peer_source_fingerprint(),bank_rating_fingerprint()]
-    from scripts.report_context import CONTEXT_FILE
+    from scripts.report_context import CONTEXT_FILE, ISSUER_FILE
     from scripts.company_profile import PROFILE_FILE
-    _report_sources.extend([signature(CONTEXT_FILE),signature(PROFILE_FILE)])
+    _report_sources.extend([signature(CONTEXT_FILE),signature(ISSUER_FILE),signature(PROFILE_FILE)])
     _digest=hashlib.sha256(json.dumps({'build':BUILD_TAG,'export_date':_export_date,'sources':_report_sources,'rating':rating_result,'basis':_history_basis,'years':_history_years,'snapshot':s.get('SnapshotPeriod')},sort_keys=True,default=str).encode()).hexdigest()[:12]
     identity=f'{selected}_{report_type}_{_digest}'
     for kind, column, title, mime, ext in [

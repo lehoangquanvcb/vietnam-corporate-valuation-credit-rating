@@ -134,7 +134,8 @@ def _embed_fonts(doc):
     setting=OxmlElement('w:embedTrueTypeFonts');doc.settings.element.append(setting)
 
 def _cover(doc,pack,report_type,when=None):
-    name=pack['Meta'].get('DisplayName') or pack['Meta'].get('CompanyName') or pack['Ticker']
+    from scripts.report_context import issuer_name
+    name=issuer_name(pack,export_date(when))
     t=doc.add_table(rows=1,cols=1);t.autofit=False;t.columns[0].width=Mm(176)
     c=t.cell(0,0);c.width=Mm(176);_shade(c,GREEN)
     mar=OxmlElement('w:tcMar')
@@ -246,16 +247,21 @@ def _context(doc,pack,when=None):
     _band(doc,'THÔNG TIN TỔNG QUAN TỔ CHỨC PHÁT HÀNH')
     paragraphs,source=issuer_context(pack,when)
     for text in paragraphs:_para(doc,text)
-    if source:_source_link(doc,source)
+    if source:
+        _source_link(doc,source)
+        for extra in source.get('AdditionalSources',[]):_source_link(doc,extra)
     _overview(doc,pack)
     for title,blocks in research_sections(pack,when):
         _band(doc,title)
         if title=='RỦI RO VĨ MÔ':
-            _para(doc,'Bối cảnh công khai đến ngày '+when.strftime('%d/%m/%Y')+'; kỳ số liệu tài chính doanh nghiệp: '+str(pack['Period'] or 'chưa xác định')+'.',8.5,color=GRAY)
+            researched=blocks[0].get('ResearchedOn') if blocks else None
+            _para(doc,'Nguồn công khai được rà soát đến '+str(researched or when.isoformat())+
+                  '; BCTC dùng cho phân tích định lượng: '+str(pack['Period'] or 'chưa xác định')+'.',8.5,color=GRAY)
         for block in blocks:
             _band(doc,block['Title'],2)
-            if block['Fact']:_para(doc,block['Fact'],10)
-            if block['Analysis']:_para(doc,block['Analysis'],10,lead='Tác động tín nhiệm:')
+            text=' '.join(x for x in (block['Fact'],block['Analysis']) if x)
+            for paragraph in text.split('\n\n'):
+                if paragraph.strip():_para(doc,paragraph,10)
             _source_link(doc,block['Source'])
 
 def _overview(doc,pack):
@@ -350,16 +356,19 @@ def _sources(doc,pack,rr=None):
             for p in history.get('Period',[]):
                 if p!=car.get('Period'):
                     records.append(at_period(pack['Ticker'],'BANK',p,'FY').get('CAR',{}))
+        seen_notes=set()
         for source in records:
             text=car_usage_text(source,pack.get('Period') if source is car else None)
             if not text:continue
             _para(doc,text,9,color=GRAY,keep=bool(source.get('SourceURL')))
             if source.get('SourceURL'):
-                _para(doc,'Nguồn công bố, trang '+str(source.get('SourcePage',''))+'; '+str(source.get('Regime',''))+'.',9,color=GRAY,keep=True)
-                _para(doc,source['SourceURL'],9,color=GRAY).alignment=WD_ALIGN_PARAGRAPH.LEFT
+                _source_link(doc,{'Name':'Báo cáo công bố CAR, trang '+str(source.get('SourcePage',''))+
+                    '; '+str(source.get('Regime','')), 'URL':source['SourceURL']})
             elif source.get('SourceReference'):
                 _para(doc,str(source['SourceReference'])+'; ngày cung cấp '+str(source.get('ProvidedOn',''))+'.',9,color=GRAY)
-            if source.get('Note'):_para(doc,source['Note'],9,color=GRAY)
+            note=source.get('Note')
+            if note and note not in seen_notes:
+                _para(doc,note,9,color=GRAY);seen_notes.add(note)
     if pack['Type']=='INSURANCE' and pack['Meta'].get('InsuranceScope'):
         _para(doc,'Phạm vi BCTC: '+str(pack['Meta']['InsuranceScope'])+'. Phân nhóm peer không thay đổi phạm vi pháp nhân của số liệu.',9,color=GRAY)
     missing=[label(m) for m,x in pack['Items'].items() if not finite(x['Value'])]
