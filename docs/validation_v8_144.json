@@ -1,0 +1,52 @@
+{
+  "Build": "V8.144.0-BANK-GOVERNMENT-SUPPORT",
+  "BaseCommit": "800e337",
+  "InheritedRelease": "V8.143.0-DOMESTIC-RESEARCH",
+  "ReviewedOn": "2026-11-05",
+  "RoutingTickers": 1754,
+  "ByType": {
+    "CORPORATE": 1699,
+    "BANK": 28,
+    "SECURITIES": 15,
+    "INSURANCE": 12
+  },
+  "RatedChecks": 34,
+  "BankChecks": 29,
+  "NonBankRegressionUnchanged": [
+    "SSI",
+    "ABI",
+    "HPG",
+    "FPT",
+    "BVH"
+  ],
+  "Tests": {
+    "FullSuitePassed": 441,
+    "SubtestsPassed": 22,
+    "Warnings": 4,
+    "FinalAffectedReportTestsPassed": 43
+  },
+  "UIChecks": 8,
+  "FinancialInputsChanged": false,
+  "PublishedToRemote": false,
+  "FullSample": {
+    "Ticker": "VCB",
+    "Pages": 24,
+    "AllPagesVisuallyReviewed": true,
+    "Layout": {
+      "Ticker": "VCB",
+      "Charts": 48,
+      "IntermediateTables": 0,
+      "SourceLinks": 16,
+      "Errors": []
+    },
+    "RenderedWith": "LibreOffice via render_docx.py"
+  },
+  "Limitations": [
+    "6-notch support is a disclosed custom model assumption, not the original method table or a CRA-assigned grade.",
+    "No empirical default-rate calibration or full CRA backtest.",
+    "Agribank is eligible but lacks financial inputs and has no SACP/ICR.",
+    "Existing qualitative/funding assumptions remain explicit.",
+    "Policy period 2026-Q2 through 2026-Q4.",
+    "Routing check is not individual research or visual inspection of all 1754 reports."
+  ]
+}

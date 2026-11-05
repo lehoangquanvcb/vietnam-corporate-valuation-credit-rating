@@ -91,6 +91,8 @@ def component_scorecard(rr, pack=None):
                 row['Điểm / Đánh giá']=str(rr.get('Funding') or 'Chưa xác định')+' / Phù Hợp (giả định)'
                 row['Kết quả / Căn cứ']='Huy động theo CASA, tiền gửi/tài sản và ổn định tiền gửi; thanh khoản dùng giả định trung tính, chưa kiểm định dòng tiền stress. Không hạ bậc chỉ từ tỷ số cho vay/tiền gửi BCTC.'
         rows.append(row)
+    rows.extend(dict(row) for row in rr.get('Scorecard',[]) if row.get('Cấu phần') in
+                {'Hỗ trợ từ Chính phủ','Hỗ trợ cổ đông / khác'})
     return rows
 
 
@@ -100,12 +102,16 @@ def rating_sensitivity(rr):
     if rr.get('ICR') in (None,'N/A',''):return []
     result=[];baseline=rr['ICR'];notches=rr.get('FactorNotches',{})
     def scenario(delta):
-        if rr.get('GovernmentSupportMethod'):
-            from scripts.bank_factor_evidence import support_notches
-            sca=move(rr['SACP'],delta)
-            return label(move(sca,support_notches(rr['Ticker'],sca)))
+        if rr.get('GovernmentSupportAssessment'):
+            from scripts.bank_government_support import apply_bank_support
+            changed=dict(rr,SACP=label(move(rr['SACP'],delta)))
+            return apply_bank_support(changed,rr.get('SupportOverrides',{}))['ICR']
         return label(move(baseline,delta))
     for key,description in [('Vốn và Lợi nhuận','Vốn và lợi nhuận mất 1 bậc điều chỉnh'),('Vị thế Rủi ro','Vị thế rủi ro mất 1 bậc điều chỉnh'),('Huy động vốn và Thanh khoản','Huy động và thanh khoản mất 1 bậc điều chỉnh')]:
         if key in notches:result.append([description,'−1',scenario(-1)])
     result.append(['Hai cấu phần cùng mất 1 bậc điều chỉnh','−2',scenario(-2)])
+    if rr.get('GovernmentSupportNotches'):
+        from scripts.bank_government_support import apply_bank_support
+        result.append(['Không còn áp dụng hỗ trợ Chính phủ','Bỏ hỗ trợ',
+                       apply_bank_support(rr,{**rr.get('SupportOverrides',{}),'UseGovernmentSupport':False})['ICR']])
     return result

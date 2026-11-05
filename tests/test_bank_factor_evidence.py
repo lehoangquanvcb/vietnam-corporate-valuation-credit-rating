@@ -73,3 +73,26 @@ def test_actual_banks_use_multiple_dimensions_and_keep_manual_priority():
         assert len(e['AnnualEvidence']['CAR'])==5
         assert 'Hiệu chỉnh' not in str(rr['Scorecard'])
     assert rate_company('TCB',{'CapitalEarnings':'Yếu'})['Factors']['Vốn và Lợi nhuận']=='Yếu'
+
+
+def test_short_profit_rebound_does_not_earn_sustainable_capital_uplift(environment):
+    ctx=Context(dict(ROA=.03,ROE=.2,CIR=.3,NIM=.05,TangibleEquityAssets=.15))
+    environment.loc[(environment.Metric=='ROA') & environment.Period.isin(['2023-Q4','2024-Q4']),'Value']=.002
+    grades,e=assess(ctx)
+    assert grades['CapitalEarnings']==3
+    assert not e['SustainableEarningsConfirmed']
+
+
+def test_recovery_with_thin_coverage_cannot_be_strong_risk(environment):
+    grades,_=assess(Context(dict(NPL=.005,LoanLossCoverage=.9,CreditCostProxy=.001)))
+    assert grades['RiskPosition']>=3
+
+
+def test_very_strong_car_cannot_be_downgraded_by_positive_earnings(environment):
+    grades,_=assess(Context(dict(CAR=.20,ROA=.03,ROE=.2,CIR=.3,NIM=.05,TangibleEquityAssets=.15)))
+    assert grades['CapitalEarnings']==1
+
+
+def test_low_relative_percentile_alone_is_not_a_downgrade(environment):
+    grades,_=assess(Context(dict(NPL=.025,LoanLossCoverage=.8,CreditCostProxy=.02)))
+    assert grades['RiskPosition']==3

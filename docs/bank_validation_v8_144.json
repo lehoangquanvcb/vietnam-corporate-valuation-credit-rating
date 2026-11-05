@@ -1,0 +1,777 @@
+{
+  "Build": "V8.144.0-BANK-GOVERNMENT-SUPPORT",
+  "ComparisonBase": "V8.143.0-DOMESTIC-RESEARCH",
+  "Checks": [
+    {
+      "Ticker": "ABB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA+",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ACB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA+",
+      "SACP": "vnA+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 1,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 1,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BAB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Yếu",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": -2,
+        "Vị thế Rủi ro": 1,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BID",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnAA-",
+      "SACP": "vnA",
+      "GovernmentSupportNotches": 5,
+      "ICR": "vnAAA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Rất Mạnh",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 2,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "APPLIED",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BVB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": -1,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "CTG",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnAA-",
+      "SACP": "vnA+",
+      "GovernmentSupportNotches": 4,
+      "ICR": "vnAAA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Rất Mạnh",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 2,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": 1,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "APPLIED",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "EIB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": -1,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "HDB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA",
+      "SACP": "vnA",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 1,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "KLB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "LPB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "MBB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA",
+      "SACP": "vnA",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Mạnh / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 1,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "MSB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "NAB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "NVB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "N/A",
+      "SACP": "N/A",
+      "GovernmentSupportNotches": 0,
+      "ICR": "N/A",
+      "Status": "INSUFFICIENT_DATA",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vị thế Rủi ro": "Yếu",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vị thế Rủi ro": -2,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {
+        "CapitalEarnings": "Thiếu CAR hợp lệ tại 2026-Q2; cần CAR cùng kỳ hoặc kết luận vốn/lợi nhuận có căn cứ."
+      }
+    },
+    {
+      "Ticker": "OCB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnA",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "PCB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "N/A",
+      "SACP": "N/A",
+      "GovernmentSupportNotches": 0,
+      "ICR": "N/A",
+      "Status": "INSUFFICIENT_DATA",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Yếu"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": -2
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {
+        "RiskPosition": "Thiếu đầu vào định lượng cùng kỳ cho Vị thế Rủi ro; cần bổ sung số liệu hoặc đánh giá riêng.",
+        "Funding": "Thiếu CASA hợp lệ tại 2026-Q2 hoặc đánh giá riêng về huy động vốn.",
+        "Liquidity": "Thiếu LDR hợp lệ tại 2026-Q2 hoặc đánh giá riêng về thanh khoản."
+      }
+    },
+    {
+      "Ticker": "PGB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "SGB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "SHB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "SSB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "STB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 1,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": -1,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "TCB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnAA",
+      "SACP": "vnAA",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnAA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Mạnh",
+        "Huy động vốn và Thanh khoản": "Mạnh / Mạnh"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 1,
+        "Vốn và Lợi nhuận": 1,
+        "Vị thế Rủi ro": 1,
+        "Huy động vốn và Thanh khoản": 1
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "TPB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA",
+      "SACP": "vnA",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Mạnh",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VAB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VBB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VCB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnAA-",
+      "SACP": "vnAA",
+      "GovernmentSupportNotches": 2,
+      "ICR": "vnAAA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Rất Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Rất Mạnh",
+        "Huy động vốn và Thanh khoản": "Mạnh / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 2,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 2,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "APPLIED",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VIB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Phù Hợp",
+        "Vốn và Lợi nhuận": "Trung Bình",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 0,
+        "Vốn và Lợi nhuận": -1,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "VPB",
+      "Methodology": "BANK",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA",
+      "GovernmentSupportNotches": 0,
+      "ICR": "vnA",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Phù Hợp",
+        "Huy động vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 1,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": 0,
+        "Huy động vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": "NOT_ELIGIBLE",
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "AGRIBANK",
+      "Methodology": "BANK",
+      "Period": null,
+      "OldICR": "N/A",
+      "SACP": "N/A",
+      "GovernmentSupportNotches": null,
+      "ICR": "N/A",
+      "Status": "INSUFFICIENT_DATA",
+      "Factors": {},
+      "FactorNotches": {},
+      "GovernmentSupportStatus": "PENDING_SACP",
+      "MissingEvidence": {
+        "FinancialInputs": "Không có kỳ BCTC hợp lệ; không tự gán điểm hoặc bậc."
+      }
+    },
+    {
+      "Ticker": "SSI",
+      "Methodology": "SECURITIES",
+      "Period": "2026-Q2",
+      "OldICR": "vnBBB+",
+      "SACP": "vnBBB+",
+      "GovernmentSupportNotches": null,
+      "ICR": "vnBBB+",
+      "Status": "ESTIMATED",
+      "Factors": {
+        "Hồ sơ Kinh doanh": "Rất Mạnh",
+        "Vốn và Lợi nhuận": "Phù Hợp",
+        "Vị thế Rủi ro": "Trung Bình",
+        "Nguồn vốn và Thanh khoản": "Phù Hợp / Phù Hợp"
+      },
+      "FactorNotches": {
+        "Hồ sơ Kinh doanh": 2,
+        "Vốn và Lợi nhuận": 0,
+        "Vị thế Rủi ro": -1,
+        "Nguồn vốn và Thanh khoản": 0
+      },
+      "GovernmentSupportStatus": null,
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "ABI",
+      "Methodology": "INSURANCE",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": null,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": null,
+      "FactorNotches": null,
+      "GovernmentSupportStatus": null,
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "HPG",
+      "Methodology": "CORPORATE",
+      "Period": "2026-Q2",
+      "OldICR": "vnA-",
+      "SACP": "vnA-",
+      "GovernmentSupportNotches": null,
+      "ICR": "vnA-",
+      "Status": "ESTIMATED",
+      "Factors": null,
+      "FactorNotches": null,
+      "GovernmentSupportStatus": null,
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "FPT",
+      "Methodology": "CORPORATE",
+      "Period": "2026-Q2",
+      "OldICR": "vnA+",
+      "SACP": "vnA+",
+      "GovernmentSupportNotches": null,
+      "ICR": "vnA+",
+      "Status": "ESTIMATED",
+      "Factors": null,
+      "FactorNotches": null,
+      "GovernmentSupportStatus": null,
+      "MissingEvidence": {}
+    },
+    {
+      "Ticker": "BVH",
+      "Methodology": "INSURANCE",
+      "Period": null,
+      "OldICR": "N/A",
+      "SACP": "N/A",
+      "GovernmentSupportNotches": null,
+      "ICR": "N/A",
+      "Status": "NOT_APPLICABLE",
+      "Factors": null,
+      "FactorNotches": null,
+      "GovernmentSupportStatus": null,
+      "MissingEvidence": [
+        "Phạm vi: Tập đoàn hỗn hợp bảo hiểm/đầu tư. Phương pháp đang cài đặt áp dụng cho pháp nhân bảo hiểm phi nhân thọ trực tiếp. Cần phương pháp phù hợp với loại hình hoặc BCTC riêng của pháp nhân thuộc phạm vi để xác định Anchor, SCA và ICR."
+      ]
+    }
+  ],
+  "Note": "Kiểm tra số học và hồi quy phần mềm; không phải thẩm định tín nhiệm hay backtest với CRA."
+}

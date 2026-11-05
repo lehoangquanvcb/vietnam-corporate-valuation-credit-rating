@@ -98,6 +98,9 @@ def get_company(ticker):
     u=universe(); t=str(ticker).upper().strip()
     z=u[u.Ticker.eq(t)]
     if z.empty:
+        if t=='AGRIBANK':
+            name='Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam'
+            return {'Ticker':t,'CompanyName':name,'LegalName':name,'DisplayName':name,'EntityType':'BANK','Sector':'Ngân hàng','Exchange':'Chưa niêm yết','PeerGroup':'Ngân hàng','Methodology':'BANK_2026','Active':1}
         return {'Ticker':t,'CompanyName':t,'LegalName':t,'DisplayName':t,'EntityType':'CORPORATE','Sector':'Chưa phân loại','Exchange':'N/A','PeerGroup':'Chưa phân loại','Methodology':'CORPORATE_2025','Active':1}
     d=z.iloc[0].to_dict()
     legal=str(d.get('LegalName') or '').strip()

@@ -121,6 +121,23 @@
           "AccessedOn": "2026-11-05"
         }
       ]
+    },
+    "VCB": {
+      "CompanyName": "Ngân hàng TMCP Ngoại thương Việt Nam",
+      "ResearchedOn": "2026-11-05",
+      "Paragraphs": [
+        "Vietcombank (VCB) là ngân hàng thương mại nhà nước quy mô lớn, phục vụ khách hàng cá nhân, doanh nghiệp và định chế tài chính. Nền tảng tiền gửi thanh toán là lợi thế về chi phí vốn và tính ổn định của nguồn tài trợ.",
+        "Theo công bố ngày 03/02/2026 của Vietcombank, Moody’s nâng đánh giá sức mạnh tài chính độc lập lên Ba2, ghi nhận chất lượng tài sản và nguồn vốn. Xếp hạng dài hạn được giữ ở Ba2, tương đương trần quốc gia. Đây là thang quốc tế, không phải mức AAA trong nước của mô hình này.",
+        "Về tín nhiệm, lợi thế huy động và dự phòng hỗ trợ khả năng hấp thụ tổn thất. Tuy nhiên, tăng trưởng tài sản vẫn cần đi cùng bổ sung vốn và duy trì chất lượng tín dụng. Bậc độc lập và phần hỗ trợ Chính phủ được trình bày riêng để phân biệt năng lực nội tại với giả định hỗ trợ bên ngoài."
+      ],
+      "Sources": [
+        {
+          "Name": "Vietcombank – Moody’s nâng đánh giá sức mạnh tài chính độc lập",
+          "URL": "https://www.vietcombank.com.vn/Trang-thong-tin-dien-tu/Articles/2026/02/03/260203_Ban-CL_Web---Moodys-nang-bac-BCA-cua-VCB-_vFinal",
+          "PublishedOn": "2026-02-03",
+          "AccessedOn": "2026-11-05"
+        }
+      ]
     }
   }
 }

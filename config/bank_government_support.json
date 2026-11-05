@@ -1,0 +1,20 @@
+{
+  "PolicyId": "BANK_GOV_SUPPORT_2026",
+  "EffectivePeriod": "2026-Q2",
+  "ReviewThroughPeriod": "2026-Q4",
+  "ReviewedOn": "2026-11-05",
+  "Origin": "USER_MODEL_POLICY",
+  "SupportCeiling": "aaa",
+  "MaximumNotches": 6,
+  "EligibleBanks": ["VCB", "BID", "CTG", "AGRIBANK"],
+  "Level": "Rất cao — giả định mô hình",
+  "Rationale": "Nhóm ngân hàng Nhà nước giữ vai trò trọng yếu trong hệ thống được giả định có khả năng nhận hỗ trợ rất cao. Cộng tối đa 6 bậc từ SACP, giới hạn tại AAA trên thang trong nước; mức cộng thực tế giảm khi gần trần. Đây là quy tắc nghiên cứu được nâng cấp theo yêu cầu chủ mô hình, không phải bảo lãnh của Chính phủ hay kết luận của CRA.",
+  "MethodologyDifference": "Phạm vi bốn ngân hàng kế thừa Mục II, Bảng 13, trang 38–39 của tài liệu phương pháp người dùng cung cấp. Số bậc tối đa 6 và trần AAA là giả định mới của mô hình, thay bảng ánh xạ cũ; không được trình bày là nguyên văn phương pháp Saigon Ratings.",
+  "Sources": [
+    {"Title": "Phương pháp XHTN Ngân hàng 2026 — Mục II, Bảng 13", "URL": "", "Reference": "Tài liệu người dùng cung cấp, trang 38–39"},
+    {"Title": "BIDV: Moody’s công bố nâng triển vọng — hỗ trợ Chính phủ và vị thế hệ thống", "URL": "https://bidvinfo.com.vn/moody-s-cong-bo-nang-trien-vong-cua-bidv-len-tich-cuc-10015825.html", "PublishedOn": "2026-05-08"},
+    {"Title": "Agribank: Moody’s điều chỉnh triển vọng, vai trò hỗ trợ Chính phủ", "URL": "https://www.agribank.com.vn/vn/ve-agribank/tin-tuc-su-kien/tin-ve-agribank/hoat-dong-agribank/agribank-duoc-moody-ratings-dieu-chinh-trien-vong-xep-hang-tu-on-dinh-len-tich-cuc", "PublishedOn": "2026-05-06"},
+    {"Title": "Vietcombank: Moody’s nâng BCA, vị thế và nguồn vốn", "URL": "https://www.vietcombank.com.vn/Trang-thong-tin-dien-tu/Articles/2026/02/03/260203_Ban-CL_Web---Moodys-nang-bac-BCA-cua-VCB-_vFinal", "PublishedOn": "2026-02-03"},
+    {"Title": "VietinBank: công bố xếp hạng tín nhiệm quốc tế", "URL": "https://investor.vietinbank.vn/vi/internationalranking.aspx", "PublishedOn": "2026-05-05"}
+  ]
+}

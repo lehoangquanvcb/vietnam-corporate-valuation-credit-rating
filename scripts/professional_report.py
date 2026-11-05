@@ -390,13 +390,20 @@ def _scorecard(doc,pack,rr):
     else:
         governance=rr.get('Factors',{}).get('Quản trị và điều hành') or rr.get('AssessmentInputs',{}).get('ManagementAssessment')
         _para(doc,'Đánh giá quản trị: '+str(governance)+'.' if governance else 'Chưa có kết luận quản trị và điều hành được xác nhận trong hồ sơ hiện tại.',9,color=GRAY)
-    _band(doc,'YẾU TỐ BÊN NGOÀI')
+    _band(doc,'HỖ TRỢ TỪ CHÍNH PHỦ VÀ CÁC YẾU TỐ BÊN NGOÀI' if rr.get('Methodology')=='BANK' else 'YẾU TỐ BÊN NGOÀI')
     support=rr.get('ExternalSupportNotches')
     if support is not None:
         _para(doc,('Trong kịch bản tự động, hỗ trợ bên ngoài đóng góp ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Hỗ trợ bên ngoài đóng góp ')+str(support)+' bậc. '+('ICR bằng SACP khi không cộng điều chỉnh hỗ trợ.' if support==0 else 'Điều chỉnh này đưa kết quả từ '+_show_rating(rr.get('SACP'))+' lên '+_show_rating(rr.get('ICR'))+'.'))
     else:_para(doc,'Chưa xác định điều chỉnh hỗ trợ bên ngoài cho kỳ xếp hạng này.')
-    if rr.get('GovernmentSupportMethod'):
-        _para(doc,rr['GovernmentSupportMethod']+'. Mức hỗ trợ tính từ SACP tại kỳ đánh giá, không ấn định bậc đích theo mã ngân hàng.',9,color=GRAY)
+    if rr.get('GovernmentSupportAssessment'):
+        g=rr['GovernmentSupportAssessment']
+        _para(doc,'Hỗ trợ từ Chính phủ: '+g['Rationale'])
+        if g.get('MethodologyDifference'):_para(doc,g['MethodologyDifference'],9,color=GRAY)
+        _para(doc,'Hỗ trợ Chính phủ: '+(str(g['Notches'])+' bậc' if g['Notches'] is not None else 'chờ SACP')+
+              '; hỗ trợ cổ đông / khác: '+str(rr.get('OtherSupportNotches',0))+' bậc.',9,color=GRAY)
+        for source in g.get('Sources',[]):
+            if source.get('URL'):
+                _source_link(doc,{'Name':source['Title'],'URL':source['URL'],'PublishedOn':source.get('PublishedOn'),'AccessedOn':g.get('ReviewedOn')})
     _band(doc,'ĐỘ NHẠY XẾP HẠNG')
     if pack['Type']=='BANK':
         _para(doc,'Áp lực hạ bậc có thể xuất hiện nếu bộ đệm vốn suy giảm, nợ xấu tăng vượt khả năng bù đắp của dự phòng và lợi nhuận, hoặc nguồn vốn mất ổn định khi tín dụng tiếp tục mở rộng. Khả năng cải thiện phụ thuộc việc duy trì vốn, hiệu quả sinh lời và chất lượng tài sản qua nhiều kỳ.')
@@ -420,9 +427,9 @@ def _scorecard(doc,pack,rr):
         if pack['Type']=='BANK':
             from scripts.bank_report_chapters import component_scorecard
             components=component_scorecard(rr,pack)
-            names={r['Cấu phần'] for r in components}
-            rows=([r for r in rows if r['Cấu phần']=='Anchor']+components+
-                  [r for r in rows if r['Cấu phần'] not in names|{'Anchor'}])
+            details={r['Cấu phần']:r for r in components}
+            rows=([r for r in rows if r['Cấu phần']=='Anchor']+
+                  [details.get(r['Cấu phần'],r) for r in rows if r['Cấu phần']!='Anchor'])
         _table(doc,headers,[[row.get(h,'') for h in headers] for row in rows],[43,36,23,74],9)
         if rr.get('QuantitativeEvidence'):
             if pack['Type']=='BANK':
@@ -460,6 +467,10 @@ def _scorecard(doc,pack,rr):
         rows += [['Tổng điều chỉnh nội sinh','—',f'{n:+d}' if n is not None else '—',_show_rating(rr.get('SACP'))],
                  ['Hỗ trợ bên ngoài','Trung lập' if support==0 else 'Điều chỉnh' if support is not None else 'Chưa xác định',f'{support:+d}' if support is not None else '—',_show_rating(rr.get('ICR'))],
                  ['Kết quả xếp hạng',_show_rating(rr.get('Outlook')),'—',_show_rating(rr.get('ICR'))]]
+        if rr.get('GovernmentSupportAssessment'):
+            g=rr['GovernmentSupportAssessment'];other=rr.get('OtherSupportNotches',0)
+            rows[-2:-1]=[['Hỗ trợ từ Chính phủ',g['Level'],f"+{g['Notches']}" if g['Notches'] is not None else 'Chờ SACP','Sau SACP'],
+                         ['Hỗ trợ cổ đông / khác','Theo đánh giá riêng',f'+{other}','Sau SACP']]
         _table(doc,['Cấu phần','Đánh giá','Nâng/hạ bậc','Kết quả'],rows,[62,43,27,44],9.5)
     else:
         rows=[['Anchor',_show_rating(rr.get('Anchor'))]]+[[str(k),str(v)] for k,v in rr.get('Factors',{}).items()]

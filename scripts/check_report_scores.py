@@ -35,11 +35,14 @@ def main():
             rows.append({'Ticker':t,'Methodology':r.get('Methodology'),'Status':r.get('RatingStatus'),
                 'Origin':r.get('RatingOrigin'),'Anchor':r.get('Anchor'),'SCA':r.get('SCA',r.get('SACP')),
                 'ICR':r.get('ICR'),
+                'GovernmentSupportNotches':r.get('GovernmentSupportNotches'),
+                'GovernmentSupportStatus':r.get('GovernmentSupportAssessment',{}).get('Status'),
+                'OtherSupportNotches':r.get('OtherSupportNotches'),
                 'ConditionalAssumptions':len(r.get('Assumptions',[])),
                 'FileName':report_filename(t),'MissingEvidence':r.get('MissingEvidence')})
         except Exception as exc:errors.append({'Ticker':t,'Error':repr(exc)})
         if (i+1)%10==0:print(f'Checked {i+1}/{len(selected)}',flush=True)
-    result={'Build':'V8.140.0-RATING-HEADER','RoutingTickers':len(u),'CheckedTickers':len(rows),
+    result={'Build':'V'+(ROOT/'VERSION.txt').read_text(encoding='utf-8').strip(),'RoutingTickers':len(u),'CheckedTickers':len(rows),
         'ByStatus':dict(Counter(r['Status'] for r in rows)),'Checks':rows,'Errors':errors,
         'Result':'PASS' if not errors else 'FAIL',
         'Note':'PASS xác nhận kiểm tra phần mềm. Bậc tự động có giả định, không phải thẩm định hoàn chỉnh; không tạo bậc khi thiếu dữ liệu cốt lõi hoặc ngoài phạm vi phương pháp.'}

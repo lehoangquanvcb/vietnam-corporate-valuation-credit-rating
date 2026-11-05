@@ -443,12 +443,6 @@ def _financial_institution(ticker, typ, o, ctx, strict):
         if inherited_cap == label(ceiling):
             sca = _cap(sca, ceiling)
             break
-    if typ=='BANK' and r.get('ExternalSupportAssumed') and ticker in {'VCB','BID','CTG','AGRIBANK'}:
-        from scripts.bank_factor_evidence import support_notches
-        support=support_notches(ticker,sca)
-        r['ExternalSupportAssumed']=False
-        r['GovernmentSupportMethod']='Bảng 17 của phương pháp ngân hàng do người dùng cung cấp'
-        a[:]=[v for v in a if not v.startswith('Hỗ trợ bên ngoài:')]
     result=_finish(r,anchor,sca,support,outlook)
     if r.get('GovernmentSupportMethod'):
         for row in result['Scorecard']:
@@ -558,4 +552,9 @@ def rate_company(ticker, overrides=None):
     inputs={k:v for k,v in dict(overrides or {}).items() if v is not None and k!='UseDomesticCalibration'}
     # Báo cáo mẫu cũ là tài liệu tham khảo, không tự trở thành phiếu thẩm định
     # cho kỳ hiện tại. Phiếu bank_rating_assessments.json vẫn được ưu tiên.
-    return _base_rate_company(ticker,inputs)
+    result=_base_rate_company(ticker,inputs)
+    if result.get('Methodology')=='BANK':
+        from scripts.bank_government_support import apply_bank_support
+        result.setdefault('Ticker',ticker)
+        result=apply_bank_support(result,inputs)
+    return result

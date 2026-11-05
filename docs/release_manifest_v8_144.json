@@ -1,0 +1,146 @@
+{
+  "Build": "V8.144.0-BANK-GOVERNMENT-SUPPORT",
+  "BaseCommit": "800e337",
+  "Files": [
+    {
+      "Path": "GIT_FILES_V8_143.txt",
+      "Size": 281,
+      "SHA256": "3fc70ee280fbe723bb7702681092e1821729307a338dc4d7bf72effae72ffec0"
+    },
+    {
+      "Path": "GIT_FILES_V8_144.txt",
+      "Size": 799,
+      "SHA256": "c4b6289f351fc5d1210645ff0914574ebbce69586344f825918cc95b8226ebd6"
+    },
+    {
+      "Path": "README_V8_143.txt",
+      "Size": 5137,
+      "SHA256": "a1293808ddb9f8b24732d810e286801679e3cab7f95a8140604377ba7b62afee"
+    },
+    {
+      "Path": "README_V8_144.txt",
+      "Size": 3784,
+      "SHA256": "b5d6187c4a5bddc7bb81f22d920ed6e24be90390b5880310bbd9c854e1958a62"
+    },
+    {
+      "Path": "VERSION.txt",
+      "Size": 8,
+      "SHA256": "2178b8bb4db2dc7e601799f3d79ff18bd8f7e1391901afff09e0ed5ac5e0c3d6"
+    },
+    {
+      "Path": "app.py",
+      "Size": 67432,
+      "SHA256": "0323faf3179c3fbf53be4ac90529afc6c6c2fdea98f53cdae0db2cddac99c06b"
+    },
+    {
+      "Path": "config/bank_government_support.json",
+      "Size": 2317,
+      "SHA256": "d7c39f11235ed979953139d517440208ab20d40cc758829bf150175c44c4cfce"
+    },
+    {
+      "Path": "data/report_issuer_research.json",
+      "Size": 13300,
+      "SHA256": "f5141bbd63834cf639ce1d43242f48ceaa9f268e14a4bc34f8be0e0259b046ba"
+    },
+    {
+      "Path": "data/report_public_context.json",
+      "Size": 82696,
+      "SHA256": "61d4a16c2bc3719e60c7a9baaf2d7967f399c10dea568abec0e5640e72f575b2"
+    },
+    {
+      "Path": "docs/BANK_SUPPORT_V8_144.md",
+      "Size": 6217,
+      "SHA256": "63be3869746781a30c2a8163a039e79fd1718b1cfc4a8d57a690e9c271e79add"
+    },
+    {
+      "Path": "docs/bank_validation_v8_144.json",
+      "Size": 23870,
+      "SHA256": "d56cbb9afce9b77dc3de7f5ca1341a15172e29c0f0e957c2e3a96ebaec36945b"
+    },
+    {
+      "Path": "docs/ui_validation_v8_144.json",
+      "Size": 604,
+      "SHA256": "d9cb44e0d726754e5d811b7a1be75548a1a1ceed58e002925a73e3282dd936a8"
+    },
+    {
+      "Path": "docs/validation_v8_143.json",
+      "Size": 3596,
+      "SHA256": "78db7cd1b02589ab2ecb020690e0a9cc8bf6c613b9163aef41b09bb86453df54"
+    },
+    {
+      "Path": "docs/validation_v8_144.json",
+      "Size": 1411,
+      "SHA256": "f51ace763642d7904c947a45365bda628f336ff4861f84fc0501eed385304797"
+    },
+    {
+      "Path": "scripts/bank_factor_evidence.py",
+      "Size": 13319,
+      "SHA256": "619eac1eff59bbd8b347dc9f062e35fd0b5cb5db5f73f588cd35af4862dbde4c"
+    },
+    {
+      "Path": "scripts/bank_government_support.py",
+      "Size": 8516,
+      "SHA256": "35f6a8967f775bd7bb7e97577d0bf61481f26553a793962282389a800e1ba4b9"
+    },
+    {
+      "Path": "scripts/bank_report_chapters.py",
+      "Size": 10902,
+      "SHA256": "ad0e643eeef6951f3d940fc048ada98393b3fe500afb587f66bc3a2aa956ebc3"
+    },
+    {
+      "Path": "scripts/check_report_scores.py",
+      "Size": 3315,
+      "SHA256": "53e240621f6a065f6fcbc4e532d5d7b50b4bb32e47195e9691ec36d02e3f1c58"
+    },
+    {
+      "Path": "scripts/professional_report.py",
+      "Size": 38453,
+      "SHA256": "84e28a20b3ac6c02bc8235826a21701c1f52b8b569380ff22edde24e3b34738e"
+    },
+    {
+      "Path": "scripts/public_company_profile.py",
+      "Size": 5843,
+      "SHA256": "14b6d0f785e681f1f999fee0f0b836d019da066b9af9447ba3b7a6e373f057cf"
+    },
+    {
+      "Path": "scripts/report_context.py",
+      "Size": 10535,
+      "SHA256": "999364dc6810106de01366b40d2e5bfb2a81f24f6e5d61c2665ca763f84b4a58"
+    },
+    {
+      "Path": "scripts/report_rating.py",
+      "Size": 39150,
+      "SHA256": "96d8ca093bcb1a081ae995f53b531c02e343c4758dd755fcbc6446b7ebd681f8"
+    },
+    {
+      "Path": "scripts/universal_data.py",
+      "Size": 9128,
+      "SHA256": "9bedfb4017787ed3b70c6d103e7061fca5cdf6e93fce5a860b2d47ab644cb5c0"
+    },
+    {
+      "Path": "tests/test_bank_domestic_rating.py",
+      "Size": 2734,
+      "SHA256": "fb124122c87adf28bd28fee298934d8282fe0ed4a6a2c3c780ba09df3c1493e3"
+    },
+    {
+      "Path": "tests/test_bank_factor_evidence.py",
+      "Size": 5084,
+      "SHA256": "da059f740e9815c17da43a545f5556e98d359fcf54e5a15a6a9a35f5cebcfc69"
+    },
+    {
+      "Path": "tests/test_bank_government_support.py",
+      "Size": 6613,
+      "SHA256": "941ca5d9df883a69465f7ea9dc77b7d46a9e1c819e2fd2032e78e30ba0c59c8a"
+    },
+    {
+      "Path": "tests/test_report_domestic_research.py",
+      "Size": 4036,
+      "SHA256": "7f5234d83d9c846be74552d80e245f8b38d8f83004ca86c272d480323e2cee2d"
+    },
+    {
+      "Path": "report_examples/Bao_cao_XHTN_VCB_05-11-2026.docx",
+      "Size": 2515063,
+      "SHA256": "12b56d45ae2e6dd0dab636715b4eb2389cf86266855a015bdc39557c4c2cafbd"
+    }
+  ]
+}

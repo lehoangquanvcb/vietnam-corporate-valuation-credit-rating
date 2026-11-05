@@ -1,0 +1,42 @@
+[
+  {
+    "Ticker": "ABB",
+    "Headline": "A-",
+    "Exceptions": 0
+  },
+  {
+    "Ticker": "VCB",
+    "Headline": "AAA",
+    "Exceptions": 0
+  },
+  {
+    "Ticker": "BID",
+    "Headline": "AAA",
+    "Exceptions": 0
+  },
+  {
+    "Ticker": "CTG",
+    "Headline": "AAA",
+    "Exceptions": 0
+  },
+  {
+    "Ticker": "TCB",
+    "Headline": "AA",
+    "Exceptions": 0
+  },
+  {
+    "Ticker": "OCB",
+    "Headline": "A",
+    "Exceptions": 0
+  },
+  {
+    "Ticker": "VCB_no_government",
+    "Headline": "AA",
+    "Exceptions": 0
+  },
+  {
+    "Ticker": "VCB_restored",
+    "Headline": "AAA",
+    "Exceptions": 0
+  }
+]

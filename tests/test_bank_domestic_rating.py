@@ -11,7 +11,8 @@ from scripts.bank_factor_evidence import support_notches
 @pytest.mark.parametrize('ticker',['VCB','BID','CTG','TCB','VPB','ACB','ABB','OCB','KLB','STB','SSI','ABI','HPG','BVH'])
 def test_no_ticker_target_or_legacy_flag(ticker):
     r=rate_company(ticker)
-    assert r==_base_rate_company(ticker)
+    base=_base_rate_company(ticker)
+    assert r['SACP']==base.get('SACP') if 'SACP' in r else r==base
     assert rate_company(ticker,{'UseDomesticCalibration':True})==r
     assert rate_company(ticker,{'UseDomesticCalibration':False})==r
     assert 'DomesticCalibrationApplied' not in r
@@ -32,7 +33,8 @@ def test_manual_factor_and_support_override_auto():
     r=rate_company('VCB',{'BusinessProfile':'Yếu','ExternalSupportNotches':0})
     assert r['Factors']['Hồ sơ Kinh doanh']=='Yếu'
     assert r['ExternalSupportNotches']==0
-    assert 'GovernmentSupportMethod' not in r
+    assert r['GovernmentSupportNotches']==0
+    assert r['GovernmentSupportAssessment']['Status']=='DISABLED'
     assert r['ICR']==r['SACP']
 
 def test_word_has_no_calibration_and_sensitivity_recomputes_support():
@@ -45,5 +47,6 @@ def test_word_has_no_calibration_and_sensitivity_recomputes_support():
         d=Document(BytesIO(generate_docx('VCB','rating',r)))
     assert 'Hiệu chỉnh thang trong nước' not in d.element.xml
     assert 'ICR sau hiệu chỉnh' not in d.element.xml
-    sca=move(r['SACP'],-1)
-    assert rating_sensitivity(r)[0][2]==label(move(sca,support_notches('VCB',sca)))
+    from scripts.bank_government_support import apply_bank_support
+    sca=label(move(r['SACP'],-1))
+    assert rating_sensitivity(r)[0][2]==apply_bank_support(dict(r,SACP=sca))['ICR']

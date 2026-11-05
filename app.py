@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.143.0-DOMESTIC-RESEARCH'
+BUILD_TAG='V8.144.0-BANK-GOVERNMENT-SUPPORT'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -758,8 +758,15 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
                         if _g!='Dùng kết quả tự động':_rating_overrides[_key]=_g
                     if _rating_overrides.get('Funding')==_rating_overrides.get('Liquidity')=='Mạnh':
                         _rating_overrides['FundingStrongExceptionConfirmed']=st.checkbox('Đã kết luận đủ điều kiện điều chỉnh +1 bậc theo ma trận',key=f'bank_{selected}_funding_exception')
-                    _confirmed=st.checkbox('Đã đánh giá mức hỗ trợ bên ngoài',key=f'bank_{selected}_support_confirmed')
-                    if _confirmed:_rating_overrides['ExternalSupportNotches']=st.number_input('Notch hỗ trợ đã thẩm định',0,8,0,1,key=f'bank_{selected}_support')
+                    from scripts.bank_government_support import ELIGIBLE_BANKS,load_policy
+                    if selected in ELIGIBLE_BANKS:
+                        _gov_mode=st.selectbox('Hỗ trợ từ Chính phủ',['Theo chính sách mô hình','Không cộng hỗ trợ Chính phủ','Nhập mức hỗ trợ riêng'],key=f'bank_{selected}_gov_mode')
+                        if _gov_mode=='Không cộng hỗ trợ Chính phủ':_rating_overrides['UseGovernmentSupport']=False
+                        elif _gov_mode=='Nhập mức hỗ trợ riêng':
+                            _rating_overrides['GovernmentSupportNotches']=st.number_input('Số notch hỗ trợ Chính phủ tối đa',0,load_policy()['MaximumNotches'],0,1,key=f'bank_{selected}_gov_notches')
+                    else:st.caption('Hỗ trợ từ Chính phủ: 0 bậc. Tiêu chí này chỉ áp dụng VCB, BID, CTG và Agribank.')
+                    _confirmed=st.checkbox('Đã đánh giá hỗ trợ từ cổ đông hoặc nguồn khác',key=f'bank_{selected}_support_confirmed')
+                    if _confirmed:_rating_overrides['OtherSupportNotches']=st.number_input('Notch hỗ trợ cổ đông / khác',0,8,0,1,key=f'bank_{selected}_support_other')
                     _outlook=st.selectbox('Triển vọng',['Chưa nhập triển vọng','Ổn định','Tích cực','Tiêu cực'],key=f'bank_{selected}_outlook')
                     if _outlook!='Chưa nhập triển vọng':_rating_overrides['Outlook']=_outlook
         elif _entity_method=='SECURITIES':
@@ -824,6 +831,8 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
         else:
             st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
         st.caption('Các mức tự động là ước tính theo giả định công bố. Triển vọng: '+str(rr3.get('Outlook','Chưa đánh giá'))+'.')
+        if rr3.get('GovernmentSupportEligible'):
+            st.caption('Hỗ trợ Chính phủ được tính sau SACP, tối đa 6 notch và trần AAA trên thang trong nước. Đây là giả định nghiên cứu của mô hình; xem căn cứ và độ nhạy trong báo cáo.')
 
     if meta['EntityType']=='INSURANCE':
         from scripts.insurance_analysis import render_analysis
@@ -924,7 +933,11 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
             except (ValueError,TypeError):return 'N/A'
         _sumrows.append({'Cấu phần':'Tổng điều chỉnh nội sinh','Đánh giá / Điểm':'—','Nâng/Hạ notch':_fmt_notch(rr3.get('InternalNotches')),'Kết quả':_rating_no_vn(rr3.get('SACP','N/A'))})
         _support=rr3.get('ExternalSupportNotches')
-        _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Chưa thẩm định' if _support is None else ('Trung lập' if _support==0 else 'Có điều chỉnh'),'Nâng/Hạ notch':_fmt_notch(_support),'Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
+        if rr3.get('Methodology')=='BANK':
+            for _key,_title in [('GovernmentSupportNotches','Hỗ trợ từ Chính phủ'),('OtherSupportNotches','Hỗ trợ cổ đông / khác')]:
+                _sumrows.append({'Cấu phần':_title,'Đánh giá / Điểm':rr3.get('GovernmentSupportAssessment',{}).get('Level','') if _key=='GovernmentSupportNotches' else 'Theo đánh giá riêng','Nâng/Hạ notch':_fmt_notch(rr3.get(_key)),'Kết quả':'Điều chỉnh sau SACP'})
+        else:
+            _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Chưa thẩm định' if _support is None else ('Trung lập' if _support==0 else 'Có điều chỉnh'),'Nâng/Hạ notch':_fmt_notch(_support),'Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
         _sumrows.append({'Cấu phần':'Kết quả XHTN','Đánh giá / Điểm':rr3.get('Outlook','Chờ thẩm định'),'Nâng/Hạ notch':'—','Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
     elif rr3.get('Methodology')=='CORPORATE':
@@ -955,6 +968,9 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
     if rr3.get('Methodology')!='INSURANCE':
         st.markdown('### Chuỗi hình thành bậc xếp hạng')
         _steps=[('Anchor',rr3.get('Anchor','N/A')),('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A')))]
+        if rr3.get('Methodology')=='BANK':
+            _gov=rr3.get('GovernmentSupportNotches')
+            _steps += [('Hỗ trợ từ Chính phủ','Chờ SACP' if _gov is None else f'+{_gov} notch'),('Hỗ trợ cổ đông / khác',f"+{rr3.get('OtherSupportNotches',0)} notch")]
         _steps += [('ICR',rr3.get('ICR','N/A'))]
         _waterfall=[{'Bước':name,'Bậc':_rating_no_vn(value)} for name,value in _steps]
         st.dataframe(pd.DataFrame(_waterfall),hide_index=True,use_container_width=True)
