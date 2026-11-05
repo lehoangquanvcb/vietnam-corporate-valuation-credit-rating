@@ -75,13 +75,13 @@ def peer_figure(frame, ticker, title, scale=1, unit=''):
     if 'BasisLabel' in q:
         fig.data[0].customdata=q[['BasisLabel']].values
         fig.data[0].hovertemplate='%{x}: %{y:.2f}%<br>%{customdata[0]}<extra></extra>'
-        fig.update_xaxes(tickmode='array',tickvals=q.Ticker.tolist(),ticktext=[r.Ticker+('*' if r.SourceKind!='VERIFIED_DISCLOSURE' else '')+'<br>'+r.Regime for r in q.itertuples()])
+        fig.update_xaxes(tickmode='array',tickvals=q.Ticker.tolist(),ticktext=q.Ticker.tolist(),tickangle=0)
     mask=q.Ticker.ne(ticker)
     if 'Comparable' in q:mask &= q.Comparable
     peers = q.loc[mask, 'Value']
     if len(peers) >= 5:
         fig.add_hline(y=float(peers.mean() * scale), line_dash='dash', line_color=PEER_COLOR,
                       annotation_text='Bình quân cùng cơ sở' if 'Comparable' in q else 'Bình quân peer', annotation_position='top right')
-    fig.update_layout(title=title, height=380 if 'BasisLabel' in q else 330, margin=dict(t=55, b=80 if 'BasisLabel' in q else 45), yaxis_title=unit)
+    fig.update_layout(title=title, height=330, margin=dict(t=55, b=45), yaxis_title=unit)
     fig.update_xaxes(type='category')
     return fig

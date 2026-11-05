@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.141.0-COMPACT-PUBLIC-REPORTS'
+BUILD_TAG='V8.142.0-CAR-CLEAN-LABELS'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -401,8 +401,6 @@ def _render_metric_analysis(ticker,metric,title,pack):
     if peers is not None:
         _plotly_chart_safe(peers,use_container_width=True)
         if metric=='CAR':
-            from scripts.bank_car import peer_note
-            st.caption(peer_note(item))
             with st.expander('Số CAR và nguồn của từng ngân hàng'):
                 st.dataframe(pd.DataFrame(item.get('Peers',[])),hide_index=True,use_container_width=True)
         if own_current and note.get('Peers'):st.write(note['Peers'])

@@ -1,0 +1,7 @@
+app.py
+VERSION.txt
+scripts/financial_charts.py
+scripts/professional_report.py
+README_V8_142.txt
+GIT_FILES_V8_142.txt
+docs/car_chart_validation_v8_142.json

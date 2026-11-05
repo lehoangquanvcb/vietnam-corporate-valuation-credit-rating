@@ -1,0 +1,55 @@
+{
+  "Build": "V8.142.0-CAR-CLEAN-LABELS",
+  "Checks": [
+    {
+      "Ticker": "OCB",
+      "Period": "2026-Q2",
+      "Bars": 24,
+      "AppTickerOnly": true,
+      "ReportTickerOnly": true,
+      "ValuesAndMeanUnchanged": true,
+      "RemovedReportCaption": true
+    },
+    {
+      "Ticker": "VCB",
+      "Period": "2026-Q2",
+      "Bars": 24,
+      "AppTickerOnly": true,
+      "ReportTickerOnly": true,
+      "ValuesAndMeanUnchanged": true,
+      "RemovedReportCaption": true
+    },
+    {
+      "Ticker": "ABB",
+      "Period": "2026-Q2",
+      "Bars": 24,
+      "AppTickerOnly": true,
+      "ReportTickerOnly": true,
+      "ValuesAndMeanUnchanged": true,
+      "RemovedReportCaption": true
+    },
+    {
+      "Ticker": "MSB",
+      "Period": "2026-Q2",
+      "Bars": 24,
+      "AppTickerOnly": true,
+      "ReportTickerOnly": true,
+      "ValuesAndMeanUnchanged": true,
+      "RemovedReportCaption": true
+    }
+  ],
+  "RemovedAppCaption": true,
+  "SourceExpanderPreserved": true,
+  "PythonSyntax": "PASS",
+  "Result": "PASS",
+  "ExistingTests": {
+    "Passed": 33,
+    "Files": [
+      "tests/test_financial_charts.py",
+      "tests/test_bank_car_coverage.py",
+      "tests/test_bank_car_disclosures.py"
+    ]
+  },
+  "BaseGitCommit": "f4bcb5cd00b978e5ba8e0110e3b91665e5079e2d",
+  "VisualCheck": "OCB quarterly chart reviewed; ticker labels only, no overlap."
+}

@@ -283,7 +283,7 @@ def _chart(pack,m,kind):
         else:
             rows=([dict(x['Record'],Ticker=pack['Ticker'],Value=x['Value'])] if finite(x['Value']) else [])+x['Peers']
             if rows:
-                ax.bar([r['Ticker']+(('*' if r.get('SourceKind')!='VERIFIED_DISCLOSURE' else '')+'\n'+(r.get('Regime') if r.get('Regime') in {'TT41','TT14'} else '?') if m=='CAR' else '') for r in rows],[r['Value']*sc for r in rows],color=['#4F9E1E' if r['Ticker']==pack['Ticker'] else '#B2BEA8' for r in rows],width=.65)
+                ax.bar([r['Ticker'] for r in rows],[r['Value']*sc for r in rows],color=['#4F9E1E' if r['Ticker']==pack['Ticker'] else '#B2BEA8' for r in rows],width=.65)
                 if finite(x['PeerMean']):
                     ax.axhline(x['PeerMean']*sc,color='#BA7A22',ls='--',lw=1,label='Bình quân cùng cơ sở' if m=='CAR' else 'Bình quân peer')
                     ax.legend(loc='lower left',bbox_to_anchor=(0,1),fontsize=8,frameon=False)
@@ -318,9 +318,6 @@ def _metric_page(doc,pack,group,m):
     _para(doc,str(pack['Period'] or 'Chưa xác định kỳ')+' • '+basis_text(x['Record'].get('Basis'))+' | '+label(m),9,True,keep=True,color=DARK)
     if m!='CAR' or finite(x['Value']) or x['Peers']:
         _picture(doc,_chart(pack,m,'quarter'))
-    if m=='CAR':
-        from scripts.bank_car import peer_note
-        _para(doc,peer_note(x),8,color=GRAY)
     _para(doc,(n['Meaning']+' '+n['Conclusion']).strip(),10,lead='Đánh giá')
 
 def _readable(text):
