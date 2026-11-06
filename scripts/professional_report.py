@@ -147,7 +147,11 @@ def _cover(doc,pack,report_type,when=None):
     _font(q.add_run(title),21,True,'FFFFFF')
     q=c.add_paragraph();q.paragraph_format.space_after=Pt(0)
     _font(q.add_run(str(name)+' ('+pack['Ticker']+')'),15,True,'FFFFFF')
-    _para(doc,'NGÀNH: '+TYPE_LABELS[pack['Type']].upper(),11,True).paragraph_format.space_before=Pt(8)
+    sector=TYPE_LABELS[pack['Type']]
+    if pack['Type']=='CORPORATE':
+        specific=str(pack['Meta'].get('Sector') or '').strip()
+        if specific and specific.lower() not in {'nan','none','chưa phân loại'}:sector=specific
+    _para(doc,'NGÀNH: '+sector.upper(),11,True).paragraph_format.space_before=Pt(8)
     _para(doc,'QUỐC GIA: VIỆT NAM',11,True)
     first=next((x['History'] for x in pack['Items'].values() if len(x['History'])),None)
     years='–'.join([str(first.DisplayPeriod.iloc[0]),str(first.DisplayPeriod.iloc[-1])]) if first is not None else '5 năm gần nhất'

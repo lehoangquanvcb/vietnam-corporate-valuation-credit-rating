@@ -129,7 +129,7 @@ class InsuranceData(unittest.TestCase):
         self.assertGreaterEqual(a['PeerPBCount'],5)
         self.assertIsNone(valuation('BVH',get_snapshot('BVH'))['FairValue'])
     def test_same_model_option_keeps_legal_models(self):
-        self.assertEqual(set(peer_universe('ABI',same_model=True)),{'AIC','BIC','BLI','BMI','MIG','PGI','PTI'})
+        self.assertEqual(set(peer_universe('ABI',same_model=True)),{'AIC','BHI','BIC','BLI','BMI','MIG','PGI','PTI'})
         self.assertEqual(peer_universe('BVH',same_model=True),['PVI']);self.assertEqual(peer_universe('PRE',same_model=True),['VNR'])
     def test_quarter_is_not_ttm(self):
         p=metric_pair('ABI','GrossWrittenPremium');v=p['Peers'].iloc[0].Value
@@ -137,7 +137,7 @@ class InsuranceData(unittest.TestCase):
     def test_every_metric_has_paired_history_peer(self):
         pack=analysis_pack('ABI');self.assertEqual(len(pack),34)
         for r in pack:
-            self.assertEqual(len(r['History']),5);self.assertEqual(len(r['Peers']),12);self.assertTrue(r['HistoryText'] and r['PeerText'] and r['MethodNote'])
+            self.assertEqual(len(r['History']),5);self.assertEqual(len(r['Peers']),13);self.assertTrue(r['HistoryText'] and r['PeerText'] and r['MethodNote'])
     def test_underwriting_reconciles(self):
         for t in ['ABI','AIC','BIC','BLI','BMI','MIG','PGI','PTI']:
             r=at_period(t,'INSURANCE','2026-Q2','QUARTER');ratio=r['CombinedRatio']['Value']
@@ -150,9 +150,9 @@ class InsuranceData(unittest.TestCase):
         for m in ['InsuranceLiquidity','PaidInCapitalRequired','SolvencyRatio']:self.assertIsNone(r[m]['Value'])
     def test_sector_mean_and_specialist_small_group(self):
         self.assertIsNotNone(metric_pair('BVH','TotalAssets')['PeerMean'])
-        self.assertEqual(metric_pair('ABI','TotalAssets')['PeerCount'],11)
+        self.assertEqual(metric_pair('ABI','TotalAssets')['PeerCount'],12)
         self.assertIsNotNone(metric_pair('BVH','InsuranceReserves')['PeerMean'])
-        self.assertEqual(metric_pair('BVH','InsuranceReserves')['PeerCount'],9)
+        self.assertEqual(metric_pair('BVH','InsuranceReserves')['PeerCount'],10)
     def test_group_underwriting_not_applied(self):
         self.assertEqual(at_period('BVH','INSURANCE','2026-Q2','QUARTER')['CombinedRatio']['Status'],'NOT_APPLICABLE')
     def test_manual_liquidity_haircuts(self):
@@ -165,7 +165,11 @@ class InsuranceData(unittest.TestCase):
             self.assertEqual(r['StressedLiquidAssets']['Value'],599);self.assertEqual(r['InsuranceLiquidity']['Value'],2.995);self.assertEqual(r['SolvencyRatio']['Value'],3)
     def test_alias_normalization(self):
         frame=pd.DataFrame([dict(Ticker='XX1',EntityType='INSURANCE_NONLIFE',Methodology='OTHER',Sector='Khác'),dict(Ticker='XX2',EntityType='CORPORATE',Methodology='CORPORATE',Sector='Môi giới bảo hiểm')])
-        with patch('scripts.universal_data.read_csv',return_value=frame):r=universe().set_index('Ticker')
+        from scripts.universal_data import _universe
+        _universe.cache_clear()
+        try:
+            with patch('scripts.universal_data.read_csv',return_value=frame):r=universe().set_index('Ticker')
+        finally:_universe.cache_clear()
         self.assertEqual(r.loc['XX1','EntityType'],'INSURANCE');self.assertEqual(r.loc['XX2','EntityType'],'CORPORATE')
 
 if __name__=='__main__':unittest.main(verbosity=2)

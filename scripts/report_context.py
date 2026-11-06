@@ -58,7 +58,11 @@ def research_sections(pack, when):
     kind = pack['Type']; sector = str(pack['Meta'].get('Sector') or '')
     industry = catalog['Industry'].get(kind, [])
     if kind == 'CORPORATE':
-        industry = catalog['CorporateSectors'].get(sector, catalog['CorporateSectors']['DEFAULT'])
+        # Ngành ICB chi tiết dùng khung ngành cha khi chưa có bài riêng.
+        names=[sector]+[str(pack['Meta'].get(f'ICBName{lv}') or '') for lv in (4,3,2,1)]
+        key=next((name for name in names if name in catalog['CorporateSectors'] and
+                  all(_available(row,when) for row in catalog['CorporateSectors'][name])),'DEFAULT')
+        industry = catalog['CorporateSectors'][key]
     result = []
     for heading, rows in [('RỦI RO VĨ MÔ', catalog['Macro']), ('RỦI RO NGÀNH', industry)]:
         blocks = []

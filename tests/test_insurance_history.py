@@ -15,7 +15,8 @@ class HistoricalPeers(unittest.TestCase):
         peers=peer_universe('ABI')
         for r in h.itertuples():
             values=[at_period(t,'INSURANCE',r.Period,'FY')['TotalAssets']['Value'] for t in peers]
-            self.assertEqual(r.PeerCount,11);self.assertNotIn('ABI',r.PeerTickers)
+            values=[v for v in values if v is not None]
+            self.assertEqual(r.PeerCount,len(values));self.assertNotIn('ABI',r.PeerTickers)
             self.assertAlmostEqual(r.PeerMean,sum(values)/len(values),delta=.01)
         self.assertNotEqual(h.iloc[0].PeerMean,h.iloc[-1].PeerMean)
         self.assertNotEqual(h.iloc[-1].PeerMean,p['PeerMean'])
@@ -61,9 +62,11 @@ class HistoricalPeers(unittest.TestCase):
     def test_history_plot_has_actual_peer_trace_and_counts(self):
         p=metric_pair('ABI','Equity');history,quarter=figures(p)
         traces=[t for t in history.data if t.name=='Bình quân peer']
-        self.assertEqual(len(traces),1)
-        self.assertEqual(list(traces[0].customdata),p['PeerHistory'].PeerCount.tolist())
-        self.assertEqual(list(traces[0].y),(p['PeerHistory'].PeerMean*1e-9).tolist())
+        self.assertGreaterEqual(len(traces),1)
+        # BHI có lịch sử ngắn hơn: đổi mẫu peer phải ngắt đường, giữ đúng các điểm.
+        self.assertEqual([v for t in traces for v in t.customdata],p['PeerHistory'].PeerCount.tolist())
+        self.assertEqual([v for t in traces for v in t.y],(p['PeerHistory'].PeerMean*1e-9).tolist())
+        self.assertEqual(sum(bool(t.showlegend) for t in traces),1)
         self.assertTrue(history.layout.showlegend)
         self.assertEqual(quarter.data[0].type,'bar')
 

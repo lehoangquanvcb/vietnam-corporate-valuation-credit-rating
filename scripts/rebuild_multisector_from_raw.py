@@ -111,6 +111,9 @@ def main():
         snaps.append(row)
         history_rows.extend(h)
         if not args.dry_run and long_df is not None and len(long_df):
+            from scripts.export_financial_evidence import export_ticker
+            from scripts.financial_evidence import read_csv as evidence_read_csv
+            export_ticker(t,RAW,DATA/'financial_evidence',evidence_read_csv(CFG/'raw_period_basis.csv'))
             fp=FUND_PARTS/f'{t}.csv'; long_df.to_csv(fp,index=False,encoding='utf-8-sig')
             manifest.append({'Ticker':t,'Rows':len(long_df),'Path':str(fp.relative_to(ROOT)).replace(chr(92),'/'),'RetrievedAt':now()})
             if args.compact: compact.append(long_df)

@@ -8,6 +8,7 @@ from pathlib import Path
 import json, re
 import numpy as np
 import pandas as pd
+from functools import lru_cache
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'data'; CFG=ROOT/'config'
@@ -17,6 +18,11 @@ def read_csv(path):
     return evidence_csv(path)
 
 def universe():
+    from scripts.financial_evidence import signature
+    return _universe(signature(CFG/'company_universe.csv'),signature(CFG/'insurance_entities.csv')).copy()
+
+@lru_cache(maxsize=4)
+def _universe(universe_sig, insurance_sig):
     x=read_csv(CFG/'company_universe.csv')
     if len(x):
         x['Ticker']=x['Ticker'].astype(str).str.upper().str.strip()
@@ -52,6 +58,12 @@ def universe():
 
 def bank_snapshot(): return read_csv(DATA/'bank_snapshot.csv')
 def generic_snapshot():
+    from scripts.financial_evidence import signature
+    return _generic_snapshot(signature(DATA/'company_snapshot.csv'),
+        signature(DATA/'securities_capital_ratio_master.csv'),signature(CFG/'manual_financial_inputs.csv')).copy()
+
+@lru_cache(maxsize=4)
+def _generic_snapshot(snapshot_sig, public_sig, manual_sig):
     x=read_csv(DATA/'company_snapshot.csv')
 
     # Public prudential-ratio overlay for listed/registered securities companies.

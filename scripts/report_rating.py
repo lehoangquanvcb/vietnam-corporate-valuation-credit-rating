@@ -136,7 +136,8 @@ class Evidence:
             weight += w
             count += 1
             self.add(metric, value, score, 'Điểm tương đối 1–6; phân vị trong peer cùng kỳ/cơ sở (quy tắc tự động)', len(values))
-        return (total / weight if count >= 2 and weight >= .4 else None)
+        # Giới hạn sai số số thực ở biên thang điểm, không nới kiểm tra override.
+        return (max(1.0,min(6.0,total / weight)) if count >= 2 and weight >= .4 else None)
 
 
 def _base(ticker, typ, ctx, strict):

@@ -956,6 +956,9 @@ def main():
                 # Memory-safe full-fundamental storage: persist each ticker immediately
                 # instead of retaining tens of millions of Python dicts in RAM.
                 if a:
+                    from scripts.export_financial_evidence import export_ticker
+                    from scripts.financial_evidence import read_csv as evidence_read_csv
+                    export_ticker(t,RAW,DATA/'financial_evidence',evidence_read_csv(CFG/'raw_period_basis.csv'))
                     part = FUND_PARTS / f'{t}.csv'
                     pd.DataFrame(a).drop_duplicates(['Ticker','Period','Dataset','Field'], keep='last').to_csv(part,index=False,encoding='utf-8-sig')
                     manifest.append({'Ticker':t,'Rows':len(a),'Path':str(part.relative_to(ROOT)).replace('\\','/'),'RetrievedAt':now()})

@@ -60,7 +60,7 @@ class Presentation(unittest.TestCase):
     def test_peer_narrative_names_actual_same_quarter_peer(self):
         p=metric_pair('BVH','ROE')
         self.assertIn('PVI',set(p['Peers'].Ticker));self.assertIn('2026-Q2',p['PeerText'])
-        self.assertEqual(p['PeerCount'],11);self.assertIsNotNone(p['PeerMean'])
+        self.assertEqual(p['PeerCount'],12);self.assertIsNotNone(p['PeerMean'])
         self.assertIn('Biến động từng năm',p['HistoryText'])
         self.assertEqual(set(p['Peers'].Period),{'2026-Q2'})
         self.assertIn('không diễn giải',metric_pair('BVH','UnderwritingProfit')['AnalysisText'].lower())

@@ -35,6 +35,11 @@ class IndustryTests(unittest.TestCase):
         self.assertEqual(icb._entity_and_method('Tài chính','','','Môi giới chứng khoán','Công ty chứng khoán Ngân hàng Đầu tư')[0],'SECURITIES')
         self.assertEqual(icb._entity_and_method('Tài chính','','','Bảo hiểm phi nhân thọ','ABC')[0],'INSURANCE')
 
+    def test_finance_services_do_not_receive_nonfinancial_methodology(self):
+        for name in ['Tài chính cá nhân','Quản lý tài sản','Quỹ đầu tư']:
+            self.assertEqual(icb._entity_and_method('Tài chính','','',name,'ABC')[1],'EXCLUDED_SPECIALIZED')
+        self.assertEqual(icb._entity_and_method('Tài chính','','','Bất động sản','Vingroup')[1],'CORPORATE_2025')
+
     def test_long_schema_preserves_all_levels(self):
         source = pd.DataFrame([{'symbol':'AAA','icb_level':lv,'icb_code':c,'icb_name':n} for lv,c,n in
             [(1,'0001','N1'),(2,'0100','N2'),(3,'0130','N3'),(4,'0135','N4')]])

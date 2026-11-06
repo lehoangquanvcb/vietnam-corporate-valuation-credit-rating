@@ -1,0 +1,117 @@
+[
+  {
+    "Ticker": "VIC",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "BBB-",
+      "P/E": "80,83x",
+      "ROE": "14,8%",
+      "ROA": "1,9%",
+      "Nợ/EBITDA": "3,05x",
+      "Thanh toán hiện hành": "1,05x",
+      "Anchor": "BBB-",
+      "SACP / SCA": "BBB-",
+      "ICR": "BBB-",
+      "Peer có dữ liệu": "10",
+      "Thanh khoản": "Chưa có đánh giá dự phóng",
+      "Đủ dữ liệu để tự động XHTN": "CÓ"
+    }
+  },
+  {
+    "Ticker": "HPG",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "A-",
+      "P/E": "7,89x",
+      "ROE": "17,4%",
+      "ROA": "8,9%",
+      "Nợ/EBITDA": "2,30x",
+      "Thanh toán hiện hành": "1,14x",
+      "Anchor": "A-",
+      "SACP / SCA": "A-",
+      "ICR": "A-",
+      "Peer có dữ liệu": "10",
+      "Thanh khoản": "Chưa có đánh giá dự phóng",
+      "Đủ dữ liệu để tự động XHTN": "CÓ"
+    }
+  },
+  {
+    "Ticker": "FPT",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "A+",
+      "P/E": "11,96x",
+      "ROE": "26,5%",
+      "ROA": "12,8%",
+      "Nợ/EBITDA": "1,17x",
+      "Thanh toán hiện hành": "1,56x",
+      "Anchor": "A+",
+      "SACP / SCA": "A+",
+      "ICR": "A+",
+      "Peer có dữ liệu": "8",
+      "Thanh khoản": "Chưa có đánh giá dự phóng",
+      "Đủ dữ liệu để tự động XHTN": "CÓ"
+    }
+  },
+  {
+    "Ticker": "VNM",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "AA-",
+      "P/E": "11,50x",
+      "ROE": "33,9%",
+      "ROA": "19,8%",
+      "Nợ/EBITDA": "0,52x",
+      "Thanh toán hiện hành": "1,91x",
+      "Anchor": "AA-",
+      "SACP / SCA": "AA-",
+      "ICR": "AA-",
+      "Peer có dữ liệu": "10",
+      "Thanh khoản": "Chưa có đánh giá dự phóng",
+      "Đủ dữ liệu để tự động XHTN": "CÓ"
+    }
+  },
+  {
+    "Ticker": "VCB",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "AAA",
+      "ROE": "17,9%",
+      "NPL": "0,6%",
+      "CAR": "11,71%",
+      "CASA": "33,9%",
+      "Anchor": "A-",
+      "SACP / SCA": "AA",
+      "ICR": "AAA"
+    }
+  },
+  {
+    "Ticker": "SSI",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "BBB",
+      "P/E": "12,21x",
+      "ROE": "13,4%",
+      "Nợ/VCSH": "1,33x",
+      "Vốn khả dụng": "N/A",
+      "Anchor": "BBB",
+      "SACP / SCA": "BBB",
+      "ICR": "BBB"
+    }
+  },
+  {
+    "Ticker": "BHI",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "BB+",
+      "Tổng tài sản": "4.737 tỷ đồng",
+      "Vốn chủ sở hữu": "1.229 tỷ đồng",
+      "Dự phòng nghiệp vụ": "1.991 tỷ đồng",
+      "ROE": "2,2%",
+      "ROA": "0,6%",
+      "Anchor": "BBB-",
+      "SCA": "BB+",
+      "ICR": "BB+"
+    }
+  }
+]

@@ -117,7 +117,9 @@ def _dimension_score(s, peers, specs):
         vals.append((r,weight)); evidence.append(metric)
     if not vals:return None,[],0.0
     w=sum(x[1] for x in vals)
-    return sum(r*wt for r,wt in vals)/w,evidence,w
+    # Tổng trọng số có thể sinh 6.000000000000001 tại biên do số thực.
+    # Chỉ chặn sai số của điểm tự động; đầu vào thẩm định vẫn được kiểm tra riêng.
+    return max(1.0,min(6.0,sum(r*wt for r,wt in vals)/w)),evidence,w
 
 def _risk_label(score):
     if score is None:return 'Chưa đủ dữ liệu'

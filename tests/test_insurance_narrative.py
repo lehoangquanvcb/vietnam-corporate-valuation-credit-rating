@@ -144,8 +144,8 @@ class ActualPortfolio(unittest.TestCase):
         self.assertIn('không diễn giải số âm thành lỗ khai thác phi nhân thọ',p['UnderwritingProfit']['AnalysisText'])
         self.assertIn('đứt gãy',p['InsuranceReserves']['NarrativeHistory'])
         self.assertIn('16,1%',p['EquityAssets']['AnalysisText'])
-        self.assertEqual(p['TotalAssets']['PeerCount'],11)
-        self.assertEqual(p['GrossWrittenPremium']['PeerCount'],9)
+        self.assertEqual(p['TotalAssets']['PeerCount'],12)
+        self.assertEqual(p['GrossWrittenPremium']['PeerCount'],10)
         self.assertEqual(insurance_rating('BVH')['RatingBlocker'],'SCOPE')
 
     def test_latest_recovery_does_not_hide_longer_term_weakness(self):

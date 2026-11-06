@@ -6,32 +6,32 @@ from scripts.insurance_analysis import metric_pair, analysis_pack, quarter_kpi_t
 from scripts.insurance_peers import peer_universe, configured_peer_universe, quarter_peers, included_rows
 from scripts.universal_data import get_snapshot
 
-INSURERS={'ABI','AIC','BIC','BLI','BMI','BVH','MIG','PGI','PRE','PTI','PVI','VNR'}
+INSURERS={'ABI','AIC','BHI','BIC','BLI','BMI','BVH','MIG','PGI','PRE','PTI','PVI','VNR'}
 
 
 class InsurancePeers(unittest.TestCase):
     def test_all_insurers_in_sector_comparison_for_every_target(self):
         for ticker in INSURERS:
             self.assertEqual(set(peer_universe(ticker)),INSURERS-{ticker})
-            self.assertEqual(len(peer_universe(ticker)),11)
+            self.assertEqual(len(peer_universe(ticker)),len(INSURERS)-1)
 
-    def test_bvh_quarter_has_twelve_bars_and_mean_excludes_target(self):
+    def test_bvh_quarter_includes_new_insurer_and_mean_excludes_target(self):
         p=metric_pair('BVH','TotalAssets');rows=included_rows(p['Peers'])
         self.assertEqual(set(rows.Ticker),INSURERS)
         self.assertEqual(set(rows.Period),{'2026-Q2'})
-        self.assertEqual(p['PeerCount'],11)
+        self.assertEqual(p['PeerCount'],len(INSURERS)-1)
         self.assertAlmostEqual(p['PeerMean'],rows[rows.Ticker.ne('BVH')].Value.mean())
         self.assertEqual(p['PeerExclusions'],'')
 
     def test_specialist_ratios_keep_same_model_and_explain_exclusions(self):
         p=metric_pair('ABI','CombinedRatio');q=p['Peers']
-        self.assertEqual(p['PeerCount'],7)
+        self.assertEqual(p['PeerCount'],8)
         self.assertTrue(included_rows(q).SameModel.all())
         self.assertEqual(set(q.Ticker),INSURERS)
         self.assertTrue(q.loc[~q.Included,'ExclusionReason'].str.len().gt(0).all())
         self.assertIn('PVI',p['PeerExclusions'])
 
-    def test_bvh_pvi_nonlife_cohort_includes_all_ten_symbols(self):
+    def test_bvh_pvi_nonlife_cohort_includes_all_registered_symbols(self):
         nonlife=INSURERS-{'PRE','VNR'}
         from scripts.universal_data import get_company
         for ticker in sorted(nonlife):
@@ -40,9 +40,9 @@ class InsurancePeers(unittest.TestCase):
             for metric in ['GrossWrittenPremium','NetInsurancePremium','UnderwritingProfit','InsuranceReserves']:
                 p=metric_pair(ticker,metric);q=included_rows(p['Peers'])
                 self.assertEqual(set(q.Ticker),nonlife,(ticker,metric))
-                self.assertEqual(p['PeerCount'],9)
+                self.assertEqual(p['PeerCount'],len(nonlife)-1)
                 self.assertAlmostEqual(p['PeerMean'],q[q.Ticker.ne(ticker)].Value.mean())
-                self.assertIn('9/11',p['PeerText'])
+                self.assertIn(f'{len(nonlife)-1}/{len(INSURERS)-1}',p['PeerText'])
                 self.assertIn('PRE',p['PeerExclusions']);self.assertIn('VNR',p['PeerExclusions'])
         for ticker in ['PRE','VNR']:
             p=metric_pair(ticker,'UnderwritingProfit')

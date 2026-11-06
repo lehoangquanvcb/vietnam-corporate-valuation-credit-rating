@@ -91,8 +91,8 @@ class SuppliedData(unittest.TestCase):
         self.assertEqual(h.DisplayPeriod.nunique(),5)
         latest=h[h.DisplayPeriod.eq('6T/2026')].set_index('Metric').Value
         self.assertEqual(latest['TotalAssets'],get_snapshot('FPT')['TotalAssets'])
-        raw=pd.read_csv(Path(__file__).resolve().parents[1]/'data/raw/FPT_income.csv')
-        self.assertAlmostEqual(latest.Revenue,raw[raw.period.isin(['2026-Q1','2026-Q2'])].IS_NET_REVENUE.sum())
+        raw=pd.read_csv(Path(__file__).resolve().parents[1]/'data/financial_evidence/FPT.csv.gz')
+        self.assertAlmostEqual(latest.Revenue,raw[raw.Period.isin(['2026-Q1','2026-Q2']) & raw.Field.eq('IS_NET_REVENUE')].Value.sum())
     def test_no_target_in_peer_benchmark(self):
         self.assertNotIn('FPT',peer_snapshot('FPT').Ticker.tolist())
     def test_benchmark_requires_five_observations(self):
@@ -100,7 +100,15 @@ class SuppliedData(unittest.TestCase):
     def test_no_market_price_fair_value_fallback(self):
         self.assertIsNone(fair_value_range('BVH')['Base'])
     def test_per_share_values_are_vnd(self):
-        for t in ['BID','ABB','BVH','FPT','SSI']:
+        for t in ['BVH','FPT','SSI']:
             s=get_snapshot(t);self.assertGreater(s['BVPS'],1000);self.assertGreater(s['EPS'],100)
+    def test_bank_missing_per_share_source_is_not_filled_from_unverified_cache(self):
+        # Gói Cloud của ngân hàng không có ParentEquity/EPS semantic.
+        # Không tái sử dụng cache cũ có đơn vị nghìn đồng/cp không được xác minh.
+        for t in ['BID','ABB']:
+            s=get_snapshot(t)
+            for m in ['BVPS','EPS']:
+                if s[m] is None:self.assertEqual(s['_MetricEvidence'][m]['Status'],'MISSING')
+                else:self.assertGreater(s[m],100)
 
 if __name__=='__main__':unittest.main(verbosity=2)

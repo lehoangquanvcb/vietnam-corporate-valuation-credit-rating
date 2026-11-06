@@ -1,0 +1,76 @@
+{
+  "Build": "V8.145.0-CORPORATE-CLOUD-DATA",
+  "Date": "2026-11-06",
+  "BaseGitCommit": "9b247bf",
+  "Environment": "Fresh checkout without data/raw CSV; no vnstock package/API credentials",
+  "PortableData": {
+    "NO_SOURCE": 15,
+    "EXPORTED": 1711
+  },
+  "Coverage": {
+    "CORPORATE": {
+      "Tickers": 1670,
+      "ByStatus": {
+        "ESTIMATED": 1246,
+        "INSUFFICIENT_DATA": 417,
+        "OUT_OF_SCOPE": 7
+      }
+    },
+    "BANK": {
+      "Tickers": 28,
+      "ByStatus": {
+        "ESTIMATED": 26,
+        "INSUFFICIENT_DATA": 2
+      }
+    },
+    "SECURITIES": {
+      "Tickers": 43,
+      "ByStatus": {
+        "ESTIMATED": 42,
+        "INSUFFICIENT_DATA": 1
+      }
+    },
+    "INSURANCE": {
+      "Tickers": 13,
+      "ByStatus": {
+        "ESTIMATED": 9,
+        "NOT_APPLICABLE": 4
+      }
+    }
+  },
+  "RatingAudit": {
+    "Tickers": 1754,
+    "Result": "PASS",
+    "Errors": []
+  },
+  "UI": {
+    "Tickers": [
+      "VIC",
+      "HPG",
+      "FPT",
+      "VNM",
+      "VCB",
+      "SSI",
+      "BHI"
+    ],
+    "Exceptions": 0
+  },
+  "Word": {
+    "File": "report_examples/Bao_cao_XHTN_VIC_06-11-2026.docx",
+    "RenderedPages": 29,
+    "InspectedPages": 29
+  },
+  "Limits": [
+    "Financial inputs retain the latest stored period; they are not automatically updated to newly published filings.",
+    "Estimated grades retain disclosed qualitative assumptions; PASS checks software consistency, not CRA validation.",
+    "417 corporate entities lack sufficient comparable quantitative inputs; 7 specialized entities excluded.",
+    "No changes have been pushed to GitHub or deployed by this package."
+  ],
+  "Tests": {
+    "Command": "python -m pytest -q --tb=short",
+    "Passed": 458,
+    "SubtestsPassed": 22,
+    "Failed": 0,
+    "ElapsedSeconds": 163.03
+  }
+}

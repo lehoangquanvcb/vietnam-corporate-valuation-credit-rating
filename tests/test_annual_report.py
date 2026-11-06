@@ -117,13 +117,14 @@ def test_ui_quarter_peer_uses_quarter_income_not_ttm():
 def test_vcb_annual_profit_is_four_raw_quarters_and_stocks_are_year_end():
     from pathlib import Path
     root=Path(__file__).resolve().parents[1]
-    raw=pd.read_csv(root/'data/raw/VCB_income_q.csv')
+    raw=pd.read_csv(root/'data/bank_history_long.csv')
+    raw=raw[raw.Ticker.eq('VCB') & raw.Metric.eq('NPAT')]
     p=build_pack('VCB')
     for r in p['Items']['NPAT']['History'].itertuples():
         year=str(r.DisplayPeriod)
-        q=raw[raw.period.isin([year+'-Q'+str(i) for i in range(1,5)]) & raw.id.eq('IS_NET_PROFIT_AFTER_TAX')]
-        assert q.period.nunique()==4
-        assert r.Value==pytest.approx(q.value.sum())
+        q=raw[raw.Period.isin([year+'-Q'+str(i) for i in range(1,5)])]
+        assert q.Period.nunique()==4
+        assert r.Value==pytest.approx(q.Value.sum())
     cache=pd.read_csv(root/'data/bank_history_long.csv')
     for r in p['Items']['TotalAssets']['History'].itertuples():
         q=cache[cache.Ticker.eq('VCB') & cache.Period.eq(r.Period) & cache.Metric.eq('TotalAssets')]

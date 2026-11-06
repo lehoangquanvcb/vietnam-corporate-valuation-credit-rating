@@ -70,3 +70,12 @@ def test_domestic_sources_and_broad_financial_sector_do_not_assume_real_estate()
     text = ' '.join(b['Analysis'] for b in rows[1][1])
     assert 'phân ngành rộng' in text and 'có thể gồm' in text
     assert 'doanh nghiệp bất động sản' not in text
+
+
+def test_detailed_icb_routes_to_correct_research_sector():
+    from scripts.universal_data import get_company
+    for ticker, phrase in [('VIC','Khả năng hấp thụ'),('HPG','Chu kỳ giá hàng hóa'),('FPT','Chất lượng hợp đồng')]:
+        blocks=context.research_sections({'Type':'CORPORATE','Meta':get_company(ticker)},date(2026,11,6))[1][1]
+        assert phrase in blocks[0]['Title']
+    old=context.research_sections({'Type':'CORPORATE','Meta':get_company('VIC')},date(2026,11,5))[1][1]
+    assert 'Khả năng tạo tiền của danh mục' in old[0]['Title']

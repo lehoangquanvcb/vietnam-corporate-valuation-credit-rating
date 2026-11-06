@@ -572,6 +572,36 @@
         "Analysis": "Độ nhạy với giá nguyên liệu, tỷ giá và nhu cầu tiêu thụ quyết định mức biến động của lợi nhuận và dòng tiền. Doanh nghiệp có thể giảm rủi ro bằng hợp đồng dài hạn, cơ cấu khách hàng phù hợp và tài sản có thể khai thác linh hoạt, nhưng các biện pháp này cần được thể hiện trong hiệu quả thực tế. Khi dòng tiền sau đầu tư âm kéo dài, lợi nhuận kế toán không đủ bù nhu cầu tài trợ. Mức đòn bẩy và lịch trả nợ phải tương thích với chu kỳ kinh doanh; tài sản khó bán hoặc khoản đầu tư tài chính tập trung không tạo cùng mức bảo vệ thanh khoản như tiền sẵn có.",
         "Fact": ""
       }
+    ],
+    "Bất động sản": [
+      {
+        "Title": "Khả năng hấp thụ và thời điểm chuyển doanh số thành tiền",
+        "Source": "VARS",
+        "ResearchedOn": "2026-11-06",
+        "Fact": "Tóm tắt công khai của VARS về quý III/2026 ghi nhận nguồn cung nhà ở còn lớn, nhưng giao dịch chậm lại và phân hóa theo phân khúc.",
+        "Analysis": "Trong bối cảnh này, doanh nghiệp phát triển bất động sản có thể phải kéo dài tiến độ bán hàng hoặc tăng chiết khấu. Suy luận tín nhiệm: tiền thu chậm hơn kế hoạch làm tăng nhu cầu vay để hoàn thiện dự án; doanh số ký hợp đồng chỉ hỗ trợ trả nợ khi chuyển thành khoản thu thực tế. Với tập đoàn đa ngành, cần tách tiền từ bàn giao dự án khỏi tiền của các hoạt động khác."
+      },
+      {
+        "Title": "Chênh lệch giữa lợi nhuận bàn giao và nhu cầu tài trợ dự án",
+        "Source": "VARS",
+        "ResearchedOn": "2026-11-06",
+        "Fact": "",
+        "Analysis": "Suy luận tín nhiệm từ tính chọn lọc của giao dịch: quy mô quỹ đất không bảo đảm nguồn tiền ngắn hạn. Doanh nghiệp phải chi cho đất, xây dựng và hạ tầng trước khi thu đủ tiền khách hàng. Tồn kho dự án kéo dài hoặc khách hàng chậm thanh toán sẽ làm vốn bị giữ lại, trong khi lãi vay vẫn phát sinh."
+      },
+      {
+        "Title": "Nợ đến hạn và khả năng giãn tiến độ đầu tư",
+        "Source": "RATE",
+        "ResearchedOn": "2026-11-06",
+        "Fact": "",
+        "Analysis": "Đặc điểm chu kỳ dự án khiến dòng tiền thu và nghĩa vụ nợ có thể lệch nhau nhiều quý. Do đó, hệ số nợ tại một thời điểm cần được đọc cùng lịch trả gốc, khoản vay có tài sản bảo đảm và hạn mức còn có thể sử dụng. Bán tài sản hoặc huy động vốn mới có thể bổ sung thanh khoản, nhưng phụ thuộc giá giao dịch và điều kiện thị trường. Khi khả năng tiếp cận vốn giảm, khả năng trì hoãn khoản đầu tư chưa cam kết và duy trì tiền sẵn có giúp hạn chế áp lực tái cấp vốn."
+      },
+      {
+        "Title": "Khả năng điều chuyển tiền trong tập đoàn",
+        "Source": "FINANCE",
+        "ResearchedOn": "2026-11-06",
+        "Fact": "",
+        "Analysis": "Số liệu hợp nhất phản ánh toàn nhóm, trong khi khoản nợ có thể tập trung tại công ty mẹ hoặc từng pháp nhân dự án. Tiền tại công ty con chưa chắc được chuyển ngay để trả nợ ở nơi khác, do nhu cầu vận hành, nghĩa vụ với bên cho vay và lợi ích của cổ đông thiểu số. Đánh giá tín nhiệm tập đoàn đa ngành vì vậy cần xem xét cổ tức thực nhận, cho vay nội bộ, nghĩa vụ bảo lãnh và nguồn tiền của từng mảng. Phần thiếu thông tin về những nghĩa vụ này phải được giữ là giới hạn của kết luận."
+      }
     ]
   }
 }

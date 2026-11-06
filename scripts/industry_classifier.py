@@ -132,6 +132,8 @@ def _entity_and_method(*names):
             return 'BANK', 'BANK_2026'
         if 'hangkhong' in n or 'airline' in n:
             return 'CORPORATE', 'EXCLUDED_SPECIALIZED'
+        if n in {'taichinhcanhan','quanlytaisan','quydautu'}:
+            return 'CORPORATE', 'EXCLUDED_SPECIALIZED'
     return 'CORPORATE', 'CORPORATE_2025'
 
 

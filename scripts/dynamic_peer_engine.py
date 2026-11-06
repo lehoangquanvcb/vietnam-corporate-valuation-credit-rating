@@ -42,7 +42,7 @@ from threading import RLock
 from scripts.industry_classifier import clean, code, atomic_csv
 from scripts.financial_evidence import signature, metric_evidence, repair_snapshot
 
-ENGINE_VERSION = '8.123.0'
+ENGINE_VERSION = '8.145.0'
 OUTPUT_COLUMNS = ['TargetTicker','Ticker','PeerRank','SimilarityScore','DistanceScore',
     'MetricsCoverage','PeerPool','SimilarityBasis','DataStatus','IndustryStatus',
     'CompanyName','LegalName','Sector','EntityType']
@@ -154,6 +154,7 @@ def peer_source_fingerprint():
         'manual_financial_inputs.csv','raw_period_basis.csv','insurance_entities.csv','insurance_metric_inputs.csv']]
     paths += [('data/'+p, DATA/p) for p in ['company_snapshot.csv','bank_snapshot.csv','bank_history_long.csv','bank_car_disclosures.csv','bank_car_user_inputs.csv','securities_capital_ratio_master.csv']]
     paths += [('data/raw/'+p.name, p) for p in sorted((DATA/'raw').glob('*.csv'))]
+    paths += [('data/financial_evidence/'+p.name, p) for p in sorted((DATA/'financial_evidence').glob('*.csv.gz'))]
     return hashlib.sha256(repr((ENGINE_VERSION, tuple((name,_file_digest(signature(p))) for name,p in paths))).encode()).hexdigest()
 
 

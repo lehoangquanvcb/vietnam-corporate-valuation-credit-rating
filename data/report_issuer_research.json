@@ -138,6 +138,42 @@
           "AccessedOn": "2026-11-05"
         }
       ]
+    },
+    "VIC": {
+      "CompanyName": "Tập đoàn Vingroup - Công ty CP",
+      "ResearchedOn": "2026-11-06",
+      "Paragraphs": [
+        "Tập đoàn Vingroup - Công ty CP (VIC) là doanh nghiệp phi tài chính hoạt động theo mô hình tập đoàn đa ngành. Tiền thân là Technocom, thành lập năm 1993; mô hình Vingroup được hình thành năm 2012 sau khi Vincom và Vinpearl sáp nhập. Các hoạt động hiện nay trải rộng từ công nghệ, công nghiệp và thương mại dịch vụ đến hạ tầng và năng lượng xanh. Phân ngành chứng khoán xếp VIC vào Bất động sản, nhưng đánh giá tín nhiệm hợp nhất cần xét cả các hoạt động ngoài bất động sản.",
+        "Danh mục thương hiệu gồm Vinhomes trong phát triển nhà ở, Vinpearl trong du lịch và nghỉ dưỡng, cùng các hoạt động công nghệ và sản xuất như VinFast. Sự đa dạng hoạt động có thể giảm phụ thuộc vào một thị trường đầu ra, song không đồng nghĩa các nguồn tiền luôn sẵn có để hỗ trợ lẫn nhau. Mức độ chuyển tiền giữa công ty mẹ và các công ty con, các cam kết tài trợ và nghĩa vụ bảo lãnh là những vấn đề cần xem xét khi đánh giá khả năng trả nợ ở cấp tổ chức phát hành.",
+        "Về rủi ro tín dụng, các mảng đầu tư có chu kỳ thu hồi vốn và nhu cầu chi đầu tư khác nhau. Dòng tiền từ bàn giao bất động sản có thể biến động theo tiến độ dự án, trong khi mở rộng sản xuất và hạ tầng thường cần vốn trước khi tạo dòng tiền ổn định. Vì vậy, phân tích cần đặt dòng tiền kinh doanh, chi đầu tư và lịch trả nợ cạnh lợi nhuận kế toán; các khoản lãi chuyển nhượng tài sản hoặc doanh nghiệp phải được xem xét riêng về khả năng tái diễn.",
+        "Các chỉ tiêu và điểm tự động trong báo cáo sử dụng dữ liệu tài chính được lưu theo kỳ hiển thị. Danh mục công bố của Vingroup đã có báo cáo hợp nhất quý III/2026; số liệu kỳ mới này cần được nạp và đối chiếu trước khi thay kỳ tính toán. So sánh với nhóm doanh nghiệp bất động sản phản ánh một góc nhìn tham chiếu, chưa bao quát đầy đủ cơ cấu tập đoàn đa ngành và rủi ro nghĩa vụ nợ ở từng pháp nhân."
+      ],
+      "Sources": [
+        {
+          "Name": "Vingroup – Giới thiệu tập đoàn",
+          "URL": "https://www.vingroup.net/gioi-thieu",
+          "PublishedOn": "",
+          "AccessedOn": "2026-11-06"
+        },
+        {
+          "Name": "Vingroup – Thương mại dịch vụ",
+          "URL": "https://vingroup.net/linh-vuc-hoat-dong/thuong-mai-br-dich-vu/",
+          "PublishedOn": "",
+          "AccessedOn": "2026-11-06"
+        },
+        {
+          "Name": "Vingroup – Công nghệ và công nghiệp",
+          "URL": "https://vingroup.net/linh-vuc-hoat-dong",
+          "PublishedOn": "",
+          "AccessedOn": "2026-11-06"
+        },
+        {
+          "Name": "Vingroup – Danh mục báo cáo tài chính 2026",
+          "URL": "https://www.vingroup.net/vi/quan-he-co-dong/bao-cao-tai-chinh/2026",
+          "PublishedOn": "",
+          "AccessedOn": "2026-11-06"
+        }
+      ]
     }
   }
 }

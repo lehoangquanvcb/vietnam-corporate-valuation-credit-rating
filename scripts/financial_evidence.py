@@ -162,6 +162,39 @@ def _paths(ticker,typ,root):
         paths.append(next((p for p in candidates if p.exists()),candidates[0]))
     return paths
 
+def _portable_path(ticker, root):
+    return Path(root)/'data/financial_evidence'/f'{ticker}.csv.gz'
+
+def _portable_frames(sig, ticker):
+    """Bản xuất semantic có kỳ/cơ sở rõ ràng, đi cùng mã nguồn trên Cloud.
+
+    Không dùng fundamentals_long cũ có Period=LATEST hoặc Field=value/order.
+    Dữ liệu gốc tại máy người dùng vẫn có quyền ưu tiên theo từng dòng/kỳ.
+    """
+    data = _csv_cached(sig)
+    if data.empty:
+        return {}, data.attrs.get('error')
+    required = {'Ticker','Dataset','Period','Field','Value','Basis','Unit','Source'}
+    if not required.issubset(data):
+        return {}, 'Tệp dữ liệu triển khai thiếu kỳ, mã dòng hoặc cơ sở tính'
+    if not data.Ticker.astype(str).eq(ticker).all():
+        return {}, 'Tệp dữ liệu triển khai chứa sai mã doanh nghiệp'
+    frames = {}
+    for ds in ('balance','income','cashflow','ratio'):
+        part = data[data.Dataset.eq(ds)].copy()
+        if part.empty:
+            continue
+        if (not part.Period.map(period).notna().all() or
+                not part.Field.astype(str).str.match(r'^(BS|IS|CF|RT)_[A-Z0-9_]+$').all() or
+                not part.Basis.isin(['QUARTER','YTD','FY','END_PERIOD','REPORTED_RATIO']).all()):
+            return {}, 'Tệp dữ liệu triển khai có dòng/kỳ/cơ sở không hợp lệ'
+        # normalize_raw phát hiện giá trị mâu thuẫn; không che lỗi bằng cache.
+        normalized = normalize_raw(part.rename(columns={'Field':'id'}), str(sig[0]))
+        sources = part.groupby(['Period','Field']).Source.agg(lambda x: ' | '.join(dict.fromkeys(x.astype(str))))
+        normalized['Source'] = [sources.get((r.Period,r.Field),str(sig[0])) for r in normalized.itertuples()]
+        frames[ds] = normalized
+    return frames, None
+
 def _record(metric,value=None,basis='',per='',source='',reason='',status=None):
     n=number(value)
     return {'Metric':metric,'Value':n,'Status':status or ('OK' if n is not None else 'MISSING'),
@@ -185,8 +218,9 @@ def _bank_history_metric(cached, metric, source):
     return z[z.Value.map(number).notna() | z.Error.ne('')].copy()
 
 @lru_cache(maxsize=128)
-def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig,car_sig,user_car_sig):
+def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig,car_sig,user_car_sig,portable_sig):
     frames={};errors={};cfg=read_csv(Path(root)/'config/raw_period_basis.csv')
+    portable, portable_error = _portable_frames(portable_sig, ticker)
     for ds,sig in zip(['balance','income','cashflow','ratio'],sigs):
         raw=_csv_cached(sig)
         default='QUARTER'
@@ -197,6 +231,17 @@ def _source_cached(ticker,typ,root,sigs,cache_sig,basis_sig,car_sig,user_car_sig
             frames[ds]=normalize_raw(raw,str(Path(sig[0]).relative_to(root)),default)
             if raw.attrs.get('error'): errors[ds]=raw.attrs['error']
         except ValueError as e: frames[ds]=pd.DataFrame();errors[ds]=str(e)
+        if ds not in errors and ds in portable:
+            # Không ghi đè giá trị nguồn hoặc lỗi xung đột đã phát hiện.
+            current=frames[ds]
+            backup=portable[ds]
+            if len(current):
+                protected=current.Value.notna() | current.Error.fillna('').ne('')
+                keys=pd.MultiIndex.from_frame(current.loc[protected,['Period','Field']])
+                backup=backup[~pd.MultiIndex.from_frame(backup[['Period','Field']]).isin(keys)]
+            frames[ds]=(pd.concat([backup,current],ignore_index=True) if len(current) else backup.copy()).drop_duplicates(['Period','Field'],keep='first')
+        elif portable_error and frames[ds].empty:
+            errors[ds]=portable_error
     cached=_csv_cached(cache_sig)
     if len(cached) and 'Ticker' in cached:cached=cached[cached.Ticker.astype(str).str.upper().str.strip().eq(ticker)]
     # Nguồn raw được ưu tiên; lịch sử ngân hàng bổ sung từng chỉ tiêu/kỳ bị thiếu.
@@ -245,7 +290,8 @@ def source_data(ticker,typ,root=ROOT):
     root=Path(root);p=_paths(ticker,typ,root)
     return _source_cached(ticker,typ,str(root),tuple(signature(x) for x in p),
                           signature(root/'data/bank_history_long.csv'),signature(root/'config/raw_period_basis.csv'),
-                          signature(root/'data/bank_car_disclosures.csv'),signature(root/'data/bank_car_user_inputs.csv'))
+                          signature(root/'data/bank_car_disclosures.csv'),signature(root/'data/bank_car_user_inputs.csv'),
+                          signature(_portable_path(ticker,root)))
 
 def aggregate(metric, frame, target, basis='TTM'):
     """Tính tại một kỳ; thiếu bất kỳ quý nào thì không cộng thành TTM/YTD/FY."""
@@ -375,7 +421,7 @@ def _at_period_cached(ticker,typ,target,basis='TTM',root=ROOT,fingerprint=()):
 
 def at_period(ticker,typ,target,basis='TTM',root=ROOT):
     root=Path(root)
-    fingerprint=tuple(signature(p) for p in _paths(ticker,typ,root))+ (signature(root/'data/bank_history_long.csv'),signature(root/'config/raw_period_basis.csv'),signature(root/'data/bank_car_disclosures.csv'),signature(root/'data/bank_car_user_inputs.csv'))
+    fingerprint=tuple(signature(p) for p in _paths(ticker,typ,root))+ (signature(root/'data/bank_history_long.csv'),signature(root/'config/raw_period_basis.csv'),signature(root/'data/bank_car_disclosures.csv'),signature(root/'data/bank_car_user_inputs.csv'),signature(_portable_path(ticker,root)))
     return {m:dict(r) for m,r in _at_period_cached(ticker,typ,target,basis,root,fingerprint+(signature(root/'config/insurance_metric_inputs.csv'),signature(root/'config/insurance_entities.csv'))).items()}
 
 
