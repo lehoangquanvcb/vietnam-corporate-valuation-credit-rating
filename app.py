@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.146.0-CORPORATE-WEIGHTED-SCORE'
+BUILD_TAG='V8.148.0-CORPORATE-LIQUIDITY-UPLIFT'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -502,7 +502,8 @@ def _render_header_kpis(rating_result=None):
             grade='Không áp dụng'
         else:
             grade=_rating_no_vn(rating_result.get('ICR'))
-        items=[('Mức Xếp hạng tín nhiệm không chỉ định',grade)]+[(lab,v) for lab,v in items if lab not in {'Giá thị trường','P/B'}]
+        from scripts.rating_presentation import credit_header
+        items=[('Mức Xếp hạng tín nhiệm không chỉ định',grade)]+credit_header(items)
     with _header_slot:
         with st.container(key='rating_header_metrics' if rating_result is not None else 'company_header_metrics'):
             widths=([2.6]+[1]*(len(items)-1)) if rating_result is not None else [1]*len(items)
@@ -532,10 +533,12 @@ _history_years=5
 st.sidebar.caption('Lịch sử tài chính: 5 năm tài chính đã kết thúc gần nhất. Peer: quý gần nhất.')
 if _active_section in _sections[:3]:
     with st.expander('Lịch sử tài chính 5 năm gần nhất',expanded=True):
-        st.dataframe(history_table(selected,_history_basis,_history_years),hide_index=True,use_container_width=True)
-        st.caption(HISTORY_NOTE)
+        from scripts.rating_presentation import credit_metrics
         _history_options=HISTORY_METRICS[meta['EntityType']]
-        _hm=st.multiselect('Chỉ tiêu trên biểu đồ lịch sử',_history_options,default=_history_options[:2],key='history_metrics_'+selected)
+        if _active_section==_sections[0]:_history_options=credit_metrics(_history_options)
+        st.dataframe(history_table(selected,_history_basis,_history_years,metrics=_history_options),hide_index=True,use_container_width=True)
+        st.caption(HISTORY_NOTE)
+        _hm=st.multiselect('Chỉ tiêu trên biểu đồ lịch sử',_history_options,default=_history_options[:2],key='history_metrics_'+selected+('_rating' if _active_section==_sections[0] else ''))
         for _m in _hm:
             from scripts.methodology_kpi_engine import LABELS, PCT
             _history_fig=metric_chart(selected,_m,LABELS.get(_m,_m),_m in PCT)
@@ -784,6 +787,9 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
                     if st.checkbox('Nhập điểm: '+_lab,key=f'corp_{selected}_{_key}_manual'):
                         _rating_overrides[_key]=st.number_input(_lab,min_value=1.0,max_value=6.0,value=3.0,step=.05,key=f'corp_{selected}_{_key}_score')
                 st.caption(WEIGHT_NOTE)
+                from scripts.corporate_liquidity import LEVELS
+                _liq=st.selectbox('Yếu tố thanh khoản',['Tự tính từ BCTC thực tế']+list(LEVELS),key=f'corp_{selected}_liquidity')
+                if _liq!='Tự tính từ BCTC thực tế':_rating_overrides['LiquidityAssessment']=_liq
                 if st.checkbox('Nhập tỷ trọng theo hồ sơ ngành',key=f'corp_{selected}_manual_weights'):
                     _weights={}
                     for _key,_lab in zip(RISK_KEYS,RISK_TITLES):
@@ -829,7 +835,7 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
         _total=rr3.get('WeightedScore')
         r1.metric('Tổng điểm có trọng số',f'{_total:.6f}/6' if num(_total) is not None else 'Chưa đủ căn cứ')
         r2.metric('Bậc xếp hạng ban đầu',_rating_no_vn(rr3.get('InitialRating','N/A')))
-        r3.metric('Kết quả xếp hạng',_rating_no_vn(rr3.get('ICR','N/A')))
+        r3.metric('Kết quả xếp hạng tín nhiệm cuối cùng',_rating_no_vn(rr3.get('ICR','N/A')))
     elif rr3.get('Methodology')=='INSURANCE':
         r1.metric('Anchor',rating_value_text(rr3,'Anchor'));r2.metric('SCA',rating_value_text(rr3,'SCA'));r3.metric('ICR',rating_value_text(rr3,'ICR'))
     else:
@@ -857,11 +863,11 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
 
     if meta['EntityType']=='INSURANCE':
         from scripts.insurance_analysis import render_analysis
-        render_analysis(selected,_history_basis,_history_years,'rating_ins_')
+        render_analysis(selected,_history_basis,_history_years,'rating_ins_',rating=True)
     if meta['EntityType']!='INSURANCE':st.markdown('### Phân tích các chỉ số tín dụng trọng yếu')
     _rating_metric_map={
         'BANK':['ROE','ROA','NIM','NPL','CAR','CASA','LDR','CIR'],
-        'SECURITIES':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio','PB','PE'],
+        'SECURITIES':['ROE','ROA','AvailableCapitalRatio','DebtEquity','CurrentRatio'],
         'INSURANCE':['ROE','ROA','CombinedRatio','SolvencyRatio','LossRatio','ExpenseRatio','NetInsurancePremium'],
         'CORPORATE':['Revenue','GrossMargin','EBITDAMargin','ROE','ROA','DebtEquity','DebtEBITDA','CFO_Debt','FOCF_Debt','CurrentRatio','CashDebt']
     }
@@ -919,7 +925,14 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
             _rows.append({'Nhóm rủi ro':k,'Điểm':_score,'Mức rủi ro':labels.get(k,'N/A')})
         st.markdown('### Tổng hợp hồ sơ rủi ro')
         st.dataframe(pd.DataFrame(_rows),hide_index=True,use_container_width=True)
-        p1,p2,p3=st.columns(3); p1.metric('Peer có dữ liệu',rr3.get('PeerCount',0)); p2.metric('Thanh khoản',rr3.get('Liquidity','N/A')); p3.metric('Đủ dữ liệu để tự động XHTN','CÓ' if rr3.get('DataSufficientForAutoRating') else 'CHƯA')
+        from scripts.corporate_liquidity import display as _liquidity_display
+        p1,p2,p3=st.columns(3); p1.metric('Peer có dữ liệu',rr3.get('PeerCount',0)); p2.metric('Yếu tố thanh khoản',_liquidity_display(rr3)); p3.metric('Đủ dữ liệu để tự động XHTN','CÓ' if rr3.get('DataSufficientForAutoRating') else 'CHƯA')
+        if rr3.get('LiquidityAssessment'):
+            st.write(rr3.get('LiquidityRationale',''))
+            with st.expander('Căn cứ đánh giá thanh khoản từ BCTC',expanded=False):
+                if num(rr3.get('LiquidityScore')) is not None:st.write(f"Điểm thanh khoản tổng hợp: {rr3['LiquidityScore']:.3f}/6")
+                st.dataframe(pd.DataFrame(rr3['LiquidityAssessment']['Observations']),hide_index=True,use_container_width=True)
+                st.caption(rr3['LiquidityAssessment']['PolicyNote'])
         if not rr3.get('DataSufficientForAutoRating'):
             st.warning('Chưa đủ dữ liệu doanh nghiệp/peer để phát hành bậc XHTN mô phỏng.')
     elif rr3.get('Methodology')=='INSURANCE' and not rr3.get('Scorecard'):

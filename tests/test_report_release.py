@@ -37,7 +37,9 @@ def test_absolute_cashflow_and_capital_benchmarks():
 
 class Data:
     period='2026-Q2';peers=['AAA','BBB','CCC'];rows=[]
-    def __init__(self,values,score=3):self.values=values;self.rows=[];self.score=score
+    def __init__(self,values,score=3):
+        self.values=values;self.rows=[];self.score=score
+        self.records={k:{'Value':v,'Status':'OK','Period':self.period,'Basis':'DERIVED_TTM' if k in {'CFO','FOCF','CFO_Debt','FOCF_Debt'} else 'END_PERIOD'} for k,v in values.items()}
     def value(self,key):return self.values.get(key)
     def peer_score(self,specs):return self.score
     def add(self,metric,value,score=None,rule='',count=None):

@@ -1,0 +1,102 @@
+{
+  "Build": "V8.148.0-CORPORATE-LIQUIDITY-UPLIFT",
+  "Date": "2026-11-06",
+  "Status": "PASS",
+  "Scope": "New liquidity row and uplift mapping apply only to nonfinancial CORPORATE methodology.",
+  "Mapping": {
+    "Rất Mạnh": 2,
+    "Mạnh": 1,
+    "Phù Hợp": 0,
+    "Trung Bình": 0,
+    "Yếu": 0
+  },
+  "Pytest": [
+    {
+      "Suites": [
+        "test_corporate_liquidity.py",
+        "test_corporate_weighted_method.py",
+        "test_report_release.py",
+        "test_insurance_presentation.py"
+      ],
+      "Passed": 114,
+      "Seconds": 57.98
+    },
+    {
+      "Suites": [
+        "test_corporate_liquidity.py::test_corporate_liquidity_does_not_run_for_financial_institutions",
+        "test_bank_funding.py",
+        "test_insurance_workflow.py"
+      ],
+      "Passed": 56,
+      "SubtestsPassed": 22,
+      "Seconds": 29.14
+    }
+  ],
+  "RatingValidation": {
+    "CheckedTickers": 15,
+    "Errors": [],
+    "FinancialTickersUnchanged": [
+      "VCB",
+      "BID",
+      "CTG",
+      "AGRIBANK",
+      "TCB",
+      "ABB",
+      "OCB",
+      "SSI",
+      "BVH",
+      "ABI"
+    ],
+    "ComparedFields": [
+      "ICR",
+      "Anchor",
+      "SCA",
+      "GovernmentSupportNotches",
+      "Liquidity",
+      "LiquidityNotches"
+    ]
+  },
+  "UI": {
+    "Tickers": [
+      "ABB",
+      "VIC",
+      "VHM",
+      "HPG",
+      "FPT",
+      "VNM",
+      "SSI",
+      "BVH"
+    ],
+    "Errors": [],
+    "Checks": [
+      "No market valuation metrics in rating header/history",
+      "Corporate liquidity row between initial and final ratings",
+      "Exact mapping and expected final ratings",
+      "No corporate Anchor or pending forecast labels",
+      "Non-rating analysis tab preserved"
+    ]
+  },
+  "Export": {
+    "Ticker": "VNM",
+    "InitialRating": "vnAA-",
+    "Liquidity": "Rất Mạnh",
+    "LiquidityNotches": 2,
+    "FinalRating": "vnAA+",
+    "Formats": [
+      "DOCX",
+      "PDF"
+    ],
+    "PagesVisuallyReviewed": 6,
+    "InlineCharts": 2,
+    "Scope": "Internal QA export with CurrentRatio section; not a full report deliverable.",
+    "Checks": [
+      "Correct new policy and row order",
+      "No corporate Anchor or obsolete forecast labels",
+      "No clipping or overlapping in six rendered pages"
+    ]
+  },
+  "Limitations": [
+    "Focused regression suites and 15-ticker integration checks; full-universe coverage audit was not rerun for this mapping-only update.",
+    "No external GitHub push or Streamlit deployment performed."
+  ]
+}

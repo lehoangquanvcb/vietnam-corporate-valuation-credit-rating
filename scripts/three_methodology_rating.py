@@ -160,17 +160,17 @@ def corporate_rating(ticker,overrides=None):
     financial_specs=[
         ('DebtEquity',.15,False),('NetDebtEBITDA',.20,False),('DebtEBITDA',.15,False),
         ('CFO_Debt',.18,True),('FOCF_Debt',.12,True),('CurrentRatio',.10,True),('CashDebt',.10,True)]
-    liquidity_specs=[('CurrentRatio',.35,True),('CashDebt',.25,True),('CFO_Debt',.25,True),('FOCF_Debt',.15,True)]
 
     b_auto,b_ev,b_cov=_dimension_score(s,peers,business_specs)
     f_auto,f_ev,f_cov=_dimension_score(s,peers,financial_specs)
-    l_auto,l_ev,l_cov=_dimension_score(s,peers,liquidity_specs)
+    from scripts.corporate_liquidity import assess_ticker
+    liquidity_result=assess_ticker(ticker,o.get('LiquidityAssessment'))
+    l_ev=[r['Metric'] for r in liquidity_result['LiquidityAssessment']['Observations'] if r['Giá trị'] is not None]
 
     industry=num(o.get('IndustryRisk'))  # analyst/public-intelligence input; neutral if not overridden
     business=float(o.get('BusinessRisk',b_auto)) if o.get('BusinessRisk',b_auto) is not None else None
     financial=float(o.get('FinancialRisk',f_auto)) if o.get('FinancialRisk',f_auto) is not None else None
     governance=num(o.get('GovernanceRisk')) # qualitative; neutral until evidence/analyst override
-    liquidity=float(o.get('LiquidityScore',l_auto)) if o.get('LiquidityScore',l_auto) is not None else None
 
     peer_count=max(0,len(peers)-1 if len(peers) and 'Ticker' in peers and str(ticker).upper() in set(peers.Ticker.astype(str).str.upper()) else len(peers))
     core_available=sum(x is not None for x in [business,financial])
@@ -195,8 +195,7 @@ def corporate_rating(ticker,overrides=None):
     if not sufficient:missing['QuantitativeEvidence']='Chưa đủ chỉ tiêu và ít nhất 3 peer'
     result={'Methodology':'CORPORATE','MethodologyName':'Phương pháp XHTN Doanh nghiệp phi tài chính',
         **profile,'RiskLabels':risk_labels,'ModifierNotches':o.get('ModifierNotches'),
-        'StandaloneRating':'N/A','Liquidity':o.get('LiquidityAssessment') or 'Chưa có đánh giá dự phóng',
-        'LiquidityScore':None,'ExternalSupportNotches':o.get('ExternalSupportNotches'),
+        'StandaloneRating':'N/A',**liquidity_result,'ExternalSupportNotches':o.get('ExternalSupportNotches'),
         'ICR':'N/A','Outlook':o.get('Outlook','Chưa thẩm định'),'PeerCount':peer_count,
         'EvidenceMetrics':evidence_metrics,'QuantCoverage':quant_coverage,'MissingEvidence':missing,
         'DataSufficientForAutoRating':not missing,'ProvisionalAutoScoring':True,
@@ -204,7 +203,8 @@ def corporate_rating(ticker,overrides=None):
         'WeightSource':'Đầu vào tỷ trọng do chuyên viên nhập' if o.get('Weights') is not None else WEIGHT_NOTE}
     if not missing:
         result.update(apply_adjustments(result['InitialRating'],governance,o['ModifierNotches'],
-            o['ExternalSupportNotches'],o.get('LiquidityAssessment'),o.get('FinancialPolicyWeak')))
+            o['ExternalSupportNotches'],None if result['Liquidity']=='Chưa đủ dữ liệu' else result['Liquidity'],
+            liquidity_notches=result['LiquidityNotches']))
     result['Scorecard']=scorecard(result)
     return result
 

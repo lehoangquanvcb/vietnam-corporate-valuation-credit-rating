@@ -193,9 +193,12 @@ def _summary(doc,pack,rr,report_type):
         rating='Ngoài phạm vi phương pháp' if rr.get('RatingBlocker')=='SCOPE' else _show_rating(rr.get('ICR'))
         _cell_para(left,rating,26 if rr.get('ICR') not in (None,'N/A','') else 14,True,DARK)
         if pack['Type']=='CORPORATE':
+            from scripts.corporate_liquidity import display as liquidity_display
             total=rr.get('WeightedScore')
             summary=[('Tổng điểm có trọng số',vi(total,6)+'/6' if finite(total) else 'Chưa đủ căn cứ'),
-                     ('Bậc xếp hạng ban đầu',rr.get('InitialRating')),('Triển vọng',rr.get('Outlook'))]
+                     ('Bậc xếp hạng ban đầu',rr.get('InitialRating')),
+                     ('Yếu tố thanh khoản',liquidity_display(rr)),
+                     ('Triển vọng',rr.get('Outlook'))]
         else:
             summary=[('Triển vọng',rr.get('Outlook')),('Anchor',rr.get('Anchor')),('SACP / SCA',rr.get('SACP',rr.get('SCA'))),('Hỗ trợ bên ngoài',str(rr['ExternalSupportNotches'])+' bậc' if rr.get('ExternalSupportNotches') is not None else None)]
         for title,value in summary:
@@ -285,6 +288,7 @@ def _overview(doc,pack):
     if first is None:_para(doc,'Chưa có dữ liệu lịch sử với kỳ xác định.');return
     cols=list(first.DisplayPeriod);rows=[]
     for m in HISTORY_METRICS[pack['Type']]:
+        if m not in pack['Items']:continue
         h=pack['Items'][m]['History'];rows.append([label(m),unit(m)]+[fmt(m,v,False) for v in h.Value])
     _table(doc,['Chỉ tiêu','Đơn vị']+cols,rows,[42,16]+[118/len(cols)]*len(cols),8)
     _para(doc,'BCTC năm: số dư tại cuối năm, kết quả kinh doanh và dòng tiền cả năm; tỷ số công bố tại cuối năm. Đơn vị tiền tệ: tỷ đồng.',9,color=GRAY)
@@ -401,9 +405,15 @@ def _corporate_score_table(doc,rr):
     headers=['Cấu phần','Điểm / Đánh giá','Tỷ trọng','Điểm đóng góp','Kết quả / Căn cứ']
     _table(doc,headers,[[row.get(h,'') for h in headers] for row in scorecard(rr)],[47,28,18,25,58],8.5)
     _para(doc,rr.get('WeightSource',''),8.5,color=GRAY)
-    if rr.get('AdjustmentScorecard'):
-        _band(doc,'CÁC ĐIỀU CHỈNH SAU TỔNG ĐIỂM',2)
-        _table(doc,['Cấu phần','Tác động','Kết quả'],[[r[h] for h in ['Cấu phần','Tác động','Kết quả']] for r in rr['AdjustmentScorecard']],[85,51,40],9)
+    if rr.get('LiquidityAssessment'):
+        _band(doc,'CĂN CỨ ĐÁNH GIÁ THANH KHOẢN',2)
+        a=rr['LiquidityAssessment']
+        if finite(rr.get('LiquidityScore')):
+            _para(doc,'Điểm thanh khoản tổng hợp: '+vi(rr['LiquidityScore'],3)+'/6. Mức đánh giá sau các điều kiện kiểm soát: '+rr['Liquidity']+'.',9)
+        _table(doc,['Chỉ tiêu','Giá trị','Điểm','Tỷ trọng','Kỳ'],[
+            [r['Chỉ tiêu'],fmt(r['Metric'],r['Giá trị']),r['Điểm'] if r['Điểm'] is not None else '—',
+             f"{r['Tỷ trọng']:.0%}",str(r['Kỳ'])] for r in a['Observations']],[65,26,15,20,50],8)
+        _para(doc,a['PolicyNote'],8.5,color=GRAY)
 
 
 def _scorecard(doc,pack,rr):
@@ -533,6 +543,9 @@ def _valuation(doc,pack):
 def generate_docx(ticker,report_type='analysis',rating_result=None,mna=None):
     ticker=str(ticker).upper()
     pack=build_pack(ticker,'FY',5)
+    if report_type=='rating':
+        from scripts.rating_presentation import credit_pack
+        pack=credit_pack(pack)
     rr=rating_result if rating_result is not None else rate_company(ticker)
     when=export_date((mna or {}).get('export_date'))
     doc=Document();_style(doc,ticker,when,report_type);_cover(doc,pack,report_type,when);_summary(doc,pack,rr,report_type);_context(doc,pack,when)

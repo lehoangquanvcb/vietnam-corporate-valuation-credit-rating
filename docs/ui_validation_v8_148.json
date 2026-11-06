@@ -1,0 +1,70 @@
+[
+  {
+    "Ticker": "ABB",
+    "Seconds": 0.01,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true
+  },
+  {
+    "Ticker": "VIC",
+    "Seconds": 18.25,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true,
+    "Initial": "vnBBB-",
+    "Liquidity": "Trung Bình",
+    "Notches": 0,
+    "Final": "vnBBB-"
+  },
+  {
+    "Ticker": "VHM",
+    "Seconds": 2.81,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true,
+    "Initial": "vnA-",
+    "Liquidity": "Phù Hợp",
+    "Notches": 0,
+    "Final": "vnA-"
+  },
+  {
+    "Ticker": "HPG",
+    "Seconds": 5.19,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true,
+    "Initial": "vnA-",
+    "Liquidity": "Trung Bình",
+    "Notches": 0,
+    "Final": "vnA-"
+  },
+  {
+    "Ticker": "FPT",
+    "Seconds": 4.06,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true,
+    "Initial": "vnA+",
+    "Liquidity": "Mạnh",
+    "Notches": 1,
+    "Final": "vnAA-"
+  },
+  {
+    "Ticker": "VNM",
+    "Seconds": 10.26,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true,
+    "Initial": "vnAA-",
+    "Liquidity": "Rất Mạnh",
+    "Notches": 2,
+    "Final": "vnAA+"
+  },
+  {
+    "Ticker": "SSI",
+    "Seconds": 8.72,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true
+  },
+  {
+    "Ticker": "BVH",
+    "Seconds": 9.97,
+    "Errors": [],
+    "HeaderNoMarketMetrics": true
+  }
+]

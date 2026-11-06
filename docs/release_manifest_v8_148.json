@@ -1,0 +1,106 @@
+{
+  "Build": "V8.148.0-CORPORATE-LIQUIDITY-UPLIFT",
+  "PackageType": "Cumulative update from V8.146/V8.147; not standalone",
+  "Files": [
+    {
+      "Path": "GIT_FILES_V8_148.txt",
+      "Bytes": 626,
+      "SHA256": "2ff9b327860c98ea7d53591ac78def92f0efaf796ba59b92c9f122edb7149e2d"
+    },
+    {
+      "Path": "VERSION.txt",
+      "Bytes": 8,
+      "SHA256": "28af8ce3d4aadf64db4aef43eb43757f71611502b425b32f2d52c9542ab2b316"
+    },
+    {
+      "Path": "app.py",
+      "Bytes": 68588,
+      "SHA256": "f93e7461ac13ad48a8a6a0bc99be5b548bd2075c7eadff9c0a5612b5cc94d46b"
+    },
+    {
+      "Path": "docs/CORPORATE_LIQUIDITY_V8_148.md",
+      "Bytes": 4513,
+      "SHA256": "314259b1f565bdafcaee85afa355d2f6e5cd5dbf7a25ed6901618988f184c058"
+    },
+    {
+      "Path": "docs/rating_validation_v8_148.json",
+      "Bytes": 10046,
+      "SHA256": "c86ee2e2f9c8bf02ba3497cb30ec506a9c7d084c84aa424aaf3f86b164bc1e08"
+    },
+    {
+      "Path": "docs/ui_validation_v8_148.json",
+      "Bytes": 1300,
+      "SHA256": "b5797a15ee4ec28514fe0d7f4d7233e23915c783652eab6388a6327aaa57fd11"
+    },
+    {
+      "Path": "docs/validation_v8_148.json",
+      "Bytes": 2483,
+      "SHA256": "0e64daadddad94149a2b499706deca4aad4d43f40364c7bf973b60f1ff586c70"
+    },
+    {
+      "Path": "scripts/check_report_scores.py",
+      "Bytes": 4305,
+      "SHA256": "c064842ff96c491b14f202958cad1b046a20c6f94ae8c77cdee3a6e82ce693c2"
+    },
+    {
+      "Path": "scripts/corporate_liquidity.py",
+      "Bytes": 6917,
+      "SHA256": "070faa737463d66c4cf14a677270393de0476cfb03373f8c16497a85567e641c"
+    },
+    {
+      "Path": "scripts/corporate_methodology.py",
+      "Bytes": 9993,
+      "SHA256": "d442c76a1ae7e958f8d88fd2810336622baf4b648b0c1ca886b8127f6cc20fbe"
+    },
+    {
+      "Path": "scripts/insurance_analysis.py",
+      "Bytes": 16385,
+      "SHA256": "77ec240effba1c3effdea1362c77bd8b391d1bd28a0278832c5665c4525e3597"
+    },
+    {
+      "Path": "scripts/professional_report.py",
+      "Bytes": 41345,
+      "SHA256": "58bf96636f726662ea89df64df2c9bac6709fa5f28539331dfb0b94c14369044"
+    },
+    {
+      "Path": "scripts/rating_committee_engine.py",
+      "Bytes": 4485,
+      "SHA256": "8b4eee8bb491dc888b74caae1f4a6b8856e2e9ec0c84756ec788370887ac8c7c"
+    },
+    {
+      "Path": "scripts/rating_presentation.py",
+      "Bytes": 671,
+      "SHA256": "58c88567e1bee169074687808e88d8c0114854e775a354d9572f776d5c86c7ac"
+    },
+    {
+      "Path": "scripts/report_rating.py",
+      "Bytes": 37885,
+      "SHA256": "c5376c77fb262cfb2268beabcb14f44412bf57f02bc2625e1f4ba7833846f01e"
+    },
+    {
+      "Path": "scripts/three_methodology_rating.py",
+      "Bytes": 18520,
+      "SHA256": "bba91ad18b31ea46512d4ee8275f68a6837c1f58e2066816d378ea1eaa92733c"
+    },
+    {
+      "Path": "tests/test_corporate_liquidity.py",
+      "Bytes": 6985,
+      "SHA256": "5c0e9cb20264aaa6a63ed4e19d1adc344d31c44e4d658f3ef57ddc05e9b36f7f"
+    },
+    {
+      "Path": "tests/test_corporate_weighted_method.py",
+      "Bytes": 6306,
+      "SHA256": "f1334615cabceae7cc6bb7ae14b15e8a80a90c19718b372bd3c5310bb24e3f69"
+    },
+    {
+      "Path": "tests/test_insurance_presentation.py",
+      "Bytes": 6547,
+      "SHA256": "7f8af1aeeafb9f21df1cda78eb80e629e08bf4f36641caabf288a1c47db314cf"
+    },
+    {
+      "Path": "tests/test_report_release.py",
+      "Bytes": 6471,
+      "SHA256": "19a5e02150a9e10ef2eec742d198dd1dac44499a92a634af941e6f8bde1ce458"
+    }
+  ]
+}

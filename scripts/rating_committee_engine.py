@@ -32,9 +32,6 @@ def committee_pack(ticker, overrides=None):
         for i,row in enumerate(scorecard(rr),1):
             rows.append({'Bước':str(i),'Cấu phần':row['Cấu phần'],'Kết quả':row['Điểm / Đánh giá'],
                          'Điều chỉnh':row['Tỷ trọng'],'Điểm đóng góp':row['Điểm đóng góp'],'Luận cứ':row['Kết quả / Căn cứ']})
-        for row in rr.get('AdjustmentScorecard',[]):
-            rows.append({'Bước':'Điều chỉnh','Cấu phần':row['Cấu phần'],'Kết quả':row['Kết quả'],
-                         'Điều chỉnh':row['Tác động'],'Luận cứ':'Áp dụng sau quy đổi tổng điểm bốn nhóm rủi ro.'})
 
     elif method=='INSURANCE':
         from scripts.insurance_rating import insurance_scorecard

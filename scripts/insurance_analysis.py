@@ -142,12 +142,12 @@ def figures(pair):
     b.update_xaxes(type='category')
     return clean_figure(a,periods),clean_figure(b)
 
-def render_analysis(ticker,basis='FY',years=5,key='insurance'):
+def render_analysis(ticker,basis='FY',years=5,key='insurance',rating=False):
     import streamlit as st
     st.subheader('Phân tích bảo hiểm theo từng chỉ tiêu')
     meta=get_company(ticker)
     st.caption('Nguồn phương pháp: Saigon Ratings, 20.01.2025. '+str(meta.get('InsuranceScope','Chưa xác nhận loại hình'))+
-               '. Lịch sử dùng cơ sở đã chọn; so sánh ngang dùng đúng quý gần nhất của doanh nghiệp. Dòng tiền quý riêng lẻ, số dư cuối quý; ROE/ROA/PB/PE giữ cơ sở tỷ số nguồn.')
+               '. Lịch sử dùng cơ sở đã chọn; so sánh ngang dùng đúng quý gần nhất của doanh nghiệp. Dòng tiền quý riêng lẻ, số dư cuối quý; tỷ số giữ cơ sở nguồn công bố.')
     peers=peer_universe(ticker)
     st.caption(f'Nhóm so sánh ngành: {len(peers)+1} doanh nghiệp, gồm {ticker} và {len(peers)} peer: '+(', '.join(peers) or 'chưa có')+'.')
     configured=configured_peer_universe(ticker)
@@ -160,7 +160,11 @@ def render_analysis(ticker,basis='FY',years=5,key='insurance'):
             'Tổng tài sản':fmt('TotalAssets',r.Value,r.Status),
             'Đưa vào biểu đồ tài sản':'Có' if r.Included else 'Không','Lý do':r.ExclusionReason} for r in audit.itertuples()]),hide_index=True,use_container_width=True)
     from scripts.insurance_presentation import has_evidence,quantitative_coverage,executive_findings
-    pack=analysis_pack(ticker,basis,years);coverage=quantitative_coverage(ticker,pack)
+    pack=analysis_pack(ticker,basis,years)
+    if rating:
+        from scripts.rating_presentation import MARKET_METRICS
+        pack=[p for p in pack if p['Metric'] not in MARKET_METRICS]
+    coverage=quantitative_coverage(ticker,pack)
     st.caption(coverage['Note'])
     findings=executive_findings(ticker,pack)
     a,b=st.columns(2)

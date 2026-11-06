@@ -66,11 +66,12 @@ def test_source_governance_caps(governance,cap):
 
 
 @pytest.mark.parametrize('initial,liquidity,policy,expected',[
-    ('vnAA','Phù hợp',None,'vnAA'),('vnAA','Trung Bình',None,'vnAA'),('vnAA','Dưới trung bình',None,'vnBB+'),
-    ('vnBB+','Dưới trung bình',None,'vnBB'),('vnBB-','Dưới trung bình',None,'vnB+'),
-    ('vnB+','Dưới trung bình',None,'vnB+'),('vnA','Yếu',None,'vnB-'),
-    ('vnB','Mạnh',None,'vnB'),('vnB','Mạnh',True,'vnB'),('vnB','Mạnh',False,'vnB+')])
-def test_liquidity_adjustment_requires_explicit_method_inputs(initial,liquidity,policy,expected):
+    ('vnAA','Phù hợp',None,'vnAA'),('vnAA','Trung Bình',None,'vnAA'),('vnAA','Dưới trung bình',None,'vnAA'),
+    ('vnBB+','Dưới trung bình',None,'vnBB+'),('vnBB-','Dưới trung bình',None,'vnBB-'),
+    ('vnB+','Dưới trung bình',None,'vnB+'),('vnA','Yếu',None,'vnA'),
+    ('vnB','Mạnh',None,'vnB+'),('vnB','Mạnh',True,'vnB+'),('vnB','Mạnh',False,'vnB+'),
+    ('vnA','Rất Mạnh',None,'vnAA-')])
+def test_liquidity_level_input_uses_uplift_only_rule(initial,liquidity,policy,expected):
     assert apply_adjustments(initial,3,liquidity=liquidity,financial_policy_weak=policy)['ICR']==expected
 
 
@@ -118,7 +119,7 @@ def test_corporate_word_has_one_weighted_table_no_bank_chain_and_two_charts():
     assert len(doc.inline_shapes)==2
     tables=[t for t in doc.tables if len(t.columns)==5 and 'Điểm đóng góp' in t.rows[0].cells[-2].text] # five-column scorecard
     assert len(tables)==1
-    assert len(tables[0].rows)==8
+    assert len(tables[0].rows)==9
     text=doc.element.xml
     assert 'Tổng điểm có trọng số' in text and 'Bậc xếp hạng ban đầu' in text
     assert all(label not in text for label in ['Anchor','SACP','SCA'])

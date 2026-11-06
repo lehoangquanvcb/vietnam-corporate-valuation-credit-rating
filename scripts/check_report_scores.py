@@ -30,6 +30,9 @@ def main():
                     assert r.get('InitialRating') not in (None,'N/A') and r.get('WeightedScore') is not None
                     assert len(r.get('WeightedContributions',[]))==4 and 'Anchor' not in r
                     assert abs(sum(x['Contribution'] for x in r['WeightedContributions'])-r['WeightedScore'])<1e-10
+                    titles=[row['Cấu phần'] for row in r['Scorecard']]
+                    assert titles.index('Bậc xếp hạng ban đầu')<titles.index('Yếu tố thanh khoản')<titles.index('Kết quả xếp hạng tín nhiệm cuối cùng')
+                    assert r.get('LiquidityNotches') in (0,1,2)
                 else:assert r.get('Anchor') not in (None,'N/A') and r.get('SCA') not in (None,'N/A')
             assert not r.get('DomesticCalibrationApplied'),'Không được hiệu chỉnh theo mức đích'
             if r.get('RatingBlocker')=='SCOPE':assert not has_grade
@@ -40,6 +43,8 @@ def main():
                 'Origin':r.get('RatingOrigin'),'WeightedScore':r.get('WeightedScore'),'InitialRating':r.get('InitialRating'),
                 'Anchor':r.get('Anchor'),'SCA':r.get('StandaloneRating',r.get('SCA',r.get('SACP'))),
                 'ICR':r.get('ICR'),
+                'Liquidity':r.get('Liquidity'),'LiquidityNotches':r.get('LiquidityNotches'),
+                'LiquidityStatus':r.get('LiquidityAssessment',{}).get('Status'),
                 'GovernmentSupportNotches':r.get('GovernmentSupportNotches'),
                 'GovernmentSupportStatus':r.get('GovernmentSupportAssessment',{}).get('Status'),
                 'OtherSupportNotches':r.get('OtherSupportNotches'),

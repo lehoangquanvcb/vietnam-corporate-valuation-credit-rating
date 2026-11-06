@@ -87,8 +87,12 @@ class WordReport(unittest.TestCase):
                       'QUẢN TRỊ, ĐIỀU HÀNH VÀ CÁC ĐIỀU CHỈNH KHÁC',
                       'YẾU TỐ BÊN NGOÀI','ĐỘ NHẠY XẾP HẠNG','TỔNG KẾT CẤU PHẦN XẾP HẠNG',REPORT_TITLE]:
             self.assertIn(label,self.text)
-        for group in GROUPS['INSURANCE']:
-            self.assertIn(group.upper(),self.text)
+        for group,metrics in GROUPS['INSURANCE'].items():
+            if set(metrics)-{'PE','PB','Price','EV_EBITDA','FairValue'}:
+                self.assertIn(group.upper(),self.text)
+        self.assertNotIn('CHỈ TIÊU THỊ TRƯỜNG THAM KHẢO',self.text)
+        self.assertNotIn('P/E',self.text)
+        self.assertNotIn('P/B',self.text)
         self.assertEqual(self.doc.styles['Normal'].font.name,'Lato')
         self.assertAlmostEqual(self.doc.sections[0].page_width.mm,210,places=1)
         self.assertIn('4F9E1E',self.doc.element.xml)
@@ -96,7 +100,8 @@ class WordReport(unittest.TestCase):
     def test_only_evidenced_metrics_receive_chart_pairs(self):
         from scripts.report_evidence import build_pack,finite
         p=build_pack('BVH')
-        active=[x for x in p['Items'].values() if finite(x['Value']) or x['History'].Value.notna().any()]
+        active=[x for m,x in p['Items'].items() if m not in {'PE','PB','Price','EV_EBITDA','FairValue'}
+                and (finite(x['Value']) or x['History'].Value.notna().any())]
         self.assertEqual(len(self.doc.inline_shapes),len(active)*2)
         self.assertEqual(self.text.count('Diễn biến doanh nghiệp'),len(active))
         self.assertEqual(self.text.count('So sánh quý gần nhất'),len(active))

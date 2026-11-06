@@ -179,6 +179,9 @@ def _corporate(ticker, o, ctx, strict):
         if isinstance(o.get(key),bool):raise ValueError(key+': điểm phải là số trong khoảng 1–6')
     r = _base(ticker, 'CORPORATE', ctx, strict)
     a = r['Assumptions']
+    from scripts.corporate_liquidity import assess, POLICY_NOTE
+    r.update(assess(ctx.records,ctx.period,o.get('LiquidityAssessment')))
+    a.append(POLICY_NOTE)
     business = number(o.get('BusinessRisk'))
     if business is None:
         business = ctx.peer_score([('Revenue', .18, True), ('TotalAssets', .12, True),
@@ -232,11 +235,9 @@ def _corporate(ticker, o, ctx, strict):
         return _missing(r, 'Cần ít nhất hai chỉ tiêu kinh doanh cùng kỳ với ≥3 peer và hai chỉ tiêu trả nợ/dòng tiền, hoặc dữ liệu xác nhận không có nợ vay.')
     modifier=_notch(o,'ModifierNotches',a)
     support=_notch(o,'ExternalSupportNotches',a,0,8)
-    liquidity=o.get('LiquidityAssessment')
-    if liquidity is None:
-        a.append('Thanh khoản: chưa có dự báo nguồn/sử dụng tiền và điều khoản nợ; giả định 0 bậc, không tự tăng bậc từ Current Ratio.')
-    r.update(apply_adjustments(r['InitialRating'],governance,modifier,support,liquidity,o.get('FinancialPolicyWeak')))
-    r.update(Liquidity=liquidity or 'Chưa có đánh giá dự phóng',LiquidityScore=None)
+    r.update(apply_adjustments(r['InitialRating'],governance,modifier,support,
+        None if r['Liquidity']=='Chưa đủ dữ liệu' else r['Liquidity'],
+        liquidity_notches=r['LiquidityNotches']))
     if o.get('Outlook') and o['Outlook'] not in ('Chưa thẩm định','Chưa xác định'):r['Outlook']=o['Outlook']
     r['EvidenceMetrics']=list(dict.fromkeys(x['Chỉ tiêu'] for x in r['QuantitativeEvidence']))
     r['Scorecard']=corporate_scorecard(r)
