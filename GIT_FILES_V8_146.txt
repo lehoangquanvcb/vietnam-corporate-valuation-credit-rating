@@ -1,0 +1,17 @@
+GIT_FILES_V8_146.txt
+README_V8_146.txt
+VERSION.txt
+app.py
+docs/CORPORATE_METHOD_V8_146.md
+docs/rating_coverage_v8_146.json
+docs/reference_review_v8_146.json
+docs/release_manifest_v8_146.json
+docs/ui_validation_v8_146.json
+docs/validation_v8_146.json
+scripts/check_report_scores.py
+scripts/corporate_methodology.py
+scripts/professional_report.py
+scripts/rating_committee_engine.py
+scripts/report_rating.py
+scripts/three_methodology_rating.py
+tests/test_corporate_weighted_method.py

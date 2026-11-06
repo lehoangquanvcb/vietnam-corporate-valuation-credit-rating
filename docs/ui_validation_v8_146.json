@@ -1,0 +1,245 @@
+[
+  {
+    "Ticker": "VIC",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "BBB-",
+      "P/E": "80,83x",
+      "ROE": "14,8%",
+      "ROA": "1,9%",
+      "Nợ/EBITDA": "3,05x",
+      "Thanh toán hiện hành": "1,05x",
+      "Tổng điểm có trọng số": "3.511250/6",
+      "Bậc xếp hạng ban đầu": "BBB-",
+      "Kết quả xếp hạng": "BBB-",
+      "Peer có dữ liệu": "10",
+      "Thanh khoản": "Chưa có đánh giá dự phóng",
+      "Đủ dữ liệu để tự động XHTN": "CÓ"
+    },
+    "WeightedTables": [
+      [
+        {
+          "Cấu phần": "Rủi ro Vĩ mô và Ngành",
+          "Điểm / Đánh giá": "3.0000/6",
+          "Tỷ trọng": "20.0%",
+          "Điểm đóng góp": "0.600000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Kinh doanh",
+          "Điểm / Đánh giá": "3.1000/6",
+          "Tỷ trọng": "30.0%",
+          "Điểm đóng góp": "0.930000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Tài chính",
+          "Điểm / Đánh giá": "4.3750/6",
+          "Tỷ trọng": "35.0%",
+          "Điểm đóng góp": "1.531250",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Quản trị và Quản lý",
+          "Điểm / Đánh giá": "3.0000/6",
+          "Tỷ trọng": "15.0%",
+          "Điểm đóng góp": "0.450000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Tổng điểm có trọng số",
+          "Điểm / Đánh giá": "3.511250/6",
+          "Tỷ trọng": "100%",
+          "Điểm đóng góp": "3.511250",
+          "Kết quả / Căn cứ": "Cộng bốn đóng góp; không làm tròn trung gian"
+        },
+        {
+          "Cấu phần": "Bậc xếp hạng ban đầu",
+          "Điểm / Đánh giá": "vnBBB-",
+          "Tỷ trọng": "—",
+          "Điểm đóng góp": "—",
+          "Kết quả / Căn cứ": "Quy đổi tổng điểm theo Bảng 01"
+        },
+        {
+          "Cấu phần": "Kết quả xếp hạng",
+          "Điểm / Đánh giá": "vnBBB-",
+          "Tỷ trọng": "—",
+          "Điểm đóng góp": "—",
+          "Kết quả / Căn cứ": "Bằng bậc ban đầu khi không có điều chỉnh"
+        }
+      ]
+    ]
+  },
+  {
+    "Ticker": "HPG",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "A-",
+      "P/E": "7,89x",
+      "ROE": "17,4%",
+      "ROA": "8,9%",
+      "Nợ/EBITDA": "2,30x",
+      "Thanh toán hiện hành": "1,14x",
+      "Tổng điểm có trọng số": "2.839875/6",
+      "Bậc xếp hạng ban đầu": "A-",
+      "Kết quả xếp hạng": "A-",
+      "Peer có dữ liệu": "10",
+      "Thanh khoản": "Chưa có đánh giá dự phóng",
+      "Đủ dữ liệu để tự động XHTN": "CÓ"
+    },
+    "WeightedTables": [
+      [
+        {
+          "Cấu phần": "Rủi ro Vĩ mô và Ngành",
+          "Điểm / Đánh giá": "3.0000/6",
+          "Tỷ trọng": "20.0%",
+          "Điểm đóng góp": "0.600000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Kinh doanh",
+          "Điểm / Đánh giá": "1.8100/6",
+          "Tỷ trọng": "30.0%",
+          "Điểm đóng góp": "0.543000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Tài chính",
+          "Điểm / Đánh giá": "3.5625/6",
+          "Tỷ trọng": "35.0%",
+          "Điểm đóng góp": "1.246875",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Quản trị và Quản lý",
+          "Điểm / Đánh giá": "3.0000/6",
+          "Tỷ trọng": "15.0%",
+          "Điểm đóng góp": "0.450000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Tổng điểm có trọng số",
+          "Điểm / Đánh giá": "2.839875/6",
+          "Tỷ trọng": "100%",
+          "Điểm đóng góp": "2.839875",
+          "Kết quả / Căn cứ": "Cộng bốn đóng góp; không làm tròn trung gian"
+        },
+        {
+          "Cấu phần": "Bậc xếp hạng ban đầu",
+          "Điểm / Đánh giá": "vnA-",
+          "Tỷ trọng": "—",
+          "Điểm đóng góp": "—",
+          "Kết quả / Căn cứ": "Quy đổi tổng điểm theo Bảng 01"
+        },
+        {
+          "Cấu phần": "Kết quả xếp hạng",
+          "Điểm / Đánh giá": "vnA-",
+          "Tỷ trọng": "—",
+          "Điểm đóng góp": "—",
+          "Kết quả / Căn cứ": "Bằng bậc ban đầu khi không có điều chỉnh"
+        }
+      ]
+    ]
+  },
+  {
+    "Ticker": "VHM",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "A-",
+      "P/E": "7,59x",
+      "ROE": "32,7%",
+      "ROA": "9,0%",
+      "Nợ/EBITDA": "1,82x",
+      "Thanh toán hiện hành": "1,17x",
+      "Tổng điểm có trọng số": "2.578000/6",
+      "Bậc xếp hạng ban đầu": "A-",
+      "Kết quả xếp hạng": "A-",
+      "Peer có dữ liệu": "10",
+      "Thanh khoản": "Chưa có đánh giá dự phóng",
+      "Đủ dữ liệu để tự động XHTN": "CÓ"
+    },
+    "WeightedTables": [
+      [
+        {
+          "Cấu phần": "Rủi ro Vĩ mô và Ngành",
+          "Điểm / Đánh giá": "3.0000/6",
+          "Tỷ trọng": "20.0%",
+          "Điểm đóng góp": "0.600000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Kinh doanh",
+          "Điểm / Đánh giá": "2.7600/6",
+          "Tỷ trọng": "30.0%",
+          "Điểm đóng góp": "0.828000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Tài chính",
+          "Điểm / Đánh giá": "2.0000/6",
+          "Tỷ trọng": "35.0%",
+          "Điểm đóng góp": "0.700000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Rủi ro Quản trị và Quản lý",
+          "Điểm / Đánh giá": "3.0000/6",
+          "Tỷ trọng": "15.0%",
+          "Điểm đóng góp": "0.450000",
+          "Kết quả / Căn cứ": "Điểm cấu phần × tỷ trọng"
+        },
+        {
+          "Cấu phần": "Tổng điểm có trọng số",
+          "Điểm / Đánh giá": "2.578000/6",
+          "Tỷ trọng": "100%",
+          "Điểm đóng góp": "2.578000",
+          "Kết quả / Căn cứ": "Cộng bốn đóng góp; không làm tròn trung gian"
+        },
+        {
+          "Cấu phần": "Bậc xếp hạng ban đầu",
+          "Điểm / Đánh giá": "vnA-",
+          "Tỷ trọng": "—",
+          "Điểm đóng góp": "—",
+          "Kết quả / Căn cứ": "Quy đổi tổng điểm theo Bảng 01"
+        },
+        {
+          "Cấu phần": "Kết quả xếp hạng",
+          "Điểm / Đánh giá": "vnA-",
+          "Tỷ trọng": "—",
+          "Điểm đóng góp": "—",
+          "Kết quả / Căn cứ": "Bằng bậc ban đầu khi không có điều chỉnh"
+        }
+      ]
+    ]
+  },
+  {
+    "Ticker": "VCB",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "AAA",
+      "ROE": "17,9%",
+      "NPL": "0,6%",
+      "CAR": "11,71%",
+      "CASA": "33,9%",
+      "Anchor": "A-",
+      "SACP / SCA": "AA",
+      "ICR": "AAA"
+    },
+    "WeightedTables": []
+  },
+  {
+    "Ticker": "SSI",
+    "Exceptions": [],
+    "Metrics": {
+      "Mức Xếp hạng tín nhiệm không chỉ định": "BBB",
+      "P/E": "12,21x",
+      "ROE": "13,4%",
+      "Nợ/VCSH": "1,33x",
+      "Vốn khả dụng": "N/A",
+      "Anchor": "BBB",
+      "SACP / SCA": "BBB",
+      "ICR": "BBB"
+    },
+    "WeightedTables": []
+  }
+]

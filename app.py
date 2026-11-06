@@ -24,7 +24,7 @@ try: from scripts.credit_rating_engine import build_credit_rating
 except Exception: build_credit_rating=None
 
 ROOT=Path(__file__).resolve().parent; DATA=ROOT/'data'
-BUILD_TAG='V8.145.0-CORPORATE-CLOUD-DATA'
+BUILD_TAG='V8.146.0-CORPORATE-WEIGHTED-SCORE'
 
 from scripts.company_profile import load_company_profile, profile_overview_text, profile_source_text
 
@@ -777,13 +777,24 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
                 _v=st.selectbox('Notch hỗ trợ bên ngoài',['Giữ giả định tự động']+list(range(9)),key=f'sec_{selected}_support')
                 if isinstance(_v,int):_rating_overrides['ExternalSupportNotches']=_v
         else:
-            with st.expander('Thẩm định yếu tố định tính doanh nghiệp phi tài chính',expanded=True):
-                for _key,_lab in [('IndustryRisk','Rủi ro vĩ mô và ngành'),('GovernanceRisk','Rủi ro quản trị và quản lý')]:
-                    _v=st.selectbox(_lab,['Giữ giả định tự động']+list(range(1,7)),key=f'corp_{selected}_{_key}')
-                    if isinstance(_v,int):_rating_overrides[_key]=_v
-                for _key,_lab,_vals in [('ModifierNotches','Điều chỉnh khác',range(-6,7)),('ExternalSupportNotches','Hỗ trợ bên ngoài',range(9))]:
+            with st.expander('Điểm bốn nhóm rủi ro và tỷ trọng doanh nghiệp phi tài chính',expanded=True):
+                from scripts.corporate_methodology import RISK_KEYS,RISK_TITLES,DEFAULT_WEIGHTS,WEIGHT_NOTE
+                st.caption('Tổng điểm = tổng của điểm từng nhóm × tỷ trọng. Thang 1–6: điểm thấp hơn là rủi ro thấp hơn.')
+                for _key,_lab in zip(RISK_KEYS,RISK_TITLES):
+                    if st.checkbox('Nhập điểm: '+_lab,key=f'corp_{selected}_{_key}_manual'):
+                        _rating_overrides[_key]=st.number_input(_lab,min_value=1.0,max_value=6.0,value=3.0,step=.05,key=f'corp_{selected}_{_key}_score')
+                st.caption(WEIGHT_NOTE)
+                if st.checkbox('Nhập tỷ trọng theo hồ sơ ngành',key=f'corp_{selected}_manual_weights'):
+                    _weights={}
+                    for _key,_lab in zip(RISK_KEYS,RISK_TITLES):
+                        _weights[_key]=st.number_input('Tỷ trọng '+_lab+' (%)',min_value=0.0,max_value=100.0,value=DEFAULT_WEIGHTS[_key]*100,step=1.0,key=f'corp_{selected}_{_key}_weight')/100
+                    if abs(sum(_weights.values())-1)>1e-12:
+                        st.error('Tổng tỷ trọng phải bằng 100%.');st.stop()
+                    _rating_overrides['Weights']=_weights
+                for _key,_lab,_vals in [('ModifierNotches','Điều chỉnh khác sau tổng điểm',range(-6,7)),('ExternalSupportNotches','Hỗ trợ bên ngoài sau đánh giá độc lập',range(9))]:
                     _v=st.selectbox(_lab,['Giữ giả định tự động']+list(_vals),key=f'corp_{selected}_{_key}')
                     if isinstance(_v,int):_rating_overrides[_key]=_v
+
     rr3=rate_three_methodologies(selected,_rating_overrides)
     _render_header_kpis(rr3)
     if rr3.get('RatingOrigin') in {'AUTO_RESEARCH'}:
@@ -814,7 +825,12 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
     if str(rr3.get('RatingOrigin','')).startswith('REFERENCE_REPORT'):
         st.caption('Kết quả mô phỏng kế thừa bảng chấm: '+rr3.get('AssessmentSource','')+' | '+rr3.get('AssessmentPeriod','')+'. Các bậc được tính lại từ từng cấu phần của báo cáo nguồn.')
     r1,r2,r3=st.columns(3)
-    if rr3.get('Methodology')=='INSURANCE':
+    if rr3.get('Methodology')=='CORPORATE':
+        _total=rr3.get('WeightedScore')
+        r1.metric('Tổng điểm có trọng số',f'{_total:.6f}/6' if num(_total) is not None else 'Chưa đủ căn cứ')
+        r2.metric('Bậc xếp hạng ban đầu',_rating_no_vn(rr3.get('InitialRating','N/A')))
+        r3.metric('Kết quả xếp hạng',_rating_no_vn(rr3.get('ICR','N/A')))
+    elif rr3.get('Methodology')=='INSURANCE':
         r1.metric('Anchor',rating_value_text(rr3,'Anchor'));r2.metric('SCA',rating_value_text(rr3,'SCA'));r3.metric('ICR',rating_value_text(rr3,'ICR'))
     else:
         r1.metric('Anchor',_rating_no_vn(rr3.get('Anchor','N/A')));r2.metric('SACP / SCA',_rating_no_vn(rr3.get('SACP',rr3.get('SCA','N/A'))));r3.metric('ICR',_rating_no_vn(rr3.get('ICR','N/A')))
@@ -830,6 +846,11 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
                 st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
         else:
             st.dataframe(pd.DataFrame(rr3['Scorecard']),hide_index=True,use_container_width=True)
+        if rr3.get('Methodology')=='CORPORATE':
+            st.caption(rr3.get('WeightSource',''))
+            if rr3.get('AdjustmentScorecard'):
+                with st.expander('Các điều chỉnh sau tổng điểm',expanded=False):
+                    st.dataframe(pd.DataFrame(rr3['AdjustmentScorecard']),hide_index=True,use_container_width=True)
         st.caption('Các mức tự động là ước tính theo giả định công bố. Triển vọng: '+str(rr3.get('Outlook','Chưa đánh giá'))+'.')
         if rr3.get('GovernmentSupportEligible'):
             st.caption('Hỗ trợ Chính phủ được tính sau SACP, tối đa 6 notch và trần AAA trên thang trong nước. Đây là giả định nghiên cứu của mô hình; xem căn cứ và độ nhạy trong báo cáo.')
@@ -940,32 +961,15 @@ if _active_section=='BÁO CÁO XẾP HẠNG TÍN NHIỆM':
             _sumrows.append({'Cấu phần':'Hỗ trợ bên ngoài','Đánh giá / Điểm':'Chưa thẩm định' if _support is None else ('Trung lập' if _support==0 else 'Có điều chỉnh'),'Nâng/Hạ notch':_fmt_notch(_support),'Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
         _sumrows.append({'Cấu phần':'Kết quả XHTN','Đánh giá / Điểm':rr3.get('Outlook','Chờ thẩm định'),'Nâng/Hạ notch':'—','Kết quả':_rating_no_vn(rr3.get('ICR','N/A'))})
         st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
-    elif rr3.get('Methodology')=='CORPORATE':
-        _rs=rr3.get('RiskScores',{}); _rl=rr3.get('RiskLabels',{})
-        _sumrows=[]
-        for _k,_v in _rs.items():
-            try:_pt=f"{float(_v):.1f}/6"
-            except Exception:_pt='N/A'
-            _sumrows.append({'Cấu phần':_k,'Điểm':_pt,'Mức rủi ro':_rl.get(_k,'N/A'),'Tác động':'Điểm cấu phần'})
-        _weighted=rr3.get('WeightedScore')
-        try:_weighted_txt=f"{float(_weighted):.2f}/6"
-        except Exception:_weighted_txt='N/A'
-        def _corp_anchor_band_ui(x):
-            from scripts.three_methodology_rating import _anchor_from_weighted
-            return 'Chưa thẩm định' if num(x) is None else _anchor_from_weighted(float(x)).upper()
-        def _corp_anchor_rating_ui(x):return _corp_anchor_band_ui(x)
-        _sumrows += [
-            {'Cấu phần':'Điểm rủi ro tổng hợp có trọng số','Điểm':_weighted_txt,'Mức rủi ro':'Điểm cuối trước modifier','Tác động':_corp_anchor_band_ui(_weighted)},
-            {'Cấu phần':'Anchor quy đổi từ điểm tổng hợp','Điểm':_corp_anchor_rating_ui(_weighted),'Mức rủi ro':'Quy đổi theo engine mô phỏng','Tác động':'Điểm → Anchor'},
-            {'Cấu phần':'Thanh khoản','Điểm':str(rr3.get('LiquidityScore','N/A')),'Mức rủi ro':rr3.get('Liquidity','N/A'),'Tác động':'Modifier/cap nếu trọng yếu; không cộng trực tiếp vào điểm tổng hợp'},
-            {'Cấu phần':'Modifier','Điểm':'—','Mức rủi ro':'—','Tác động':('Chưa thẩm định' if rr3.get('ModifierNotches') is None else f"{int(rr3['ModifierNotches']):+d} notch")},
-            {'Cấu phần':'SCA','Điểm':_rating_no_vn(rr3.get('SCA','N/A')),'Mức rủi ro':'Sau modifier/cap','Tác động':'Anchor + modifier/cap'},
-            {'Cấu phần':'Hỗ trợ bên ngoài','Điểm':'—','Mức rủi ro':'—','Tác động':('Chưa thẩm định' if rr3.get('ExternalSupportNotches') is None else f"{int(rr3['ExternalSupportNotches']):+d} notch")},
-            {'Cấu phần':'Kết quả XHTN','Điểm':_rating_no_vn(rr3.get('ICR','N/A')),'Mức rủi ro':rr3.get('Outlook','N/A'),'Tác động':'SCA + hỗ trợ bên ngoài'},
-        ]
-        st.dataframe(pd.DataFrame(_sumrows),hide_index=True,use_container_width=True)
+    elif rr3.get('Methodology')=='CORPORATE' and not rr3.get('Scorecard'):
+        from scripts.corporate_methodology import scorecard as _corporate_scorecard
+        st.dataframe(pd.DataFrame(_corporate_scorecard(rr3)),hide_index=True,use_container_width=True)
 
-    if rr3.get('Methodology')!='INSURANCE':
+    if rr3.get('Methodology')=='CORPORATE':
+        from scripts.corporate_methodology import steps as _corporate_steps
+        st.markdown('### Tổng điểm và kết quả xếp hạng')
+        st.dataframe(pd.DataFrame([{'Bước':name,'Kết quả':_rating_no_vn(value)} for name,value in _corporate_steps(rr3)]),hide_index=True,use_container_width=True)
+    elif rr3.get('Methodology')!='INSURANCE':
         st.markdown('### Chuỗi hình thành bậc xếp hạng')
         _steps=[('Anchor',rr3.get('Anchor','N/A')),('SACP / SCA',rr3.get('SACP',rr3.get('SCA','N/A')))]
         if rr3.get('Methodology')=='BANK':

@@ -1,0 +1,51 @@
+{
+  "Build": "V8.146.0-CORPORATE-WEIGHTED-SCORE",
+  "ValidatedOn": "2026-11-06",
+  "BaseCommit": "ae702cf42df93a25ddf0f470aaeb548ae2dd5752",
+  "Tests": {
+    "ExistingSuitePassed": 458,
+    "ExistingSubtestsPassed": 22,
+    "NewCorporateTestsPassed": 50,
+    "TotalTestsPassed": 508,
+    "Commands": [
+      "python -m pytest -q --disable-warnings",
+      "python -m pytest tests/test_corporate_weighted_method.py -q --disable-warnings"
+    ]
+  },
+  "Routing": {
+    "CheckedTickers": 1754,
+    "Errors": [],
+    "CorporateTickers": 1670,
+    "CorporateEstimated": 1246,
+    "CorporateInsufficientData": 417,
+    "CorporateExcluded": 7
+  },
+  "DefaultGradeChangesVs8145": [],
+  "UI": {
+    "Tickers": [
+      "VIC",
+      "HPG",
+      "VHM",
+      "VCB",
+      "SSI"
+    ],
+    "Exceptions": [],
+    "CorporateWeightedTablesPerIssuer": 1,
+    "BankSecuritiesPresentationPreserved": true
+  },
+  "WordPDF": {
+    "Sample": "report_examples/Bao_cao_XHTN_HPG_06-11-2026.docx",
+    "RenderedPages": 28,
+    "AllPagesLayoutInspected": true,
+    "WeightedScoreTableAtFront": true,
+    "CorporateAnchorSACPSCANotPresent": true,
+    "TwoChartsPerAvailableMetric": true
+  },
+  "Limitations": [
+    "Default 20/30/35/15 weights are inherited model assumptions, not confirmed industry KCF weights.",
+    "Automatic factor scores retain disclosed qualitative assumptions and observed-data quantitative proxies; not a complete CRA assessment.",
+    "VHM reference does not disclose four-factor weights; no target-rating adjustment applied.",
+    "Remote GitHub and deployed Streamlit app have not been updated by this local package."
+  ],
+  "Result": "PASS"
+}

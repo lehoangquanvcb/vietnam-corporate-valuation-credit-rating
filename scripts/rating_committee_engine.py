@@ -28,18 +28,13 @@ def committee_pack(ticker, overrides=None):
         rows.append({'Bước':'4','Cấu phần':'SACP','Kết quả':rr.get('SACP'),'Điều chỉnh':notch('InternalNotches'),'Luận cứ':'Kết quả độc lập.'})
         rows.append({'Bước':'5','Cấu phần':'Hỗ trợ bên ngoài','Kết quả':notch('ExternalSupportNotches'),'Điều chỉnh':notch('ExternalSupportNotches'),'Luận cứ':'Hỗ trợ tập đoàn/Chính phủ nếu có cơ sở.'})
     elif method=='CORPORATE':
-        labels=rr.get('RiskLabels',{})
-        for k,v in rr.get('RiskScores',{}).items():
-            show='N/A' if v is None or str(v)=='nan' else f'{float(v):.1f}/6 · {labels.get(k,"")}'
-            rows.append({'Bước':'1','Cấu phần':k,'Kết quả':show,'Điều chỉnh':'Đánh giá theo nhóm rủi ro',
-                         'Luận cứ':'Định lượng dựa trên KPI và peer khi có dữ liệu; yếu tố ngành/quản trị cần chuyên viên xác nhận.'})
-        rows.append({'Bước':'2','Cấu phần':'Peer benchmark','Kết quả':f"{rr.get('PeerCount',0)} peer",'Điều chỉnh':'Dynamic peer',
-                     'Luận cứ':'Nhóm tương đồng động theo ngành, quy mô và hồ sơ tài chính; chỉ tiêu bằng chứng: '+', '.join(rr.get('EvidenceMetrics',[])[:8])})
-        rows.append({'Bước':'3','Cấu phần':'Anchor','Kết quả':rr.get('Anchor'),'Điều chỉnh':'Từ hồ sơ rủi ro tổng hợp','Luận cứ':'Không sử dụng BICRA/ngân hàng; không phát hành Anchor nếu dữ liệu định lượng chưa đủ.'})
-        rows.append({'Bước':'4','Cấu phần':'Thanh khoản','Kết quả':rr.get('Liquidity','N/A'),'Điều chỉnh':'Yếu tố điều chỉnh/cap','Luận cứ':'Đọc Current Ratio, Cash/Debt, CFO/Debt và FOCF/Debt cùng cấu trúc đáo hạn khi có dữ liệu.'})
-        rows.append({'Bước':'5','Cấu phần':'Modifiers','Kết quả':notch('ModifierNotches'),'Điều chỉnh':notch('ModifierNotches'),'Luận cứ':'Đa dạng hóa, nghĩa vụ nợ, thanh khoản và các yếu tố điều chỉnh khác.'})
-        rows.append({'Bước':'6','Cấu phần':'SCA','Kết quả':rr.get('SCA'),'Điều chỉnh':'Sau modifiers/caps','Luận cứ':'Kết quả độc lập trước hỗ trợ bên ngoài.'})
-        rows.append({'Bước':'7','Cấu phần':'Hỗ trợ bên ngoài','Kết quả':notch('ExternalSupportNotches'),'Điều chỉnh':notch('ExternalSupportNotches'),'Luận cứ':'Tập đoàn/Chính phủ chỉ khi có bằng chứng về năng lực và động cơ hỗ trợ.'})
+        from scripts.corporate_methodology import scorecard
+        for i,row in enumerate(scorecard(rr),1):
+            rows.append({'Bước':str(i),'Cấu phần':row['Cấu phần'],'Kết quả':row['Điểm / Đánh giá'],
+                         'Điều chỉnh':row['Tỷ trọng'],'Điểm đóng góp':row['Điểm đóng góp'],'Luận cứ':row['Kết quả / Căn cứ']})
+        for row in rr.get('AdjustmentScorecard',[]):
+            rows.append({'Bước':'Điều chỉnh','Cấu phần':row['Cấu phần'],'Kết quả':row['Kết quả'],
+                         'Điều chỉnh':row['Tác động'],'Luận cứ':'Áp dụng sau quy đổi tổng điểm bốn nhóm rủi ro.'})
 
     elif method=='INSURANCE':
         from scripts.insurance_rating import insurance_scorecard
@@ -48,7 +43,7 @@ def committee_pack(ticker, overrides=None):
 
     for row in rows:
         if row.get('Kết quả') is None or str(row.get('Kết quả'))=='N/A':row['Kết quả']='Chưa thẩm định'
-    if method!='INSURANCE':rows.append({'Bước':'Kết luận','Cấu phần':'ICR','Kết quả':rr.get('ICR'),'Điều chỉnh':'—','Luận cứ':'Kết quả cuối cùng trước khi trình/duyệt theo quy trình nội bộ.'})
+    if method not in {'INSURANCE','CORPORATE'}:rows.append({'Bước':'Kết luận','Cấu phần':'ICR','Kết quả':rr.get('ICR'),'Điều chỉnh':'—','Luận cứ':'Kết quả cuối cùng trước khi trình/duyệt theo quy trình nội bộ.'})
     return {
         'Ticker':str(ticker).upper(),
         'Methodology':rr.get('MethodologyName'),

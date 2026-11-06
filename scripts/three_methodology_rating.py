@@ -139,19 +139,15 @@ def _liq_label(score):
     return 'Yếu'
 
 def _anchor_from_weighted(x):
-    # Transparent model mapping for simulation, not a claim of an official CRA table.
-    if x<=1.75:return 'a+'
-    if x<=2.25:return 'a'
-    if x<=2.75:return 'a-'
-    if x<=3.25:return 'bbb+'
-    if x<=3.75:return 'bbb'
-    if x<=4.25:return 'bbb-'
-    if x<=4.75:return 'bb+'
-    if x<=5.25:return 'bb'
-    return 'bb-'
+    # Alias cũ dùng chung Bảng 01; không còn một thang quy đổi riêng cho UI.
+    from scripts.corporate_methodology import rating_from_score
+    return rating_from_score(x)
+
 
 def corporate_rating(ticker,overrides=None):
     o=overrides or {}; meta=get_company(ticker)
+    for key in ('IndustryRisk','BusinessRisk','FinancialRisk','GovernanceRisk'):
+        if isinstance(o.get(key),bool):raise ValueError(key+': điểm phải là số trong khoảng 1–6')
     raw=get_snapshot(ticker); s=_enrich(raw)
     peers=_peer_frame(ticker)
     if len(peers): peers=pd.DataFrame([_enrich(r) for r in peers.to_dict('records')])
@@ -188,48 +184,29 @@ def corporate_rating(ticker,overrides=None):
                  'Rủi ro Quản trị và Quản lý':governance if governance is not None else np.nan}
     risk_labels={k:_risk_label(v if np.isfinite(v) else None) for k,v in risk_scores.items()}
 
-    # Sample-report-consistent weighting: business and financial profiles carry most of the quantitative signal.
-    # This is explicitly a simulation layer and can be overridden by analysts/committee.
-    w=o.get('Weights',{'IndustryRisk':.20,'BusinessRisk':.30,'FinancialRisk':.35,'GovernanceRisk':.15})
-    if set(w)!={'IndustryRisk','BusinessRisk','FinancialRisk','GovernanceRisk'} or any(num(v) is None or v<0 for v in w.values()) or abs(sum(w.values())-1)>1e-8:
-        raise ValueError('Trọng số phải không âm và tổng bằng 1')
-    missing={}
-    for key,value in [('IndustryRisk',industry),('BusinessRisk',business),('FinancialRisk',financial),('GovernanceRisk',governance)]:
-        if value is None:missing[key]='Chưa thẩm định' if key in ('IndustryRisk','GovernanceRisk') else 'Thiếu dữ liệu/peer'
-        elif not 1<=value<=6:raise ValueError(key+': điểm phải trong khoảng 1..6')
+    from scripts.corporate_methodology import weighted_profile,apply_adjustments,scorecard,WEIGHT_NOTE
+    profile=weighted_profile(dict(zip(['IndustryRisk','BusinessRisk','FinancialRisk','GovernanceRisk'],
+                                      [industry,business,financial,governance])),o.get('Weights'))
+    missing={k:('Chưa thẩm định' if k in {'IndustryRisk','GovernanceRisk'} else 'Thiếu dữ liệu/peer')
+             for k in profile['MissingRiskGroups']}
     for key,lo,hi in [('ModifierNotches',-6,6),('ExternalSupportNotches',0,8)]:
         v=o.get(key)
         if not isinstance(v,int) or isinstance(v,bool) or not lo<=v<=hi:missing[key]='Chưa thẩm định'
     if not sufficient:missing['QuantitativeEvidence']='Chưa đủ chỉ tiêu và ít nhất 3 peer'
-    if missing:
-        return {
-            'Methodology':'CORPORATE','MethodologyName':'Phương pháp XHTN Doanh nghiệp phi tài chính',
-            'RiskScores':risk_scores,'RiskLabels':risk_labels,'Weights':w,'WeightedScore':None,
-            'Anchor':'N/A','ModifierNotches':o.get('ModifierNotches'),'SCA':'N/A','Liquidity':_liq_label(liquidity),
-            'LiquidityScore':liquidity,'ExternalSupportNotches':o.get('ExternalSupportNotches'),
-            'ICR':'N/A','Outlook':'Chưa thẩm định','PeerCount':peer_count,'EvidenceMetrics':evidence_metrics,
-            'QuantCoverage':quant_coverage,'DataSufficientForAutoRating':False,
-            'ProvisionalAutoScoring':True,'MissingEvidence':missing,'RatingStatus':'UNREVIEWED',
-            'Audit':'Điểm kinh doanh/tài chính là tín hiệu định lượng; ngành, quản trị, modifiers và hỗ trợ phải được thẩm định trước khi hình thành bậc mô phỏng.'}
-
-    weighted=(industry*w.get('IndustryRisk',0)+business*w.get('BusinessRisk',0)+
-              financial*w.get('FinancialRisk',0)+governance*w.get('GovernanceRisk',0))
-    anchor=_anchor_from_weighted(weighted)
-
-    modifier=int(o.get('ModifierNotches',0)); sca=move(anchor,modifier)
-    # Governance/liquidity caps are applied only when supported by an explicit high-risk score.
-    if governance>=5 and SCALE.index(sca)<SCALE.index('bb-'):sca='bb-'
-    if liquidity is not None and liquidity>=4.5 and SCALE.index(sca)<SCALE.index('b+'):sca='b+'
-    support=int(o.get('ExternalSupportNotches',0)); icr=move(sca,support)
-    return {
-        'Methodology':'CORPORATE','MethodologyName':'Phương pháp XHTN Doanh nghiệp phi tài chính',
-        'RiskScores':risk_scores,'RiskLabels':risk_labels,'Weights':w,'WeightedScore':weighted,
-        'Anchor':label(anchor),'ModifierNotches':modifier,'SCA':label(sca),
-        'Liquidity':_liq_label(liquidity),'LiquidityScore':liquidity,
-        'ExternalSupportNotches':support,'ICR':label(icr),'Outlook':o.get('Outlook','Ổn định'),
-        'PeerCount':peer_count,'EvidenceMetrics':evidence_metrics,'QuantCoverage':quant_coverage,
-        'DataSufficientForAutoRating':True,'ProvisionalAutoScoring':True,
-        'Audit':'Rủi ro vĩ mô & ngành → Rủi ro kinh doanh (peer/hiệu quả/sinh lợi) → Rủi ro tài chính (đòn bẩy/dòng tiền/trả nợ) → Quản trị → Thanh khoản/modifiers → SCA → hỗ trợ → ICR. Điểm định tính cần analyst validation.'}
+    result={'Methodology':'CORPORATE','MethodologyName':'Phương pháp XHTN Doanh nghiệp phi tài chính',
+        **profile,'RiskLabels':risk_labels,'ModifierNotches':o.get('ModifierNotches'),
+        'StandaloneRating':'N/A','Liquidity':o.get('LiquidityAssessment') or 'Chưa có đánh giá dự phóng',
+        'LiquidityScore':None,'ExternalSupportNotches':o.get('ExternalSupportNotches'),
+        'ICR':'N/A','Outlook':o.get('Outlook','Chưa thẩm định'),'PeerCount':peer_count,
+        'EvidenceMetrics':evidence_metrics,'QuantCoverage':quant_coverage,'MissingEvidence':missing,
+        'DataSufficientForAutoRating':not missing,'ProvisionalAutoScoring':True,
+        'RatingStatus':'UNREVIEWED' if missing else 'SIMULATED',
+        'WeightSource':'Đầu vào tỷ trọng do chuyên viên nhập' if o.get('Weights') is not None else WEIGHT_NOTE}
+    if not missing:
+        result.update(apply_adjustments(result['InitialRating'],governance,o['ModifierNotches'],
+            o['ExternalSupportNotches'],o.get('LiquidityAssessment'),o.get('FinancialPolicyWeak')))
+    result['Scorecard']=scorecard(result)
+    return result
 
 
 

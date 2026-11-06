@@ -12,9 +12,9 @@ from scripts.bank_method_2026 import GRADES, FUNDING_GRADES, FUNDING_MATRIX, car
 from scripts.methodology_kpi_engine import LABELS
 from scripts.bank_car import comparable_metric
 
-RISK_KEYS = ['IndustryRisk', 'BusinessRisk', 'FinancialRisk', 'GovernanceRisk']
-RISK_TITLES = ['Rủi ro Vĩ mô và Ngành', 'Rủi ro Kinh doanh', 'Rủi ro Tài chính', 'Rủi ro Quản trị và Quản lý']
-DEFAULT_WEIGHTS = dict(zip(RISK_KEYS, [.20, .30, .35, .15]))
+from scripts.corporate_methodology import (RISK_KEYS,RISK_TITLES,DEFAULT_WEIGHTS,
+    weighted_profile,validated_weights,rating_from_score,apply_adjustments,
+    scorecard as corporate_scorecard,WEIGHT_NOTE)
 
 
 def number(value):
@@ -28,14 +28,8 @@ def number(value):
 
 
 def corporate_anchor(score):
-    """Table 01: exact 0.3125 steps, no intermediate rounding."""
-    score = number(score)
-    if score is None or not 1 <= score <= 6:
-        raise ValueError('Điểm rủi ro phải trong khoảng 1–6')
-    for i, rating in enumerate(SCALE[:16]):
-        if score <= 1 + i * .3125:
-            return rating
-    return 'ccc'  # CCC–C is one source band; no default event is inferred.
+    """Alias tương thích cho script cũ; đây là bậc quy đổi SAU tổng điểm."""
+    return rating_from_score(score)
 
 
 def threshold_risk(value, thresholds, higher_better=False):
@@ -149,7 +143,7 @@ def _base(ticker, typ, ctx, strict):
             'PeerCount': len(ctx.peers), 'Scorecard': [],
             'Outlook': 'Chưa đánh giá',
             'RatingBasisNote': 'Bậc ước tính tự động theo số liệu và các giả định công bố; chưa phải kết quả thẩm định.',
-            'Audit': 'Bảng phương pháp gốc quyết định Anchor/notch; quy tắc định lượng thay thế và giả định được công bố riêng.'}
+            'Audit': strict.get('Audit','') if typ=='CORPORATE' else 'Bảng phương pháp gốc quyết định Anchor/notch; quy tắc định lượng thay thế và giả định được công bố riêng.'}
 
 
 def _missing(r, text, missing=None):
@@ -157,7 +151,12 @@ def _missing(r, text, missing=None):
              DataSufficientForAutoRating=False, RatingBlocker='INPUTS',
              MissingEvidence=missing or {'FinancialInputs': text},
              RatingBasisNote='Các cấu phần có đủ đầu vào vẫn được tính riêng; chưa đủ căn cứ tổng hợp bậc xếp hạng.')
-    r['Scorecard'].append(_row('Kết quả', 'Chưa đủ căn cứ tổng hợp', '—', text))
+    if r.get('Methodology')=='CORPORATE':
+        for old_key in ('Anchor','SCA','SACP'):r.pop(old_key,None)
+        r['InitialRating']='N/A';r['StandaloneRating']='N/A'
+        r['Scorecard']=corporate_scorecard(r)
+    else:
+        r['Scorecard'].append(_row('Kết quả', 'Chưa đủ căn cứ tổng hợp', '—', text))
     return r
 
 
@@ -176,6 +175,8 @@ def _finish(r, anchor, sca, support, outlook=None):
 
 
 def _corporate(ticker, o, ctx, strict):
+    for key in ('IndustryRisk','BusinessRisk','FinancialRisk','GovernanceRisk'):
+        if isinstance(o.get(key),bool):raise ValueError(key+': điểm phải là số trong khoảng 1–6')
     r = _base(ticker, 'CORPORATE', ctx, strict)
     a = r['Assumptions']
     business = number(o.get('BusinessRisk'))
@@ -217,48 +218,29 @@ def _corporate(ticker, o, ctx, strict):
     if governance is None:
         governance = 3.0
         a.append('Quản trị/quản lý: giả định 3/6, không phải xác nhận chất lượng quản trị của doanh nghiệp.')
-    w = dict(o.get('Weights') or DEFAULT_WEIGHTS)
-    if set(w) != set(RISK_KEYS) or any(number(x) is None or x < 0 for x in w.values()) or abs(sum(w.values())-1) > 1e-8:
-        raise ValueError('Trọng số bốn cấu phần phải không âm và tổng bằng 1')
-    a.append('Trọng số bốn cấu phần ngành/kinh doanh/tài chính/quản trị lần lượt '+
-             '/'.join(f'{w[k]:.0%}' for k in RISK_KEYS)+': cấu hình kế thừa của ứng dụng, chưa phải trọng số ngành KCF được xác nhận.')
+    w=validated_weights(o.get('Weights'))
+    r['WeightSource']='Đầu vào tỷ trọng do chuyên viên nhập' if o.get('Weights') is not None else WEIGHT_NOTE
+    a.append(r['WeightSource'])
     a.append('Sử dụng dữ liệu thực tế đến kỳ báo cáo; chưa có dự báo hai năm nên không lập giả số cho trọng số dự phóng của phương pháp.')
-    if business is None or financial is None:
-        return _missing(r, 'Cần ít nhất hai chỉ tiêu kinh doanh cùng kỳ với ≥3 peer và hai chỉ tiêu trả nợ/dòng tiền, hoặc dữ liệu xác nhận không có nợ vay.')
-    values = [industry, business, financial, governance]
-    if any(not 1 <= v <= 6 for v in values):
-        raise ValueError('Điểm cấu phần phải thuộc thang 1–6')
-    weighted = sum(v*w[k] for k,v in zip(RISK_KEYS, values))
-    anchor = corporate_anchor(weighted)
-    modifier = _notch(o, 'ModifierNotches', a)
-    sca = move(anchor, modifier)
-    caps = []
-    if governance >= 4:
-        ceiling = 'b' if governance >= 6 else 'bb-' if governance >= 5 else 'bb+'
-        sca = _cap(sca, ceiling);caps.append('Quản trị: '+label(ceiling))
-    # Forward-looking liquidity cannot be inferred from current ratio alone.
-    liquidity = o.get('LiquidityAssessment')
-    if liquidity == 'Yếu':
-        sca = _cap(sca, 'b-');caps.append('Thanh khoản yếu: vnB-')
-    elif liquidity == 'Dưới trung bình':
-        if SCALE.index(sca) < SCALE.index('bb+'):
-            sca = 'bb+'
-        elif SCALE.index(sca) <= SCALE.index('bb-'):
-            sca = move(sca, -1)
-    elif liquidity in ('Mạnh','Rất Mạnh') and SCALE.index(anchor) >= SCALE.index('b+') and o.get('FinancialPolicyWeak') is False:
-        sca = move(sca, 1)
-    elif liquidity is None:
-        a.append('Thanh khoản: chưa có dự báo nguồn/sử dụng tiền và điều khoản nợ; giả định 0 bậc, không tự tăng bậc từ Current Ratio.')
-    support = _notch(o, 'ExternalSupportNotches', a, 0, 8)
+    profile=weighted_profile(dict(zip(RISK_KEYS,[industry,business,financial,governance])),w)
+    r.update(profile)
     from scripts.three_methodology_rating import _risk_label
-    r.update(RiskScores=dict(zip(RISK_TITLES,values)), RiskLabels={k:_risk_label(v) for k,v in zip(RISK_TITLES,values)},
-             Weights=w, WeightedScore=weighted, ModifierNotches=modifier, RatingCaps=caps,
-             Liquidity=liquidity or 'Chưa có đánh giá dự phóng', LiquidityScore=None)
-    for key,title,v in zip(RISK_KEYS,RISK_TITLES,values):
-        r['Scorecard'].append(_row(title, f'{v:.3f}/6', f'{w[key]:.0%}', f'Đóng góp {v*w[key]:.4f}'))
-    r['Scorecard'].append(_row('Điểm có trọng số', f'{weighted:.4f}/6', 'Bảng 01', label(anchor)))
-    r['Scorecard'].append(_row('Điều chỉnh / giới hạn', modifier, f'{modifier:+d} bậc', '; '.join(caps) or 'Không áp giới hạn bổ sung trong kịch bản'))
-    return _finish(r, anchor, sca, support, o.get('Outlook'))
+    r['RiskLabels']={k:_risk_label(v) for k,v in r['RiskScores'].items()}
+    for old_key in ('Anchor','SCA','SACP'):r.pop(old_key,None)
+    if business is None or financial is None:
+        r['Scorecard']=corporate_scorecard(r)
+        return _missing(r, 'Cần ít nhất hai chỉ tiêu kinh doanh cùng kỳ với ≥3 peer và hai chỉ tiêu trả nợ/dòng tiền, hoặc dữ liệu xác nhận không có nợ vay.')
+    modifier=_notch(o,'ModifierNotches',a)
+    support=_notch(o,'ExternalSupportNotches',a,0,8)
+    liquidity=o.get('LiquidityAssessment')
+    if liquidity is None:
+        a.append('Thanh khoản: chưa có dự báo nguồn/sử dụng tiền và điều khoản nợ; giả định 0 bậc, không tự tăng bậc từ Current Ratio.')
+    r.update(apply_adjustments(r['InitialRating'],governance,modifier,support,liquidity,o.get('FinancialPolicyWeak')))
+    r.update(Liquidity=liquidity or 'Chưa có đánh giá dự phóng',LiquidityScore=None)
+    if o.get('Outlook') and o['Outlook'] not in ('Chưa thẩm định','Chưa xác định'):r['Outlook']=o['Outlook']
+    r['EvidenceMetrics']=list(dict.fromkeys(x['Chỉ tiêu'] for x in r['QuantitativeEvidence']))
+    r['Scorecard']=corporate_scorecard(r)
+    return r
 
 
 def securities_capital(leverage=None, capital_ratio=None, debt_ebitda=None):

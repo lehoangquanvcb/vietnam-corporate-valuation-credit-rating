@@ -1,0 +1,33 @@
+{
+  "ReviewedOn": "2026-11-06",
+  "Files": [
+    {
+      "Name": "HPG_XHTN (1)(2).docx",
+      "SHA256": "3e16f48d36cfe7ae929cdc45228877252c36466465453c1e5bc339ae3ae47cd1",
+      "Role": "User-supplied reference; reviewed locally; not bundled"
+    },
+    {
+      "Name": "170725_Phương pháp XHTN doanh nghiệp.docx",
+      "SHA256": "4fc2a30e103d12fac0b10fc6414add4d35411094c0f36b066d2ca01492a235f8",
+      "Role": "User-supplied reference; reviewed locally; not bundled"
+    },
+    {
+      "Name": "Báo cáo XHTN không chỉ định HPG 02-11-2026.docx",
+      "SHA256": "aeb0cb07b19f40f89b77044b636b4730844377cd54f6d24826252d5f7c225f02",
+      "Role": "User-supplied reference; reviewed locally; not bundled"
+    },
+    {
+      "Name": "HPG_XHTN(2).docx",
+      "SHA256": "196c963d77b3d6e466335c73f80f56c6fcd29d3a50ee9fe22b14bae7699997aa",
+      "Role": "User-supplied reference; reviewed locally; not bundled"
+    },
+    {
+      "Name": "6.5_Vinhomes_BCXHTN_VN_dịch bản này(1).docx",
+      "SHA256": "29b91478e976fe421bb4e1c392dc32847ea8c3ef130f356937154c2876acbf04",
+      "Role": "User-supplied reference; reviewed locally; not bundled"
+    }
+  ],
+  "FourGroupWeightsConfirmed": false,
+  "DefaultWeightsOrigin": "Inherited research configuration",
+  "NoTargetRatingOverrides": true
+}

@@ -192,7 +192,13 @@ def _summary(doc,pack,rr,report_type):
         _font(right.paragraphs[0].add_run('LUẬN ĐIỂM XẾP HẠNG'),11,True)
         rating='Ngoài phạm vi phương pháp' if rr.get('RatingBlocker')=='SCOPE' else _show_rating(rr.get('ICR'))
         _cell_para(left,rating,26 if rr.get('ICR') not in (None,'N/A','') else 14,True,DARK)
-        for title,value in [('Triển vọng',rr.get('Outlook')),('Anchor',rr.get('Anchor')),('SACP / SCA',rr.get('SACP',rr.get('SCA'))),('Hỗ trợ bên ngoài',str(rr['ExternalSupportNotches'])+' bậc' if rr.get('ExternalSupportNotches') is not None else None)]:
+        if pack['Type']=='CORPORATE':
+            total=rr.get('WeightedScore')
+            summary=[('Tổng điểm có trọng số',vi(total,6)+'/6' if finite(total) else 'Chưa đủ căn cứ'),
+                     ('Bậc xếp hạng ban đầu',rr.get('InitialRating')),('Triển vọng',rr.get('Outlook'))]
+        else:
+            summary=[('Triển vọng',rr.get('Outlook')),('Anchor',rr.get('Anchor')),('SACP / SCA',rr.get('SACP',rr.get('SCA'))),('Hỗ trợ bên ngoài',str(rr['ExternalSupportNotches'])+' bậc' if rr.get('ExternalSupportNotches') is not None else None)]
+        for title,value in summary:
             if value:_cell_para(left,title+': '+_show_rating(value),10)
         _cell_para(left,'Kỳ tài chính: '+str(pack['Period']),9)
         _cell_para(left,'BCTC 5 năm và peer quý gần nhất',9)
@@ -202,7 +208,10 @@ def _summary(doc,pack,rr,report_type):
         if str(rr.get('RatingOrigin','')).startswith('REFERENCE_REPORT'):
             _cell_para(left,'Kế thừa bảng chấm trong báo cáo tham chiếu',9,False,GRAY)
         if rr.get('ICR') not in (None,'N/A',''):
-            text=('Bậc xếp hạng ước tính ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Kết quả xếp hạng ')+rating+'; Anchor '+_show_rating(rr.get('Anchor'))+'.'
+            text=('Bậc xếp hạng ước tính ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Kết quả xếp hạng ')+rating+'.'
+            if pack['Type']=='CORPORATE':
+                text+=' Tổng điểm bốn nhóm rủi ro '+vi(rr.get('WeightedScore'),6)+'/6, tương ứng bậc ban đầu '+_show_rating(rr.get('InitialRating'))+'.'
+            else:text+=' Anchor '+_show_rating(rr.get('Anchor'))+'.'
             if rr.get('InternalNotches') is not None:text+=' Điều chỉnh nội tại '+str(rr['InternalNotches'])+' bậc.'
             if rr.get('ExternalSupportNotches') is not None:text+=' Hỗ trợ bên ngoài '+str(rr['ExternalSupportNotches'])+' bậc.'
             _cell_para(right,text,10)
@@ -218,6 +227,8 @@ def _summary(doc,pack,rr,report_type):
     else:
         _band(doc,'LUẬN ĐIỂM PHÂN TÍCH',2)
         for text in cross_findings(pack)[:3]:_para(doc,text,10)
+    if report_type=='rating' and pack['Type']=='CORPORATE':
+        _corporate_score_table(doc,rr)
     _band(doc,'NHỮNG NHÂN TỐ CHÍNH DẪN ĐẾN KẾT QUẢ XẾP HẠNG' if report_type=='rating' else 'ĐIỂM MẠNH VÀ RỦI RO')
     from scripts.report_strengths import summary_findings
     from itertools import zip_longest
@@ -384,6 +395,17 @@ def _sources(doc,pack,rr=None):
         for warning in x.get('HistoryWarnings',[]):_para(doc,label(m)+': '+warning,9,color=GRAY)
     _para(doc,NOTICE,9,color=GRAY)
 
+def _corporate_score_table(doc,rr):
+    from scripts.corporate_methodology import scorecard
+    _band(doc,'TỔNG HỢP BỐN NHÓM RỦI RO',2)
+    headers=['Cấu phần','Điểm / Đánh giá','Tỷ trọng','Điểm đóng góp','Kết quả / Căn cứ']
+    _table(doc,headers,[[row.get(h,'') for h in headers] for row in scorecard(rr)],[47,28,18,25,58],8.5)
+    _para(doc,rr.get('WeightSource',''),8.5,color=GRAY)
+    if rr.get('AdjustmentScorecard'):
+        _band(doc,'CÁC ĐIỀU CHỈNH SAU TỔNG ĐIỂM',2)
+        _table(doc,['Cấu phần','Tác động','Kết quả'],[[r[h] for h in ['Cấu phần','Tác động','Kết quả']] for r in rr['AdjustmentScorecard']],[85,51,40],9)
+
+
 def _scorecard(doc,pack,rr):
     from scripts.bank_report_chapters import rating_sensitivity
     _band(doc,'QUẢN TRỊ, ĐIỀU HÀNH VÀ CÁC ĐIỀU CHỈNH KHÁC')
@@ -397,7 +419,9 @@ def _scorecard(doc,pack,rr):
     _band(doc,'HỖ TRỢ TỪ CHÍNH PHỦ VÀ CÁC YẾU TỐ BÊN NGOÀI' if rr.get('Methodology')=='BANK' else 'YẾU TỐ BÊN NGOÀI')
     support=rr.get('ExternalSupportNotches')
     if support is not None:
-        _para(doc,('Trong kịch bản tự động, hỗ trợ bên ngoài đóng góp ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Hỗ trợ bên ngoài đóng góp ')+str(support)+' bậc. '+('ICR bằng SACP khi không cộng điều chỉnh hỗ trợ.' if support==0 else 'Điều chỉnh này đưa kết quả từ '+_show_rating(rr.get('SACP'))+' lên '+_show_rating(rr.get('ICR'))+'.'))
+        base=rr.get('StandaloneRating') if pack['Type']=='CORPORATE' else rr.get('SACP')
+        explanation=('Kết quả bằng bậc độc lập khi không cộng hỗ trợ.' if pack['Type']=='CORPORATE' else 'ICR bằng SACP khi không cộng điều chỉnh hỗ trợ.') if support==0 else 'Điều chỉnh này đưa kết quả từ '+_show_rating(base)+' lên '+_show_rating(rr.get('ICR'))+'.'
+        _para(doc,('Trong kịch bản tự động, hỗ trợ bên ngoài đóng góp ' if rr.get('RatingOrigin')=='AUTO_RESEARCH' else 'Hỗ trợ bên ngoài đóng góp ')+str(support)+' bậc. '+explanation)
     else:_para(doc,'Chưa xác định điều chỉnh hỗ trợ bên ngoài cho kỳ xếp hạng này.')
     if rr.get('GovernmentSupportAssessment'):
         g=rr['GovernmentSupportAssessment']
@@ -424,7 +448,7 @@ def _scorecard(doc,pack,rr):
     if rows:
         _table(doc,['Kịch bản thay đổi đánh giá','Thay đổi bậc','ICR theo kịch bản'],[[a,b,_show_rating(c)] for a,b,c in rows],[110,29,37],9)
         _para(doc,'Các kịch bản giữ nguyên các đánh giá khác, tính lại hỗ trợ theo phương pháp khi có áp dụng; thể hiện độ nhạy của phép tính, không phải dự báo thay đổi xếp hạng.',8.5,color=GRAY)
-    _band(doc,'TỔNG KẾT CẤU PHẦN XẾP HẠNG')
+    _band(doc,'CĂN CỨ CHẤM ĐIỂM BỐN NHÓM RỦI RO' if pack['Type']=='CORPORATE' else 'TỔNG KẾT CẤU PHẦN XẾP HẠNG')
     if rr.get('Scorecard'):
         headers=['Cấu phần','Điểm / Đánh giá','Tác động','Kết quả / Căn cứ']
         rows=rr['Scorecard']
@@ -434,7 +458,8 @@ def _scorecard(doc,pack,rr):
             details={r['Cấu phần']:r for r in components}
             rows=([r for r in rows if r['Cấu phần']=='Anchor']+
                   [details.get(r['Cấu phần'],r) for r in rows if r['Cấu phần']!='Anchor'])
-        _table(doc,headers,[[row.get(h,'') for h in headers] for row in rows],[43,36,23,74],9)
+        if pack['Type']!='CORPORATE':
+            _table(doc,headers,[[row.get(h,'') for h in headers] for row in rows],[43,36,23,74],9)
         if rr.get('QuantitativeEvidence'):
             if pack['Type']=='BANK':
                 _band(doc,'PHỤ LỤC: CĂN CỨ TÍNH ĐIỂM VÀ GIẢ ĐỊNH')
@@ -451,6 +476,8 @@ def _scorecard(doc,pack,rr):
             _band(doc,'GIẢ ĐỊNH SỬ DỤNG CHO BẬC ƯỚC TÍNH',2)
             _para(doc,rr.get('RatingBasisNote',''),9,bold=True,color=DARK)
             for i,text in enumerate(rr['Assumptions'],1):_para(doc,str(i)+'. '+text,9)
+    elif pack['Type']=='CORPORATE':
+        _para(doc,'Bảng tổng hợp bốn nhóm rủi ro được trình bày tại phần kết quả xếp hạng.',9,color=GRAY)
     elif pack['Type']=='INSURANCE':
         from scripts.insurance_rating import INPUT_LABELS
         score_fields={'CombinedRiskScore':'Rủi ro kinh doanh tổng hợp','CapitalEarningsScore':'Nguồn vốn và lợi nhuận',

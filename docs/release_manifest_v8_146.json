@@ -1,0 +1,70 @@
+{
+  "Build": "V8.146.0-CORPORATE-WEIGHTED-SCORE",
+  "BaseCommit": "ae702cf42df93a25ddf0f470aaeb548ae2dd5752",
+  "Files": [
+    {
+      "Path": "GIT_FILES_V8_146.txt",
+      "SHA256": "d5b5201a9477734f1f2e82ae11a2983993970dafeea0acbb5cf70abae9eb68ba"
+    },
+    {
+      "Path": "README_V8_146.txt",
+      "SHA256": "98ad66b36a209909d5e45fe77004b57993820f36373566f678ab19cdcd2e5e10"
+    },
+    {
+      "Path": "VERSION.txt",
+      "SHA256": "e55d32f954ee00ff80fd79b4f7e5a1d4faf67544d3bcc1349d94cff49eb07675"
+    },
+    {
+      "Path": "app.py",
+      "SHA256": "5a87e1a2d2418c2d21beb04db45fce59669278e6d4009a3b4dd902fb1bcfc363"
+    },
+    {
+      "Path": "docs/CORPORATE_METHOD_V8_146.md",
+      "SHA256": "218c782e3e87a9f0ae0b8a126ffc2682004531e40da53644d5f962e7551862d9"
+    },
+    {
+      "Path": "docs/rating_coverage_v8_146.json",
+      "SHA256": "5b8e179e66227cfbb57f6d4f47521323fd302e24b90bf2b82190aa878b11115e"
+    },
+    {
+      "Path": "docs/reference_review_v8_146.json",
+      "SHA256": "5a4921c770fcb71f0fe63c8dd4e16988749c22f405f9ddef7c3bf033baf1da04"
+    },
+    {
+      "Path": "docs/ui_validation_v8_146.json",
+      "SHA256": "655aef38f849f3667608935f817ddd3413635e21ed479ebf76fbdb4b4d8fd4d4"
+    },
+    {
+      "Path": "docs/validation_v8_146.json",
+      "SHA256": "3a9f209e3d089b8e70ff56e37de0e832bc582e65a443b8249798b4ab73c67504"
+    },
+    {
+      "Path": "scripts/check_report_scores.py",
+      "SHA256": "fd91973706eb4d8c66eb5016f11f739d709bcc5d577c625231621439b665b50f"
+    },
+    {
+      "Path": "scripts/corporate_methodology.py",
+      "SHA256": "da7507133b1e65b86a1329502c2b47fa3f5605f22ea1f53dfe7baad5b3d685bd"
+    },
+    {
+      "Path": "scripts/professional_report.py",
+      "SHA256": "6a59c2ba205ebc0208b40b04b56de8b5dfcd1195ca0edb6d2e3293a88c732e4c"
+    },
+    {
+      "Path": "scripts/rating_committee_engine.py",
+      "SHA256": "217f5f0759b4fd9cedf6157125810662ae8f717085b9b2f9e69cd99a7a30bfb8"
+    },
+    {
+      "Path": "scripts/report_rating.py",
+      "SHA256": "6d619af8b8c9bd44c31c94a5b0363ff5c81d3edc66d76e3a8efe67ced67934a9"
+    },
+    {
+      "Path": "scripts/three_methodology_rating.py",
+      "SHA256": "d72b2e782769ff7b57c802be9414a28f80fb26f9ac248544a39add6fa502991b"
+    },
+    {
+      "Path": "tests/test_corporate_weighted_method.py",
+      "SHA256": "e78bc2b4185fdc5dbd7961da885a98f54cc3f8a62296b853c4a11403c8b4025b"
+    }
+  ]
+}

@@ -26,14 +26,19 @@ def main():
             if r.get('RatingOrigin')=='AUTO_RESEARCH' and has_grade:
                 assert r.get('Scorecard') and r.get('Assumptions')
                 assert r.get('AssessmentComplete') is False
-                assert r.get('Anchor') not in (None,'N/A') and r.get('SCA') not in (None,'N/A')
+                if r.get('Methodology')=='CORPORATE':
+                    assert r.get('InitialRating') not in (None,'N/A') and r.get('WeightedScore') is not None
+                    assert len(r.get('WeightedContributions',[]))==4 and 'Anchor' not in r
+                    assert abs(sum(x['Contribution'] for x in r['WeightedContributions'])-r['WeightedScore'])<1e-10
+                else:assert r.get('Anchor') not in (None,'N/A') and r.get('SCA') not in (None,'N/A')
             assert not r.get('DomesticCalibrationApplied'),'Không được hiệu chỉnh theo mức đích'
             if r.get('RatingBlocker')=='SCOPE':assert not has_grade
             if r.get('RatingStatus')=='INSUFFICIENT_DATA':
                 assert not has_grade and not r.get('DataSufficientForAutoRating')
                 assert r.get('MissingEvidence')
             rows.append({'Ticker':t,'Methodology':r.get('Methodology'),'Status':r.get('RatingStatus'),
-                'Origin':r.get('RatingOrigin'),'Anchor':r.get('Anchor'),'SCA':r.get('SCA',r.get('SACP')),
+                'Origin':r.get('RatingOrigin'),'WeightedScore':r.get('WeightedScore'),'InitialRating':r.get('InitialRating'),
+                'Anchor':r.get('Anchor'),'SCA':r.get('StandaloneRating',r.get('SCA',r.get('SACP'))),
                 'ICR':r.get('ICR'),
                 'GovernmentSupportNotches':r.get('GovernmentSupportNotches'),
                 'GovernmentSupportStatus':r.get('GovernmentSupportAssessment',{}).get('Status'),
